@@ -1,4 +1,6 @@
-John
-Charles Gamboa
-Reyn
-Antoinette
+- John
+- Charles Gamboa
+- Reyn
+- Antoinette
+- Logan L
+
