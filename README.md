@@ -2,5 +2,6 @@
 - Charles Gamboa
 - Reyn
 - Antoinette
-- Logan L -> testing to make sure properly on 
+- Logan L -> testing to make sure properly on
+- Derek 
 
