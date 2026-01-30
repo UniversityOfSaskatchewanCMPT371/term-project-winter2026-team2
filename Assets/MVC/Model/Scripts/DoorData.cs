@@ -26,6 +26,11 @@ public class DoorData : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        if (doorLookup == null)
+        {
+            doorLookup = new Dictionary<int, DoorData>();
+        }
+
         Assert.IsFalse(doorLookup.ContainsKey(doorId), "DoorId is not unique");
 
         doorLookup[doorId] = this;
