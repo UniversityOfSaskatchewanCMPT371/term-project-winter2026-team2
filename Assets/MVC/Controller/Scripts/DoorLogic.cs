@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,6 +8,7 @@ public class DoorLogic : MonoBehaviour
 
     public DoorData doorData;
     public SceneChanger sceneChanger;
+    public int exitDoorId;
 
     void Awake()
     {
@@ -16,9 +16,9 @@ public class DoorLogic : MonoBehaviour
         Assert.IsNotNull(sceneChanger, "SceneChanger field cannot be null.");
     }
 
-    public void OnPlayerEnter()
+    public void OnPlayerEnter(Collider other)
     {
-        Scenes sceneIdx = doorData.sceneIdx;
+        Scenes sceneIdx = doorData.sceneDestination;
 
         sceneChanger.LoadScene(sceneIdx);
     }
