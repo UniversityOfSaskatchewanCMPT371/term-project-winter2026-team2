@@ -27,6 +27,6 @@ public class DoorView : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("MainCamera")) return;
 
-        doorLogic.OnPlayerEnter(other.GetComponentInParent<Player>().gameObject);
+        doorLogic.OnPlayerEnter(other.GetComponentInParent<PlayerData>().gameObject);
     }
 }

@@ -11,6 +11,7 @@ public class DoorLogic : MonoBehaviour
 {
     public DoorData doorData;                   // Reference to the data attached to this object
     private SceneChanger sceneChanger;          // Reference to the global scene changer service
+    private static bool triggerDebounce = false;     // Prevents rapid requests   
 
     /// <summary>
     /// Validates required fields and retrieves the SceneChanger service.
@@ -31,31 +32,35 @@ public class DoorLogic : MonoBehaviour
     /// <param name="playerRig">The player's XR rig GameObject.</param>
     public void OnPlayerEnter(GameObject playerRig)
     {
-        // TODO: Throw an exception if doorData is missing or invalid
+        if (!playerRig.GetComponent<PlayerLogic>()) throw new MissingComponentException("This function requires PlayerLogic component attached to PlayerRig.");
+
+        if (triggerDebounce) return;
+        triggerDebounce = true;
 
         DoorData targetDoor;
-        Vector3 teleportPosition = new Vector3(0, 1, 0);
+        Vector3 teleportPosition = new Vector3(0, 0, 0);
         Quaternion teleportRotation = new Quaternion();
-
-        try
-        {
-            targetDoor = doorData.GetTargetDoor();
-            teleportPosition = targetDoor.GetTeleportPosition();
-            teleportRotation = targetDoor.GetTeleportRotation();
-        }
-        catch (Exception e)
-        {
-            // Exception caught properly
-        }
 
         // Load the destination scene
         Scenes sceneIdx = doorData.sceneDestination;
         AsyncOperation loadingScene = sceneChanger.LoadScene(sceneIdx);
-
-        // When the scene finishes loading, teleport the player rig
-        loadingScene.completed += (o) =>
+        try
         {
-            playerRig.transform.SetPositionAndRotation(teleportPosition, teleportRotation);
-        };
+            // When the scene finishes loading, teleport the player rig
+            loadingScene.completed += (o) =>
+            {
+                targetDoor = doorData.GetTargetDoor();
+                teleportPosition = targetDoor.GetTeleportPosition();
+                teleportRotation = targetDoor.GetTeleportRotation();   
+
+                playerRig.GetComponent<PlayerLogic>().teleportPlayerTo(teleportPosition, teleportRotation);
+                triggerDebounce = false;
+            };
+        }
+        catch (InvalidOperationException e)
+        {
+            print("error handled");
+            // Exception caught properly
+        }
     }
 }
