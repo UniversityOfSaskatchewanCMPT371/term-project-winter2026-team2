@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -16,8 +17,8 @@ public class PlayerLogic : MonoBehaviour
         XRRayInteractor leftRayInteractor = leftController.GetComponentInChildren<XRRayInteractor>();
         XRRayInteractor rightRayInteractor = rightController.GetComponentInChildren<XRRayInteractor>();
 
-        // This thing is causing an error. Ill replace this when I have time
-        // to learn more about ray interactor stuff
+        leftRayInteractor.TryGetHitInfo(out _, out _, out _, out _);
+        rightRayInteractor.TryGetHitInfo(out _, out _, out _, out _);
 
         leftRayInteractor.enabled = false;
         rightRayInteractor.enabled = false;
@@ -33,6 +34,7 @@ public class PlayerLogic : MonoBehaviour
     public void teleportPlayerTo(Vector3 position, Quaternion rotation)
     {
         gameObject.transform.SetPositionAndRotation(position, rotation);
-        resetRayInteractor();
+
+        Invoke(nameof(resetRayInteractor), 0.1f);
     }
 }
