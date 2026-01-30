@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MVC/Resources/Scenes/Room1.unity
     guid: d361d3d86c5159d4b99bc67c64192eac
+  - enabled: 1
+    path: Assets/MVC/Resources/Scenes/Room2.unity
+    guid: 4eabc30bf65aae345ae9f7d9e9e42a73
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0af4d3905ffb32d4685efaad422827ee, type: 2}

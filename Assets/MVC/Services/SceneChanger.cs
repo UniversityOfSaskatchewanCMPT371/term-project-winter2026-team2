@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +6,7 @@ public enum Scenes
 {
     Hub = 0,
     Room1 = 1,
+    Room3 = 2,
 }
 
 /// <summary>
@@ -19,6 +17,9 @@ public class SceneChanger : MonoBehaviour
     private static SceneChanger instance { get; set; }          // Singleton instance of the SceneChanger
     private static bool loadDebounce = false;                   // Prevents multiple scene loads from being triggered at once
 
+    /// <summary>
+    /// Ensures this component follows a singleton pattern and persists across scene loads.
+    /// </summary>
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -31,6 +32,9 @@ public class SceneChanger : MonoBehaviour
         DontDestroyOnLoad(instance);
     }
 
+    /// <summary>
+    /// Sets debounce to false.
+    /// </summary>
     private void resetDebounce()
     {
         loadDebounce = false;

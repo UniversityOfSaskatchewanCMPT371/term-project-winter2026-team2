@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// This object holds data for a door object.
@@ -16,7 +14,7 @@ public class DoorData : MonoBehaviour
     public Scenes sceneDestination = Scenes.Hub;                        // Used to determine which scene this door leads to
     public int doorId;                                                  // Used to uniquely identify this door
     public int targetDoorId;                                            // Used to uniquely identify the target door this will lead to
-    public Vector3 teleportOffset = new Vector3(0, 0, 1f);              // Used when a player exits this door in which they are teleported using this offset facing forwards
+    public Vector3 teleportOffset;                                      // Used when a player exits this door in which they are teleported using this offset facing forwards
 
     /// <summary>
     /// 
@@ -31,8 +29,9 @@ public class DoorData : MonoBehaviour
             doorLookup = new Dictionary<int, DoorData>();
         }
 
-        Assert.IsFalse(doorLookup.ContainsKey(doorId), "DoorId is not unique");
+        // Assert.IsFalse(doorLookup.ContainsKey(doorId), "DoorId is not unique");
 
+        teleportOffset = transform.forward * 4f;
         doorLookup[doorId] = this;
     }
 
@@ -46,10 +45,10 @@ public class DoorData : MonoBehaviour
     public DoorData GetTargetDoor()
     {
         if (doorId == targetDoorId)
-            throw new InvalidOperationException($"Door {doorId} cannot target itself.");
+            throw new InvalidOperationException($"Cannot target itself.");
 
         if (!doorLookup.ContainsKey(targetDoorId))
-            throw new InvalidOperationException($"Door {doorId} cannot find target door {targetDoorId}.");
+            throw new InvalidOperationException($"Cannot find target door {targetDoorId}.");
 
         return doorLookup[targetDoorId];
     }
@@ -62,7 +61,7 @@ public class DoorData : MonoBehaviour
     /// <returns>The door's teleport position in world space.</returns>
     public Vector3 GetTeleportPosition()
     {
-        return transform.TransformPoint(teleportOffset);
+        return transform.position + teleportOffset;
     }
 
     /// <summary>

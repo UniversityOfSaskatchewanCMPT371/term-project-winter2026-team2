@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerData : MonoBehaviour
 {
-    private static Player instance { get; set; }
+    private static PlayerData instance { get; set; }
     
     /// <summary>
     /// Ensures this component follows a singleton pattern and persists across scene loads.
