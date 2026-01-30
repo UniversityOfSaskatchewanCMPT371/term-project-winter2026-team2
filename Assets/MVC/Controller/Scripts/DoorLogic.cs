@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 [ RequireComponent(typeof(DoorData)) ]
 public class DoorLogic : MonoBehaviour
@@ -8,7 +10,6 @@ public class DoorLogic : MonoBehaviour
 
     public DoorData doorData;
     public SceneChanger sceneChanger;
-    public int exitDoorId;
 
     void Awake()
     {
@@ -16,10 +17,27 @@ public class DoorLogic : MonoBehaviour
         Assert.IsNotNull(sceneChanger, "SceneChanger field cannot be null.");
     }
 
-    public void OnPlayerEnter(Collider other)
+    public void OnPlayerEnter(GameObject playerRig)
     {
-        Scenes sceneIdx = doorData.sceneDestination;
+        if (!playerRig.CompareTag("Player")) return;
 
+        DoorData targetDoor;
+        Vector3 teleportPosition = new Vector3();
+        Quaternion teleportRotation = new Quaternion();
+
+        try
+        {
+            targetDoor = doorData.GetTargetDoor();
+            teleportPosition = targetDoor.GetTeleportPosition();
+            teleportRotation = targetDoor.GetTeleportRotation();
+        } catch (Exception e)
+        {
+            // Exception caught properly
+        }
+
+        Scenes sceneIdx = doorData.sceneDestination;
         sceneChanger.LoadScene(sceneIdx);
+
+        playerRig.transform.SetPositionAndRotation(teleportPosition, teleportRotation);
     }
 }
