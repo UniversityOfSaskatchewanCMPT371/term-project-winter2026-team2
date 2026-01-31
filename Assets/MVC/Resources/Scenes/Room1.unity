@@ -504,11 +504,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 6436544242978802091, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436544242978802091, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5720997431999239473}
+    - target: {fileID: 6436544242978802091, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayerEnter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436544242978802091, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436544242978802091, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+--- !u!114 &5720997431999239473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6778107819051103217, guid: 856d079ab3706c34bb741a6126bb2081, type: 3}
+  m_PrefabInstance: {fileID: 5720997431999239472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75532f854dd782a42870f2dd8d03f3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
