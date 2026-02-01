@@ -2,11 +2,19 @@ using UnityEngine;
 
 [ RequireComponent(typeof(WhackAColorData)) ]
 [ RequireComponent(typeof(WhackAColorView)) ]
+
+/// <summary>
+/// Controller layer for WhackAColor minigame.
+/// </summary>
 public class WhackAColorLogic : MonoBehaviour
 {
-    public WhackAColorData whackAColorData;
-    public WhackAColorView whackAColorView;
+    public WhackAColorData whackAColorData;                 // Reference to Model layer
+    public WhackAColorView whackAColorView;                 // Reference to View layer
 
+    /// <summary>
+    /// Handles changing to next target color, and randomizes
+    /// the color of the cubes.
+    /// </summary>
     private void NextTargetColor()
     {
         // get lists of random colors to be used
@@ -24,6 +32,9 @@ public class WhackAColorLogic : MonoBehaviour
         whackAColorView.RandomizeCubeColors(colorPool);
     }
 
+    /// <summary>
+    /// Starts the minigame.
+    /// </summary>
     public void StartGame()
     {
         // throw exception here
@@ -37,14 +48,22 @@ public class WhackAColorLogic : MonoBehaviour
         whackAColorData.GameState = GameState.Playing;
     }
 
+    /// <summary>
+    /// Finishes the minigame.
+    /// </summary>
     public void FinishGame()
     {
         whackAColorView.ChangeAllCubeColors(whackAColorData.defaultColor);
-        whackAColorView.MinigameFinished(whackAColorData.IsGoalReached());
+        whackAColorView.DisplayResults(whackAColorData.IsGoalReached());
+        whackAColorView.Invoke("DisplayTitle", 3);
         whackAColorData.ResetData();
         whackAColorData.GameState = GameState.Ready;
     }
 
+    /// <summary>
+    /// Verifys that the color hit was the target color.
+    /// </summary>
+    /// <param name="color">Color that was hit.</param>
     public void VerifyColorHit(Color color)
     {
         if (!whackAColorData.IsPlaying()) return;
@@ -59,6 +78,9 @@ public class WhackAColorLogic : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update the status of the game each frame.
+    /// </summary>
     private void Update()
     {
         // Don't update when the game status is ready
@@ -70,7 +92,7 @@ public class WhackAColorLogic : MonoBehaviour
             whackAColorData.Timer -= Time.deltaTime;
 
             // Update the view about the score and timer
-            whackAColorView.OnUpdate(whackAColorData.Score, whackAColorData.Goal, whackAColorData.Timer);
+            whackAColorView.DisplayStatus(whackAColorData.Score, whackAColorData.Goal, whackAColorData.Timer);
 
             // Check if the goal has been reached
             // Check if time ran out

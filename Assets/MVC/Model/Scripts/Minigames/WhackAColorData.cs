@@ -7,6 +7,9 @@ public enum GameState
     Finished,
 }
 
+/// <summary>
+/// Data layer for WhackAColor minigame.
+/// </summary>
 public class WhackAColorData : MonoBehaviour
 {
     /// <summary>
