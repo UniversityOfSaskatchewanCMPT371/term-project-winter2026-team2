@@ -13,11 +13,11 @@ public class WhackAColorData : MonoBehaviour
     /// Data Section
     /// </summary>
     private int score = 0;                              // Current score
-    private int goal = 1;                               // Minimum score to win
+    private int goal = 10;                              // Minimum score to win
 
     private float delay = 3f;                           // Delay between color change
     private bool delayDebounce = false;                 // Prevents consecutive color changes
-    private float timeout = 6;                       // Amount of time to win the game
+    private float timeout = 30f;                        // Amount of time to win the game
     private float timer = 0f;                           // Countdown timer before out of time
 
     public Color defaultColor = Color.white;            // Default color
