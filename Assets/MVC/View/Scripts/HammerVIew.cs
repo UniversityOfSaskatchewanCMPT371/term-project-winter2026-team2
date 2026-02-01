@@ -3,6 +3,10 @@ using UnityEngine.Events;
 
 [ RequireComponent(typeof(Collision)) ]
 [ RequireComponent(typeof(Rigidbody)) ]
+
+/// <summary>
+/// View layer for hammer prefab.
+/// </summary>
 public class HammerView : MonoBehaviour
 {
     public UnityEvent<Collision> OnHammerHit;
