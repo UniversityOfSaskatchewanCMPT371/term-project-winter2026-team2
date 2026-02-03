@@ -1,2 +1,5 @@
-John
-Antoinette
+Repository Structure: The structure of our repository is aimed to follow standard git formatting and protocols. In the following incrementals, our main system being built's code will be found in the code section of the repository in the main branch. For Deliverable 1, we currently have our VRGame Spike Prototype in the main branch and the spike prototype for E2E test automation in its own branch, as well as our dev teams spike protoype is in its own branch. This was done to isolate issues and tasks upon their own teams just for this deliverable. 
+
+Our issues and backlog can be found in the issues tab on the github page. We are assigning members and tagging tasks. 
+
+Accessing Artifacts on Github: Team 2 assignment artifacts can be found in the wiki page of the "term-project-winter2026-team2" repository. One on the wiki page, you will be on our project wiki homepage and can view an overview of the project and navigate to other deliverable pages. ID1 artifacts can be found in the ID1 Hand-in Page This page contains all of our documents. 

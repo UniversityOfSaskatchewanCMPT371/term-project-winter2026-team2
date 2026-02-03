@@ -1,0 +1,121 @@
+############################################
+# Unity generated folders
+############################################
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# Unity Asset Store tools cache
+[Uu]nity[Pp]ackage[Mm]anager/
+[Pp]ackages/packages-lock.json.meta
+
+############################################
+# Unity generated files
+############################################
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.unityproj
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+############################################
+# Builds / artifacts
+############################################
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+############################################
+# Crash reports / logs
+############################################
+sysinfo.txt
+crashlytics-build.properties
+
+############################################
+# OS generated
+############################################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+############################################
+# IDE / editor files
+############################################
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.sln.DotSettings.user
+*.sln.DotSettings
+
+############################################
+# Rider / JetBrains
+############################################
+.idea/
+*.resharper
+*.DotSettings.user
+*.DotSettings
+
+############################################
+# Unity Collaborate / Plastic SCM (optional)
+############################################
+.plastic/
+.plastic/
+*.plastic
+
+############################################
+# Unity Addressables cache (if you use it later)
+############################################
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.json*
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.hash*
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bundle*
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.catalog*
+
+############################################
+# Test results / coverage
+############################################
+TestResults/
+test-results/
+coverage/
+CodeCoverage/
+*.xml
+*.html
+
+############################################
+# Local env files
+############################################
+.env
+.env.*
+
