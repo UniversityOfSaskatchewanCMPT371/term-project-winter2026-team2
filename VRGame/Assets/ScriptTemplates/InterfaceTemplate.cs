@@ -10,7 +10,7 @@ public interface InternalInterface
     /// <summary>
     /// Example method exclusive to this layer.
     /// </summary>
-    void ExclusiveMethod();
+    internal void ExclusiveMethod();                            // all methods have to be internal
 }
 
 /// <summary>
@@ -25,5 +25,26 @@ public interface ExternalInterface
     /// <summary>
     /// Example method exposed to other layer.
     /// </summary>
-    void ExposedMethod();
+    void ExposedMethod();                                       // public by default
 }
+
+/// MVC Contract
+/// 
+/// Model
+/// - Contains data
+/// - Mutates data
+/// - No access to View and Controller
+/// - Validates input from controller via assertions
+/// 
+/// Controller
+/// - Contains none/minimal data (mostly just reference to View/Model)
+/// - Access to View and Model
+/// - Can mutate Model via its external interface
+/// - Validates Model/View references via assertions
+/// 
+/// View
+/// - Contains object references
+/// - Access to Controller
+/// - No access to Model (only through controller)
+/// - Validates object references via assertions
+/// 
