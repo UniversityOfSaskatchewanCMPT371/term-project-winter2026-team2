@@ -1,24 +1,25 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Controller layer base class.
 /// Requires internal/external interface.
 /// </summary>
-public class BaseController : InternalInterface, ExternalInterface
+public class BaseController : MonoBehaviour, InternalInterface, ExternalInterface
 {
     /*  
     DATA SECTION
     DATA SECTION
     */
-    private BaseModel model = new BaseModel();
-    private BaseView view = new BaseView();
+    [SerializeField] private BaseModel model;               // Reference to this class's Model layer
+    [SerializeField] private BaseView view;                 // Reference to this class's View layer
 
     /*
     EXCLUSIVE METHODS SECTION
     EXCLUSIVE METHODS SECTION
     */
 
-    void InternalInterface.ExclusiveMethod()
+    void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
     {
         Debug.Log("Hello, from controller layer!");
         model.ExposedMethod();
@@ -31,6 +32,47 @@ public class BaseController : InternalInterface, ExternalInterface
 
     public void ExposedMethod()
     {
-        ((InternalInterface)this).ExclusiveMethod();
+        ((InternalInterface)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
+    }
+
+    /*
+    RUNTIME BEHAVIOURS SECTION
+    RUNTIME BEHAVIOURS SECTION
+    */
+
+    /// <summary>
+    /// Called after the scene loads.
+    /// </summary>
+    private void Awake()
+    {
+        // Verify layer references before starting
+        Assert.IsNotNull(model, "Reference to model layer cannot be null.");
+        Assert.IsNotNull(view, "Reference to view layer cannot be null.");
+        if (model == null | view == null) return;
+
+        // Your code here
+    }
+
+    /// <summary>
+    /// Called after all Awake() calls finishes.
+    /// </summary>
+    private void Start()
+    {
+        // Your code here
+    }
+
+    /// <summary>
+    /// Called every frame.
+    /// </summary>
+    private void Update()
+    {
+        // Your code here
     }
 }
+
+/// Controller Contract Guidelines
+/// - Contains none/minimal data (mostly just reference to View/Model)
+/// - Access to View and Model
+/// - Can mutate Model via its external interface
+/// - Validates Model/View references via assertions
+/// - Can use unity libraries

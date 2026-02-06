@@ -1,3 +1,4 @@
+#NOTRIM#
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -5,21 +6,21 @@ using UnityEngine.Assertions;
 /// Controller layer base class.
 /// Requires internal/external interface.
 /// </summary>
-public class #SCRIPNAME#Controller : MonoBehaviour, I#SCRIPNAME#, E#SCRIPNAME#
+public class #SCRIPTNAME# : MonoBehaviour, I#SCRIPTNAME#, E#SCRIPTNAME#
 {
     /*  
     DATA SECTION
     DATA SECTION
     */
-    public #SCRIPNAME#Model model;
-    public #SCRIPNAME#View view;
+    [SerializeField] private BaseModel model;               // Reference to this class's Model layer
+    [SerializeField] private BaseView view;                 // Reference to this class's View layer
 
     /*
     EXCLUSIVE METHODS SECTION
     EXCLUSIVE METHODS SECTION
     */
 
-    void I#SCRIPNAME#.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting I#SCRIPNAME# type on it self.
+    void I#SCRIPTNAME#.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting I#SCRIPTNAME# type on it self.
     {
         Debug.Log("Hello, from controller layer!");
         model.ExposedMethod();
@@ -32,7 +33,7 @@ public class #SCRIPNAME#Controller : MonoBehaviour, I#SCRIPNAME#, E#SCRIPNAME#
 
     public void ExposedMethod()
     {
-        ((I#SCRIPNAME#)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
+        ((I#SCRIPTNAME#)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
     }
 
     /*
@@ -46,8 +47,8 @@ public class #SCRIPNAME#Controller : MonoBehaviour, I#SCRIPNAME#, E#SCRIPNAME#
     private void Awake()
     {
         // Verify layer references before starting
-        Assert.IsNotNull(model, "Reference to #SCRIPNAME#Model cannot be null.");
-        Assert.IsNotNull(view, "Reference to #SCRIPNAME#View cannot be null.");
+        Assert.IsNotNull(model, "Reference to model layer cannot be null.");
+        Assert.IsNotNull(view, "Reference to view layer cannot be null.");
         if (model == null | view == null) return;
 
         // Your code here
