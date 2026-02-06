@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 /// <summary>
@@ -21,7 +20,7 @@ public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
     
     void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
     {
-        Console.Write(prompt);
+        Debug.Log(prompt);
     }
 
     /*

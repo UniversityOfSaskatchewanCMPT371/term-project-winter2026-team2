@@ -1,5 +1,5 @@
 #NOTRIM#
-using System;
+using UnityEngine;
 
 /// <summary>
 /// Model layer base class.
@@ -24,7 +24,7 @@ public class #SCRIPTNAME# : MonoBehaviour, I#SCRIPTNAME#, E#SCRIPTNAME#
     /// </summary>
     void I#SCRIPTNAME#.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting I#SCRIPTNAME# type on it self.
     {
-        Console.Write(prompt);
+        Debug.Log(prompt);
     }
 
     /*
