@@ -1,4 +1,4 @@
-using UnityEngine;
+using System;
 
 /// <summary>
 /// Model layer base class.
@@ -18,12 +18,9 @@ public class BaseModel : InternalInterface, ExternalInterface
     EXCLUSIVE METHODS SECTION
     */
     
-    /// <summary>
-    /// Example method exclusive to this layer.
-    /// </summary>
     void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
     {
-        Debug.Log(prompt);
+        Console.Write(prompt);
     }
 
     /*
@@ -31,11 +28,15 @@ public class BaseModel : InternalInterface, ExternalInterface
     EXPOSED METHODS SECTION
     */
 
-    /// <summary>
-    /// Example method exposed to controller layer.
-    /// </summary>
     public void ExposedMethod()
     {
         ((InternalInterface)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
     }
 }
+
+/// Model Contract Guidelines
+/// - Contains data
+/// - Mutates data
+/// - No access to View and Controller
+/// - Validates input from controller via assertions
+/// - No unity libraries (should be testable without unity)

@@ -28,20 +28,21 @@ public interface ExternalInterface
     void ExposedMethod();                                       // public by default
 }
 
-/// MVC Contract
+/// MVC Contract Guidelines
 /// 
 /// Model
 /// - Contains data
 /// - Mutates data
 /// - No access to View and Controller
 /// - Validates input from controller via assertions
+/// - No unity libraries (should be testable without unity)
 /// 
 /// Controller
 /// - Contains none/minimal data (mostly just reference to View/Model)
 /// - Access to View and Model
 /// - Can mutate Model via its external interface
 /// - Validates Model/View references via assertions
-/// 
+///
 /// View
 /// - Contains object references
 /// - Access to Controller
