@@ -1,10 +1,11 @@
 using System;
+using UnityEngine;
 
 /// <summary>
 /// Model layer base class.
 /// Requires internal/external interface.
 /// </summary>
-public class BaseModel : InternalInterface, ExternalInterface
+public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
 {
     /*  
     DATA SECTION
@@ -39,4 +40,3 @@ public class BaseModel : InternalInterface, ExternalInterface
 /// - Mutates data
 /// - No access to View and Controller
 /// - Validates input from controller via assertions
-/// - No unity libraries (should be testable without unity)

@@ -75,4 +75,3 @@ public class BaseController : MonoBehaviour, InternalInterface, ExternalInterfac
 /// - Access to View and Model
 /// - Can mutate Model via its external interface
 /// - Validates Model/View references via assertions
-/// - Can use unity libraries

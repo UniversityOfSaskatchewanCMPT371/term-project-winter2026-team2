@@ -35,7 +35,6 @@ public interface ExternalInterface
 /// - Mutates data
 /// - No access to View and Controller
 /// - Validates input from controller via assertions
-/// - No unity libraries (should be testable without unity)
 /// 
 /// Controller
 /// - Contains none/minimal data (mostly just reference to View/Model)

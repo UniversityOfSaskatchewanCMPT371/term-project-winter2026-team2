@@ -5,7 +5,7 @@ using System;
 /// Model layer base class.
 /// Requires internal/external interface.
 /// </summary>
-public class #SCRIPTNAME# : I#SCRIPTNAME#, E#SCRIPTNAME#
+public class #SCRIPTNAME# : MonoBehaviour, I#SCRIPTNAME#, E#SCRIPTNAME#
 {
     /*  
     DATA SECTION
@@ -46,5 +46,3 @@ public class #SCRIPTNAME# : I#SCRIPTNAME#, E#SCRIPTNAME#
 /// - Mutates data
 /// - No access to View and Controller
 /// - Validates input from controller via assertions
-/// - No unity libraries
-/// - No unity libraries (should be testable without unity)
