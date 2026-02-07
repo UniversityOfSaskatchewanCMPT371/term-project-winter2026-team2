@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -21,6 +22,8 @@ public class BaseView : MonoBehaviour, InternalInterface, ExternalInterface
     void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
     {
         Debug.Log("Hello, from view layer!");
+
+        // Methods that aren't implemented yet should throw errors
         controller.ExposedMethod();
     }
 
@@ -46,7 +49,11 @@ public class BaseView : MonoBehaviour, InternalInterface, ExternalInterface
     {
         // Verify layer references before starting
         Assert.IsNotNull(controller, "Reference to controller layer cannot be null.");
-        if (controller == null) return;
+        if (controller == null)
+        {
+            Debug.LogError("Controller reference is missing. Cancelled execution.");
+            return;
+        }
 
         ExposedMethod();
         // Your code here

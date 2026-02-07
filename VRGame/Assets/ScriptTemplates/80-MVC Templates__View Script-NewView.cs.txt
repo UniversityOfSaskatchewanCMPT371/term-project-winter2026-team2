@@ -47,7 +47,11 @@ public class #SCRIPTNAME# : MonoBehaviour, I#SCRIPTNAME#, E#SCRIPTNAME#
     {
         // Verify layer references before starting
         Assert.IsNotNull(controller, "Reference to controller layer cannot be null.");
-        if (controller == null) return;
+        if (controller == null) 
+        {
+            Debug.LogError("Controller reference is missing. Cancelled execution.");
+            return;
+        };
 
         ExposedMethod();
         // Your code here

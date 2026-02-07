@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -48,7 +49,12 @@ public class BaseController : MonoBehaviour, InternalInterface, ExternalInterfac
         // Verify layer references before starting
         Assert.IsNotNull(model, "Reference to model layer cannot be null.");
         Assert.IsNotNull(view, "Reference to view layer cannot be null.");
-        if (model == null | view == null) return;
+        if (model == null | view == null)
+        { 
+            if (model == null) Debug.LogError("Model reference is missing. Cancelled execution.");
+            if (view == null) Debug.LogError("View reference is missing. Cancelled execution.");
+            return;
+        }
 
         // Your code here
     }

@@ -1,20 +1,17 @@
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.UI;
 
 /// <summary>
-/// Model layer base class.
+/// Base manger class.
 /// Requires internal/external interface.
 /// </summary>
-public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
+public class BaseManager : InternalInterface, ExternalInterface
 {
-    /*  
+
+    /*
     DATA SECTION
     DATA SECTION
     */
-
-    private string prompt = "Hello, from model layer!";
+    private string prompt = "Hello, from manager!";
 
     /*
     EXCLUSIVE METHODS SECTION
@@ -23,13 +20,6 @@ public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
     
     void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
     {
-        Assert.IsNotNull(prompt, "Field prompt cannot be null.");
-        if (prompt == null)
-        {
-            Debug.LogError("Missing prompt field. Cancelled execution.");
-            return;
-        }
-        
         Debug.Log(prompt);
     }
 
@@ -44,8 +34,8 @@ public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
     }
 }
 
-/// Model Contract Guidelines
-/// - Contains data
+/// Manager Contract Guidelines
+/// - Governs the game (ex. SceneChanger, or AudioManager)
+/// - Contains data (some global)
 /// - Mutates data
-/// - No access to View and Controller
-/// - Validates input from controller via assertions
+/// - Not an MVC, but a service
