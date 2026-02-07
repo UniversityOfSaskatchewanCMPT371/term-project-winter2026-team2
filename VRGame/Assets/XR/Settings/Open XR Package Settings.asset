@@ -744,18 +744,18 @@ MonoBehaviour:
   m_Name: Standalone
   m_EditorClassIdentifier: 
   features:
-  - {fileID: 1443452708213354362}
+  - {fileID: 4963040286616351577}
   - {fileID: -1557233674024107270}
-  - {fileID: 9096479736163431129}
+  - {fileID: -1276894210230670667}
   - {fileID: 5047315830286589360}
   - {fileID: 6504682016904032715}
   - {fileID: 5007098057516315081}
   - {fileID: 2497339995422133549}
   - {fileID: 928296757526069075}
   - {fileID: -4647824206626811188}
-  - {fileID: 4025793028449617705}
-  - {fileID: -2513858183220632965}
-  - {fileID: 6841333374066517713}
+  - {fileID: -4314466618941312080}
+  - {fileID: -381482547018402083}
+  - {fileID: 5447152813868908602}
   - {fileID: -4454024988132797082}
   - {fileID: -8895518590110429109}
   - {fileID: 4451366187881382638}
@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056125dd64c0ed540b40a4af74f7b495, type: 3}
   m_Name: RuntimeDebuggerOpenXRFeature Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Runtime Debugger
   version: 1
   featureIdInternal: com.unity.openxr.features.runtimedebugger

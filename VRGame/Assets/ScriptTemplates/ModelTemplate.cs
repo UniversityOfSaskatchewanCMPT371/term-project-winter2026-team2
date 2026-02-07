@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.UI;
 
 /// <summary>
 /// Model layer base class.
@@ -14,7 +12,9 @@ public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
     DATA SECTION
     */
 
-    private string prompt = "Hello, from model layer!";
+    public string prompt = "Hello, from model layer!";      // Generally you wanna keep these private, 
+                                                            // but for testing purposes it is set to 
+                                                            // public (to avoid having to change the base interface template)
 
     /*
     EXCLUSIVE METHODS SECTION
