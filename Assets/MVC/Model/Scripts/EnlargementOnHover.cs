@@ -23,8 +23,8 @@ public class XRScaleLinkedOnHover : MonoBehaviour
         //</summary>
         for (int i = 0; i < linkedObjects.Length; i++)
         {
-            originalScales[i] = linkedObjects[i].localScale;
-            targetScales[i] = originalScales[i];
+            normalScale[i] = linkedObjects[i].localScale;
+            biggerScale[i] = normalScale[i];
         }
 
         
@@ -33,5 +33,16 @@ public class XRScaleLinkedOnHover : MonoBehaviour
 
     void Update()
     {
+        //<summary>
+        // Update the scale of the linked objects using for loop
+        //</summary>
+        for (int i = 0; i < linkedObjects.Length; i++)
+        {
+            linkedObjects[i].localScale = Vector3.Lerp(
+                linkedObjects[i].localScale,
+                biggerScale[i],
+                Time.deltaTime * scaleSpeed
+            );
+        }
     }
 }
