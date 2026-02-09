@@ -27,14 +27,31 @@ public class XRScaleLinkedOnHover : MonoBehaviour
             biggerScale[i] = normalScale[i];
         }
 
-        
+        //<summary>
+        // A hover-entered event listener to scale the linked objects to bigger scale
+        //</summary>
+        var modelInteractable = GetComponent<XRBaseInteractable>();
+        modelInteractable.hoverEntered.AddListener(_ =>
+        {
+            for (int i = 0; i < linkedObjects.Length; i++)
+                biggerScale[i] = normalScale[i] * hoverScaleMultiplier;
+        });
 
+        //<summary>
+        // A hover-exited event listener to scale the linked objects back to normal
+        //</summary>
+        modelInteractable.hoverExited.AddListener(_ =>
+        {
+            for (int i = 0; i < linkedObjects.Length; i++)
+                biggerScale[i] = normalScale[i];
+        });
     }
 
     void Update()
     {
         //<summary>
         // Update the scale of the linked objects using for loop
+        // Transition smoothly between normal and bigger scales with scaleSpeed
         //</summary>
         for (int i = 0; i < linkedObjects.Length; i++)
         {
