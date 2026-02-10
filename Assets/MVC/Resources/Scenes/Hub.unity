@@ -633,15 +633,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6386941472593511184, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08
+      value: 0.081
       objectReference: {fileID: 0}
     - target: {fileID: 6386941472593511184, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.22
+      value: -1.382
       objectReference: {fileID: 0}
     - target: {fileID: 6386941472593511184, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.55
+      value: -0.498
       objectReference: {fileID: 0}
     - target: {fileID: 7559369061304381422, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalScale.z
@@ -649,15 +649,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7559369061304381422, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25907
+      value: 0.258
       objectReference: {fileID: 0}
     - target: {fileID: 7559369061304381422, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.89169
+      value: -1.064
       objectReference: {fileID: 0}
     - target: {fileID: 7559369061304381422, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.659
+      value: -0.604
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -802,7 +802,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 337973800}
   - {fileID: 1696639210}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &337973804
 MonoBehaviour:
@@ -1015,7 +1015,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 514910429}
   - {fileID: 585481797}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &514910433
 MonoBehaviour:
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 585481797}
   - {fileID: 514910429}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &585481801
 MonoBehaviour:
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 745939436}
   - {fileID: 1844260060}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &745939440
 MonoBehaviour:
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 938516626}
   - {fileID: 1441678609}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &938516630
 MonoBehaviour:
@@ -1800,7 +1800,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1130966748}
   - {fileID: 1217023808}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1130966752
 MonoBehaviour:
@@ -2046,7 +2046,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1217023808}
   - {fileID: 1130966748}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1217023812
 MonoBehaviour:
@@ -2198,7 +2198,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1282522989}
   - {fileID: 1365620987}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1282522993
 MonoBehaviour:
@@ -2350,7 +2350,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1365620987}
   - {fileID: 1282522989}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1365620991
 MonoBehaviour:
@@ -2502,7 +2502,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1441678609}
   - {fileID: 938516626}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1441678613
 MonoBehaviour:
@@ -2788,7 +2788,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1696639210}
   - {fileID: 337973800}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1696639214
 MonoBehaviour:
@@ -3046,7 +3046,7 @@ MonoBehaviour:
   linkedObjects:
   - {fileID: 1844260060}
   - {fileID: 745939436}
-  hoverScaleMultiplier: 1.1
+  hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1844260064
 MonoBehaviour:

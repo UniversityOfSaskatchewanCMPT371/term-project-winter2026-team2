@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class XRScaleLinkedOnHover : MonoBehaviour
 {
     public Transform[] linkedObjects;
-    public float hoverScaleMultiplier = 1.1f;
+    public float hoverScaleMultiplier = 1.25f;
     public float scaleSpeed = 10f;
 
     private Vector3[] normalScale;
