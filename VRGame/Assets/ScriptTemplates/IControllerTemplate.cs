@@ -10,6 +10,5 @@ public interface IControllerTemplate
     /// <summary>
     /// Updates the data Model's counter.
     /// </summary>
-    /// <exception cref="MissingReferenceException"></exception>
     void Count();
 }

@@ -1,3 +1,4 @@
+#NOTRIM#
 using UnityEngine;
 using System;
 
@@ -12,7 +13,7 @@ using System;
 /// TODO: Replace IControllerTemplate interface.
 /// TODO: Replace type cast on ModelRef/ViewRef
 /// </summary>
-public class ControllerTemplate : Controller, IControllerTemplate
+public class #SCRIPTNAME# : Controller, IControllerTemplate
 {
     /*
     ======================== DATA SECTION ========================

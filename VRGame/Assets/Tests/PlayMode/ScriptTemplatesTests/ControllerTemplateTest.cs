@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -38,10 +37,6 @@ public class PMControllerTemplateTest
         ModelTemplate model = go.GetComponent<ModelTemplate>();
 
         yield return null; // allow Start() to run
-
-
-
-        // Test if Count() increments the Model and updates the View
 
         bool invoked = false;
         int lastValue = 0;

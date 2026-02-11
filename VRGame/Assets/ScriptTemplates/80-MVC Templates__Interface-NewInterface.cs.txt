@@ -1,8 +1,9 @@
+#NOTRIM#
 /// <summary>
 /// Base interface for all interfaces.
 /// TODO: Add a description here.
 /// </summary>
-public interface Interface
+public interface #SCRIPTNAME#
 {
     /*
     =================== PUBLIC METHODS SECTION ===================

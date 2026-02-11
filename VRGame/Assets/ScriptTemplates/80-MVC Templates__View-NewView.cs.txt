@@ -1,3 +1,4 @@
+#NOTRIM#
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,7 +17,7 @@ using UnityEngine.Events;
 /// TODO: Replace IViewTemplate interface.
 /// TODO: Replace type cast on ControllerRef.
 /// </summary>
-public class ViewTemplate : View, IViewTemplate
+public class #SCRIPTNAME# : View, IViewTemplate
 {
     /*
     ======================== DATA SECTION ========================

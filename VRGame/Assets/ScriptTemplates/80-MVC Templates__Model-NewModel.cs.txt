@@ -1,3 +1,4 @@
+#NOTRIM#
 using UnityEngine;
 using System;
 
@@ -10,7 +11,7 @@ using System;
 /// TODO: Add a description here.
 /// TODO: Replace IModelTemplate interface.
 /// </summary>
-public class ModelTemplate : Model, IModelTemplate
+public class #SCRIPTNAME# : Model, IModelTemplate
 {
     /*
     ======================== DATA SECTION ========================
