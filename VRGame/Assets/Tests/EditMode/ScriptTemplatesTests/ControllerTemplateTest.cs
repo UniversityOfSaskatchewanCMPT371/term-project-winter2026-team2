@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Reflection;
 
-public class ControllerTemplateTest
+public class EMControllerTemplateTest
 {
     [Test]
     public void Test01_Instantiate()

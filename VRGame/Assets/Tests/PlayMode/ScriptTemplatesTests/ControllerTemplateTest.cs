@@ -3,23 +3,69 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEditor;
 
-public class ControllerTemplateTest
+public class PMControllerTemplateTest
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void ControllerTemplateTestSimplePasses()
+    GameObject preloadPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/ScriptTemplates/MVCPrefab.prefab");
+
+    [UnityTest]
+    public IEnumerator Test01_Initialize()
     {
-        // Use the Assert class to test conditions
+        // Create GameObject and attach MVC components
+        GameObject go = Object.Instantiate(preloadPrefab);
+
+        // Destroy components we don't need
+        ModelTemplate model = go.GetComponent<ModelTemplate>();
+        Object.DestroyImmediate(model);
+
+        ViewTemplate view = go.GetComponent<ViewTemplate>();
+        Object.DestroyImmediate(view);
+
+        LogAssert.Expect(LogType.Assert, "Field ModelRef cannot be null");
+        LogAssert.Expect(LogType.Assert, "Field ViewRef cannot be null");
+
+        yield return null;
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator ControllerTemplateTestWithEnumeratorPasses()
+    public IEnumerator Test02_Count()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
+        // Create GameObject and attach MVC components
+        GameObject go = Object.Instantiate(preloadPrefab);
+        ControllerTemplate controller = go.GetComponent<ControllerTemplate>();
+        ViewTemplate view = go.GetComponent<ViewTemplate>();
+        ModelTemplate model = go.GetComponent<ModelTemplate>();
+
+        yield return null; // allow Start() to run
+
+
+
+        // Test if Count() increments the Model and updates the View
+
+        bool invoked = false;
+        int lastValue = 0;
+
+        view.OnExampleEvent.AddListener((value) =>
+        {
+            invoked = true;
+            lastValue = value;
+        });
+
+        int before = model.GetExample();
+
+        controller.Count();
+
+        // Test if Count() increments the Model and updates the View
+        Assert.AreEqual(before + 1, model.GetExample());
+
+        // Test if update is reflected on View layer
+        Assert.IsTrue(invoked);
+
+        // Final update from finally block
+        Assert.AreEqual(-1, lastValue);
+
         yield return null;
+
     }
 }

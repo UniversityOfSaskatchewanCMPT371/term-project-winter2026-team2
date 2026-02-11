@@ -79,11 +79,9 @@ public class ControllerTemplate : Controller, IControllerTemplate
     =================== RUNTIME METHODS SECTION ===================
     */
 
-    /// <summary>
-    /// Verify all layer wirings.
-    /// </summary>
-    void Awake()
+    void Start()
     {
+        // Verify layer reference
         Debug.Assert(ModelRef != null, "Field ModelRef cannot be null");
         Debug.Assert(ViewRef != null, "Field ViewRef cannot be null");
     }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 717049d3af675434cb72f8daf9734b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelRef: {fileID: 0}
+  ModelRef: {fileID: -5129083112479875355}
   ViewRef: {fileID: 7376583791663867978}
 --- !u!114 &7376583791663867978
 MonoBehaviour:

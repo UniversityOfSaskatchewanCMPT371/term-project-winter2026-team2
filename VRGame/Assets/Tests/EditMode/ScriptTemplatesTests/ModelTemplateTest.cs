@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 
-public class ModelTemplateTest
+public class EMModelTemplateEditModeTest
 {
     [Test]
     public void Test01_Instantiate()

@@ -64,16 +64,17 @@ public class ViewTemplate : View, IViewTemplate
     =================== RUNTIME METHODS SECTION ===================
     */
 
-    /// <summary>
-    /// Verify layer wirings.
-    /// </summary>
     void Awake()
     {
-        Debug.Assert(ControllerRef != null, "Field ControllerRef cannot be null");
+        // TODO: Your code here. (can be deleted)
     }
 
     void Start()
     {
+        // Verify layer reference
+        Debug.Assert(ControllerRef != null, "Field ControllerRef cannot be null");
+
+        // Mimic a user input
         InvokeRepeating("ExampleUserInput", 0, 1);
 
         // TODO: Your code here. (can be deleted)

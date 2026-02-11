@@ -3,33 +3,42 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.TestTools;
 using System.Collections;
-using System.Reflection;
-using System.IO;
 
-public class ViewTemplatePlayModeTest
+public class PMViewTemplateTest
 {
     GameObject preloadPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/ScriptTemplates/MVCPrefab.prefab");
 
     [UnityTest]
-    public IEnumerator Test_Initialize()
+    public IEnumerator Test01_Initialize()
     {
         // Create GameObject and attach MVC components
         GameObject go = Object.Instantiate(preloadPrefab);
 
-        LogAssert.Expect(LogType.Assert, "Field ModelRef cannot be null");
+        // Destroy components we don't need
+        ModelTemplate model = go.GetComponent<ModelTemplate>();
+        Object.DestroyImmediate(model);
+
+        // Destroy components we don't need
+        ControllerTemplate controller = go.GetComponent<ControllerTemplate>();
+        Object.DestroyImmediate(controller);
+
+        LogAssert.Expect(LogType.Assert, "Field ControllerRef cannot be null");
 
         yield return null;
     }
 
     [UnityTest]
-    public IEnumerator Test_OnExampleUpdate()
+    public IEnumerator Test02_OnExampleUpdate()
     {
         // Create GameObject and attach MVC components
         GameObject go = Object.Instantiate(preloadPrefab);
         ViewTemplate view = go.GetComponent<ViewTemplate>();
 
-        // We don't need model layer to test this
+        // Destroy components we don't need
+        ModelTemplate model = go.GetComponent<ModelTemplate>();
+        Object.DestroyImmediate(model);
 
+        // Expect assertions
         LogAssert.Expect(LogType.Assert, "Field ModelRef cannot be null");
         LogAssert.Expect(LogType.Warning, "Reference to the Model layer is missing");
 
@@ -41,9 +50,9 @@ public class ViewTemplatePlayModeTest
         });
 
         // Skip one frame to allow Awake() and Start() to fire
-
         yield return null;
 
+        // Test to see if ExampleEvent will fire when invoked by the controller layer.
         Assert.IsTrue(EventInvoked, "Expected event to fire, but did not");
     }
 }
