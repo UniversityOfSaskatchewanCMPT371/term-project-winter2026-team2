@@ -18,7 +18,7 @@ public class ModelTemplateTest
         ModelTemplate model = go.AddComponent<ModelTemplate>();
 
         // Test to see if GetExample() will return an int value
-        Assert.NotNull(model.GetExample(), "Expected an int value to be returned, but got null.");
+        Assert.NotNull(model.GetExample(), "Expected an int value to be returned, but got null");
     }
 
     [Test]
@@ -35,11 +35,11 @@ public class ModelTemplateTest
         Expected = 10;
         model.SetExample(Expected);
         Result = model.GetExample();
-        Assert.AreEqual(Result, Expected, $"Expected value to be {Expected}, but got {Result}.");
+        Assert.AreEqual(Result, Expected, $"Expected value to be {Expected}, but got {Result}");
         
         // Test to see if SetExample() will thrown an exception on a negative parameter
         Input = -1;
-        Assert.Throws<ArgumentOutOfRangeException>(() => model.SetExample(Input), "Expected exception to be thrown, but none was thrown on a negative value.");
+        Assert.Throws<ArgumentOutOfRangeException>(() => model.SetExample(Input), "Expected exception to be thrown, but none was thrown on a negative value");
     }
 
     [Test]
@@ -51,14 +51,14 @@ public class ModelTemplateTest
         int Expected;
         int Result;
 
-        // Test to see if IncrementExample() will increment Example by 1.
+        // Test to see if IncrementExample() will increment Example by 1
         Expected = 1;
         model.IncrementExample();
         Result = model.GetExample();
-        Assert.AreEqual(Result, Expected, $"Expected value to be {Expected}, but got {Result}.");
+        Assert.AreEqual(Result, Expected, $"Expected value to be {Expected}, but got {Result}");
 
-        // Test to see if IncrementExample() will throw an error when Example is set to int.MaxValue().
+        // Test to see if IncrementExample() will throw an error when Example is set to int.MaxValue()
         model.SetExample(int.MaxValue);
-        Assert.Throws<InvalidOperationException>(() => model.IncrementExample(), "Expected exception to be thrown, but none was thrown on attempt to increment past int.MaxValue.");
+        Assert.Throws<InvalidOperationException>(() => model.IncrementExample(), "Expected exception to be thrown, but none was thrown on attempt to increment past int.MaxValue");
     }
 }

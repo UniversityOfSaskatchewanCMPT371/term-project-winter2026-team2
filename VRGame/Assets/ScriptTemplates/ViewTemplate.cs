@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.Events;
 
 /// <summary>
@@ -31,15 +31,18 @@ public class ViewTemplate : View, IViewTemplate
     /// <exception cref="MissingReferenceException"></exception>
     private void ExampleUserInput()
     {
-        if (ControllerRef == null)
-            throw new MissingReferenceException("Reference to Controller layer is missing.");
-
         try
         {
+            if (ControllerRef == null)
+                throw new MissingReferenceException("Reference to Controller layer is missing");
+
             ControllerRef.Count();
         } catch (MissingReferenceException err)
         {
-            Debug.LogError(err);
+            Debug.LogWarning(err.Message);
+        } catch (Exception err)
+        {
+            Debug.LogError(err.Message);
         }
     }
 
@@ -54,7 +57,6 @@ public class ViewTemplate : View, IViewTemplate
     public void OnExampleUpdate(int amount)
     {
         // All attached functions will be invoked
-        Debug.Log(amount);
         OnExampleEvent.Invoke(amount);
     }
 
@@ -67,18 +69,12 @@ public class ViewTemplate : View, IViewTemplate
     /// </summary>
     void Awake()
     {
-        Assert.IsNotNull<Controller>(ControllerRef, "Field ControllerRef cannot be null.");
+        Debug.Assert(ControllerRef != null, "Field ControllerRef cannot be null");
     }
 
     void Start()
     {
-        try
-        {
-            InvokeRepeating("ExampleUserInput", 1, 1);
-        } catch (MissingReferenceException err)
-        {
-            Debug.LogError(err);
-        }
+        InvokeRepeating("ExampleUserInput", 0, 1);
 
         // TODO: Your code here. (can be deleted)
     }

@@ -29,12 +29,11 @@ public class ControllerTemplate : Controller, IControllerTemplate
     /// Updates the View with the new counter value.
     /// </summary>
     /// <exception cref="MissingReferenceException"></exception>
-    private void CountUpdate()
+    private void CountUpdate(int amount)
     {
         if (ViewRef == null)
-            throw new MissingReferenceException("Reference to the View layer is missing.");
-
-        ViewRef.OnExampleUpdate(ModelRef.GetExample());
+            throw new MissingReferenceException("Reference to the View layer is missing");
+        ViewRef.OnExampleUpdate(amount);
     }
 
     /*
@@ -42,26 +41,37 @@ public class ControllerTemplate : Controller, IControllerTemplate
     */
 
     /// <summary>
-    /// Updates the data Model's counter.
+    /// Updates the data Example in Model layer.
     /// </summary>
-    /// <exception cref="MissingReferenceException"></exception>
     public void Count()
     {
-        if (ModelRef == null)
-            throw new MissingReferenceException("Reference to the Model layer is missing.");
+        try
+        {
+            if (ModelRef == null)
+                throw new MissingReferenceException("Reference to the Model layer is missing");
+            ModelRef.IncrementExample();
+        } catch (InvalidOperationException err) {
+            Debug.LogWarning(err.Message);
+        } catch (MissingReferenceException err) {
+            Debug.LogWarning(err.Message);
+        } catch (Exception err)
+        {
+            Debug.LogError(err.Message);
+        } 
         
         try
         {
-            ModelRef.IncrementExample();
-            CountUpdate();
-        } catch (InvalidOperationException err)
-        {
-            Debug.LogError(err);
-
-            // Exit early since there's no new update
-            return;
+            if (ModelRef == null)
+                throw new MissingReferenceException("Reference to the Model layer is missing");
+            CountUpdate(ModelRef.GetExample());
         } catch (MissingReferenceException err) {
-            Debug.LogWarning(err);
+            Debug.LogWarning(err.Message);
+        } catch (Exception err)
+        {
+            Debug.LogError(err.Message);
+        } finally
+        {
+            CountUpdate(-1);
         }
     }
 
@@ -74,7 +84,7 @@ public class ControllerTemplate : Controller, IControllerTemplate
     /// </summary>
     void Awake()
     {
-        Assert.IsNotNull<Model>(ModelRef, "Field ModelRef cannot be null.");
-        Assert.IsNotNull<View>(ViewRef, "Field ViewRef cannot be null.");
+        Debug.Assert(ModelRef != null, "Field ModelRef cannot be null");
+        Debug.Assert(ViewRef != null, "Field ViewRef cannot be null");
     }
 }

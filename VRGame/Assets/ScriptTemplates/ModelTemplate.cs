@@ -40,7 +40,7 @@ public class ModelTemplate : Model, IModelTemplate
     public void SetExample(int amount)
     {
         if (amount < 0)
-            throw new ArgumentOutOfRangeException("Example cannot be negative.");
+            throw new ArgumentOutOfRangeException("Example cannot be negative");
 
         Example = amount;
     }
@@ -52,7 +52,7 @@ public class ModelTemplate : Model, IModelTemplate
     public void IncrementExample()
     {
         if (Example == int.MaxValue) 
-            throw new InvalidOperationException("Example cannot be incremented further.");
+            throw new InvalidOperationException("Example cannot be incremented further");
 
         Example += 1;
     }
