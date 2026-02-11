@@ -4,8 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "ScriptTemplates",
-        "ScriptTemplateRef"
+        "ScriptTemplates"
     ],
     "includePlatforms": [
         "Editor"

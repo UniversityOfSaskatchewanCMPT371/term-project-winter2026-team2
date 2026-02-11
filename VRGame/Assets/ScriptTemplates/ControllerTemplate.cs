@@ -1,83 +1,80 @@
-using System;
 using UnityEngine;
+using System;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// Controller layer base class.
-/// Requires internal/external interface.
+/// TODO: Add a description here.
 /// </summary>
-public class BaseController : MonoBehaviour, InternalInterface, ExternalInterface
+public class ControllerTemplate : Controller, IControllerTemplate
 {
-    /*  
-    DATA SECTION
-    DATA SECTION
-    */
-    [SerializeField] private BaseModel model;               // Reference to this class's Model layer
-    [SerializeField] private BaseView view;                 // Reference to this class's View layer
-
     /*
-    EXCLUSIVE METHODS SECTION
-    EXCLUSIVE METHODS SECTION
-    */
-
-    void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
-    {
-        Debug.Log("Hello, from controller layer!");
-        model.ExposedMethod();
-    }
-
-    /*
-    EXPOSED METHODS SECTION
-    EXPOSED METHODS SECTION
-    */
-
-    public void ExposedMethod()
-    {
-        ((InternalInterface)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
-    }
-
-    /*
-    RUNTIME BEHAVIOURS SECTION
-    RUNTIME BEHAVIOURS SECTION
+    ======================== DATA SECTION ========================
     */
 
     /// <summary>
-    /// Called after the scene loads.
+    /// Reference to the Model layer.
     /// </summary>
-    private void Awake()
+    [SerializeField] private ModelTemplate ModelRef;
+
+    /// <summary>
+    /// Reference to the View layer.
+    /// </summary>
+    [SerializeField] private ViewTemplate ViewRef;
+
+    /*
+    =================== PRIVATE METHODS SECTION ==================
+    */
+
+    /// <summary>
+    /// Updates the View with the new counter value.
+    /// </summary>
+    /// <exception cref="MissingReferenceException"></exception>
+    private void CountUpdate()
     {
-        // Verify layer references before starting
-        Assert.IsNotNull(model, "Reference to model layer cannot be null.");
-        Assert.IsNotNull(view, "Reference to view layer cannot be null.");
-        if (model == null | view == null)
-        { 
-            if (model == null) Debug.LogError("Model reference is missing. Cancelled execution.");
-            if (view == null) Debug.LogError("View reference is missing. Cancelled execution.");
+        if (ViewRef == null)
+            throw new MissingReferenceException("Reference to the View layer is missing.");
+
+        ViewRef.OnExampleUpdate(ModelRef.GetExample());
+    }
+
+    /*
+    =================== PUBLIC METHODS SECTION ===================
+    */
+
+    /// <summary>
+    /// Updates the data Model's counter.
+    /// </summary>
+    /// <exception cref="MissingReferenceException"></exception>
+    public void Count()
+    {
+        if (ModelRef == null)
+            throw new MissingReferenceException("Reference to the Model layer is missing.");
+        
+        try
+        {
+            ModelRef.IncrementExample();
+            CountUpdate();
+        } catch (InvalidOperationException err)
+        {
+            Debug.LogError(err);
+
+            // Exit early since there's no new update
             return;
+        } catch (MissingReferenceException err) {
+            Debug.LogWarning(err);
         }
-
-        // Your code here
     }
 
-    /// <summary>
-    /// Called after all Awake() calls finishes.
-    /// </summary>
-    private void Start()
-    {
-        // Your code here
-    }
+    /*
+    =================== RUNTIME METHODS SECTION ===================
+    */
 
     /// <summary>
-    /// Called every frame.
+    /// Verify all layer wirings.
     /// </summary>
-    private void Update()
+    void Awake()
     {
-        // Your code here
+        Assert.IsNotNull<Model>(ModelRef, "Field ModelRef cannot be null.");
+        Assert.IsNotNull<View>(ViewRef, "Field ViewRef cannot be null.");
     }
 }
-
-/// Controller Contract Guidelines
-/// - Contains none/minimal data (mostly just reference to View/Model)
-/// - Access to View and Model
-/// - Can mutate Model via its external interface
-/// - Validates Model/View references via assertions

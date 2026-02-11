@@ -1,51 +1,59 @@
 using UnityEngine;
-using UnityEngine.Assertions;
+using System;
 
 /// <summary>
-/// Model layer base class.
-/// Requires internal/external interface.
+/// TODO: Add a description here.
 /// </summary>
-public class BaseModel : MonoBehaviour, InternalInterface, ExternalInterface
+public class ModelTemplate : Model, IModelTemplate
 {
-    /*  
-    DATA SECTION
-    DATA SECTION
+    /*
+    ======================== DATA SECTION ========================
     */
 
-    public string prompt = "Hello, from model layer!";      // Generally you wanna keep these private, 
-                                                            // but for testing purposes it is set to 
-                                                            // public (to avoid having to change the base interface template)
+    /// <summary>
+    /// Example int variable that counts up.
+    /// </summary>
+    [SerializeField] private int Example = 0;
 
     /*
-    EXCLUSIVE METHODS SECTION
-    EXCLUSIVE METHODS SECTION
+    =================== PRIVATE METHODS SECTION ==================
     */
-    
-    void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
+
+    /*
+    =================== PUBLIC METHODS SECTION ===================
+    */
+
+    /// <summary>
+    /// Get the current value of Example.
+    /// </summary>
+    /// <returns>The value Example.</returns>
+    public int GetExample()
     {
-        Assert.IsNotNull(prompt, "Field prompt cannot be null.");
-        if (prompt == null)
-        {
-            Debug.LogError("Missing prompt field. Cancelled execution.");
-            return;
-        }
-        
-        Debug.Log(prompt);
+        return Example;
     }
 
-    /*
-    EXPOSED METHODS SECTION
-    EXPOSED METHODS SECTION
-    */
-
-    public void ExposedMethod()
+    /// <summary>
+    /// Set the current value of Example
+    /// </summary>
+    /// <param name="amount">Value to be set to.</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void SetExample(int amount)
     {
-        ((InternalInterface)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
+        if (amount < 0)
+            throw new ArgumentOutOfRangeException("Example cannot be negative.");
+
+        Example = amount;
+    }
+
+    /// <summary>
+    /// Increments the Example by 1.
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
+    public void IncrementExample()
+    {
+        if (Example == int.MaxValue) 
+            throw new InvalidOperationException("Example cannot be incremented further.");
+
+        Example += 1;
     }
 }
-
-/// Model Contract Guidelines
-/// - Contains data
-/// - Mutates data
-/// - No access to View and Controller
-/// - Validates input from controller via assertions

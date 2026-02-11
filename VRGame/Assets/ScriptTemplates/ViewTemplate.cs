@@ -1,67 +1,90 @@
-using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 /// <summary>
-/// View layer base class.
-/// Requires internal/external interface.
+/// TODO: Add a description here.
 /// </summary>
-public class BaseView : MonoBehaviour, InternalInterface, ExternalInterface
+public class ViewTemplate : View, IViewTemplate
 {
-    /*  
-    DATA SECTION
-    DATA SECTION
-    */
-    [SerializeField] private BaseController controller;     // Reference to this class's Controller layer
-
     /*
-    EXCLUSIVE METHODS SECTION
-    EXCLUSIVE METHODS SECTION
-    */
-
-    void InternalInterface.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting InternalInterface type on it self.
-    {
-        Debug.Log("Hello, from view layer!");
-
-        // Methods that aren't implemented yet should throw errors
-        controller.ExposedMethod();
-    }
-
-    /*
-    EXPOSED METHODS SECTION
-    EXPOSED METHODS SECTION
-    */
-
-    public void ExposedMethod()
-    {
-        ((InternalInterface)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
-    }
-
-    /*
-    RUNTIME BEHAVIOURS SECTION
-    RUNTIME BEHAVIOURS SECTION
+    ======================== DATA SECTION ========================
     */
 
     /// <summary>
-    /// Called after the scene loads.
+    /// Reference to the Controller layer.
     /// </summary>
-    private void Awake()
+    [SerializeField] private ControllerTemplate ControllerRef;
+
+    /// <summary>
+    /// Invoked when Example changes value.
+    /// </summary>
+    public UnityEvent<int> OnExampleEvent;
+
+    /*
+    =================== PRIVATE METHODS SECTION ==================
+    */
+
+    /// <summary>
+    /// Example of a user input (such as button press or collision)
+    /// </summary>
+    /// <exception cref="MissingReferenceException"></exception>
+    private void ExampleUserInput()
     {
-        // Verify layer references before starting
-        Assert.IsNotNull(controller, "Reference to controller layer cannot be null.");
-        if (controller == null)
+        if (ControllerRef == null)
+            throw new MissingReferenceException("Reference to Controller layer is missing.");
+
+        try
         {
-            Debug.LogError("Controller reference is missing. Cancelled execution.");
-            return;
+            ControllerRef.Count();
+        } catch (MissingReferenceException err)
+        {
+            Debug.LogError(err);
+        }
+    }
+
+    /*
+    =================== PUBLIC METHODS SECTION ===================
+    */
+
+    /// <summary>
+    /// Invokes all functions connected to OnExampleEvent with the updated Example.
+    /// </summary>
+    /// <param name="amount">The updated value of Example.</param>
+    public void OnExampleUpdate(int amount)
+    {
+        // All attached functions will be invoked
+        Debug.Log(amount);
+        OnExampleEvent.Invoke(amount);
+    }
+
+    /*
+    =================== RUNTIME METHODS SECTION ===================
+    */
+
+    /// <summary>
+    /// Verify layer wirings.
+    /// </summary>
+    void Awake()
+    {
+        Assert.IsNotNull<Controller>(ControllerRef, "Field ControllerRef cannot be null.");
+    }
+
+    void Start()
+    {
+        try
+        {
+            InvokeRepeating("ExampleUserInput", 1, 1);
+        } catch (MissingReferenceException err)
+        {
+            Debug.LogError(err);
         }
 
-        ExposedMethod();
-        // Your code here
+        // TODO: Your code here. (can be deleted)
+    }
+
+    void Update()
+    {
+        // TODO: Your code here. (can be deleted)
     }
 }
-
-/// View Contract Guidelines
-/// - Contains object references
-/// - Access to Controller
-/// - No access to Model (only through controller)
-/// - Validates object/layer references via assertions
