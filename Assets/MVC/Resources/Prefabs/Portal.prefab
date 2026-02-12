@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0531018, y: 0.8895849, z: 0.1}
+  m_LocalScale: {x: 1.55, y: 0.9, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5447637991413432508}
@@ -4893,7 +4893,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 5, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5447637991413432508}
@@ -9723,7 +9723,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 5, z: 2}
+  m_LocalScale: {x: 2, y: 2.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5447637991413432508}
@@ -9918,7 +9918,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.32809716, g: 0.44670975, b: 0.6886792, a: 1}
+      maxColor: {r: 0.8604651, g: 0.90697676, b: 1, a: 0.25490198}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14535,11 +14535,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3544af017cfeb451485f93e71a9bfa04, type: 3}
       propertyPath: m_LocalScale.x
-      value: 142.0992
+      value: 205
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3544af017cfeb451485f93e71a9bfa04, type: 3}
       propertyPath: m_LocalScale.y
-      value: 205.39085
+      value: 205
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3544af017cfeb451485f93e71a9bfa04, type: 3}
       propertyPath: m_LocalScale.z
@@ -14551,7 +14551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3544af017cfeb451485f93e71a9bfa04, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3544af017cfeb451485f93e71a9bfa04, type: 3}
       propertyPath: m_LocalPosition.z
