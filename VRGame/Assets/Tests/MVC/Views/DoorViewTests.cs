@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+
+public class DoorViewTests
+{
+    // A Test behaves as an ordinary method
+    [Test]
+    public void DoorViewTestsSimplePasses()
+    {
+        GameObject go = new GameObject();
+        IDoorView doorV = go.AddComponent<DoorView>();
+        
+    }
+
+    // A UnityTest behaves like a Play Mode. In Edit Mode you can use
+    // `yield return null;` to skip a frame.
+    [UnityTest]
+    public IEnumerator DoorViewTestsWithEnumeratorPasses()
+    {
+        // Use the Assert class to test conditions.
+        // Use yield to skip a frame.
+        yield return null;
+    }
+}

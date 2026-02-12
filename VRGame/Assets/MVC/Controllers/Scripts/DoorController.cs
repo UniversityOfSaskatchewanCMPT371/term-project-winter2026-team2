@@ -37,7 +37,7 @@ public class DoorController : MonoBehaviour, IDoorController
         // makes it so the player can only enter the door once
         if (triggerDebounce) return;
         triggerDebounce = true;
-
+        //
         triggerDebounce = false;
     }
 }
