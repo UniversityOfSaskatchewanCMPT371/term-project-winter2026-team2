@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class BillBoardView : MonoBehaviour
 {
-    void LateUpdate()
+    static Transform tCam = null;
+    void Update ()
     {
-        Camera mainCamera = Camera.main;
-
-        if (!mainCamera) return;
-
-        transform.LookAt(transform.position + mainCamera.transform.position);
+        if(!tCam)
+        {
+            if(!Camera.main)
+            {
+                return;
+            }
+            tCam = Camera.main.transform;
+        }
+        transform.LookAt(tCam.position, Vector3.up);
     }
 }
