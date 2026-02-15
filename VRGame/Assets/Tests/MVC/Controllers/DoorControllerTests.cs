@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using NSubstitute;
 
 public class DoorControllerTests
 {
@@ -13,15 +14,32 @@ public class DoorControllerTests
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
         IDoorController doorC = go.AddComponent<DoorController>();
-        // TODO mock this out
-        IDoorModel doorM = go.AddComponent<DoorModel>();
-        doorM.DoorId = 1;
-        doorM.Init();
+        
+        // mocking out door model 
+        IDoorModel doorM = Substitute.For<IDoorModel>();
 
         doorC.DoorModel = doorM;
         doorC.Init();
         Assert.NotNull(doorC);
     }
+
+    public void GetDoorModel()
+    {
+        GameObject go = new GameObject();
+        IDoorController doorC = go.AddComponent<DoorController>();
+        
+        // mocking out door model 
+        IDoorModel doorM = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorM;
+
+        doorC.Init();
+        Assert.IsNotNull(doorC.DoorModel);
+
+    }
+
+    
+
+    
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.

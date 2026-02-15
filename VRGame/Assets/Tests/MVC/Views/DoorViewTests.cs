@@ -8,7 +8,7 @@ public class DoorViewTests
 {
     // A Test behaves as an ordinary method
     [Test]
-    public void DoorViewTestsSimplePasses()
+    public void Instantiation()
     {
         GameObject go = new GameObject();
         IDoorView doorV = go.AddComponent<DoorView>();

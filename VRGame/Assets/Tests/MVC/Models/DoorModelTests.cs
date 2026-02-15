@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-
+using NSubstitute;
 
 public class NewTestScript
 {
@@ -80,12 +80,10 @@ public class NewTestScript
         GameObject go = new GameObject();
 
         IDoorModel door1 = go.AddComponent<DoorModel>();
-        IDoorModel door2 = go.AddComponent<DoorModel>();
         door1.DoorId = 1;
         door1.TargetDoorId = 2;
 
         door1.Init();
-        door2.Init();
 
         //TODO: Find better way to do this
         try {
