@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -29,15 +29,21 @@ public class DoorController : MonoBehaviour, IDoorController
 
     }
 
-    public void OnPlayerEnter(GameObject playerRig)
+    public void OnPlayerEnter(IPlayerController playerController)
     {
-        // check for playerig having player logic TODO - does not exist yet
-        //Assert.IsNotNull(playerRig.GetComponent<IPlayerController>());
+        Assert.IsNotNull(playerController, "Player controller must be non-null.");
 
         // makes it so the player can only enter the door once
         if (triggerDebounce) return;
         triggerDebounce = true;
         //
         triggerDebounce = false;
+
+
+        IDoorModel targetDoor;
+        Vector3 teleportPosition = new Vector3(0, 0, 0);
+        Quaternion teleportRotation = new Quaternion();
+
+        // load this door's destination scene
     }
 }

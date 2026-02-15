@@ -1,5 +1,6 @@
 
 
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -60,6 +61,7 @@ public class DoorView : MonoBehaviour, IDoorView
     /// </remarks>
     public void Init()
     {
+        // sanity checks
         Assert.IsNotNull(doorController, "Field doorController cannot be null.");
     }
 
@@ -72,6 +74,8 @@ public class DoorView : MonoBehaviour, IDoorView
     /// Preconditions:
     /// - `Collider other` must be non-null
     /// - `doorController` instance var must be non-null
+    /// Postconditions:
+    /// 
     public void OnTriggerEnter(Collider other)
     {
         Assert.IsNotNull(other, "Collider other can not be null.");
@@ -81,7 +85,13 @@ public class DoorView : MonoBehaviour, IDoorView
             return;
         }
 
-        doorController.OnPlayerEnter(other.GetComponentInParent<IPlayerModel>().gameObject);
+        
+        // ensure main camera has playerModel component
+        IPlayerController player = other.GetComponentInParent<IPlayerController>();
+        Assert.IsNotNull(player, "MainCamera collider must contain PlayerModel");
+
+        // execute player enter functionality in controller portion.
+        doorController.OnPlayerEnter(player);
     }
 
     /// <summary>
