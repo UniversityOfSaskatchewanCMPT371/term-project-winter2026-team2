@@ -53,8 +53,8 @@ public class SceneChangerModelTests
         scm.Init();
 
         string dummyPath = "scene1";
-        scm.ScenePaths.Add(dummyPath);
-        Assert.IsTrue(scm.ScenePaths.Contains("scene1"));
+        scm.ScenePaths.Add(1, dummyPath);
+        Assert.IsTrue(scm.ScenePaths[1] == "scene1");
         Object.DestroyImmediate(go);
     }
 

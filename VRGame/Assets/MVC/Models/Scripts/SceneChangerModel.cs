@@ -25,12 +25,12 @@ public class SceneChangerModel : MonoBehaviour, ISceneChangerModel
     /// <summary>
     /// Collection of paths to scenes held by the scenechanger
     /// </summary>
-    private List<string> scenePaths;
+    private Dictionary<int, string> scenePaths;
 
     /// <summary>
     /// Public accessor for the scene path collection
     /// </summary>
-    public List<string> ScenePaths
+    public Dictionary<int, string> ScenePaths
     {
         /// <summary>
         /// Access the SceneChanger's collection of scene paths
@@ -50,16 +50,34 @@ public class SceneChangerModel : MonoBehaviour, ISceneChangerModel
 
 
     /// <summary>
+    /// Retreive pathname from scenePaths collection from associated key
+    /// </summary>
+    /// <param name="key"> Key associated with value in scenePaths </param>
+    /// <returns> Pathname associated with passed in key in scenePaths </returns>
+    /// <remarks>
+    /// Preconditions:
+    /// - key must exist in scenePaths
+    /// Postconditions:
+    /// - value associated with key is returned. ScenePaths in unmodified
+    public string getStringPath(int key)
+    {
+        string pathName = scenePaths[key];
+        Assert.IsNotNull(pathName);
+
+        return pathName;
+    }
+
+
+    /// <summary>
     /// Initializes the SceneChangerModel. Called by the game within the MonoBehavior function
-    /// `Awake()` (executes once when the game starts) - Separated from `Start()` as this makes unit
+    /// `Awake()` (executes once when the game starts) - Separated from `Awake()` as this makes unit
     /// testing easier.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - Another sceneChangerModel must not exist
     /// Postconditions:
-    /// - If a SceneChangerModel already exists, nothing is done, the function returns. If a 
-    /// SceneChangerModel doesn't exist, a single instance of it is created and a collection
+    /// If a SceneChangerModel doesn't exist, a single instance of it is created and a collection
     /// for holding Scenes is allocated
     /// 
     /// </remarks>
@@ -67,15 +85,16 @@ public class SceneChangerModel : MonoBehaviour, ISceneChangerModel
     {
 
         Assert.IsTrue(instance == null, "Cannot create second instance");
-        if (instance != null & instance != this)
-        {
+        //if (instance != null & instance != this)
+        //{
             // In the spikeprototype implementation the gameObject this script is attached
             // to is destroyed if there's already a SceneChanger. That seems extreme but I
             // may be wrong
             //Destroy(gameObject);
-            return;
-        }
-        scenePaths = new List<string>();
+            //return;
+        //}
+
+        scenePaths = new Dictionary<int, string>();
         instance = this;
     }
 
@@ -84,7 +103,7 @@ public class SceneChangerModel : MonoBehaviour, ISceneChangerModel
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - All that is required for Init() to properly execute
     /// PostConditions:
     /// - `Init()` is called, changes to state from that function are made. Additionaly
     /// ensures that this object won't be destroyed when a new scene is loaded. It is persistent
