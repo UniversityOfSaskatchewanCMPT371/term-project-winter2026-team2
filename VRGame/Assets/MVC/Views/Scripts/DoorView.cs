@@ -44,9 +44,14 @@ public class DoorView : MonoBehaviour, IDoorView
         /// - `value` must be non-null
         /// Postconditions:
         /// - DoorView's `doorController` instance variable set to input value.
+        /// </remarks>
         set
         {
-            Assert.IsNotNull(value, "doorController cannot be null.");
+            if (value == null)
+            {
+                Debug.LogError("value passed to setDoorController is null");
+                Assert.IsNotNull(value, "doorController cannot be null.");
+            }
             doorController = value;
         }
     }
@@ -66,7 +71,11 @@ public class DoorView : MonoBehaviour, IDoorView
     public void Init()
     {
         // sanity checks
-        Assert.IsNotNull(doorController, "Field doorController cannot be null.");
+        if (doorController == null)
+        {
+            Debug.LogError("doorController field in DoorView is null");
+            Assert.IsNotNull(doorController, "Field doorController cannot be null.");
+        }
     }
 
     /// <summary>
@@ -82,17 +91,26 @@ public class DoorView : MonoBehaviour, IDoorView
     /// - changes to state created by calling `doorController.OnPlayerEnter()`
     public void OnTriggerEnter(Collider other)
     {
-        Assert.IsNotNull(other, "Collider other can not be null.");
+        if (other == null)
+        {
+            Debug.LogError("Collider other is null");
+            Assert.IsNotNull(other, "Collider other can not be null.");
+        }
 
         // Ignore interaction with any collider that is not the player's.
         if (!other.gameObject.CompareTag("MainCamera")) {
+            Debug.Log("Component other than player collided with door");
             return;
         }
 
         
         // ensure main camera has playerModel component
         IPlayerController player = other.GetComponentInParent<IPlayerController>();
-        Assert.IsNotNull(player, "MainCamera collider must contain PlayerModel");
+        if (player == null)
+        {
+            Debug.Log("Collider does no contain playerController component");
+            Assert.IsNotNull(player, "MainCamera collider must contain PlayerModel");
+        }
 
         // execute player enter functionality in controller portion.
         doorController.OnPlayerEnter(player);
