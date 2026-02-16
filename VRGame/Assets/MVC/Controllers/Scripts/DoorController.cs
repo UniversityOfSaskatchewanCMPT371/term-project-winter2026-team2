@@ -44,7 +44,11 @@ public class DoorController : MonoBehaviour, IDoorController
         /// - DoorController's `doorModel` instance variable set to input value
         set
         {
-            Assert.IsNotNull(value, "Door model must not be null");
+            if (value == null)
+            {
+                Debug.LogError("value passed to set DoorModel is null");
+                Assert.IsNotNull(value, "Door model must not be null");
+            }
             doorModel = value;
         }
     }
@@ -86,7 +90,11 @@ public class DoorController : MonoBehaviour, IDoorController
         /// </remarks>
         set
         {
-            Assert.IsNotNull(value);
+            if (value == null)
+            {
+                Debug.LogError("value passed to setSceneChangerController is null");
+                Assert.IsNotNull(value);
+            }
             sceneChangerController = value;
         }
     }
@@ -111,8 +119,18 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </remarks>
     public void Init()
     {
-        Assert.IsNotNull(doorModel, "DoorModel field cannot be null.");
-        Assert.IsNotNull(sceneChangerController, "SceneChangerController field cannot be null.");
+        if (doorModel == null)
+        {
+            Debug.LogError("doorModel is null");
+            Assert.IsNotNull(doorModel, "DoorModel field cannot be null.");
+        }
+        if (sceneChangerController == null)
+        {
+            Debug.LogError("sceneChangerController is null");
+            Assert.IsNotNull(sceneChangerController, "SceneChangerController field cannot be null.");
+        }
+
+        Debug.Log("DoorController initialized");
     }
 
     /// <summary>
@@ -128,7 +146,11 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </remarks>
     public void OnPlayerEnter(IPlayerController playerController)
     {
-        Assert.IsNotNull(playerController, "Player controller must be non-null.");
+        if (playerController == null)
+        {
+            Debug.LogError("playerController passed to OnPlayerEnter is null");
+            Assert.IsNotNull(playerController, "Player controller must be non-null.");
+        }
 
         // makes it so the player can only enter the door once
         if (triggerDebounce) return;

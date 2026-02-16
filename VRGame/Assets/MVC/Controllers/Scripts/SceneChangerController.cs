@@ -43,7 +43,12 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         /// <remarks>
         set
         {
-            Assert.IsNotNull(value);
+            if (value == null)
+            {
+                Debug.LogError("value passed to set SceneChangerModel is null");
+                Assert.IsNotNull(value);
+            }
+
             sceneChangerModel = value;
         }
         /// <summary>
@@ -91,13 +96,19 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     {
         if (loadDebounce)
         {
+            Debug.Log("Enter triggered again");
             return null;
         }
         loadDebounce = true;
 
         // load scene from model using key
         string scenePath = sceneChangerModel.ScenePaths[sceneKey];
-        Assert.IsNotNull(scenePath);
+
+        if (scenePath == null)
+        {
+            Debug.LogError("scenePath doesn't exist in sceneChangerModel's path collection");
+            Assert.IsNotNull(scenePath);
+        }
 
         AsyncOperation loadingScene = SceneManager.LoadSceneAsync(scenePath);
 
@@ -122,10 +133,20 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </remarks>
     public void Init()
     {
-        Assert.IsNotNull(sceneChangerModel, "sceneChangerModel must not be null");
-        Assert.IsNull(instance, "static var instance should be null, only one sceneChangerController may exist at a time");
+        if (sceneChangerModel == null)
+        {
+            Debug.LogError("SceneChangerModel instance in SceneChangerController is null");
+            Assert.IsNotNull(sceneChangerModel, "sceneChangerModel must not be null");
+        }
+
+        if (instance != null)
+        {
+            Debug.LogError("SceneChangerController instance already exists");
+            Assert.IsNull(instance, "static var instance should be null, only one sceneChangerController may exist at a time");
+        }
         
         instance = this;
+        Debug.Log("SceneChangerController initialized");
     }
 
     /// <summary>
