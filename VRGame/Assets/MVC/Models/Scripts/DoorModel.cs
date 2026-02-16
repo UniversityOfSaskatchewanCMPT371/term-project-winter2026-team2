@@ -51,7 +51,11 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// Postconditions:
         /// - DoorModel's `doorId` instance variable set to input value
         set {
-            Assert.IsTrue(value >= 0, "doorId must be positive");
+            if (value < 0)
+            {
+                Debug.LogError("value passed to setDoorId is negative");
+                Assert.IsTrue(value >= 0, "doorId must be positive");
+            }
             doorId = value;
         }
     }
@@ -91,7 +95,11 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// - DoorModel's `targetDoorId` instance variable set to input value
         /// </remarks>
         set {
-            Assert.IsTrue(value >= 0, "doorId must be positive");
+            if (value < 0)
+            {
+                Debug.LogError("value passed to setTargetDoorId is negative");
+                Assert.IsTrue(value >= 0, "doorId must be positive");
+            }
             targetDoorId = value;
         }
     }
@@ -120,8 +128,6 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         {
             return destinationSceneId;
         }
-        set
-        {
         /// <summary>
         /// Set the value of the DoorModel's destinationSceneId instance variable
         /// Note: This is for unit testing purposes - the instance variables of Monobehavior 
@@ -133,7 +139,13 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// Postconditions:
         /// - DoorModel's `destinationSceneId` instance variable set to input value
         /// </remarks>
-            Assert.IsTrue(value >= 0, "destinationSceneId must be positive");
+        set
+        {
+            if (value < 0)
+            {
+                Debug.LogError("value passed to set destinationSceneId is negative");
+                Assert.IsTrue(value >= 0, "destinationSceneId must be positive");
+            }
             destinationSceneId = value;
         }
     }
@@ -156,7 +168,11 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// - target door is returned
     public IDoorModel GetTargetDoor()
     {
-        Assert.IsTrue(doorLookup.ContainsKey(targetDoorId));
+        if (!doorLookup.ContainsKey(targetDoorId))
+        {
+            Debug.LogError("Target door does not exist");
+            Assert.IsTrue(doorLookup.ContainsKey(targetDoorId));
+        }
 
         IDoorModel target = doorLookup[targetDoorId];
 
@@ -211,9 +227,12 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         if (doorLookup == null)
         {
             doorLookup = new Dictionary<int, IDoorModel>();
+            Debug.Log("doorLookup dictionary created");
         }
         Assert.IsFalse(doorLookup.ContainsKey(doorId), "A doorModel with this ID already exists");
         doorLookup[doorId] = this;
+
+        Debug.Log("DoorModel Initialized");
     }
 
     /// <summary>
@@ -227,6 +246,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     public void ResetDoorLookup()
     {
         doorLookup.Clear();
+        Debug.Log("doorLookup dictionary cleared");
     }
 
     /// <summary>
