@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
 
-public class NewTestScript
+public class DoorModelTests
 {
     // A Test behaves as an ordinary method
     [Test]
@@ -19,6 +19,7 @@ public class NewTestScript
         door.Init();
         Assert.NotNull(door);
 
+        door.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }
     [Test]
@@ -31,6 +32,8 @@ public class NewTestScript
         door.Init();
 
         Assert.AreEqual(door.DoorId, 1);
+
+        door.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }
 
@@ -52,6 +55,9 @@ public class NewTestScript
         
         Assert.AreEqual(door1.TargetDoorId, 2);
         Assert.AreEqual(door2.TargetDoorId, 1);
+
+        door1.ResetDoorLookup();
+        Object.DestroyImmediate(go);
     }
 
     [Test]
@@ -72,6 +78,9 @@ public class NewTestScript
 
         Assert.AreEqual(door1.GetTargetDoor(), door2);
         Assert.AreEqual(door2.GetTargetDoor(), door1); 
+
+        door1.ResetDoorLookup();
+        Object.DestroyImmediate(go);
     }
 
     [Test]
@@ -91,7 +100,9 @@ public class NewTestScript
             Assert.IsTrue(1==2);
         }
         catch {}
-            
+
+        door1.ResetDoorLookup(); 
+        Object.DestroyImmediate(go);
     }
     
 
