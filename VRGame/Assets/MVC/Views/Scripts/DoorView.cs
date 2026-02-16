@@ -7,7 +7,6 @@ using UnityEngine.Assertions;
 /// <summary>
 /// View portion of the reusable door module. Collisions are handled here
 /// </summary>
-/// <var
 /// <remarks>
 /// - doorController is always non-null upon calling Init()
 /// </remarks>
@@ -26,6 +25,11 @@ public class DoorView : MonoBehaviour, IDoorView
         /// <summary>
         /// Access the DoorView's DoorController instance variable
         /// </summary>
+        /// <remarks>
+        /// Precondtions:
+        /// - None
+        /// Postconditions:
+        /// - DoorView's doorController instance variable is returned
         get
         {
             return doorController;
@@ -75,7 +79,7 @@ public class DoorView : MonoBehaviour, IDoorView
     /// - `Collider other` must be non-null
     /// - `doorController` instance var must be non-null
     /// Postconditions:
-    /// 
+    /// - changes to state created by calling `doorController.OnPlayerEnter()`
     public void OnTriggerEnter(Collider other)
     {
         Assert.IsNotNull(other, "Collider other can not be null.");
@@ -96,7 +100,8 @@ public class DoorView : MonoBehaviour, IDoorView
 
     /// <summary>
     /// A `MonoBehaviour` function, called on the frame when a script is enabled, before
-    /// any `Update()` functions are called
+    /// any `Update()` functions are called. - Important to call on Start() instead of Awake(),
+    /// as it depends on the existence of other elements.
     /// </summary>
     /// <remarks>
     /// Preconditions:
