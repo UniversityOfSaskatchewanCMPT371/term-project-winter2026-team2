@@ -162,6 +162,43 @@ public class DoorModel : MonoBehaviour, IDoorModel {
 
 
     /// <summary>
+    /// Public Accessor for teleport offset field
+    /// </summary>
+    public Vector3 TeleportOffset
+    {
+        /// <summary>
+        /// Retrieve doorModel's teleportOffset
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's teleport offset is returned
+        /// </remarks>
+        get
+        {
+            return teleportOffset;
+        }
+
+        /// <summary>
+        /// Set doorModel's teleportOffset
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - `value` must be valid Vector3
+        /// Postconditions:
+        /// - DoorModel's teleportOffset is set to value
+        /// </remarks>
+        set
+        {
+            teleportOffset = value;
+        }
+
+    }
+
+
+
+    /// <summary>
     /// Retrieve the destinationDoor associated with this doors targetDoorId
     /// </summary>
     /// <returns>DoorModel associated with this door's targetId</returns>
@@ -228,12 +265,25 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// This door is added to it.
     public void Init()
     {
+        // check fields to see if they have proper values
         if (doorLookup == null)
         {
             doorLookup = new Dictionary<int, IDoorModel>();
             Debug.Log("doorLookup dictionary created");
         }
         Assert.IsFalse(doorLookup.ContainsKey(doorId), "A doorModel with this ID already exists");
+
+        if (doorId < 0)
+        {
+            Debug.Log("doorId must be positive");
+        }
+        Assert.IsTrue(doorId > 0);
+
+        if (targetDoorId < 0)
+        {
+            Debug.Log("targetDoorId must be positive");
+        }
+        Assert.IsTrue(targetDoorId > 0);
 
 
         doorLookup[doorId] = this;
