@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4f9e21624d91242a485a8bf2943e8776
+=======
+guid: 80d550fa42b808444b635587f907ee42
+>>>>>>> hub-restructured
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
