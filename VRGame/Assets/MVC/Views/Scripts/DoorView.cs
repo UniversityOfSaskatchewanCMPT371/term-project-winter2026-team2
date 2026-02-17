@@ -12,7 +12,14 @@ using UnityEngine.Assertions;
 /// </remarks>
 public class DoorView : MonoBehaviour, IDoorView
 {
-    
+
+    /// <summary>
+    /// This field exists because Unity can't serialize interfaces. A wrapper
+    /// for doorController
+    /// </summary>
+    [SerializeField]
+    private MonoBehaviour serializableDoorController;
+
     /// Controller portion of door module. The view portion will
     /// call methods of this.
     private IDoorController doorController;
@@ -70,6 +77,12 @@ public class DoorView : MonoBehaviour, IDoorView
     /// </remarks>
     public void Init()
     {
+        // If values set through inspector window, set the inner value to those
+        if (serializableDoorController != null)
+        {
+            doorController = (IDoorController) serializableDoorController;
+        }
+
         // sanity checks
         if (doorController == null)
         {

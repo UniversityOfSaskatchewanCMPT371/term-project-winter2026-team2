@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Enum used to index scenes. Map directly to build index numbers
 /// </summary>
-public enum Scenes
+public enum SceneEnum
 {
     Hub = 0,
 }
