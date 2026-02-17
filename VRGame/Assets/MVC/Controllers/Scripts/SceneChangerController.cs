@@ -83,8 +83,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - A sceneChangerController must not already exist. If this is the first one being instantiated, it must already have
-    /// a `SceneChangerModel` assigned to it. The field cannot be null.
+    /// - A sceneChangerController must not already exist.
     /// Postconditions: 
     /// If a SceneChangerModel doesn't exist, a single instance of it is created
     /// </remarks>
