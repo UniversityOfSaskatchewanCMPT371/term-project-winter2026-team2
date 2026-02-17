@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.collab-proxy": "2.11.3",
+    "com.unity.collab-proxy": "2.7.1",
     "com.unity.feature.development": "1.0.1",
     "com.unity.feature.vr": "1.0.0",
     "com.unity.inputsystem": "1.14.0",
@@ -8,7 +8,8 @@
     "com.unity.render-pipelines.universal": "14.0.12",
     "com.unity.textmeshpro": "3.0.9",
     "com.unity.timeline": "1.7.7",
-    "com.unity.visualscripting": "1.9.4",
+    "com.unity.visualscripting": "1.9.9",
+    "com.unity.xr.core-utils": "2.5.3",
     "com.unity.xr.interaction.toolkit": "3.1.2",
     "com.unity.xr.management": "4.5.1",
     "com.unity.xr.openxr": "1.14.3",
@@ -43,5 +44,7 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "enableLockFile": true,
+  "resolutionStrategy": "highest"
 }
