@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
+using System.Text.RegularExpressions;
 
 public class DoorModelTests
 {
@@ -38,7 +39,7 @@ public class DoorModelTests
     }
 
     [Test]
-    public void SetTargetDoorId()
+    public void GetTargetDoorId()
     {
         GameObject go = new GameObject();
 
@@ -57,6 +58,27 @@ public class DoorModelTests
         Assert.AreEqual(door2.TargetDoorId, 1);
 
         door1.ResetDoorLookup();
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void InvalidTargetDoorId()
+    {
+        // Use the Assert class to test conditions
+        GameObject go = new GameObject();
+        IDoorModel door = go.AddComponent<DoorModel>();
+        // ensure doormodel instantiated correctly
+        door.Init();
+
+        // test should fire assertion, tell unity to ignore
+        // associated error log
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try
+        {
+            door.TargetDoorId = -1;
+        }
+        catch{}
+        door.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }
 
@@ -94,7 +116,9 @@ public class DoorModelTests
 
         door1.Init();
 
-        //TODO: Find better way to do this
+        // test should fail, but need to tell unity
+        // to ignore error log, or else test will not pass
+        LogAssert.Expect(LogType.Error, "Target door does not exist");
         try {
             door1.GetTargetDoor();
             Assert.IsTrue(1==2);
@@ -104,7 +128,71 @@ public class DoorModelTests
         door1.ResetDoorLookup(); 
         Object.DestroyImmediate(go);
     }
-    
+
+    [Test]
+    public void GetDestinationSceneId()
+    {
+        // Use the Assert class to test conditions
+        GameObject go = new GameObject();
+        IDoorModel door = go.AddComponent<DoorModel>();
+        // ensure doormodel instantiated correctly
+
+        door.DestinationSceneId = 1;
+        door.Init();
+
+        Assert.AreEqual(door.DestinationSceneId, 1);
+        door.ResetDoorLookup();
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void InvalidDestinationSceneId()
+    {
+        // Use the Assert class to test conditions
+        GameObject go = new GameObject();
+        IDoorModel door = go.AddComponent<DoorModel>();
+        // ensure doormodel instantiated correctly
+
+        // this test should fire assertion. Tell unity to ignore associated error message
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try {
+            door.DestinationSceneId = -1;
+            Assert.Fail();
+        }
+        catch{}
+        door.ResetDoorLookup();
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void GetTeleportPosition()
+    {
+        GameObject go = new GameObject();
+        IDoorModel door = go.AddComponent<DoorModel>();
+        // ensure doormodel instantiated correctly
+
+        door.Init();
+
+        Assert.IsNotNull(door.GetTeleportPosition());
+        // this test should fire assertion. Tell unity to ignore associated error message
+        door.ResetDoorLookup();
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void GetTeleportRotation()
+    {
+        GameObject go = new GameObject();
+        IDoorModel door = go.AddComponent<DoorModel>();
+        // ensure doormodel instantiated correctly
+
+        door.Init();
+
+        Assert.IsNotNull(door.GetTeleportRotation());
+        // this test should fire assertion. Tell unity to ignore associated error message
+        door.ResetDoorLookup();
+        Object.DestroyImmediate(go);
+    }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.

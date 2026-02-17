@@ -54,8 +54,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
             if (value < 0)
             {
                 Debug.LogError("value passed to setDoorId is negative");
-                Assert.IsTrue(value >= 0, "doorId must be positive");
             }
+            Assert.IsTrue(value >= 0, "doorId must be positive");
             doorId = value;
         }
     }
@@ -98,8 +98,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
             if (value < 0)
             {
                 Debug.LogError("value passed to setTargetDoorId is negative");
-                Assert.IsTrue(value >= 0, "doorId must be positive");
             }
+            Assert.IsTrue(value >= 0, "doorId must be positive");
             targetDoorId = value;
         }
     }
@@ -144,8 +144,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
             if (value < 0)
             {
                 Debug.LogError("value passed to set destinationSceneId is negative");
-                Assert.IsTrue(value >= 0, "destinationSceneId must be positive");
             }
+            Assert.IsTrue(value >= 0, "destinationSceneId must be positive");
             destinationSceneId = value;
         }
     }
@@ -171,8 +171,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         if (!doorLookup.ContainsKey(targetDoorId))
         {
             Debug.LogError("Target door does not exist");
-            Assert.IsTrue(doorLookup.ContainsKey(targetDoorId));
         }
+        Assert.IsTrue(doorLookup.ContainsKey(targetDoorId));
 
         IDoorModel target = doorLookup[targetDoorId];
 
@@ -230,8 +230,9 @@ public class DoorModel : MonoBehaviour, IDoorModel {
             Debug.Log("doorLookup dictionary created");
         }
         Assert.IsFalse(doorLookup.ContainsKey(doorId), "A doorModel with this ID already exists");
-        doorLookup[doorId] = this;
 
+
+        doorLookup[doorId] = this;
         Debug.Log("DoorModel Initialized");
     }
 

@@ -6,6 +6,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
+using System.Text.RegularExpressions;
 
 public class SceneChangerModelTests
 {
@@ -26,7 +27,7 @@ public class SceneChangerModelTests
     }
 
     [Test]
-    public void Singleton()
+    public void SingletonCheck()
     {
         GameObject go = new GameObject();
         ISceneChangerModel scm1 = go.AddComponent<SceneChangerModel>();
@@ -34,6 +35,9 @@ public class SceneChangerModelTests
         ISceneChangerModel scm2 = go.AddComponent<SceneChangerModel>();
 
         // trying to init a second SceneChangerModel should throw exception
+
+        // tell unity to ignore error log, or else test won't pass 
+        LogAssert.Expect(LogType.Error, "SceneChangerModel instance already exists");
         try
         {
             scm2.Init();
@@ -46,7 +50,7 @@ public class SceneChangerModelTests
     }
 
     [Test]
-    public void DummyScenePath()
+    public void ScenePathDictLookup()
     {
         GameObject go = new GameObject();
         ISceneChangerModel scm = go.AddComponent<SceneChangerModel>();
@@ -55,6 +59,51 @@ public class SceneChangerModelTests
         string dummyPath = "scene1";
         scm.ScenePaths.Add(1, dummyPath);
         Assert.IsTrue(scm.ScenePaths[1] == "scene1");
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void NonExistantScenePathDictLookup()
+    {
+        // new instantiation, dict should be empty
+        GameObject go = new GameObject();
+        ISceneChangerModel scm = go.AddComponent<SceneChangerModel>();
+        scm.Init();
+
+        try {
+            string check = scm.ScenePaths[1];
+            Assert.Fail("Searching nonexistent dict element should throw exception");
+        }
+        catch{} 
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void GetStringPath()
+    {
+        GameObject go = new GameObject();
+        ISceneChangerModel scm = go.AddComponent<SceneChangerModel>();
+        scm.Init();
+
+        string dummyPath = "scene1";
+        scm.ScenePaths.Add(1, dummyPath);
+        Assert.IsTrue(scm.GetStringPath(1) == "scene1");
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void NonexistentGetStringPath()
+    {
+        GameObject go = new GameObject();
+        ISceneChangerModel scm = go.AddComponent<SceneChangerModel>();
+        scm.Init();
+
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try {
+            scm.GetStringPath(1);
+            Assert.Fail("Assertion should have fired from using nonexistant key in string path dict");
+        }
+        catch {}
         Object.DestroyImmediate(go);
     }
 

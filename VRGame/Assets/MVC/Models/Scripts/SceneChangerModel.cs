@@ -59,13 +59,13 @@ public class SceneChangerModel : MonoBehaviour, ISceneChangerModel
     /// - key must exist in scenePaths
     /// Postconditions:
     /// - value associated with key is returned. ScenePaths in unmodified
-    public string getStringPath(int key)
+    public string GetStringPath(int key)
     {
         if (!scenePaths.ContainsKey(key))
         {
             Debug.LogError("key does not exist in scenePaths dict");
-            Assert.IsTrue(scenePaths.ContainsKey(key));
         }
+        Assert.IsTrue(scenePaths.ContainsKey(key));
 
         string pathName = scenePaths[key];
         Assert.IsNotNull(pathName);
@@ -93,8 +93,8 @@ public class SceneChangerModel : MonoBehaviour, ISceneChangerModel
         if (instance != null)
         {
             Debug.LogError("SceneChangerModel instance already exists");
-            Assert.IsTrue(instance == null, "Cannot create second instance");
         }
+        Assert.IsTrue(instance == null, "Cannot create second instance");
         //if (instance != null & instance != this)
         //{
             // In the spikeprototype implementation the gameObject this script is attached
