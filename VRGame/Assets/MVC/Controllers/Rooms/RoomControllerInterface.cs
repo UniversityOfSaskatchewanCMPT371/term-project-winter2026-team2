@@ -1,6 +1,6 @@
 public interface IRoomController
 {
-    /// DATA SECTION
+    /// METHODS SECTION
 
     /// <summary>
     /// Handles the logic required when the room becomes completed.
