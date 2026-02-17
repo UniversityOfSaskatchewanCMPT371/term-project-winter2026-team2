@@ -96,6 +96,35 @@ public interface IDoorModel {
     }
 
     /// <summary>
+    /// Public Accessor for teleport offset field
+    /// </summary>
+    public Vector3 TeleportOffset
+    {
+        /// <summary>
+        /// Retrieve doorModel's teleportOffset
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's teleport offset is returned
+        /// </remarks>
+        get;
+
+        /// <summary>
+        /// Set doorModel's teleportOffset
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - `value` must be valid Vector3
+        /// Postconditions:
+        /// - DoorModel's teleportOffset is set to value
+        /// </remarks>
+        set;
+
+    }
+
+    /// <summary>
     /// Retrieve the destinationDoor associated with this doors targetDoorId
     /// </summary>
     /// <returns>DoorModel associated with this door's targetId</returns>

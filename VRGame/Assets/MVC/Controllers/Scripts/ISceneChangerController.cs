@@ -12,35 +12,6 @@ public interface ISceneChangerController
 {
 
 
-    /// <summary>
-    /// Public accessor for the sceneChangerModel reference. For testing purposes
-    /// </summary>
-    public ISceneChangerModel SceneChangerModel
-    {
-        /// <summary>
-        /// Set the reference of the associated model portion of SceneChanger
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - value must not be null
-        /// </remarks>
-        /// Postconditions:
-        /// SceneChangerController's sceneChangerModel instance variable set to `value`
-        /// <remarks>
-        set;
-
-        /// <summary>
-        /// Get the sceneChangerModel reference instance variable
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// SceneChangerController's sceneChangerModel instance variable is returned
-        /// 
-        get;
-    }
-
 
 
     /// <summary>

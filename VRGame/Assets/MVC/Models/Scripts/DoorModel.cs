@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
 
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
@@ -275,16 +276,22 @@ public class DoorModel : MonoBehaviour, IDoorModel {
 
         if (doorId < 0)
         {
-            Debug.Log("doorId must be positive");
+            Debug.LogError("doorId must be positive");
         }
-        Assert.IsTrue(doorId > 0);
+        Assert.IsTrue(doorId >= 0, "doorId is not positive");
 
         if (targetDoorId < 0)
         {
-            Debug.Log("targetDoorId must be positive");
+            Debug.LogError("targetDoorId must be positive");
         }
-        Assert.IsTrue(targetDoorId > 0);
+        Assert.IsTrue(targetDoorId >= 0, "target doorId must be positive");
 
+        //check if destination scene exists
+        if (!Enum.IsDefined(typeof(SceneEnum), destinationSceneId))
+        {
+            Debug.LogError("Invalid destination scene id. Not in enum");
+        }
+        Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), destinationSceneId));
 
         doorLookup[doorId] = this;
         Debug.Log("DoorModel Initialized");

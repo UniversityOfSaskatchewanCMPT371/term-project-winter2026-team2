@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
@@ -21,50 +22,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </summary>
     private static bool loadDebounce;
 
-    /// <summary>
-    /// Reference to associated SceneChangerModel
-    /// </summary>
-    private ISceneChangerModel sceneChangerModel;
 
-    /// <summary>
-    /// Public accessor for the sceneChangerModel reference. For testing purposes
-    /// </summary>
-    public ISceneChangerModel SceneChangerModel
-    {
-        /// <summary>
-        /// Set the reference of the associated model portion of SceneChanger
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - value must not be null
-        /// </remarks>
-        /// Postconditions:
-        /// SceneChangerController's sceneChangerModel instance variable set to `value`
-        /// <remarks>
-        set
-        {
-            if (value == null)
-            {
-                Debug.LogError("value passed to set SceneChangerModel is null");
-            }
-            Assert.IsNotNull(value);
-
-            sceneChangerModel = value;
-        }
-        /// <summary>
-        /// Get the sceneChangerModel reference instance variable
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// SceneChangerController's sceneChangerModel instance variable is returned
-        /// 
-        get
-        {
-            return sceneChangerModel;
-        }
-    }
 
     /// <summary>
     /// Resets the static debounce value
@@ -101,16 +59,15 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         }
         loadDebounce = true;
 
-        // load scene from model using key
-        string scenePath = sceneChangerModel.GetStringPath(sceneKey);
-
-        if (scenePath == null)
+        // check if sceneKey is legal in enum
+        if (!Enum.IsDefined(typeof(SceneEnum), sceneKey))
         {
-            Debug.LogError("scenePath doesn't exist in sceneChangerModel's path collection");
-            Assert.IsNotNull(scenePath);
+            Debug.LogError("Invalid sceneKey passed to LoadScene. Not in enum");
         }
+        Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneKey));
 
-        AsyncOperation loadingScene = SceneManager.LoadSceneAsync(scenePath);
+        // load scene using build index model
+        AsyncOperation loadingScene = SceneManager.LoadSceneAsync(sceneKey);
 
         // reset debounce when the scene finishes loading
         loadingScene.completed += (o) => resetDebounce();
@@ -133,11 +90,6 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </remarks>
     public void Init()
     {
-        if (sceneChangerModel == null)
-        {
-            Debug.LogError("SceneChangerModel instance in SceneChangerController is null");
-        }
-        Assert.IsNotNull(sceneChangerModel, "sceneChangerModel must not be null");
 
         if (instance != null)
         {
