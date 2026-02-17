@@ -13,16 +13,6 @@ public interface IDoorController
     /// </summary>
     public IDoorModel DoorModel 
     {
-        /// <summary>
-        /// Access DoorController's DoorModel instance
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - DoorController's doorModel reference is returned
-        /// </remarks>
-        get;
 
         /// <summary>
         /// Set the value of DoorController's DoorModel instance variable
@@ -43,16 +33,6 @@ public interface IDoorController
     /// </summary>
     public ISceneChangerController SceneChangerController
     {
-        /// <summary>
-        /// Access the sceneChangerController
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - sceneChangerController is returned
-        /// </remarks>
-        get;
 
         /// <summary>
         /// Set the value for DoorControllers reference to SceneChangerController

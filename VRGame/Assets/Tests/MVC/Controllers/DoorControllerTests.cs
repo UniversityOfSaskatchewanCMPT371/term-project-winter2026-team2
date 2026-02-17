@@ -20,51 +20,17 @@ public class DoorControllerTests
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
-
-        doorC.DoorModel = doorM;
-        doorC.SceneChangerController = sceneC;
-        doorC.Init();
         Assert.NotNull(doorC);
         
-        Object.DestroyImmediate(go);
-    }
-
-    [Test]
-    public void GetDoorModel()
-    {
-        GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
-        
-        // mocking out door model 
-        IDoorModel doorM = Substitute.For<IDoorModel>();
         doorC.DoorModel = doorM;
-        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
-        
         doorC.Init();
-        Assert.IsNotNull(doorC.DoorModel);
-
+        
         Object.DestroyImmediate(go);
     }
 
 
-    [Test]
-    public void GetSceneChangerController()
-    {
-        GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
-        
-        // mocking out door model 
-        IDoorModel doorM = Substitute.For<IDoorModel>();
-        doorC.DoorModel = doorM;
-        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
-        doorC.SceneChangerController = sceneC;
-        
-        doorC.Init();
-        Assert.IsNotNull(doorC.SceneChangerController);
 
-        Object.DestroyImmediate(go);
-    }
     
 
     [Test]

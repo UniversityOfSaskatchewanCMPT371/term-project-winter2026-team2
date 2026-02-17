@@ -28,19 +28,6 @@ public class DoorController : MonoBehaviour, IDoorController
     /// Public accessor of model portion of door module
     /// </summary>
     public IDoorModel DoorModel {
-        /// <summary>
-        /// Access DoorController's DoorModel instance
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - DoorController's doorModel reference is returned
-        /// </remarks>
-        get
-        {
-            return doorModel;
-        }
 
         /// <summary>
         /// Set the value of DoorController's DoorModel instance variable
@@ -83,19 +70,6 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </summary>
     public ISceneChangerController SceneChangerController
     {
-        /// <summary>
-        /// Access the sceneChangerController
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - sceneChangerController is returned
-        /// </remarks>
-        get
-        {
-            return sceneChangerController;
-        }
 
         /// <summary>
         /// Set the value for DoorControllers reference to SceneChangerController
