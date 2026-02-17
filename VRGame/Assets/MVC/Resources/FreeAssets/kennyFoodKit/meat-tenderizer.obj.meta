@@ -1,15 +1,11 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VRGame/Assets/Samples/XR Interaction Toolkit/2.6.5/Starter Assets/Models/XRControllerLeft.fbx.meta
-guid: be3083a5f26d4e859d594ecbe632f87e
-========
-guid: 2c2e1df22f951344eb823dfbb330cc79
->>>>>>>> hub-restructured:VRGame/Assets/MVC/Resources/FreeAssets/kennyFoodKit/meat-tenderizer.obj.meta
+guid: d80ddc125aa964abd918fd3b85e441db
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -49,7 +45,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 0
+    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -104,14 +100,9 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
-<<<<<<<< HEAD:VRGame/Assets/Samples/XR Interaction Toolkit/2.6.5/Starter Assets/Models/XRControllerLeft.fbx.meta
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
-========
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
->>>>>>>> hub-restructured:VRGame/Assets/MVC/Resources/FreeAssets/kennyFoodKit/meat-tenderizer.obj.meta
   additionalBone: 0
   userData: 
   assetBundleName: 

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VRGame/Assets/Samples/XR Interaction Toolkit/2.6.5.meta
-guid: 74ba7f53abc304222a11fbd7475b05ac
-========
-guid: 83c0b485203841641aca6804062973c5
->>>>>>>> hub-restructured:VRGame/Assets/MVC/Model.meta
+guid: 4d1bb0d1057a04d7ab50e2b1625262ac
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

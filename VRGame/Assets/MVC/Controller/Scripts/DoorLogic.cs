@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[ RequireComponent(typeof(DoorData)) ]
+[RequireComponent(typeof(DoorData))]
 
 /// <summary>
 /// Handles door interaction logic
@@ -51,13 +51,13 @@ public class DoorLogic : MonoBehaviour
             {
                 targetDoor = doorData.GetTargetDoor();
                 teleportPosition = targetDoor.GetTeleportPosition();
-                teleportRotation = targetDoor.GetTeleportRotation();   
+                teleportRotation = targetDoor.GetTeleportRotation();
 
                 playerRig.GetComponent<PlayerLogic>().teleportPlayerTo(teleportPosition, teleportRotation);
                 triggerDebounce = false;
             };
         }
-        catch (InvalidOperationException e)
+        catch (InvalidOperationException)
         {
             print("error handled");
             // Exception caught properly

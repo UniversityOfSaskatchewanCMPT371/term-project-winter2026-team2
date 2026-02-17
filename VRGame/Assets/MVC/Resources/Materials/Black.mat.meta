@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VRGame/Assets/Samples/XR Interaction Toolkit/2.6.5/Starter Assets/Presets/XRI Default Continuous Move.preset.meta
-guid: 91f9da00cfdac5d49955df2d2d820b9c
-========
-guid: c574d3c204d2149e3a3ef809bb1d6100
->>>>>>>> hub-restructured:VRGame/Assets/MVC/Resources/Materials/Black.mat.meta
+guid: 58c6058016a02449599d6f7c4f02a96b
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

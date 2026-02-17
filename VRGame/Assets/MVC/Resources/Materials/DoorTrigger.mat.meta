@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VRGame/Assets/Samples/XR Interaction Toolkit/2.6.5/Starter Assets/Presets/XRI Default Left Controller.preset.meta
-guid: ffd8268f7307a0c48a067dad4a8fe060
-========
-guid: 6e4233d0568cbfe46ae6d01b2d11711e
->>>>>>>> hub-restructured:VRGame/Assets/MVC/Resources/Materials/DoorTrigger.mat.meta
+guid: aa88aeed85cf04ed580f9de615048e47
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
