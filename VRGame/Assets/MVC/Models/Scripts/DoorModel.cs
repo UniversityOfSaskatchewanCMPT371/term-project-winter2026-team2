@@ -23,6 +23,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// <summary>
     /// Integer Id associated with this door.
     /// </summary>
+    [SerializeField]
     private int doorId;
     /// <summary>
     /// Public accessor for door's id
@@ -63,6 +64,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// <summary>
     /// Id of another door that this door targets
     /// </summary>
+    [SerializeField]
     private int targetDoorId ;
 
     /// <summary>
@@ -108,6 +110,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// Id of the scene this door is targeting. Id should exist as a key
     /// in SceneChangerModel's path collection
     /// </summary>
+    [SerializeField]
     private int destinationSceneId;
 
     /// <summary>
@@ -154,6 +157,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// Used when a player exits the door associated with this DoorModel.
     /// They are teleported using this offset facing forwards
     /// </summary>
+    [SerializeField]
     private Vector3 teleportOffset;
 
 
