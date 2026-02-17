@@ -9,6 +9,16 @@ using UnityEngine.Assertions;
 /// </remarks>
 public class DoorController : MonoBehaviour, IDoorController
 {
+
+    /// <summary>
+    /// This field exists because interfaces cannot
+    /// be serialized in unity, meaning otherwise this
+    /// value could not be set in the inspector window
+    /// - A wrapper for doorModel
+    /// </summary>
+    [SerializeField]
+    private MonoBehaviour serializableDoorModel;
+
     /// <summary>
     /// Model portion of door module. Controller portion uses data from this
     /// </summary>
@@ -52,6 +62,16 @@ public class DoorController : MonoBehaviour, IDoorController
             doorModel = value;
         }
     }
+
+
+    /// <summary>
+    /// This field exists because interfaces cannot
+    /// be serialized in unity, meaning otherwise this
+    /// value could not be set in the inspector window
+    /// - A wrapper for sceneChangerController
+    /// </summary>
+    [SerializeField]
+    private MonoBehaviour serializableSceneChangerController;
 
     /// <summary>
     /// Reference to singleton SceneChangerController, handles scene changes
@@ -119,6 +139,17 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </remarks>
     public void Init()
     {
+        // If field was set in inspector window, set the internal values to that
+        if (serializableDoorModel != null)
+        {
+            doorModel = (IDoorModel) serializableDoorModel;
+        }
+        if (serializableSceneChangerController != null)
+        {
+            sceneChangerController = (ISceneChangerController) serializableSceneChangerController;
+        }
+
+        // error checking
         if (doorModel == null)
         {
             Debug.LogError("doorModel is null");
