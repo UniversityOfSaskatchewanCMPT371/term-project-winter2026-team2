@@ -14,16 +14,6 @@ public interface IDoorView
     /// </summary>
     public IDoorController DoorController 
     {
-        /// <summary>
-        /// Access the DoorView's DoorController instance variable
-        /// </summary>
-        /// <remarks>
-        /// Precondtions:
-        /// - None
-        /// Postconditions:
-        /// - DoorView's doorController instance variable is returned
-        get;
-
 
         /// <summary>
         /// Set the value of the DoorView's DoorController instance variable

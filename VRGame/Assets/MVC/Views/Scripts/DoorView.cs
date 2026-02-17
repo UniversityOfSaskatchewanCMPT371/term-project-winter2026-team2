@@ -30,18 +30,6 @@ public class DoorView : MonoBehaviour, IDoorView
     public IDoorController DoorController
     {
         /// <summary>
-        /// Access the DoorView's DoorController instance variable
-        /// </summary>
-        /// <remarks>
-        /// Precondtions:
-        /// - None
-        /// Postconditions:
-        /// - DoorView's doorController instance variable is returned
-        get
-        {
-            return doorController;
-        }
-        /// <summary>
         /// Set the value of the DoorView's DoorController instance variable
         /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
         /// scripts are usually set in a GUI window within the Unity editor 
@@ -110,15 +98,17 @@ public class DoorView : MonoBehaviour, IDoorView
         }
         Assert.IsNotNull(other, "Collider other can not be null.");
 
-        // Ignore interaction with any collider that is not the player's.
-        if (!other.gameObject.CompareTag("MainCamera")) {
+        IColliderWrapper colliderWrapper = new ColliderWrapper(other);
+
+        if (!colliderWrapper.CompareGameObjectTag("MainCamera")) 
+        {
             Debug.Log("Component other than player collided with door");
             return;
         }
 
         
         // ensure main camera has playerModel component
-        IPlayerController player = other.GetComponentInParent<IPlayerController>();
+        IPlayerController player = colliderWrapper.GetPlayerFromParent();
         if (player == null)
         {
             Debug.LogError("Collider does not contain playerController component");
