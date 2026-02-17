@@ -34,6 +34,7 @@
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.slnx
 
 ############################################
 # Builds / artifacts
