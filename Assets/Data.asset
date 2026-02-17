@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Data
   m_EditorClassIdentifier: 
   title: Frontal Lobe
-  description: 'Hey this is a Frontal Lobe
-
-'
+  description: 'The frontal lobe is the largest part of the brain, located at the
+    front, responsible for higher cognitive functions, decision-making, problem-solving,
+    and emotional regulation. It plays a crucial role in thinking, behavior, and
+    voluntary movement. The frontal lobe is divided into two main regions: the prefrontal
+    cortex, which is involved in planning and reasoning, and the motor cortex, which
+    coordinates voluntary movements.'

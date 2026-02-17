@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BillBoardView : MonoBehaviour
 {
+    public Transform PointB;
+
     static Transform tCam = null;
     void Update ()
     {
@@ -12,6 +14,7 @@ public class BillBoardView : MonoBehaviour
                 return;
             }
             tCam = Camera.main.transform;
+            PointB.transform.localPosition = new Vector3(0, 0, Vector3.Distance(transform.position, tCam.position));
         }
         transform.LookAt(tCam.position, Vector3.up);
     }
