@@ -1,6 +1,4 @@
-using UnityEngine.Events;
-
 public interface IRoomView
 {
-    event System.Action MinigameCompleted;
+    event System.Action OnRoomCompletion;
 }

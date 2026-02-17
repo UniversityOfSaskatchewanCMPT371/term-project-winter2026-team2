@@ -49,8 +49,29 @@ public interface IRoomModel
     /// </summary>
     static bool MinigameCompleted
     {
+        /// <summary>
+        /// Access the current completion state of minigame.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - Returns the current completion state of minigame.
+        /// </remarks>
+        /// <returns>
+        /// Current completion state of the minigame.
+        /// </returns>
         get;
 
+        /// <summary>
+        /// Mofies the completion state of minigame.
+        /// </summary>
+        /// <remarks>
+        /// Precondition:
+        /// - Value can either be true or false.
+        /// Postcondition:
+        /// - The minigame completion state is updated
+        /// </remarks>
         set;
     }
 
@@ -66,10 +87,22 @@ public interface IRoomModel
         /// Preconditions:
         /// - None
         /// Postcondtitions:
-        /// - Returns the current static
+        /// - Returns the current completion state of educational dialogue.
         /// </remarks>
+        /// <returns>
+        /// Current completion state of educational dialogue.
+        /// </returns>
         get;
 
+        /// <summary>
+        /// Modifies the completion state of educational dialogue.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value can either be true or false.
+        /// Postconditions:
+        /// - The educational dialogue completion state is updated.
+        /// </remarks>
         set;
     }
 
