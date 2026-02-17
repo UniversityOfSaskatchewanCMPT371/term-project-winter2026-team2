@@ -46,8 +46,8 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
             if (value == null)
             {
                 Debug.LogError("value passed to set SceneChangerModel is null");
-                Assert.IsNotNull(value);
             }
+            Assert.IsNotNull(value);
 
             sceneChangerModel = value;
         }
@@ -102,7 +102,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         loadDebounce = true;
 
         // load scene from model using key
-        string scenePath = sceneChangerModel.ScenePaths[sceneKey];
+        string scenePath = sceneChangerModel.GetStringPath(sceneKey);
 
         if (scenePath == null)
         {
@@ -136,17 +136,30 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         if (sceneChangerModel == null)
         {
             Debug.LogError("SceneChangerModel instance in SceneChangerController is null");
-            Assert.IsNotNull(sceneChangerModel, "sceneChangerModel must not be null");
         }
+        Assert.IsNotNull(sceneChangerModel, "sceneChangerModel must not be null");
 
         if (instance != null)
         {
             Debug.LogError("SceneChangerController instance already exists");
-            Assert.IsNull(instance, "static var instance should be null, only one sceneChangerController may exist at a time");
         }
+        Assert.IsNull(instance, "static var instance should be null, only one sceneChangerController may exist at a time");
         
         instance = this;
         Debug.Log("SceneChangerController initialized");
+    }
+
+    /// <summary>
+    /// Resets static singleton instance of Scenechanger. Used for unit testing purposes
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Static instance of SceneChangerController set to null
+    public void ResetInstance()
+    {
+        instance = null;
     }
 
     /// <summary>

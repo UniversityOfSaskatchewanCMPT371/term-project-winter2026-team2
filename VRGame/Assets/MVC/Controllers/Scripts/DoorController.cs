@@ -122,13 +122,13 @@ public class DoorController : MonoBehaviour, IDoorController
         if (doorModel == null)
         {
             Debug.LogError("doorModel is null");
-            Assert.IsNotNull(doorModel, "DoorModel field cannot be null.");
         }
+        Assert.IsNotNull(doorModel, "DoorModel field cannot be null.");
         if (sceneChangerController == null)
         {
             Debug.LogError("sceneChangerController is null");
-            Assert.IsNotNull(sceneChangerController, "SceneChangerController field cannot be null.");
         }
+        Assert.IsNotNull(sceneChangerController, "SceneChangerController field cannot be null.");
 
         Debug.Log("DoorController initialized");
     }
@@ -149,14 +149,12 @@ public class DoorController : MonoBehaviour, IDoorController
         if (playerController == null)
         {
             Debug.LogError("playerController passed to OnPlayerEnter is null");
-            Assert.IsNotNull(playerController, "Player controller must be non-null.");
         }
+        Assert.IsNotNull(playerController, "Player controller must be non-null.");
 
         // makes it so the player can only enter the door once
         if (triggerDebounce) return;
         triggerDebounce = true;
-        //
-        triggerDebounce = false;
 
 
         IDoorModel targetDoor;
