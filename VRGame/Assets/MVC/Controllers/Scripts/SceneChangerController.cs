@@ -41,11 +41,11 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// <summary>
     /// Loads a scene based on the the key in the collection held by SceneChangerModel
     /// </summary>
-    /// <param name="sceneKey">key, should be associated with value in SceneChagnerModel's collection </param>
+    /// <param name="sceneKey">key, should be associated with value in SceneEnum </param>
     /// <returns>The scene to loead based on the provided key</returns>
     /// <remarks>
     /// Preconditions:
-    /// - sceneKey must exist in sceneChangerModel's collection
+    /// - sceneKey must exist in SceneEnum
     /// Postconditions:
     /// - loadDebounce will be set to true while scene is asynchronously loaded, disallowing
     /// multiple scenes to be loaded at a time
