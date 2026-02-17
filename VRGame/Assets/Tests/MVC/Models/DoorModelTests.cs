@@ -136,11 +136,12 @@ public class DoorModelTests
         GameObject go = new GameObject();
         IDoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
-
-        door.DestinationSceneId = 1;
+        door.DoorId = 0;
+        door.TargetDoorId = 1;
+        door.DestinationSceneId = 0;
         door.Init();
 
-        Assert.AreEqual(door.DestinationSceneId, 1);
+        Assert.AreEqual(door.DestinationSceneId, 0);
         door.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }

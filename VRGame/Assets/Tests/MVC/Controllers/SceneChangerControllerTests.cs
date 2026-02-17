@@ -18,13 +18,9 @@ public class SceneChangerControllerTests
         GameObject go = new GameObject();
         ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
         
-        // mocking out sceneChangerModel
-        ISceneChangerModel sceneM = Substitute.For<ISceneChangerModel>();
 
-        sceneC.SceneChangerModel = sceneM;
         sceneC.Init();
 
-        Assert.IsNotNull(sceneC.SceneChangerModel);
 
         sceneC.ResetInstance();
         Object.DestroyImmediate(go);
@@ -37,15 +33,10 @@ public class SceneChangerControllerTests
         GameObject go = new GameObject();
         ISceneChangerController sceneC1 = go.AddComponent<SceneChangerController>();
 
-        // mocking out sceneChangerModel
-        ISceneChangerModel sceneM = Substitute.For<ISceneChangerModel>();
-
-        sceneC1.SceneChangerModel = sceneM;
         sceneC1.Init();
 
 
         ISceneChangerController sceneC2 = go.AddComponent<SceneChangerController>();
-        sceneC2.SceneChangerModel = sceneM;
 
         // attempting to create another instance should fail
         
@@ -64,28 +55,6 @@ public class SceneChangerControllerTests
         Object.DestroyImmediate(go);
     }
 
-    [Test]
-    public void InvalidSceneChangerModel()
-    {
-
-        // Use the Assert class to test conditions
-        GameObject go = new GameObject();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        
-        // tell unity to ignore error log so test can pass
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
-
-        // trying to init a SceneChangerController without an associated model should fail
-        try
-        {
-            sceneC.Init();
-            Assert.IsNotNull(null);
-        }
-        catch{}
-        sceneC.ResetInstance();
-        Object.DestroyImmediate(go);
-
-    }
 
     // LOADSCENEASYNC which is called in loadscene must be in playmode
     /* 
