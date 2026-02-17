@@ -58,6 +58,15 @@ public interface ISceneChangerController
     public AsyncOperation LoadScene(int sceneKey);
 
 
+    /// <summary>
+    /// Resets static singleton instance of Scenechanger. Used for unit testing purposes
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Static instance of SceneChangerController set to null
+    public void ResetInstance();
 
     /// <summary>
     /// Initializes the SceneChangerController. Called by the game within the MonoBehavior function

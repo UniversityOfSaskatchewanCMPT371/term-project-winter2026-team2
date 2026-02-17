@@ -42,7 +42,7 @@ public interface ISceneChangerModel {
     /// - key must exist in scenePaths
     /// Postconditions:
     /// - value associated with key is returned. ScenePaths in unmodified
-    public string getStringPath(int key);
+    public string GetStringPath(int key);
     
     /// <summary>
     /// Initializes the SceneChangerModel. Called by the game within the MonoBehavior function
