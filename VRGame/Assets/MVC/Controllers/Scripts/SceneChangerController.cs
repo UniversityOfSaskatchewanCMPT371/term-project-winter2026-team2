@@ -17,6 +17,37 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </summary>
     private static SceneChangerController instance;
 
+
+    /// <summary>
+    /// Wrapper for unity's sceneManager. Created to make unit testing easier. Will
+    /// be used to asynchronously load new scenes
+    /// </summary>
+    private ISceneManagerWrapper sceneManagerWrapper;
+
+    /// <summary>
+    /// Public accessor for sceneManagerWrapper
+    /// </summary>
+    public ISceneManagerWrapper SceneManagerWrapper
+    {
+        /// <summary>
+        /// Set SceneChangerController's sceneManagerWrapper
+        /// </summary>
+        /// <remarks>
+        /// Preconditions
+        /// - value must not be null
+        /// Postconditions:
+        /// - SceneChangerController's sceneManagerWrapper set to value
+        /// </remarks>
+        set
+        {
+            if (value == null)
+            {
+                Debug.LogError("SceneManagerWrapper is null");
+            }
+            Assert.IsNotNull(value, "sceneManagerWrapper cannot be null");
+        }
+    }
+
     /// <summary>
     /// Prevents multiple scene loads from being triggered at once
     /// </summary>
@@ -48,9 +79,10 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// - sceneKey must exist in SceneEnum
     /// Postconditions:
     /// - loadDebounce will be set to true while scene is asynchronously loaded, disallowing
-    /// multiple scenes to be loaded at a time
+    /// multiple scenes to be loaded at a time. Returns LoadScene asyncOperation within a wrapper class made
+    /// for ease of unit testing.
     /// </remarks>
-    public AsyncOperation LoadScene(int sceneKey)
+    public IAsyncOperationWrapper LoadScene(int sceneKey)
     {
         if (loadDebounce)
         {
@@ -66,13 +98,12 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneKey));
 
-        // load scene using build index model
-        AsyncOperation loadingScene = SceneManager.LoadSceneAsync(sceneKey);
+        IAsyncOperationWrapper loadingSceneWrapper = sceneManagerWrapper.LoadSceneAsync(sceneKey);
 
         // reset debounce when the scene finishes loading
-        loadingScene.completed += (o) => resetDebounce();
+        loadingSceneWrapper.Completed += (o) => resetDebounce();
 
-        return loadingScene;
+        return loadingSceneWrapper;
     }
 
 

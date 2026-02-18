@@ -11,7 +11,22 @@ using UnityEngine.SceneManagement;
 public interface ISceneChangerController
 {
 
-
+    /// <summary>
+    /// Public accessor for sceneManagerWrapper
+    /// </summary>
+    public ISceneManagerWrapper SceneManagerWrapper
+    {
+        /// <summary>
+        /// Set SceneChangerController's sceneManagerWrapper
+        /// </summary>
+        /// <remarks>
+        /// Preconditions
+        /// - value must not be null
+        /// Postconditions:
+        /// - SceneChangerController's sceneManagerWrapper set to value
+        /// </remarks>
+        set;
+    }
 
 
     /// <summary>
@@ -24,9 +39,9 @@ public interface ISceneChangerController
     /// - sceneKey must exist in SceneEnum
     /// Postconditions:
     /// - loadDebounce will be set to true while scene is asynchronously loaded, disallowing
-    /// multiple scenes to be loaded at a time
+    /// multiple scenes to be loaded at a time. Returns async loadScene operation within a wrapper class
     /// </remarks>
-    public AsyncOperation LoadScene(int sceneKey);
+    public IAsyncOperationWrapper LoadScene(int sceneKey);
 
 
     /// <summary>
