@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NSubstitute;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /// <summary>
 /// Unit tests for the ToolTipModel ScriptableObject.
 /// Tests data integrity, initialization, and property behavior.
 /// Runs automatically when attached to a GameObject or called manually.
+/// You can run it by Seeing Tests Window, adn Press Run ToolTipModel Tests 
 /// </summary>
 public class ToolTipModelUnitTest : MonoBehaviour
 {
@@ -354,5 +358,14 @@ public class ToolTipModelUnitTest : MonoBehaviour
         }, "ToolTipModel_ShouldAllowNullAssignment_ForDescription");
     }
 
-  
+#if UNITY_EDITOR
+    [MenuItem("Tests/Run ToolTipModel Tests")]
+    public static void RunTestsFromMenu()
+    {
+        var go = new GameObject("TestRunner");
+        var tester = go.AddComponent<ToolTipModelUnitTest>();
+        tester.RunAllTests();
+        DestroyImmediate(go);
+    }
+#endif
 }
