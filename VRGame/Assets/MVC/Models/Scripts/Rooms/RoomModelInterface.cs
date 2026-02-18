@@ -132,4 +132,15 @@ public interface IRoomModel
     /// </remarks>
     /// <returns></returns>
     void Complete();
+
+    /// <summary>
+    /// Initializes this component. Called by the game within the MonoBehaviour.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Serialized fields must be set, or default.
+    /// Postcondtions:
+    /// - Asserts that all Serialized fields are in a valid.
+    /// </remarks>
+    void Init();
 }

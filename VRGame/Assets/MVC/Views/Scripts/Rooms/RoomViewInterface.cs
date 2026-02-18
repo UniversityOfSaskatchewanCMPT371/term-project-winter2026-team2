@@ -36,4 +36,17 @@ public interface IRoomView
     /// - The room's minigame compeltion state is updated.
     /// </remarks>
     void MinigameCompleted();
+
+    /// <summary>
+    /// Initializes this component. Called by the game within the MonoBehaviour.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Serialized fields must be set, or default.
+    /// - Reference to controller layer must be set.
+    /// Postcondtions:
+    /// - Asserts that all Serialized fields are in a valid.
+    /// - Asserts that the reference to controller layer is valid.
+    /// </remarks>
+    void Init();
 }
