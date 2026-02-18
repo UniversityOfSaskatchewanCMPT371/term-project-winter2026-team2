@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Model class that holds the data and state for scale-on-hover functionality
+/// Model class holds the data and state for scale-on-hover functionality
 /// </summary>
 public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 {
@@ -54,45 +54,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
     }
 
-    /// <summary>
-    /// Called when hover enters - sets target scales to bigger values.
-    /// </summary>
-    /// Pre-condition:
-    ///     -   Controllers must be hovering on the linkedObject && inkedObjects[i] != null
-    /// Post-condition
-    ///     -   Make object grow 1.25x in size on hover enter
-    public void OnHoverEnter()
-    {
-        isHovering = true;
-        // Make size bigger
-        for (int i = 0; i < linkedObjects.Length; i++)
-        {
-            if (linkedObjects[i] != null)
-            {
-                targetScales[i] = normalScales[i] * hoverScaleMultiplier;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Called when hover exits - sets target scales back to normal.
-    /// </summary>
-    /// Pre-condition:
-    ///     -   Controllers must not be hovering on the linkedObject && inkedObjects[i] != null
-    /// Post-condition
-    ///     -   Make object grow 1.25x in size on hover enter
-    public void OnHoverExit()
-    {
-        isHovering = false;
-        // Make size smaller (back to normal)
-        for (int i = 0; i < linkedObjects.Length; i++)
-        {
-            if (linkedObjects[i] != null)
-            {
-                targetScales[i] = normalScales[i];
-            }
-        }
-    }
+    
 
     /*** GETTERS ***/
 
