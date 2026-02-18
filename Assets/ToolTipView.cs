@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Permissions;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +9,11 @@ public class ToolTipView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (data == null && description == null)
+        {
+            Debug.LogError("ToolTipModel data and description is not assigned in the Unity Editor.");
+            return;
+        }
         title.SetText(data.title);
         description.SetText(data.description);
         
