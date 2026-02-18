@@ -89,7 +89,8 @@ public class DoorView : MonoBehaviour, IDoorView
     /// - `Collider other` must be non-null
     /// - `doorController` instance var must be non-null
     /// Postconditions:
-    /// - changes to state created by calling `doorController.OnPlayerEnter()`
+    /// - changes to state created by calling `doorController.OnPlayerEnter()` with colliders
+    /// associated palyer controller
     public void OnTriggerEnter(Collider other)
     {
         if (other == null)
@@ -100,13 +101,30 @@ public class DoorView : MonoBehaviour, IDoorView
 
         IColliderWrapper colliderWrapper = new ColliderWrapper(other);
 
+        OnTriggerEnterLogic(colliderWrapper);
+
+    }
+
+
+    /// <summary>
+    /// Actual logic for OnTriggerEnter functionality. Separated to make unit testing easier
+    /// - collider's cannot be mocked out, so the actual OnTriggerEnter() puts the collider
+    /// in a wrapper class and should call this
+    /// </summary>
+    /// <param name="colliderWrapper">colliderWrapper created within OnTriggerEnter()</param>
+    /// <remarks>
+    /// PreConditions:
+    /// - colliderWrapper must not be null
+    /// PostConditions:
+    /// - changes to state created by calling doorController.OnPlayerEnter()` with collider's
+    /// associated PlayerController
+    public void OnTriggerEnterLogic(IColliderWrapper colliderWrapper)
+    {
         if (!colliderWrapper.CompareGameObjectTag("MainCamera")) 
         {
             Debug.Log("Component other than player collided with door");
             return;
         }
-
-        
         // ensure main camera has playerModel component
         IPlayerController player = colliderWrapper.GetPlayerFromParent();
         if (player == null)
@@ -117,7 +135,9 @@ public class DoorView : MonoBehaviour, IDoorView
 
         // execute player enter functionality in controller portion.
         doorController.OnPlayerEnter(player);
+        Debug.Log("Player collision handled");
     }
+
 
     /// <summary>
     /// A `MonoBehaviour` function, called on the frame when a script is enabled, before

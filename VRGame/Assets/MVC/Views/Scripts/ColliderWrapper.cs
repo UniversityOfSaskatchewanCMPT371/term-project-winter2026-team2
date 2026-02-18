@@ -45,6 +45,17 @@ public class ColliderWrapper : IColliderWrapper
 
     }
 
+    /// <summary>
+    /// Compares the collider's gameObject.tag to the input tag
+    /// </summary>
+    /// <param name="tag">tag to compare the collider's gameObject.tag to</param>
+    /// <returns>true if the same, false otherwise</returns>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Either true or false returned depending on whether tags strings are the same
+    /// </remarks>
     public bool CompareGameObjectTag(String tag)
     {
         return collider.gameObject.CompareTag(tag);

@@ -52,6 +52,21 @@ public interface IDoorView
     /// - `Collider other` must be non-null
     /// - `doorController` instance var must be non-null
     /// Postconditions:
-    /// - changes to state created by calling `doorController.OnPlayerEnter()`
+    /// - changes to state created by calling `doorController.OnPlayerEnter()` with colliders
+    /// associated palyer controller
     public void OnTriggerEnter(Collider other);
+
+    /// <summary>
+    /// Actual logic for OnTriggerEnter functionality. Separated to make unit testing easier
+    /// - collider's cannot be mocked out, so the actual OnTriggerEnter() puts the collider
+    /// in a wrapper class and should call this
+    /// </summary>
+    /// <param name="colliderWrapper">colliderWrapper created within OnTriggerEnter()</param>
+    /// <remarks>
+    /// PreConditions:
+    /// - colliderWrapper must not be null
+    /// PostConditions:
+    /// - changes to state created by calling doorController.OnPlayerEnter()` with collider's
+    /// associated PlayerController
+    public void OnTriggerEnterLogic(IColliderWrapper colliderWrapper);
 }
