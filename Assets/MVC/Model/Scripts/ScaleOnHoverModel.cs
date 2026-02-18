@@ -94,4 +94,69 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
     }
 
+    /*** GETTERS ***/
+
+    /// <summary>
+    /// Returns the target scale 
+    /// </summary>
+    /// Pre-condition:
+    ///     -   None
+    /// Post-condition:
+    ///     -   Returns the objects target
+    public Vector3[] getTargetScale()
+    {
+        return targetScales;
+    }
+
+    /// <summary>
+    /// Returns the array of linked transform objects
+    /// </summary>
+    /// Pre-condition:
+    ///     -   None
+    /// Post-condition:
+    ///     - Returns the array of linked transform objects
+    public Transform[] getLinkedObjects()
+    {
+        return linkedObjects;
+    }
+
+    /// <summary>
+    /// Returns the scale transition speed
+    /// </summary>
+    /// Pre-condition:
+    ///     -   None
+    /// Post-condition:
+    ///     -   Returns the scale transition speed
+    public float getScaleSpeed()
+    {
+        return scaleSpeed;
+    }
+
+    /// <summary>
+    /// Gets whether the object is currently being hovered
+    /// </summary>
+    /// Pre-condition:
+    ///     -   None
+    /// Post-condition:
+    ///     -   Returns True if hovering, false otherwise
+    public bool IsHovering()
+    {
+        return isHovering;
+    }
+
+    /// <summary>
+    /// Initialize scales on Awake (to the linkedObjects that are assigned in inspector)
+    /// </summary>
+    /// Pre-condition:
+    ///     -   0 < linkedObjects && linkedObjects != null
+    /// Post-condition:
+    ///     - Initializes the linkedObjects on Awake()
+    private void Awake()
+    {
+        if (linkedObjects != null && linkedObjects.Length > 0)
+        {
+            InitializeScales();
+        }
+    }
+
 }
