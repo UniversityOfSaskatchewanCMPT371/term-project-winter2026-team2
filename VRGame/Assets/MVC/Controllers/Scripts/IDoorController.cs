@@ -49,6 +49,22 @@ public interface IDoorController
     }
 
     /// <summary>
+    /// Public readonly accessor for triggerDebounce
+    /// </summary>
+    public bool TriggerDebounce
+    {
+        /// <summary>
+        /// View current status of triggerDebounce
+        /// </summary> 
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - triggerDebounce is returned 
+        get;
+    }
+
+    /// <summary>
     /// Handles logic for player entering a door
     /// </summary>
     /// <param name="playerController"> Controller portion of player module </param>

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
 using System.Text.RegularExpressions;
+using System;
 
 
 public class DoorControllerTests
@@ -21,17 +22,41 @@ public class DoorControllerTests
         IDoorModel doorM = Substitute.For<IDoorModel>();
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         Assert.NotNull(doorC);
-        
+
         doorC.DoorModel = doorM;
         doorC.SceneChangerController = sceneC;
         doorC.Init();
+        // no assertion triggered, meaning it worked
+
+        UnityEngine.Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void triggerDebounceCheck()
+    {
+        // Use the Assert class to test conditions
+        GameObject go = new GameObject();
+        IDoorController doorC = go.AddComponent<DoorController>();
         
-        Object.DestroyImmediate(go);
+        // mocking out door model 
+        IDoorModel doorM = Substitute.For<IDoorModel>();
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        Assert.NotNull(doorC);
+
+        doorC.DoorModel = doorM;
+        doorC.SceneChangerController = sceneC;
+        doorC.Init();
+
+        // trigger debounce should default to false, or else scnen change can never
+        // be triggered
+        Assert.IsFalse(doorC.TriggerDebounce); 
+
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
 
 
-    
+
 
     [Test]
     public void InvalidDoorModel()
@@ -47,7 +72,7 @@ public class DoorControllerTests
         try
         {
             doorC.Init();
-            Assert.IsNotNull(null);
+            Assert.Fail("Null door model should've triggered assertion");
 
         } 
         catch
@@ -56,7 +81,7 @@ public class DoorControllerTests
         }
         
 
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     [Test]
@@ -81,14 +106,11 @@ public class DoorControllerTests
         {
 
         }
-        
-
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
-    /* Having a lot of trouble  mocking out AsyncOperations 
     [Test]
-    public void OnPlayerEnter()
+    public void OnPlayerEnter_InvalidPlayerController()
     {
         GameObject go = new GameObject();
         IDoorController doorC = go.AddComponent<DoorController>();
@@ -102,25 +124,86 @@ public class DoorControllerTests
         
         doorC.Init();
 
+        //trying to call OnPlayerEnter with null playerController should cause error
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try
+        {
+            doorC.OnPlayerEnter(null);
+            Assert.Fail("Passing null playerController to OnPlayerEnter should've triggered assertion");
+        }
+        catch{}
 
-        IPlayerController Ipc = Substitute.For<IPlayerController>();
+        UnityEngine.Object.DestroyImmediate(go);
 
-        // target door returned from doorModel within function
-        IDoorModel targetMock = Substitute.For<IDoorModel>();
-        doorM.GetTargetDoor().Returns(targetMock);
-        targetMock.GetTeleportPosition().Returns(new Vector3());
-        targetMock.GetTeleportRotation().Returns(new Quaternion());
-
-        // async operation within onPlayerEnter from sceneChangerController
-        AsyncOperation asyncMock = Substitute.For<AsyncOperation>();
-        sceneC.LoadScene(doorM.DestinationSceneId).Returns(asyncMock);
-
-        // should not throw exception
-        doorC.OnPlayerEnter(Ipc);
-
-        Object.DestroyImmediate(go);
     }
-    */ 
+
+    public void OnPlayerEnter_InvalidSceneId()
+    {
+        GameObject go = new GameObject();
+        IDoorController doorC = go.AddComponent<DoorController>();
+        
+        // mocking out door model 
+        IDoorModel doorM = Substitute.For<IDoorModel>();
+
+        // invalid sceneId
+        doorM.DestinationSceneId = -1;
+
+        doorC.DoorModel = doorM;
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
+        
+        doorC.Init();
+
+        IPlayerController playerMock = Substitute.For<IPlayerController>();
+
+        //trying to call OnPlayerEnter with invalid scene Id
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try
+        {
+            doorC.OnPlayerEnter(playerMock);
+            Assert.Fail("DoorModel with invalid sceneId with OnPlayerEnter should've triggered assertion");
+        }
+        catch{}
+
+        UnityEngine.Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void OnPlayerEnterValid()
+    {
+        GameObject go = new GameObject();
+        IDoorController doorC = go.AddComponent<DoorController>();
+        
+        // mocking out door model 
+        IDoorModel doorM = Substitute.For<IDoorModel>();
+        doorM.DestinationSceneId = 0;
+        doorC.DoorModel = doorM;
+
+        // async operation that sceneChangerController will return
+        IAsyncOperationWrapper loadingScene = Substitute.For<IAsyncOperationWrapper>();
+
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        sceneC.LoadScene(0).Returns(loadingScene);
+        doorC.SceneChangerController = sceneC;
+        
+        doorC.Init();
+
+        // enter 
+        IPlayerController playerMock = Substitute.For<IPlayerController>();
+        doorC.OnPlayerEnter(playerMock);
+
+        // trigger debounce should be true, to stop entrance logic from triggering multiple
+        // times
+        Assert.IsTrue(doorC.TriggerDebounce);
+
+        // manually set mocked async event to completed
+        loadingScene.Completed += Raise.Event<Action<IAsyncOperationWrapper>>(loadingScene);
+
+        // trigger debounce should be false, to allow entrance again
+        Assert.IsFalse(doorC.TriggerDebounce);
+
+        UnityEngine.Object.DestroyImmediate(go);
+    }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.

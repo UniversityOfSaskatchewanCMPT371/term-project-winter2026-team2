@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
 
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here
@@ -98,6 +99,24 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </summary>
     private static bool triggerDebounce = false;
 
+    /// <summary>
+    /// Public readonly accessor for triggerDebounce
+    /// </summary>
+    public bool TriggerDebounce
+    {
+        /// <summary>
+        /// View current status of triggerDebounce
+        /// </summary> 
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - triggerDebounce is returned 
+        get
+        {
+            return triggerDebounce;
+        }
+    }
 
 
     /// <summary>
@@ -129,6 +148,7 @@ public class DoorController : MonoBehaviour, IDoorController
             Debug.LogError("doorModel is null");
         }
         Assert.IsNotNull(doorModel, "DoorModel field cannot be null.");
+
         if (sceneChangerController == null)
         {
             Debug.LogError("sceneChangerController is null");
@@ -168,10 +188,18 @@ public class DoorController : MonoBehaviour, IDoorController
 
         // load this door's destination scene
         int sceneId = doorModel.DestinationSceneId;
-        // if this sceneId doesn't exist, the controller will set off an assertion, causing an error
-        AsyncOperation loadingScene = sceneChangerController.LoadScene(sceneId);
+
+        // ensure destination scene actually exists
+        if (!Enum.IsDefined(typeof(SceneEnum), sceneId))
+        {
+            Debug.LogError("Invalid destination scene id. Not in enum");
+        }
+        Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneId));
+
+        // load new scene with scene changer
+        IAsyncOperationWrapper loadingScene = sceneChangerController.LoadScene(sceneId);
             
-        loadingScene.completed += (o) =>
+        loadingScene.Completed += (o) =>
         {
             targetDoor = doorModel.GetTargetDoor();
             teleportPosition = targetDoor.GetTeleportPosition();
@@ -180,5 +208,7 @@ public class DoorController : MonoBehaviour, IDoorController
             playerController.teleportPlayerTo(teleportPosition, teleportRotation);
             triggerDebounce = false;
         };
+
+
     }
 }
