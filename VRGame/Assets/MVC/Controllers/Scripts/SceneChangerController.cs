@@ -45,6 +45,8 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
                 Debug.LogError("SceneManagerWrapper is null");
             }
             Assert.IsNotNull(value, "sceneManagerWrapper cannot be null");
+
+            sceneManagerWrapper = value;
         }
     }
 
@@ -53,7 +55,24 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </summary>
     private static bool loadDebounce;
 
-
+    /// <summary>
+    /// Public readonly accessor for loadDebounce
+    /// </summary>
+    public bool LoadDebounce
+    {
+        /// <summary>
+        /// View current status of loadDebounce
+        /// </summary> 
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - loadDebounce is returned 
+        get
+        {
+            return loadDebounce;
+        }
+    }
 
     /// <summary>
     /// Resets the static debounce value
@@ -98,6 +117,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneKey));
 
+        // get Load new scene with sceneManager through wrapper
         IAsyncOperationWrapper loadingSceneWrapper = sceneManagerWrapper.LoadSceneAsync(sceneKey);
 
         // reset debounce when the scene finishes loading
@@ -126,7 +146,15 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
             Debug.LogError("SceneChangerController instance already exists");
         }
         Assert.IsNull(instance, "static var instance should be null, only one sceneChangerController may exist at a time");
-        
+
+        if (sceneManagerWrapper == null)
+        {
+            Debug.LogError("SceneManagerWrapper is null");
+        }
+        Assert.IsNotNull(sceneManagerWrapper, "SceneManagerWrapper must not be null");
+
+        loadDebounce = false;
+
         instance = this;
         Debug.Log("SceneChangerController initialized");
     }

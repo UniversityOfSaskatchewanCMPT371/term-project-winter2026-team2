@@ -30,6 +30,23 @@ public interface ISceneChangerController
 
 
     /// <summary>
+    /// Public readonly accessor for loadDebounce
+    /// </summary>
+    public bool LoadDebounce
+    {
+        /// <summary>
+        /// View current status of loadDebounce
+        /// </summary> 
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - loadDebounce is returned 
+        get;
+    }
+
+
+    /// <summary>
     /// Loads a scene based on the the key in the collection held by SceneChangerModel
     /// </summary>
     /// <param name="sceneKey">key, should be associated with value in SceneEnum </param>
