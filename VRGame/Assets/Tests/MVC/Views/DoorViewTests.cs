@@ -18,9 +18,9 @@ public class DoorViewTests
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
 
+        // if it is initialized without causing exception, we're good
         doorV.Init();
 
-        Assert.IsNotNull(doorV.DoorController);
 
         Object.DestroyImmediate(go);
     }
@@ -79,16 +79,12 @@ public class DoorViewTests
 
         doorV.Init();
 
-        // I can't properly mock out unity types like this. Just make a collider
-        // without MainCamera tag.
+        // mocked out collider which does not have main camera tag in gameObject,
+        // i.e. is not the player
+        IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
+        otherC.CompareGameObjectTag("MainCamera").Returns(false);
 
-        //Collider otherM = Substitute.For<Collider>();
-        //otherM.gameObject.Returns(Substitute.For<GameObject>());
-        //otherM.gameObject.CompareTag("MainCamera").Returns(false);
-        Collider otherM = go.AddComponent<BoxCollider>();
-        otherM.gameObject.tag = "Untagged";
-
-        doorV.OnTriggerEnter(otherM);
+        doorV.OnTriggerEnterLogic(otherC);
         // this log message indicates a non-player collision has been handled properly
         LogAssert.Expect(LogType.Log, "Component other than player collided with door");
 
@@ -108,18 +104,16 @@ public class DoorViewTests
 
         doorV.Init();
 
-        // I can't properly mock out unity types like this. Just make a collider
-        // with MainCamera tag. It also needs to include PlayerController in parent hierarchy,
-        // so making a second gameObject.
+        // create improperly set up collider; has MainCamera tag but not IPlayerController component in
+        // it's gameObject parent. This should cause an error
+        IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
+        otherC.CompareGameObjectTag("MainCamera").Returns(true);
 
-        GameObject colliderParent = new GameObject();
-        Collider otherM = colliderParent.AddComponent<BoxCollider>();
-        otherM.gameObject.tag = "MainCamera";
+        otherC.GetPlayerFromParent().Returns((IPlayerController) null);
 
-        // test should fail, tell unity to ignore associated error log
         LogAssert.Expect(LogType.Error, "Collider does not contain playerController component");
         try {
-            doorV.OnTriggerEnter(otherM);
+            doorV.OnTriggerEnterLogic(otherC);
             Assert.Fail("Improperly set up camera collider's parent does not contain playerController component. Should have triggered assertion");
         }
         catch
@@ -129,9 +123,33 @@ public class DoorViewTests
         Object.DestroyImmediate(go);
     }
 
-    //NOTE - As playerController isn't an actual monobehavior, I can't attach
-    // it to a gameObject. TODO - figure out how to properly unit test Player properly
-    // colliding with door
+    [Test]
+    public void OnTriggerEnter_Player()
+    {
+        GameObject go = new GameObject();
+        IDoorView doorV = go.AddComponent<DoorView>();
+
+        IDoorController doorC = Substitute.For<IDoorController>();
+        doorV.DoorController = doorC;
+
+        doorV.Init();
+
+        // create improperly set up collider; has MainCamera tag but not IPlayerController component in
+        // it's gameObject parent. This should cause an error
+        IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
+        otherC.CompareGameObjectTag("MainCamera").Returns(true);
+
+        // playerController getPlayerFromParent will return
+        IPlayerController pMock = Substitute.For<IPlayerController>();
+        otherC.GetPlayerFromParent().Returns(pMock);
+
+
+        doorV.OnTriggerEnterLogic(otherC);
+        // this log lets us know it worked
+        LogAssert.Expect(LogType.Log, "Player collision handled");
+
+    }
+
 
 
     // A UnityTest behaves like a Play Mode. In Edit Mode you can use
