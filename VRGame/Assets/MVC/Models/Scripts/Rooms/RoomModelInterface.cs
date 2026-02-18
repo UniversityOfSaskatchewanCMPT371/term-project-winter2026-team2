@@ -47,7 +47,7 @@ public interface IRoomModel
     /// <summary>
     /// Current completion state of minigame.
     /// </summary>
-    static bool MinigameCompleted
+    bool MinigameCompleted
     {
         /// <summary>
         /// Access the current completion state of minigame.
@@ -64,7 +64,7 @@ public interface IRoomModel
         get;
 
         /// <summary>
-        /// Mofies the completion state of minigame.
+        /// Modifies the completion state of minigame.
         /// </summary>
         /// <remarks>
         /// Precondition:
@@ -78,7 +78,7 @@ public interface IRoomModel
     /// <summary>
     /// Current completion state of educational dialogue.
     /// </summary>
-    static bool EducationalDialogueCompleted
+    bool EducationalDialogueCompleted
     {
         /// <summary>
         /// Access the current completion state of educational dialogue.
@@ -119,19 +119,6 @@ public interface IRoomModel
     /// </remarks>
     /// <returns>Current completion state of the room.</returns>
     bool IsComplete();
-
-    /// <summary>
-    /// Changes the state of the room to complete.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Educational dialogue is complete
-    /// - Minigame is complete.
-    /// Postconditions:
-    /// - Completion state is set to true.
-    /// </remarks>
-    /// <returns></returns>
-    void Complete();
 
     /// <summary>
     /// Initializes this component. Called by the game within the MonoBehaviour.
