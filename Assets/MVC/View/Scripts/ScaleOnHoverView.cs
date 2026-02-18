@@ -1,23 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-
+/// <summary>
+/// View class updates the scale of the linkedObjects 
 public class ScaleOnHoverView : IScaleOnHoverView
 {
-    [SerializeField] IScaleOnHoverModel model;
+    // Reference to the controller
+    [SerializeField] private IScaleOnHoverController controller;
 
-    public void Init(IScaleOnHoverModel model)
+    /// <summary>
+    /// Validates that the controller layer exists
+    /// </summary>
+    /// Pre-condition:
+    ///     -   controller != null
+    /// Post-condition:
+    ///     -   View holds a reference to the controller 
+    public void Init()
     {
-        this.model = model;
+        Assert.IsNotNull(controller, "Controller cannot be null");
     }
 
+    /// <summary>
+    /// Updates the scaling of linkedObjects
+    /// </summary>
+    /// Pre-condition:
+    ///     -   model != null && linkedObjects exists 
+    /// Post-condition:
+    ///     -   linkedObjects' scale transitions to its target scale
     public void Update() 
     {
-        Transform[] linkedObjects = model.getLinkedObjects();
-        Vector3[] targetScales = model.getTargetScale();
-        float scaleSpeed = model.getScaleSpeed();
+        // Grab data from model
+        Transform[] linkedObjects = controller.retrieveLinkedObjects();
+        Vector3[] targetScales = controller.retrieveTargetScale();
+        float scaleSpeed = controller.retrieveScaleSpeed();
 
+        // We use 'Lerp' to gradually move from localScale to targetScale
         for (int i = 0; i < linkedObjects.Length; i++) {
             linkedObjects[i].localScale = Vector3.Lerp(
                 linkedObjects[i].localScale,
