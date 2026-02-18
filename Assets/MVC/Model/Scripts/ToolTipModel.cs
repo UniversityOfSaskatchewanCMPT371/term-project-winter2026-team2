@@ -14,5 +14,7 @@ public class ToolTipModel : ScriptableObject
 {
     public string title;
     [TextArea]public string description;
+
+    
 }
    
