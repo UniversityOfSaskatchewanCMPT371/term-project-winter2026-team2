@@ -1,6 +1,13 @@
+/// <summary>
+/// Default internal interface for room model.
+/// </summary>
+public interface InternalRoomModel
+{
+    /// None
+}
 
 /// <summary>
-/// Default interface for room model.
+/// Default external interface for room model.
 /// </summary>
 public interface IRoomModel
 {

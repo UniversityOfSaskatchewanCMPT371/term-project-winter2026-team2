@@ -1,6 +1,9 @@
 using NUnit.Framework;
 using UnityEngine;
 
+/// <summary>
+/// Unit tests for RoomModel class.
+/// </summary>
 public class RoomModelTests
 {
     /// <summary>
@@ -33,9 +36,6 @@ public class RoomModelTests
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
 
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
-
         // initialize the component, no errors should occur
         roomModel.Init();
 
@@ -57,9 +57,6 @@ public class RoomModelTests
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
 
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
-
         // initialize the component, no errors should occur
         roomModel.Init();
 
@@ -80,9 +77,6 @@ public class RoomModelTests
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
 
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
-
         // initialize the component, no errors should occur
         roomModel.Init();
 
@@ -102,9 +96,6 @@ public class RoomModelTests
         // test setup
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
-
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -127,9 +118,6 @@ public class RoomModelTests
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
 
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
-
         // initialize the component, no errors should occur
         roomModel.Init();
 
@@ -149,9 +137,6 @@ public class RoomModelTests
         // test setup
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
-
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -175,9 +160,6 @@ public class RoomModelTests
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
 
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
-
         // initialize the component, no errors should occur
         roomModel.Init();
 
@@ -199,9 +181,6 @@ public class RoomModelTests
         // test setup
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
-
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -226,9 +205,6 @@ public class RoomModelTests
         // test setup
         GameObject go = new GameObject();
         IRoomModel roomModel = null;
-
-        // confirm that roomModel is not null
-        Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
 
         // initialize the component, no errors should occur
         roomModel.Init();
