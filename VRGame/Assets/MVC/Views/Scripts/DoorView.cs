@@ -1,9 +1,11 @@
 
 
+using System.Runtime.CompilerServices;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[assembly: InternalsVisibleTo("Tests")]
 /// <summary>
 /// View portion of the reusable door module. Collisions are handled here
 /// </summary>
@@ -15,7 +17,8 @@ public class DoorView : MonoBehaviour, IDoorView
 
     /// <summary>
     /// This field exists because Unity can't serialize interfaces. A wrapper
-    /// for doorController
+    /// for doorController. Allows this field to be set from editor window
+    /// in unity
     /// </summary>
     [SerializeField]
     private MonoBehaviour serializableDoorController;
@@ -27,7 +30,7 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <summary>
     ///  Public accessor of the controller portion of the door module.
     /// </summary>
-    public IDoorController DoorController
+    internal IDoorController DoorController
     {
         /// <summary>
         /// Set the value of the DoorView's DoorController instance variable

@@ -102,7 +102,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
             {
                 Debug.LogError("value passed to setTargetDoorId is negative");
             }
-            Assert.IsTrue(value >= 0, "doorId must be positive");
+            Assert.IsTrue(value >= 0, "doorId must be non-negative");
             targetDoorId = value;
         }
     }

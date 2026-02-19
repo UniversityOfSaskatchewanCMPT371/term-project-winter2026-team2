@@ -17,7 +17,7 @@ public class SceneChangerControllerTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
         
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sceneC.SceneManagerWrapper = sMWrapper;
@@ -35,7 +35,7 @@ public class SceneChangerControllerTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
         
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sceneC.SceneManagerWrapper = sMWrapper;
@@ -75,14 +75,14 @@ public class SceneChangerControllerTests
     public void SingletonTest()
     {
         GameObject go = new GameObject();
-        ISceneChangerController sceneC1 = go.AddComponent<SceneChangerController>();
+        SceneChangerController sceneC1 = go.AddComponent<SceneChangerController>();
 
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sceneC1.SceneManagerWrapper = sMWrapper;
         sceneC1.Init();
 
 
-        ISceneChangerController sceneC2 = go.AddComponent<SceneChangerController>();
+        SceneChangerController sceneC2 = go.AddComponent<SceneChangerController>();
         sceneC2.SceneManagerWrapper = sMWrapper;
         // attempting to create another instance should fail
         
@@ -111,7 +111,7 @@ public class SceneChangerControllerTests
         IAsyncOperationWrapper aMock = Substitute.For<IAsyncOperationWrapper>();
 
         GameObject go = new GameObject();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
         
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sMWrapper.LoadSceneAsync(0).Returns(aMock);
@@ -148,7 +148,7 @@ public class SceneChangerControllerTests
         IAsyncOperationWrapper aMock = Substitute.For<IAsyncOperationWrapper>();
 
         GameObject go = new GameObject();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
         
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sMWrapper.LoadSceneAsync(0).Returns(aMock);

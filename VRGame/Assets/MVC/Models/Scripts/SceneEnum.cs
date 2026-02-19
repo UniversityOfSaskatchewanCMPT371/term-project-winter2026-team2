@@ -8,7 +8,8 @@ using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Enum used to index scenes. Map directly to build index numbers
+/// Enum used to index scenes. Map directly to build index numbers - numbers unity
+/// assigns to scenes within a project
 /// </summary>
 public enum SceneEnum
 {

@@ -13,7 +13,7 @@ public class DoorViewTests
     public void Instantiation()
     {
         GameObject go = new GameObject();
-        IDoorView doorV = go.AddComponent<DoorView>();
+        DoorView doorV = go.AddComponent<DoorView>();
 
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
@@ -29,7 +29,7 @@ public class DoorViewTests
     public void InvalidDoorController()
     {
         GameObject go = new GameObject();
-        IDoorView doorV = go.AddComponent<DoorView>();
+        DoorView doorV = go.AddComponent<DoorView>();
 
 
         // this test should trigger assertion, tell unity to ignore associated
@@ -49,7 +49,7 @@ public class DoorViewTests
     public void NullCollider_OnTriggerEnter()
     {
         GameObject go = new GameObject();
-        IDoorView doorV = go.AddComponent<DoorView>();
+        DoorView doorV = go.AddComponent<DoorView>();
 
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
@@ -72,7 +72,7 @@ public class DoorViewTests
     public void OnTriggerEnter_NonPlayerCollider()
     {
         GameObject go = new GameObject();
-        IDoorView doorV = go.AddComponent<DoorView>();
+        DoorView doorV = go.AddComponent<DoorView>();
 
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
@@ -97,7 +97,7 @@ public class DoorViewTests
     public void OnTriggerEnter_MainCameraNoPlayerController()
     {
         GameObject go = new GameObject();
-        IDoorView doorV = go.AddComponent<DoorView>();
+        DoorView doorV = go.AddComponent<DoorView>();
 
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
@@ -127,7 +127,7 @@ public class DoorViewTests
     public void OnTriggerEnter_Player()
     {
         GameObject go = new GameObject();
-        IDoorView doorV = go.AddComponent<DoorView>();
+        DoorView doorV = go.AddComponent<DoorView>();
 
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
