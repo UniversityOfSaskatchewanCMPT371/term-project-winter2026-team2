@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class IScaleOnHover : MonoBehaviour
+public interface IScaleOnHoverController
 {
     Transform[] retrieveLinkedObjects();
     Vector3[] retrieveTargetScale();

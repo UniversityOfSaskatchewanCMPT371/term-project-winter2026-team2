@@ -5,7 +5,8 @@ using UnityEngine.Assertions;
 
 /// <summary>
 /// View class updates the scale of the linkedObjects 
-public class ScaleOnHoverView : IScaleOnHoverView
+/// </summary>
+public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 {
     // Reference to the controller
     [SerializeField] private IScaleOnHoverController controller;
@@ -74,7 +75,7 @@ public class ScaleOnHoverView : IScaleOnHoverView
             linkedObjects[i].localScale = Vector3.Lerp(
                 linkedObjects[i].localScale,
                 targetScales[i],
-                deltaTime * speed
+                Time.deltaTime * scaleSpeed
             );
         }
     }
