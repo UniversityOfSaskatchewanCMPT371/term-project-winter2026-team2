@@ -1,9 +1,29 @@
 using UnityEngine;
 public class RoomModel : MonoBehaviour, IRoomModel, InternalRoomModel
 {
-    public int roomId = 0;
+    /// <summary>
+    /// Unique identifier for this room.
+    /// </summary>
+    [SerializeField]
+    private int roomId = 0;
 
-    public string roomName = "";
+    /// <summary>
+    /// Name of this room.
+    /// </summary>
+    [SerializeField]
+    private string roomName = "RoomNameHere";
+
+    /// <summary>
+    /// Completion state of the minigame in this room.
+    /// </summary>
+    [SerializeField]
+    private bool minigameCompleted = false;
+
+    /// <summary>
+    /// Completion state of the educational dialogue of this room.
+    /// </summary>
+    [SerializeField]
+    private bool eductionalDialogueCompleted = false;
 
     /// <summary>
     /// Getter for this room's unique id.
@@ -20,8 +40,8 @@ public class RoomModel : MonoBehaviour, IRoomModel, InternalRoomModel
     /// </summary>
     public bool MinigameCompleted 
     { 
-        get => throw new System.NotImplementedException(); 
-        set => throw new System.NotImplementedException(); 
+        get => minigameCompleted; 
+        set => minigameCompleted = value; 
     }
 
     /// <summary>
@@ -29,8 +49,8 @@ public class RoomModel : MonoBehaviour, IRoomModel, InternalRoomModel
     /// </summary>
     public bool EducationalDialogueCompleted 
     { 
-        get => throw new System.NotImplementedException(); 
-        set => throw new System.NotImplementedException(); 
+        get => eductionalDialogueCompleted; 
+        set => eductionalDialogueCompleted = value; 
     }
 
     public void Init()

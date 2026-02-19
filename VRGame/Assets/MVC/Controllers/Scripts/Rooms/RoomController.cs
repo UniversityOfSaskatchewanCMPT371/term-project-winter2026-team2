@@ -22,14 +22,7 @@ public class RoomController : MonoBehaviour, IRoomController, InternalRoomContro
     public IRoomView RoomView 
     { 
         get => throw new System.NotImplementedException(); 
-        set
-        {
-            if (value == null)
-            {
-                throw new NoNullAllowedException();
-            }
-            roomView = value;
-        }
+        set => roomView = value;
     }
 
     /// <summary>
