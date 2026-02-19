@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Runtime.CompilerServices;
+
+// makes it so test scripts can access 
+// this class's internal fields
+[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here
@@ -25,10 +30,11 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </summary>
     private IDoorModel doorModel;
 
+
     /// <summary>
     /// Public accessor of model portion of door module
     /// </summary>
-    public IDoorModel DoorModel {
+    internal IDoorModel DoorModel {
 
         /// <summary>
         /// Set the value of DoorController's DoorModel instance variable
@@ -51,7 +57,6 @@ public class DoorController : MonoBehaviour, IDoorController
         }
     }
 
-
     /// <summary>
     /// This field exists because interfaces cannot
     /// be serialized in unity, meaning otherwise this
@@ -69,7 +74,7 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <summary>
     /// Public accessor for singleton SceneChangerController, handles scene changes
     /// </summary>
-    public ISceneChangerController SceneChangerController
+    internal ISceneChangerController SceneChangerController
     {
 
         /// <summary>

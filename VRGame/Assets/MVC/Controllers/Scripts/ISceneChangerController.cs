@@ -11,22 +11,6 @@ using UnityEngine.SceneManagement;
 public interface ISceneChangerController
 {
 
-    /// <summary>
-    /// Public accessor for sceneManagerWrapper
-    /// </summary>
-    public ISceneManagerWrapper SceneManagerWrapper
-    {
-        /// <summary>
-        /// Set SceneChangerController's sceneManagerWrapper
-        /// </summary>
-        /// <remarks>
-        /// Preconditions
-        /// - value must not be null
-        /// Postconditions:
-        /// - SceneChangerController's sceneManagerWrapper set to value
-        /// </remarks>
-        set;
-    }
 
 
     /// <summary>

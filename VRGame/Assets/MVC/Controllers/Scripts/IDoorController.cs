@@ -8,46 +8,7 @@ using UnityEngine;
 /// </remarks>
 public interface IDoorController
 {
-    /// <summary>
-    /// Public accessor of model portion of door module
-    /// </summary>
-    public IDoorModel DoorModel 
-    {
-
-        /// <summary>
-        /// Set the value of DoorController's DoorModel instance variable
-        /// Note: this is for testing purposes - instance variables of MonoBehavior 
-        /// scripts are usually set in a GUI window within the Unity editor
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - `value` must be non-null
-        /// Postconditions:
-        /// - DoorController's `doorModel` instance variable set to input value
-
-        set;
-    }
-
-    /// <summary>
-    /// Public accessor for singleton SceneChangerController, handles scene changes
-    /// </summary>
-    public ISceneChangerController SceneChangerController
-    {
-
-        /// <summary>
-        /// Set the value for DoorControllers reference to SceneChangerController
-        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-        /// scripts are usually set in a GUI window within the Unity editor 
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - `value` must be non-null
-        /// Postconditiosn:
-        /// - DoorController's `sceneChangerController` instance var set to input value
-        /// </remarks>
-        set;
-    }
-
+    
     /// <summary>
     /// Public readonly accessor for triggerDebounce
     /// </summary>
