@@ -4,11 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Models",
-        "Controllers",
-        "Views",
-        "AllCode",
-        ""
+        "AllCode"
     ],
     "includePlatforms": [
         "Editor"
