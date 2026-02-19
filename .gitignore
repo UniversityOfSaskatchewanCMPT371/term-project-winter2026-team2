@@ -32,6 +32,7 @@
 *.unityproj
 *.csproj
 *.sln
+*.slnx
 *.suo
 *.tmp
 *.user
