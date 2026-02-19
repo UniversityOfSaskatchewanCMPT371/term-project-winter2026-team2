@@ -6,8 +6,16 @@ using UnityEngine.Assertions;
 /// </summary>
 public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
 {
-    [SerializeField] private IScaleOnHoverModel model;
-    [SerializeField] private IScaleOnHoverView view;
+    [SerializeField] private ScaleOnHoverModel model;
+    [SerializeField] private ScaleOnHoverView view;
+
+    /// <summary>
+    /// Initialize and validate that the model and view layer exist
+    /// </summary>
+    private void Start()
+    {
+        Init();
+    }
 
     /// <summary>
     /// Validate that the model and view layer exist
@@ -18,6 +26,15 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   Controller holds reference to Model and View layer
     private void Init()
     {
+        if (model == null)
+        {
+            model = GetComponent<ScaleOnHoverModel>();
+        }
+        if (view == null)
+        {
+            view = GetComponent<ScaleOnHoverView>();
+        }
+
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
     }
@@ -31,6 +48,8 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   Objects linked to the script are returned
     public Transform[] retrieveLinkedObjects() 
     {
+        if (model == null) 
+            return null;
         return model.getLinkedObjects();
     }
 
@@ -43,6 +62,8 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   Target scale(s) are returned
     public Vector3[] retrieveTargetScale()
     {
+        if (model == null) 
+            return null;
         return model.getTargetScale();
     }
     
@@ -55,6 +76,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   The model's scale speed is returned
     public float retrieveScaleSpeed() 
     {
+        if (model == null) return 1f;
         return model.getScaleSpeed();
     }
 
@@ -67,6 +89,8 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   Returns True if model is hovered on, false otherwise
     public bool IsHovering()
     {
+        if (model == null) 
+            return false;
         return model.IsHovering();
     }
 
@@ -79,7 +103,10 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   OnHoverEnter() is called in model
     public void OnHoverEnter()
     {
-        model.OnHoverEnter();
+        if (model != null)
+        {
+            model.OnHoverEnter();
+        }
     }
 
     /// <summary>
@@ -91,6 +118,9 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   OnHoverExit() is called in model
     public void OnHoverExit()
     {
-        model.OnHoverExit();
+        if (model != null)
+        {
+            model.OnHoverExit();
+        }
     }
 }
