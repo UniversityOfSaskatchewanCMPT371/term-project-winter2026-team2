@@ -39,6 +39,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     private void InitializeScales()
     {
         if (linkedObjects == null || linkedObjects.Length == 0) return;
+        
         // Initialize normal and target/bigger scale
         normalScales = new Vector3[linkedObjects.Length];
         targetScales = new Vector3[linkedObjects.Length];
@@ -54,9 +55,45 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
     }
 
-    
+    /// <summary>
+    /// Called when hover enters - sets target scales to bigger values
+    /// </summary>
+    /// Pre-condition: 
+    ///     -   linkedObjects must exist and not be null
+    /// Post-condition: 
+    ///     -   Target scales are set to be bigger (1.25x)
+    public void OnHoverEnter()
+    {
+        isHovering = true;
+        
+        for (int i = 0; i < linkedObjects.Length; i++)
+        {
+            if (linkedObjects[i] != null)
+            {
+                targetScales[i] = normalScales[i] * hoverScaleMultiplier;
+            }
+        }
+    }
 
-    /*** GETTERS ***/
+    /// <summary>
+    /// Called when hover exits - sets target scales back to normal
+    /// </summary>
+    /// Pre-condition: 
+    ///     -   linkedObjects must exist and not be null
+    /// Post-condition: 
+    ///     -   Target scales goes back to normal scale
+    public void OnHoverExit()
+    {
+        isHovering = false;
+        
+        for (int i = 0; i < linkedObjects.Length; i++)
+        {
+            if (linkedObjects[i] != null)
+            {
+                targetScales[i] = normalScales[i];
+            }
+        }
+    }
 
     /// <summary>
     /// Returns the target scale 
