@@ -8,8 +8,16 @@ using UnityEngine.Assertions;
 /// </summary>
 public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 {
-    // Reference to the controller
-    [SerializeField] private IScaleOnHoverController controller;
+    // Reference to the controller - using concrete type for Unity serialization
+    [SerializeField] private ScaleOnHoverController controller;
+
+    /// <summary>
+    /// Initialize the view and validate controller reference
+    /// </summary>
+    private void Start()
+    {
+        Init();
+    }
 
     /// <summary>
     /// Validates that the controller layer exists
@@ -20,6 +28,10 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     ///     -   View holds a reference to the controller 
     public void Init()
     {
+        if (controller == null)
+        {
+            controller = GetComponent<ScaleOnHoverController>();
+        }
         Assert.IsNotNull(controller, "Controller cannot be null");
     }
 
@@ -65,18 +77,34 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     ///     -   linkedObjects' scale transitions to its target scale
     public void Update() 
     {
+        // Check if controller is null to prevent NullReferenceException
+        if (controller == null)
+        {
+            return;
+        }
+
         // Grab data from model
         Transform[] linkedObjects = controller.retrieveLinkedObjects();
         Vector3[] targetScales = controller.retrieveTargetScale();
         float scaleSpeed = controller.retrieveScaleSpeed();
 
-        // We use 'Lerp' to gradually move from localScale to targetScale
-        for (int i = 0; i < linkedObjects.Length; i++) {
-            linkedObjects[i].localScale = Vector3.Lerp(
-                linkedObjects[i].localScale,
-                targetScales[i],
-                Time.deltaTime * scaleSpeed
-            );
+        // Additional null checks for safety
+        if (linkedObjects == null || targetScales == null)
+        {
+            return;
         }
+
+        // We use 'Lerp' to gradually move from localScale to targetScale
+        for (int i = 0; i < linkedObjects.Length && i < targetScales.Length; i++) {
+                if (linkedObjects[i] != null) {
+                    linkedObjects[i].localScale = Vector3.Lerp(
+                    linkedObjects[i].localScale,
+                    targetScales[i],
+                    Time.deltaTime * scaleSpeed
+                );
+                }
+            }
     }
 }
+ 
+
