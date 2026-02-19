@@ -2,8 +2,8 @@
     "name": "ControllerScripts",
     "rootNamespace": "",
     "references": [
-        "GUID:ba171b3dd2a51234ab864770f99741a5",
-        "GUID:2bafac87e7f4b9b418d9448d219b01ab"
+        "UnityEngine.SpatialTracking",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
