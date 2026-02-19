@@ -1,7 +1,46 @@
-public interface IRoomView
+/// <summary>
+/// Default internal interface for room view.
+/// </summary>
+public interface InternalRoomView
 {
     /// DATA SECTION
+    
+    /// <summary>
+    /// Internal access to the controller layer, 
+    /// only accessed via assembly reference to RoomController.
+    /// </summary>
+    public IRoomView RoomController {
+        /// <summary>
+        /// Access the controller layer of this room.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - Returns the reference to the controller layer.
+        /// </remarks>
+        /// <returns>
+        /// Current completion state of the minigame.
+        /// </returns>
+        get; 
+        /// <summary>
+        /// Modify the reference to the controller layer of this room.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Controller layer cannot be null.
+        /// Postconditions:
+        /// - None.
+        /// </remarks>
+        set; 
+        }
+}
 
+/// <summary>
+/// Default internal interface for room view.
+/// </summary>
+public interface IRoomView
+{
     /// <summary>
     /// Called when all educational dialogues and minigame is completed.
     /// </summary>

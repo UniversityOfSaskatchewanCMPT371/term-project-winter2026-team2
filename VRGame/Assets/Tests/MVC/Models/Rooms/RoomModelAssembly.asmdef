@@ -1,10 +1,13 @@
 {
-    "name": "Controller",
+    "name": "RoomModelAssembly",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "RoomControllerScripts"
+        "RoomModelScripts",
+        "RoomInterface",
+        "RoomControllerScripts",
+        "RoomViewsScripts"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
