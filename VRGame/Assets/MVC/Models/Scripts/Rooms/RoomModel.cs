@@ -1,5 +1,5 @@
 using UnityEngine;
-public class RoomModel : MonoBehaviour, IRoomModel, InternalRoomModel
+public class RoomModel : Model, IRoomModel, InternalRoomModel
 {
     /// <summary>
     /// Unique identifier for this room.

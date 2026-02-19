@@ -1,25 +1,24 @@
 using System.Data;
-using NUnit.Framework;
 using UnityEngine;
 
-public class RoomController : MonoBehaviour, IRoomController, InternalRoomController
+public class RoomController : Controller, IRoomController, InternalRoomController
 {
     /// <summary>
     /// Reference to the view layer.
     /// </summary>
     [SerializeField]
-    private IRoomView roomView;
+    private View roomView;
 
     /// <summary>
     /// Reference to the model layer.
     /// </summary>
     [SerializeField]
-    private IRoomModel roomModel;
+    private Model roomModel;
 
     /// <summary>
     /// Getters/Setters of the view layer.
     /// </summary>
-    public IRoomView RoomView 
+    public View RoomView
     { 
         get => throw new System.NotImplementedException(); 
         set => roomView = value;
@@ -28,7 +27,7 @@ public class RoomController : MonoBehaviour, IRoomController, InternalRoomContro
     /// <summary>
     /// Getters/Setters of the model layer.
     /// </summary>
-    public IRoomModel RoomModel 
+    public Model RoomModel 
     { 
         get => throw new System.NotImplementedException(); 
         set

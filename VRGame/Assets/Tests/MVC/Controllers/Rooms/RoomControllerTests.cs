@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using NSubstitute;
-using System.Text.RegularExpressions;
 
 /// <summary>
 /// Unit tests for RoomController class.
@@ -19,7 +16,7 @@ public class RoomControllerTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomController roomController = null;
+        IRoomController roomController = go.AddComponent<RoomController>();;
 
         // confirm that roomController is not null
         Assert.NotNull(roomController, $"roomController cannot be null. Got {roomController}");
@@ -44,7 +41,7 @@ public class RoomControllerTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomController roomController = null;
+        IRoomController roomController = go.AddComponent<RoomController>();
 
         roomController.Init();
 

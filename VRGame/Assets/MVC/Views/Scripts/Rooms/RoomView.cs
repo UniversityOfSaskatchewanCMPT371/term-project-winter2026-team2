@@ -1,15 +1,14 @@
 using System;
-using System.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class RoomView : MonoBehaviour, IRoomView, InternalRoomView
+public class RoomView : View, IRoomView, InternalRoomView
 {
     /// <summary>
     /// Reference to the controller layer of this room.
     /// </summary>
     [SerializeField]
-    private IRoomController roomController;
+    private Controller roomController;
 
     /// <summary>
     /// Called by controller when the minigame and 
@@ -21,7 +20,7 @@ public class RoomView : MonoBehaviour, IRoomView, InternalRoomView
     /// <summary>
     /// Getter/Setter for this room's controller layer.
     /// </summary>
-    public IRoomController RoomController 
+    public Controller RoomController 
     { 
         get => roomController; 
         set => roomController = value;

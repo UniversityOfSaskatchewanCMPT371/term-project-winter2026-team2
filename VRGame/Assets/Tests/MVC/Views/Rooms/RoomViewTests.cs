@@ -20,7 +20,7 @@ public class RoomViewTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomView roomView = null;
+        IRoomView roomView = go.AddComponent<RoomView>();
 
         // confirm that roomView is not null
         Assert.NotNull(roomView, $"roomView cannot be null. Got {roomView}");
@@ -41,7 +41,7 @@ public class RoomViewTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomView roomView = null;
+        IRoomView roomView = go.AddComponent<RoomView>();
 
         // initialize the component, no errors should occur
         roomView.Init();
@@ -62,7 +62,7 @@ public class RoomViewTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomView roomView = null;
+        IRoomView roomView = go.AddComponent<RoomView>();
 
         // initialize the component, no errors should occur
         roomView.Init();
@@ -75,8 +75,9 @@ public class RoomViewTests
     }
 
     [UnityTest]
-    public IEnumerator PlayModeTest()
+    public IEnumerator Initialization()
     {
+        /// TODO: I should make this once all the layers are done.
         yield return null;
     }
 }

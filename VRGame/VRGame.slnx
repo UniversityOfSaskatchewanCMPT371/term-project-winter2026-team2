@@ -53,7 +53,10 @@
   <Project Path="Unity.InternalAPIEngineBridge.007.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
   <Project Path="Unity.InternalAPIEditorBridge.007.csproj" />
+  <Project Path="ControllerScripts.csproj" />
+  <Project Path="ModelScripts.csproj" />
   <Project Path="UnityEngine.SpatialTracking.csproj" />
+  <Project Path="ViewScripts.csproj" />
   <Project Path="RoomModelScripts.csproj" />
   <Project Path="Unity.InputSystem.ForUI.csproj" />
   <Project Path="RoomViewAssembly.csproj" />

@@ -1,10 +1,9 @@
 {
-    "name": "RoomInterface",
+    "name": "ViewScripts",
     "rootNamespace": "",
     "references": [
-        "GUID:5a4babe21cdeb8741bd62cfb44efe0c3",
-        "GUID:ba5341cbcf95aaf40a1a80376f922fd5",
-        "GUID:a1987e13ee87e5b4b938f75506a5535a"
+        "GUID:ba171b3dd2a51234ab864770f99741a5",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

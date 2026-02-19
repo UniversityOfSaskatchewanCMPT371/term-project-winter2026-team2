@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Default internal interface for room controller.
 /// </summary>
@@ -9,7 +11,7 @@ public interface InternalRoomController
     /// Internal access to the view layer, 
     /// only accessed via assembly reference to RoomView.
     /// </summary>
-    public IRoomView RoomView {
+    public View RoomView {
         /// <summary>
         /// Access the view layer of this room.
         /// </summary>
@@ -39,7 +41,7 @@ public interface InternalRoomController
     /// Internal access to the model layer, 
     /// only accessed via assembly reference to RoomModel.
     /// </summary>
-    public IRoomModel RoomModel {
+    public Model RoomModel {
         /// <summary>
         /// Access the model layer of this room.
         /// </summary>
