@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 public class RoomModel : Model, IRoomModel, InternalRoomModel
 {
@@ -5,13 +6,13 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// Unique identifier for this room.
     /// </summary>
     [SerializeField]
-    private int roomId = 0;
+    private int roomId;
 
     /// <summary>
     /// Name of this room.
     /// </summary>
     [SerializeField]
-    private string roomName = "RoomNameHere";
+    private string roomName;
 
     /// <summary>
     /// Completion state of the minigame in this room.
@@ -26,13 +27,31 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     private bool eductionalDialogueCompleted = false;
 
     /// <summary>
-    /// Getter for this room's unique id.
+    /// Access the current id of this room.
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postcondition:
+    /// - Returns the current id of the room.
+    /// </remarks>
+    /// <returns>
+    /// Current id of the room.
+    /// </returns>
     public int Id => roomId;
 
     /// <summary>
-    /// Getter for this room's name.
+    /// Access the current name of this room
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postcondition:
+    /// - Returns the current name of the room.
+    /// </remarks>
+    /// <returns>
+    /// Current name of the room.
+    /// </returns>
     public string Name => roomName;
 
     /// <summary>
@@ -40,7 +59,28 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// </summary>
     public bool MinigameCompleted 
     { 
-        get => minigameCompleted; 
+        /// <summary>
+        /// Access the current completion state of minigame.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - Returns the current completion state of minigame.
+        /// </remarks>
+        /// <returns>
+        /// Current completion state of the minigame.
+        /// </returns>
+        get => minigameCompleted;
+        /// <summary>
+        /// Modifies the completion state of minigame.
+        /// </summary>
+        /// <remarks>
+        /// Precondition:
+        /// - Value can either be true or false.
+        /// Postcondition:
+        /// - The minigame completion state is updated
+        /// </remarks>
         set => minigameCompleted = value; 
     }
 
@@ -49,17 +89,85 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// </summary>
     public bool EducationalDialogueCompleted 
     { 
-        get => eductionalDialogueCompleted; 
+        /// <summary>
+        /// Access the current completion state of educational dialogue.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postcondtitions:
+        /// - Returns the current completion state of educational dialogue.
+        /// </remarks>
+        /// <returns>
+        /// Current completion state of educational dialogue.
+        /// </returns>
+        get => eductionalDialogueCompleted;
+        /// <summary>
+        /// Modifies the completion state of educational dialogue.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value can either be true or false.
+        /// Postconditions:
+        /// - The educational dialogue completion state is updated.
+        /// </remarks>
         set => eductionalDialogueCompleted = value; 
     }
 
-    public void Init()
-    {
-        throw new System.NotImplementedException();
-    }
-
+    /// <summary>
+    /// Verifies if the room is complete or not.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Returns the current completion state of the room.
+    /// </remarks>
+    /// <returns>Current completion state of the room.</returns>
     public bool IsComplete()
     {
-        throw new System.NotImplementedException();
+        return eductionalDialogueCompleted & minigameCompleted;
+    }
+
+    /// <summary>
+    /// Initializes this component. Called by the game within the MonoBehaviour.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Serialized fields must be set, or default.
+    /// Postcondtions:
+    /// - Asserts that all Serialized fields are in a valid.
+    /// </remarks>
+    public void Init()
+    {
+        if (roomName != "Hub")
+        {
+            Debug.LogWarning("Field roomName 'Hub' is reserved.");
+        }
+        Assert.False(roomName == "Hub", "Field roomId must be set to a different name.");
+
+        if (roomId == 0 && roomName != "Hub")
+        {
+            Debug.LogWarning("Field roomId '0' is reserved for Hub room.");
+        }
+        Assert.False(roomId == 0 && roomName != "Hub","Field roomId must be set to a different number.");
+
+        if (roomName.Trim() == "")
+        {
+            Debug.LogWarning("Field roomName cannot be whitespace.");
+        }
+        Assert.False(roomName.Trim() == "", "Field roomName must be set to a different name.");
+
+        if (minigameCompleted)
+        {
+            Debug.LogWarning("Field minigameCompleted must start as false.");
+        }
+        Assert.False(minigameCompleted, "Field minigameCompleted must be set to false.");
+
+        if (eductionalDialogueCompleted)
+        {
+            Debug.LogWarning("Field eductionalDialogueCompleted must start as false.");
+        }
+        Assert.False(eductionalDialogueCompleted, "Field eductionalDialogueCompleted must be set to false.");
     }
 }

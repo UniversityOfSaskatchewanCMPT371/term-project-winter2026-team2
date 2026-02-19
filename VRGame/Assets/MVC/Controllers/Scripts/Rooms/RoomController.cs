@@ -1,5 +1,6 @@
 using System.Data;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class RoomController : Controller, IRoomController, InternalRoomController
 {
@@ -20,16 +21,23 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </summary>
     public View RoomView
     { 
-        get => throw new System.NotImplementedException(); 
-        set => roomView = value;
+        get => roomView;
+        set
+        {
+            if (value == null)
+            {
+                throw new NoNullAllowedException();
+            }
+            roomView = value;
+        }
     }
 
     /// <summary>
     /// Getters/Setters of the model layer.
     /// </summary>
-    public Model RoomModel 
+    public Model RoomModel
     { 
-        get => throw new System.NotImplementedException(); 
+        get => roomModel; 
         set
         {
             if (value == null)
@@ -40,6 +48,16 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         }
     }
 
+    public void MinigameCompleted()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void EducationalDialogueCompleted()
+    {
+        ((IRoomModel)RoomModel).EducationalDialogueCompleted = true;
+    }
+
     public void HandleCompletion()
     {
         throw new System.NotImplementedException();
@@ -47,6 +65,16 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
 
     public void Init()
     {
-        throw new System.NotImplementedException();
+        if (roomView == null)
+        {
+            Debug.LogError("Missing field roomView.");
+        }
+        Assert.IsNotNull(roomView, "Field roomView cannot be null.");
+
+        if (roomView == null)
+        {
+            Debug.LogError("Misising field roomView.");
+        }
+        Assert.IsNotNull(roomModel, "Field roomView cannot be null.");
     }
 }
