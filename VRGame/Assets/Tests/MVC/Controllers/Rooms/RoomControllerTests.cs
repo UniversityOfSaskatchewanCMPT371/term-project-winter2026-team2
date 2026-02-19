@@ -29,7 +29,7 @@ public class RoomControllerTests
         // the assertion thrown must have the exact same string
         // as these otherwise it wont detect it.
         LogAssert.Expect(LogType.Assert, "RoomController requires reference to RoomModel.");
-        LogAssert.Expect(LogType.Assert, "RoomController requires reference RoomView.");
+        LogAssert.Expect(LogType.Assert, "RoomController requires reference to RoomView.");
         roomController.Init();
 
         // free up memory
@@ -37,7 +37,7 @@ public class RoomControllerTests
     }
 
     /// <summary>
-    /// Test the initialization of RoomController.
+    /// Test calling HandleCompletion()
     /// </summary>
     [Test]
     public void HandleCompletion()
@@ -52,7 +52,7 @@ public class RoomControllerTests
         // the assertion thrown must have the exact same string
         // as these otherwise it wont detect it.
         LogAssert.Expect(LogType.Assert, "RoomController requires reference to RoomModel.");
-        LogAssert.Expect(LogType.Assert, "RoomController requires reference RoomView.");
+        LogAssert.Expect(LogType.Assert, "RoomController requires reference to RoomView.");
         roomController.HandleCompletion();
 
         // free up memory

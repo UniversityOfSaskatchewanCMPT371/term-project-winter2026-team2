@@ -1,3 +1,6 @@
+using System;
+using Castle.Components.DictionaryAdapter.Xml;
+
 /// <summary>
 /// Default internal interface for room view.
 /// </summary>
@@ -9,7 +12,7 @@ public interface InternalRoomView
     /// Internal access to the controller layer, 
     /// only accessed via assembly reference to RoomController.
     /// </summary>
-    public IRoomView RoomController {
+    public IRoomController RoomController {
         /// <summary>
         /// Access the controller layer of this room.
         /// </summary>
@@ -37,21 +40,10 @@ public interface InternalRoomView
 }
 
 /// <summary>
-/// Default internal interface for room view.
+/// Default external interface for room view.
 /// </summary>
 public interface IRoomView
 {
-    /// <summary>
-    /// Called when all educational dialogues and minigame is completed.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - The room is in a valid state of compeletion.
-    /// Postconditions:
-    /// - All subscribed listeners to this event is executed.
-    /// </remarks>
-    event System.Action OnRoomCompleted;
-
     /// METHODS SECTIONS
 
     /// <summary>

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
 using System.Text.RegularExpressions;
+using System;
 
 /// <summary>
 /// Unit tests for RoomView class.
@@ -28,7 +29,49 @@ public class RoomViewTests
         roomView.Init();
 
         // free up memory
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
+    }
+
+    /// <summary>
+    /// Test to see if MinigameCompleted() will throw an error
+    /// with missing controller reference.
+    /// </summary>
+    [Test]
+    public void MinigameCompleted()
+    {
+        // test setup
+        GameObject go = new GameObject();
+        IRoomView roomView = null;
+
+        // initialize the component, no errors should occur
+        roomView.Init();
+
+        // should throw an exception since reference to controller is missing.
+        Assert.Throws<MissingFieldException>(() => roomView.MinigameCompleted(), "Missing RoomController field.");
+
+        // free up memory
+        UnityEngine.Object.DestroyImmediate(go);
+    }
+
+    /// <summary>
+    /// Test to see if EducationalDialoguesCompleted() will throw an error
+    /// with missing controller reference.
+    /// </summary>
+    [Test]
+    public void EducationalDialoguesCompleted()
+    {
+        // test setup
+        GameObject go = new GameObject();
+        IRoomView roomView = null;
+
+        // initialize the component, no errors should occur
+        roomView.Init();
+
+        // should throw an exception since reference to controller is missing.
+        Assert.Throws<MissingFieldException>(() => roomView.EducationalDialoguesCompleted(), "Missing RoomController field.");
+
+        // free up memory
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     [UnityTest]

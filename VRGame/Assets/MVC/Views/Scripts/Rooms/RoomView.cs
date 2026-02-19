@@ -1,22 +1,30 @@
 using System;
+using System.Data;
 using UnityEngine;
+using UnityEngine.Events;
+
 public class RoomView : MonoBehaviour, IRoomView, InternalRoomView
 {
-
+    /// <summary>
+    /// Reference to the controller layer of this room.
+    /// </summary>
     [SerializeField]
     private IRoomController roomController;
 
-    public IRoomView RoomController 
+    /// <summary>
+    /// Called by controller when the minigame and 
+    /// educational dialogues are completed.
+    /// </summary>
+    [SerializeField]
+    public UnityEvent onRoomCompleted = new UnityEvent();
+
+    /// <summary>
+    /// Getter/Setter for this room's controller layer.
+    /// </summary>
+    public IRoomController RoomController 
     { 
-        get => throw new System.NotImplementedException(); 
-        set => throw new System.NotImplementedException(); 
-    }
-
-    public event Action OnRoomCompleted;
-
-    public void EducationalDialoguesCompleted()
-    {
-        throw new NotImplementedException();
+        get => roomController; 
+        set => roomController = value;
     }
 
     public void Init()
@@ -25,6 +33,11 @@ public class RoomView : MonoBehaviour, IRoomView, InternalRoomView
     }
 
     public void MinigameCompleted()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void EducationalDialoguesCompleted()
     {
         throw new NotImplementedException();
     }
