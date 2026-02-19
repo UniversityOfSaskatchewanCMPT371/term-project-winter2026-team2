@@ -14,7 +14,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // confirm that roomModel is not null
         Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
@@ -34,7 +34,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();;
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -55,7 +55,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -75,7 +75,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -95,7 +95,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -116,7 +116,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -136,7 +136,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -158,7 +158,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -180,7 +180,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();
@@ -204,7 +204,7 @@ public class RoomModelTests
     {
         // test setup
         GameObject go = new GameObject();
-        IRoomModel roomModel = null;
+        IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // initialize the component, no errors should occur
         roomModel.Init();

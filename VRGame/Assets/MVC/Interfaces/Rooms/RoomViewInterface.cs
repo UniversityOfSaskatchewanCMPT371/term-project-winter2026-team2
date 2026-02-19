@@ -1,5 +1,6 @@
 using System;
 using Castle.Components.DictionaryAdapter.Xml;
+using UnityEngine;
 
 /// <summary>
 /// Default internal interface for room view.
@@ -12,7 +13,7 @@ public interface InternalRoomView
     /// Internal access to the controller layer, 
     /// only accessed via assembly reference to RoomController.
     /// </summary>
-    public IRoomController RoomController {
+    public Controller RoomController{
         /// <summary>
         /// Access the controller layer of this room.
         /// </summary>
