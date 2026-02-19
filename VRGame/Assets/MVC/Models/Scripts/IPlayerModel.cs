@@ -6,5 +6,4 @@ using UnityEngine.EventSystems;
 /// in door module. Singleton in actual implementation
 /// </summary>
 public interface IPlayerModel {
-    //private static IPlayerModel instance { get; set; }
 }

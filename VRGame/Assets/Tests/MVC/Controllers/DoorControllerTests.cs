@@ -16,7 +16,7 @@ public class DoorControllerTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
@@ -36,7 +36,7 @@ public class DoorControllerTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
@@ -62,7 +62,7 @@ public class DoorControllerTests
     public void InvalidDoorModel()
     {
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
 
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
@@ -89,7 +89,7 @@ public class DoorControllerTests
     public void InvalidSceneChanger()
     {
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
 
         IDoorModel doorM = Substitute.For<IDoorModel>();
         doorC.DoorModel = doorM;
@@ -113,7 +113,7 @@ public class DoorControllerTests
     public void OnPlayerEnter_InvalidPlayerController()
     {
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
@@ -140,7 +140,7 @@ public class DoorControllerTests
     public void OnPlayerEnter_InvalidSceneId()
     {
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
@@ -172,7 +172,7 @@ public class DoorControllerTests
     public void OnPlayerEnterValid()
     {
         GameObject go = new GameObject();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();

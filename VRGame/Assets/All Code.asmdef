@@ -18,5 +18,8 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false
+    "noEngineReferences": false,
+    "InternalsVisibleTo": [
+        "Tests"
+    ]
 }

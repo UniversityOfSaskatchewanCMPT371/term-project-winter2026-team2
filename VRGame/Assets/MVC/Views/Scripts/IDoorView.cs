@@ -9,24 +9,6 @@ using UnityEngine;
 /// </remarks>
 public interface IDoorView
 {
-    /// <summary>
-    ///  Public accessor of the controller portion of the door module.
-    /// </summary>
-    public IDoorController DoorController 
-    {
-
-        /// <summary>
-        /// Set the value of the DoorView's DoorController instance variable
-        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-        /// scripts are usually set in a GUI window within the Unity editor 
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - `value` must be non-null
-        /// Postconditions:
-        /// - DoorView's `doorController` instance variable set to input value.
-        set;
-    }
 
     /// <summary>
     /// Initializes the DoorView. Called by the game within the
