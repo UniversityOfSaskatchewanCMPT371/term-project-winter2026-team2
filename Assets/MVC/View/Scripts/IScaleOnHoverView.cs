@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class IScaleOnHoverView : MonoBehaviour
+public interface IScaleOnHoverView
 {
     void Update();
+    void OnHoverEnter();
+    void OnHoverExit();
+    void Init();
 }

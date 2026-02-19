@@ -18,8 +18,8 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     ///     -   Controller holds reference to Model and View layer
     private void Init()
     {
-        Assert.IsNotNull(model, "Model layer does not exist")
-        Assert.IsNotNull(view, "View Layer does not exist")
+        Assert.IsNotNull(model, "Model layer does not exist");
+        Assert.IsNotNull(view, "View Layer does not exist");
     }
 
     /// <summary>
