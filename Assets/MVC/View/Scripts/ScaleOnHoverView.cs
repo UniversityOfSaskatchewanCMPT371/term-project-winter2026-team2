@@ -22,6 +22,39 @@ public class ScaleOnHoverView : IScaleOnHoverView
         Assert.IsNotNull(controller, "Controller cannot be null");
     }
 
+
+    /// <summary>
+    /// Called when hover enters 
+    /// </summary>
+    /// Pre-condition: 
+    ///     -   Controller must exist
+    /// Post-condition: 
+    ///     -   Hover Enter event is processed
+    public void OnHoverEnter()
+    {
+        if (controller != null)
+        {
+            controller.OnHoverEnter();
+        }
+    }
+
+    /// <summary>
+    /// Called when hover exits 
+    /// </summary>
+    /// Pre-condition: 
+    ///     -   Controller must exist
+    /// Post-condition: 
+    ///     -   Hover Exit event is processed
+    public void OnHoverExit()
+    {
+        if (controller != null)
+        {
+            controller.OnHoverExit();
+        }
+    }
+
+
+
     /// <summary>
     /// Updates the scaling of linkedObjects
     /// </summary>
