@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d38fb1463c5c804b8847c20e8873623, type: 3}
-  m_Name: XRInteractionEditorSettings
+  m_Script: {fileID: 11500000, guid: c76bebe14424446cca62c6e29db5054f, type: 3}
+  m_Name: SampleSettings
   m_EditorClassIdentifier: 
-  m_InputReaderPropertyDrawerMode: 0
+  m_RequiresItem: 0
+  m_RuntimeToggle: 1
