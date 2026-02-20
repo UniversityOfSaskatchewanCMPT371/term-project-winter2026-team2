@@ -14,7 +14,7 @@ public interface IRoomModel
     /// DATA SECTION
 
     /// <summary>
-    /// Unique identifier of this room.
+    /// Getter/Setter for this room's unique id.
     /// </summary>
     int Id { 
         /// <summary>
@@ -30,10 +30,21 @@ public interface IRoomModel
         /// Current id of the room.
         /// </returns>
         get;
+        /// <summary>
+        /// Modify the current value of this room's id.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value is not the same as previous one.
+        /// - Value is not null.
+        /// Postcondition:
+        /// - Value of the room's unique id is modified.
+        /// </remarks>
+        set;
         }
 
     /// <summary>
-    /// Name of this room.
+    /// Getters/Setters for this room's name.
     /// </summary>
     string Name {
         /// <summary>
@@ -49,6 +60,17 @@ public interface IRoomModel
         /// Current name of the room.
         /// </returns>
         get;
+        /// <summary>
+        /// Modify the current value of this room's name.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value is not the same as previous one.
+        /// - Value is not null.
+        /// Postcondition:
+        /// - Value of the room's name is modified.
+        /// </remarks>
+        set;
         }
 
     /// <summary>
