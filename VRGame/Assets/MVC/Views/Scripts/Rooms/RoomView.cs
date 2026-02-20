@@ -26,6 +26,11 @@ public class RoomView : View, IRoomView, InternalRoomView
         set => roomController = value;
     }
 
+    public void InvokeOnRoomComplete()
+    {
+       throw new NotImplementedException(); 
+    }
+
     public void Init()
     {
         throw new NotImplementedException();

@@ -90,6 +90,30 @@ public interface IRoomController
     void HandleCompletion();
 
     /// <summary>
+    /// Handles the logic behind changing the state of minigame
+    /// completion in the model layer.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - minigame is not complete
+    /// Postconditions:
+    /// - The room's minigame completion state is updated.
+    /// </remarks>
+    void HandleCompleteMinigame();
+
+    /// <summary>
+    /// Handles the logic behind changing the state of educational
+    /// dialogue in the model layer.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Educational dialogue is not complete
+    /// Postconditions:
+    /// - The room's educational dialogue completion state is updated.
+    /// </remarks>
+    void HandleCompleteEducationalDialogue();
+
+    /// <summary>
     /// Initializes this component. Called by the game within the MonoBehaviour.
     /// </summary>
     /// <remarks>
@@ -97,6 +121,7 @@ public interface IRoomController
     /// - Reference to view and model layers must be set.
     /// Postcondtions:
     /// - Asserts that the references to the view and model layers are valid.
+    /// - Initializes the model layer.
     /// </remarks>
     void Init();
 }
