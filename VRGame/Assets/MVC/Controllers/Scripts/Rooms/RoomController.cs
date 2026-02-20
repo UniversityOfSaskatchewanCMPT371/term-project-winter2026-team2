@@ -169,13 +169,13 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         {
             Debug.LogError("Missing field roomView.");
         }
-        Assert.IsNotNull(RoomView, "Field roomView cannot be null.");
+        Debug.Assert(RoomView != null, "Field roomView cannot be null.");
 
         if (RoomModel == null)
         {
-            Debug.LogError("Misising field roomModel.");
+            Debug.LogError("Missing field roomModel.");
         }
-        Assert.IsNotNull(RoomModel, "Field roomModel cannot be null.");
+        Debug.Assert(RoomModel != null, "Field roomModel cannot be null.");
     }
 
     /// <summary>

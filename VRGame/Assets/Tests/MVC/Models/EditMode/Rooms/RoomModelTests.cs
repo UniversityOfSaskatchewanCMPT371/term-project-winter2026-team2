@@ -56,7 +56,7 @@ public class RoomModelTests
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // verify name values
-        Assert.IsNull(roomModel.Name, $"roomModel.Name cannot be Null. Got '{roomModel.Name}'");
+        Assert.IsNotNull(roomModel.Name, $"roomModel.Name cannot be Null. Got '{roomModel.Name}'");
 
         // free up memory
         Object.DestroyImmediate(go);
