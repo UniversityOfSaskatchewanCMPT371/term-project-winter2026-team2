@@ -14,6 +14,11 @@ public class RoomView : View, IRoomView, InternalRoomView
     private Controller roomController;
 
     /// <summary>
+    /// Used to mock controller layer.
+    /// </summary>
+    private IRoomController roomControllerMock;
+
+    /// <summary>
     /// Called by controller when the minigame and 
     /// educational dialogues are completed.
     /// </summary>
@@ -24,38 +29,22 @@ public class RoomView : View, IRoomView, InternalRoomView
     /// </summary>
     public IRoomController RoomController 
     { 
-        /// <summary>
-        /// Access the controller layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns the reference to the controller layer.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of the minigame.
-        /// </returns>
-        get => (IRoomController)roomController;
-        /// <summary>
-        /// Modify the reference to the controller layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Controller layer cannot be null.
-        /// Postconditions:
-        /// - None.
-        /// </remarks>
+        get
+        {
+            if (roomController == null)
+            {
+                return roomControllerMock;
+            }
+            return (IRoomController)roomController;
+        }
+
         set
         {
-            if (value == null)
+            if (value is Controller controllerLayer)
             {
-                throw new NoNullAllowedException();
-            } else if (value.GetType() != typeof(View))
-            {
-                throw new InvalidCastException();
+                roomController = controllerLayer;
             }
-            roomController = (Controller)value;
+            roomControllerMock = value;
         }
     }
 
@@ -143,5 +132,14 @@ public class RoomView : View, IRoomView, InternalRoomView
         {
             
         }
+    }
+
+    /// <summary>
+    /// Start after all Awake() calls have finished.
+    /// Provided/Built-in by Unity.
+    /// </summary>
+    void Start()
+    {
+        Init();
     }
 }

@@ -98,6 +98,8 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
             throw new MissingFieldException("Field roomModel is missing.");
         }
         RoomModel.MinigameCompleted = true;
+
+        HandleCompletion();
     }
 
     /// <summary>
@@ -118,6 +120,8 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
             throw new MissingFieldException("Field roomModel is missing.");
         }
         RoomModel.EducationalDialogueCompleted = true;
+
+        HandleCompletion();
     }
 
     /// <summary>
@@ -158,7 +162,6 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// - Reference to view and model layers must be set.
     /// Postcondtions:
     /// - Asserts that the references to the view and model layers are valid.
-    /// - Initializes the model layer.
     /// </remarks>
     public void Init()
     {
@@ -173,7 +176,14 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
             Debug.LogError("Misising field roomModel.");
         }
         Assert.IsNotNull(RoomModel, "Field roomModel cannot be null.");
+    }
 
-        RoomModel.Init();
+    /// <summary>
+    /// Start after all Awake() calls have finished.
+    /// Provided/Built-in by Unity.
+    /// </summary>
+    void Start()
+    {
+        Init();
     }
 }

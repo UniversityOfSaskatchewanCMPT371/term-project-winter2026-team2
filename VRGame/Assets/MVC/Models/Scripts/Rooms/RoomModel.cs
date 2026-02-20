@@ -1,9 +1,16 @@
 using System;
+using System.Collections.Generic;
+using Codice.Client.BaseCommands.BranchExplorer;
 using NUnit.Framework;
 using UnityEditor.PackageManager;
 using UnityEngine;
 public class RoomModel : Model, IRoomModel, InternalRoomModel
 {
+    /// <summary>
+    /// Dictionary of rooms already created.
+    /// </summary>
+    private static Dictionary<int, RoomModel> roomLookUp = new Dictionary<int, RoomModel>();
+
     /// <summary>
     /// Unique identifier for this room.
     /// </summary>
@@ -56,14 +63,7 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         /// Postcondition:
         /// - Value of the room's unique id is modified.
         /// </remarks>
-        set
-        {
-            if (value == roomId)
-            {
-                throw new InvalidOperationException("Value cannot be the same as the current roomId.");
-            }
-            roomId = value;
-        }
+        set => roomId = value;
     }
 
     /// <summary>
@@ -187,37 +187,58 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// - Serialized fields must be set, or default.
     /// Postcondtions:
     /// - Asserts that all Serialized fields are in a valid.
+    /// - Adds this room model to the roomLookup dictionary.
     /// </remarks>
     public void Init()
     {
-        if (roomName != "Hub")
-        {
-            Debug.LogWarning("Field roomName 'Hub' is reserved.");
-        }
-        Assert.False(roomName == "Hub", "Field roomId must be set to a different name.");
-
-        if (roomId == 0 && roomName != "Hub")
-        {
-            Debug.LogWarning("Field roomId '0' is reserved for Hub room.");
-        }
-        Assert.False(roomId == 0 && roomName != "Hub","Field roomId must be set to a different number.");
-
         if (roomName.Trim() == "")
         {
-            Debug.LogWarning("Field roomName cannot be whitespace.");
+            Debug.LogError("Field roomName cannot be whitespace.");
         }
-        Assert.False(roomName.Trim() == "", "Field roomName must be set to a different name.");
+        Debug.Assert(roomName.Trim() != "", "Field roomName must be set to a different name.");
 
         if (minigameCompleted)
         {
-            Debug.LogWarning("Field minigameCompleted must start as false.");
+            Debug.LogError("Field minigameCompleted must start as false.");
         }
-        Assert.False(minigameCompleted, "Field minigameCompleted must be set to false.");
+        Debug.Assert(minigameCompleted == false, "Field minigameCompleted must be set to false.");
 
         if (eductionalDialogueCompleted)
         {
-            Debug.LogWarning("Field eductionalDialogueCompleted must start as false.");
+            Debug.LogError("Field eductionalDialogueCompleted must start as false.");
         }
-        Assert.False(eductionalDialogueCompleted, "Field eductionalDialogueCompleted must be set to false.");
+        Debug.Assert(eductionalDialogueCompleted == false, "Field eductionalDialogueCompleted must be set to false.");
+
+        bool isKeyTaken = roomLookUp.ContainsKey(Id);
+        if (isKeyTaken)
+        {
+            Debug.LogError("Field roomId is already taken.");
+        } else
+        {
+            roomLookUp.Add(roomId,this);
+        }
+        Debug.Assert(isKeyTaken == false, "Field roomId must be set to a different id.");
+    }
+
+    /// <summary>
+    /// Start after all Awake() calls have finished.
+    /// Provided/Built-in by Unity.
+    /// </summary>
+    void Start()
+    {
+        Init();
+    }
+
+    /// <summary>
+    /// Called when the game object this component is
+    /// attached to is destroyed.
+    /// Provided/Built-in by Unity.
+    /// </summary>
+    void OnDestroy()
+    {
+        if (roomLookUp.ContainsKey(Id))
+        {
+            roomLookUp.Remove(Id);
+        }
     }
 }
