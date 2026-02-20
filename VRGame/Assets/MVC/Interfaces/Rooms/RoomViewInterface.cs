@@ -10,10 +10,9 @@ public interface InternalRoomView
     /// DATA SECTION
     
     /// <summary>
-    /// Internal access to the controller layer, 
-    /// only accessed via assembly reference to RoomController.
+    /// Access to the controller layer, 
     /// </summary>
-    public Controller RoomController{
+    public IRoomController RoomController{
         /// <summary>
         /// Access the controller layer of this room.
         /// </summary>
