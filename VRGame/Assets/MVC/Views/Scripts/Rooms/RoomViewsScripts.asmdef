@@ -9,9 +9,9 @@
         "Unity.InputSystem",
         "Unity.Mathematics",
         "Unity.TextMeshPro",
-        "RoomInterface",
         "ViewScripts",
-        "ControllerScripts"
+        "ControllerScripts",
+        "AllInterfaces"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

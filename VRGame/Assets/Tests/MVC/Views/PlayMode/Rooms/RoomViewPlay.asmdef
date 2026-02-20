@@ -5,11 +5,11 @@
         "UnityEditor.TestRunner",
         "RoomControllerScripts",
         "RoomViewsScripts",
-        "RoomInterface",
         "RoomModelScripts",
         "ViewScripts",
         "ControllerScripts",
         "ModelScripts",
+        "AllInterfaces",
         "UnityEngine.TestRunner"
     ],
     "includePlatforms": [
