@@ -197,13 +197,4 @@ public class RoomModelTests
         // free up memory
         Object.DestroyImmediate(go);
     }
-
-    /*
-    Not needed because Model Layer does not interact with Controller and View Layer.
-    [UnityTest]
-    public IEnumerator PlayModeTest()
-    {
-        yield return null;
-    }
-    */
 }

@@ -1,17 +1,21 @@
 {
-    "name": "RoomViewAssembly",
+    "name": "RoomControllerPlay",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "RoomControllerScripts",
+        "RoomModelScripts",
         "RoomViewsScripts",
         "RoomInterface",
-        "RoomModelScripts",
-        "ViewScripts",
-        "ControllerScripts"
+        "ControllerScripts",
+        "ModelScripts",
+        "ViewScripts"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Android",
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,

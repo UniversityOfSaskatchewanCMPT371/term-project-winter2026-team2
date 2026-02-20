@@ -30,7 +30,7 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
         roomController.RoomModel = roomModel;
 
-        // initialize the component.
+        // initialize the component
         roomController.Init();
 
         // free up memory
@@ -41,7 +41,7 @@ public class RoomControllerTests
     /// Test calling HandleCompleteEducationalDialogue() with missing model layer
     /// </summary>
     [Test]
-    public void HandleCompleteEducationalDialogueMissingLayers()
+    public void HandleCompleteEducationalDialogueMissingLayersRef()
     {
         // test setup
         GameObject go = new GameObject();
@@ -52,7 +52,7 @@ public class RoomControllerTests
 
         roomController.RoomView = roomView;
 
-        // test if it will throw an exception
+        // should throw since there's no valid references to model layer
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompleteEducationalDialogue(), "Expected an exception, but no exception was thrown on missing layers.");
 
         // free up memory
@@ -63,7 +63,7 @@ public class RoomControllerTests
     /// Test calling HandleCompleteEducationalDialogue() with model layer
     /// </summary>
     [Test]
-    public void HandleCompleteEducationalDialogueValidLayers()
+    public void HandleCompleteEducationalDialogueValidLayersRef()
     {
         // test setup
         GameObject go = new GameObject();
@@ -76,7 +76,7 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
         roomController.RoomModel = roomModel;
 
-        // test if it will not throw an exception
+        // should not throw since there's valid references to view and model layer
         Assert.DoesNotThrow(() => roomController.HandleCompleteEducationalDialogue(), "Expected no exceptions, but an exception was thrown on valid layers.");
 
         // free up memory
@@ -87,7 +87,7 @@ public class RoomControllerTests
     /// Test calling HandleCompleteMinigame() with missing model layer
     /// </summary>
     [Test]
-    public void HandleCompleteMinigameMissingLayers()
+    public void HandleCompleteMinigameMissingLayersRef()
     {
         // test setup
         GameObject go = new GameObject();
@@ -98,7 +98,7 @@ public class RoomControllerTests
 
         roomController.RoomView = roomView;
 
-        // test if it will throw an exception
+        // should throw since there's no valid references to model layer
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompleteMinigame(), "Expected an exception, but no exception was thrown on missing layers.");
 
         // free up memory
@@ -109,7 +109,7 @@ public class RoomControllerTests
     /// Test calling HandleCompleteMinigame() with model layer
     /// </summary>
     [Test]
-    public void HandleCompleteMinigameValidLayers()
+    public void HandleCompleteMinigameValidLayersRef()
     {
         // test setup
         GameObject go = new GameObject();
@@ -122,7 +122,7 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
         roomController.RoomModel = roomModel;
 
-        // test if it will not throw an exception
+        // should not throw since there's valid references to view and model layer
         Assert.DoesNotThrow(() => roomController.HandleCompleteMinigame(), "Expected no exceptions, but an exception was thrown on valid layers.");
 
         // free up memory
@@ -133,7 +133,7 @@ public class RoomControllerTests
     /// Test calling HandleCompleteMinigame() with model/view layer
     /// </summary>
     [Test]
-    public void HandleCompletionValidLayers()
+    public void HandleCompletionValidLayersRef()
     {
         // test setup
         GameObject go = new GameObject();
@@ -146,7 +146,7 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
         roomController.RoomModel = roomModel;
 
-        // test if it will not throw an exception
+        // should not throw since there's valid references to view and model layer
         Assert.DoesNotThrow(() => roomController.HandleCompletion(), "Expected no exceptions, but an exceptionw as thrown on valid layers.");
 
         // free up memory
@@ -157,7 +157,7 @@ public class RoomControllerTests
     /// Test calling HandleCompletion() with missing model/view layer
     /// </summary>
     [Test]
-    public void HandleCompletionMissingLayers()
+    public void HandleCompletionMissingLayersRef()
     {
         // test setup
         GameObject go = new GameObject();
@@ -166,7 +166,7 @@ public class RoomControllerTests
         // confirm that roomController is not null
         Assert.NotNull(roomController, $"roomController cannot be null. Got {roomController}");
 
-        // test if it will throw an exception
+        // should throw since there is no valid references to view and model layer
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
 
         // free up memory
@@ -189,22 +189,16 @@ public class RoomControllerTests
 
         roomController.RoomView = roomView;
 
-        // test if it will throw an exceptions on just the model layer missing
+        // should throw since there is no valid reference to model
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
 
         roomController.RoomView = null;
         roomController.RoomModel = roomModel;
         
-        // test if it will throw an exceptions on just the view layer missing
+        // should throw since there is no valid reference to view
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
 
         // free up memory
         UnityEngine.Object.DestroyImmediate(go);
-    }
-
-    [UnityTest]
-    public IEnumerator Initialization()
-    {
-        yield return null;
     }
 }
