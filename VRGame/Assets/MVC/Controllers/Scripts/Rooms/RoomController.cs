@@ -1,4 +1,7 @@
+using System;
 using System.Data;
+using System.Reflection;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -11,82 +14,68 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     private View roomView;
 
     /// <summary>
+    /// Used to mock view layer.
+    /// </summary>
+    private IRoomView roomViewMock;
+
+    /// <summary>
     /// Reference to the model layer.
     /// </summary>
     [SerializeField]
     private Model roomModel;
 
     /// <summary>
+    /// Used to mock model layer.
+    /// </summary>
+    private IRoomModel roomModelMock;
+
+    /// <summary>
     /// Getters/Setters of the view layer.
     /// </summary>
-    public View RoomView
-    { 
-        /// <summary>
-        /// Access the view layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns the reference to the view layer.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of the minigame.
-        /// </returns>
-        get => roomView;
-        /// <summary>
-        /// Modify the reference to the view layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - View layer cannot be null.
-        /// Postconditions:
-        /// - None.
-        /// </remarks>
+    public IRoomView RoomView
+    {
+
+        get
+        {
+            if (roomView == null)
+            {
+                return roomViewMock;
+            }
+            return (IRoomView)roomView;
+        }
+
         set
         {
-            if (value == null)
+            if (value is View viewLayer)
             {
-                throw new NoNullAllowedException();
+                roomView = viewLayer;
             }
-            roomView = value;
+            roomViewMock = value;
         }
     }
 
     /// <summary>
     /// Getters/Setters of the model layer.
     /// </summary>
-    public Model RoomModel
+    public IRoomModel RoomModel
     { 
-        /// <summary>
-        /// Access the model layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns the reference to the model layer.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of the minigame.
-        /// </returns>
-        get => roomModel; 
-        /// <summary>
-        /// Modify the reference to the model layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Model layer cannot be null.
-        /// Postconditions:
-        /// - None.
-        /// </remarks>
+
+        get
+        {
+            if (roomModel == null)
+            {
+                return roomModelMock;
+            }
+            return (IRoomModel)roomModel;
+        }
+
         set
         {
-            if (value == null)
+            if (value is Model modelLayer)
             {
-                throw new NoNullAllowedException();
+                roomModel = modelLayer;
             }
-            roomModel = value;
+            roomModelMock = value;
         }
     }
 
@@ -96,13 +85,19 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - minigame is not complete
+    /// - roomModel is not null.
+    /// - minigame is not complete.
     /// Postconditions:
     /// - The room's minigame completion state is updated.
     /// </remarks>
+    /// <throws>
     public void HandleCompleteMinigame()
     {
-        ((IRoomModel)RoomModel).MinigameCompleted = true;
+        if (RoomModel == null)
+        {
+            throw new MissingFieldException("Field roomModel is missing.");
+        }
+        RoomModel.MinigameCompleted = true;
     }
 
     /// <summary>
@@ -111,13 +106,18 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </summary>
     /// <remarks>
     /// Preconditions:
+    /// - roomModel is not null.
     /// - Educational dialogue is not complete
     /// Postconditions:
     /// - The room's educational dialogue completion state is updated.
     /// </remarks>
     public void HandleCompleteEducationalDialogue()
     {
-        ((IRoomModel)RoomModel).EducationalDialogueCompleted = true;
+        if (RoomModel == null)
+        {
+            throw new MissingFieldException("Field roomModel is missing.");
+        }
+        RoomModel.EducationalDialogueCompleted = true;
     }
 
     /// <summary>
@@ -125,6 +125,8 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </summary>
     /// <remarks>
     /// Preconditions:
+    /// - roomModel is not null.
+    /// - roomView is not null.
     /// - The room is not previously completed.
     /// - All educational dialogue completed.
     /// - Minigame is completed.
@@ -134,9 +136,17 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </remarks>
     public void HandleCompletion()
     {
-        if (((IRoomModel)RoomModel).IsComplete())
+        if (RoomModel == null)
         {
-            ((IRoomView)RoomView).InvokeOnRoomComplete();
+            throw new MissingFieldException("Field roomModel is missing.");
+        } else if (RoomView == null)
+        {
+            throw new MissingFieldException("Field roomView is missing,");
+        }
+
+        if (RoomModel.IsComplete())
+        {
+            RoomView.InvokeOnRoomComplete();
         }
     }
 
@@ -152,18 +162,18 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </remarks>
     public void Init()
     {
-        if (roomView == null)
+        if (RoomView == null)
         {
             Debug.LogError("Missing field roomView.");
         }
-        Assert.IsNotNull(roomView, "Field roomView cannot be null.");
+        Assert.IsNotNull(RoomView, "Field roomView cannot be null.");
 
-        if (roomView == null)
+        if (RoomModel == null)
         {
-            Debug.LogError("Misising field roomView.");
+            Debug.LogError("Misising field roomModel.");
         }
-        Assert.IsNotNull(roomModel, "Field roomView cannot be null.");
+        Assert.IsNotNull(RoomModel, "Field roomModel cannot be null.");
 
-        ((IRoomModel)roomModel).Init();
+        RoomModel.Init();
     }
 }
