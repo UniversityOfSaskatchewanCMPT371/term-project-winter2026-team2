@@ -4,8 +4,17 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+/// <summary>
+/// Edit mode tests for the ScaleOnHoverModel class to ensure it initializes and functions correctly in edit mode
+/// </summary>
+
+/// Note: These tests are focused on the initialization and basic functionality of the ScaleOnHoverModel in edit mode
+
 public class SoH_EditTests
 {
+    /// <summary>
+    /// Simple test to check if the ScaleOnHoverModel component can be added to a GameObject without issues
+    /// </summary>
     [Test]
     public void SoH_EditTestsSimplePasses()
     {
@@ -14,6 +23,9 @@ public class SoH_EditTests
         Assert.IsNotNull(soh);
     }
 
+    /// <summary>
+    /// Test to check if the ScaleOnHoverModel initializes correctly with given parameters
+    /// </summary>
     [Test]
     public void SoH_EditTestsInitialization()
     {
@@ -28,8 +40,11 @@ public class SoH_EditTests
         Assert.AreEqual(1, soh.getLinkedObjects().Length);
     }
 
+    /// <summary>
+    /// Test to check if the hover scale multiplier is set correctly during initialization
+    /// </summary>  
     [Test]
-    public void SoH_EditTestsScaleSpeed()
+    public void SoH_EditTestsGetScaleSpeed()
     {
         GameObject go = new GameObject();
         GameObject linkedGo = new GameObject();
