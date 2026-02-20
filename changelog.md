@@ -4,6 +4,13 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [0.1.0] - 2026-02-18
+
+### Added
+
+- Added reusable door prefab, teleportation logic 
+
+
 ## [0.0.2] - 2026-02-18
 
 ### Changed
