@@ -1,6 +1,3 @@
-using System;
-using Castle.Components.DictionaryAdapter.Xml;
-using UnityEngine;
 
 /// <summary>
 /// Default internal interface for room view.

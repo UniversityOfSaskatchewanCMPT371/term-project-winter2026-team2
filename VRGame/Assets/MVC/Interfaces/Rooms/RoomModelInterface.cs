@@ -1,3 +1,4 @@
+
 /// <summary>
 /// Default internal interface for room model.
 /// </summary>

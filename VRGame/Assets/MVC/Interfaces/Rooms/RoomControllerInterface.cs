@@ -1,4 +1,3 @@
-using UnityEngine;
 
 /// <summary>
 /// Default internal interface for room controller.
