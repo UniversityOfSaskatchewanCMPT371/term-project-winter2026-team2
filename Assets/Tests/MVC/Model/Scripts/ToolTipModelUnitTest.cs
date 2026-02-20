@@ -123,7 +123,7 @@ public class ToolTipModelUnitTest : MonoBehaviour
         {
             testMethod.Invoke();
             _passedTests++;
-            Debug.Log("PASS:</color> {testName}");
+            Debug.Log("PASS:{testName}");
         }
         catch (System.Exception ex)
         {

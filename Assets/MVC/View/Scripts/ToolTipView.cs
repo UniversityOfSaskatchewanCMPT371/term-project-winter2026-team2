@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class ToolTipView : MonoBehaviour
 {
@@ -9,13 +10,10 @@ public class ToolTipView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (data == null && description == null)
-        {
-            Debug.LogError("ToolTipModel data and description is not assigned in the Unity Editor.");
-            return;
-        }
-        title.SetText(data.title);
-        description.SetText(data.description);
+      Assert.IsNotNull(title, "Title TextMeshProUGUI component is not assigned in the inspector.");
+      Assert.IsNotNull(description, "Description TextMeshProUGUI component is not assigned in the inspector.");
+      title.SetText(data.title);
+      description.SetText(data.description);
         
         
     }
