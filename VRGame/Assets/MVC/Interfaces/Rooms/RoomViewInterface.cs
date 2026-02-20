@@ -46,6 +46,17 @@ public interface InternalRoomView
 public interface IRoomView
 {
     /// METHODS SECTIONS
+    
+    /// <summary>
+    /// Called by the controller layer when the room is complete.
+    /// </summary>
+    /// </remarks>
+    /// Preconditions:
+    /// - The rooms is complete.
+    /// Postconditions:
+    /// - Invoke all listeners.
+    /// </remarks>
+    void InvokeOnRoomComplete();
 
     /// <summary>
     /// Called when all educational dialogues are complete.
