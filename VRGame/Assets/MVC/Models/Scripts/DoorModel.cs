@@ -4,6 +4,9 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
@@ -199,15 +202,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
 
 
 
-    /// <summary>
-    /// Retrieve the destinationDoor associated with this doors targetDoorId
-    /// </summary>
-    /// <returns>DoorModel associated with this door's targetId</returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - static lookup table `doorLookup` must contain door associated with target Id
-    /// Postconditions:
-    /// - target door is returned
+    /// <inheritdoc/>
     public IDoorModel GetTargetDoor()
     {
         if (!doorLookup.ContainsKey(targetDoorId))
@@ -221,49 +216,20 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         return target;
     }
 
-    /// <summary>
-    /// Retrieves this door's teleport position in world space
-    /// </summary>
-    /// <returns>This door's teleport position in world space </returns>
-    /// <remarks>
-    /// Preconditions:
-    ///  - none
-    /// Postconditions:
-    /// - This doors teleport position in world space in returned
-    /// </remarks>
+    /// <inheritdoc/>
     public Vector3 GetTeleportPosition()
     {
         return transform.position + teleportOffset;
     }
 
-    /// <summary>
-    /// Retrieves this door's teleport rotation in world space
-    /// </summary>
-    /// <returns>The door's teleport rotation in worldspace</returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - Door's teleport rotation in worldspace is returned
-    /// </remarks>
+    /// <inheritdoc/>
     public Quaternion GetTeleportRotation()
     {
         return Quaternion.LookRotation(transform.forward, Vector3.up);
     }
 
 
-    /// <summary>
-    /// Initializes this doorModel. Called by the game within the MonoBehaviour
-    /// function `Start()` (exectures the frame the script is enables) - Separated
-    /// from `Start()` to make unit testing easier
-    /// </summary>
-    /// <remarks>
-    /// Precondtions:
-    /// - All instance variables of DoorModel must be set. Another doorModel with
-    /// the same Id must not already exist
-    /// Postconditions:
-    /// - Static lookup table for all DoorModels allocated if doesn't already exits.
-    /// This door is added to it.
+    /// <inheritdoc/>
     public void Init()
     {
         // check fields to see if they have proper values
@@ -305,7 +271,7 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// - None
     /// Postconditions:
     /// - doorLookup is cleared.
-    public void ResetDoorLookup()
+    internal void ResetDoorLookup()
     {
         doorLookup.Clear();
         Debug.Log("doorLookup dictionary cleared");

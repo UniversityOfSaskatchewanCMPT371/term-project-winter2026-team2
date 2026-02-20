@@ -173,14 +173,4 @@ public interface IDoorModel {
     /// - Static lookup table for all DoorModels allocated if doesn't already exits.
     /// This door is added to it.
     public void Init();
-
-    /// <summary>
-    /// Resets the static lookup table of DoorModels. Used for testing purposes
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - doorLookup is cleared.
-    public void ResetDoorLookup();
 }

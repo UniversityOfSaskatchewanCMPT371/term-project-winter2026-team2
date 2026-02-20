@@ -104,9 +104,7 @@ public class DoorController : MonoBehaviour, IDoorController
     /// </summary>
     private static bool triggerDebounce = false;
 
-    /// <summary>
-    /// Public readonly accessor for triggerDebounce
-    /// </summary>
+    /// <inheritdoc/>
     public bool TriggerDebounce
     {
         /// <summary>
@@ -124,17 +122,7 @@ public class DoorController : MonoBehaviour, IDoorController
     }
 
 
-    /// <summary>
-    /// Initializes the DoorController. Called by the game within the
-    /// MonoBehaviour function `Start()` (executes the frame a script is enabled)
-    /// - Separated from `Start()`, as this makes unit testing easier.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - `doorModel` and `sceneChangerController` instance vars must be non-null
-    /// PostConditions:
-    /// - Checked to make sure DoorController will be able to function properly, has values set for instance variables
-    /// </remarks>
+    /// <inheritdoc/>
     public void Init()
     {
         // If field was set in inspector window, set the internal values to that
@@ -163,17 +151,7 @@ public class DoorController : MonoBehaviour, IDoorController
         Debug.Log("DoorController initialized");
     }
 
-    /// <summary>
-    /// Handles logic for player entering a door
-    /// </summary>
-    /// <param name="playerController"> Controller portion of player module </param>
-    /// <remarks>
-    /// Preconditions:
-    /// - playerController must be non-null
-    /// PostConditions:
-    /// - Changes to state made in argument, `teleportPlayerTo` called on playerController,
-    /// moving them to position of `doorModel`s target door
-    /// </remarks>
+    /// <inheritdoc/>
     public void OnPlayerEnter(IPlayerController playerController)
     {
         if (playerController == null)

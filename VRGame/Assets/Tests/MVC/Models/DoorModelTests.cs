@@ -15,7 +15,7 @@ public class DoorModelTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
         door.Init();
         Assert.NotNull(door);
@@ -27,7 +27,7 @@ public class DoorModelTests
     public void SetDoorId()
     {
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
 
         door.DoorId = 1;
         door.Init();
@@ -43,8 +43,8 @@ public class DoorModelTests
     {
         GameObject go = new GameObject();
 
-        IDoorModel door1 = go.AddComponent<DoorModel>();
-        IDoorModel door2 = go.AddComponent<DoorModel>();
+        DoorModel door1 = go.AddComponent<DoorModel>();
+        DoorModel door2 = go.AddComponent<DoorModel>();
         door1.DoorId = 1;
         door2.DoorId = 2;
         door1.TargetDoorId = 2;
@@ -66,7 +66,7 @@ public class DoorModelTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
         door.Init();
 
@@ -87,8 +87,8 @@ public class DoorModelTests
     {
         GameObject go = new GameObject();
 
-        IDoorModel door1 = go.AddComponent<DoorModel>();
-        IDoorModel door2 = go.AddComponent<DoorModel>();
+        DoorModel door1 = go.AddComponent<DoorModel>();
+        DoorModel door2 = go.AddComponent<DoorModel>();
         door1.DoorId = 1;
         door2.DoorId = 2;
         door1.TargetDoorId = 2;
@@ -110,7 +110,7 @@ public class DoorModelTests
     {
         GameObject go = new GameObject();
 
-        IDoorModel door1 = go.AddComponent<DoorModel>();
+        DoorModel door1 = go.AddComponent<DoorModel>();
         door1.DoorId = 1;
         door1.TargetDoorId = 2;
 
@@ -134,7 +134,7 @@ public class DoorModelTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
         door.DoorId = 0;
         door.TargetDoorId = 1;
@@ -151,7 +151,7 @@ public class DoorModelTests
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
 
         // this test should fire assertion. Tell unity to ignore associated error message
@@ -169,7 +169,7 @@ public class DoorModelTests
     public void GetTeleportPosition()
     {
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
 
         door.Init();
@@ -184,7 +184,7 @@ public class DoorModelTests
     public void GetTeleportRotation()
     {
         GameObject go = new GameObject();
-        IDoorModel door = go.AddComponent<DoorModel>();
+        DoorModel door = go.AddComponent<DoorModel>();
         // ensure doormodel instantiated correctly
 
         door.Init();

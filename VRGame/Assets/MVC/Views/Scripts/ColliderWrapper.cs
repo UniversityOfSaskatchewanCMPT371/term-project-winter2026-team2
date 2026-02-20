@@ -29,33 +29,14 @@ public class ColliderWrapper : IColliderWrapper
         this.collider = collider;
     }
 
-    /// <summary>
-    /// Retrieve `IPlayerController` component if present in parent collider
-    /// </summary>
-    /// <returns>IPlayerController component present in parent collider</returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - IplayerController component in collider's parent returned if present, NULL otherwise
-    /// </remarks>
+    /// <inheritdoc/>
     public IPlayerController GetPlayerFromParent()
     {
         return collider.GetComponentInParent<IPlayerController>();
 
     }
 
-    /// <summary>
-    /// Compares the collider's gameObject.tag to the input tag
-    /// </summary>
-    /// <param name="tag">tag to compare the collider's gameObject.tag to</param>
-    /// <returns>true if the same, false otherwise</returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - Either true or false returned depending on whether tags strings are the same
-    /// </remarks>
+    /// <inheritdoc/>
     public bool CompareGameObjectTag(String tag)
     {
         return collider.gameObject.CompareTag(tag);

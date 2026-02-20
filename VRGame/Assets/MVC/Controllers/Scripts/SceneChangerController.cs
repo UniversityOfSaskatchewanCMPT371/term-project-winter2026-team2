@@ -59,9 +59,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// </summary>
     private static bool loadDebounce;
 
-    /// <summary>
-    /// Public readonly accessor for loadDebounce
-    /// </summary>
+    /// <inheritdoc/>
     public bool LoadDebounce
     {
         /// <summary>
@@ -92,19 +90,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         loadDebounce = false;
     }
 
-    /// <summary>
-    /// Loads a scene based on the the key in the collection held by SceneChangerModel
-    /// </summary>
-    /// <param name="sceneKey">key, should be associated with value in SceneEnum </param>
-    /// <returns>The scene to loead based on the provided key</returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - sceneKey must exist in SceneEnum
-    /// Postconditions:
-    /// - loadDebounce will be set to true while scene is asynchronously loaded, disallowing
-    /// multiple scenes to be loaded at a time. Returns LoadScene asyncOperation within a wrapper class made
-    /// for ease of unit testing.
-    /// </remarks>
+    /// <inheritdoc/>
     public IAsyncOperationWrapper LoadScene(int sceneKey)
     {
         if (loadDebounce)
@@ -131,17 +117,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     }
 
 
-    /// <summary>
-    /// Initializes the SceneChangerController. Called by the game within the MonoBehavior function
-    /// `Start()` (executes once when the game starts) - Separated from `Start()` as this makes unit
-    /// testing easier. Important that this is called in Start() instead of Awake(), as it depends on other components already existing
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - A sceneChangerController must not already exist.
-    /// Postconditions: 
-    /// If a SceneChangerModel doesn't exist, a single instance of it is created
-    /// </remarks>
+    /// <inheritdoc/>
     public void Init()
     {
 
@@ -163,14 +139,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         Debug.Log("SceneChangerController initialized");
     }
 
-    /// <summary>
-    /// Resets static singleton instance of Scenechanger. Used for unit testing purposes
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - Static instance of SceneChangerController set to null
+    /// <inheritdoc/>
     public void ResetInstance()
     {
         instance = null;
