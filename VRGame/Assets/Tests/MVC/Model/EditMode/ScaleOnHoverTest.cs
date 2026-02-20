@@ -6,15 +6,39 @@ using UnityEngine.TestTools;
 
 public class SoH_EditTests
 {
-    // A Test behaves as an ordinary method
     [Test]
     public void SoH_EditTestsSimplePasses()
     {
-        // Use the Assert class to test conditions
         GameObject go = new GameObject();
-        ScaleOnHover soh = go.AddComponent<ScaleOnHover>();
-        soh.init();
+        ScaleOnHoverModel soh = go.AddComponent<ScaleOnHoverModel>();
         Assert.IsNotNull(soh);
     }
 
+    [Test]
+    public void SoH_EditTestsInitialization()
+    {
+        GameObject go = new GameObject();
+        GameObject linkedGo = new GameObject();
+        ScaleOnHoverModel soh = go.AddComponent<ScaleOnHoverModel>();
+        
+        Transform[] linkedObjects = new Transform[] { linkedGo.transform };
+        soh.Initialize(linkedObjects, 1.25f, 10f);
+        
+        Assert.IsNotNull(soh.getLinkedObjects());
+        Assert.AreEqual(1, soh.getLinkedObjects().Length);
+    }
+
+    [Test]
+    public void SoH_EditTestsScaleSpeed()
+    {
+        GameObject go = new GameObject();
+        GameObject linkedGo = new GameObject();
+        ScaleOnHoverModel soh = go.AddComponent<ScaleOnHoverModel>();
+        
+        Transform[] linkedObjects = new Transform[] { linkedGo.transform };
+        float expectedScaleSpeed = 10f;
+        soh.Initialize(linkedObjects, 1.25f, expectedScaleSpeed);
+        
+        Assert.AreEqual(expectedScaleSpeed, soh.getScaleSpeed());
+    }
 }
