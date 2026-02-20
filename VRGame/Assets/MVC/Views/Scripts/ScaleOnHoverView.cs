@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// View class updates the scale of the linkedObjects 
@@ -17,6 +18,43 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     private void Start()
     {
         Init();
+        SetupXREvents();
+    }
+
+    /// <summary>
+    /// Setup XR interaction events for ray interactor hover detection
+    /// </summary>
+    private void SetupXREvents()
+    {
+        var xrInteractable = GetComponent<XRBaseInteractable>();
+        if (xrInteractable != null)
+        {
+            xrInteractable.hoverEntered.AddListener(OnXRHoverEnter);
+            xrInteractable.hoverExited.AddListener(OnXRHoverExit);
+            Debug.Log($"XR hover events connected for {gameObject.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"No XRBaseInteractable found on {gameObject.name}. Ray interactor hover won't work!");
+        }
+    }
+
+    /// <summary>
+    /// XR hover enter event handler - called when ray interactor hovers over object
+    /// </summary>
+    private void OnXRHoverEnter(HoverEnterEventArgs args)
+    {
+        Debug.Log($"XR Hover Enter detected on {gameObject.name}");
+        OnHoverEnter();
+    }
+
+    /// <summary>
+    /// XR hover exit event handler - called when ray interactor stops hovering
+    /// </summary>
+    private void OnXRHoverExit(HoverExitEventArgs args)
+    {
+        Debug.Log($"XR Hover Exit detected on {gameObject.name}");
+        OnHoverExit();
     }
 
     /// <summary>
