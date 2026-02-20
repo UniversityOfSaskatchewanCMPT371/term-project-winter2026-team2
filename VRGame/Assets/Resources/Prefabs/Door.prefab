@@ -66,7 +66,7 @@ MonoBehaviour:
   doorId: 1
   targetDoorId: 2
   destinationSceneId: 0
-  teleportOffset: {x: 0, y: 0, z: 0}
+  teleportOffset: {x: 5, y: 0, z: 0}
 --- !u!114 &1187387836709570864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: -8879391126077866720, guid: 04a39706c02616248b4d2c0334a71e3d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: ad26fa25d46242c4fac4997572e012af, type: 2}
     - target: {fileID: -8879391126077866720, guid: 04a39706c02616248b4d2c0334a71e3d, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
