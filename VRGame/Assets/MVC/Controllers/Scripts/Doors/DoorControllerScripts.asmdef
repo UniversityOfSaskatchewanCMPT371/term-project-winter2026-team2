@@ -1,16 +1,9 @@
 {
-    "name": "RoomModelScripts",
+    "name": "DoorControllerScripts",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.SpatialTracking",
-        "UnityEngine.UI",
-        "Unity.XR.CoreUtils",
-        "Unity.XR.Interaction.Toolkit",
-        "Unity.InputSystem",
-        "Unity.Mathematics",
-        "Unity.TextMeshPro",
-        "ModelScripts",
-        "AllInterfaces"
+        "AllInterfaces",
+        "AllHelpers"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

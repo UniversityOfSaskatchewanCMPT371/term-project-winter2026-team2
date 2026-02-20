@@ -1,16 +1,9 @@
 {
-    "name": "RoomModelScripts",
+    "name": "SceneChangerScripts",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.SpatialTracking",
-        "UnityEngine.UI",
-        "Unity.XR.CoreUtils",
-        "Unity.XR.Interaction.Toolkit",
-        "Unity.InputSystem",
-        "Unity.Mathematics",
-        "Unity.TextMeshPro",
-        "ModelScripts",
-        "AllInterfaces"
+        "GUID:e41f50c2b16580745a58c2cbe2d763d7",
+        "GUID:61c577f0483ac2a4298fed7bcb3256ba"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,10 +1,8 @@
 {
-    "name": "RoomInterface",
+    "name": "AllHelpers",
     "rootNamespace": "",
     "references": [
-        "GUID:5a4babe21cdeb8741bd62cfb44efe0c3",
-        "GUID:ba5341cbcf95aaf40a1a80376f922fd5",
-        "GUID:a1987e13ee87e5b4b938f75506a5535a"
+        "GUID:e41f50c2b16580745a58c2cbe2d763d7"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
