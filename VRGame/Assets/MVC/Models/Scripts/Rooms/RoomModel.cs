@@ -15,13 +15,13 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// Unique identifier for this room.
     /// </summary>
     [SerializeField]
-    private int roomId;
+    private int roomId = 0;
 
     /// <summary>
     /// Name of this room.
     /// </summary>
     [SerializeField]
-    private string roomName;
+    private string roomName = "Room";
 
     /// <summary>
     /// Completion state of the minigame in this room.

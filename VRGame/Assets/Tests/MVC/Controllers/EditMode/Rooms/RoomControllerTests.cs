@@ -2,8 +2,6 @@ using NUnit.Framework;
 using UnityEngine;
 using NSubstitute;
 using System;
-using UnityEngine.TestTools;
-using System.Collections;
 
 /// <summary>
 /// Unit tests for RoomController class.

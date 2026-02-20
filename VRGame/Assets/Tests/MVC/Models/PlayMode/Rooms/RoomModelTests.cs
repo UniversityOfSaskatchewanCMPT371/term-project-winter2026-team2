@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.TestTools;
+using System;
 
 /// <summary>
 /// Unit tests for RoomModel class.
@@ -29,7 +29,7 @@ public class RoomModelTests
         yield return null;
 
         // no errors should occur
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
@@ -65,8 +65,8 @@ public class RoomModelTests
         yield return null;
 
         // cleanup
-        Object.DestroyImmediate(go1);
-        Object.DestroyImmediate(go2);
+        UnityEngine.Object.DestroyImmediate(go1);
+        UnityEngine.Object.DestroyImmediate(go2);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public class RoomModelTests
         yield return null;
 
         // cleanup
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class RoomModelTests
         yield return null;
 
         // cleanup
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
@@ -144,6 +144,6 @@ public class RoomModelTests
         yield return null;
 
         // cleanup
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 }

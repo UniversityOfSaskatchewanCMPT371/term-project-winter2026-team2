@@ -2,18 +2,19 @@
     "name": "RoomViewPlay",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "RoomControllerScripts",
         "RoomViewsScripts",
         "RoomInterface",
         "RoomModelScripts",
         "ViewScripts",
-        "ControllerScripts"
+        "ControllerScripts",
+        "ModelScripts",
+        "UnityEngine.TestRunner"
     ],
     "includePlatforms": [
-        "Editor",
-        "Android"
+        "Android",
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

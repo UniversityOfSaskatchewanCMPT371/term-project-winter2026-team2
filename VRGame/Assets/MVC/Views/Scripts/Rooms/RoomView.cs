@@ -1,7 +1,5 @@
 using System;
-using System.Data;
 using NUnit.Framework;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -63,26 +61,6 @@ public class RoomView : View, IRoomView, InternalRoomView
     }
 
     /// <summary>
-    /// Initializes this component. Called by the game within the MonoBehaviour.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Serialized fields must be set, or default.
-    /// - Reference to controller layer must be set.
-    /// Postcondtions:
-    /// - Asserts that all Serialized fields are in a valid.
-    /// - Asserts that the reference to controller layer is valid.
-    /// </remarks>
-    public void Init()
-    {
-        if (RoomController == null)
-        {
-            Debug.LogError("Missing field roomController.");
-        }
-        Assert.IsNotNull(RoomController, "Field roomController cannot be null.");
-    }
-
-    /// <summary>
     /// Called when the minigame is completed.
     /// </summary>
     /// <remarks>
@@ -132,6 +110,26 @@ public class RoomView : View, IRoomView, InternalRoomView
         {
             
         }
+    }
+
+    /// <summary>
+    /// Initializes this component. Called by the game within the MonoBehaviour.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Serialized fields must be set, or default.
+    /// - Reference to controller layer must be set.
+    /// Postcondtions:
+    /// - Asserts that all Serialized fields are in a valid.
+    /// - Asserts that the reference to controller layer is valid.
+    /// </remarks>
+    public void Init()
+    {
+        if (RoomController == null)
+        {
+            Debug.LogError("Missing field roomController.");
+        }
+        Debug.Assert(RoomController != null, "Field roomController cannot be null.");
     }
 
     /// <summary>
