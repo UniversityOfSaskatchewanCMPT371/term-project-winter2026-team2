@@ -1,4 +1,6 @@
+using System;
 using NUnit.Framework;
+using UnityEditor.PackageManager;
 using UnityEngine;
 public class RoomModel : Model, IRoomModel, InternalRoomModel
 {
@@ -27,32 +29,80 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     private bool eductionalDialogueCompleted = false;
 
     /// <summary>
-    /// Access the current id of this room.
+    /// Getter/Setter for this room's unique id.
     /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postcondition:
-    /// - Returns the current id of the room.
-    /// </remarks>
-    /// <returns>
-    /// Current id of the room.
-    /// </returns>
-    public int Id => roomId;
+    public int Id
+    {
+        /// <summary>
+        /// Access the current id of this room.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postcondition:
+        /// - Returns the current id of the room.
+        /// </remarks>
+        /// <returns>
+        /// Current id of the room.
+        /// </returns>
+        get => roomId;
+        /// <summary>
+        /// Modify the current value of this room's id.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value is not the same as previous one
+        /// - Value is not null
+        /// Postcondition:
+        /// - Value of the room's unique id is modified.
+        /// </remarks>
+        set
+        {
+            if (value == roomId)
+            {
+                throw new InvalidOperationException("Value cannot be the same as the current roomId.");
+            }
+            roomId = value;
+        }
+    }
 
     /// <summary>
-    /// Access the current name of this room
+    /// Getters/Setters for this room's name.
     /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postcondition:
-    /// - Returns the current name of the room.
-    /// </remarks>
-    /// <returns>
-    /// Current name of the room.
-    /// </returns>
-    public string Name => roomName;
+    public string Name
+    {
+        /// <summary>
+        /// Access the current name of this room
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postcondition:
+        /// - Returns the current name of the room.
+        /// </remarks>
+        /// <returns>
+        /// Current name of the room.
+        /// </returns>
+        get => roomName;
+        /// <summary>
+        /// Modify the current value of this room's name.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value is not the same as previous one.
+        /// - Value is not null.
+        /// Postcondition:
+        /// - Value of the room's name is modified.
+        /// </remarks>
+        set
+        {
+            if (value == roomName)
+            {
+                throw new InvalidOperationException("Value cannot be the same as the current roomName.");
+            }
+            roomName = value;
+        }
+    }
 
     /// <summary>
     /// Getter/Setter for this room's minigameCompleted state.
