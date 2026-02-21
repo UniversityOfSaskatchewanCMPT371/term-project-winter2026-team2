@@ -81,3 +81,17 @@ in the final `MVC` layer of the directory the corresponding file hierarchy of th
 being tested is mirrored.
 
 <img width="425" height="780" style="width:33%;" alt="TestRunner" src="https://github.com/user-attachments/assets/fde2d642-5162-4120-8182-fe6612666b9a" />
+
+## Development Notes
+
+- NSubstitute is being used for mocking. To mock, you need an interface, so
+  writing interfaces for all classes is not only good style but mandatory
+- Multilevel logging is being done through Unity's `Debug.Log`, `Debug.LogError`
+  , and `Debug.LogWarning`
+- this note will pertain to how multilevel logging is being captured
+- this note will pertain to how test running is being captured
+- Friend assembly is being used to let our compiled test asseblies access
+  internal methods on classes. This is our "testhook" method to keep dev
+  APIs from being exposed to anything but tests
+- We are using <inheritdoc/> at the class / method level to inherit docs from
+  interfaces to remove duplication
