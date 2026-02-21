@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class IPlayerModel : MonoBehaviour
+public interface IPlayerModel
 {
-    String getPlayerName();
+    void Initialize(string name, int id);
+    string getPlayerName();
     int getId();
 }

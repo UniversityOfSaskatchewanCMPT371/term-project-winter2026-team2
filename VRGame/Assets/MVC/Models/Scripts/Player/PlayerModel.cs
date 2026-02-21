@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 /// <summary>
 /// A simple PlayerModel class to represent the player in the MVC architecture
 /// </summary>
-public class PlayerModel : MonoBehaviour
+public class PlayerModel : MonoBehaviour, IPlayerModel
 {
     // Basic player attributes
-    public String playerName;
-    public int id;
+    [SerializeField] private string playerName;
+    [SerializeField] private int id;
 
     ///<summary>
     /// Initializes the player model with a name and an ID
@@ -30,7 +27,7 @@ public class PlayerModel : MonoBehaviour
     ///     -   playerName has been initialized in the constructor
     /// post-condition: 
     ///     -   returns the name of the player
-    public String getPlayerName()
+    public string getPlayerName()
     {
         return playerName;
     }
