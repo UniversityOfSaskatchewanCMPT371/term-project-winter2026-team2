@@ -8,16 +8,19 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     // Basic player attributes
     [SerializeField] private string playerName;
     [SerializeField] private int id;
+    [SerializeField] bool alive = false;
 
     ///<summary>
     /// Initializes the player model with a name and an ID
     /// </summary>
     /// <param name="name">The name of the player</param>
     /// <param name="id">The unique identifier for the player</param>
+    /// <param name="isAlive">Sets player's alive status to be true once initialized</param>
     public void Initialize(string name, int id)
     {
         this.playerName = name;
         this.id = id;
+        this.alive = true;
     }
 
     /// <summary>
@@ -43,4 +46,10 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     {
         return id;
     }
+
+    public bool isAlive()
+    {
+        return alive;
+    }
+
 }
