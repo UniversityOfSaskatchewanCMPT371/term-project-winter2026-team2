@@ -61,9 +61,15 @@ Our processes can be seen in the [wiki](https://github.com/UniversityOfSaskatche
 `./VRGame` is the Unity project. We refrained from putting everything at the top
 level so that we can put our spike prototypes beside the main project.
 
+<img width="1035" height="612" alt="UnityHubView  " src="https://github.com/user-attachments/assets/e069635c-4bec-47a8-85a5-de237d4e5053" />
+
 `./VRGame/Assets/MVC` currently contains each of the Model/View/Controller
 folders but we're going to flatten that between ID2 and ID3.
+
+<img width="528" height="1008" alt="371MVC" src="https://github.com/user-attachments/assets/52667564-a967-455f-96ed-0da64b45c60f" />
 
 `./VRGame/Assets/Tests/{EditMode,PlayMode}/MVC/*` is where our tests live, and
 in the final `MVC` layer of the directory the corresponding file hierarchy of the code
 being tested is mirrored.
+
+<img width="425" height="780" alt="TestRunner" src="https://github.com/user-attachments/assets/fde2d642-5162-4120-8182-fe6612666b9a" />
