@@ -7,8 +7,16 @@ public interface InternalRoomView
     /// DATA SECTION
     
     /// <summary>
-    /// Access to the controller layer, 
+    /// Getter/Setter for the controller layer.
+    /// Returns the real controller if assigned, otherwise returns the mock.
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Getting returns a valid IRoomController (real or mock).
+    /// - Setting updates either the real controller reference or the mock.
+    /// </remarks>
     public IRoomController RoomController{
         /// <summary>
         /// Access the controller layer of this room.
@@ -46,33 +54,35 @@ public interface IRoomView
     /// <summary>
     /// Called by the controller layer when the room is complete.
     /// </summary>
-    /// </remarks>
-    /// Preconditions:
-    /// - The rooms is complete.
-    /// Postconditions:
-    /// - Invoke all listeners.
-    /// </remarks>
-    void InvokeOnRoomComplete();
-
-    /// <summary>
-    /// Called when all educational dialogues are complete.
-    /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - All educational dialogues are completed.
+    /// - The room is complete.
     /// Postconditions:
-    /// - The room's educational dialogue completion state is updated.
+    /// - All listeners subscribed to onRoomCompleted are invoked.
     /// </remarks>
-    void EducationalDialoguesCompleted();
+    void InvokeOnRoomComplete();
 
     /// <summary>
     /// Called when the minigame is completed.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Minigame is completed.
+    /// - RoomController is not null.
+    /// - The minigame has been completed.
     /// Postconditions:
-    /// - The room's minigame compeltion state is updated.
+    /// - The room's minigame completion state is updated through the controller.
+    /// </remarks>
+    void EducationalDialoguesCompleted();
+
+    /// <summary>
+    /// Called when all educational dialogues are complete.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - RoomController is not null.
+    /// - All educational dialogues have been completed.
+    /// Postconditions:
+    /// - The room's educational dialogue completion state is updated through the controller.
     /// </remarks>
     void MinigameCompleted();
 
@@ -81,11 +91,11 @@ public interface IRoomView
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Serialized fields must be set, or default.
-    /// - Reference to controller layer must be set.
-    /// Postcondtions:
-    /// - Asserts that all Serialized fields are in a valid.
-    /// - Asserts that the reference to controller layer is valid.
+    /// - Serialized fields must be assigned or have valid defaults.
+    /// - A reference to the controller layer must be set.
+    /// Postconditions:
+    /// - Logs errors if RoomController is missing.
+    /// - Asserts that RoomController is valid.
     /// </remarks>
     void Init();
 }

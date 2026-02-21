@@ -7,62 +7,32 @@ public interface InternalRoomController
     // DATA SECTION
 
     /// <summary>
-    /// Internal access to the view layer, 
-    /// only accessed via assembly reference to RoomView.
+    /// Gets or sets the view layer.  
+    /// Returns the real view if assigned, otherwise returns the mock.
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None.
+    /// Postconditions:
+    /// - Always returns a valid IRoomView reference (real or mock).
+    /// </remarks>
     public IRoomView RoomView {
-        /// <summary>
-        /// Access the view layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns the reference to the view layer.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of the minigame.
-        /// </returns>
         get; 
-        /// <summary>
-        /// Modify the reference to the view layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - View layer cannot be null.
-        /// Postconditions:
-        /// - None.
-        /// </remarks>
         set; 
         }
 
     /// <summary>
-    /// Internal access to the model layer, 
-    /// only accessed via assembly reference to RoomModel.
+    /// Gets or sets the model layer.  
+    /// Returns the real model if assigned, otherwise returns the mock.
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None.
+    /// Postconditions:
+    /// - Always returns a valid IRoomModel reference (real or mock).
+    /// </remarks>
     public IRoomModel RoomModel {
-        /// <summary>
-        /// Access the model layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns the reference to the model layer.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of the minigame.
-        /// </returns>
-        get; 
-        /// <summary>
-        /// Modify the reference to the model layer of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Model layer cannot be null.
-        /// Postconditions:
-        /// - None.
-        /// </remarks>
+        get;
         set; 
         }
 }
@@ -75,52 +45,60 @@ public interface IRoomController
     /// METHODS SECTION
 
     /// <summary>
-    /// Handles the logic required when the room becomes completed.
+    /// Marks the minigame as complete in the model and then checks
+    /// whether the room is fully complete.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - The room is not previously completed.
-    /// - All educational dialogue completed.
-    /// - Minigame is completed.
+    /// - RoomModel must not be null.
     /// Postconditions:
-    /// - The room's completion state is updated.
-    /// - Any completion-related effects or callbacks have been executed.
+    /// - RoomModel.MinigameCompleted is set to true.
+    /// - Completion logic is evaluated.
+    /// Throws:
+    /// - MissingFieldException if RoomModel is null.
     /// </remarks>
     void HandleCompletion();
 
     /// <summary>
-    /// Handles the logic behind changing the state of minigame
-    /// completion in the model layer.
+    /// Marks the educational dialogue as complete in the model and then
+    /// checks whether the room is fully complete.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - minigame is not complete
+    /// - RoomModel must not be null.
     /// Postconditions:
-    /// - The room's minigame completion state is updated.
+    /// - RoomModel.EducationalDialogueCompleted is set to true.
+    /// - Completion logic is evaluated.
+    /// Throws:
+    /// - MissingFieldException if RoomModel is null.
     /// </remarks>
     void HandleCompleteMinigame();
 
     /// <summary>
-    /// Handles the logic behind changing the state of educational
-    /// dialogue in the model layer.
+    /// Checks whether the room is fully complete and, if so,
+    /// notifies the view layer.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Educational dialogue is not complete
+    /// - RoomModel must not be null.
+    /// - RoomView must not be null.
     /// Postconditions:
-    /// - The room's educational dialogue completion state is updated.
+    /// - If the model reports completion, RoomView.InvokeOnRoomComplete() is called.
+    /// Throws:
+    /// - MissingFieldException if RoomModel or RoomView is null.
     /// </remarks>
     void HandleCompleteEducationalDialogue();
 
     /// <summary>
-    /// Initializes this component. Called by the game within the MonoBehaviour.
+    /// Initializes this component and verifies that the view and model
+    /// references are set correctly.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Reference to view and model layers must be set.
-    /// Postcondtions:
-    /// - Asserts that the references to the view and model layers are valid.
-    /// - Initializes the model layer.
+    /// - Should be called after dependency injection or inspector assignment.
+    /// Postconditions:
+    /// - Logs errors if RoomView or RoomModel is missing.
+    /// - Asserts that both references are valid.
     /// </remarks>
     void Init();
 }

@@ -35,40 +35,14 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     [SerializeField]
     private bool eductionalDialogueCompleted = false;
 
-    /// <summary>
-    /// Getter/Setter for this room's unique id.
-    /// </summary>
+    /// <inheritdoc/>
     public int Id
     {
-        /// <summary>
-        /// Access the current id of this room.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postcondition:
-        /// - Returns the current id of the room.
-        /// </remarks>
-        /// <returns>
-        /// Current id of the room.
-        /// </returns>
         get => roomId;
-        /// <summary>
-        /// Modify the current value of this room's id.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Value is not the same as previous one
-        /// - Value is not null
-        /// Postcondition:
-        /// - Value of the room's unique id is modified.
-        /// </remarks>
         set => roomId = value;
     }
 
-    /// <summary>
-    /// Getters/Setters for this room's name.
-    /// </summary>
+    /// <inheritdoc/>
     public string Name
     {
         /// <summary>
@@ -104,91 +78,27 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         }
     }
 
-    /// <summary>
-    /// Getter/Setter for this room's minigameCompleted state.
-    /// </summary>
+    /// <inheritdoc/>
     public bool MinigameCompleted 
     { 
-        /// <summary>
-        /// Access the current completion state of minigame.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns the current completion state of minigame.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of the minigame.
-        /// </returns>
         get => minigameCompleted;
-        /// <summary>
-        /// Modifies the completion state of minigame.
-        /// </summary>
-        /// <remarks>
-        /// Precondition:
-        /// - Value can either be true or false.
-        /// Postcondition:
-        /// - The minigame completion state is updated
-        /// </remarks>
         set => minigameCompleted = value; 
     }
 
-    /// <summary>
-    /// Getter/Setter for this room's educationDialogueCompleted state.
-    /// </summary>
+    /// <inheritdoc/>
     public bool EducationalDialogueCompleted 
     { 
-        /// <summary>
-        /// Access the current completion state of educational dialogue.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postcondtitions:
-        /// - Returns the current completion state of educational dialogue.
-        /// </remarks>
-        /// <returns>
-        /// Current completion state of educational dialogue.
-        /// </returns>
         get => eductionalDialogueCompleted;
-        /// <summary>
-        /// Modifies the completion state of educational dialogue.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Value can either be true or false.
-        /// Postconditions:
-        /// - The educational dialogue completion state is updated.
-        /// </remarks>
         set => eductionalDialogueCompleted = value; 
     }
 
-    /// <summary>
-    /// Verifies if the room is complete or not.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - Returns the current completion state of the room.
-    /// </remarks>
-    /// <returns>Current completion state of the room.</returns>
+    /// <inheritdoc/>
     public bool IsComplete()
     {
         return eductionalDialogueCompleted & minigameCompleted;
     }
 
-    /// <summary>
-    /// Initializes this component. Called by the game within the MonoBehaviour.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Serialized fields must be set, or default.
-    /// Postcondtions:
-    /// - Asserts that all Serialized fields are in a valid.
-    /// - Adds this room model to the roomLookup dictionary.
-    /// </remarks>
+    /// <inheritdoc/>
     public void Init()
     {
         if (roomName.Trim() == "")
@@ -220,20 +130,13 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         Debug.Assert(isKeyTaken == false, "Field roomId must be set to a different id.");
     }
 
-    /// <summary>
-    /// Start after all Awake() calls have finished.
-    /// Provided/Built-in by Unity.
-    /// </summary>
+    /// <inheritdoc/>
     void Start()
     {
         Init();
     }
 
-    /// <summary>
-    /// Called when the game object this component is
-    /// attached to is destroyed.
-    /// Provided/Built-in by Unity.
-    /// </summary>
+    /// <inheritdoc/>
     void OnDestroy()
     {
         if (roomLookUp.ContainsKey(Id))

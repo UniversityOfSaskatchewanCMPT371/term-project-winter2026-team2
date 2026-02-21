@@ -22,9 +22,7 @@ public class RoomView : View, IRoomView, InternalRoomView
     /// </summary>
     public UnityEvent onRoomCompleted = new UnityEvent();
 
-    /// <summary>
-    /// Getter/Setter for this room's controller layer.
-    /// </summary>
+    /// <inheritdoc/>
     public IRoomController RoomController 
     { 
         get
@@ -46,30 +44,13 @@ public class RoomView : View, IRoomView, InternalRoomView
         }
     }
 
-    /// <summary>
-    /// Called by the controller layer when the room is complete.
-    /// </summary>
-    /// </remarks>
-    /// Preconditions:
-    /// - The rooms is complete.
-    /// Postconditions:
-    /// - Invoke all listeners.
-    /// </remarks>
+    /// <inheritdoc/>
     public void InvokeOnRoomComplete()
     {
        onRoomCompleted.Invoke();
     }
 
-    /// <summary>
-    /// Called when the minigame is completed.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - roomController is not null.
-    /// - Minigame is completed.
-    /// Postconditions:
-    /// - The room's minigame compeltion state is updated.
-    /// </remarks>
+    /// <inheritdoc/>
     public void MinigameCompleted()
     {
         if (RoomController == null)
@@ -86,16 +67,7 @@ public class RoomView : View, IRoomView, InternalRoomView
         }
     }
 
-    /// <summary>
-    /// Called when all educational dialogues are complete.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - roomController is not null.
-    /// - All educational dialogues are completed.
-    /// Postconditions:
-    /// - The room's educational dialogue completion state is updated.
-    /// </remarks>
+    /// <inheritdoc/>
     public void EducationalDialoguesCompleted()
     {
         if (RoomController == null)
@@ -112,17 +84,7 @@ public class RoomView : View, IRoomView, InternalRoomView
         }
     }
 
-    /// <summary>
-    /// Initializes this component. Called by the game within the MonoBehaviour.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Serialized fields must be set, or default.
-    /// - Reference to controller layer must be set.
-    /// Postcondtions:
-    /// - Asserts that all Serialized fields are in a valid.
-    /// - Asserts that the reference to controller layer is valid.
-    /// </remarks>
+    /// <inheritdoc/>
     public void Init()
     {
         if (RoomController == null)
@@ -132,10 +94,7 @@ public class RoomView : View, IRoomView, InternalRoomView
         Debug.Assert(RoomController != null, "Field roomController cannot be null.");
     }
 
-    /// <summary>
-    /// Start after all Awake() calls have finished.
-    /// Provided/Built-in by Unity.
-    /// </summary>
+    /// <inheritdoc/>
     void Start()
     {
         Init();

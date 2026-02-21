@@ -29,9 +29,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     /// </summary>
     private IRoomModel roomModelMock;
 
-    /// <summary>
-    /// Getters/Setters of the view layer.
-    /// </summary>
+    /// <inheritdoc/>
     public IRoomView RoomView
     {
 
@@ -54,9 +52,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         }
     }
 
-    /// <summary>
-    /// Getters/Setters of the model layer.
-    /// </summary>
+    /// <inheritdoc/>
     public IRoomModel RoomModel
     { 
 
@@ -79,18 +75,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         }
     }
 
-    /// <summary>
-    /// Handles the logic behind changing the state of minigame
-    /// completion in the model layer.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - roomModel is not null.
-    /// - minigame is not complete.
-    /// Postconditions:
-    /// - The room's minigame completion state is updated.
-    /// </remarks>
-    /// <throws>
+    /// <inheritdoc/>
     public void HandleCompleteMinigame()
     {
         if (RoomModel == null)
@@ -102,17 +87,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         HandleCompletion();
     }
 
-    /// <summary>
-    /// Handles the logic behind changing the state of educational
-    /// dialogue in the model layer.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - roomModel is not null.
-    /// - Educational dialogue is not complete
-    /// Postconditions:
-    /// - The room's educational dialogue completion state is updated.
-    /// </remarks>
+    /// <inheritdoc/>
     public void HandleCompleteEducationalDialogue()
     {
         if (RoomModel == null)
@@ -124,20 +99,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         HandleCompletion();
     }
 
-    /// <summary>
-    /// Handles the logic required when the room becomes completed.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - roomModel is not null.
-    /// - roomView is not null.
-    /// - The room is not previously completed.
-    /// - All educational dialogue completed.
-    /// - Minigame is completed.
-    /// Postconditions:
-    /// - The room's completion state is updated.
-    /// - Any completion-related effects or callbacks have been executed.
-    /// </remarks>
+    /// <inheritdoc/>
     public void HandleCompletion()
     {
         if (RoomModel == null)
@@ -154,15 +116,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         }
     }
 
-    /// <summary>
-    /// Initializes this component. Called by the game within the MonoBehaviour.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Reference to view and model layers must be set.
-    /// Postcondtions:
-    /// - Asserts that the references to the view and model layers are valid.
-    /// </remarks>
+    /// <inheritdoc/>
     public void Init()
     {
         if (RoomView == null)
@@ -178,10 +132,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
         Debug.Assert(RoomModel != null, "Field roomModel cannot be null.");
     }
 
-    /// <summary>
-    /// Start after all Awake() calls have finished.
-    /// Provided/Built-in by Unity.
-    /// </summary>
+    /// <inheritdoc/>
     void Start()
     {
         Init();
