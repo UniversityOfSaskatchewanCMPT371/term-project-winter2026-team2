@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IToolTipView : MonoBehaviour
+/// <summary>
+/// Interface defining IToolTipView
+/// for mocking in tests
+/// </summary>
+public interface IToolTipView
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void UpdateContent(IToolTipModel model);
+    void setActive(bool active);
 }
