@@ -13,8 +13,8 @@ public class ToolTipView : MonoBehaviour, IToolTipView
     {
       Assert.IsNotNull(title, "Title TextMeshProUGUI component is not assigned in the inspector.");
       Assert.IsNotNull(description, "Description TextMeshProUGUI component is not assigned in the inspector.");
-      title.SetText(data.title);
-      description.SetText(data.description);
+      title.SetText(data.Title);
+      description.SetText(data.Description);
         
         
     }

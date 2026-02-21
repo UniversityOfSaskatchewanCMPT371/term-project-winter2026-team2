@@ -152,7 +152,7 @@ public class ToolTipModelUnitTest : MonoBehaviour
         RunTest(() =>
         {
             // Assert
-            AssertIsNull(_toolTipModel.title);
+            AssertIsNull(_toolTipModel.Title);
         }, "Title_ShouldBeNull_WhenInitialized");
     }
 
@@ -164,10 +164,10 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string expectedTitle = "VR Interaction Tooltip";
 
             // Act
-            _toolTipModel.title = expectedTitle;
+            _toolTipModel.Title = expectedTitle;
 
             // Assert
-            AssertAreEqual(expectedTitle, _toolTipModel.title);
+            AssertAreEqual(expectedTitle, _toolTipModel.Title);
         }, "Title_ShouldBeSet_WhenAssignedValidString");
     }
 
@@ -179,11 +179,11 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string emptyTitle = "";
 
             // Act
-            _toolTipModel.title = emptyTitle;
+            _toolTipModel.Title = emptyTitle;
 
             // Assert
-            AssertAreEqual(emptyTitle, _toolTipModel.title);
-            AssertIsEmpty(_toolTipModel.title);
+            AssertAreEqual(emptyTitle, _toolTipModel.Title);
+            AssertIsEmpty(_toolTipModel.Title);
         }, "Title_ShouldAcceptEmptyString");
     }
 
@@ -192,7 +192,7 @@ public class ToolTipModelUnitTest : MonoBehaviour
         RunTest(() =>
         {
             // Assert
-            AssertIsNull(_toolTipModel.description);
+            AssertIsNull(_toolTipModel.Description);
         }, "Description_ShouldBeNull_WhenInitialized");
     }
 
@@ -204,10 +204,10 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string expectedDescription = "This tooltip provides information about VR interactions.";
 
             // Act
-            _toolTipModel.description = expectedDescription;
+            _toolTipModel.Description = expectedDescription;
 
             // Assert
-            AssertAreEqual(expectedDescription, _toolTipModel.description);
+            AssertAreEqual(expectedDescription, _toolTipModel.Description);
         }, "Description_ShouldBeSet_WhenAssignedValidString");
     }
 
@@ -219,11 +219,11 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string multilineDescription = "Line 1: Introduction\nLine 2: Details\nLine 3: Instructions";
 
             // Act
-            _toolTipModel.description = multilineDescription;
+            _toolTipModel.Description = multilineDescription;
 
             // Assert
-            AssertAreEqual(multilineDescription, _toolTipModel.description);
-            AssertIsTrue(_toolTipModel.description.Contains("\n"));
+            AssertAreEqual(multilineDescription, _toolTipModel.Description);
+            AssertIsTrue(_toolTipModel.Description.Contains("\n"));
         }, "Description_ShouldAcceptMultilineText");
     }
 
@@ -235,11 +235,11 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string emptyDescription = "";
 
             // Act
-            _toolTipModel.description = emptyDescription;
+            _toolTipModel.Description = emptyDescription;
 
             // Assert
-            AssertAreEqual(emptyDescription, _toolTipModel.description);
-            AssertIsEmpty(_toolTipModel.description);
+            AssertAreEqual(emptyDescription, _toolTipModel.Description);
+            AssertIsEmpty(_toolTipModel.Description);
         }, "Description_ShouldAcceptEmptyString");
     }
 
@@ -252,12 +252,12 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string expectedDescription = "Use the trigger button to grab and release this object.";
 
             // Act
-            _toolTipModel.title = expectedTitle;
-            _toolTipModel.description = expectedDescription;
+            _toolTipModel.Title = expectedTitle;
+            _toolTipModel.Description = expectedDescription;
 
             // Assert
-            AssertAreEqual(expectedTitle, _toolTipModel.title);
-            AssertAreEqual(expectedDescription, _toolTipModel.description);
+            AssertAreEqual(expectedTitle, _toolTipModel.Title);
+            AssertAreEqual(expectedDescription, _toolTipModel.Description);
         }, "ToolTipModel_ShouldMaintainBothProperties_WhenSetSimultaneously");
     }
 
@@ -270,12 +270,12 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string newTitle = "Updated Title";
 
             // Act
-            _toolTipModel.title = initialTitle;
-            _toolTipModel.title = newTitle;
+            _toolTipModel.Title = initialTitle;
+            _toolTipModel.Title = newTitle;
 
             // Assert
-            AssertAreEqual(newTitle, _toolTipModel.title);
-            AssertAreNotEqual(initialTitle, _toolTipModel.title);
+            AssertAreEqual(newTitle, _toolTipModel.Title);
+            AssertAreNotEqual(initialTitle, _toolTipModel.Title);
         }, "Title_ShouldBeOverwritten_WhenReassigned");
     }
 
@@ -288,12 +288,12 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string newDescription = "Updated description text.";
 
             // Act
-            _toolTipModel.description = initialDescription;
-            _toolTipModel.description = newDescription;
+            _toolTipModel.Description = initialDescription;
+            _toolTipModel.Description = newDescription;
 
             // Assert
-            AssertAreEqual(newDescription, _toolTipModel.description);
-            AssertAreNotEqual(initialDescription, _toolTipModel.description);
+            AssertAreEqual(newDescription, _toolTipModel.Description);
+            AssertAreNotEqual(initialDescription, _toolTipModel.Description);
         }, "Description_ShouldBeOverwritten_WhenReassigned");
     }
 
@@ -305,10 +305,10 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string specialTitle = "VR: Grab & Release!";
 
             // Act
-            _toolTipModel.title = specialTitle;
+            _toolTipModel.Title = specialTitle;
 
             // Assert
-            AssertAreEqual(specialTitle, _toolTipModel.title);
+            AssertAreEqual(specialTitle, _toolTipModel.Title);
         }, "Title_ShouldAcceptSpecialCharacters");
     }
 
@@ -320,11 +320,11 @@ public class ToolTipModelUnitTest : MonoBehaviour
             string longDescription = new string('A', 1000);
 
             // Act
-            _toolTipModel.description = longDescription;
+            _toolTipModel.Description = longDescription;
 
             // Assert
-            AssertAreEqual(longDescription, _toolTipModel.description);
-            AssertAreEqual(1000, _toolTipModel.description.Length);
+            AssertAreEqual(longDescription, _toolTipModel.Description);
+            AssertAreEqual(1000, _toolTipModel.Description.Length);
         }, "Description_ShouldAcceptLongText");
     }
 
@@ -333,13 +333,13 @@ public class ToolTipModelUnitTest : MonoBehaviour
         RunTest(() =>
         {
             // Arrange
-            _toolTipModel.title = "Some Title";
+            _toolTipModel.Title = "Some Title";
 
             // Act
-            _toolTipModel.title = null;
+            _toolTipModel.Title = null;
 
             // Assert
-            AssertIsNull(_toolTipModel.title);
+            AssertIsNull(_toolTipModel.Title);
         }, "ToolTipModel_ShouldAllowNullAssignment_ForTitle");
     }
 
@@ -348,13 +348,13 @@ public class ToolTipModelUnitTest : MonoBehaviour
         RunTest(() =>
         {
             // Arrange
-            _toolTipModel.description = "Some Description";
+            _toolTipModel.Description = "Some Description";
 
             // Act
-            _toolTipModel.description = null;
+            _toolTipModel.Description = null;
 
             // Assert
-            AssertIsNull(_toolTipModel.description);
+            AssertIsNull(_toolTipModel.Description);
         }, "ToolTipModel_ShouldAllowNullAssignment_ForDescription");
     }
 
