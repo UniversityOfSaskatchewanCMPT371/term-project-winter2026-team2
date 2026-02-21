@@ -10,7 +10,8 @@
         "DoorControllerScripts",
         "DoorModelScripts",
         "DoorViewScripts",
-        "SceneChangerScripts"
+        "SceneChangerScripts",
+        "TNRD.NSubstitute"
     ],
     "includePlatforms": [
         "Editor"
@@ -19,8 +20,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll",
-        "NSubstitute.dll"
+        "nunit.framework.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

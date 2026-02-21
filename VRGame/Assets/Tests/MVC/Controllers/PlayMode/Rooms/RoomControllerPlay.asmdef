@@ -10,7 +10,8 @@
         "ControllerScripts",
         "AllInterfaces",
         "ModelScripts",
-        "ViewScripts"
+        "ViewScripts",
+        "TNRD.NSubstitute"
     ],
     "includePlatforms": [
         "Android",
@@ -21,7 +22,7 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "NSubstitute.dll"
+        ""
     ],
     "autoReferenced": false,
     "defineConstraints": [
