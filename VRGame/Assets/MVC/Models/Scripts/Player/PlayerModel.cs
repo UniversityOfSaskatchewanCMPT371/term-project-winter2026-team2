@@ -42,12 +42,12 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     ///     -   id has been initialized in the constructor
     /// post-condition:
     ///    -   returns the unique identifier of the player
-    public int getId()
+    public int getPlayerId()
     {
         return id;
     }
 
-    public bool isAlive()
+    public bool playerIsAlive()
     {
         return alive;
     }
