@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IToolTipModel : MonoBehaviour
+/// <summary>
+/// Interface defining ToolTipModel
+/// for mocking in tests
+/// </summary>
+public interface IToolTipModel
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    string Title { get; set; }
+    string Description { get; set; }
 }
