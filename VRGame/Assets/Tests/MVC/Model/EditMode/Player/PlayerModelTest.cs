@@ -6,20 +6,17 @@ using UnityEngine.TestTools;
 
 public class PlayerModel_EditTest
 {
-    // A Test behaves as an ordinary method
+    /// <summary>
+    /// A simple test to check if the getPlayerName method of the PlayerModel class 
+    ///      returns the correct name after initialization
+    /// </summary>
     [Test]
-    public void PlayerModel_EditTestSimplePasses()
+    public void PlayerModel_EditTestGetPlayerName()
     {
-        // Use the Assert class to test conditions
-    }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator PlayerModel_EditTestWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        GameObject go = new GameObject();
+        PlayerModel playerModel = go.AddComponent<PlayerModel>();
+        playerModel.Initialize("TestPlayer", 1);
+        // Use the Assert class to test if the getPlayerName method returns the expected name after initializing the PlayerModel
+        Assert.AreEqual("TestPlayer", playerModel.getPlayerName());
     }
 }
