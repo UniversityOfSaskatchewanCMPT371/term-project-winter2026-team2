@@ -10,10 +10,21 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// <remarks>Use this type to define reusable tooltip data for UI elements in Unity projects. The asset can be
 /// created and edited in the Unity Editor via the 'VR/Data' menu.</remarks>
 [CreateAssetMenu(fileName ="Data",menuName ="VR/Data")]
-public class ToolTipModel : ScriptableObject
+public class ToolTipModel : ScriptableObject, IToolTipModel
 {
-    public string title;
-    [TextArea]public string description;
+    [SerializeField] private string title;
+    [SerializeField, TextArea] private string description;
+    public string Title 
+    { 
+        get => title;
+        set => title = value;
+    }
+
+    public string Description 
+    { 
+        get => description; 
+        set => description = value; 
+    }
 
     
 }
