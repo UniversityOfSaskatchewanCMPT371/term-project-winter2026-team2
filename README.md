@@ -52,6 +52,14 @@ To setup this project for development:
 The installation steps for production deployment, to actual headsets in the
 field, is not concretely established yet.
 
+## Walkthrough
+
+### TODO BEFORE HANDIN FOR ID2
+
+This section should be populated with images, maybe some GIFS, and a link to
+a YouTube video that does a quick walkthrough once the hub is all merged. Like
+45 seconds long.
+
 ## Project Development
 
 Our processes can be seen in the [wiki](https://github.com/UniversityOfSaskatchewanCMPT371/term-project-winter2026-team2/wiki).
