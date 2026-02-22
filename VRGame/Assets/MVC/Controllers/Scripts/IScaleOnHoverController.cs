@@ -8,7 +8,7 @@ public interface IScaleOnHoverController
     /// <summary>
     /// Calls the Init() method to initialize and validate that the model and view layer exist
     /// </summary>
-    private void Start();
+    void Start();
 
     /// <summary>
     /// Validate that the model and view layer exist
@@ -19,7 +19,7 @@ public interface IScaleOnHoverController
     /// <post-condition>
     ///     -   Controller holds reference to Model and View layer
     /// </post-condition>
-    private void Init();
+    void Init();
 
     /// <summary>
     /// Retrieves linked objects from model
@@ -30,7 +30,7 @@ public interface IScaleOnHoverController
     /// <post-condition>
     ///     -   Objects linked to the script are returned
     /// </post-condition>
-    public Transform[] retrieveLinkedObjects();
+    Transform[] retrieveLinkedObjects();
 
     /// <summary>
     /// Retrieves target scale from model
@@ -41,7 +41,7 @@ public interface IScaleOnHoverController
     /// <post-condition>
     ///     -   Target scale(s) are returned
     /// </post-condition>
-    public Vector3[] retrieveTargetScale();
+    Vector3[] retrieveTargetScale();
 
     /// <summary>
     /// Retrieves scale speed from the model
@@ -51,7 +51,7 @@ public interface IScaleOnHoverController
     /// </pre-condition>
     /// <post-condition>
     ///     -   The model's scale speed is returned
-    public float retrieveScaleSpeed();
+    float retrieveScaleSpeed();
 
     /// <summary>
     /// Returns current hover state of the model
@@ -62,7 +62,7 @@ public interface IScaleOnHoverController
     /// <post-condition>
     ///     -   Returns True if model is hovered on, false otherwise
     /// </post-condition>
-    public bool IsHovering();
+    bool IsHovering();
 
     /// <summary>
     /// Hover enter event handler
@@ -73,7 +73,7 @@ public interface IScaleOnHoverController
     /// <post-condition>
     ///     -   OnHoverEnter() is called in model
     /// </post-condition>
-    public void OnHoverEnter();
+    void OnHoverEnter();
 
     /// <summary>
     /// Hover exit event handler
@@ -84,5 +84,5 @@ public interface IScaleOnHoverController
     /// <post-condition>
     ///     -   OnHoverExit() is called in model
     /// </post-condition>
-    public void OnHoverExit();
+    void OnHoverExit();
 }
