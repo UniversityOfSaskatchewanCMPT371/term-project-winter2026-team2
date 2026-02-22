@@ -91,62 +91,103 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         return model.getTargetScale();
     }
 
-    
+
     
     /// <summary>
     /// Retrieves scale speed from the model
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   model != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   The model's scale speed is returned
     public float retrieveScaleSpeed() 
     {
-        if (model == null) return 1f;
+        /// Check if model reference is null
+        if (model == null) 
+        {
+            Debug.LogError("Model reference is null");
+            return 1f;
+        }
+
+        /// Assert to ensure model reference is not null before retrieving scale speed
+        Assert.IsNotNull(model, "Model reference cannot be null");
+
         return model.getScaleSpeed();
     }
+
+
 
     /// <summary>
     /// Returns current hover state of the model
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   model != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   Returns True if model is hovered on, false otherwise
+    /// </post-condition>
     public bool IsHovering()
     {
+        /// Check if model reference is null
         if (model == null) 
+        {
+            Debug.LogError("Model reference is null in IsHovering");
             return false;
+        }
+        /// Assert to ensure model reference is not null before checking hover state
+        Assert.IsNotNull(model, "Model reference cannot be null in IsHovering");
+        
         return model.IsHovering();
     }
+
+    
 
     /// <summary>
     /// Hover enter event handler
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   model != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   OnHoverEnter() is called in model
+    /// </post-condition>
     public void OnHoverEnter()
     {
-        if (model != null)
+        /// Check if model reference is null
+        if (model == null)
         {
-            model.OnHoverEnter();
+            Debug.LogError("Model reference is null in OnHoverEnter");
+            return;
         }
+
+        /// Assert to ensure model reference is not null before calling OnHoverEnter
+        Assert.IsNotNull(model, "Model reference cannot be null in OnHoverEnter");
+
+        model.OnHoverEnter();
     }
 
     /// <summary>
     /// Hover exit event handler
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   model != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   OnHoverExit() is called in model
+    /// </post-condition>
     public void OnHoverExit()
     {
-        if (model != null)
+        /// Check if model reference is null
+        if (model == null)
         {
-            model.OnHoverExit();
+            Debug.LogError("Model reference is null in OnHoverExit");
+            return;
         }
+
+        /// Assert to ensure model reference is not null before calling OnHoverExit
+        Assert.IsNotNull(model, "Model reference cannot be null in OnHoverExit");
+
+        model.OnHoverExit();
     }
 }
