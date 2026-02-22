@@ -63,7 +63,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
 
         /// Assert to ensure model reference is not null before retrieving linked objects
         Assert.IsNotNull(model, "Model reference cannot be null");
-        return model.getLinkedObjects();
+        return model.LinkedObjects;
     }
 
 
@@ -82,13 +82,13 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         /// Check if model reference is null
         if (model == null) 
         {
-            debug.LogError("Model reference cannot be null");
+            Debug.LogError("Model reference cannot be null");
             return null;
         }
 
         /// Assert to ensure model reference is not null before retrieving target scale
         Assert.IsNotNull(model, "Model reference cannot be null");
-        return model.getTargetScale();
+        return model.TargetScales;
     }
 
 
@@ -113,7 +113,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         /// Assert to ensure model reference is not null before retrieving scale speed
         Assert.IsNotNull(model, "Model reference cannot be null");
 
-        return model.getScaleSpeed();
+        return model.ScaleSpeed;
     }
 
 
@@ -138,7 +138,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         /// Assert to ensure model reference is not null before checking hover state
         Assert.IsNotNull(model, "Model reference cannot be null in IsHovering");
         
-        return model.IsHovering();
+        return model.IsHovering;
     }
 
     
