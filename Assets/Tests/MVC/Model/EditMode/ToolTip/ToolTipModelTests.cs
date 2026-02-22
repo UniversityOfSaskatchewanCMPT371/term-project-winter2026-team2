@@ -21,12 +21,48 @@ public class ToolTipModelTests
         UnityEngine.Object.DestroyImmediate(toolTipModel);
     }
 
-    // A Test behaves as an ordinary method
+    /// <summary>
+    /// Tests that the Title property of the ToolTipModel is null 
+    /// when the model is initialized.
+    /// </summary>
     [Test]
     public void Title_ShouldBeNull_WhenInitialized()
     {
         Assert.IsNull(toolTipModel.Title);
     }
+
+    /// <summary>
+    /// Tests that the Description property of the ToolTipModel is null 
+    /// when the model is initialized.
+    /// </summary>
+    [Test]
+    public void Description_ShouldBeNull_WhenInitialized()
+    {
+        Assert.IsNull(toolTipModel.Description);
+    }
+
+    /// <summary>
+    /// Tests that the Title property of the ToolTipModel is set correctly
+    /// when a value is assigned to it.
+    /// </summary>
+    [Test]
+    public void Title_ShouldBeSet_WhenAssigned()
+    {
+        toolTipModel.Title = "Test Title";
+        Assert.AreEqual("Test Title", toolTipModel.Title);
+    }
+
+    /// <summary>
+    /// Tests that the Description property of the ToolTipModel is set correctly
+    /// when a value is assigned to it.
+    /// </summary>
+    [Test]
+    public void Description_ShouldBeSet_WhenAssigned()
+    {
+        toolTipModel.Description = "Test Description";
+        Assert.AreEqual("Test Description", toolTipModel.Description);
+    }
+
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
