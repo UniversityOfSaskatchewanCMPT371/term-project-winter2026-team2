@@ -281,7 +281,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 
     
         /// Initialize scales based on the linked objects' original scales
-        InitializeScales();
+        InitializeScales;
     }
 
 
@@ -295,7 +295,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     /// <post-condition>
     ///     -   The normal scale and target scale for a linked object is initialized
     /// </post-condition>
-    private void InitializeScales()
+    private void InitializeScales
     {
         /// Debug log for linkedObjects array
         if (linkedObjects == null || linkedObjects.Length == 0)
@@ -314,11 +314,18 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         // Initialize scales 
         for (int i = 0; i < linkedObjects.Length; i++)
         {
-            if (linkedObjects[i] != null)
+            if (linkedObjects[i] == null)
             {
-                normalScales[i] = linkedObjects[i].localScale;
-                targetScales[i] = normalScales[i];
+                Debug.LogError($"Linked object at index {i} is null");
+                return;
             }
+
+            /// Assertion for linked object at index i
+            assert.IsNotNull(linkedObjects[i], $"Linked object at index {i} cannot be null");
+
+            /// All checks passed, initialize normal and target scales for linked object at index i
+            normalScales[i] = linkedObjects[i].localScale;
+            targetScales[i] = normalScales[i];
         }
     }
 
@@ -333,7 +340,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     /// <post-condition> 
     ///     -   Target scales are set to be bigger (1.25x)
     /// </post-condition>
-    public void OnHoverEnter()
+    public void OnHoverEnter
     {
         isHovering = true;
         
@@ -349,6 +356,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
             /// Assertion for linked object at index i
             assert.IsNotNull(linkedObjects[i], $"Linked object at index {i} cannot be null");
 
+            /// All checks passed, set target scale to be bigger
             targetScales[i] = normalScales[i] * hoverScaleMultiplier;
         }
     }
@@ -364,7 +372,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     /// <post-condition> 
     ///     -   Target scales goes back to normal scale
     /// </post-condition>
-    public void OnHoverExit()
+    public void OnHoverExit
     {
         isHovering = false;
         
@@ -380,6 +388,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
             /// Assertion for linked object at index i
             assert.IsNotNull(linkedObjects[i], $"Linked object at index {i} cannot be null");
 
+            /// All checks passed, set target scale back to normal
             targetScales[i] = normalScales[i];
         }
     }
@@ -387,45 +396,31 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 
 
     /// <summary>
-    /// Returns the target scale 
-    /// </summary>
-    /// Pre-condition:
-    ///     -   None
-    /// Post-condition:
-    ///     -   Returns the objects target
-    public Vector3[] getTargetScale()
-    {
-        return targetScales;
-    }
-
-
-    
-
-    /// <summary>
-    /// Gets whether the object is currently being hovered
-    /// </summary>
-    /// Pre-condition:
-    ///     -   None
-    /// Post-condition:
-    ///     -   Returns True if hovering, false otherwise
-    public bool IsHovering()
-    {
-        return isHovering;
-    }
-
-    /// <summary>
     /// Initialize scales on Awake (to the linkedObjects that are assigned in inspector)
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   0 < linkedObjects && linkedObjects != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     - Initializes the linkedObjects on Awake()
+    /// </post-condition>
     private void Awake()
     {
-        if (linkedObjects != null && linkedObjects.Length > 0)
+
+        // Check for null or empty linkedObjects array and log a warning if so (scales cannot be initialized)
+        if (linkedObjects == null)
         {
-            InitializeScales();
+            Debug.LogWarning("Cannot initialize scales. linked objects array is null on Awake");
         }
+        else if (linkedObjects.Length <= 0)
+        {
+            Debug.LogWarning("Cannot initialize scales. linked objects array is empty on Awake");
+        }
+        assert.IsNotNull(linkedObjects, "Linked objects array cannot be null on Awake");
+        assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element on Awake");
+
+        /// All checks passed
+        InitializeScales;
     }
 
 }
