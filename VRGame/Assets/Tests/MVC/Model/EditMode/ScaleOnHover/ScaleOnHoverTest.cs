@@ -13,14 +13,21 @@ using UnityEngine.TestTools;
 public class SoH_EditTests
 {
     /// <summary>
-    /// Simple test to check if the ScaleOnHoverModel component can be added to a GameObject without issues
-    /// </summary>
+    /// Simple test for LinkedObjects accessor method
     [Test]
-    public void SoH_EditTestsSimplePasses()
+    public void SoH_EditTestsLinkedObjects()
     {
+        /// Create a new GameObject and add the ScaleOnHoverModel component to it
         GameObject go = new GameObject();
+        GameObject linkedGo = new GameObject();
         ScaleOnHoverModel soh = go.AddComponent<ScaleOnHoverModel>();
-        Assert.IsNotNull(soh);
+        
+        /// Set the LinkedObjects property
+        Transform[] linkedObjects = new Transform[] { linkedGo.transform };
+        soh.LinkedObjects = linkedObjects;
+        
+        /// Assert that the LinkedObjects property returns the correct value
+        Assert.AreEqual(linkedObjects, soh.LinkedObjects);
     }
 
     /// <summary>

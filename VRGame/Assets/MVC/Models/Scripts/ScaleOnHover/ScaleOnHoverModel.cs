@@ -268,7 +268,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
             return;
         }
         /// Assertion for hoverScaleMultiplier parameter
-        assert.IsTrue(hoverScaleMultiplier >= 0, "Hover scale multiplier must be non-negative");
+        Assert.IsTrue(hoverScaleMultiplier >= 0, "Hover scale multiplier must be non-negative");
         this.hoverScaleMultiplier = hoverScaleMultiplier;
 
         /// Debug log for scaleSpeed parameter
