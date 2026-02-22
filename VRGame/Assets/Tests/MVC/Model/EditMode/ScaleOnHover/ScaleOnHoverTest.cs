@@ -148,6 +148,24 @@ public class SoH_EditTests
     }
 
 
+    /// <summary>
+    /// Simple test for ScaleSpeed setter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsScaleSpeed_set()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+        float newValue = 15f;
+
+        /// Act - set ScaleSpeed
+        model.ScaleSpeed = newValue;
+
+        /// Assert - value should be set correctly
+        Assert.AreEqual(newValue, model.ScaleSpeed);
+    }
+
+
     
 }
 
