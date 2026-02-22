@@ -1,0 +1,21 @@
+name: test-pr
+run-name: Testing build for ${{ github.actor }}
+on: [pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout
+      - name: Checkout branch
+        uses: actions/checkout@v6
+
+      # cache
+      - name: Cache Library
+        uses: actions/cache@v5
+        with:
+          path: Library
+          key: >
+            Library-${{ hashFiles('VRGame/Assets/**', 'VRGame/Packages/**', 
+            'VRGame/ProjectSettings/**') }}
+          restore-keys: |
+            Library-
