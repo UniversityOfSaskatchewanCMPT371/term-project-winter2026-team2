@@ -116,6 +116,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     }
 
 
+
     /// <summary>
     /// Called when hover enters 
     /// </summary>
@@ -127,11 +128,19 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void OnHoverEnter()
     {
-        if (controller != null)
+        /// Check if controller is null
+        if (controller == null)
         {
-            controller.OnHoverEnter();
+            Debug.LogError("ScaleOnHoverController reference cannot be null");
+            return; 
         }
+        /// Assert to ensure controller reference is not null before processing hover enter
+        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null");
+
+        controller.OnHoverEnter();
     }
+
+
 
     /// <summary>
     /// Called when hover exits 
