@@ -46,30 +46,52 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// <summary>
     /// Retrieves linked objects from model
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   model != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   Objects linked to the script are returned
+    /// </post-condition>
     public Transform[] retrieveLinkedObjects() 
     {
+        /// Check if model reference is null
         if (model == null) 
+        {
+            Debug.LogError("Model reference cannot be null");
             return null;
+        }
+
+        /// Assert to ensure model reference is not null before retrieving linked objects
+        Assert.IsNotNull(model, "Model reference cannot be null");
         return model.getLinkedObjects();
     }
+
+
 
     /// <summary>
     /// Retrieves target scale from model
     /// </summary>
-    /// Pre-condition:
+    /// <pre-condition>
     ///     -   model != null
-    /// Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   Target scale(s) are returned
+    /// </post-condition>
     public Vector3[] retrieveTargetScale()
     {
+        /// Check if model reference is null
         if (model == null) 
+        {
+            debug.LogError("Model reference cannot be null");
             return null;
+        }
+
+        /// Assert to ensure model reference is not null before retrieving target scale
+        Assert.IsNotNull(model, "Model reference cannot be null");
         return model.getTargetScale();
     }
+
+    
     
     /// <summary>
     /// Retrieves scale speed from the model
