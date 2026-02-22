@@ -1,23 +1,17 @@
 {
     "name": "Tests",
-    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "TNRD.NSubstitute",
         "AllCode"
     ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
+    "includePlatforms": ["Editor"],
     "allowUnsafeCode": false,
-    "overrideReferences": true,
-    "precompiledReferences": [
-        "nunit.framework.dll"
-    ],
+    "overrideReferences": false,
     "autoReferenced": false,
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
     ],
-    "versionDefines": [],
     "noEngineReferences": false
 }
