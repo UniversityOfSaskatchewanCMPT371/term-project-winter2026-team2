@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/XR/Loaders/SampleLoader.asset.meta
+guid: cc60d6b0354a14df9a9ce3741daf6836
+========
+guid: 42171596aee19d145895e254f06e1069
+>>>>>>>> origin/Development:VRGame/Assets/XR/Loaders/OpenXRLoader.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
