@@ -1,5 +1,5 @@
 {
-    "name": "ToolTipViewPlay",
+    "name": "ToolTipControllerPlay",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
