@@ -42,12 +42,57 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
                 Debug.LogError("Can't set linked objects to null or empty array");
                 return;
             }
+            Assert.IsTrue(value != null && value.Length > 0, "Linked objects array must not be null or empty");
             linkedObjects = value;
         }
     }
 
 
+
+    /// <summary>
+    /// Float multiplier for how much the linked objects should scale up when hovered
+    /// </summary>
     [SerializeField] private float hoverScaleMultiplier = 1.25f;
+
+    /// <summary>
+    /// Public accessor method for hover scale multiplier
+    /// </summary>
+    public float HoverScaleMultiplier
+    {
+        /// <summary>
+        /// Getter method for hover scale multiplier
+        /// </summary>
+        /// <post-condition>
+        ///     -   Returns the hover scale multiplier value
+        /// </post-condition>
+        get
+        {
+            return hoverScaleMultiplier;
+        }
+
+        /// <summary>
+        /// Setter method for hover scale multiplier
+        /// </summary>
+        /// <pre-condition>
+        ///     -   value > 0
+        /// </pre-condition>
+        /// <post-condition>
+        ///     -   Hover scale multiplier is updated to the new value
+        /// </post-condition>
+        set
+        {
+            if (value <= 0)
+            {
+                Debug.LogError("Hover scale multiplier must be zero or positive");
+                return;
+            }
+            Assert.IsTrue(value > 0, "Hover scale multiplier must be greater than zero");
+            hoverScaleMultiplier = value;
+        }
+    }
+
+
+
     [SerializeField] private float scaleSpeed = 10f;
     
     private Vector3[] normalScales;
