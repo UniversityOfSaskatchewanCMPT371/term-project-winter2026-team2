@@ -16,7 +16,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// Initialize the view and validate controller reference
     /// </summary>
     /// <pre-condition>
-    ///     -   This GameObject must have a ScaleOnHoverController component attached or assigned in the inspector
+    ///     -   Must have a ScaleOnHoverController component attached or assigned in the inspector
     /// </pre-condition>
     /// <post-condition>
     ///     -   View is initialized and ready to process hover events
@@ -31,7 +31,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// Setup XR interaction events for ray interactor hover detection
     /// </summary>
     /// <pre-condition>
-    ///    -   This GameObject must have an XRBaseInteractable component for ray interaction to work
+    ///    -   XRBaseInteractable component != null
     /// </pre-condition>
     /// <post-condition>
     ///    -   XR hover events are connected to the appropriate handlers for hover enter and exit
@@ -60,7 +60,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// XR hover enter event handler - called when ray interactor hovers over object
     /// </summary>
     /// <pre-condition>
-    ///     -   Ray interactor must hover over GameObject (with an XRBaseInteractable component)
+    ///     -   Ray interactor must be hovered over GameObject (with an XRBaseInteractable component)
     /// </pre-condition>
     /// <post-condition>
     ///     -   OnHoverEnter is called to trigger scaling (up) of linkedObjects
@@ -123,7 +123,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// Called when hover enters 
     /// </summary>
     /// <pre-condition> 
-    ///     -   Controller must exist
+    ///     -   controller != null
     /// </pre-condition>
     /// <post-condition>
     ///     -   Hover Enter event is processed
@@ -149,7 +149,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// Called when hover exits 
     /// </summary>
     /// <pre-condition> 
-    ///     -   Controller must exist
+    ///     -   controller != null
     /// </pre-condition>
     /// <post-condition>
     ///     -   Hover Exit event is processed
@@ -175,7 +175,9 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// Updates the scaling of linkedObjects
     /// </summary>
     /// <pre-condition>
-    ///     -   model != null && linkedObjects exists 
+    ///     -   linkedObjects != null 
+    ///     -   targetScales != null
+    ///     -   scaleSpeed > 0
     /// </pre-condition>
     /// <post-condition>
     ///     -   linkedObjects' scale transitions to its target scale
