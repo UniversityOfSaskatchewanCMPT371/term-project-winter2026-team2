@@ -5,7 +5,48 @@ using UnityEngine;
 /// </summary>
 public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 {
+    /// <summary>
+    /// Array of linked objects that will be scaled when hovered
+    /// </summary>
     [SerializeField] private Transform[] linkedObjects;
+
+    /// <summary>
+    /// Public accessor method for linked objects
+    /// </summary>
+    public Transform[] LinkedObjects
+    {
+        /// <summary>
+        /// Getter method for linked objects
+        /// </summary>
+        /// <post-condition>
+        ///     - Returns the array of linked transform objects
+        /// </post-condition>
+        get
+        {
+            return linkedObjects;
+        }
+
+        /// <summary>
+        /// Setter method for linked objects
+        /// </summary>
+        /// <pre-condition>
+        ///     -   value != null && value.length > 0
+        /// </pre-condition>
+        /// <post-condition>
+        ///     -   linkedObjects is updated to the new array of transform objects
+        /// </post-condition>
+        set
+        {
+            if (value == null || value.Length == 0)
+            {
+                Debug.LogError("Can't set linked objects to null or empty array");
+                return;
+            }
+            linkedObjects = value;
+        }
+    }
+
+
     [SerializeField] private float hoverScaleMultiplier = 1.25f;
     [SerializeField] private float scaleSpeed = 10f;
     
@@ -107,17 +148,6 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         return targetScales;
     }
 
-    /// <summary>
-    /// Returns the array of linked transform objects
-    /// </summary>
-    /// Pre-condition:
-    ///     -   None
-    /// Post-condition:
-    ///     - Returns the array of linked transform objects
-    public Transform[] getLinkedObjects()
-    {
-        return linkedObjects;
-    }
 
     /// <summary>
     /// Returns the scale transition speed
