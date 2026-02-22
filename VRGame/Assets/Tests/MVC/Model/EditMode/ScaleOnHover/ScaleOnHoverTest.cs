@@ -128,5 +128,26 @@ public class SoH_EditTests
         /// Assert - value should remain unchanged since we prevent negative assignments in the setter, 
         ///     so it should still be the default value of 1.25f
         Assert.AreEqual(1.25f, model.HoverScaleMultiplier);
-    }   
+    }
+
+
+    /// <summary>
+    /// Simple test for ScaleSpeed getter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsScaleSpeed_get()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        /// Act - get ScaleSpeed
+        float speed = model.ScaleSpeed;
+
+        /// Assert - default value should be 10f
+        Assert.AreEqual(10f, speed);
+    }
+
+
+    
 }
+
