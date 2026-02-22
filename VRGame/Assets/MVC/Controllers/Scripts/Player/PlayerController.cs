@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
         Assert.IsNotNull(view, "PlayerView reference cannot be null");
 
         // Initialize the player with default values
-        // You can customize this based on your needs
         model.Initialize("Player", 1);
         
         Debug.Log($"Player initialized: {model.getPlayerName} (ID: {model.getPlayerId})");

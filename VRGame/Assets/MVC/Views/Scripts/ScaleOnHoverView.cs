@@ -183,37 +183,22 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void Update() 
     {
-        // Check if controller is null to prevent NullReferenceException
+        // Check if controller is null
         if (controller == null)
         {
-            Debug.LogError("ScaleOnHoverController reference cannot be null in Update");
-            return;
+            return; 
         }
-         /// Assert to ensure controller reference is not null before updating scales
-        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in Update");
-        
 
         // Grab data from model
         Transform[] linkedObjects = controller.retrieveLinkedObjects();
         Vector3[] targetScales = controller.retrieveTargetScale();
         float scaleSpeed = controller.retrieveScaleSpeed();
 
-        // Additional null checks for safety
-        if (linkedObjects == null)
-        {
-            Debug.LogError("Linked objects array or target scales array cannot be null in Update");
-            return;
-        }
-        if (targetScales == null)
+        // Additional null checks for safety - return if not initialized
+        if (linkedObjects == null || targetScales == null)
         {            
-            Debug.LogError("Target scales array cannot be null in Update");
-            return;
+            return; 
         }
-
-         /// Assert to ensure linkedObjects and targetScales are not null before updating scales
-        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null in Update");
-        Assert.IsNotNull(targetScales, "Target scales array cannot be null in Update");
-        
 
         // We use 'Lerp' to gradually move from localScale to targetScale
         for (int i = 0; i < linkedObjects.Length && i < targetScales.Length; i++) {
