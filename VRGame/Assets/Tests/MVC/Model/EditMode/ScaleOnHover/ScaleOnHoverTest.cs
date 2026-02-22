@@ -91,7 +91,42 @@ public class SoH_EditTests
         float multiplier = model.HoverScaleMultiplier;
 
         /// Assert - default value should be 1.25f
-        Assert.AreEqual(1.25f, multiplier, "Default hover scale multiplier should be 1.25f");
+        Assert.AreEqual(1.25f, multiplier);
     }
 
+    /// <summary>
+    /// Simple test for hoverScaleMultiplier setter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsHoverScaleMultiplier_set()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();   
+        float newValue = 1.5f;
+        
+        /// Act - set hoverScaleMultiplier
+        model.HoverScaleMultiplier = newValue;
+
+        /// Assert - value should be set correctly
+        Assert.AreEqual(newValue, model.HoverScaleMultiplier);
+    }
+
+
+    /// <summary>
+    /// Simple test for hoverScaleMultiplier setter method to check for negative values - should reject negative values
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsHoverScaleMultiplier_negativeMultiplier()
+    {        
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        /// Act - attempt to set hoverScaleMultiplier to a negative value
+        LogAssert.Expect(LogType.Error, "Hover scale multiplier must be non-negative");
+        model.HoverScaleMultiplier = -0.5f;
+
+        /// Assert - value should remain unchanged since we prevent negative assignments in the setter, 
+        ///     so it should still be the default value of 1.25f
+        Assert.AreEqual(1.25f, model.HoverScaleMultiplier);
+    }   
 }

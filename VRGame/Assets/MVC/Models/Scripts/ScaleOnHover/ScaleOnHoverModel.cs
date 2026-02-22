@@ -84,7 +84,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         {
             if (value <= 0)
             {
-                Debug.LogError("Hover scale multiplier must be zero or positive");
+                Debug.LogError("Hover scale multiplier must be non-negative");
                 return;
             }
             Assert.IsTrue(value > 0, "Hover scale multiplier must be greater than zero");
