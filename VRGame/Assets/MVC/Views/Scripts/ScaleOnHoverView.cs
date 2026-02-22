@@ -54,6 +54,8 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         xrInteractable.hoverExited.AddListener(OnXRHoverExit);
     }
 
+
+
     /// <summary>
     /// XR hover enter event handler - called when ray interactor hovers over object
     /// </summary>
@@ -68,6 +70,8 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         Debug.Log($"XR Hover Enter detected on {gameObject.name}");
         OnHoverEnter();
     }
+
+
 
     /// <summary>
     /// XR hover exit event handler - called when ray interactor stops hovering
@@ -84,6 +88,8 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         OnHoverExit();
     }
 
+
+
     /// <summary>
     /// Validates that the controller layer exists
     /// </summary>
@@ -95,11 +101,18 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void Init()
     {
+        /// Check if controller reference is set in the inspector
         if (controller == null)
         {
-            controller = GetComponent<ScaleOnHoverController>();
+            Debug.LogError("ScaleOnHoverController reference is not set in the inspector");
+            return;
         }
-        Assert.IsNotNull(controller, "Controller cannot be null");
+
+        /// Assert to ensure controller reference is not null
+        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in the inspector");
+
+        /// All checks passed, view is initialized
+        controller = GetComponent<ScaleOnHoverController>();
     }
 
 
