@@ -297,7 +297,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     /// <post-condition>
     ///     -   The normal scale and target scale for a linked object is initialized
     /// </post-condition>
-    private void InitializeScales()
+    public void InitializeScales()
     {
         /// Debug log for linkedObjects array
         if (linkedObjects == null || linkedObjects.Length == 0)
@@ -406,7 +406,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     /// <post-condition>
     ///     - Initializes the linkedObjects on Awake()
     /// </post-condition>
-    private void Awake()
+    public void Awake()
     {
 
         // Check for null or empty linkedObjects array and log a warning if so (scales cannot be initialized)
