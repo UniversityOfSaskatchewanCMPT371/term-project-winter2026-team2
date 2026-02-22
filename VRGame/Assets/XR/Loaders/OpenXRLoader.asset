@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<<< HEAD:VRGame/Assets/XR/Loaders/SampleLoader.asset
-  m_Script: {fileID: 11500000, guid: 7bc0125267fb14445a858e84633a46b9, type: 3}
-  m_Name: SampleLoader
-========
   m_Script: {fileID: 11500000, guid: d3552e428dc7646a88de3ed3650f87da, type: 3}
   m_Name: OpenXRLoader
->>>>>>>> origin/Development:VRGame/Assets/XR/Loaders/OpenXRLoader.asset
   m_EditorClassIdentifier: 
