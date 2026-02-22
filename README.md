@@ -39,12 +39,19 @@ wellness, movement, and brain health.
 
 <small>_overview given by Dr. Soo Kim and adapted by Logan Fossenier_</small>
 
+Our tech stack is typical of VR in Unity. We are using [XR Interaction Tookit](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.6/manual/index.html)
+which lets AR and VR experiences be created more readily. There is also the
+[XR Device Simulator](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.6/manual/samples-xr-device-simulator.html)
+which is being used in testing to drive the VR game from the desktop without a
+headset. These packages are so powerful that we do not need much else, but that
+which remains can be seen in [manifest.json](./VRGame/Packages/manifest.json)
+
 ## Installation
 
 To setup this project for development:
 
 1. clone the repository
-2. install Unity locally (version 2022.3)
+2. install [Unity](https://unity.com/download) locally (version 2022.3)
 3. open the project which will install required packages
 4. the project is now ready, all dependencies are versioned from the
    [manifest](./VRGame/Packages/manifest.json)
@@ -78,7 +85,7 @@ folders but we're going to flatten that between ID2 and ID3.
 
 `./VRGame/Assets/Tests/{EditMode,PlayMode}/MVC/*` is where our tests live, and
 in the final `MVC` layer of the directory the corresponding file hierarchy of the code
-being tested is mirrored.
+being tested is mirrored. You can run the tests as in the below photos from the Test Runner.
 
 <img width="425" height="780" style="width:33%;" alt="TestRunner" src="https://github.com/user-attachments/assets/fde2d642-5162-4120-8182-fe6612666b9a" />
 
@@ -95,3 +102,4 @@ being tested is mirrored.
   APIs from being exposed to anything but tests
 - We are using <inheritdoc/> at the class / method level to inherit docs from
   interfaces to remove duplication
+- [Our license](./LICENSE) is MIT
