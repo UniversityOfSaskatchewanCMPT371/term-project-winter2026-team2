@@ -6,6 +6,11 @@ using UnityEngine.TestTools;
 using TMPro;
 using NSubstitute;
 
+/// <summary>
+/// Edit Mode tests for ToolTipView.
+/// Verifies that the ToolTipView correctly updates 
+/// its text and toggles active state
+/// </summary>
 public class ToolTipViewTests
 {
     private GameObject toolTipGameObject;
@@ -41,7 +46,9 @@ public class ToolTipViewTests
         UnityEngine.Object.DestroyImmediate(toolTipGameObject);
     }
 
-    // A Test behaves as an ordinary method
+    /// <summary>
+    /// verifies that UpdateContent() correctly sets the text of the title and description
+    /// </summary>
     [Test]
     public void UpdateContent_SetsTextFromModel()
     {
@@ -50,6 +57,9 @@ public class ToolTipViewTests
         Assert.AreEqual("Test Description", toolTipView.description.text);
     }
 
+    /// <summary>
+    /// verifies that SetActive() toggles the active state of the tooltip gameobject
+    /// </summary>
     [Test]
     public void SetActive_MakesGameObjectActiveOrInactive()
     {

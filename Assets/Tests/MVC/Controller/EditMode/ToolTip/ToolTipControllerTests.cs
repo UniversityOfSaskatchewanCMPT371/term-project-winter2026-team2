@@ -6,6 +6,12 @@ using UnityEngine.TestTools;
 using NSubstitute;
 using System;
 
+/// <summary>
+/// Edit Mode tests for ToolTipController. 
+/// To verify that the controller correctly enables and 
+/// disables the interactive element based on hover events, 
+/// and that it properly unsubscribes from events when disposed. 
+/// </summary>
 public class ToolTipControllerTests
 {
 
@@ -28,13 +34,19 @@ public class ToolTipControllerTests
         UnityEngine.Object.DestroyImmediate(interactiveElement);
     }
 
-    // A Test behaves as an ordinary method
+    /// <summary>
+    /// Tests that the constructor of ToolTipController 
+    /// correctly disables the interactive element at start
+    /// </summary>
     [Test]
     public void Constructor_DisablesInteractiveElement()
     {
         Assert.IsFalse(interactiveElement.activeSelf);
     }
 
+    /// <summary>
+    /// Tests that when the HoverEntered event is raised on the trigger,
+    /// the interactive element is enabled.
     [Test]
     public void OnHoverEnter_EnablesInteractiveElement()
     {
@@ -43,6 +55,10 @@ public class ToolTipControllerTests
         Assert.IsTrue(interactiveElement.activeSelf);
     }
 
+    /// <summary> 
+    /// Tests that when the HoverExited event is raised on the trigger,
+    /// the interactive element is disabled.
+    /// </summary>
     [Test]
     public void OnHoverExit_DisablesInteractiveElement()
     {
@@ -53,6 +69,12 @@ public class ToolTipControllerTests
         Assert.IsFalse(interactiveElement.activeSelf); //check it's disabled
     }
 
+    /// <summary>
+    /// Tests that when the controller is disposed, 
+    /// it unsubscribes from the trigger's events,
+    /// ensuring that subsequent events do not affect the state 
+    /// of the interactive element.
+    /// </summary>
     [Test]
     public void Dispose_UnsubscribesFromEvents()
     {
