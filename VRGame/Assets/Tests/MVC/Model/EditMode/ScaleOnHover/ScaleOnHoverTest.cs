@@ -54,7 +54,8 @@ public class SoH_EditTests
     }
 
     /// <summary>
-    /// Simple test for null check in LinkedObjects - should reject null values
+    /// Simple test for null check in LinkedObjects 
+    /// This should reject null values
     /// </summary>
     [Test]
     public void SoH_EditTestsLinkedObjects_null_check()
@@ -113,7 +114,8 @@ public class SoH_EditTests
 
 
     /// <summary>
-    /// Simple test for hoverScaleMultiplier setter method to check for negative values - should reject negative values
+    /// Simple test for hoverScaleMultiplier setter method to check for negative values 
+    /// This should reject negative values
     /// </summary>
     [Test]
     public void SoH_EditTestsHoverScaleMultiplier_negativeMultiplier()
@@ -166,6 +168,24 @@ public class SoH_EditTests
     }
 
 
+    /// <summary>
+    /// Simple test for ScaleSpeed setter method to check for negative values 
+    /// Thisshould reject negative values
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsScaleSpeed_negativeValue()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        /// Act - attempt to set ScaleSpeed to a negative value
+        LogAssert.Expect(LogType.Error, "Scale speed must be zero or positive");
+        model.ScaleSpeed = -5f;
+
+        /// Assert - value should remain unchanged since we prevent negative assignments in the setter, 
+        ///     so it should still be the default value of 10f
+        Assert.AreEqual(10f, model.ScaleSpeed);
+    }
     
 }
 
