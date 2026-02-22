@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 namespace Unity.VRTemplate
 {
@@ -54,7 +52,7 @@ namespace Unity.VRTemplate
                 var angleDelta = end - start;
                 var angleSign = Mathf.Sign(angleDelta);
                 angleDelta = Math.Abs(angleDelta) % max;
-                
+
                 if (angleDelta > (max * 0.5f))
                     angleDelta = -(max - angleDelta);
 
@@ -210,8 +208,8 @@ namespace Unity.VRTemplate
             else
                 m_ForwardVectorAngles.SetTargetFromVector(localForward);
 
-            var knobRotation = m_BaseKnobRotation - 
-                ((m_UpVectorAngles.totalOffset + m_ForwardVectorAngles.totalOffset) * m_KnobModel.TwistSensitivity) - 
+            var knobRotation = m_BaseKnobRotation -
+                ((m_UpVectorAngles.totalOffset + m_ForwardVectorAngles.totalOffset) * m_KnobModel.TwistSensitivity) -
                 m_PositionAngles.totalOffset;
 
             if (m_KnobModel.ClampedMotion)
