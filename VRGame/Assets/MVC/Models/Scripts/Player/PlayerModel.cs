@@ -14,16 +14,19 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     private string playerName;
 
     /// <summary>
-    /// Getter method to retrieve the player's name
+    /// Public accessor for the player's name
     /// </summary>
-    /// <pre-condition> 
-    ///     -   playerName has been initialized in the constructor
-    /// </pre-condition>
-    /// <post-condition> 
-    ///     -   returns the name of the player
-    /// </post-condition>
     public string getPlayerName
     {
+        /// <summary>
+        /// Getter method to retrieve the player's name
+        /// </summary>
+        /// <pre-condition> 
+        ///     -   playerName has been initialized in the constructor
+        /// </pre-condition>
+        /// <post-condition> 
+        ///     -   returns the name of the player
+        /// </post-condition>
         get {
             return playerName;
         }
@@ -56,16 +59,19 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     [SerializeField] private int id;
 
     /// <summary>
-    /// Getter method to retrieve the player's ID
+    /// Public accessor for the player's ID
     /// </summary>
-    /// <pre-condition>
-    ///     -   id has been initialized in the constructor
-    /// </pre-condition>
-    /// <post-condition>   
-    ///    -   returns the unique identifier of the player
-    /// </post-condition>
     public int getPlayerId
     {
+        /// <summary>
+        /// Getter method to retrieve the player's ID
+        /// </summary>
+        /// <pre-condition>
+        ///     -   id has been initialized in the constructor
+        /// </pre-condition>
+        /// <post-condition>   
+        ///    -   returns the unique identifier of the player
+        /// </post-condition>
         get {
             return id;
         }
@@ -98,16 +104,19 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     [SerializeField] bool alive = false;
     
     /// <summary>
-    /// Method to check if the player is alive    
+    /// Public accessor for the player's alive status
     /// </summary>
-    /// <pre-condition>
-    ///     -   alive status has been initialized in the constructor
-    /// </pre-condition>
-    /// <post-condition>
-    ///     -   returns true if player is alive, false otherwise
-    /// </post-condition>
     public bool playerIsAlive
     {
+        /// <summary>
+        /// Getter method to check if the player is alive        
+        /// </summary>
+        /// <pre-condition>
+        ///     -   alive has been initialized in the constructor
+        /// </pre-condition>
+        /// <post-condition>
+        ///     -   returns true if the player is alive, false otherwise
+        /// </post-condition>
         get {
             return alive;
         }
