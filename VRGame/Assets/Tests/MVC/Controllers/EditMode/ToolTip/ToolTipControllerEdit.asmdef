@@ -1,0 +1,22 @@
+{
+    "name": "ToolTipControllerEdit",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:9a88817da2cdeb94388ab1c4165583ac",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:3e2bcbb1350d7df40a95f663539c6928"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
