@@ -109,11 +109,6 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
             controller = GetComponent<ScaleOnHoverController>();
             
         }
-        /// Check if controller reference is still null after attempting to get it from the same GameObject
-        if (controller == null)
-        {
-            Debug.LogError("ScaleOnHoverController reference is not set in the inspector");
-        }
     
         /// Assert to ensure controller reference is not null
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in the inspector");
