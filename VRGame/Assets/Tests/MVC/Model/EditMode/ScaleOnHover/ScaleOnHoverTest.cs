@@ -70,11 +70,28 @@ public class SoH_EditTests
         /// Act - attempt to set LinkedObjects to null 
         /// Note: This should be rejected since we prevent null assignments in the setter, 
         ///         but we need to check if it logs an error as expected, so we use LogAssert to verify the error log
-        LogAssert.Expect(LogType.Error);
+        LogAssert.Expect(LogType.Error,  "Can't set linked objects to null or empty array");
         model.LinkedObjects = null;
 
-        /// Assert 
-        Assert.AreEqual(validObjects, model.LinkedObjects);
+        // Assert - LinkedObjects should remain unchanged
+        Assert.AreEqual(validObjects, model.LinkedObjects, "LinkedObjects should not change when set to null");
+    }
+
+
+    /// <summary>
+    /// Simple test for hoverScaleMultiplier getter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsHoverScaleMultiplier_get()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        /// Act - get hoverScaleMultiplier
+        float multiplier = model.HoverScaleMultiplier;
+
+        /// Assert - default value should be 1.25f
+        Assert.AreEqual(1.25f, multiplier, "Default hover scale multiplier should be 1.25f");
     }
 
 }
