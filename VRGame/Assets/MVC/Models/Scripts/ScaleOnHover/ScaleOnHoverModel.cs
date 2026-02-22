@@ -164,7 +164,50 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 
     
 
+    /// <summary>
+    /// Array to store the target scales of linked objects 
+    /// </summary>
     private Vector3[] targetScales;
+
+    /// <summary>
+    /// Public accessor method for target scales
+    /// </summary>
+    public Vector3[] TargetScales
+    {
+        /// <summary>
+        /// Getter method for target scales
+        /// </summary>
+        /// <post-condition>
+        ///     -   Returns the array of target scales for linked objects
+        /// </post-condition>
+        get
+        {            
+            return targetScales;
+        }
+
+        /// <summary>
+        /// Setter method for target scales
+        /// </summary>
+        /// <pre-condition>
+        ///     -   value != null
+        /// </pre-condition>
+        /// <post-condition>
+        ///     -   Target scales are updated to the new values
+        /// </post-condition>
+        set
+        {
+            if (value == null)
+            {
+                Debug.LogError("Setting of target scales array cannot be null");
+                return;
+            }
+            Assert.IsTrue(value != null, "Target scales array cannot be null");
+            targetScales = value;
+        }
+    }
+
+
+
     private bool isHovering = false;
 
 
