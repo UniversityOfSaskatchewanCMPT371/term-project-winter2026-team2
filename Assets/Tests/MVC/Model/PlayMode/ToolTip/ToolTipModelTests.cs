@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NUnit.Framework;
+using UnityEngine.TestTools;
 
-public class ToolTipPlayTests : MonoBehaviour
+public class ToolTipModelTests
 {
-    // Start is called before the first frame update
-    void Start()
+    [UnityTest]
+    public IEnumerator ToolTipModel_CanBeCreatedInPlayMode()
     {
-        
-    }
+        // Create an instance of the ToolTipModel ScriptableObject
+        var toolTipModel = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Assert.IsNotNull(toolTipModel);
+        yield return null;
+        Object.DestroyImmediate(toolTipModel);
     }
 }
