@@ -136,7 +136,34 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     }
 
     
+
+    /// <summary>
+    /// Array to store the normal (original)scales of linked objects
+    /// </summary>
     private Vector3[] normalScales;
+
+    /// <summary>
+    /// Public accessor method for normal scales
+    /// </summary>
+    public Vector3[] NormalScales
+    {
+        /// <summary>
+        /// Getter method for normal scales
+        /// </summary>
+        /// <post-condition>
+        ///     -   Returns the array of normal scales for linked objects
+        /// </post-condition>
+        get
+        {            
+            return normalScales;
+        }
+        /// Note: No setter for normal scales since they are initialized based 
+        ///         on the linked objects' original scales 
+        ///         (they should not be arbitrarily changed)
+    }   
+
+    
+
     private Vector3[] targetScales;
     private bool isHovering = false;
 
