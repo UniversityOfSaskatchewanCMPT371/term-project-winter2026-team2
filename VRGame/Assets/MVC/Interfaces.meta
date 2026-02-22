@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/MVC/Interfaces.meta
 guid: d72905e8f46ddc14e9f89adbc2712bbd
 folderAsset: yes
+========
+guid: d07d8072bf400174695f2b0dfa590835
+>>>>>>>> Development:VRGame/Assets/Resources/FreeAssets/KennyPrototypeKit/animal-bison.mtl.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

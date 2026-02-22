@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/MVC/Models/Scripts.meta
 guid: 17c9c11305a46fb4eb980bc30c22506c
 folderAsset: yes
+========
+guid: 762cf422f30797445be56930831f721e
+>>>>>>>> Development:VRGame/Assets/Resources/FreeAssets/KennyPrototypeKit/animal-dog.mtl.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
