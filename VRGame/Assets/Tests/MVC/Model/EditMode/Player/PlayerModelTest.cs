@@ -29,7 +29,7 @@ public class PlayerModel_EditTest
         PlayerModel playerModel = go.AddComponent<PlayerModel>();
         playerModel.Initialize("TestPlayer", 1);
         // Use the Assert class to test if the getPlayerName method returns the expected name after initializing the PlayerModel
-        Assert.AreEqual("TestPlayer", playerModel.getPlayerName());
+        Assert.AreEqual("TestPlayer", playerModel.getPlayerName);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class PlayerModel_EditTest
         PlayerModel playerModel = go.AddComponent<PlayerModel>();
         playerModel.Initialize("TestPlayer", 42);
         /// Use the Assert class to test if the getId method returns the expected ID after initializing the PlayerModel
-        Assert.AreEqual(42, playerModel.getPlayerId());
+        Assert.AreEqual(42, playerModel.getPlayerId);
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class PlayerModel_EditTest
         GameObject go = new GameObject();
         PlayerModel playerModel = go.AddComponent<PlayerModel>();
         playerModel.Initialize("TestPlayer", 1);
-        Assert.IsTrue(playerModel.playerIsAlive());
+        Assert.IsTrue(playerModel.playerIsAlive);
     }
     
 }
