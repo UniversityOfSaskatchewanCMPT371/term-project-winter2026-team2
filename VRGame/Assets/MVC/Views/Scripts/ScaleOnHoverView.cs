@@ -156,10 +156,17 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void OnHoverExit()
     {
-        if (controller != null)
+        /// Check if controller is null
+        if (controller == null)
         {
-            controller.OnHoverExit();
+            Debug.LogError("ScaleOnHoverController reference is null in OnHoverExit");
+            return;
         }
+        /// Assert to ensure controller reference is not null before processing hover exit
+        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnHoverExit");
+        
+        /// All checks passed, trigger hover exit event in controller
+        controller.OnHoverExit();
     }
 
 
