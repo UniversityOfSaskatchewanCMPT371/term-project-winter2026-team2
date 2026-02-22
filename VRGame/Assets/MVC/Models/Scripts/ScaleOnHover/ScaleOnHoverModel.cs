@@ -284,16 +284,28 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         InitializeScales();
     }
 
+
+
     /// <summary>
     /// Initializes the normal and target scales for objects linked
     /// </summary>
-    /// // Pre-condition:
+    /// <pre-condition>
     ///      -   linkedObject != null && linkedObject > 0
-    /// // Post-condition:
+    /// </pre-condition>
+    /// <post-condition>
     ///     -   The normal scale and target scale for a linked object is initialized
+    /// </post-condition>
     private void InitializeScales()
     {
-        if (linkedObjects == null || linkedObjects.Length == 0) return;
+        /// Debug log for linkedObjects array
+        if (linkedObjects == null || linkedObjects.Length == 0)
+        {
+            Debug.LogError("Cannot initialize scales: linked objects array is null or empty");
+            return;
+        }
+        /// Assertions for linkedObjects array
+        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null");
+        Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element"); 
         
         // Initialize normal and target/bigger scale
         normalScales = new Vector3[linkedObjects.Length];
