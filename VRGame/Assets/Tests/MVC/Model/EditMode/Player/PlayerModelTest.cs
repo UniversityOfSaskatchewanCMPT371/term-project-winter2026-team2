@@ -7,6 +7,18 @@ using UnityEngine.TestTools;
 public class PlayerModel_EditTest
 {
     /// <summary>
+    /// A simple initialization test to check if the PlayerModel can be initialized without errors
+    /// </summary>
+    [Test]
+    public void PlayerModel_EditTestInitialization()
+    {
+        GameObject go = new GameObject();
+        PlayerModel playerModel = go.AddComponent<PlayerModel>();
+        playerModel.Initialize("TestPlayer", 1);
+        Assert.IsNotNull(playerModel);
+    }
+
+    /// <summary>
     /// A simple test to check if the getPlayerName method of the PlayerModel class 
     ///      returns the correct name after initialization
     /// </summary>
