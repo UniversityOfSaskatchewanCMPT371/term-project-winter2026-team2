@@ -12,7 +12,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// <summary>
     /// Calls the Init() method to initialize and validate that the model and view layer exist
     /// </summary>
-    private void Start()
+    public void Start()
     {
         Init();
     }
@@ -26,7 +26,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// <post-condition>
     ///     -   Controller holds reference to Model and View layer
     /// </post-condition>
-    private void Init()
+    public void Init()
     {
         /// If model or view is not assigned in the inspector, attempt to get them from the same GameObject
         if (model == null)
