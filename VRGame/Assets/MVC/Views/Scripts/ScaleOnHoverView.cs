@@ -21,7 +21,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <post-condition>
     ///     -   View is initialized and ready to process hover events
     /// </post-condition>
-    private void Start()
+    public void Start()
     {
         Init();
         SetupXREvents();
@@ -36,7 +36,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <post-condition>
     ///    -   XR hover events are connected to the appropriate handlers for hover enter and exit
     /// </post-condition>
-    private void SetupXREvents()
+    public void SetupXREvents()
     {
         var xrInteractable = GetComponent<XRBaseInteractable>();
 
@@ -65,7 +65,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <post-condition>
     ///     -   OnHoverEnter is called to trigger scaling (up) of linkedObjects
     /// </post-condition>
-    private void OnXRHoverEnter(HoverEnterEventArgs args)
+    public void OnXRHoverEnter(HoverEnterEventArgs args)
     {
         Debug.Log($"XR Hover Enter detected on {gameObject.name}");
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnXRHoverEnter");
@@ -83,7 +83,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <post-condition>
     ///     -   OnHoverExit is called to trigger scaling (down) of linkedObjects
     /// </post-condition>
-    private void OnXRHoverExit(HoverExitEventArgs args)
+    public void OnXRHoverExit(HoverExitEventArgs args)
     {
         Debug.Log($"XR Hover Exit detected on {gameObject.name}");
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnXRHoverExit");

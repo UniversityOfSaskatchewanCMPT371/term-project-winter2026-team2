@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public interface IScaleOnHoverView
 {
@@ -47,7 +48,7 @@ public interface IScaleOnHoverView
     /// <post-condition>
     ///     -   OnHoverExit is called to trigger scaling (down) of linkedObjects
     /// </post-condition>
-    private void OnXRHoverExit(HoverExitEventArgs args);
+    void OnXRHoverExit(HoverExitEventArgs args);
 
 
     /// <summary>
