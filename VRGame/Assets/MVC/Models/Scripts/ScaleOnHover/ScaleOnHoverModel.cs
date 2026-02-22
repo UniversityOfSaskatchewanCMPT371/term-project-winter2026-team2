@@ -208,7 +208,29 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 
 
 
+    /// <summary>
+    /// Boolean data to track whether the object is currently being hovered
+    /// </summary>
     private bool isHovering = false;
+
+    /// <summary>
+    /// Public accessor method for isHovering
+    /// </summary>
+    public bool IsHovering
+    {
+        /// <summary>
+        /// Getter method for isHovering
+        /// </summary>
+        /// <post-condition>
+        ///     -   Returns true if the object is currently being hovered, false otherwise
+        /// </post-condition>
+        get
+        {
+            return isHovering;
+        }
+        /// Note: No setter for isHovering since it should only be changed 
+        ///         through the OnHoverEnter and OnHoverExit methods
+    }
 
 
     /// <summary>
