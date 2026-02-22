@@ -68,6 +68,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     private void OnXRHoverEnter(HoverEnterEventArgs args)
     {
         Debug.Log($"XR Hover Enter detected on {gameObject.name}");
+        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnXRHoverEnter");
         OnHoverEnter();
     }
 
@@ -85,6 +86,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     private void OnXRHoverExit(HoverExitEventArgs args)
     {
         Debug.Log($"XR Hover Exit detected on {gameObject.name}");
+        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnXRHoverExit");
         OnHoverExit();
     }
 
@@ -137,6 +139,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         /// Assert to ensure controller reference is not null before processing hover enter
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null");
 
+        /// All checks passed, trigger hover enter event in controller
         controller.OnHoverEnter();
     }
 
