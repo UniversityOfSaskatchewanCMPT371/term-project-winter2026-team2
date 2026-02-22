@@ -93,7 +93,48 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
 
 
 
+    /// <summary>
+    /// Float speed for how quickly the linked objects should transition to their target scale
+    /// </summary>
     [SerializeField] private float scaleSpeed = 10f;
+
+    /// <summary>
+    /// Public accessor method for scale speed
+    /// </summary>
+    public float ScaleSpeed
+    {
+        /// <summary>
+        /// Getter method for scale speed
+        /// </summary>
+        /// <post-condition>
+        ///     -   Returns the scale speed value
+        /// </post-condition>
+        get
+        {
+            return scaleSpeed;
+        }
+
+        /// <summary>
+        /// Setter method for scale speed
+        /// </summary>
+        /// <pre-condition>
+        ///     -   value > 0
+        /// </pre-condition>
+        /// <post-condition>
+        ///     -   Scale speed is updated to the new value
+        /// </post-condition>
+        set
+        {
+            if (value <= 0)            
+            {
+                Debug.LogError("Scale speed must be zero or positive");
+                return;
+            }
+            Assert.IsTrue(value > 0, "Scale speed must be greater than zero");
+            scaleSpeed = value;
+        }
+    }
+
     
     private Vector3[] normalScales;
     private Vector3[] targetScales;
@@ -194,17 +235,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     }
 
 
-    /// <summary>
-    /// Returns the scale transition speed
-    /// </summary>
-    /// Pre-condition:
-    ///     -   None
-    /// Post-condition:
-    ///     -   Returns the scale transition speed
-    public float getScaleSpeed()
-    {
-        return scaleSpeed;
-    }
+    
 
     /// <summary>
     /// Gets whether the object is currently being hovered
