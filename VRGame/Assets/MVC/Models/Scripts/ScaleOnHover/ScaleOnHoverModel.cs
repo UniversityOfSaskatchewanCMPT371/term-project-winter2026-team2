@@ -322,23 +322,34 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
     }
 
+
+
     /// <summary>
     /// Called when hover enters - sets target scales to bigger values
     /// </summary>
-    /// Pre-condition: 
+    /// <pre-condition> 
     ///     -   linkedObjects must exist and not be null
-    /// Post-condition: 
+    /// </pre-condition>
+    /// <post-condition> 
     ///     -   Target scales are set to be bigger (1.25x)
+    /// </post-condition>
     public void OnHoverEnter()
     {
         isHovering = true;
         
         for (int i = 0; i < linkedObjects.Length; i++)
         {
-            if (linkedObjects[i] != null)
+            /// Debug log for linked object at index i
+            if (linkedObjects[i] == null)
             {
-                targetScales[i] = normalScales[i] * hoverScaleMultiplier;
+                /// Stop processing if a linked object is null
+                Debug.LogError($"Linked object at index {i} is null");
+                return;
             }
+            /// Assertion for linked object at index i
+            assert.IsNotNull(linkedObjects[i], $"Linked object at index {i} cannot be null");
+            
+            targetScales[i] = normalScales[i] * hoverScaleMultiplier;
         }
     }
 
