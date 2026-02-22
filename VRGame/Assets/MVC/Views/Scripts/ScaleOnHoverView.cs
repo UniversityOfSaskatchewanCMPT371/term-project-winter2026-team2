@@ -9,7 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 {
-    // Reference to the controller - using concrete type for Unity serialization
+    // Reference to the controller to access model data and trigger events
     [SerializeField] private ScaleOnHoverController controller;
 
     /// <summary>
@@ -39,16 +39,19 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     private void SetupXREvents()
     {
         var xrInteractable = GetComponent<XRBaseInteractable>();
-        if (xrInteractable != null)
+
+        /// Check if XRBaseInteractable component exists
+        if (xrInteractable == null)
         {
-            xrInteractable.hoverEntered.AddListener(OnXRHoverEnter);
-            xrInteractable.hoverExited.AddListener(OnXRHoverExit);
-            Debug.Log($"XR hover events connected for {gameObject.name}");
+            Debug.LogError("XRBaseInteractable component is required for XR hover events to work");
+            return;
         }
-        else
-        {
-            Debug.LogWarning($"No XRBaseInteractable found on {gameObject.name}. Ray interactor hover won't work!");
-        }
+        /// Assert to ensure XRBaseInteractable is not null
+        Assert.IsNotNull(xrInteractable, "XRBaseInteractable component cannot be null for XR hover events");
+        
+        /// All checks passed, setup event listeners for hover enter and exit
+        xrInteractable.hoverEntered.AddListener(OnXRHoverEnter);
+        xrInteractable.hoverExited.AddListener(OnXRHoverExit);
     }
 
     /// <summary>
