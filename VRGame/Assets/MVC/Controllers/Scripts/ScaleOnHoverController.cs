@@ -10,7 +10,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     [SerializeField] private ScaleOnHoverView view;
 
     /// <summary>
-    /// Initialize and validate that the model and view layer exist
+    /// Calls the Init() method to initialize and validate that the model and view layer exist
     /// </summary>
     private void Start()
     {
