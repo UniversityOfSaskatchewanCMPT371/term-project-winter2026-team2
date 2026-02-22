@@ -164,7 +164,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         }
         /// Assert to ensure controller reference is not null before processing hover exit
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnHoverExit");
-        
+
         /// All checks passed, trigger hover exit event in controller
         controller.OnHoverExit();
     }
@@ -185,8 +185,12 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         // Check if controller is null to prevent NullReferenceException
         if (controller == null)
         {
+            Debug.LogError("ScaleOnHoverController reference cannot be null in Update");
             return;
         }
+         /// Assert to ensure controller reference is not null before updating scales
+        Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in Update");
+        
 
         // Grab data from model
         Transform[] linkedObjects = controller.retrieveLinkedObjects();
@@ -194,21 +198,40 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         float scaleSpeed = controller.retrieveScaleSpeed();
 
         // Additional null checks for safety
-        if (linkedObjects == null || targetScales == null)
+        if (linkedObjects == null)
         {
+            Debug.LogError("Linked objects array or target scales array cannot be null in Update");
+            return;
+        }
+        if (targetScales == null)
+        {            
+            Debug.LogError("Target scales array cannot be null in Update");
             return;
         }
 
+         /// Assert to ensure linkedObjects and targetScales are not null before updating scales
+        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null in Update");
+        Assert.IsNotNull(targetScales, "Target scales array cannot be null in Update");
+        
+
         // We use 'Lerp' to gradually move from localScale to targetScale
         for (int i = 0; i < linkedObjects.Length && i < targetScales.Length; i++) {
-                if (linkedObjects[i] != null) {
-                    linkedObjects[i].localScale = Vector3.Lerp(
+                /// Check if linkedObjects[i] is null
+                if (linkedObjects[i] == null) {
+                    Debug.LogError("Linked object at index " + i + " is null in Update");
+                    continue;
+                }
+
+                /// Assert to ensure linkedObjects[i] is not null before updating its scale 
+                Assert.IsNotNull(linkedObjects[i], "Linked object at index " + i + " cannot be null in Update");
+
+                /// All checks passed, update the scale of linkedObjects[i] towards targetScales[i] using Lerp for smooth transition
+                linkedObjects[i].localScale = Vector3.Lerp(
                     linkedObjects[i].localScale,
                     targetScales[i],
                     Time.deltaTime * scaleSpeed
                 );
-                }
-            }
+        }
     }
 }
  
