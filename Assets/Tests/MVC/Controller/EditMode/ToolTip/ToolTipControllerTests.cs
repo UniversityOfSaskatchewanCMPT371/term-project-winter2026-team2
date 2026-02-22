@@ -42,6 +42,29 @@ public class ToolTipControllerTests
         trigger.HoverEntered += Raise.Event<Action>();
         Assert.IsTrue(interactiveElement.activeSelf);
     }
+
+    [Test]
+    public void OnHoverExit_DisablesInteractiveElement()
+    {
+        trigger.HoverEntered += Raise.Event<Action>(); //first enable it
+        Assert.IsTrue(interactiveElement.activeSelf); //check it's enabled
+
+        trigger.HoverExited += Raise.Event<Action>(); //then raise hover exit
+        Assert.IsFalse(interactiveElement.activeSelf); //check it's disabled
+    }
+
+    [Test]
+    public void Dispose_UnsubscribesFromEvents()
+    {
+        toolTipController.Dispose();
+
+        //after disposing, raising events should not change the state
+        trigger.HoverEntered += Raise.Event<Action>();
+        Assert.IsFalse(interactiveElement.activeSelf);
+
+        trigger.HoverExited += Raise.Event<Action>();
+        Assert.IsFalse(interactiveElement.activeSelf);
+    }
     
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
