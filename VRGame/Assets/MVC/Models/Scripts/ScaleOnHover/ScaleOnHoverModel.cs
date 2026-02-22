@@ -239,12 +239,48 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     /// <param name="linkedObjects">Objects linked to the script</param>
     /// <param name="hoverScaleMultiplier">How big the linkedObject will grow</param>
     /// <param name="scaleSpeed">Speed of scale transitions</param>
+    /// <pre-condition>
+    ///     -   linkedObjects != null && linkedObjects.length > 0
+    ///     -   hoverScaleMultiplier > 0
+    ///     -   scaleSpeed > 0
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   Model is initialized with the parameters
+    /// </post-condition>
     public void Initialize(Transform[] linkedObjects, float hoverScaleMultiplier, float scaleSpeed)
     {
+        //// Debug logs for LinkedObjects parameter
+        if (linkedObjects == null || linkedObjects.Length == 0)
+        {
+            Debug.LogError("Linked objects array cannot be null or empty");
+            return;
+        }
+        /// Assertions for linkedObjects parameter
+        assert.IsNotNull(linkedObjects, "Linked objects array cannot be null");
+        assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element");
         this.linkedObjects = linkedObjects;
+
+        /// Debug log for hoverScaleMultiplier parameter
+        if (hoverScaleMultiplier <= 0)
+        {
+            Debug.LogError("Hover scale multiplier must be non-negative");
+            return;
+        }
+        /// Assertion for hoverScaleMultiplier parameter
+        assert.IsTrue(hoverScaleMultiplier >= 0, "Hover scale multiplier must be non-negative");
         this.hoverScaleMultiplier = hoverScaleMultiplier;
+
+        /// Debug log for scaleSpeed parameter
+        if (scaleSpeed <= 0)        {
+            Debug.LogError("Scale speed must be non-negative");
+            return;
+        }
+        /// Assertion for scaleSpeed parameter
+        assert.IsTrue(scaleSpeed >= 0, "Scale speed must be non-negative");
         this.scaleSpeed = scaleSpeed;
 
+    
+        /// Initialize scales based on the linked objects' original scales
         InitializeScales();
     }
 
