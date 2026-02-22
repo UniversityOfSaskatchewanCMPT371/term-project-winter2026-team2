@@ -9,7 +9,7 @@ public interface IScaleOnHoverModel
     /// <summary>
     /// Public accessor method for linked objects
     /// </summary>
-    public Transform[] LinkedObjects;
+    Transform[] LinkedObjects
     {
         /// <summary>
         /// Getter method for linked objects
@@ -36,7 +36,7 @@ public interface IScaleOnHoverModel
     /// <summary>
     /// Public accessor method for hover scale multiplier
     /// </summary>
-    public float HoverScaleMultiplier
+    float HoverScaleMultiplier
     {
         /// <summary>
         /// Getter method for hover scale multiplier
@@ -63,7 +63,7 @@ public interface IScaleOnHoverModel
     /// <summary>
     /// Public accessor method for scale speed
     /// </summary>
-    public float ScaleSpeed
+    float ScaleSpeed
     {
         /// <summary>
         /// Getter method for scale speed
@@ -90,7 +90,7 @@ public interface IScaleOnHoverModel
     /// <summary>
     /// Public accessor method for normal scales
     /// </summary>
-    public Vector3[] NormalScales
+    Vector3[] NormalScales
     {
         /// <summary>
         /// Getter method for normal scales
@@ -110,7 +110,7 @@ public interface IScaleOnHoverModel
     /// <summary>
     /// Public accessor method for target scales
     /// </summary>
-    public Vector3[] TargetScales
+    Vector3[] TargetScales
     {
         /// <summary>
         /// Getter method for target scales
@@ -137,7 +137,7 @@ public interface IScaleOnHoverModel
     /// <summary>
     /// Public accessor method for isHovering
     /// </summary>
-    public bool IsHovering
+    bool IsHovering
     {
         /// <summary>
         /// Getter method for isHovering
@@ -166,7 +166,7 @@ public interface IScaleOnHoverModel
     /// <post-condition>
     ///     -   Model is initialized with the parameters
     /// </post-condition>
-    public void Initialize(Transform[] linkedObjects, float hoverScaleMultiplier, float scaleSpeed);
+    void Initialize(Transform[] linkedObjects, float hoverScaleMultiplier, float scaleSpeed);
 
 
 
@@ -179,7 +179,7 @@ public interface IScaleOnHoverModel
     /// <post-condition>
     ///     -   The normal scale and target scale for a linked object is initialized
     /// </post-condition>
-    private void InitializeScales();
+    void InitializeScales();
     
 
 
@@ -193,7 +193,7 @@ public interface IScaleOnHoverModel
     /// <post-condition> 
     ///     -   Target scales are set to be bigger (1.25x)
     /// </post-condition>
-    public void OnHoverEnter();
+    void OnHoverEnter();
 
 
 
@@ -206,7 +206,7 @@ public interface IScaleOnHoverModel
     /// <post-condition> 
     ///     -   Target scales goes back to normal scale
     /// </post-condition>
-    public void OnHoverExit();
+    void OnHoverExit();
 
 
 
@@ -219,6 +219,6 @@ public interface IScaleOnHoverModel
     /// <post-condition>
     ///     - Initializes the linkedObjects on Awake()
     /// </post-condition>
-    private void Awake();
+    void Awake();
 
 }
