@@ -243,6 +243,39 @@ public class SoH_EditTests
         /// Assert - TargetScales should be initialized to NormalScales (not multiplied yet, that happens on hover)
         Assert.AreEqual(Vector3.one, targetScales[0], "TargetScales[0] should initially equal NormalScales[0]");
     }
+
+
+    /// <summary>
+    /// Simple test for TargetScale setter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsTargetScale_set()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+        // create a test object to assign to LinkedObjects
+        GameObject obj1 = new GameObject("TestObject1");
+        // set the test object's scale to default value (Vector3.one)
+        obj1.transform.localScale = Vector3.one;
+        // assign the test object to LinkedObjects
+        model.LinkedObjects = new Transform[]
+        {
+            obj1.transform
+        }; 
+        // initialize scales
+        model.InitializeScales();
+
+        // define new target scales to set (we try double cause why not)
+        Vector3[] newTargetScales = new Vector3[]
+        {
+            Vector3.one * 2f
+        };
+        // Act - set TargetScales
+        model.TargetScales = newTargetScales; 
+
+        /// Assert - TargetScales should be updated to the new values
+        Assert.AreEqual(newTargetScales, model.TargetScales);
+    }
     
 }
 
