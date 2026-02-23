@@ -310,5 +310,32 @@ public class SoH_EditTests
         Assert.AreEqual(model.NormalScales[1], model.TargetScales[1], "NormalScales[1] should match TargetScales[1]");
     }
 
+
+    /// <summary>
+    /// Simple test for OnHoverEnter()
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsOnHoverEnter() 
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        Transform[] linkedObjects = new Transform[]
+        {
+            new GameObject("TestObject1").transform
+        };
+
+        model.LinkedObjects = linkedObjects;
+        model.InitializeScales();
+
+
+        /// Act - Call OnHoverEnter
+        model.OnHoverEnter();
+
+        /// Assert - IsHovering should be true
+        Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
+
+    }
+    
 }
 
