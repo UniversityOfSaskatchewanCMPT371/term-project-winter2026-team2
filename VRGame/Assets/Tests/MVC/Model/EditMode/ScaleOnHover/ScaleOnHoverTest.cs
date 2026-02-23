@@ -312,30 +312,31 @@ public class SoH_EditTests
 
 
     /// <summary>
-    /// Simple test for OnHoverEnter()
-    /// </summary>
-    [Test]
-    public void SoH_EditTestsOnHoverEnter() 
-    {
-        /// Arrange
-        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+/// Simple test for OnHoverEnter()
+/// </summary>
+[Test]
+public void SoH_EditTestsOnHoverEnter() 
+{
+    // Arrange
+    ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
 
-        Transform[] linkedObjects = new Transform[]
-        {
-            new GameObject("TestObject1").transform
-        };
+    Transform obj = new GameObject("TestObject1").transform;
+    Transform[] linkedObjects = new Transform[] { obj };
 
-        model.LinkedObjects = linkedObjects;
-        model.InitializeScales();
+    model.Initialize(linkedObjects, 2.0f, 3.0f);
 
+    // manually define target scale
+    Vector3 target = model.NormalScales[0] * 2.0f;
 
-        /// Act - Call OnHoverEnter
-        model.OnHoverEnter();
+    // Act - call OnHoverEnter
+    model.OnHoverEnter();
 
-        /// Assert - IsHovering should be true
-        Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
+    // Assert
+    Assert.AreEqual(target, model.TargetScales[0]);
+    Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
+}
 
-    }
+    
     
 }
 
