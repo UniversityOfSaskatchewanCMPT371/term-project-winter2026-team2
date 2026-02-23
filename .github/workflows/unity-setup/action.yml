@@ -1,5 +1,4 @@
 name: unity-setup
-run-name: Setting up build for ${{ github.actor }}
 
 runs:
   using: composite
