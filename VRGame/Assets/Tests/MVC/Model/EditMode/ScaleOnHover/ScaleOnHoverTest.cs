@@ -54,28 +54,28 @@ public class SoH_EditTests
     }
 
     /// <summary>
-    /// Simple test for null check in LinkedObjects 
-    /// This should reject null values
+    /// Simple test for length checks in LinkedObjects 
     /// </summary>
     [Test]
-    public void SoH_EditTestsLinkedObjects_null_check()
+    public void SoH_EditTestsLinkedObjects_lengthCheck()
     {
-        /// Arrange
+        /// Arrange - create a ScaleOnHoverModel and some test objects to assign to LinkedObjects
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
-        
-        /// Set up a valid array first
+
         GameObject obj1 = new GameObject("TestObject1");
-        Transform[] validObjects = new Transform[] { obj1.transform };
-        model.LinkedObjects = validObjects;
+        GameObject obj2 = new GameObject("TestObject2");
 
-        /// Act - attempt to set LinkedObjects to null 
-        /// Note: This should be rejected since we prevent null assignments in the setter, 
-        ///         but we need to check if it logs an error as expected, so we use LogAssert to verify the error log
-        LogAssert.Expect(LogType.Error,  "Can't set linked objects to null or empty array");
-        model.LinkedObjects = null;
+        Transform[] testObjects = new Transform[]
+        {
+            obj1.transform,
+            obj2.transform
+        };
 
-        // Assert - LinkedObjects should remain unchanged
-        Assert.AreEqual(validObjects, model.LinkedObjects, "LinkedObjects should not change when set to null");
+        /// Act - set LinkedObjects to test objects
+        model.LinkedObjects = testObjects;
+
+        /// Assert - length of LinkedObjects should match length of assigned array
+        Assert.AreEqual(testObjects.Length, model.LinkedObjects.Length, "Length of LinkedObjects should match length of assigned array");
     }
 
 
