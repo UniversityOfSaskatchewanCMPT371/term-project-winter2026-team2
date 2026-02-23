@@ -294,6 +294,35 @@ public class SoH_EditTests
         /// Assert - IsHovering should be false on initialization
         Assert.IsFalse(isHovering, "IsHovering should be false on initialization");
     }
+
+
+    /// <summary>
+    /// Simple test for Initalize()
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsInitialize()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        Transform[] linkedObjects = new Transform[]
+        {
+            new GameObject("TestObject1").transform,
+            new GameObject("TestObject2").transform
+        };
+
+        float hoverScaleMultiplier = 1.5f;
+        float scaleSpeed = 20f;
+
+        /// Act - Initialize data
+        model.Initialize(linkedObjects, hoverScaleMultiplier, scaleSpeed);
+
+        /// Assert - check input parameters
+        Assert.IsNotNull(model.LinkedObjects, "LinkedObjects should not be null after initialization");
+        Assert.AreEqual(1.5f, model.HoverScaleMultiplier, "HoverScaleMultiplier should be 1.5f");
+        Assert.AreEqual(20f, model.ScaleSpeed, "ScaleSpeed should be 20f");
+        
+    }
     
 }
 
