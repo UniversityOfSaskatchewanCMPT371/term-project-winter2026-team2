@@ -285,5 +285,30 @@ public class SoH_EditTests
     }
     
     
+    /// <summary>
+    /// Simple test for InitializeScales() - normal equals target on initialization
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsInitializeScales()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        Transform[] linkedObjects = new Transform[]
+        {
+            new GameObject("TestObject1").transform,
+            new GameObject("TestObject2").transform
+        };
+
+        model.LinkedObjects = linkedObjects;
+
+        /// Act - Initialize scales
+        model.InitializeScales();
+
+        /// Assert - NormalScales and TargetScales should be initialized based on linked objects' scales
+        Assert.AreEqual(model.NormalScales[0], model.TargetScales[0], "NormalScales[0] should match TargetScales[0]");
+        Assert.AreEqual(model.NormalScales[1], model.TargetScales[1], "NormalScales[1] should match TargetScales[1]");
+    }
+
 }
 
