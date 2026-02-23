@@ -376,10 +376,13 @@ public class SoH_EditTests
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
 
         // create 2 game objects
+        GameObject obj1 = new GameObject("TestObject1");
+        GameObject obj2 = new GameObject("TestObject2");
+        
         Transform[] linkedObjects = new Transform[]
         {
-            new GameObject("TestObject1").transform,
-            new GameObject("TestObject2").transform
+            obj1.transform,
+            obj2.transform
         };
 
         model.LinkedObjects = linkedObjects;
@@ -394,8 +397,8 @@ public class SoH_EditTests
         Assert.AreEqual(2, model.NormalScales.Length, "NormalScales should be of length 2 on Awake");
         Assert.AreEqual(2, model.TargetScales.Length, "TargetScales should be of length 2 on Awake");
 
-        Assert.AreEqual(obj1.localScale, model.NormalScales[0], "obj1 local scale should match normalscale on Awake");
-        Assert.AreEqual(obj2.localScale, model.NormalScales[1], "obj2 local scale should match normalscale on Awake");
+        Assert.AreEqual(obj1.transform.localScale, model.NormalScales[0], "obj1 local scale should match normalscale on Awake");
+        Assert.AreEqual(obj2.transform.localScale, model.NormalScales[1], "obj2 local scale should match normalscale on Awake");
     }
 }
 
