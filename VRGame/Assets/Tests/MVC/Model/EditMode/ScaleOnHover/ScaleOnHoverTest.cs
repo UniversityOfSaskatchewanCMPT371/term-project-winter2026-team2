@@ -170,7 +170,7 @@ public class SoH_EditTests
 
     /// <summary>
     /// Simple test for ScaleSpeed setter method to check for negative values 
-    /// Thisshould reject negative values
+    /// This should reject negative values
     /// </summary>
     [Test]
     public void SoH_EditTestsScaleSpeed_negativeValue()
@@ -185,6 +185,34 @@ public class SoH_EditTests
         /// Assert - value should remain unchanged since we prevent negative assignments in the setter, 
         ///     so it should still be the default value of 10f
         Assert.AreEqual(10f, model.ScaleSpeed);
+    }
+
+
+    /// <summary>
+    /// Simple test for NormalScales getter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsNormalScale_get()
+    {
+        /// Arrange
+        /// create model
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+        /// create a test object to assign to LinkedObjects
+        GameObject obj1 = new GameObject("TestObject1");
+        /// set the test object's scale to default value (Vector3.one)
+        obj1.transform.localScale = Vector3.one;
+
+        model.LinkedObjects = new Transform[]
+        {
+            obj1.transform
+        };
+
+        /// Act - initialize scales (this sets NormalScales internally)
+        model.InitializeScales();
+        Vector3[] normalScale = model.NormalScales;
+
+        /// Assert - NormalScales should be initialized based on linked objects' scales
+        Assert.AreEqual(Vector3.one, normalScale[0], "NormalScales[0] should match the object's scale");
     }
     
 }
