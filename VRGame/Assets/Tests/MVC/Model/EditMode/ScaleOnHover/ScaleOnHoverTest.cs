@@ -312,31 +312,57 @@ public class SoH_EditTests
 
 
     /// <summary>
-/// Simple test for OnHoverEnter()
-/// </summary>
-[Test]
-public void SoH_EditTestsOnHoverEnter() 
-{
-    // Arrange
-    ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+    /// Simple test for OnHoverEnter()
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsOnHoverEnter() 
+    {
+        // Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
 
-    Transform obj = new GameObject("TestObject1").transform;
-    Transform[] linkedObjects = new Transform[] { obj };
+        Transform obj = new GameObject("TestObject1").transform;
+        Transform[] linkedObjects = new Transform[] { obj };
 
-    model.Initialize(linkedObjects, 2.0f, 3.0f);
+        model.Initialize(linkedObjects, 2.0f, 3.0f);
 
-    // manually define target scale
-    Vector3 target = model.NormalScales[0] * 2.0f;
+        // manually define target scale
+        Vector3 target = model.NormalScales[0] * 2.0f;
 
-    // Act - call OnHoverEnter
-    model.OnHoverEnter();
+        // Act - call OnHoverEnter
+        model.OnHoverEnter();
 
-    // Assert
-    Assert.AreEqual(target, model.TargetScales[0]);
-    Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
-}
+        // Assert
+        Assert.AreEqual(target, model.TargetScales[0]);
+        Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
+    }
 
     
-    
+    /// <summary>
+    /// Simple test for OnHoverExit()
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsOnHoverExit() 
+    {
+        // Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        Transform obj = new GameObject("TestObject1").transform;
+        Transform[] linkedObjects = new Transform[] { obj };
+
+        model.Initialize(linkedObjects, 2.0f, 3.0f);
+
+        // manually define normal scale 
+        Vector3 normal = model.NormalScales[0];
+
+        // call OnHoverEnter first
+        model.OnHoverEnter();
+
+        // Act - then call OnHoverExit
+        model.OnHoverExit();
+
+        // Assert
+        Assert.AreEqual(normal, model.TargetScales[0]);
+        Assert.IsFalse(model.IsHovering, "IsHovering should be true after OnHoverEnter");
+    }
 }
 
