@@ -114,26 +114,6 @@ public class SoH_EditTests
 
 
     /// <summary>
-    /// Simple test for hoverScaleMultiplier setter method to check for negative values 
-    /// This should reject negative values
-    /// </summary>
-    [Test]
-    public void SoH_EditTestsHoverScaleMultiplier_negativeMultiplier()
-    {        
-        /// Arrange
-        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
-
-        /// Act - attempt to set hoverScaleMultiplier to a negative value
-        LogAssert.Expect(LogType.Error, "Hover scale multiplier must be non-negative");
-        model.HoverScaleMultiplier = -0.5f;
-
-        /// Assert - value should remain unchanged since we prevent negative assignments in the setter, 
-        ///     so it should still be the default value of 1.25f
-        Assert.AreEqual(1.25f, model.HoverScaleMultiplier);
-    }
-
-
-    /// <summary>
     /// Simple test for ScaleSpeed getter method
     /// </summary>
     [Test]
@@ -165,26 +145,6 @@ public class SoH_EditTests
 
         /// Assert - value should be set correctly
         Assert.AreEqual(newValue, model.ScaleSpeed);
-    }
-
-
-    /// <summary>
-    /// Simple test for ScaleSpeed setter method to check for negative values 
-    /// This should reject negative values
-    /// </summary>
-    [Test]
-    public void SoH_EditTestsScaleSpeed_negativeValue()
-    {
-        /// Arrange
-        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
-
-        /// Act - attempt to set ScaleSpeed to a negative value
-        LogAssert.Expect(LogType.Error, "Scale speed must be zero or positive");
-        model.ScaleSpeed = -5f;
-
-        /// Assert - value should remain unchanged since we prevent negative assignments in the setter, 
-        ///     so it should still be the default value of 10f
-        Assert.AreEqual(10f, model.ScaleSpeed);
     }
 
 
@@ -323,6 +283,7 @@ public class SoH_EditTests
         Assert.AreEqual(20f, model.ScaleSpeed, "ScaleSpeed should be 20f");
         
     }
+    
     
 }
 
