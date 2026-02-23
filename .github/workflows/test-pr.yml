@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # checkout + cache
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/unity-setup
 
       # test
@@ -24,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # checkout + cache
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/unity-setup
 
       # build
