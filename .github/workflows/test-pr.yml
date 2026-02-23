@@ -1,39 +1,32 @@
 name: test-pr
 run-name: Testing build for ${{ github.actor }}
-on: [push, pull_request]
+on: [pull_request]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-      # checkout
-      - name: Checkout branch
-        uses: actions/checkout@v6
-
-      # cache
-      - name: Cache Library
-        uses: actions/cache@v5
-        with:
-          path: Library
-          key: >
-            Library-${{ hashFiles('VRGame/Assets/**', 'VRGame/Packages/**', 
-            'VRGame/ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+      # checkout + cache
+      - uses: ./.github/actions/unity-setup
 
       # test
-      # - name: Run tests
-      #   uses: game-ci/unity-test-runner@v4
-      #   env:
-      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      #     UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-      #     UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-      #   with:
-      #     projectPath: VRGame
-      # with:
-      #   githubToken: ${{ secrets.GITHUB_TOKEN }}
-      #
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: VRGame
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      # checkout + cache
+      - uses: ./.github/actions/unity-setup
+
+      # build
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
@@ -44,7 +37,7 @@ jobs:
           targetPlatform: WebGL
           projectPath: VRGame
 
-      # Output
+      # output
       - uses: actions/upload-artifact@v4
         with:
           name: Build
