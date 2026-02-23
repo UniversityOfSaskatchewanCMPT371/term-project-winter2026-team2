@@ -317,7 +317,7 @@ public class SoH_EditTests
     [Test]
     public void SoH_EditTestsOnHoverEnter() 
     {
-        // Arrange
+        /// Arrange
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
 
         Transform obj = new GameObject("TestObject1").transform;
@@ -328,10 +328,10 @@ public class SoH_EditTests
         // manually define target scale
         Vector3 target = model.NormalScales[0] * 2.0f;
 
-        // Act - call OnHoverEnter
+        /// Act - call OnHoverEnter
         model.OnHoverEnter();
 
-        // Assert
+        /// Assert
         Assert.AreEqual(target, model.TargetScales[0]);
         Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
     }
@@ -343,7 +343,7 @@ public class SoH_EditTests
     [Test]
     public void SoH_EditTestsOnHoverExit() 
     {
-        // Arrange
+        /// Arrange
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
 
         Transform obj = new GameObject("TestObject1").transform;
@@ -357,12 +357,45 @@ public class SoH_EditTests
         // call OnHoverEnter first
         model.OnHoverEnter();
 
-        // Act - then call OnHoverExit
+        /// Act - then call OnHoverExit
         model.OnHoverExit();
 
-        // Assert
+        /// Assert
         Assert.AreEqual(normal, model.TargetScales[0]);
         Assert.IsFalse(model.IsHovering, "IsHovering should be true after OnHoverEnter");
+    }
+
+
+    /// <summary>
+    /// Simple test for Awake
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsAwake()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        // create 2 game objects
+        Transform[] linkedObjects = new Transform[]
+        {
+            new GameObject("TestObject1").transform,
+            new GameObject("TestObject2").transform
+        };
+
+        model.LinkedObjects = linkedObjects;
+
+        /// Act - call Awake
+        model.Awake();
+
+        /// Assert - validate all scales (since we initialize them on Awake)
+        Assert.IsNotNull(model.NormalScales, "NormalScales should be initialized in Awake");
+        Assert.IsNotNull(model.TargetScales, "TargetScales should be initialized in Awake");
+
+        Assert.AreEqual(2, model.NormalScales.Length, "NormalScales should be of length 2 on Awake");
+        Assert.AreEqual(2, model.TargetScales.Length, "TargetScales should be of length 2 on Awake");
+
+        Assert.AreEqual(obj1.localScale, model.NormalScales[0], "obj1 local scale should match normalscale on Awake");
+        Assert.AreEqual(obj2.localScale, model.NormalScales[1], "obj2 local scale should match normalscale on Awake");
     }
 }
 
