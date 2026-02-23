@@ -270,11 +270,29 @@ public class SoH_EditTests
         {
             Vector3.one * 2f
         };
-        // Act - set TargetScales
+        /// Act - set TargetScales
         model.TargetScales = newTargetScales; 
 
         /// Assert - TargetScales should be updated to the new values
         Assert.AreEqual(newTargetScales, model.TargetScales);
+    }
+
+
+    /// <summary>
+    /// Simple test for IsHovering getter
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsIsHovering_get()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        /// Act - get IsHovering
+        /// Note: Should be false to begin with
+        bool isHovering = model.IsHovering;
+
+        /// Assert - IsHovering should be false on initialization
+        Assert.IsFalse(isHovering, "IsHovering should be false on initialization");
     }
     
 }
