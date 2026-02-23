@@ -195,7 +195,6 @@ public class SoH_EditTests
     public void SoH_EditTestsNormalScale_get()
     {
         /// Arrange
-        /// create model
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
         /// create a test object to assign to LinkedObjects
         GameObject obj1 = new GameObject("TestObject1");
@@ -207,12 +206,42 @@ public class SoH_EditTests
             obj1.transform
         };
 
-        /// Act - initialize scales (this sets NormalScales internally)
+        /// Act - initialize scales
         model.InitializeScales();
         Vector3[] normalScale = model.NormalScales;
 
         /// Assert - NormalScales should be initialized based on linked objects' scales
         Assert.AreEqual(Vector3.one, normalScale[0], "NormalScales[0] should match the object's scale");
+    }
+
+
+    /// <summary>
+    /// Simple test for TargetScale getter method
+    /// </summary>
+    [Test]
+    public void SoH_EditTestsTargetScale_get()
+    {
+        /// Arrange
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
+
+        // create a test object to assign to LinkedObjects
+        GameObject obj1 = new GameObject("TestObject1");
+        // set the test object's scale to default value (Vector3.one)
+        obj1.transform.localScale = Vector3.one;
+
+        // assign the test object to LinkedObjects
+        model.LinkedObjects = new Transform[]
+        {
+            obj1.transform
+        };
+
+        /// Act - initialize scales
+        model.InitializeScales();
+        // get TargetScales
+        Vector3[] targetScales = model.TargetScales;
+
+        /// Assert - TargetScales should be initialized to NormalScales (not multiplied yet, that happens on hover)
+        Assert.AreEqual(Vector3.one, targetScales[0], "TargetScales[0] should initially equal NormalScales[0]");
     }
     
 }
