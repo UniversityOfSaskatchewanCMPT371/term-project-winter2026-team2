@@ -12,7 +12,7 @@ public enum Scenes
 /// <summary>
 /// A persistent singleton responsible for changing scenes safely.
 /// </summary>
-public class SceneChanger : MonoBehaviour
+public class SceneChanger : MonoBehaviour, ISceneChanger // Implementing the ISceneChanger interface for dependency injection
 {
     private static SceneChanger instance { get; set; }          // Singleton instance of the SceneChanger
     private static bool loadDebounce = false;                   // Prevents multiple scene loads from being triggered at once

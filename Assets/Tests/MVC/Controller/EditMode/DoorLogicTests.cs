@@ -78,4 +78,20 @@ public class DoorLogicTests
         Object.DestroyImmediate(doorObject);
         Object.DestroyImmediate(playerObject);
     }
+
+    /// <summary>
+    /// Verifies that when the player enters the door, the DoorLogic
+    /// requests the scene loader to load the configured destination scene.
+    /// </summary>
+    [Test]
+    public void OnPlayerEnter_CallsLoadScene_WithCorrectScene()
+    {
+        // Act: simulate player entering the door collider
+        doorLogic.OnPlayerEnter(playerObject);
+
+        // Assert: the scene changer was asked to load the expected scene exactly once
+        mockSceneChanger.Received(1)
+            .LoadScene(Scenes.Room1);
+    }
 }
+
