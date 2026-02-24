@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 672563507087408481}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.102, y: 0.814, z: -1.932}
+  m_LocalPosition: {x: -4.16, y: -2.34, z: 1.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 4096992866724483403}
   - component: {fileID: 8725348041405647430}
   - component: {fileID: 5042690720493336660}
+  - component: {fileID: 2498738388617596224}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -479,6 +480,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2498738388617596224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568249249733489958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9335a7a2c59294794696568e856443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 1412964280482956489}
+  description: {fileID: 2683032614973472379}
+  data: {fileID: 0}
 --- !u!1 &5577820386585612431
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +504,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8124709730470611285}
-  - component: {fileID: 3954708225837774209}
   m_Layer: 0
   m_Name: ToolTip
   m_TagString: Untagged
@@ -514,21 +529,6 @@ Transform:
   - {fileID: 7000259672386360788}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3954708225837774209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5577820386585612431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ca11d295b574e7c968d36d17afd108, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: {fileID: 1412964280482956489}
-  description: {fileID: 2683032614973472379}
-  data: {fileID: 0}
 --- !u!1 &6011951716046516801
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7682740461303335630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9663a668f25269c42b95f91c03548c59, type: 3}
+  m_Script: {fileID: 11500000, guid: c8a50be21ee230742afac725c94926e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pointA: {fileID: 8561998086378729333}
@@ -797,7 +797,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8923417558391455620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a54835c133a41794ca4369e11eff1e45, type: 3}
+  m_Script: {fileID: 11500000, guid: a8a852f3fa511eb4ab9ba87d6a7fed87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PointB: {fileID: 7000259672386360788}
