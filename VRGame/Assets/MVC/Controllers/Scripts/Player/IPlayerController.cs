@@ -4,15 +4,8 @@ using UnityEngine;
 
 public interface IPlayerController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// Initialize the player controller and validate model/view references
+    /// </summary>
+    void Awake();
 }
