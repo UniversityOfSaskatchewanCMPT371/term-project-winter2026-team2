@@ -64,20 +64,11 @@ public class ToolTipViewTests
     [Test]
     public void SetActive_MakesGameObjectActiveOrInactive()
     {
-        toolTipView.setActive(true);
+        toolTipView.SetActive(true);
         Assert.IsTrue(toolTipGameObject.activeSelf);
 
-        toolTipView.setActive(false);
+        toolTipView.SetActive(false);
         Assert.IsFalse(toolTipGameObject.activeSelf);
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-/*     [UnityTest]
-    public IEnumerator ToolTipViewTestsWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
-    } */
 }

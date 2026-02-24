@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine.TestTools;
 
-public class ToolTipViewTests : MonoBehaviour
+public class ToolTipViewTests
 {
     private GameObject toolTipGameObject;
     private ToolTipView toolTipView;
