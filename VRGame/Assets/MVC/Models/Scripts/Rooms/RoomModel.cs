@@ -38,7 +38,7 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// Completion state of the educational dialogue of this room.
     /// </summary>
     [SerializeField]
-    private bool eductionalDialogueCompleted = false;
+    private bool educationalDialogueCompleted = false;
 
     /// <inheritdoc/>
     public int Id
@@ -156,7 +156,7 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         /// <returns>
         /// The value of educationalDialogueCompleted.
         /// </returns>
-        get => eductionalDialogueCompleted;
+        get => educationalDialogueCompleted;
         /// Modifies the value of educationalDialogueCompleted.
         /// </summary>
         /// <remarks>
@@ -165,7 +165,7 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         /// Postconditions:
         /// - The value of educationalDialogueCompleted is modified.
         /// </remarks>
-        set => eductionalDialogueCompleted = value; 
+        set => educationalDialogueCompleted = value; 
     }
 
     /// METHODS SECTION
@@ -173,7 +173,7 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// <inheritdoc/>
     public bool IsComplete()
     {
-        return eductionalDialogueCompleted & minigameCompleted;
+        return educationalDialogueCompleted & minigameCompleted;
     }
 
     /// <inheritdoc/>
@@ -191,11 +191,11 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         }
         Debug.Assert(minigameCompleted == false, "Field minigameCompleted must be set to false.");
 
-        if (eductionalDialogueCompleted)
+        if (educationalDialogueCompleted)
         {
             Debug.LogError("Field eductionalDialogueCompleted must start as false.");
         }
-        Debug.Assert(eductionalDialogueCompleted == false, "Field eductionalDialogueCompleted must be set to false.");
+        Debug.Assert(educationalDialogueCompleted == false, "Field eductionalDialogueCompleted must be set to false.");
 
         bool isKeyTaken = roomLookUp.ContainsKey(Id);
         if (isKeyTaken)
