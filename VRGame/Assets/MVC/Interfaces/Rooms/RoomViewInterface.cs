@@ -65,6 +65,8 @@ public interface IRoomView
     /// - Minigame component is in a state of finished and completed.
     /// Postconditions:
     /// - The room's model layer minigameCompletion field gets updated.
+    /// Throws:
+    /// - MissingFieldException is thrown if RoomController is null.
     /// </remarks>
     void MinigameCompleted();
 
@@ -77,6 +79,8 @@ public interface IRoomView
     /// - EducationalDialogue component is in a state of finished and completed.
     /// Postconditions:
     /// - The room's model layer educationalDialogueCompletion field gets updated.
+    /// Throws:
+    /// - MissingFieldException is thrown if RoomController is null
     /// </remarks>
     void EducationalDialoguesCompleted();
 
