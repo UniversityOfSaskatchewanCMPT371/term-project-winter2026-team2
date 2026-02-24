@@ -418,7 +418,6 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         {
             Debug.LogWarning("Cannot initialize scales. linked objects array is empty on Awake");
         }
-        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null on Awake");
         Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element on Awake");
 
         /// All checks passed
