@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Initialize the player controller and validate model/view references
     /// </summary>
-    private void Awake()
+    public void Awake()
     {
         // Try to get components if not assigned
         if (model == null)

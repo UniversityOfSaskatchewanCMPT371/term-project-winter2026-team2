@@ -37,7 +37,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// </post-condition>
     public void Init()
     {
-        /// If model or view is not assigned in the inspector, attempt to get them from the same GameObject
+        /// If model or view is null, create them by getting the component from the GameObject
         if (model == null)
         {
             if (Model != null) /// Checks if Model is assigned in the inspector and uses it if available

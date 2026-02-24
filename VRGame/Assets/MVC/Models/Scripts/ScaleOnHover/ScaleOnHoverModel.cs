@@ -87,7 +87,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
                 Debug.LogError("Hover scale multiplier must be zero or positive");
                 return;
             }
-            Assert.IsTrue(value > 0, "Hover scale multiplier must be greater than zero");
+            Assert.IsTrue(value >= 0, "Hover scale multiplier must be greater than zero");
             hoverScaleMultiplier = value;
         }
     }
@@ -418,7 +418,6 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         {
             Debug.LogWarning("Cannot initialize scales. linked objects array is empty on Awake");
         }
-        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null on Awake");
         Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element on Awake");
 
         /// All checks passed
