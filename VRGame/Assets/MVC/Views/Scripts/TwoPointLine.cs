@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
-
+using UnityEngine.Assertions;
 public class TwoPointLine : MonoBehaviour
 {
     public Transform pointA;
@@ -13,6 +14,8 @@ public class TwoPointLine : MonoBehaviour
     void Start()
 
     {
+        Assert.IsNotNull(pointA,"Point A must be refrenced");
+        Assert.IsNotNull(pointB,"Point B must be refrenced");
         if (pointA == null && pointB == null)
         {
             Debug.LogError("PointA and PointB must be assigned in the Unity Editor.");
