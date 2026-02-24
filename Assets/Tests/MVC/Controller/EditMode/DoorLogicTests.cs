@@ -23,3 +23,4 @@ public class DoorLogicTests
     /// Data model for the door configuration.
     /// </summary>
     private DoorData doorData;
+}
