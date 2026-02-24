@@ -9,5 +9,5 @@ using UnityEngine;
 public interface IToolTipView
 {
     void UpdateContent(IToolTipModel model);
-    void setActive(bool active);
+    void SetActive(bool active);
 }

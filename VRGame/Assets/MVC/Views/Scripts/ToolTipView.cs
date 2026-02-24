@@ -19,19 +19,13 @@ public class ToolTipView : MonoBehaviour, IToolTipView
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //interface part for testing
     public void UpdateContent(IToolTipModel model)
     {
         title.SetText(model.Title);
         description.SetText(model.Description);
     }
-    public void setActive(bool active)
+    public void SetActive(bool active)
     {
         gameObject.SetActive(active);
     }
