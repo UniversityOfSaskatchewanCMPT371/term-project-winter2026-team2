@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/MVC/Models/Scripts.meta
+guid: 72b8fd79e9a5e4ead82ecb1435eb55d1
+========
 guid: 42171596aee19d145895e254f06e1069
+>>>>>>>> origin/Development:VRGame/Assets/XR/Loaders/OpenXRLoader.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
