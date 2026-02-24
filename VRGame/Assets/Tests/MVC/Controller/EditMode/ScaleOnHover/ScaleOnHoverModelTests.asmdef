@@ -1,10 +1,9 @@
 {
-    "name": "PlayerModel",
+    "name": "ScaleOnHoverModelTests",
     "rootNamespace": "",
     "references": [
-        "GUID:27619889b8ba8c24980f49ee34dbb44a",
         "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:cca9828cb1a6b6f49b246a286504785e",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
         "GUID:cca9828cb1a6b6f49b246a286504785e"
     ],
     "includePlatforms": [
@@ -12,14 +11,10 @@
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": true,
-    "precompiledReferences": [
-        "nunit.framework.dll"
-    ],
+    "overrideReferences": false,
+    "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [
-        "UNITY_INCLUDE_TESTS"
-    ],
+    "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
 }
