@@ -13,7 +13,7 @@ public class TwoPointLine : MonoBehaviour
     void Start()
 
     {
-        if (pointA == null || pointB == null)
+        if (pointA == null && pointB == null)
         {
             Debug.LogError("PointA and PointB must be assigned in the Unity Editor.");
             return;
