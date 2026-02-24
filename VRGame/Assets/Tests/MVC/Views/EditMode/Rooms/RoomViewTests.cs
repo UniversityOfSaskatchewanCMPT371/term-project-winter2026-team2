@@ -115,6 +115,8 @@ public class RoomViewTests
         GameObject go = new GameObject();
         RoomView roomView = go.AddComponent<RoomView>();
 
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
+
         // should throw since there is no valid reference to controller
         Assert.Throws<MissingFieldException>(() => roomView.EducationalDialoguesCompleted(), "Expected an exception, but no exception was thrown on missing layers.");
 
