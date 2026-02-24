@@ -3,12 +3,22 @@ using NUnit.Framework;
 using TMPro;
 using UnityEngine.TestTools;
 
+/// <summary>
+/// Pay Mode tests for ToolTipView. 
+/// Verifies View correctly updates its text
+/// and toggles active state in Play Mode
+/// </summary>
 public class ToolTipViewTests
 {
     private GameObject toolTipGameObject;
     private ToolTipView toolTipView;
     private ToolTipModel toolTipModel;
 
+
+    /// <summary>
+    /// Tests when scene runs, Start() correctly sets the text of the 
+    /// title and description from the assigned model and updates
+    /// </summary>
     [UnityTest]
     public IEnumerator Start_SetsTextFromAssignedModel()
     {
