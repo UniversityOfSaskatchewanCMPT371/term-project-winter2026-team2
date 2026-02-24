@@ -18,9 +18,36 @@ public class DoorLogicTests
     /// Instance of DoorLogic component being tested.
     /// </summary>
     private DoorLogic doorLogic;
+    private ISceneChanger mockSceneChanger;
 
     /// <summary>
     /// Data model for the door configuration.
     /// </summary>
     private DoorData doorData;
+    private GameObject playerObject;
+
+    [SetUp]
+    public void Setup()
+    {
+        mockSceneChanger = Substitute.For<ISceneChanger>();
+
+        doorObject = new GameObject();
+        doorLogic = doorObject.AddComponent<DoorLogic>();
+        doorData = doorObject.AddComponent<DoorData>();
+
+    
+        typeof(DoorLogic)
+            .GetField("doorData", BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(doorLogic, doorData);
+
+        
+        doorLogic.InjectSceneChanger(mockSceneChanger);
+
+        
+        doorData.sceneDestination = Scenes.Room1;
+
+        
+        playerObject = new GameObject();
+        playerObject.AddComponent<PlayerLogic>();
+    }
 }

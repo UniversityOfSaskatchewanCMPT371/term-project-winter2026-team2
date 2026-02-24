@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,27 +10,41 @@ using UnityEngine.Assertions;
 public class DoorLogic : MonoBehaviour
 {
     public DoorData doorData;                   // Reference to the data attached to this object
-    private SceneChanger sceneChanger;          // Reference to the global scene changer service
+    private ISceneChanger sceneChanger;          // changed from global reference to injected dependency to support testing
     private static bool triggerDebounce = false;     // Prevents rapid requests   
 
     /// <summary>
     /// Validates required fields and retrieves the SceneChanger service.
     /// </summary>
-    private void Awake()
-    {
-        // Ensure doorData is assigned in the inspector
-        Assert.IsNotNull(doorData, "DoorData field cannot be null.");
+private void Awake()
+{
+    // Ensure doorData is assigned in the inspector
+    Assert.IsNotNull(doorData, "DoorData field cannot be null.");
+}
 
-        // Locate the global Services object and extract the SceneChanger.
-        sceneChanger = GameObject.Find("Services").GetComponent<Services>().sceneChanger;
+private void Start()
+{
+    // Auto-fetch SceneChanger from Services if not injected (supports unit testing)
+    if (sceneChanger == null)
+    {
+        sceneChanger = (ISceneChanger)GameObject
+            .Find("Services")
+            .GetComponent<Services>()
+            .sceneChanger;
+    }
+}
+
+public void InjectSceneChanger(ISceneChanger changer)
+    {
+        sceneChanger = changer;
     }
 
-    /// <summary>
-    /// Called when the player enters this door's collider.
-    /// Loads the destination scene, and teleports the player.
-    /// </summary>
-    /// <param name="playerRig">The player's XR rig GameObject.</param>
-    public void OnPlayerEnter(GameObject playerRig)
+/// <summary>
+/// Called when the player enters this door's collider.
+/// Loads the destination scene, and teleports the player.
+/// </summary>
+/// <param name="playerRig">The player's XR rig GameObject.</param>
+public void OnPlayerEnter(GameObject playerRig)
     {
         if (!playerRig.GetComponent<PlayerLogic>()) throw new MissingComponentException("This function requires PlayerLogic component attached to PlayerRig.");
 
