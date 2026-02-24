@@ -1,4 +1,9 @@
+
+
 using System.Runtime.CompilerServices;
+using UnityEditor.VersionControl;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 [assembly: InternalsVisibleTo("Tests")]
 /// <summary>
@@ -56,7 +61,7 @@ public class DoorView : MonoBehaviour, IDoorView
         // If values set through inspector window, set the inner value to those
         if (serializableDoorController != null)
         {
-            doorController = (IDoorController)serializableDoorController;
+            doorController = (IDoorController) serializableDoorController;
         }
 
         // sanity checks
@@ -86,7 +91,7 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void OnTriggerEnterLogic(IColliderWrapper colliderWrapper)
     {
-        if (!colliderWrapper.CompareGameObjectTag("MainCamera"))
+        if (!colliderWrapper.CompareGameObjectTag("MainCamera")) 
         {
             Debug.Log("Component other than player collided with door");
             return;

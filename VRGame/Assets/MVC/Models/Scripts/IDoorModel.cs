@@ -1,4 +1,6 @@
 
+using UnityEditor.Build.Reporting;
+using UnityEngine;
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
 /// </summary>
@@ -6,8 +8,7 @@
 /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
-public interface IDoorModel
-{
+public interface IDoorModel {
 
     /// <summary>
     /// Public accessor for door's id
@@ -22,7 +23,7 @@ public interface IDoorModel
         /// - None
         /// Postconditions:
         /// - DoorModel's id is returned
-        get;
+        get; 
         /// <summary>
         /// Set the id of this DoorModel
         /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
@@ -50,7 +51,7 @@ public interface IDoorModel
         /// Postconditions:
         /// - DoorModel's `targetDoorId` instance variable is returned
         /// </remarks>
-        get;
+        get; 
         /// <summary>
         /// Set the value of the DoorModel's targetDoorId instance variable
         /// Note: This is for unit testing purposes - the instance variables of Monobehavior 
@@ -79,7 +80,7 @@ public interface IDoorModel
         /// Postconditions:
         /// - DoorModel's `destinationSceneId` instance variable is returned
         /// </remarks>
-        get;
+        get; 
         /// <summary>
         /// Set the value of the DoorModel's destinationSceneId instance variable
         /// Note: This is for unit testing purposes - the instance variables of Monobehavior 
