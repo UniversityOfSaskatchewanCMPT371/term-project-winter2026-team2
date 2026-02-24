@@ -52,13 +52,10 @@ public class DoorLogicTests
         doorLogic = doorObject.AddComponent<DoorLogic>();
         doorData = doorObject.AddComponent<DoorData>();
 
-        // Inject doorData into DoorLogic using reflection (since it's private)
+        // Inject mock scene changer using reflection (ensures persistence in edit mode)
         typeof(DoorLogic)
-            .GetField("doorData", BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(doorLogic, doorData);
-
-        // Inject mock scene changer for testing
-        doorLogic.InjectSceneChanger(mockSceneChanger);
+            .GetField("sceneChanger", BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(doorLogic, mockSceneChanger);
 
         // Configure door destination for test scenarios
         doorData.sceneDestination = Scenes.Room1;
@@ -93,5 +90,40 @@ public class DoorLogicTests
         mockSceneChanger.Received(1)
             .LoadScene(Scenes.Room1);
     }
-}
 
+    /// <summary>
+    /// Verifies that rapid successive calls to OnPlayerEnter are debounced
+    /// and only one scene load is initiated.
+    /// </summary>
+    [Test]
+    public void OnPlayerEnter_Debounce_PreventsDoubleLoad()
+    {
+        // Act: call OnPlayerEnter twice in rapid succession
+        doorLogic.OnPlayerEnter(playerObject);
+        doorLogic.OnPlayerEnter(playerObject);
+
+        // Assert: only one scene load was requested despite two calls
+        mockSceneChanger.Received(1)
+            .LoadScene(Scenes.Room1);
+    }
+
+    /// <summary>
+    /// Verifies that OnPlayerEnter throws a MissingComponentException
+    /// when called with a GameObject that lacks the PlayerLogic component.
+    /// </summary>
+    [Test]
+    public void OnPlayerEnter_WithoutPlayerLogic_ThrowsException()
+    {
+        // Arrange: create a player GameObject without PlayerLogic component
+        var invalidPlayer = new GameObject();
+
+        // Act & Assert: expect MissingComponentException to be thrown
+        Assert.Throws<MissingComponentException>(() =>
+        {
+            doorLogic.OnPlayerEnter(invalidPlayer);
+        });
+
+        // Cleanup: remove the temporary test GameObject
+        Object.DestroyImmediate(invalidPlayer);
+    }
+}
