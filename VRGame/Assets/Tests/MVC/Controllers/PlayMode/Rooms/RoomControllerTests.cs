@@ -52,7 +52,9 @@ public class RoomControllerTests
         roomController.RoomModel = roomModel;
 
         // expect error + assert
+        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomView.");
+        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomView cannot be null.");
 
         // allow Start() to run
@@ -79,7 +81,9 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
 
         // expect error + assert
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomModel.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
 
         // allow Start() to run
@@ -106,16 +110,20 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
 
         // expect error + assert
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomModel.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
 
-        // expect MissingFieldException
+        yield return null;
+
         Assert.Throws<MissingFieldException>(() =>
         {
             roomController.HandleCompleteMinigame();
         }, "Expected exception, but no exception was thrown.");
 
-        yield return null;
+        
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -160,7 +168,6 @@ public class RoomControllerTests
         RoomController roomController = go.AddComponent<RoomController>();
 
         RoomView roomView = go.AddComponent<RoomView>();
-        RoomModel roomModel = go.AddComponent<RoomModel>();
 
         roomView.RoomController = roomController;
 
@@ -168,16 +175,19 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
 
         // expect error + assert
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomModel.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+        
+        yield return null;
 
-        // expect MissingFieldException
         Assert.Throws<MissingFieldException>(() =>
         {
             roomController.HandleCompleteEducationalDialogue();
         }, "Expected exception, but no exception was thrown.");
 
-        yield return null;
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -195,7 +205,6 @@ public class RoomControllerTests
         RoomModel roomModel = go.AddComponent<RoomModel>();
 
         roomView.RoomController = roomController;
-
         // assign real components
         roomController.RoomView = roomView;
         roomController.RoomModel = roomModel;
@@ -229,8 +238,13 @@ public class RoomControllerTests
         roomController.RoomView = roomView;
 
         // expect error + assert
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomModel.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+
+        yield return null;
 
         // expect MissingFieldException
         Assert.Throws<MissingFieldException>(() =>
@@ -238,7 +252,6 @@ public class RoomControllerTests
             roomController.HandleCompletion();
         }, "Expected exception, but no exception was thrown.");
 
-        yield return null;
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -252,16 +265,19 @@ public class RoomControllerTests
         GameObject go = new GameObject();
         RoomController roomController = go.AddComponent<RoomController>();
 
-        RoomView roomView = go.AddComponent<RoomView>();
-
-        roomView.RoomController = roomController;
+        RoomModel roomModel = go.AddComponent<RoomModel>();
 
         // assign real components
-        roomController.RoomView = roomView;
+        roomController.RoomModel = roomModel;
 
         // expect error + assert
-        LogAssert.Expect(LogType.Error, "Missing field roomModel.");
-        LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
+        LogAssert.Expect(LogType.Error, "Missing field roomView.");
+        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
+        LogAssert.Expect(LogType.Assert, "Field roomView cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
+
+        yield return null;
 
         // expect MissingFieldException
         Assert.Throws<MissingFieldException>(() =>
@@ -269,7 +285,6 @@ public class RoomControllerTests
             roomController.HandleCompletion();
         }, "Expected exception, but no exception was thrown.");
 
-        yield return null;
         UnityEngine.Object.DestroyImmediate(go);
     }
 

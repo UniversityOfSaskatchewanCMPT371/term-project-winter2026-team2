@@ -1,4 +1,3 @@
-
 /// <summary>
 /// Default internal interface for room view.
 /// </summary>
@@ -7,38 +6,33 @@ public interface InternalRoomView
     /// DATA SECTION
     
     /// <summary>
-    /// Getter/Setter for the controller layer.
-    /// Returns the real controller if assigned, otherwise returns the mock.
+    /// Getter/Setter for controller layer component.
     /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - Getting returns a valid IRoomController (real or mock).
-    /// - Setting updates either the real controller reference or the mock.
-    /// </remarks>
     public IRoomController RoomController{
         /// <summary>
-        /// Access the controller layer of this room.
+        /// Retrieves the controller layer component, or the
+        /// mock, whichever is not null.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - None
+        /// - roomController or roomControllerMock is not null.
         /// Postconditions:
-        /// - Returns the reference to the controller layer.
+        /// - Returns the reference to controller layer component.
         /// </remarks>
         /// <returns>
-        /// Current completion state of the minigame.
+        /// - The reference to the controller layer component.
         /// </returns>
         get; 
         /// <summary>
-        /// Modify the reference to the controller layer of this room.
+        /// Modifies the reference to the controller layer component, or the
+        /// mock, if the new value inherits from Controller class.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Controller layer cannot be null.
+        /// - Value is not null
+        /// - Value either inherits from Controller class, or a mock.
         /// Postconditions:
-        /// - None.
+        /// - Reference to the controller layer is modified.
         /// </remarks>
         set; 
         }
@@ -52,50 +46,50 @@ public interface IRoomView
     /// METHODS SECTIONS
     
     /// <summary>
-    /// Called by the controller layer when the room is complete.
+    /// Invokes all listeners subscribed to OnRoomComplete event.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - The room is complete.
+    /// - The room is in a valid state of completion
     /// Postconditions:
     /// - All listeners subscribed to onRoomCompleted are invoked.
     /// </remarks>
     void InvokeOnRoomComplete();
 
     /// <summary>
-    /// Called when the minigame is completed.
+    /// Called when the state of the minigame component is finished and completed.
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - RoomController is not null.
-    /// - The minigame has been completed.
+    /// - Minigame component is in a state of finished and completed.
     /// Postconditions:
-    /// - The room's minigame completion state is updated through the controller.
-    /// </remarks>
-    void EducationalDialoguesCompleted();
-
-    /// <summary>
-    /// Called when all educational dialogues are complete.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - RoomController is not null.
-    /// - All educational dialogues have been completed.
-    /// Postconditions:
-    /// - The room's educational dialogue completion state is updated through the controller.
+    /// - The room's model layer minigameCompletion field gets updated.
     /// </remarks>
     void MinigameCompleted();
 
     /// <summary>
-    /// Initializes this component. Called by the game within the MonoBehaviour.
+    /// Called when the state of the EducationalDialogue component is finished and completed.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Serialized fields must be assigned or have valid defaults.
-    /// - A reference to the controller layer must be set.
+    /// - RoomController is not null.
+    /// - EducationalDialogue component is in a state of finished and completed.
+    /// Postconditions:
+    /// - The room's model layer educationalDialogueCompletion field gets updated.
+    /// </remarks>
+    void EducationalDialoguesCompleted();
+
+    /// <summary>
+    /// Initializes this component and verifies that the controller
+    /// reference is set correctly.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Should be called after dependency injection or inspector assignment.
     /// Postconditions:
     /// - Logs errors if RoomController is missing.
-    /// - Asserts that RoomController is valid.
+    /// - Asserts that the references are valid.
     /// </remarks>
     void Init();
 }

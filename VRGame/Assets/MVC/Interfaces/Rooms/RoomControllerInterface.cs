@@ -7,32 +7,68 @@ public interface InternalRoomController
     // DATA SECTION
 
     /// <summary>
-    /// Gets or sets the view layer.  
-    /// Returns the real view if assigned, otherwise returns the mock.
+    /// Getter/Setter for view layer component.
     /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None.
-    /// Postconditions:
-    /// - Always returns a valid IRoomView reference (real or mock).
-    /// </remarks>
     public IRoomView RoomView {
+        /// <summary>
+        /// Retrieves the view layer component, or the
+        /// mock, whichever is not null.
+        /// </summary>
+        /// <remarks>
+        /// Precondtion:
+        /// - roomView or roomViewMock is not null.
+        /// Postcondition:
+        /// - returns the reference to view layer component.
+        /// </remarks>
+        /// <returns>
+        /// - The reference to view layer component.
+        /// </returns>
         get; 
+        /// <summary>
+        /// Modifies the reference to the view layer component, or the
+        /// mock, if the new value inherits from View class.
+        /// </summary>
+        /// <remarks>
+        /// Precondition:
+        /// - Value is not null.
+        /// - Value either inherits from View class, or
+        /// a mock.
+        /// Postcondition:
+        /// - Reference to the view layer is modified.
+        /// </remarks>
         set; 
         }
 
     /// <summary>
-    /// Gets or sets the model layer.  
-    /// Returns the real model if assigned, otherwise returns the mock.
+    /// Getter/Setter for model layer component
     /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None.
-    /// Postconditions:
-    /// - Always returns a valid IRoomModel reference (real or mock).
-    /// </remarks>
     public IRoomModel RoomModel {
+        /// <summary>
+        /// Retrieves the model layer component, or the
+        /// mock, whichever is not null.
+        /// </summary>
+        /// <remark>
+        /// Preconditions:
+        /// - roomModel or roomModelMock is not null.
+        /// Postconditions:
+        /// - returns the reference to model layer component.
+        /// </remarks>
+        /// <returns>
+        /// - The reference to model layer component.
+        /// </return>
         get;
+        /// <summary>
+        /// Modifies the reference to the model layer component, or the
+        /// mock, if the new value inherits from Model class.
+        /// </summary>
+        /// <remarks>
+        /// Precondition:
+        /// - Value is not null.
+        /// - Value is either inherits from Model class, or
+        /// a mock.
+        /// Postcondition:
+        /// - Reference to the model layer is modified.
+        /// </remarks>
         set; 
         }
 }
@@ -57,8 +93,8 @@ public interface IRoomController
     /// Throws:
     /// - MissingFieldException if RoomModel is null.
     /// </remarks>
-    void HandleCompletion();
-
+    void HandleCompleteMinigame();
+    
     /// <summary>
     /// Marks the educational dialogue as complete in the model and then
     /// checks whether the room is fully complete.
@@ -68,11 +104,11 @@ public interface IRoomController
     /// - RoomModel must not be null.
     /// Postconditions:
     /// - RoomModel.EducationalDialogueCompleted is set to true.
-    /// - Completion logic is evaluated.
+    /// - calls HandleCompletion() from model layer.
     /// Throws:
     /// - MissingFieldException if RoomModel is null.
     /// </remarks>
-    void HandleCompleteMinigame();
+    void HandleCompleteEducationalDialogue();
 
     /// <summary>
     /// Checks whether the room is fully complete and, if so,
@@ -87,7 +123,7 @@ public interface IRoomController
     /// Throws:
     /// - MissingFieldException if RoomModel or RoomView is null.
     /// </remarks>
-    void HandleCompleteEducationalDialogue();
+    void HandleCompletion();
 
     /// <summary>
     /// Initializes this component and verifies that the view and model

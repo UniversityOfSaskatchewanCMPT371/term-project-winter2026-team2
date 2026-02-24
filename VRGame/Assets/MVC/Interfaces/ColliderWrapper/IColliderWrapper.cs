@@ -1,10 +1,3 @@
-
-using System;
-using UnityEditor.VersionControl;
-using UnityEngine;
-using UnityEngine.Assertions;
-
-
 /// <summary>
 /// Wrapper for unity's `Collider` type. Allows functionality involving colliders to be mocked out for unit tests
 /// </summary>

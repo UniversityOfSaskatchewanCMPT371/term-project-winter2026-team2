@@ -23,7 +23,7 @@ public class RoomModelTests
         roomModel.Name = "Test";
         roomModel.Id = 1;
         roomModel.MinigameCompleted = false;
-        roomModel.EducationalDialogueCompleted = false;
+        roomModel.EducationalDialogueCompleted = false;        
 
         // skip one frame to allow Init() to run
         yield return null;
@@ -85,6 +85,7 @@ public class RoomModelTests
         roomModel.EducationalDialogueCompleted = false;
 
         // expect error log + assert log
+        LogAssert.Expect(LogType.Assert,"Value cannot be whitespace.");
         LogAssert.Expect(LogType.Error, "Field roomName cannot be whitespace.");
         LogAssert.Expect(LogType.Assert, "Field roomName must be set to a different name.");
 

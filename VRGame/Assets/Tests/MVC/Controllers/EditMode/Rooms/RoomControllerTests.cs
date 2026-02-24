@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using NSubstitute;
 using System;
+using UnityEngine.TestTools;
 
 /// <summary>
 /// Unit tests for RoomController class.
@@ -50,6 +51,8 @@ public class RoomControllerTests
 
         roomController.RoomView = roomView;
 
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+
         // should throw since there's no valid references to model layer
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompleteEducationalDialogue(), "Expected an exception, but no exception was thrown on missing layers.");
 
@@ -95,6 +98,8 @@ public class RoomControllerTests
         IRoomView roomView = Substitute.For<IRoomView>();
 
         roomController.RoomView = roomView;
+
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
 
         // should throw since there's no valid references to model layer
         Assert.Throws<MissingFieldException>(() => roomController.HandleCompleteMinigame(), "Expected an exception, but no exception was thrown on missing layers.");
@@ -161,6 +166,8 @@ public class RoomControllerTests
         GameObject go = new GameObject();
         RoomController roomController = go.AddComponent<RoomController>();
 
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+
         // confirm that roomController is not null
         Assert.NotNull(roomController, $"roomController cannot be null. Got {roomController}");
 
@@ -187,14 +194,19 @@ public class RoomControllerTests
 
         roomController.RoomView = roomView;
 
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+        LogAssert.Expect(LogType.Assert, "Value cannot be null.");
+
         // should throw since there is no valid reference to model
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
+        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing model layer.");
+
+        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
 
         roomController.RoomView = null;
         roomController.RoomModel = roomModel;
         
         // should throw since there is no valid reference to view
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
+        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing view layer.");
 
         // free up memory
         UnityEngine.Object.DestroyImmediate(go);

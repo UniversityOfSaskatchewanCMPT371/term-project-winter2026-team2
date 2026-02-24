@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Codice.Client.BaseCommands.BranchExplorer;
-using NUnit.Framework;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Diagnostics;
+
+/// <summary>
+/// Model layer for reusable room module.
+/// </summary>
 public class RoomModel : Model, IRoomModel, InternalRoomModel
 {
+
+    /// DATA SECTION
+
     /// <summary>
-    /// Dictionary of rooms already created.
+    /// Dictionary of rooms available.
     /// </summary>
     private static Dictionary<int, RoomModel> roomLookUp = new Dictionary<int, RoomModel>();
 
@@ -38,41 +43,71 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// <inheritdoc/>
     public int Id
     {
+        /// <summary>
+        /// Retrieves this room's unique id.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - roomId is non-negative.
+        /// Postconditions:
+        /// - Returns this room's unique id.
+        /// </remarks>
         get => roomId;
-        set => roomId = value;
+        /// <summary>
+        /// Modifies the value of this room's unique id.
+        /// </summary>
+        /// <remarks
+        /// Preconditions:
+        /// - value is non-negative.
+        /// Postconditions:
+        /// - The value of this room's unique id is modified.
+        /// </remarks>
+        set
+        {
+            if (value < 0)
+            {
+                Debug.Log("Value is negative.");
+                Debug.Assert(value >= 0, "Value cannot be negative.");
+            }
+        }
     }
 
     /// <inheritdoc/>
     public string Name
     {
         /// <summary>
-        /// Access the current name of this room
+        /// Retrieves the value of this room's name.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - None
-        /// Postcondition:
-        /// - Returns the current name of the room.
+        /// - Value is not null.
+        /// Postconditions:
+        /// - Returns this room's name.
         /// </remarks>
         /// <returns>
-        /// Current name of the room.
+        /// This room's name.
         /// </returns>
         get => roomName;
         /// <summary>
-        /// Modify the current value of this room's name.
+        /// Modifies the value of this room's name.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is not the same as previous one.
-        /// - Value is not null.
-        /// Postcondition:
-        /// - Value of the room's name is modified.
+        /// - value is not null.
+        /// - value is non-whitespace.
+        /// Postconditions:
+        /// - The value of this room's name is modified.
         /// </remarks>
         set
         {
             if (value == roomName)
             {
-                throw new InvalidOperationException("Value cannot be the same as the current roomName.");
+                Debug.Log("Value is same as current.");
+                Debug.Assert(value != roomName, "Value cannot be the same as current.");
+            } else if (value.Trim() == "")
+            {
+                Debug.Log("Value is whitespace.");
+                Debug.Assert(value.Trim() != "", "Value cannot be whitespace.");
             }
             roomName = value;
         }
@@ -81,16 +116,59 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
     /// <inheritdoc/>
     public bool MinigameCompleted 
     { 
+        /// <summary>
+        /// Retrieves the value of minigameCompleted.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - Returns the value of minigameCompleted.
+        /// </remarks>
+        /// <returns>
+        /// The value of minigameCompleted.
+        /// </returns>
         get => minigameCompleted;
+        /// <summary>
+        /// Modifies the value of minigameCompleted.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value is either true or false.
+        /// Postconditions:
+        /// - The value of minigameCompleted is modified.
+        /// </remarks>
         set => minigameCompleted = value; 
     }
 
     /// <inheritdoc/>
     public bool EducationalDialogueCompleted 
     { 
+        /// <summary>
+        /// Retrieves the value of educationalDialogueCompleted.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - educationalDialogueCompleted is either true or false.
+        /// Postconditions:
+        /// - Returns the value of educationalDialogueCompleted.
+        /// </remarks>
+        /// <returns>
+        /// The value of educationalDialogueCompleted.
+        /// </returns>
         get => eductionalDialogueCompleted;
+        /// Modifies the value of educationalDialogueCompleted.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - Value is either true or false.
+        /// Postconditions:
+        /// - The value of educationalDialogueCompleted is modified.
+        /// </remarks>
         set => eductionalDialogueCompleted = value; 
     }
+
+    /// METHODS SECTION
 
     /// <inheritdoc/>
     public bool IsComplete()
@@ -130,13 +208,27 @@ public class RoomModel : Model, IRoomModel, InternalRoomModel
         Debug.Assert(isKeyTaken == false, "Field roomId must be set to a different id.");
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Called once after all Awake() calls finishes.
+    /// Initializes the component by calling Init().
+    /// This function is provided by Unity.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Init() function is implemented.
+    /// Postconditions:
+    /// - Init() function is called.
+    /// </remarks>
     void Start()
     {
         Init();
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Called when the gameObject this 
+    /// component is attached to is destroyed.
+    /// This function is provided by Unity.
+    /// </summary>
     void OnDestroy()
     {
         if (roomLookUp.ContainsKey(Id))

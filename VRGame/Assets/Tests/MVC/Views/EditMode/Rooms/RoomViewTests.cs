@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 using NSubstitute;
+using UnityEngine.TestTools;
 
 /// <summary>
 /// Unit tests for RoomView class.

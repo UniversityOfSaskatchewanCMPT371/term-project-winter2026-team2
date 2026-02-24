@@ -23,8 +23,11 @@ public class RoomViewTests
         RoomController roomController = go.AddComponent<RoomController>();
 
         // controller still needs a model, so Init() will complain about missing model
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomModel.");
+        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
+
 
         // assign controller to view
         roomView.RoomController = roomController;
@@ -47,7 +50,9 @@ public class RoomViewTests
         RoomView roomView = go.AddComponent<RoomView>();
 
         // expect missing controller errors
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomController.");
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
 
         // allow Start() to run
@@ -67,7 +72,9 @@ public class RoomViewTests
         RoomView roomView = go.AddComponent<RoomView>();
 
         // Init() will still complain about missing controller
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomController.");
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
 
         // track if event was called
@@ -95,8 +102,13 @@ public class RoomViewTests
         RoomView roomView = go.AddComponent<RoomView>();
 
         // Init() will complain about missing controller
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomController.");
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
+
+        yield return null;
 
         // method should throw
         Assert.Throws<MissingFieldException>(() =>
@@ -104,7 +116,6 @@ public class RoomViewTests
             roomView.MinigameCompleted();
         });
 
-        yield return null;
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -149,8 +160,13 @@ public class RoomViewTests
         RoomView roomView = go.AddComponent<RoomView>();
 
         // Init() will complain about missing controller
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomController.");
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
         LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
+        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
+
+        yield return null;
 
         // method should throw
         Assert.Throws<MissingFieldException>(() =>
@@ -158,13 +174,11 @@ public class RoomViewTests
             roomView.EducationalDialoguesCompleted();
         });
 
-        yield return null;
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
     /// EducationalDialoguesCompleted() should call HandleCompleteMinigame()
-    /// (because your implementation calls the same method).
     /// </summary>
     [UnityTest]
     public IEnumerator EducationalDialoguesCompletedCallsControllerMethod()
