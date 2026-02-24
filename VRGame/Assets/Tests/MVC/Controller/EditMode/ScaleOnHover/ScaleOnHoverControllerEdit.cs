@@ -62,4 +62,34 @@ public class ScaleOnHoverControllerTests
 
         Assert.Throws<UnityEngine.Assertions.AssertionException>(() => controller.Start());
     }
+
+
+    /// <summary>
+    /// Test that retrieveLinkedObjects() returns the linked objects from the model layer when they exist
+    /// </summary>
+    [Test]
+    public void retrieveLinkedObjects_ObjectsExist()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        Transform[] expectedTransforms = new Transform[] { new GameObject().transform, new GameObject().transform };
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        mockModel.LinkedObjects.Returns(expectedTransforms);
+
+        controller.model = mockModel;
+
+        // Act
+        Transform[] result = controller.retrieveLinkedObjects();
+
+        // Assert
+        Assert.AreEqual(expectedTransforms, result);
+
+        // Clean up
+        Object.DestroyImmediate(go);
+        Object.DestroyImmediate(expectedTransforms[0].gameObject);
+        Object.DestroyImmediate(expectedTransforms[1].gameObject);
+    }
 }
