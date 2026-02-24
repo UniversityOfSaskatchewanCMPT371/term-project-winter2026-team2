@@ -262,7 +262,7 @@
     },
     "com.unity.xr.management": {
       "version": "4.5.4",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.xr": "1.0.0",
