@@ -1,13 +1,22 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
+
+[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Controller class manages the interaction between Model and View layers
 /// </summary>
 public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
 {
-    [SerializeField] private ScaleOnHoverModel model;
-    [SerializeField] private ScaleOnHoverView view;
+    [SerializeField] private ScaleOnHoverModel Model;
+    [SerializeField] private ScaleOnHoverView View;
+
+    /// Internal references to the model and view layer. This lets us use mocks to substitute 
+    /// for the model and view in tests, while still allowing us to assign them in the inspector
+    /// for ease of use in the editor.
+    internal IScaleOnHoverView view;
+    internal IScaleOnHoverModel model;
 
     /// <summary>
     /// Calls the Init() method to initialize and validate that the model and view layer exist
@@ -31,17 +40,30 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         /// If model or view is not assigned in the inspector, attempt to get them from the same GameObject
         if (model == null)
         {
-            model = GetComponent<ScaleOnHoverModel>();
+            if (Model != null) /// Checks if Model is assigned in the inspector and uses it if available
+            {
+                model = Model;
+            }
+            else /// Else try to get model component from the same GameObject
+            {
+                model = GetComponent<ScaleOnHoverModel>();
+            }
         }
-        if (view == null)
+        if (view == null) /// Checks if View is assigned in the inspector and uses it if available
         {
-            view = GetComponent<ScaleOnHoverView>();
+            if (View != null)
+            {
+                view = View;
+            }
+            else /// Else try to get view component from the same GameObject
+            {
+                view = GetComponent<ScaleOnHoverView>();
+            }
         }
-
-        /// Assert to ensure model and view are not null
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
     }
+
 
     /// <summary>
     /// Retrieves linked objects from model
