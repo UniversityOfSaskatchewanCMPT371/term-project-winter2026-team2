@@ -28,7 +28,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// </post-condition>
     public void Init()
     {
-        /// If model or view is not assigned in the inspector, attempt to get them from the same GameObject
+        /// If model or view is null, create them by getting the component from the GameObject
         if (model == null)
         {
             model = GetComponent<ScaleOnHoverModel>();
@@ -38,7 +38,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
             view = GetComponent<ScaleOnHoverView>();
         }
 
-        /// Assert to ensure model and view are not null
+        /// Assert to ensure model and view are created successfully
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
     }
