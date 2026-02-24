@@ -44,15 +44,15 @@ public class SceneChanger : MonoBehaviour, ISceneChanger // Implementing the ISc
     /// Loads a scene by enum value.
     /// </summary>
     /// <returns>The AsyncOperation or null if a load request is already in progress.</returns>
-    /// <param name="sceneIdx">The scene to load based on the Scenes enum.</param>
-    public AsyncOperation LoadScene(Scenes sceneIdx)
+    /// <param name="scene">The scene to load based on the Scenes enum.</param>
+    public AsyncOperation LoadScene(Scenes scene)
     {
         if (loadDebounce) return null;
         loadDebounce = true;
 
-        // Load the scene using the sceneIdx enum
+        // Load the scene using the scene enum
 
-        AsyncOperation loadingScene = SceneManager.LoadSceneAsync((int)sceneIdx);
+        AsyncOperation loadingScene = SceneManager.LoadSceneAsync((int)scene);
 
         // Reset the debounce once the scene finishes loading
 
