@@ -82,9 +82,9 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         /// <inheritdoc/>
         set
         {
-            if (value < 0)            
+            if (value <= 0)            
             {
-                Debug.LogError("Scale speed must be zero or positive");
+                Debug.LogError("Scale speed must be greater than zero");
                 return;
             }
             Assert.IsTrue(value > 0, "Scale speed must be greater than zero");
