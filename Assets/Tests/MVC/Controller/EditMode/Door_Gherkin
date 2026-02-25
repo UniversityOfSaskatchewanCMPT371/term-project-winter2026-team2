@@ -29,3 +29,8 @@ Scenario: Scene changer service is null
   When the door is interacted with
   Then no scene should be loaded
   And an error should be logged
+
+Scenario: DoorData component is missing
+  Given a door without DoorData
+  When the door initializes
+  Then an assertion error should occur
