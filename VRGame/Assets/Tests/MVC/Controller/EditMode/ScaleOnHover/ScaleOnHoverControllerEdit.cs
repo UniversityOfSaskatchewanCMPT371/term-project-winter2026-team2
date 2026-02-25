@@ -199,5 +199,95 @@ public class ScaleOnHoverControllerTests
         // Clean up 
         Object.DestroyImmediate(go);
     }
+
+
+    [Test]
+    public void IsHovering_ModelIsHovering_ReturnsTrue()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        bool expectedState = true;
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        mockModel.IsHovering.Returns(expectedState);
+
+        controller.model = mockModel;
+
+        // Act
+        bool result = controller.IsHovering();
+
+        // Assert
+        Assert.AreEqual(expectedState, result);
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void IsHovering_ModelIsNotHovering_ReturnsFalse()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        bool expectedState = false;
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        mockModel.IsHovering.Returns(expectedState);
+
+        controller.model = mockModel;
+
+        // Act
+        bool result = controller.IsHovering();
+
+        // Assert
+        Assert.AreEqual(expectedState, result);
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void OnHoverEnter_CallsModelOnHoverEnter()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        controller.model = mockModel;
+
+        // Act
+        controller.OnHoverEnter();
+
+        // Assert
+        mockModel.Received(1).OnHoverEnter();
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void OnHoverExit_CallsModelOnHoverExit()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        controller.model = mockModel;
+
+        // Act
+        controller.OnHoverExit();
+
+        // Assert
+        mockModel.Received(1).OnHoverExit();
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
 }
 
