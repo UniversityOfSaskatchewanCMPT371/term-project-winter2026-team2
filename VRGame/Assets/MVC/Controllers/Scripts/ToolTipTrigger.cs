@@ -10,7 +10,9 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     public GameObject interactiveElement;
     public XRBaseInteractable interactable;
 
+    /// <inheritdoc> />
     public event Action HoverEntered;
+    /// <inheritdoc> />
     public event Action HoverExited;
 
     private ToolTipController toolTipController;
