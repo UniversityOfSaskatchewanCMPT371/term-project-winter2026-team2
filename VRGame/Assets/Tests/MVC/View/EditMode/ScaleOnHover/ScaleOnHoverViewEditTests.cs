@@ -92,5 +92,77 @@ public class ScaleOnHoverViewEditTests
         // Nothing to assert here since Start should fail due to missing XRGrabInteractable component and log an error
     }
 
+    /// <summary>
+    /// Tests that the OnHoverEnter method calls the controller's OnHoverEnter method when the controller reference is valid.
+    /// </summary>
+    [Test]
+    public void OnHoverEnter_ControllerExists_CallsControllerMethod()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
 
+        IScaleOnHoverController mockController = Substitute.For<IScaleOnHoverController>();
+        view.controller = mockController;
+
+        // Act
+        view.OnHoverEnter();
+
+        // Assert
+        mockController.Received(1).OnHoverEnter();
+    }
+
+
+    [Test]
+    public void OnHoverEnter_ControllerIsNull_LogsErrorAndDoesNotCallController()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
+
+        view.controller = null;
+
+        // Act
+        LogAssert.Expect(LogType.Error, "ScaleOnHoverController reference cannot be null");
+        view.OnHoverEnter();
+
+        // Assert
+    }
+
+    /// <summary>
+    /// Tests that the OnHoverEnter method calls the controller's OnHoverEnter method when the controller reference is valid.
+    /// </summary>
+    [Test]
+    public void OnHoverExit_ControllerExists_CallsControllerMethod()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
+
+        IScaleOnHoverController mockController = Substitute.For<IScaleOnHoverController>();
+        view.controller = mockController;
+
+        // Act
+        view.OnHoverExit();
+
+        // Assert
+        mockController.Received(1).OnHoverExit();
+    }
+
+
+    [Test]
+    public void OnHoverExit_ControllerIsNull_LogsErrorAndDoesNotCallController()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
+
+        view.controller = null;
+
+        // Act
+        LogAssert.Expect(LogType.Error, "ScaleOnHoverController reference is null in OnHoverExit");
+        view.OnHoverExit();
+
+        // Assert
+    }
 }
