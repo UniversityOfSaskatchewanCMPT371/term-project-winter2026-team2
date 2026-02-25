@@ -3,7 +3,15 @@ Feature: Door Interaction and Scene Transition
   I want to interact with a door
   So that I can move to another scene 
 
- Background:
+Background:
     Given a door exists in the scene
     And the door has valid DoorData
     And the scene changer service is available
+
+Scenario: Interacting with door loads the target scene
+  Given a door with valid DoorData
+  And a valid scene changer service
+  And the door is not currently transitioning
+  When the door is interacted with
+  Then the scene changer should load the target scene
+
