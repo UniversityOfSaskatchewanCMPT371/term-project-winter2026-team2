@@ -42,7 +42,7 @@ public class PlayerModel_EditTest
         GameObject go = new GameObject();
         PlayerModel playerModel = go.AddComponent<PlayerModel>();
         playerModel.Initialize("TestPlayer", 42);
-        /// Use the Assert class to test if the getId method returns the expected ID after initializing the PlayerModel
+        // Use the Assert class to test if the getId method returns the expected ID after initializing the PlayerModel
         Assert.AreEqual(42, playerModel.getPlayerId);
     }
 
