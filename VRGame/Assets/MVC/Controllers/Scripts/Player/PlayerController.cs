@@ -28,4 +28,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
         
         Debug.Log($"Player initialized: {model.getPlayerName} (ID: {model.getPlayerId})");
     }
+
+    /// <inheritdoc/>
+    public void teleportPlayerTo(Vector3 position, Quaternion rotation)
+    {
+    }
 }

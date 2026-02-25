@@ -27,6 +27,7 @@ public class ScaleOnHoverControllerTests
         go.AddComponent<ScaleOnHoverView>();
 
         /// Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model or View Layer does not exist");
         controller.Start();
 
         // Assert
@@ -47,6 +48,7 @@ public class ScaleOnHoverControllerTests
         ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
         go.AddComponent<ScaleOnHoverView>();
 
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model or View Layer does not exist");
         Assert.Throws<UnityEngine.Assertions.AssertionException>(() => controller.Start());
     }
 
@@ -60,6 +62,7 @@ public class ScaleOnHoverControllerTests
         ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
         go.AddComponent<ScaleOnHoverModel>();
 
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model or View Layer does not exist");
         Assert.Throws<UnityEngine.Assertions.AssertionException>(() => controller.Start());
     }
 
@@ -117,6 +120,58 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+
+    [Test]
+    public void retrieveTargetScale_ScalesExist()
+    {
+        // Arrange 
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        Vector3[] expectedScales = new Vector3[]
+        {
+           new Vector3(1.2f, 1.2f, 1.2f),
+           new Vector3(0.8f, 0.8f, 0.8f)
+        };
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        mockModel.TargetScales.Returns(expectedScales);
+
+        controller.model = mockModel;
+
+        // Act 
+        Vector3[] result = controller.retrieveTargetScale();
+
+        // Assert 
+        Assert.AreEqual(expectedScales, result);
+
+        // Clean up 
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void retrieveTargetScale_ScalesDoNotExist()
+    {
+        // Arrange 
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        Vector3[] expectedScales = null;
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        mockModel.TargetScales.Returns(expectedScales);
+
+        controller.model = mockModel;
+
+        // Act 
+        Vector3[] result = controller.retrieveTargetScale();
+
+        // Assert 
+        Assert.AreEqual(expectedScales, result);
+
+        // Clean up 
+        Object.DestroyImmediate(go);
+    }
 
 }
 
