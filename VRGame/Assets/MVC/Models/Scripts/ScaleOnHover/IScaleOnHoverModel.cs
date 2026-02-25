@@ -41,20 +41,27 @@ public interface IScaleOnHoverModel
         /// <summary>
         /// Getter method for hover scale multiplier
         /// </summary>
+        /// <remarks>
+        /// <pre-condition>
+        ///     -   HoverScaleMultiplier is a positive number
+        /// </pre-condition>
         /// <post-condition>
         ///     -   Returns the hover scale multiplier value
         /// </post-condition>
+        /// </remarks>
         get;
 
         /// <summary>
         /// Setter method for hover scale multiplier
         /// </summary>
+        /// <remarks>
         /// <pre-condition>
         ///     -   value > 0
         /// </pre-condition>
         /// <post-condition>
         ///     -   Hover scale multiplier is updated to the new value
         /// </post-condition>
+        /// </remarks>
         set;
     }
 
@@ -68,9 +75,14 @@ public interface IScaleOnHoverModel
         /// <summary>
         /// Getter method for scale speed
         /// </summary>
+        /// <remarks>
+        /// <pre-condition>
+        ///     -   ScaleSpeed is a positive number
+        /// </pre-condition>
         /// <post-condition>
         ///     -   Returns the scale speed value
         /// </post-condition>
+        /// </remarks>
         get;
 
         /// <summary>
@@ -95,9 +107,14 @@ public interface IScaleOnHoverModel
         /// <summary>
         /// Getter method for normal scales
         /// </summary>
+        /// <remarks>
+        /// <pre-condition>
+        ///     -   NormalScales is not null and has the same length as LinkedObjects
+        /// </pre-condition>
         /// <post-condition>
         ///     -   Returns the array of normal scales for linked objects
         /// </post-condition>
+        /// </remarks>
         get;
 
         /// Note: No setter for normal scales since they are initialized based 
@@ -115,9 +132,14 @@ public interface IScaleOnHoverModel
         /// <summary>
         /// Getter method for target scales
         /// </summary>
+        /// <remarks>
+        /// <pre-condition>
+        ///     -   TargetScales is not null and has the same length as LinkedObjects
+        /// </pre-condition>
         /// <post-condition>
         ///     -   Returns the array of target scales for linked objects
         /// </post-condition>
+        /// </remarks>
         get;
 
         /// <summary>
@@ -142,9 +164,14 @@ public interface IScaleOnHoverModel
         /// <summary>
         /// Getter method for isHovering
         /// </summary>
+        /// <remarks>
+        /// <pre-condition>
+        ///     -   IsHovering is a boolean value that tracks whether the object is currently being hovered
+        /// </pre-condition>
         /// <post-condition>
         ///     -   Returns true if the object is currently being hovered, false otherwise
         /// </post-condition>
+        /// </remarks>
         get;
 
         /// Note: No setter for isHovering since it should only be changed 
