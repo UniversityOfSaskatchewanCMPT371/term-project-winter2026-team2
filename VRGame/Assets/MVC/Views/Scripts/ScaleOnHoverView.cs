@@ -24,7 +24,6 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     {
         var xrInteractable = GetComponent<XRBaseInteractable>();
 
-        // Check if XRBaseInteractable component exists
         if (xrInteractable == null)
         {
             Debug.LogError("XRBaseInteractable component is required for XR hover events to work");
@@ -63,7 +62,6 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <inheritdoc/>
     public void Init()
     {
-        // Check if controller reference is assigned in the inspector, if not attempt to get it from the same GameObject
         if (controller == null)
         {
             controller = GetComponent<ScaleOnHoverController>();
@@ -81,7 +79,6 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <inheritdoc/>
     public void OnHoverEnter()
     {
-        // Check if controller is null
         if (controller == null)
         {
             Debug.LogError("ScaleOnHoverController reference cannot be null");
@@ -99,7 +96,6 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <inheritdoc/>
     public void OnHoverExit()
     {
-        // Check if controller is null
         if (controller == null)
         {
             Debug.LogError("ScaleOnHoverController reference is null in OnHoverExit");
@@ -117,7 +113,6 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// <inheritdoc/>
     public void Update() 
     {
-        // Check if controller is null
         if (controller == null)
         {
             return; 
