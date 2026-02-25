@@ -51,6 +51,10 @@ public class SoH_EditTests
 
         // Assert
         Assert.AreEqual(testObjects, model.LinkedObjects);
+
+        // Clean up test objects
+        Object.DestroyImmediate(obj1);
+        Object.DestroyImmediate(obj2);
     }
 
     /// <summary>
