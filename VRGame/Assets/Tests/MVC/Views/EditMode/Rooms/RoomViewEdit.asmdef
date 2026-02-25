@@ -4,11 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "RoomControllerScripts",
-        "RoomViewsScripts",
-        "RoomModelScripts",
-        "ViewScripts",
-        "AllInterfaces",
+        "AllCode",
         "TNRD.NSubstitute"
     ],
     "includePlatforms": [

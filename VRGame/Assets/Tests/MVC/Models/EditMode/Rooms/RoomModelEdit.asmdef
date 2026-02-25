@@ -4,11 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "RoomModelScripts",
-        "RoomControllerScripts",
-        "RoomViewsScripts",
-        "ModelScripts",
-        "AllInterfaces"
+        "AllCode",
+        "TNRD.NSubstitute"
     ],
     "includePlatforms": [
         "Editor"
@@ -17,8 +14,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll",
-        "NSubstitute.dll"
+        "nunit.framework.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

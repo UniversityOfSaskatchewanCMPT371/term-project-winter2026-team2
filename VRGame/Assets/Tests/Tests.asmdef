@@ -5,12 +5,6 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "AllCode",
-        "AllHelpers",
-        "AllInterfaces",
-        "DoorControllerScripts",
-        "DoorModelScripts",
-        "DoorViewScripts",
-        "SceneChangerScripts",
         "TNRD.NSubstitute"
     ],
     "includePlatforms": [
