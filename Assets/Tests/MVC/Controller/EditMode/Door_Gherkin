@@ -15,3 +15,11 @@ Scenario: Interacting with door loads the target scene
   When the door is interacted with
   Then the scene changer should load the target scene
 
+Scenario: Interacting multiple times only loads scene once
+  Given a door with valid DoorData
+  And a valid scene changer service
+  And the door is not currently transitioning
+  When the door is interacted with
+  And the door is immediately interacted with again
+  Then the scene changer should load the target scene only once
+
