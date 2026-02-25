@@ -1,0 +1,63 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// The enum values map directly to build index numbers.
+public enum Scenes
+{
+    Hub = 0,
+    Room1 = 1,
+    Room3 = 2,
+}
+
+/// <summary>
+/// A persistent singleton responsible for changing scenes safely.
+/// </summary>
+public class SceneChanger : MonoBehaviour, ISceneChanger // Implementing the ISceneChanger interface for dependency injection
+{
+    private static SceneChanger instance { get; set; }          // Singleton instance of the SceneChanger
+    private static bool loadDebounce = false;                   // Prevents multiple scene loads from being triggered at once
+
+    /// <summary>
+    /// Ensures this component follows a singleton pattern and persists across scene loads.
+    /// </summary>
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(instance);
+    }
+
+    /// <summary>
+    /// Sets debounce to false.
+    /// </summary>
+    private void resetDebounce()
+    {
+        loadDebounce = false;
+    }
+
+    /// <summary>
+    /// Loads a scene by enum value.
+    /// </summary>
+    /// <returns>The AsyncOperation or null if a load request is already in progress.</returns>
+    /// <param name="scene">The scene to load based on the Scenes enum.</param>
+    public AsyncOperation LoadScene(Scenes scene)
+    {
+        if (loadDebounce) return null;
+        loadDebounce = true;
+
+        // Load the scene using the scene enum
+
+        AsyncOperation loadingScene = SceneManager.LoadSceneAsync((int)scene);
+
+        // Reset the debounce once the scene finishes loading
+
+        loadingScene.completed += (o) => resetDebounce();
+
+        return loadingScene;
+    }
+}

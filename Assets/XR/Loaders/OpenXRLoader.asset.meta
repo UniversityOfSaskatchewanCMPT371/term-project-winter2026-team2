@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:VRGame/Assets/XR/Loaders/OpenXRLoader.asset.meta
+<<<<<<<< HEAD:Assets/XR/Loaders/OpenXRLoader.asset.meta
+guid: 42171596aee19d145895e254f06e1069
+========
+guid: ea33776266dce417794a7dfe3802bad2
+>>>>>>>> origin/interactive_popout-test:Assets/Data.asset.meta
+=======
+guid: 28f83c0fdeb4c6949876a345a95b334d
+>>>>>>> origin/interactive_popout-test:Assets/XR/Loaders/OpenXRLoader.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,32 @@
+{
+    "name": "Tests",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+<<<<<<< HEAD:VRGame/Assets/Tests/Tests.asmdef
+        "AllCode",
+        "TNRD.NSubstitute"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+=======
+        "TNRD.NSubstitute",
+        "AllCode"
+    ],
+    "includePlatforms": [],
+>>>>>>> origin/interactive_popout-test:Assets/Tests/Tests.asmdef
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

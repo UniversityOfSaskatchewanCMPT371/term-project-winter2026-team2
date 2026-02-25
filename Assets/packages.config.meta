@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:VRGame/Assets/packages.config.meta
+guid: 2887748cbc57144f6bed1d532e282228
+=======
+guid: 091e73bdb9ae2b74d878f86e559270ac
+>>>>>>> origin/interactive_popout-test:Assets/packages.config.meta
+labels:
+- NuGetForUnity
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+  - first:
+      Any: 
+    second:
+      enabled: 1
+      settings: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

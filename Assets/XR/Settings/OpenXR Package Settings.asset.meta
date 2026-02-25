@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:VRGame/Assets/XR/Settings/OpenXR Package Settings.asset.meta
+<<<<<<<< HEAD:Assets/XR/Settings/OpenXR Package Settings.asset.meta
+guid: 7036871a566514480bef228169639ecc
+========
+guid: c18f5ba5780c3ac4bbc33c009e4b7f59
+>>>>>>>> origin/interactive_popout-test:Assets/MVC/Model/Cerebellum.asset.meta
+=======
+guid: 2c5b227aedc23d943bad7a86e4949b05
+>>>>>>> origin/interactive_popout-test:Assets/XR/Settings/OpenXR Package Settings.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
