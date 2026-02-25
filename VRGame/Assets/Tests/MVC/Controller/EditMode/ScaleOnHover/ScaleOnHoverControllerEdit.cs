@@ -173,5 +173,31 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    [Test]
+    // NOTE: Because the model starts with this value set to 10f and it cannot be set to an
+    // invalid value, we can just test that the value is properly retrieved from the model
+    // without needing to test edge cases for invalid values
+    public void retrieveScaleSpeed_SpeedSet()
+    {
+        // Arrange 
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        float expectedSpeed = 10f;
+
+        IScaleOnHoverModel mockModel = Substitute.For<IScaleOnHoverModel>();
+        mockModel.ScaleSpeed.Returns(10f);
+
+        controller.model = mockModel;
+
+        // Act 
+        float result = controller.retrieveScaleSpeed();
+
+        // Assert 
+        Assert.AreEqual(expectedSpeed, result);
+
+        // Clean up 
+        Object.DestroyImmediate(go);
+    }
 }
 
