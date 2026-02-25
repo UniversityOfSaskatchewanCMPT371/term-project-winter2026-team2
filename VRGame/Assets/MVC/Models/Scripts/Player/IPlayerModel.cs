@@ -89,10 +89,17 @@ public interface IPlayerModel
 
 
 
-    /// <summary>
-    /// Method to initialize the player model with a name and ID, and set the player as alive
+    ///<summary>
+    /// Initializes the player model with a name and an ID
     /// </summary>
     /// <param name="name">The name of the player</param>
     /// <param name="id">The unique identifier for the player</param>
+    /// <pre-condition>
+    ///     -   name must be a non-null string
+    ///     -   id must be a positive integer
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   PlayerModel is initialized to alive
+    /// </post-condition>
     void Initialize(string name, int id);
 }

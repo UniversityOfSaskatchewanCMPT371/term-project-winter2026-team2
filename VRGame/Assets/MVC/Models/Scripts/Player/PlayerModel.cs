@@ -13,33 +13,15 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     [SerializeField] 
     private string playerName;
 
-    /// <summary>
-    /// Public accessor for the player's name
-    /// </summary>
+    /// <inheritdoc/>
     public string getPlayerName
     {
-        /// <summary>
-        /// Getter method to retrieve the player's name
-        /// </summary>
-        /// <pre-condition> 
-        ///     -   playerName has been initialized in the constructor
-        /// </pre-condition>
-        /// <post-condition> 
-        ///     -   returns the name of the player
-        /// </post-condition>
+        /// <inheritdoc/>
         get {
             return playerName;
         }
 
-        /// <summary>
-        /// Setter method to set the player's name
-        /// </summary>
-        /// <pre-condition>
-        ///     -   value must be a non-null string
-        /// </pre-condition>
-        /// <post-condition>
-        ///     -   sets the player's name to the value (if it is valid)
-        /// </post-condition>
+        /// <inheritdoc/>
         set {
             if (value == null)
             {
@@ -58,33 +40,15 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     /// </summary>
     [SerializeField] private int id;
 
-    /// <summary>
-    /// Public accessor for the player's ID
-    /// </summary>
+    /// <inheritdoc/>
     public int getPlayerId
     {
-        /// <summary>
-        /// Getter method to retrieve the player's ID
-        /// </summary>
-        /// <pre-condition>
-        ///     -   id has been initialized in the constructor
-        /// </pre-condition>
-        /// <post-condition>   
-        ///    -   returns the unique identifier of the player
-        /// </post-condition>
+        /// <inheritdoc/>
         get {
             return id;
         }
 
-        /// <summary>
-        /// Setter method to set the player's ID
-        /// </summary>
-        /// <pre-condition>
-        ///    -   value must be a positive integer
-        /// </pre-condition>
-        /// <post-condition>
-        ///    -   sets the player's ID to the value (if it is valid)
-        /// </post-condition>
+        /// <inheritdoc/>
         set {
             if (value <= 0)
             {
@@ -103,47 +67,21 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     /// </summary>
     [SerializeField] bool alive = false;
     
-    /// <summary>
-    /// Public accessor for the player's alive status
-    /// </summary>
+    /// <inheritdoc/>
     public bool playerIsAlive
     {
-        /// <summary>
-        /// Getter method to check if the player is alive        
-        /// </summary>
-        /// <pre-condition>
-        ///     -   alive has been initialized in the constructor
-        /// </pre-condition>
-        /// <post-condition>
-        ///     -   returns true if the player is alive, false otherwise
-        /// </post-condition>
+        /// <inheritdoc/>
         get {
             return alive;
         }
 
-        /// <summary>
-        /// Method to set the player's alive status
-        /// </summary> 
-        /// <post-condition>
-        ///     -   sets the alive status of the player to value
-        /// </post-condition>
+        /// <inheritdoc/>
         set {
             alive = value;
         }
     }
 
-    ///<summary>
-    /// Initializes the player model with a name and an ID
-    /// </summary>
-    /// <param name="name">The name of the player</param>
-    /// <param name="id">The unique identifier for the player</param>
-    /// <pre-condition>
-    ///     -   name must be a non-null string
-    ///     -   id must be a positive integer
-    /// </pre-condition>
-    /// <post-condition>
-    ///     -   PlayerModel is initialized to alive
-    /// </post-condition>
+    /// <inheritdoc/>
     public void Initialize(string name, int id)
     {
         // Pre-condition checks
