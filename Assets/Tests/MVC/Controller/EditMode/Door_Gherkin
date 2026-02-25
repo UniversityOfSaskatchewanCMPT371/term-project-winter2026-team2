@@ -1,0 +1,9 @@
+Feature: Door Interaction and Scene Transition
+  As a player
+  I want to interact with a door
+  So that I can move to another scene 
+
+ Background:
+    Given a door exists in the scene
+    And the door has valid DoorData
+    And the scene changer service is available
