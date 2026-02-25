@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -37,9 +38,17 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
             }
             else // Else try to get model component from the same GameObject
             {
+                Debug.LogWarning("Model reference is null, trying to get component from GameObject");
                 model = GetComponent<ScaleOnHoverModel>();
             }
         }
+
+        // If model is still null after trying to get component, log an error
+        if (model == null) 
+        {
+            Debug.LogError("Model reference is null after trying to get component from GameObject");
+        }
+
         if (view == null) // Checks if View is assigned in the inspector and uses it if available
         {
             if (View != null)
@@ -48,10 +57,17 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
             }
             else // Else try to get view component from the same GameObject
             {
-                view = GetComponent<ScaleOnHoverView>();
+                Debug.LogWarning("View reference is null, trying to get component from GameObject");
+                view = GetComponent<ScaleOnHoverView>();   
             }
         }
-        Debug.LogError("Model or View Layer does not exist");
+
+        // If view is still null after trying to get component, log an error
+        if (view == null) 
+        {
+            Debug.LogError("View reference is null after trying to get component from GameObject");
+        }
+
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
     }
