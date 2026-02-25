@@ -36,8 +36,8 @@ public class ScaleOnHoverViewEditTests
         // Arrange
         GameObject go = GameObject.Find("TestObject");
         ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
-        var xrInteractable = go.AddComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>();
-        var mockController = Substitute.For<IScaleOnHoverController>();
+        XRGrabInteractable xrInteractable = go.AddComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>();
+        IScaleOnHoverController mockController = Substitute.For<IScaleOnHoverController>();
         view.controller = mockController;
         // Act
         view.Start();
@@ -53,4 +53,44 @@ public class ScaleOnHoverViewEditTests
         mockController.Received(1).OnHoverExit();
 
     }
+
+    /// <summary>
+    /// Tests that the Start method causes an Assertion to fail if there is no controller.
+    /// </summary>
+    [Test]
+    public void Start_MissingController()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
+        XRGrabInteractable xrInteractable = go.AddComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>();
+        
+        // Act
+        Assert.Throws<UnityEngine.Assertions.AssertionException>(() => view.Start());
+
+        // Assert
+        // Nothing to assert here since Start should fail due to missing controller reference
+    }
+
+    /// <summary>
+    /// Tests that the Start method causes an Assertion to fail if there is no XRGrabInteractable.
+    /// </summary>
+    [Test]
+    public void Start_MissingXRInteractable()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
+        IScaleOnHoverController mockController = Substitute.For<IScaleOnHoverController>();
+        view.controller = mockController;
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "XRBaseInteractable component is required for XR hover events to work");
+        view.Start();
+
+        // Assert
+        // Nothing to assert here since Start should fail due to missing XRGrabInteractable component and log an error
+    }
+
+
 }
