@@ -96,6 +96,27 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(expectedTransforms[1].gameObject);
     }
 
+    /// <summary>
+    /// Test that retrieveLinkedObjects() returns null and errors whem model is missing
+    /// </summary>
+    [Test]
+    public void retrieveLinkedObjects_ModelMissing()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference cannot be null");
+        Transform[] result = controller.retrieveLinkedObjects();
+        // Assert
+        Assert.AreEqual(null, result);
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+
     [Test]
     public void retrieveLinkedObjects_ObjectsDontExist()
     {
@@ -173,6 +194,26 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that retrieveTargetScale() returns null and errors whem model is missing
+    /// </summary>
+    [Test]
+    public void retrieveTargetScale_ModelMissing()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference cannot be null");
+        Vector3[] result = controller.retrieveTargetScale();
+        // Assert
+        Assert.AreEqual(null, result);
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
     [Test]
     // NOTE: Because the model starts with this value set to 10f and it cannot be set to an
     // invalid value, we can just test that the value is properly retrieved from the model
@@ -197,6 +238,26 @@ public class ScaleOnHoverControllerTests
         Assert.AreEqual(expectedSpeed, result);
 
         // Clean up 
+        Object.DestroyImmediate(go);
+    }
+
+    // <summary>
+    /// Test that retrieveScaleSpeed returns 1f and errors whem model is missing
+    /// </summary>
+    [Test]
+    public void retrieveScaleSpeed_ModelMissing()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference is null");
+        float result = controller.retrieveScaleSpeed();
+        // Assert
+        Assert.AreEqual(1f, result);
+
+        // Clean up
         Object.DestroyImmediate(go);
     }
 
@@ -250,6 +311,23 @@ public class ScaleOnHoverControllerTests
     }
 
     [Test]
+    public void IsHovering_ModelMissing()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference is null in IsHovering");
+        bool result = controller.IsHovering();
+        // Assert
+        Assert.AreEqual(false, result);
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
     public void OnHoverEnter_CallsModelOnHoverEnter()
     {
         // Arrange
@@ -270,6 +348,22 @@ public class ScaleOnHoverControllerTests
     }
 
     [Test]
+    public void OnHoverEnter_ModelMissing()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference is null in OnHoverEnter");
+        controller.OnHoverEnter();
+        // Assert
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
     public void OnHoverExit_CallsModelOnHoverExit()
     {
         // Arrange
@@ -284,6 +378,22 @@ public class ScaleOnHoverControllerTests
 
         // Assert
         mockModel.Received(1).OnHoverExit();
+
+        // Clean up
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void OnHoverExit_ModelMissing()
+    {
+        // Arrange
+        GameObject go = new GameObject();
+        ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
+
+        // Act
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference is null in OnHoverExit");
+        controller.OnHoverExit();
+        // Assert
 
         // Clean up
         Object.DestroyImmediate(go);
