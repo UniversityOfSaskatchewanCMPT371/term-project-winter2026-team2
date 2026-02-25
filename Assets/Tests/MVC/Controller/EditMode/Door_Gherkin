@@ -23,3 +23,9 @@ Scenario: Interacting multiple times only loads scene once
   And the door is immediately interacted with again
   Then the scene changer should load the target scene only once
 
+Scenario: Scene changer service is null
+  Given a door with valid DoorData
+  And the scene changer service is null
+  When the door is interacted with
+  Then no scene should be loaded
+  And an error should be logged
