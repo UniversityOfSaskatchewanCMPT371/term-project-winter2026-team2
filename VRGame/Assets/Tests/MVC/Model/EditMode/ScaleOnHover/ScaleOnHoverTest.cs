@@ -59,7 +59,7 @@ public class SoH_EditTests
     [Test]
     public void SoH_EditTestsLinkedObjects_lengthCheck()
     {
-        /// Arrange - create a ScaleOnHoverModel and some test objects to assign to LinkedObjects
+        // Arrange - create a ScaleOnHoverModel and some test objects to assign to LinkedObjects
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
 
         GameObject obj1 = new GameObject("TestObject1");
