@@ -1,6 +1,7 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour, IPlayerController
 {
@@ -38,5 +39,11 @@ public class PlayerController : MonoBehaviour, IPlayerController
         model.Initialize("Player", 1);
         
         Debug.Log($"Player initialized: {model.getPlayerName} (ID: {model.getPlayerId})");
+    }
+
+    /// <inheritdoc/>
+    public void teleportPlayerTo(Vector3 position, Quaternion rotation)
+    {
+        // Yet to be implemented
     }
 }
