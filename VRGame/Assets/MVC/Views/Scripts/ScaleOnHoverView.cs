@@ -40,16 +40,16 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     {
         var xrInteractable = GetComponent<XRBaseInteractable>();
 
-        /// Check if XRBaseInteractable component exists
+        // Check if XRBaseInteractable component exists
         if (xrInteractable == null)
         {
             Debug.LogError("XRBaseInteractable component is required for XR hover events to work");
             return;
         }
-        /// Assert to ensure XRBaseInteractable is not null
+        // Assert to ensure XRBaseInteractable is not null
         Assert.IsNotNull(xrInteractable, "XRBaseInteractable component cannot be null for XR hover events");
         
-        /// All checks passed, setup event listeners for hover enter and exit
+        // All checks passed, setup event listeners for hover enter and exit
         xrInteractable.hoverEntered.AddListener(OnXRHoverEnter);
         xrInteractable.hoverExited.AddListener(OnXRHoverExit);
     }
@@ -103,14 +103,14 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void Init()
     {
-        /// Check if controller reference is assigned in the inspector, if not attempt to get it from the same GameObject
+        // Check if controller reference is assigned in the inspector, if not attempt to get it from the same GameObject
         if (controller == null)
         {
             controller = GetComponent<ScaleOnHoverController>();
             
         }
     
-        /// Assert to ensure controller reference is not null
+        // Assert to ensure controller reference is not null
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in the inspector");
 
         
@@ -129,16 +129,16 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void OnHoverEnter()
     {
-        /// Check if controller is null
+        // Check if controller is null
         if (controller == null)
         {
             Debug.LogError("ScaleOnHoverController reference cannot be null");
             return; 
         }
-        /// Assert to ensure controller reference is not null before processing hover enter
+        // Assert to ensure controller reference is not null before processing hover enter
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null");
 
-        /// All checks passed, trigger hover enter event in controller
+        // All checks passed, trigger hover enter event in controller
         controller.OnHoverEnter();
     }
 
@@ -155,16 +155,16 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
     /// </post-condition>
     public void OnHoverExit()
     {
-        /// Check if controller is null
+        // Check if controller is null
         if (controller == null)
         {
             Debug.LogError("ScaleOnHoverController reference is null in OnHoverExit");
             return;
         }
-        /// Assert to ensure controller reference is not null before processing hover exit
+        // Assert to ensure controller reference is not null before processing hover exit
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in OnHoverExit");
 
-        /// All checks passed, trigger hover exit event in controller
+        // All checks passed, trigger hover exit event in controller
         controller.OnHoverExit();
     }
 
@@ -202,16 +202,16 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 
         // We use 'Lerp' to gradually move from localScale to targetScale
         for (int i = 0; i < linkedObjects.Length && i < targetScales.Length; i++) {
-                /// Check if linkedObjects[i] is null
+                // Check if linkedObjects[i] is null
                 if (linkedObjects[i] == null) {
                     Debug.LogError("Linked object at index " + i + " is null in Update");
                     continue;
                 }
 
-                /// Assert to ensure linkedObjects[i] is not null before updating its scale 
+                // Assert to ensure linkedObjects[i] is not null before updating its scale 
                 Assert.IsNotNull(linkedObjects[i], "Linked object at index " + i + " cannot be null in Update");
 
-                /// All checks passed, update the scale of linkedObjects[i] towards targetScales[i] using Lerp for smooth transition
+                // All checks passed, update the scale of linkedObjects[i] towards targetScales[i] using Lerp for smooth transition
                 linkedObjects[i].localScale = Vector3.Lerp(
                     linkedObjects[i].localScale,
                     targetScales[i],
