@@ -51,6 +51,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
                 view = GetComponent<ScaleOnHoverView>();
             }
         }
+        Debug.LogError("Model or View Layer does not exist");
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
     }
