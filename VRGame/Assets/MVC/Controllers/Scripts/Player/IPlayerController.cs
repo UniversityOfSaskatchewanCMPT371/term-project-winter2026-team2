@@ -7,6 +7,12 @@ public interface IPlayerController
     /// <summary>
     /// Initialize the player controller and validate model/view references
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - model and view instance variables must be assigned
+    /// Postconditions:
+    /// - model and view instance variables are assigned and valid, player is initialized with default values
+    /// </remarks>
     void Awake();
 
     /*

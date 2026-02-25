@@ -6,9 +6,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [SerializeField] private PlayerModel model;
     [SerializeField] private PlayerView view;
 
-    /// <summary>
-    /// Initialize the player controller and validate model/view references
-    /// </summary>
+    /// <inheritdoc/>
     public void Awake()
     {
         // Try to get components if not assigned
