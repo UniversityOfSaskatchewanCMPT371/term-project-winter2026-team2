@@ -47,6 +47,7 @@ public class ScaleOnHoverControllerTests
         ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
         go.AddComponent<ScaleOnHoverView>();
 
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model reference is null after trying to get component from GameObject");
         UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model or View Layer does not exist");
         Assert.Throws<UnityEngine.Assertions.AssertionException>(() => controller.Start());
     }
