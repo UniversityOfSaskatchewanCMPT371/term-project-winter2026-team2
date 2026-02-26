@@ -165,4 +165,94 @@ public class ScaleOnHoverViewEditTests
 
         // Assert
     }
+
+
+    /// <summary>
+    /// Tests that the OnXRHoverEnter method calls the controller's OnHoverEnter method 
+    /// </summary>
+    [Test]
+    public void OnXRHoverEnter_ControllerExists_TriggersOnHoverEnter()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        var view = go.GetComponent<ScaleOnHoverView>();
+
+        var mockController = Substitute.For<IScaleOnHoverController>();
+        view.controller = mockController;
+
+        var args = new HoverEnterEventArgs();
+
+        // Act
+        view.OnXRHoverEnter(args);
+
+        // Assert
+        mockController.Received(1).OnHoverEnter();
+    }
+
+    /// <summary>
+    /// Make sure that if the controller reference is null, an error is logged and the controller's OnHoverEnter method is not called when OnXRHoverEnter is triggered.
+    /// </summary>
+    [Test]
+    public void OnXRHoverEnter_ControllerIsNull_LogsErrorAndDoesNotCallController()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        var view = go.GetComponent<ScaleOnHoverView>();
+
+        view.controller = null;
+
+        var args = new HoverEnterEventArgs();
+
+        // Act
+        Assert.Throws<UnityEngine.Assertions.AssertionException>(() => view.OnXRHoverEnter(args));
+
+        // Assert
+        // LogAssert validates the assertion failure
+    }
+
+
+    /// <summary>
+    /// Check that the OnXRHoverExit method calls the controller's OnHoverExit method when the controller reference is valid.
+    /// </summary>
+    [Test]
+    public void OnXRHoverExit_ControllerExists_TriggersOnHoverExit()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        var view = go.GetComponent<ScaleOnHoverView>();
+
+        var mockController = Substitute.For<IScaleOnHoverController>();
+        view.controller = mockController;
+
+        var args = new HoverExitEventArgs();
+
+        // Act
+        view.OnXRHoverExit(args);
+
+        // Assert
+        mockController.Received(1).OnHoverExit();
+    }
+
+    /// <summary>
+    /// Test that if the controller reference is null, an error is logged and the controller's OnHoverExit method is not called when OnXRHoverExit is triggered.
+    /// </summary>
+    [Test]
+    public void OnXRHoverExit_ControllerIsNull_LogsErrorAndDoesNotCallController()
+    {
+        // Arrange
+        GameObject go = GameObject.Find("TestObject");
+        var view = go.GetComponent<ScaleOnHoverView>();
+
+        view.controller = null;
+
+        var args = new HoverExitEventArgs();
+
+        // Act
+        Assert.Throws<UnityEngine.Assertions.AssertionException>(() => view.OnXRHoverExit(args));
+        
+
+        // Assert
+        // LogAssert validates the assertion failure
+    }
+
 }

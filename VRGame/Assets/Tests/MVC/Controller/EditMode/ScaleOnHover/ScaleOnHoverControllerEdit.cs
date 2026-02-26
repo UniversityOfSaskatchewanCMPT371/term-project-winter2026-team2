@@ -27,7 +27,6 @@ public class ScaleOnHoverControllerTests
         go.AddComponent<ScaleOnHoverView>();
 
         /// Act
-        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Model or View Layer does not exist");
         controller.Start();
 
         // Assert
