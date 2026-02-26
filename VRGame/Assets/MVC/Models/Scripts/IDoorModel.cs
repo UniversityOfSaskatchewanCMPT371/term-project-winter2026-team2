@@ -1,6 +1,5 @@
-
-using UnityEditor.Build.Reporting;
 using UnityEngine;
+
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
 /// </summary>
