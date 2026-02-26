@@ -46,9 +46,13 @@ public class ScaleOnHoverViewEditTests
         Assert.IsNotNull(view.controller, "Controller reference should not be null after Start");
         // Checking that the hover events are set up correctly by invoking them and verifying the
         // controller methods are called
-        xrInteractable.hoverEntered.Invoke(new HoverEnterEventArgs());
+        HoverEnterEventArgs hoverEnterArgs = new HoverEnterEventArgs();
+        hoverEnterArgs.interactorObject = go.AddComponent<XRDirectInteractor>();
+        xrInteractable.hoverEntered.Invoke(hoverEnterArgs);
         mockController.Received(1).OnHoverEnter();
 
+        HoverExitEventArgs hoverExitArgs = new HoverExitEventArgs();
+        hoverExitArgs.interactorObject = go.AddComponent<XRDirectInteractor>();
         xrInteractable.hoverExited.Invoke(new HoverExitEventArgs());
         mockController.Received(1).OnHoverExit();
 
@@ -179,15 +183,16 @@ public class ScaleOnHoverViewEditTests
     {
         // Arrange
         GameObject go = GameObject.Find("TestObject");
-        var view = go.GetComponent<ScaleOnHoverView>();
+        ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
 
-        var mockController = Substitute.For<IScaleOnHoverController>();
+        IScaleOnHoverController mockController = Substitute.For<IScaleOnHoverController>();
         view.controller = mockController;
 
-        var args = new HoverEnterEventArgs();
+        HoverEnterEventArgs hoverEnterArgs = new HoverEnterEventArgs();
+        hoverEnterArgs.interactorObject = go.AddComponent<XRDirectInteractor>();
 
         // Act
-        view.OnXRHoverEnter(args);
+        view.OnXRHoverEnter(hoverEnterArgs);
 
         // Assert
         mockController.Received(1).OnHoverEnter();
@@ -205,11 +210,12 @@ public class ScaleOnHoverViewEditTests
 
         view.controller = null;
 
-        var args = new HoverEnterEventArgs();
+        HoverEnterEventArgs hoverEnterArgs = new HoverEnterEventArgs();
+        hoverEnterArgs.interactorObject = go.AddComponent<XRDirectInteractor>();
 
         // Act
-        Assert.Throws<UnityEngine.Assertions.AssertionException>(() => view.OnXRHoverEnter(args));
-
+        LogAssert.Expect(LogType.Error, "ScaleOnHoverController reference cannot be null in OnXRHoverEnter");
+        view.OnXRHoverEnter(hoverEnterArgs);
         // Assert
         // LogAssert validates the assertion failure
     }
