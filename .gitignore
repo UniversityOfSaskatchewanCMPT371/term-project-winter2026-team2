@@ -1,4 +1,9 @@
 ############################################
+# Folders we want to keep local
+############################################
+[Ss]amples/
+
+############################################
 # Unity generated folders
 ############################################
 [Ll]ibrary/
@@ -27,6 +32,7 @@
 *.unityproj
 *.csproj
 *.sln
+*.slnx
 *.suo
 *.tmp
 *.user
@@ -78,6 +84,7 @@ Thumbs.db
 *.iws
 *.sln.DotSettings.user
 *.sln.DotSettings
+*.vsconfig
 
 ############################################
 # Rider / JetBrains
