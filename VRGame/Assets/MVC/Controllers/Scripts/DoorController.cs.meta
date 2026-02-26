@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VRGame/Assets/MVC/Models/VisualLogic/ToggleStateModel.cs.meta
-guid: 70ed9db0f7c2f43adbd8e2c010ded424
-========
 guid: 1e669605cf5294b22be30ef2b98c78c2
->>>>>>>> origin/main:VRGame/Assets/MVC/Controllers/Scripts/DoorController.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
