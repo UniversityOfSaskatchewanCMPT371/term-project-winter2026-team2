@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: d5631c4ab7ccd4de589e17609dbfc03c
+<<<<<<<< HEAD:VRGame/Assets/MVC/Models/VisualLogic/StepStateModel.cs.meta
+guid: 6d6ff62e1338b422480ea3a7d6ba048b
+========
+guid: 4ac3db20ebd044f4793fdb85785eb880
+>>>>>>>> origin/main:VRGame/Assets/MVC/Controllers/Scripts/AsyncOperationWrapper.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

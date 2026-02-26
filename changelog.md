@@ -4,6 +4,33 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.0.0] - 2026-02-25
+
+### Added
+
+- Doors (player teleportation and scene changing)
+- The hub scene (with the brain display)
+- See minor versions which cumulate into this major version bump
+
+## [0.2.0] - 2026-02-25
+
+### Added
+
+- Created the main 3D model of the brain for the hub
+- All doors are in main hub, but not implemented for scene change
+- XR Interactions were added to simulate headset capabilities
+- All interfaces are defined and implemented for their methods
+- Added tests for all applicable methods and files
+
+### Changed
+
+- Project settings and packages were either downgraded or removed
+
+### Fixed
+
+- Many comment format errors were fixed
+- A lot of LogAssert's not being in the test files
+
 ## [0.1.0] - 2026-02-18
 
 ### Added
@@ -46,3 +73,4 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed
 
 - This section is for bug fixes and patches
+
