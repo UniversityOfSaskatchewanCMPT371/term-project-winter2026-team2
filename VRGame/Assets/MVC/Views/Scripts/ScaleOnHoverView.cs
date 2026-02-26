@@ -10,7 +10,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 {
     // Reference to the controller to access model data and trigger events
-    [SerializeField] private ScaleOnHoverController controller;
+    [SerializeField] private ScaleOnHoverController Controller;
+
+    /*
+    Internal references to the controller layer. This lets us use mocks to substitute 
+    for the controller in tests, while still allowing us to assign them in the inspector
+    for ease of use in the editor.
+    */
+
+    internal IScaleOnHoverController controller;
 
     /// <inheritdoc/>
     public void Start()

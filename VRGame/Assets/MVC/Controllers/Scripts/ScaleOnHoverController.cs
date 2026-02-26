@@ -61,13 +61,10 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
                 view = GetComponent<ScaleOnHoverView>();   
             }
         }
-
-        // If view is still null after trying to get component, log an error
-        if (view == null) 
-        {
-            Debug.LogError("View reference is null after trying to get component from GameObject");
+        if (model == null || view == null)
+        {   
+            Debug.LogError("Model or View Layer does not exist"); 
         }
-
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
     }
