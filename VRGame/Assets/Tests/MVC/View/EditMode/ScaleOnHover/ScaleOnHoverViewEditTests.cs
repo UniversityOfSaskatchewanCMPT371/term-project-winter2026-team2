@@ -112,7 +112,9 @@ public class ScaleOnHoverViewEditTests
         mockController.Received(1).OnHoverEnter();
     }
 
-
+    /// <summary>
+    ///  Tests that the OnHoverEnter method logs an error and does not call the controller's OnHoverEnter method when the controller reference is null.
+    /// </summary>
     [Test]
     public void OnHoverEnter_ControllerIsNull_LogsErrorAndDoesNotCallController()
     {
@@ -149,7 +151,9 @@ public class ScaleOnHoverViewEditTests
         mockController.Received(1).OnHoverExit();
     }
 
-
+    /// <summary>
+    /// Tests that the OnHoverExit method logs an error and does not call the controller's OnHoverExit method when the controller reference is null.
+    /// </summary>
     [Test]
     public void OnHoverExit_ControllerIsNull_LogsErrorAndDoesNotCallController()
     {

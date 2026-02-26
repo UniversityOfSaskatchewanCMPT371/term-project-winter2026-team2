@@ -116,6 +116,9 @@ public class ScaleOnHoverControllerTests
     }
 
 
+    /// <summary>
+    /// Test that retrieveLinkedObjects() returns null and errors when linked objects do not exist in the model
+    /// </summary>
     [Test]
     public void retrieveLinkedObjects_ObjectsDontExist()
     {
@@ -140,7 +143,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
-
+    /// <summary>
+    /// Test that retrieveTargetScale() returns the target scales from the model layer when they exist
+    /// </summary>
     [Test]
     public void retrieveTargetScale_ScalesExist()
     {
@@ -169,6 +174,10 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+
+    /// <summary>
+    /// Test that retrieveTargetScale() returns null and errors when target scales do not exist in the model
+    /// </summary>
     [Test]
     public void retrieveTargetScale_ScalesDoNotExist()
     {
@@ -213,6 +222,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that retrieveScaleSpeed() returns the scale speed from the model layer when it exists
+    /// </summary>
     [Test]
     // NOTE: Because the model starts with this value set to 10f and it cannot be set to an
     // invalid value, we can just test that the value is properly retrieved from the model
@@ -261,6 +273,9 @@ public class ScaleOnHoverControllerTests
     }
 
 
+    /// <summary>
+    /// Test that IsHovering() returns the hovering state from the model layer when it exists
+    /// </summary>
     [Test]
     public void IsHovering_ModelIsHovering_ReturnsTrue()
     {
@@ -285,6 +300,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that IsHovering() returns the hovering state from the model layer when it exists
+    /// </summary>
     [Test]
     public void IsHovering_ModelIsNotHovering_ReturnsFalse()
     {
@@ -309,6 +327,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that IsHovering() returns false and errors whem model is missing
+    /// </summary>
     [Test]
     public void IsHovering_ModelMissing()
     {
@@ -326,6 +347,10 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+
+    /// <summary>
+    /// Test that OnHoverEnter() calls the model's OnHoverEnter() method to update the hovering state in the model layer
+    /// </summary>
     [Test]
     public void OnHoverEnter_CallsModelOnHoverEnter()
     {
@@ -346,6 +371,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that OnHoverEnter() does not throw an exception and logs an error when the model is missing, since this method is called from the view layer and should not cause crashes even if the model reference is lost. It should also log an error to help with debugging.
+    /// </summary>
     [Test]
     public void OnHoverEnter_ModelMissing()
     {
@@ -362,6 +390,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that OnHoverExit() calls the model's OnHoverExit() method to update the hovering state in the model layer
+    /// </summary>
     [Test]
     public void OnHoverExit_CallsModelOnHoverExit()
     {
@@ -382,6 +413,9 @@ public class ScaleOnHoverControllerTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Test that OnHoverExit() does not throw an exception and logs an error when the model is missing, since this method is called from the view layer and should not cause crashes even if the model reference is lost. It should also log an error to help with debugging.
+    /// </summary>
     [Test]
     public void OnHoverExit_ModelMissing()
     {
