@@ -4,6 +4,14 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.0.0] - 2026-02-25
+
+### Added
+
+- Doors (player teleportation and scene changing)
+- The hub scene (with the brain display)
+- See minor versions which cumulate into this major version bump
+
 ## [0.2.0] - 2026-02-25
 
 ### Added
@@ -65,3 +73,4 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed
 
 - This section is for bug fixes and patches
+
