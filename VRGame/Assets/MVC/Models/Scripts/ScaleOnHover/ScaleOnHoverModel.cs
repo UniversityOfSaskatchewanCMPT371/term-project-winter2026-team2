@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -81,9 +82,9 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         /// <inheritdoc/>
         set
         {
-            if (value < 0)            
+            if (value <= 0)            
             {
-                Debug.LogError("Scale speed must be zero or positive");
+                Debug.LogError("Scale speed must be greater than zero");
                 return;
             }
             Assert.IsTrue(value > 0, "Scale speed must be greater than zero");
@@ -293,12 +294,16 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         // Check for null or empty linkedObjects array and log a warning if so (scales cannot be initialized)
         if (linkedObjects == null)
         {
-            Debug.LogWarning("Cannot initialize scales. linked objects array is null on Awake");
+            Debug.LogError("Cannot initialize scales. linked objects array is null on Awake");
+            return;
         }
         else if (linkedObjects.Length <= 0)
         {
-            Debug.LogWarning("Cannot initialize scales. linked objects array is empty on Awake");
+            Debug.LogError("Cannot initialize scales. linked objects array is empty on Awake");
+            return;
         }
+
+        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null on Awake");
         Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element on Awake");
 
         /// All checks passed

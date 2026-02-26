@@ -51,6 +51,10 @@ public class SoH_EditTests
 
         // Assert
         Assert.AreEqual(testObjects, model.LinkedObjects);
+
+        // Clean up test objects
+        Object.DestroyImmediate(obj1);
+        Object.DestroyImmediate(obj2);
     }
 
     /// <summary>
@@ -76,6 +80,10 @@ public class SoH_EditTests
 
         // Assert - length of LinkedObjects should match length of assigned array
         Assert.AreEqual(testObjects.Length, model.LinkedObjects.Length, "Length of LinkedObjects should match length of assigned array");
+
+        // Clean up test objects
+        Object.DestroyImmediate(obj1);
+        Object.DestroyImmediate(obj2);
     }
 
 

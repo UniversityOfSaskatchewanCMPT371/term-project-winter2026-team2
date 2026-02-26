@@ -32,6 +32,7 @@ public interface IScaleOnHoverView
     /// </summary>
     /// <pre-condition>
     ///     -   Ray interactor must be hovered over GameObject (with an XRBaseInteractable component)
+    ///     -   Controller is not null
     /// </pre-condition>
     /// <post-condition>
     ///     -   OnHoverEnter is called to trigger scaling (up) of linkedObjects

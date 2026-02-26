@@ -16,6 +16,7 @@ public class PlayerModel_EditTest
         PlayerModel playerModel = go.AddComponent<PlayerModel>();
         playerModel.Initialize("TestPlayer", 1);
         Assert.IsNotNull(playerModel);
+        Object.DestroyImmediate(go);
     }
 
     /// <summary>

@@ -1,6 +1,7 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Tests")]
 
@@ -37,9 +38,17 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
             }
             else // Else try to get model component from the same GameObject
             {
+                Debug.LogWarning("Model reference is null, trying to get component from GameObject");
                 model = GetComponent<ScaleOnHoverModel>();
             }
         }
+
+        // If model is still null after trying to get component, log an error
+        if (model == null) 
+        {
+            Debug.LogError("Model reference is null after trying to get component from GameObject");
+        }
+
         if (view == null) // Checks if View is assigned in the inspector and uses it if available
         {
             if (View != null)
@@ -48,7 +57,8 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
             }
             else // Else try to get view component from the same GameObject
             {
-                view = GetComponent<ScaleOnHoverView>();
+                Debug.LogWarning("View reference is null, trying to get component from GameObject");
+                view = GetComponent<ScaleOnHoverView>();   
             }
         }
         if (model == null || view == null)

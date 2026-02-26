@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour, IPlayerController
 {
@@ -12,16 +14,26 @@ public class PlayerController : MonoBehaviour, IPlayerController
         // Try to get components if not assigned
         if (model == null)
         {
+            Debug.LogWarning("PlayerModel reference was not set in inspector, trying to get component...");
             model = GetComponent<PlayerModel>();
         }
+
         if (view == null)
         {
+            Debug.LogWarning("PlayerView reference was not set in inspector, trying to get component...");
             view = GetComponent<PlayerView>();
         }
 
         // Validate references
         Assert.IsNotNull(model, "PlayerModel reference cannot be null");
         Assert.IsNotNull(view, "PlayerView reference cannot be null");
+
+        if (model == null || view == null)
+        {
+            Debug.LogError("PlayerController initialization failed due to missing references. Check inspector assignments.");
+            enabled = false; // Disable the controller to prevent further errors
+            return;
+        }
 
         // Initialize the player with default values
         model.Initialize("Player", 1);
@@ -32,5 +44,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     /// <inheritdoc/>
     public void teleportPlayerTo(Vector3 position, Quaternion rotation)
     {
+        // Yet to be implemented
     }
 }
