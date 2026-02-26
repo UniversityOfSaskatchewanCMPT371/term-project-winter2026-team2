@@ -1,0 +1,50 @@
+#NOTRIM#
+using System;
+
+/// <summary>
+/// Model layer base class.
+/// Requires internal/external interface.
+/// </summary>
+public class #SCRIPTNAME# : I#SCRIPTNAME#, E#SCRIPTNAME#
+{
+    /*  
+    DATA SECTION
+    DATA SECTION
+    */
+
+    private string prompt = "Hello, from model layer!";
+
+    /*
+    EXCLUSIVE METHODS SECTION
+    EXCLUSIVE METHODS SECTION
+    */
+    
+    /// <summary>
+    /// Example method exclusive to this layer.
+    /// </summary>
+    void I#SCRIPTNAME#.ExclusiveMethod()                // ExclusiveMethod() can only be called when casting I#SCRIPTNAME# type on it self.
+    {
+        Console.Write(prompt);
+    }
+
+    /*
+    EXPOSED METHODS SECTION
+    EXPOSED METHODS SECTION
+    */
+
+    /// <summary>
+    /// Example method exposed to controller layer.
+    /// </summary>
+    public void ExposedMethod()
+    {
+        ((E#SCRIPTNAME#)this).ExclusiveMethod();        // Example of calling ExclusiveMethod()
+    }
+}
+
+/// Model Contract Guidelines
+/// - Contains data
+/// - Mutates data
+/// - No access to View and Controller
+/// - Validates input from controller via assertions
+/// - No unity libraries
+/// - No unity libraries (should be testable without unity)
