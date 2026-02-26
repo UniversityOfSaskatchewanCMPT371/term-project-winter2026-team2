@@ -1,19 +1,36 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Makes a GameObject always face the camera.
+/// </summary>
 public class BillBoardView : MonoBehaviour
 {
+    /// <summary>
+    /// Reference point used to calculate distance from camera.
+    /// </summary>
     public Transform PointB;
 
+    /// <summary>
+    /// Cached reference to the main camera's transform.
+    /// </summary>
     static Transform tCam = null;
+
+    /// <summary>
+    /// Updates the billboard to face the camera each frame.
+    /// </summary>
+    /// <preconditions>
+    /// <c>PointB</c> must be assigned in the Unity Editor.
+    /// A camera tagged as 'MainCamera' must exist in the scene.
+    /// </preconditions>
+    /// <postconditions>
+    /// The GameObject faces the camera position.
+    /// <c>tCam</c> is cached for subsequent frames.
+    /// <c>PointB</c> local position is set based on camera distance on first frame.
+    /// </postconditions>
     void Update ()
     {
-        // <summary>
-        // Make the billboard face the camera by looking at the camera's position.
-        // If the camera transform is not cached, find the main camera and cache its transform for future use.
-        // Ensure that there is a main camera in the scene and provide an assertion message if it's missing.
-        // Set the local position of PointB to be directly in front of the camera at a distance equal to the distance from the billboard to the camera.
-        // </summary>
+        // Cache camera transform and initialize PointB distance on first frame
         if (!tCam)
         {
           Assert.IsNotNull(Camera.main, "Camera.main is null. Please ensure there is a camera in the scene tagged as 'MainCamera'.");

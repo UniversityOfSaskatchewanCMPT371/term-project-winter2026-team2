@@ -11,15 +11,29 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// created and edited in the Unity Editor via the 'VR/Data' menu.</remarks>
 [CreateAssetMenu(fileName ="Data",menuName ="VR/Data")]
 public class ToolTipModel : ScriptableObject, IToolTipModel
+
 {
+    /// <summary>
+    /// The title associated with this object.
+    /// </summary>
     [SerializeField] private string title;
+    /// <summary>
+    /// The description associated with this object.
+    /// </summary>
     [SerializeField, TextArea] private string description;
+    /// <summary>
+    /// <para>Gets or sets the title associated with the object.</para>
+    /// 
+    /// </summary>
     public string Title 
     { 
         get => title;
         set => title = value;
     }
 
+    /// <summary>
+    /// <para>Gets or sets the description associated with the object.</para>
+    /// </summary>
     public string Description 
     { 
         get => description; 
