@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
-//using UnityEditor.VersionControl;
 
 [assembly: InternalsVisibleTo("Tests")]
 /// <summary>
