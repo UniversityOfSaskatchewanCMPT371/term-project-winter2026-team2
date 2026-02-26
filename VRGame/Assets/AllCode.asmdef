@@ -2,7 +2,7 @@
     "name": "AllCode",
     "rootNamespace": "",
     "references": [
-        "GUID:ba171b3dd2a51234ab864770f99741a5",
+        "GUID:b13a1d1dfb13f1b489a0ff5612f36f29",
         "GUID:2bafac87e7f4b9b418d9448d219b01ab",
         "GUID:fe685ec1767f73d42b749ea8045bfe43",
         "GUID:dc960734dc080426fa6612f1c5fe95f3",
@@ -18,8 +18,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false,
-    "InternalsVisibleTo": [
-        "Tests"
-    ]
+    "noEngineReferences": false
 }

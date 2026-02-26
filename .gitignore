@@ -84,6 +84,7 @@ Thumbs.db
 *.iws
 *.sln.DotSettings.user
 *.sln.DotSettings
+*.vsconfig
 
 ############################################
 # Rider / JetBrains

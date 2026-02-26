@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "AllCode",
-        "TNRD.NSubstitute"
+        "TNRD.NSubstitute",
+        "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [
         "Editor"
