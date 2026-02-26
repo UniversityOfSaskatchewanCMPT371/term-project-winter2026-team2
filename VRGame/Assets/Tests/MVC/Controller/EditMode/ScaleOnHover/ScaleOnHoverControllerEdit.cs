@@ -15,25 +15,25 @@ public class ScaleOnHoverControllerTests
     [Test]
     public void StartInitializesLayers()
     {
-        /// Arrange
+        // Arrange
         GameObject go = new GameObject();
         ScaleOnHoverController controller = go.AddComponent<ScaleOnHoverController>();
 
-        /// Attach the model and controller to the GameObject (because this does not use
-        /// any actual implementation of the model and view, it is ok to not use 
-        /// substitutes here. In addition, it needs AddComponent to be tested, which needs
-        /// a monobehaviour class)
+        // Attach the model and controller to the GameObject (because this does not use
+        // any actual implementation of the model and view, it is ok to not use 
+        // substitutes here. In addition, it needs AddComponent to be tested, which needs
+        // a monobehaviour class)
         go.AddComponent<ScaleOnHoverModel>();
         go.AddComponent<ScaleOnHoverView>();
 
-        /// Act
+        // Act
         controller.Start();
 
         // Assert
         Assert.IsNotNull(controller.model, "Model should have been assigned.");
         Assert.IsNotNull(controller.view, "View should have been assigned.");
 
-        /// Clean up
+        // Clean up
         Object.DestroyImmediate(go);
     }
 
