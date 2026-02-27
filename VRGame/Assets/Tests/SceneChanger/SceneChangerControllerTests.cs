@@ -1,14 +1,10 @@
-
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 using NSubstitute;
-using UnityEngine.PlayerLoop;
 using System.Text.RegularExpressions;
-using NSubstitute.Extensions;
 using System;
+using UnityEngine.TestTools;
 public class SceneChangerControllerTests
 {
     // A Test behaves as an ordinary method
@@ -18,7 +14,7 @@ public class SceneChangerControllerTests
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        
+
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sceneC.SceneManagerWrapper = sMWrapper;
 
@@ -36,7 +32,7 @@ public class SceneChangerControllerTests
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        
+
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sceneC.SceneManagerWrapper = sMWrapper;
 
@@ -60,11 +56,12 @@ public class SceneChangerControllerTests
 
         // test should cause error, tell unity to ignore error log
         LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try {
+        try
+        {
             sceneC.Init();
             Assert.Fail("Null sceneManagerWrapper should have triggered exception");
         }
-        catch{}
+        catch { }
 
         sceneC.ResetInstance();
         UnityEngine.Object.DestroyImmediate(go);
@@ -85,13 +82,13 @@ public class SceneChangerControllerTests
         SceneChangerController sceneC2 = go.AddComponent<SceneChangerController>();
         sceneC2.SceneManagerWrapper = sMWrapper;
         // attempting to create another instance should fail
-        
+
         // tell unity to ignore error log so test can pass
         LogAssert.Expect(LogType.Error, new Regex(".*"));
         try
         {
             sceneC2.Init();
-            Assert.IsTrue(1==2);
+            Assert.IsTrue(1 == 2);
         }
         catch
         {
@@ -112,7 +109,7 @@ public class SceneChangerControllerTests
 
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        
+
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sMWrapper.LoadSceneAsync(0).Returns(aMock);
 
@@ -149,7 +146,7 @@ public class SceneChangerControllerTests
 
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        
+
         ISceneManagerWrapper sMWrapper = Substitute.For<ISceneManagerWrapper>();
         sMWrapper.LoadSceneAsync(0).Returns(aMock);
 
@@ -162,12 +159,13 @@ public class SceneChangerControllerTests
         aMock.Completed += Raise.Event<Action<IAsyncOperationWrapper>>(aMock);
 
         LogAssert.Expect(LogType.Error, "Invalid sceneKey passed to LoadScene. Not in enum");
-        try {
+        try
+        {
             // won't have negative scene ids ever
             sceneC.LoadScene(-1);
             Assert.Fail("Loading invalid sceneId should've triggered assertion");
         }
-        catch {}
+        catch { }
 
         sceneC.ResetInstance();
         UnityEngine.Object.DestroyImmediate(go);

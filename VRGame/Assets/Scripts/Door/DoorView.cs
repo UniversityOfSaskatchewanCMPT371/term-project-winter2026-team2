@@ -1,11 +1,6 @@
-
-
-using System.Runtime.CompilerServices;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[assembly: InternalsVisibleTo("Tests")]
 /// <summary>
 /// View portion of the reusable door module. Collisions are handled here
 /// </summary>

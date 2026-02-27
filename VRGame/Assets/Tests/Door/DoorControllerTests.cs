@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -17,12 +16,13 @@ public class DoorControllerTests
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
-        
+
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         Assert.NotNull(doorC);
 
+        UnityEngine.Object.DestroyImmediate(go);
         doorC.DoorModel = doorM;
         doorC.SceneChangerController = sceneC;
         doorC.Init();
@@ -37,7 +37,7 @@ public class DoorControllerTests
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
-        
+
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
@@ -49,7 +49,7 @@ public class DoorControllerTests
 
         // trigger debounce should default to false, or else scnen change can never
         // be triggered
-        Assert.IsFalse(doorC.TriggerDebounce); 
+        Assert.IsFalse(doorC.TriggerDebounce);
 
         UnityEngine.Object.DestroyImmediate(go);
     }
@@ -74,12 +74,12 @@ public class DoorControllerTests
             doorC.Init();
             Assert.Fail("Null door model should've triggered assertion");
 
-        } 
+        }
         catch
         {
 
         }
-        
+
 
         UnityEngine.Object.DestroyImmediate(go);
     }
@@ -101,7 +101,7 @@ public class DoorControllerTests
             doorC.Init();
             Assert.IsNotNull(null);
 
-        } 
+        }
         catch
         {
 
@@ -114,14 +114,14 @@ public class DoorControllerTests
     {
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
-        
+
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
         doorM.DestinationSceneId = 1;
         doorC.DoorModel = doorM;
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
-        
+
         doorC.Init();
 
         //trying to call OnPlayerEnter with null playerController should cause error
@@ -131,7 +131,7 @@ public class DoorControllerTests
             doorC.OnPlayerEnter(null);
             Assert.Fail("Passing null playerController to OnPlayerEnter should've triggered assertion");
         }
-        catch{}
+        catch { }
 
         UnityEngine.Object.DestroyImmediate(go);
 
@@ -141,7 +141,7 @@ public class DoorControllerTests
     {
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
-        
+
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
 
@@ -151,7 +151,7 @@ public class DoorControllerTests
         doorC.DoorModel = doorM;
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
-        
+
         doorC.Init();
 
         IPlayerController playerMock = Substitute.For<IPlayerController>();
@@ -163,7 +163,7 @@ public class DoorControllerTests
             doorC.OnPlayerEnter(playerMock);
             Assert.Fail("DoorModel with invalid sceneId with OnPlayerEnter should've triggered assertion");
         }
-        catch{}
+        catch { }
 
         UnityEngine.Object.DestroyImmediate(go);
     }
@@ -173,7 +173,7 @@ public class DoorControllerTests
     {
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
-        
+
         // mocking out door model 
         IDoorModel doorM = Substitute.For<IDoorModel>();
         doorM.DestinationSceneId = 0;
@@ -185,7 +185,7 @@ public class DoorControllerTests
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         sceneC.LoadScene(0).Returns(loadingScene);
         doorC.SceneChangerController = sceneC;
-        
+
         doorC.Init();
 
         // enter 

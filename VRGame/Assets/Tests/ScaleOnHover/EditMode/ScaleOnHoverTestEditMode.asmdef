@@ -1,12 +1,10 @@
 {
-    "name": "Tests",
+    "name": "ScaleOnHoverTestEditMode",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "AllCode",
-        "TNRD.NSubstitute",
-        "Unity.XR.Interaction.Toolkit"
+        "GUID:9a88817da2cdeb94388ab1c4165583ac",
+        "GUID:fe685ec1767f73d42b749ea8045bfe43",
+        "GUID:dc8265438e4f046b698f6e459b631eb3"
     ],
     "includePlatforms": [
         "Editor"
@@ -17,7 +15,7 @@
     "precompiledReferences": [
         "nunit.framework.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
     ],

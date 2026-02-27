@@ -1,5 +1,3 @@
-
-
 using UnityEngine;
 /// <summary>
 /// View portion of the reusable door module. Collisions are handled here

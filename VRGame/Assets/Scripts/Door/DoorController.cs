@@ -1,11 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
-using System.Runtime.CompilerServices;
-
-// makes it so test scripts can access 
-// this class's internal fields
-[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here

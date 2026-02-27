@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using NSubstitute;
 using NUnit.Framework;
@@ -35,11 +34,12 @@ public class DoorViewTests
         // this test should trigger assertion, tell unity to ignore associated
         // error log
         LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try {
+        try
+        {
             doorV.Init();
             Assert.Fail("Attempting to init without setting doorController should trigger assertion");
         }
-        catch{}
+        catch { }
 
         Object.DestroyImmediate(go);
     }
@@ -59,11 +59,12 @@ public class DoorViewTests
         // this test should trigger assertion, tell unity to ignore associated
         // error log
         LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try {
+        try
+        {
             doorV.OnTriggerEnter(null);
             Assert.Fail("OnTriggerEnter with null collider should trigger assertion");
         }
-        catch{}
+        catch { }
 
         Object.DestroyImmediate(go);
     }
@@ -109,10 +110,11 @@ public class DoorViewTests
         IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
         otherC.CompareGameObjectTag("MainCamera").Returns(true);
 
-        otherC.GetPlayerFromParent().Returns((IPlayerController) null);
+        otherC.GetPlayerFromParent().Returns((IPlayerController)null);
 
         LogAssert.Expect(LogType.Error, "Collider does not contain playerController component");
-        try {
+        try
+        {
             doorV.OnTriggerEnterLogic(otherC);
             Assert.Fail("Improperly set up camera collider's parent does not contain playerController component. Should have triggered assertion");
         }

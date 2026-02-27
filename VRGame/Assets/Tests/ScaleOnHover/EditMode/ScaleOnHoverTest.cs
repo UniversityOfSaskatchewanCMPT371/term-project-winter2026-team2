@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 /// <summary>
 /// Edit mode tests for the ScaleOnHoverModel class to ensure it initializes and functions correctly in edit mode
@@ -110,9 +107,9 @@ public class SoH_EditTests
     public void SoH_EditTestsHoverScaleMultiplier_set()
     {
         // Arrange
-        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();   
+        ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
         float newValue = 1.5f;
-        
+
         // Act - set hoverScaleMultiplier
         model.HoverScaleMultiplier = newValue;
 
@@ -229,7 +226,7 @@ public class SoH_EditTests
         model.LinkedObjects = new Transform[]
         {
             obj1.transform
-        }; 
+        };
         // initialize scales
         model.InitializeScales();
 
@@ -239,7 +236,7 @@ public class SoH_EditTests
             Vector3.one * 2f
         };
         // Act - set TargetScales
-        model.TargetScales = newTargetScales; 
+        model.TargetScales = newTargetScales;
 
         // Assert - TargetScales should be updated to the new values
         Assert.AreEqual(newTargetScales, model.TargetScales);
@@ -289,10 +286,10 @@ public class SoH_EditTests
         Assert.IsNotNull(model.LinkedObjects, "LinkedObjects should not be null after initialization");
         Assert.AreEqual(1.5f, model.HoverScaleMultiplier, "HoverScaleMultiplier should be 1.5f");
         Assert.AreEqual(20f, model.ScaleSpeed, "ScaleSpeed should be 20f");
-        
+
     }
-    
-    
+
+
     /// <summary>
     /// Simple test for InitializeScales() - normal equals target on initialization
     /// </summary>
@@ -323,7 +320,7 @@ public class SoH_EditTests
     /// Simple test for OnHoverEnter()
     /// </summary>
     [Test]
-    public void SoH_EditTestsOnHoverEnter() 
+    public void SoH_EditTestsOnHoverEnter()
     {
         // Arrange
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
@@ -344,12 +341,12 @@ public class SoH_EditTests
         Assert.IsTrue(model.IsHovering, "IsHovering should be true after OnHoverEnter");
     }
 
-    
+
     /// <summary>
     /// Simple test for OnHoverExit()
     /// </summary>
     [Test]
-    public void SoH_EditTestsOnHoverExit() 
+    public void SoH_EditTestsOnHoverExit()
     {
         // Arrange
         ScaleOnHoverModel model = new GameObject().AddComponent<ScaleOnHoverModel>();
@@ -386,7 +383,7 @@ public class SoH_EditTests
         // create 2 game objects
         GameObject obj1 = new GameObject("TestObject1");
         GameObject obj2 = new GameObject("TestObject2");
-        
+
         Transform[] linkedObjects = new Transform[]
         {
             obj1.transform,

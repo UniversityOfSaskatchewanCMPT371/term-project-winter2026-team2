@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public class PlayerModel_EditTest
 {
@@ -59,5 +56,5 @@ public class PlayerModel_EditTest
         playerModel.Initialize("TestPlayer", 1);
         Assert.IsTrue(playerModel.playerIsAlive);
     }
-    
+
 }

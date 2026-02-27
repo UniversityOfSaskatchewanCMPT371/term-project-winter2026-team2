@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using NSubstitute;
-using NSubstitute.Extensions;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -68,7 +64,7 @@ public class ScaleOnHoverViewEditTests
         GameObject go = GameObject.Find("TestObject");
         ScaleOnHoverView view = go.GetComponent<ScaleOnHoverView>();
         XRGrabInteractable xrInteractable = go.AddComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>();
-        
+
         // Act
         Assert.Throws<UnityEngine.Assertions.AssertionException>(() => view.Start());
 
@@ -259,7 +255,7 @@ public class ScaleOnHoverViewEditTests
 
         // Act
         Assert.Throws<UnityEngine.Assertions.AssertionException>(() => view.OnXRHoverExit(args));
-        
+
 
         // Assert
         // LogAssert validates the assertion failure
