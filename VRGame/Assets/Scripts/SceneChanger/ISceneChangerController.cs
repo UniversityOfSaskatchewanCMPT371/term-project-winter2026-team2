@@ -1,8 +1,3 @@
-
-using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.SceneManagement;
-
 /// <summary>
 /// Controller portion of scene changer service. A persistent singleton
 /// </summary>

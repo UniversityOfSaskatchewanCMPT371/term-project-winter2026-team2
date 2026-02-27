@@ -1,12 +1,8 @@
 
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.SceneManagement;
 
-// makes it so test scripts can access internal methods
-[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Controller portion of scene changer service. A persistent singleton
