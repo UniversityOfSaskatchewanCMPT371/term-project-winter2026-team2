@@ -120,9 +120,9 @@ public interface IScaleOnHoverModel
         /// Note: No setter for normal scales since they are initialized based 
         ///         on the linked objects' original scales 
         ///         (they should not be arbitrarily changed)
-    }   
+    }
 
-    
+
 
     /// <summary>
     /// Public accessor method for target scales
@@ -207,7 +207,7 @@ public interface IScaleOnHoverModel
     ///     -   The normal scale and target scale for a linked object is initialized
     /// </post-condition>
     void InitializeScales();
-    
+
 
 
 

@@ -1,4 +1,3 @@
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -82,7 +81,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         /// <inheritdoc/>
         set
         {
-            if (value <= 0)            
+            if (value <= 0)
             {
                 Debug.LogError("Scale speed must be greater than zero");
                 return;
@@ -92,7 +91,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
     }
 
-    
+
 
     /// <summary>
     /// Array to store the normal (original)scales of linked objects
@@ -104,15 +103,15 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     {
         /// <inheritdoc/>
         get
-        {            
+        {
             return normalScales;
         }
         /// Note: No setter for normal scales since they are initialized based 
         ///         on the linked objects' original scales 
         ///         (they should not be arbitrarily changed)
-    }   
+    }
 
-    
+
 
     /// <summary>
     /// Array to store the target scales of linked objects 
@@ -124,7 +123,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     {
         /// <inheritdoc/>
         get
-        {            
+        {
             return targetScales;
         }
 
@@ -195,7 +194,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         Assert.IsTrue(scaleSpeed > 0, "Scale speed must be greater than zero");
         this.scaleSpeed = scaleSpeed;
 
-    
+
         // Initialize scales based on the linked objects' original scales
         InitializeScales();
     }
@@ -213,8 +212,8 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
         // Assertions for linkedObjects array
         Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null");
-        Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element"); 
-        
+        Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element");
+
         // Initialize normal and target/bigger scale
         normalScales = new Vector3[linkedObjects.Length];
         targetScales = new Vector3[linkedObjects.Length];
@@ -243,7 +242,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     public void OnHoverEnter()
     {
         isHovering = true;
-        
+
         for (int i = 0; i < linkedObjects.Length; i++)
         {
             // Debug log for linked object at index i
@@ -267,7 +266,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
     public void OnHoverExit()
     {
         isHovering = false;
-        
+
         for (int i = 0; i < linkedObjects.Length; i++)
         {
             // Debug log for linked object at index i

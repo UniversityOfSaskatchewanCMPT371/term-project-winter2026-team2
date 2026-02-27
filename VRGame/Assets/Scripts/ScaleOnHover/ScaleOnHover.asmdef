@@ -1,0 +1,6 @@
+{
+	"name": "ScaleOnHover",
+	"internalsVisibleTo": [
+        "Tests"
+    ]
+}

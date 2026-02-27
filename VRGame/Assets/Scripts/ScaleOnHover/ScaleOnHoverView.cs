@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -39,7 +37,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         }
         // Assert to ensure XRBaseInteractable is not null
         Assert.IsNotNull(xrInteractable, "XRBaseInteractable component cannot be null for XR hover events");
-        
+
         // All checks passed, setup event listeners for hover enter and exit
         xrInteractable.hoverEntered.AddListener(OnXRHoverEnter);
         xrInteractable.hoverExited.AddListener(OnXRHoverExit);
@@ -53,7 +51,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         if (controller == null)
         {
             Debug.LogError("ScaleOnHoverController reference cannot be null in OnXRHoverEnter");
-            return; 
+            return;
         }
 
         if (args.interactorObject == null)
@@ -86,13 +84,13 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         if (controller == null)
         {
             controller = GetComponent<ScaleOnHoverController>();
-            
+
         }
-    
+
         // Assert to ensure controller reference is not null
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null in the inspector");
 
-        
+
     }
 
 
@@ -103,7 +101,7 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         if (controller == null)
         {
             Debug.LogError("ScaleOnHoverController reference cannot be null");
-            return; 
+            return;
         }
         // Assert to ensure controller reference is not null before processing hover enter
         Assert.IsNotNull(controller, "ScaleOnHoverController reference cannot be null");
@@ -132,11 +130,11 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 
 
     /// <inheritdoc/>
-    public void Update() 
+    public void Update()
     {
         if (controller == null)
         {
-            return; 
+            return;
         }
 
         // Grab data from model
@@ -146,30 +144,30 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
 
         // Additional null checks for safety - return if not initialized
         if (linkedObjects == null || targetScales == null)
-        {            
+        {
             Debug.LogError("Linked objects or target scales are not initialized in Update");
-            return; 
+            return;
         }
 
         // We use 'Lerp' to gradually move from localScale to targetScale
-        for (int i = 0; i < linkedObjects.Length && i < targetScales.Length; i++) {
-                // Check if linkedObjects[i] is null
-                if (linkedObjects[i] == null) {
-                    Debug.LogError("Linked object at index " + i + " is null in Update");
-                    continue;
-                }
+        for (int i = 0; i < linkedObjects.Length && i < targetScales.Length; i++)
+        {
+            // Check if linkedObjects[i] is null
+            if (linkedObjects[i] == null)
+            {
+                Debug.LogError("Linked object at index " + i + " is null in Update");
+                continue;
+            }
 
-                // Assert to ensure linkedObjects[i] is not null before updating its scale 
-                Assert.IsNotNull(linkedObjects[i], "Linked object at index " + i + " cannot be null in Update");
+            // Assert to ensure linkedObjects[i] is not null before updating its scale 
+            Assert.IsNotNull(linkedObjects[i], "Linked object at index " + i + " cannot be null in Update");
 
-                // All checks passed, update the scale of linkedObjects[i] towards targetScales[i] using Lerp for smooth transition
-                linkedObjects[i].localScale = Vector3.Lerp(
-                    linkedObjects[i].localScale,
-                    targetScales[i],
-                    Time.deltaTime * scaleSpeed
-                );
+            // All checks passed, update the scale of linkedObjects[i] towards targetScales[i] using Lerp for smooth transition
+            linkedObjects[i].localScale = Vector3.Lerp(
+                linkedObjects[i].localScale,
+                targetScales[i],
+                Time.deltaTime * scaleSpeed
+            );
         }
     }
 }
- 
-

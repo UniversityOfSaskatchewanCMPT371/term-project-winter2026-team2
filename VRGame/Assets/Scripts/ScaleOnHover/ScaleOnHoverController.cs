@@ -1,9 +1,5 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using System;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Controller class manages the interaction between Model and View layers
@@ -44,7 +40,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         }
 
         // If model is still null after trying to get component, log an error
-        if (model == null) 
+        if (model == null)
         {
             Debug.LogError("Model reference is null after trying to get component from GameObject");
         }
@@ -58,12 +54,12 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
             else // Else try to get view component from the same GameObject
             {
                 Debug.LogWarning("View reference is null, trying to get component from GameObject");
-                view = GetComponent<ScaleOnHoverView>();   
+                view = GetComponent<ScaleOnHoverView>();
             }
         }
         if (model == null || view == null)
-        {   
-            Debug.LogError("Model or View Layer does not exist"); 
+        {
+            Debug.LogError("Model or View Layer does not exist");
         }
         Assert.IsNotNull(model, "Model layer does not exist");
         Assert.IsNotNull(view, "View Layer does not exist");
@@ -71,9 +67,9 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
 
 
     /// <inheritdoc/>
-    public Transform[] retrieveLinkedObjects() 
+    public Transform[] retrieveLinkedObjects()
     {
-        if (model == null) 
+        if (model == null)
         {
             Debug.LogError("Model reference cannot be null");
             return null;
@@ -89,7 +85,7 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// <inheritdoc/>
     public Vector3[] retrieveTargetScale()
     {
-        if (model == null) 
+        if (model == null)
         {
             Debug.LogError("Model reference cannot be null");
             return null;
@@ -101,11 +97,11 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     }
 
 
-    
+
     /// <inheritdoc/>
-    public float retrieveScaleSpeed() 
+    public float retrieveScaleSpeed()
     {
-        if (model == null) 
+        if (model == null)
         {
             Debug.LogError("Model reference is null");
             return 1f;
@@ -122,18 +118,18 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     /// <inheritdoc/>
     public bool IsHovering()
     {
-        if (model == null) 
+        if (model == null)
         {
             Debug.LogError("Model reference is null in IsHovering");
             return false;
         }
         // Assert to ensure model reference is not null before checking hover state
         Assert.IsNotNull(model, "Model reference cannot be null in IsHovering");
-        
+
         return model.IsHovering;
     }
 
-    
+
 
     /// <inheritdoc/>
     public void OnHoverEnter()
