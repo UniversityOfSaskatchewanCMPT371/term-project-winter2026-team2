@@ -34,7 +34,8 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <summary>
     /// Public accessor of model portion of door module
     /// </summary>
-    internal IDoorModel DoorModel {
+    internal IDoorModel DoorModel
+    {
 
         /// <summary>
         /// Set the value of DoorController's DoorModel instance variable
@@ -128,11 +129,11 @@ public class DoorController : MonoBehaviour, IDoorController
         // If field was set in inspector window, set the internal values to that
         if (serializableDoorModel != null)
         {
-            doorModel = (IDoorModel) serializableDoorModel;
+            doorModel = (IDoorModel)serializableDoorModel;
         }
         if (serializableSceneChangerController != null)
         {
-            sceneChangerController = (ISceneChangerController) serializableSceneChangerController;
+            sceneChangerController = (ISceneChangerController)serializableSceneChangerController;
         }
 
         // error checking
@@ -181,7 +182,7 @@ public class DoorController : MonoBehaviour, IDoorController
 
         // load new scene with scene changer
         IAsyncOperationWrapper loadingScene = sceneChangerController.LoadScene(sceneId);
-            
+
         loadingScene.Completed += (o) =>
         {
             targetDoor = doorModel.GetTargetDoor();

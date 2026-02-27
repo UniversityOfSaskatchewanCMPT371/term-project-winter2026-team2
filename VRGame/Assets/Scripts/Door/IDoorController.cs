@@ -8,7 +8,7 @@ using UnityEngine;
 /// </remarks>
 public interface IDoorController
 {
-    
+
     /// <summary>
     /// Public readonly accessor for triggerDebounce
     /// </summary>
