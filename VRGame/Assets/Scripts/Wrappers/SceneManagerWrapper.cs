@@ -1,7 +1,4 @@
-
-using System;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -24,8 +21,8 @@ public class SceneManagerWrapper
     public IAsyncOperationWrapper LoadSceneAsync(int sceneKey)
     {
         AsyncOperation loadingScene = SceneManager.LoadSceneAsync(sceneKey);
-        return  new AsyncOperationWrapper(loadingScene);
+        return new AsyncOperationWrapper(loadingScene);
     }
 
-    
+
 }

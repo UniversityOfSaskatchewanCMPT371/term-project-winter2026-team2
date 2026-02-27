@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using NSubstitute;
 using System.Text.RegularExpressions;
 
 public class DoorModelTests
@@ -53,7 +50,7 @@ public class DoorModelTests
 
         door1.Init();
         door2.Init();
-        
+
         Assert.AreEqual(door1.TargetDoorId, 2);
         Assert.AreEqual(door2.TargetDoorId, 1);
 
@@ -77,7 +74,7 @@ public class DoorModelTests
         {
             door.TargetDoorId = -1;
         }
-        catch{}
+        catch { }
         door.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }
@@ -99,7 +96,7 @@ public class DoorModelTests
         door2.Init();
 
         Assert.AreEqual(door1.GetTargetDoor(), door2);
-        Assert.AreEqual(door2.GetTargetDoor(), door1); 
+        Assert.AreEqual(door2.GetTargetDoor(), door1);
 
         door1.ResetDoorLookup();
         Object.DestroyImmediate(go);
@@ -119,13 +116,14 @@ public class DoorModelTests
         // test should fail, but need to tell unity
         // to ignore error log, or else test will not pass
         LogAssert.Expect(LogType.Error, "Target door does not exist");
-        try {
+        try
+        {
             door1.GetTargetDoor();
-            Assert.IsTrue(1==2);
+            Assert.IsTrue(1 == 2);
         }
-        catch {}
+        catch { }
 
-        door1.ResetDoorLookup(); 
+        door1.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }
 
@@ -156,11 +154,12 @@ public class DoorModelTests
 
         // this test should fire assertion. Tell unity to ignore associated error message
         LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try {
+        try
+        {
             door.DestinationSceneId = -1;
             Assert.Fail();
         }
-        catch{}
+        catch { }
         door.ResetDoorLookup();
         Object.DestroyImmediate(go);
     }

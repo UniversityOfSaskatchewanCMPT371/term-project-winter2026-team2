@@ -1,0 +1,17 @@
+{
+    "name": "SceneChanger",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ad05424ad703b431db9414aa4054867f",
+        "GUID:cf34efcae37fa4e57b7730e6dd7181f9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

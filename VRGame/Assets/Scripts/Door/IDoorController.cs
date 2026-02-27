@@ -1,5 +1,3 @@
-
-using UnityEngine;
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here
 /// </summary>
@@ -8,7 +6,7 @@ using UnityEngine;
 /// </remarks>
 public interface IDoorController
 {
-    
+
     /// <summary>
     /// Public readonly accessor for triggerDebounce
     /// </summary>

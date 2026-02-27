@@ -1,10 +1,8 @@
-
-
 /// <summary>
 /// Wrapper class for unity's SceneManager. Made so that calls to sceneManager can be mocked
 /// out for unit testign
 /// </summary>
-public interface ISceneManagerWrapper 
+public interface ISceneManagerWrapper
 {
     /// <summary>
     /// Calls loadSceneAsync from unity's SceneManager with the specified scene-Id

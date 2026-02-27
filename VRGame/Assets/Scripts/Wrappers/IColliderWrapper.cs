@@ -12,7 +12,7 @@ public interface IColliderWrapper
     /// - collider must be non-null
     /// Posconditiosn
     /// - internal collider reference set to input value
-    
+
     // You can't have constructor signatures in interfaces for some reason
     //ColliderWrapper(Collider collider);
 

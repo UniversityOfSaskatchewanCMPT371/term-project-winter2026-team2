@@ -1,0 +1,23 @@
+name: test-pr
+run-name: Testing build for ${{ github.actor }}
+on: 
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout + cache
+      - uses: actions/checkout@v6
+      - uses: ./.github/workflows/unity-setup
+
+      # test
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: VRGame
+          githubToken: ${{ secrets.GITHUB_TOKEN }}

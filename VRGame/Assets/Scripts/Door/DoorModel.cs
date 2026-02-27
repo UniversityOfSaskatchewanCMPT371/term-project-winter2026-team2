@@ -1,12 +1,8 @@
 
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Tests")]
 
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
@@ -15,7 +11,8 @@ using System.Runtime.CompilerServices;
 /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
-public class DoorModel : MonoBehaviour, IDoorModel {
+public class DoorModel : MonoBehaviour, IDoorModel
+{
 
     /// <summary>
     /// A static lookup table visible to all DoorModels. Used to Ensure that
@@ -32,7 +29,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// <summary>
     /// Public accessor for door's id
     /// </summary>
-    public int DoorId {
+    public int DoorId
+    {
         /// <summary>
         /// Access the DoorModel's Id
         /// </summary>
@@ -41,7 +39,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// - None
         /// Postconditions:
         /// - DoorModel's id is returned
-        get {
+        get
+        {
             return doorId;
         }
 
@@ -55,7 +54,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// - value must be positive
         /// Postconditions:
         /// - DoorModel's `doorId` instance variable set to input value
-        set {
+        set
+        {
             if (value < 0)
             {
                 Debug.LogError("value passed to setDoorId is negative");
@@ -69,12 +69,13 @@ public class DoorModel : MonoBehaviour, IDoorModel {
     /// Id of another door that this door targets
     /// </summary>
     [SerializeField]
-    private int targetDoorId ;
+    private int targetDoorId;
 
     /// <summary>
     /// Public accessor for this door's target id 
     /// </summary>
-    public int TargetDoorId {
+    public int TargetDoorId
+    {
 
         /// <summary>
         /// Access this DoorModel's target door Id
@@ -85,7 +86,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// Postconditions:
         /// - DoorModel's `targetDoorId` instance variable is returned
         /// </remarks>
-        get {
+        get
+        {
             return targetDoorId;
         }
 
@@ -100,7 +102,8 @@ public class DoorModel : MonoBehaviour, IDoorModel {
         /// Postconditions:
         /// - DoorModel's `targetDoorId` instance variable set to input value
         /// </remarks>
-        set {
+        set
+        {
             if (value < 0)
             {
                 Debug.LogError("value passed to setTargetDoorId is negative");
