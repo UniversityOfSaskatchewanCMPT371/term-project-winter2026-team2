@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using System;
-using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour, IPlayerController
 {
@@ -37,7 +35,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
         // Initialize the player with default values
         model.Initialize("Player", 1);
-        
+
         Debug.Log($"Player initialized: {model.getPlayerName} (ID: {model.getPlayerId})");
     }
 

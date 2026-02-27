@@ -10,19 +10,21 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     /// <summary>
     /// The name of the player
     /// </summary>
-    [SerializeField] 
+    [SerializeField]
     private string playerName;
 
     /// <inheritdoc/>
     public string getPlayerName
     {
         /// <inheritdoc/>
-        get {
+        get
+        {
             return playerName;
         }
 
         /// <inheritdoc/>
-        set {
+        set
+        {
             if (value == null)
             {
                 Debug.LogError("Player name cannot be null");
@@ -44,12 +46,14 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
     public int getPlayerId
     {
         /// <inheritdoc/>
-        get {
+        get
+        {
             return id;
         }
 
         /// <inheritdoc/>
-        set {
+        set
+        {
             if (value <= 0)
             {
                 Debug.LogError("Player ID must be a positive integer");
@@ -59,24 +63,26 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
             id = value;
         }
     }
-    
+
 
 
     /// <summary>
     /// Boolean to track if the player is alive or not
     /// </summary>
     [SerializeField] bool alive = false;
-    
+
     /// <inheritdoc/>
     public bool playerIsAlive
     {
         /// <inheritdoc/>
-        get {
+        get
+        {
             return alive;
         }
 
         /// <inheritdoc/>
-        set {
+        set
+        {
             alive = value;
         }
     }
@@ -95,15 +101,15 @@ public class PlayerModel : MonoBehaviour, IPlayerModel
             Debug.LogError("Player ID must be a positive integer");
             return;
         }
-        
+
         Assert.IsNotNull(name, "Player name cannot be null");
         Assert.IsTrue(id > 0, "Player ID must be a positive integer");
-        
+
         // Set values
         this.playerName = name;
         this.id = id;
         this.alive = true;
-        
+
         // Post-condition check
         Assert.IsTrue(this.alive, "Player should be alive after initialization");
     }
