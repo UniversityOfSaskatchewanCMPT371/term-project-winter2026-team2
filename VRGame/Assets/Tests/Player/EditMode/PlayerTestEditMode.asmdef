@@ -1,0 +1,20 @@
+{
+    "name": "PlayerModel",
+    "rootNamespace": "",
+    "references": [
+        "GUID:54e04f0c2d17e4d318cc9cdc167f31b3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
