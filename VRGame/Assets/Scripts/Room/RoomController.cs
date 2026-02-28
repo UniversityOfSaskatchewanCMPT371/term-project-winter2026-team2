@@ -8,7 +8,7 @@ using System;
 /// </remarks>
 /// - Requires view/controller layer to be set before calling Init().
 /// <remarks>
-public class RoomController : Controller, IRoomController, InternalRoomController
+public class RoomController : Controller, IRoomController
 {
     /// DATA SECTION
 
@@ -35,7 +35,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     private IRoomModel roomModelMock;
 
     /// <inheritdoc/>
-    public IRoomView RoomView
+    internal IRoomView RoomView
     {
         /// <summary>
         /// Retrieves the view layer component, or the
@@ -93,7 +93,7 @@ public class RoomController : Controller, IRoomController, InternalRoomControlle
     }
 
     /// <inheritdoc/>
-    public IRoomModel RoomModel
+    internal IRoomModel RoomModel
     { 
         /// <summary>
         /// Retrieves the model layer component, or the

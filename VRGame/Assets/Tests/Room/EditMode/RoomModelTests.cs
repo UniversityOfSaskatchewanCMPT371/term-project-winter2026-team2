@@ -15,9 +15,7 @@ public class RoomModelTests
         // test setup
         GameObject go = new GameObject();
         IRoomModel roomModel = go.AddComponent<RoomModel>();
-        roomModel.Name = "Test";
-        roomModel.Id = 1;
-
+        
         // confirm that roomModel is not null
         Assert.NotNull(roomModel, $"roomModel cannot be null. Got {roomModel}");
 

@@ -236,7 +236,6 @@ public class RoomControllerTests
 
         // assign real components
         roomController.RoomView = roomView;
-
         // expect error + assert
         LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
         LogAssert.Expect(LogType.Error, "Missing field roomModel.");

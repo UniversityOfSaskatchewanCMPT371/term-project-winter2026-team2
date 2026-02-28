@@ -1,84 +1,9 @@
-
 /// <summary>
-/// Default internal interface for room controller.
-/// </summary>
-public interface InternalRoomController
-{
-    // DATA SECTION
-
-    /// <summary>
-    /// Getter/Setter for view layer component.
-    /// </summary>
-    public IRoomView RoomView {
-        /// <summary>
-        /// Retrieves the view layer component, or the
-        /// mock, whichever is not null.
-        /// </summary>
-        /// <remarks>
-        /// Precondtion:
-        /// - roomView or roomViewMock is not null.
-        /// Postcondition:
-        /// - returns the reference to view layer component.
-        /// </remarks>
-        /// <returns>
-        /// - The reference to view layer component.
-        /// </returns>
-        get; 
-        /// <summary>
-        /// Modifies the reference to the view layer component, or the
-        /// mock, if the new value inherits from View class.
-        /// </summary>
-        /// <remarks>
-        /// Precondition:
-        /// - Value is not null.
-        /// - Value either inherits from View class, or
-        /// a mock.
-        /// Postcondition:
-        /// - Reference to the view layer is modified.
-        /// </remarks>
-        set; 
-        }
-
-    /// <summary>
-    /// Getter/Setter for model layer component
-    /// </summary>
-    public IRoomModel RoomModel {
-        /// <summary>
-        /// Retrieves the model layer component, or the
-        /// mock, whichever is not null.
-        /// </summary>
-        /// <remark>
-        /// Preconditions:
-        /// - roomModel or roomModelMock is not null.
-        /// Postconditions:
-        /// - returns the reference to model layer component.
-        /// </remarks>
-        /// <returns>
-        /// - The reference to model layer component.
-        /// </return>
-        get;
-        /// <summary>
-        /// Modifies the reference to the model layer component, or the
-        /// mock, if the new value inherits from Model class.
-        /// </summary>
-        /// <remarks>
-        /// Precondition:
-        /// - Value is not null.
-        /// - Value is either inherits from Model class, or
-        /// a mock.
-        /// Postcondition:
-        /// - Reference to the model layer is modified.
-        /// </remarks>
-        set; 
-        }
-}
-
-/// <summary>
-/// Default external interface for room controller.
+/// Interface for RoomController component.
 /// </summary>
 public interface IRoomController
 {
-    /// METHODS SECTION
+
 
     /// <summary>
     /// Marks the minigame as complete in the model and then checks

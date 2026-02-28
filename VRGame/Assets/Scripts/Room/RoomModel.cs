@@ -6,7 +6,7 @@ using UnityEngine.Diagnostics;
 /// <summary>
 /// Model layer for reusable room module.
 /// </summary>
-public class RoomModel : Model, IRoomModel, InternalRoomModel
+public class RoomModel : Model, IRoomModel
 {
 
     /// DATA SECTION

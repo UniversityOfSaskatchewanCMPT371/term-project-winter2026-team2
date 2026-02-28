@@ -1,50 +1,9 @@
 /// <summary>
-/// Default internal interface for room view.
-/// </summary>
-public interface InternalRoomView
-{
-    /// DATA SECTION
-    
-    /// <summary>
-    /// Getter/Setter for controller layer component.
-    /// </summary>
-    public IRoomController RoomController{
-        /// <summary>
-        /// Retrieves the controller layer component, or the
-        /// mock, whichever is not null.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - roomController or roomControllerMock is not null.
-        /// Postconditions:
-        /// - Returns the reference to controller layer component.
-        /// </remarks>
-        /// <returns>
-        /// - The reference to the controller layer component.
-        /// </returns>
-        get; 
-        /// <summary>
-        /// Modifies the reference to the controller layer component, or the
-        /// mock, if the new value inherits from Controller class.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Value is not null
-        /// - Value either inherits from Controller class, or a mock.
-        /// Postconditions:
-        /// - Reference to the controller layer is modified.
-        /// </remarks>
-        set; 
-        }
-}
-
-/// <summary>
-/// Default external interface for room view.
+/// Interface for RoomView component.
 /// </summary>
 public interface IRoomView
 {
-    /// METHODS SECTIONS
-    
+   
     /// <summary>
     /// Invokes all listeners subscribed to OnRoomComplete event.
     /// </summary>

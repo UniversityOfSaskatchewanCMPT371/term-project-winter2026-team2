@@ -135,8 +135,8 @@ public class RoomViewTests
 
         // controller needs model + view to avoid its own Init() errors
         RoomModel roomModel = go.AddComponent<RoomModel>();
-        roomController.RoomModel = roomModel;
         roomController.RoomView = roomView;
+        roomController.RoomModel = roomModel;
 
         yield return null;
 
@@ -193,8 +193,8 @@ public class RoomViewTests
 
         // controller needs model + view
         RoomModel roomModel = go.AddComponent<RoomModel>();
-        roomController.RoomModel = roomModel;
         roomController.RoomView = roomView;
+        roomController.RoomModel = roomModel;
 
         yield return null;
 

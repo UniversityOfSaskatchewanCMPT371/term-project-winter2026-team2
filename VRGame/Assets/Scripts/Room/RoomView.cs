@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class RoomView : View, IRoomView, InternalRoomView
+public class RoomView : View, IRoomView
 {
     /// <summary>
     /// Reference to the controller layer of this room.
@@ -23,7 +23,7 @@ public class RoomView : View, IRoomView, InternalRoomView
     public UnityEvent onRoomCompleted = new UnityEvent();
 
     /// <inheritdoc/>
-    public IRoomController RoomController 
+    internal IRoomController RoomController 
     { 
         /// <summary>
         /// Retrieves the controller layer component, or the
