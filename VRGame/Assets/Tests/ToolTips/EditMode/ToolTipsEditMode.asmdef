@@ -5,7 +5,9 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "TNRD.NSubstitute",
-        "ToolTips"
+        "ToolTips",
+        "Unity.TextMeshPro",
+        "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [
         "Editor"
