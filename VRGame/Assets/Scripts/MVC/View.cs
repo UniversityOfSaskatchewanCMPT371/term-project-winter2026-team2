@@ -16,6 +16,7 @@ public abstract class View<C> : MonoBehaviour, IView
     /// value could not be set in the inspector window
     /// - A wrapper for controller
     /// </summary>
+    [SerializeField]
     protected Controller<IModel, IView> serializableController;
 
     /// <summary>
