@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Interface defining ToolTipModel
+/// for mocking in tests
+/// </summary>
+public interface IToolTipModel
+
+{/// <summary>
+ /// Gets or sets the title associated with the object.
+ /// </summary>
+    string Title { get; set; }
+    /// <summary>
+    /// Gets or sets the description associated with the object.
+    /// </summary>
+    string Description { get; set; }
+}
