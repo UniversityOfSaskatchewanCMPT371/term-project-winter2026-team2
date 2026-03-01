@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 /// <remarks>
 /// - C type is the interface of the controller component you implemented.
-/// This generic is used to typecast.
+/// This generic is used to declare type and typecast.
 /// </remarks>
 public abstract class View<C> : MonoBehaviour, IView
     where C : IController

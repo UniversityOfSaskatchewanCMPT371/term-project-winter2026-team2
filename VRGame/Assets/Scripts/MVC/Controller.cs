@@ -6,7 +6,7 @@ using UnityEngine;
 /// <remarks>
 /// - M type is the interface of the model component you implemented.
 /// - V type is the interface of the view component you implemented.
-/// These generics are used to typecast.
+/// These generics are used to declare type and typecast.
 /// </remarks>
 public abstract class Controller<M,V> : MonoBehaviour, IController
     where M : IModel
