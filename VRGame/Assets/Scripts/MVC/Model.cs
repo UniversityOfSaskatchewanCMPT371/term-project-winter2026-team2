@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Base class for model component.
 /// </summary>
-public abstract class Model : MonoBehaviour
+public abstract class Model : MonoBehaviour, IModel
 {
     /// </inheritdoc>
     public abstract void Init();
