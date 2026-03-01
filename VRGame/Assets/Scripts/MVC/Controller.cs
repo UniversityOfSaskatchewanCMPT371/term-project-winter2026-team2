@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Base class for model component.
+/// Base class for controller component.
 /// </summary>
 public abstract class Controller : MonoBehaviour, IController
 {
