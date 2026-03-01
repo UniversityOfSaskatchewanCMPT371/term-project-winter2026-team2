@@ -4,6 +4,7 @@
 public interface IView
 {   
     /// <summary>
+    /// Called by Start() method at runtime.
     /// Initializes the component and verifies each field values.
     /// </summary>
     /// <remarks>

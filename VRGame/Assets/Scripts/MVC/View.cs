@@ -3,7 +3,12 @@ using UnityEngine;
 /// <summary>
 /// Base class for view component.
 /// </summary>
-public abstract class View : MonoBehaviour, IView
+/// <remarks>
+/// - C type is the interface of the controller component you implemented.
+/// This generic is used to typecast.
+/// </remarks>
+public abstract class View<C> : MonoBehaviour, IView
+    where C : IController
 {
     /// <summary>
     /// This field exists because interfaces cannot
@@ -11,17 +16,17 @@ public abstract class View : MonoBehaviour, IView
     /// value could not be set in the inspector window
     /// - A wrapper for controller
     /// </summary>
-    private Controller serializableController;
+    protected Controller<IModel, IView> serializableController;
 
     /// <summary>
     /// Controller portion of door module. Controller portion uses data from this
     /// </summary>
-    private IController controller;
+    protected C controller;
 
     /// <summary>
     /// Public accessor of controller portion of door module
     /// </summary>
-    internal IController Controller
+    internal C Controller
     {
         /// <summary>
         /// Set the value of View's controller instance variable
@@ -42,6 +47,30 @@ public abstract class View : MonoBehaviour, IView
         }
     }
 
+    /// <summary>
+    /// Called by Start() method at runtime.
+    /// Verifies the references to other layer components.
+    /// </summary>
+    /// <remarks>
+    /// Precondition:
+    /// - 'controller' field is not missing.
+    /// Postcondition:
+    /// - Logs error if any field is missing.
+    /// </remarks>
+    private void CheckLayerRefs()
+    {
+        if (serializableController != null)
+        {
+            controller = (C)(IController)serializableController;
+        }
+
+        if (controller == null)
+        {
+            Debug.LogError("'controller' field is null.");
+            Debug.Assert(controller != null, "'controller' field cannot be null.");
+        }
+    }
+
     /// </inheritdoc>
     public abstract void Init();
 
@@ -57,6 +86,7 @@ public abstract class View : MonoBehaviour, IView
     /// <remarks>
     public virtual void Start()
     {
+        CheckLayerRefs();
         Init();
     }
 }

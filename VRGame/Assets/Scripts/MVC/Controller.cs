@@ -3,7 +3,14 @@ using UnityEngine;
 /// <summary>
 /// Base class for controller component.
 /// </summary>
-public abstract class Controller : MonoBehaviour, IController
+/// <remarks>
+/// - M type is the interface of the model component you implemented.
+/// - V type is the interface of the view component you implemented.
+/// These generics are used to typecast.
+/// </remarks>
+public abstract class Controller<M,V> : MonoBehaviour, IController
+    where M : IModel
+    where V : IView
 {
     /// <summary>
     /// This field exists because interfaces cannot
@@ -11,17 +18,18 @@ public abstract class Controller : MonoBehaviour, IController
     /// value could not be set in the inspector window
     /// - A wrapper for model
     /// </summary>
-    private Model serializableModel;
+    [SerializeField]
+    protected Model serializableModel;
 
     /// <summary>
     /// Model portion of door module. Controller portion uses data from this
     /// </summary>
-    private IModel model;
+    protected M model;
 
     /// <summary>
     /// Public accessor of model portion of door module
     /// </summary>
-    internal IModel Model
+    internal M Model
     {
 
         /// <summary>
@@ -49,17 +57,18 @@ public abstract class Controller : MonoBehaviour, IController
     /// value could not be set in the inspector window
     /// - A wrapper for view
     /// </summary>
-    private View serializableView;
+    [SerializeField]
+    protected View<IController> serializableView;
 
     /// <summary>
     /// View portion of door module. Controller portion uses data from this
     /// </summary>
-    private IView view;
+    protected V view;
 
     /// <summary>
     /// Public accessor of view portion of door module
     /// </summary>
-    internal IView View
+    internal V View
     {
 
         /// <summary>
@@ -81,21 +90,57 @@ public abstract class Controller : MonoBehaviour, IController
         }
     }
 
+    /// <summary>
+    /// Called by Start() method at runtime.
+    /// Verifies the references to other layer components.
+    /// </summary>
+    /// <remarks>
+    /// Precondition:
+    /// - 'view' and 'model' field are not missing.
+    /// Postcondition:
+    /// - Logs error if any field is missing.
+    /// </remarks>
+    private void CheckLayerRefs()
+    {
+        if (serializableModel != null)
+        {
+            model = (M)(IModel)serializableModel;
+        }
+        if (serializableView != null)
+        {
+            view = (V)(IView)serializableModel;
+        }
+
+        if (model == null)
+        {
+            Debug.LogError("'model' field is null.");
+            Debug.Assert(model != null, "'model' field cannot be null.");
+        } else if (view == null)
+        {
+            Debug.LogError("'view' field is null.");
+            Debug.Assert(view != null, "'view' field cannot be null.");
+        }
+    }
+
     /// </inheritdoc>
     public abstract void Init();
 
     /// <summary>
     /// Called once after all Awake() calls.
     /// Inherited from MonoBehaviourl.
+    /// Verifies all the fields.
     /// </summary>
     /// <remarks>
     /// Precondition:
+    /// - CheckLayerRefs() method is implemented.
     /// - Init() method is implemented.
     /// Postcondition:
+    /// - Calls CheckLayerRefs().
     /// - Calls Init() method.
     /// <remarks>
     public virtual void Start()
     {
+        CheckLayerRefs();
         Init();
     }
 }
