@@ -1,14 +1,8 @@
 {
-    "name": "MVCEditTests",
+    "name": "ScriptTemplates",
     "rootNamespace": "",
-    "references": [
-        "TNRD.NSubstitute",
-        "UnityEngine.TestRunner",
-        "MVC"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
