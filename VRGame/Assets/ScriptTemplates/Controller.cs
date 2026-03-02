@@ -5,9 +5,9 @@ using UnityEngine;
 /// Base class for controller component.
 /// </summary>
 /// <remarks>
-/// - 'M' is the interface of the model component your implementation.
-/// - 'V' is the interface of the view component your implementation.
-/// These generics are used to declare type and typecast. Which is needed to access methods
+/// - 'M' is the interface of the model component of your implementation.
+/// - 'V' is the interface of the view component of your implementation.
+/// These generics are used to define the type of 'modelInstance and viewInstance' and typecast. Which is needed to access methods
 /// from the controller model component and view component.
 /// </remarks>
 public abstract class Controller<M,V> : MonoBehaviour, IController
