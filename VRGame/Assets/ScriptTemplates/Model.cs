@@ -9,15 +9,15 @@ public abstract class Model : MonoBehaviour, IModel
     public abstract void Init();
 
     /// <summary>
-    /// Called once after all Awake() calls.
-    /// Inherited from MonoBehaviourl.
+    /// Called once after all Awake() calls. Inherited from MonoBehaviour.
     /// </summary>
     /// <remarks>
     /// Precondition:
-    /// - Init() method is implemented.
+    /// - 'Init()' method is implemented by the subclass.
+    ///
     /// Postcondition:
-    /// - Calls Init() method.
-    /// <remarks>
+    /// - Calls 'Init()' method after all Awake() calls have completed.
+    /// </remarks>
     public virtual void Start()
     {
         Init();

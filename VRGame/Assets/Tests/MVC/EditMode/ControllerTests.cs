@@ -3,7 +3,13 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class BaseController : Controller<IModel,IView>
+public class BaseControllerWithoutControllerClass : MonoBehaviour
+{
+    
+}
+
+
+public class BaseController : Controller<IModel, IView>
 {
     public override void Init()
     {
@@ -18,40 +24,40 @@ public class ControllerTests
     private IView view;
     private IModel model;
 
+    // setup controller component
     [SetUp]
     public void Setup()
     {
-        // setup component
         go = new GameObject();
         controller = go.AddComponent<BaseController>();
     }
 
+    // clean up object
     [TearDown]
     public void TearDown()
     {
-        // clean up objects
         UnityEngine.Object.DestroyImmediate(go);
     }
 
+    // mock the view
     public void MockViewComponent()
     {
-        // mock the view
         view = Substitute.For<IView>();
-        controller.View = view;
+        controller.ViewMock = view;
     }
 
+    // mock the model
     public void MockModelComponent()
     {
-        // mock the model
         model = Substitute.For<IModel>();
-        controller.Model = model;
+        controller.ModelMock = model;
     }
 
-    // A Test behaves as an ordinary method
+    // test the instantiation of controller component with no missing fields
     [Test]
     public void Instantiation()
     {
-        Assert.NotNull(controller, "'controller' field cannot be null");
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
 
         MockViewComponent();
         MockModelComponent();
@@ -59,29 +65,77 @@ public class ControllerTests
         controller.Start();
     }
 
+    // test the instantiation of controller component with 'modelInstance' missing
     [Test]
     public void InstantiationWithMissingModelRefs()
     {
-        Assert.NotNull(controller, "'controller' field cannot be null");
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Error, "'model' field is null.");
-        LogAssert.Expect(LogType.Assert, "'model' field cannot be null.");
+        LogAssert.Expect(LogType.Error, "'modelInstance' field is null.");
 
         MockViewComponent();
 
-        controller.Start();
+        Assert.Throws<AssertionException>(() => controller.Start(), "'modelInstance' field cannot be null.");
     }
 
+    // test the instantiation of controller component with 'viewInstance' missing
     [Test]
     public void InstantiationWithMissingViewRefs()
     {
-        Assert.NotNull(controller, "'controller' field cannot be null");
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Error, "'view' field is null.");
-        LogAssert.Expect(LogType.Assert, "'view' field cannot be null.");
+        LogAssert.Expect(LogType.Error, "'viewInstance' field is null.");
 
         MockModelComponent();
 
-        controller.Start();
+        Assert.Throws<AssertionException>(() => controller.Start(), "'viewInstance' field cannot be null.");
+    }
+
+    // test setting the value of 'modelInstance' to null
+    [Test]
+    public void SetModelFieldToNull()
+    {
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
+
+        LogAssert.Expect(LogType.Error, "'value' passed to set 'modelInstance' is null.");
+
+        Assert.Throws<AssertionException>(() => controller.ModelMock = null, "Expected exception to be thrown when setting field 'modelInstance' to null.");
+    }
+
+    // test setting the value of 'viewInstance' to null
+    [Test]
+    public void SetViewFieldToNull()
+    {
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
+
+        LogAssert.Expect(LogType.Error, "'value' passed to set 'viewInstance' is null.");
+
+        Assert.Throws<AssertionException>(() => controller.ViewMock = null, "Expected exception to be thrown when setting field 'viewInstance' to null.");
+    }
+
+    // test setting the value of 'modelInstance' automatically
+    [Test]
+    public void AutomaticallySetModelField()
+    {
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
+
+        LogAssert.Expect(LogType.Warning, "'inspectorWindowModel' value was not set in inspector.");
+        LogAssert.Expect(LogType.Error, "'viewInstance' field is null.");
+        go.AddComponent<BaseModel>();
+
+        Assert.Throws<AssertionException>(() => controller.Start(), "Expected exception to be thrown when 'viewInstance' field is null.");
+    }
+
+    // test setting the value of 'viewInstance' automatically
+    [Test]
+    public void AutomaticallySetViewField()
+    {
+        Assert.NotNull(controller, "'controllerInstance' field cannot be null");
+
+        LogAssert.Expect(LogType.Warning, "'inspectorWindowView' value was not set in inspector.");
+        LogAssert.Expect(LogType.Error, "'modelInstance' field is null.");
+        go.AddComponent<BaseView>();
+
+        Assert.Throws<AssertionException>(() => controller.Start(), "Expected exception to be thrown when 'modelInstance' field is null.");
     }
 }

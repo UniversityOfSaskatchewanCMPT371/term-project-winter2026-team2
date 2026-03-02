@@ -36,8 +36,8 @@ public class TryController : Controller<ITryModel, ITryView>
     public override void Init()
     {
         // you'll have access to:
-        // this.view;               accessor to view component
-        // this.model.GetCount();   accessor to model component
+        // this.modelInstance;              accessor to view component
+        // this.modelInstance.GetCount();   accessor to model component
     }    
 }
 
@@ -53,6 +53,6 @@ public class TryView : View<ITryController>
     public override void Init()
     {
         // you'll have access to:
-        // this.controller          accessor to controller component
+        // this.controllerInstance          accessor to controller component
     }    
 }

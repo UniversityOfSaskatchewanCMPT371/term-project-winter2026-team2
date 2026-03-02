@@ -1,10 +1,10 @@
-using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
-using NSubstitute;
-using System.Text.RegularExpressions;
-using System;
+
+public class BaseModelWithoutModelClass : MonoBehaviour
+{
+    
+}
 
 public class BaseModel : Model
 {
@@ -19,6 +19,7 @@ public class ModelTests
     private GameObject go;
     private BaseModel model;
 
+    // setup model component
     [SetUp]
     public void Setup()
     {
@@ -26,6 +27,7 @@ public class ModelTests
         model = go.AddComponent<BaseModel>();
     }
 
+    // clean up object
     [TearDown]
     public void TearDown()
     {
@@ -36,8 +38,8 @@ public class ModelTests
     [Test]
     public void Instantiation()
     {
-        Assert.NotNull(model, "'model' field cannot be null");
+        Assert.NotNull(model, "'modelInstance' field cannot be null");
 
-        model.Start();
+        Assert.DoesNotThrow(() => model.Start(), "Expected no exception to be thrown, but one was thrown.");
     }
 }

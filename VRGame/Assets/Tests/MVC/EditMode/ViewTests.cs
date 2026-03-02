@@ -3,6 +3,11 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+public class BaseViewWithoutViewClass : MonoBehaviour
+{
+    
+}
+
 public class BaseView : View<IController>
 {
     public override void Init()
@@ -17,33 +22,33 @@ public class ViewTests
     private BaseView view;
     private IController controller;
 
+    // setup the view component
     [SetUp]
     public void Setup()
     {
-        // setup the component
         go = new GameObject();
         view = go.AddComponent<BaseView>();
     }
 
+    // clean up object
     [TearDown]
     public void TearDown()
     {
-        // clean up objects
         UnityEngine.Object.DestroyImmediate(go);
     }
 
+    // mock the controller
     public void MockControllerComponent()
     {
-        // mock the controller
         controller = Substitute.For<IController>();
-        view.Controller = controller;
+        view.ControllerMock = controller;
     }
 
     // Test with all valid fields
     [Test]
     public void Instantiation()
     {
-        Assert.NotNull(view, "'view' field cannot be null");
+        Assert.NotNull(view, "'viewInstance' field cannot be null");
 
         MockControllerComponent();
 
@@ -54,11 +59,32 @@ public class ViewTests
     [Test]
     public void InstantiationWithMissingControllerRefs()
     {
-        Assert.NotNull(controller, "'controller' field cannot be null");
+        Assert.NotNull(view, "'viewInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Error, "'controller' field is null.");
-        LogAssert.Expect(LogType.Assert, "'controller' field cannot be null.");
+        LogAssert.Expect(LogType.Error, "'controllerInstance' field is null.");
+        Assert.Throws<AssertionException>(() => view.Start(), "'controllerInstance' field cannot be null.");
+    }
 
-        view.Start();
+    // test setting the value of 'controllerInstance' to null
+    [Test]
+    public void SetControllerFieldToNull()
+    {
+        Assert.NotNull(view, "'viewInstance' field cannot be null");
+
+        LogAssert.Expect(LogType.Error, "'value' passed to set 'controllerInstance' is null.");
+
+        Assert.Throws<AssertionException>(() => view.ControllerMock = null, "Expected exception to be thrown when setting field 'controllerInstance' to null.");
+    }
+
+    // test setting the value of 'controllerInstance' automatically
+    [Test]
+    public void AutomaticallySetControllerField()
+    {
+        Assert.NotNull(view, "'viewInstance' field cannot be null");
+
+        LogAssert.Expect(LogType.Warning, "'inspectorWindowController' value was not set in inspector.");
+        go.AddComponent<BaseController>();
+
+        Assert.DoesNotThrow(() => view.Start(), "Expected exception to be thrown when 'controllerInstance' field is null.");
     }
 }
