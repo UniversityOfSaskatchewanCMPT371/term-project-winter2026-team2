@@ -1,0 +1,15 @@
+using UnityEngine;
+
+/// <summary>
+/// Model component of #SCRIPTNAME#.
+/// </summary>
+public class #SCRIPTNAME# : Model, I#SCRIPTNAME#
+{
+
+    /// <inheritdoc></inheritdoc>
+    public override void Init()
+    {
+
+    }
+}
+#NOTRIM#

@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Model : MonoBehaviour, IModel
 {
-    /// </inheritdoc>
+    /// <inheritdoc></inheritdoc>
     public abstract void Init();
 
     /// <summary>

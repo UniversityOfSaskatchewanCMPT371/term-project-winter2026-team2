@@ -1,6 +1,3 @@
-
-using System.Runtime.CompilerServices;
-
 public interface ITryModel : IModel
 {
     public int GetCount();
@@ -24,10 +21,7 @@ public class TryModel : Model
     }    
 }
 
-public interface ITryController : IController
-{
-    
-}
+public interface ITryController : IController{}
 
 // generics are used to declare types, and typecasting (required)
 public class TryController : Controller<ITryModel, ITryView>
@@ -41,10 +35,7 @@ public class TryController : Controller<ITryModel, ITryView>
     }    
 }
 
-public interface ITryView : IView
-{
-    
-}
+public interface ITryView : IView{}
 
 // generics are used to declare types, and typecasting (required)
 public class TryView : View<ITryController>

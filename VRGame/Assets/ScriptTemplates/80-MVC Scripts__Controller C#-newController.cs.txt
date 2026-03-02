@@ -1,0 +1,19 @@
+using UnityEngine;
+
+/// <summary>
+/// Controller component of #SCRIPTNAME#.
+/// </summary>
+public class #SCRIPTNAME# : 
+    Controller<IModel, IView>, // reminder to switch the generics to the ones you've implemented
+    I#SCRIPTNAME#
+{
+    // use 'this.viewInstance' to access view component, and
+    // 'this.modelInstance' to access model component
+
+    /// <inheritdoc></inheritdoc>
+    public override void Init()
+    {
+
+    }
+}
+#NOTRIM#

@@ -71,7 +71,7 @@ public abstract class View<C> : MonoBehaviour, IView
     private void CheckLayerRefs()
     {
         // if the controller component is attached to the game object
-        // but 'inspectorWindowController' value is not set. Automatically
+        // but 'inspectorWindowController' value is not set, automatically
         // set it's value
         if (inspectorWindowController == null && gameObject.GetComponent<C>() != null)
         {
@@ -97,7 +97,7 @@ public abstract class View<C> : MonoBehaviour, IView
         }
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc></inheritdoc>
     public abstract void Init();
 
     /// <summary>

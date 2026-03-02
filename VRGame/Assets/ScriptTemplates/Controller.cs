@@ -119,7 +119,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
     private void CheckLayerRefs()
     {
         // if the model component is attached to the game object
-        // but 'inspectorWindowModel' value is not set. Automatically
+        // but 'inspectorWindowModel' value is not set, automatically
         // set it's value
         if (inspectorWindowModel == null && gameObject.GetComponent<M>() != null)
         {
@@ -128,7 +128,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
         }
 
         // if the view component is attached to the game object
-        // but 'inspectorWindowView' value is not set. Automatically
+        // but 'inspectorWindowView' value is not set, automatically
         // set it's value
         if (inspectorWindowView == null && gameObject.GetComponent<V>() != null)
         {
@@ -169,7 +169,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
         }
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc></inheritdoc>
     public abstract void Init();
 
     /// <summary>
