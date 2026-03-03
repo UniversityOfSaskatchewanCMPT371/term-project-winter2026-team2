@@ -4,7 +4,7 @@
 public interface IModel
 {
     /// <summary>
-    /// Called by Start() method at runtime after CheckLayerRefs() is called.
+    /// Called by Start() method at runtime.
     /// This method is to be overriden by the subclass that implements it
     /// and its docstring should be changed accordingly.
     /// </summary>

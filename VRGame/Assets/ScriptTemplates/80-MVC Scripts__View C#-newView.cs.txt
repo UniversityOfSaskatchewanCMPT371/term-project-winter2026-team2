@@ -9,10 +9,11 @@ public class #SCRIPTNAME# :
 {
     // use 'this.controllerInstance' to access controller component
 
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public override void Init()
     {
-
+        // used to resolve and validate controller component
+        this.CheckControllerRef();
     }
 }
 #NOTRIM#

@@ -6,7 +6,7 @@ using UnityEngine;
 public class #SCRIPTNAME# : Model, I#SCRIPTNAME#
 {
 
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public override void Init()
     {
 

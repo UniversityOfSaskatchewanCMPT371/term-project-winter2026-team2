@@ -52,7 +52,7 @@ public class ViewTests
 
         MockControllerComponent();
 
-        view.Start();
+        view.CheckControllerRef();
     }
 
     // Test where the controller field is missing
@@ -62,7 +62,7 @@ public class ViewTests
         Assert.NotNull(view, "'viewInstance' field cannot be null");
 
         LogAssert.Expect(LogType.Error, "'controllerInstance' field is null.");
-        Assert.Throws<AssertionException>(() => view.Start(), "'controllerInstance' field cannot be null.");
+        Assert.Throws<AssertionException>(() => view.CheckControllerRef(), "'controllerInstance' field cannot be null.");
     }
 
     // test setting the value of 'controllerInstance' to null
@@ -85,6 +85,6 @@ public class ViewTests
         LogAssert.Expect(LogType.Warning, "'inspectorWindowController' value was not set in inspector.");
         go.AddComponent<BaseController>();
 
-        Assert.DoesNotThrow(() => view.Start(), "Expected exception to be thrown when 'controllerInstance' field is null.");
+        Assert.DoesNotThrow(() => view.CheckControllerRef(), "Expected exception to be thrown when 'controllerInstance' field is null.");
     }
 }

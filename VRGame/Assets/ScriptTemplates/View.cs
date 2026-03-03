@@ -52,23 +52,8 @@ public abstract class View<C> : MonoBehaviour, IView
         }
     }
 
-    /// <summary>
-    /// Called by Start() at runtime. Resolves and validates the controller
-    /// reference required by this component.
-    /// </summary>
-    /// <remarks>
-    /// Precondition:
-    /// - The GameObject may or may not have a component implementing the
-    ///   generic interface. If present, it can be
-    ///   auto‑assigned when the inspector field is unset.
-    ///
-    /// Postcondition:
-    /// - 'controllerInstance' is assigned to a component implementing
-    ///   <typeparamref name="C"/>.
-    /// - Logs errors and raises assertions when the resolved reference is
-    ///   missing or does not implement <typeparamref name="C"/>.
-    /// </remarks>
-    private void CheckLayerRefs()
+    /// <inheritdoc/>
+    public void CheckControllerRef()
     {
         // if the controller component is attached to the game object
         // but 'inspectorWindowController' value is not set, automatically
@@ -97,28 +82,20 @@ public abstract class View<C> : MonoBehaviour, IView
         }
     }
 
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public abstract void Init();
 
     /// <summary>
-    /// Called once after all Awake() calls. Ensures that this component's
-    /// controller reference is resolved and validated before initialization.
+    /// Called once after all Awake() calls. Invokes Init() method.
     /// </summary>
     /// <remarks>
     /// Precondition:
-    /// - 'CheckLayerRefs()' is implemented and able to resolve the
-    ///   controller reference.
     /// - 'Init()' is implemented by the subclass.
-    ///
     /// Postcondition:
-    /// - 'CheckLayerRefs()' is invoked to resolve and validate
-    ///   'controllerInstance'.
-    /// - 'Init()' is invoked after a valid controller reference is ensured.
-    /// - Errors and assertions occur if the controller reference cannot be resolved.
+    /// - 'Init()' is invoked.
     /// </remarks>
     public virtual void Start()
     {
-        CheckLayerRefs();
         Init();
     }
 }

@@ -10,10 +10,12 @@ public class #SCRIPTNAME# :
     // use 'this.viewInstance' to access view component, and
     // 'this.modelInstance' to access model component
 
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public override void Init()
     {
-
+        // these are used to resolve and validate model and view components
+        this.CheckModelRef();
+        this.CheckViewRef();
     }
 }
 #NOTRIM#

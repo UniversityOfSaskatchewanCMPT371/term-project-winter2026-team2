@@ -5,18 +5,17 @@ using UnityEngine;
 /// </summary>
 public abstract class Model : MonoBehaviour, IModel
 {
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public abstract void Init();
 
     /// <summary>
-    /// Called once after all Awake() calls. Inherited from MonoBehaviour.
+    /// Called once after all Awake() calls. Invokes Init() method.
     /// </summary>
     /// <remarks>
     /// Precondition:
-    /// - 'Init()' method is implemented by the subclass.
-    ///
+    /// - 'Init()' is implemented by the subclass.
     /// Postcondition:
-    /// - Calls 'Init()' method after all Awake() calls have completed.
+    /// - 'Init()' is invoked.
     /// </remarks>
     public virtual void Start()
     {

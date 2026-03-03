@@ -1,3 +1,4 @@
+using Codice.CM.Common;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -96,27 +97,8 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
         }
     }
 
-    /// <summary>
-    /// Called by Start() at runtime. Resolves and validates the
-    /// 'modelInstance' and 'viewInstance' references required
-    /// by this component.
-    /// </summary>
-    /// <remarks>
-    /// Precondition:
-    /// - 'inspectorWindowModel' and 'inspectorWindowView' may or may not
-    ///   be assigned in the inspector. If unassigned, matching components
-    ///   implementing <typeparamref name="M"/> and <typeparamref name="V"/> may
-    ///   be auto‑assigned when the inspector field is unset.
-    ///
-    /// Postcondition:
-    /// - 'modelInstance' is resolved from a component implementing
-    ///   <typeparamref name="M"/>.
-    /// - 'viewInstance' is resolved from a component implementing
-    ///   <typeparamref name="V"/>.
-    /// - Errors are logged and assertions raised when either reference is missing
-    ///   or does not implement the required interface.
-    /// </remarks>
-    private void CheckLayerRefs()
+    /// <inheritdoc/>
+    public void CheckModelRef()
     {
         // if the model component is attached to the game object
         // but 'inspectorWindowModel' value is not set, automatically
@@ -126,16 +108,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
             inspectorWindowModel = gameObject.GetComponent<M>() as MonoBehaviour;
             Debug.LogWarning("'inspectorWindowModel' value was not set in inspector.");
         }
-
-        // if the view component is attached to the game object
-        // but 'inspectorWindowView' value is not set, automatically
-        // set it's value
-        if (inspectorWindowView == null && gameObject.GetComponent<V>() != null)
-        {
-            inspectorWindowView = gameObject.GetComponent<V>() as MonoBehaviour;
-            Debug.LogWarning("'inspectorWindowView' value was not set in inspector.");
-        }
-
+        
         if (inspectorWindowModel != null)
         {
             modelInstance = inspectorWindowModel as M;
@@ -145,6 +118,25 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
                 Debug.LogError($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
                 Assert.IsNotNull(modelInstance, $"'inspectorWindowModel' needs to implement {typeof(M).Name}.");   
             }
+        } 
+        
+        if (modelInstance == null)
+        {
+            Debug.LogError("'modelInstance' field is null.");
+            Assert.IsNotNull(modelInstance, "'modelInstance' field cannot be null.");
+        }
+    }
+
+    /// <inheritdoc/>
+    public void CheckViewRef()
+    {
+        // if the view component is attached to the game object
+        // but 'inspectorWindowView' value is not set, automatically
+        // set it's value
+        if (inspectorWindowView == null && gameObject.GetComponent<V>() != null)
+        {
+            inspectorWindowView = gameObject.GetComponent<V>() as MonoBehaviour;
+            Debug.LogWarning("'inspectorWindowView' value was not set in inspector.");
         }
 
         if (inspectorWindowView != null)
@@ -158,39 +150,27 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
             }
         }
 
-        if (modelInstance == null)
-        {
-            Debug.LogError("'modelInstance' field is null.");
-            Assert.IsNotNull(modelInstance, "'modelInstance' field cannot be null.");
-        } else if (viewInstance == null)
+        if (viewInstance == null)
         {
             Debug.LogError("'viewInstance' field is null.");
             Assert.IsNotNull(viewInstance, "'viewInstance' field cannot be null.");
         }
     }
 
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public abstract void Init();
 
     /// <summary>
-    /// Called once after all Awake() calls. Ensures that this component's
-    /// model and view references are resolved and validated before initialization.
+    /// Called once after all Awake() calls. Invokes Init() method.
     /// </summary>
     /// <remarks>
     /// Precondition:
-    /// - 'CheckLayerRefs()' is implemented and able to resolve the
-    ///   'modelInstance' and 'viewInstance' references.
     /// - 'Init()' is implemented by the subclass.
-    ///
     /// Postcondition:
-    /// - 'CheckLayerRefs()' is invoked to resolve and validate
-    ///   'modelInstance' and 'viewInstance'.
-    /// - 'Init()' is invoked after valid references are ensured.
-    /// - Errors and assertions occur if either reference cannot be resolved.
+    /// - 'Init()' is invoked.
     /// </remarks>
     public virtual void Start()
     {
-        CheckLayerRefs();  
         Init();
     }
 }
