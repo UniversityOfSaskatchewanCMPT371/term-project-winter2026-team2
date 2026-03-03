@@ -6,6 +6,7 @@ namespace ObjectMatchGame
         levelComplete,
         levelFailed,
         readyToStart,
-        tutorial
+        tutorial,
+        complete
     }
 }

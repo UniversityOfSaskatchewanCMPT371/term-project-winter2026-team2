@@ -1,18 +1,10 @@
+using ObjectMatchGame;
 /// <summary>
 /// Interface for the model of the object matching minigame for the occipital lobe
 /// The model is responsible for keeping track of the state of the game
 /// </summary>
 public interface IObjectMatchGameModel
 {
-
-    enum GameState
-    {
-        playing,
-        levelComplete,
-        levelFailed,
-        readyToStart,
-        tutorial
-    }
 
     /// <summary>
     /// Gets the current state of the game
@@ -24,17 +16,6 @@ public interface IObjectMatchGameModel
     /// - The current state of the game is returned as a GameState enum value
     /// </remarks>
     public GameState GetGameState();
-
-    /// <summary>
-    /// Sets the current state of the game to the input value
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - `value` must be a valid GameState enum value
-    /// Postconditions:
-    /// - The current state of the game is set to the input value
-    /// </remarks>
-    public void SetGameState(GameState newState);
 
     /// <summary>
     /// Gets the current level of the game. If the game is in the tutorial or 
@@ -52,6 +33,18 @@ public interface IObjectMatchGameModel
     /// levels, returns the next level number (1 higher than level just completed).
     /// </remarks>
     public int GetCurrentLevel();
+
+    /// <summary>
+    ///  Gets the total number of levels in the game. This is a fixed value that does not
+    ///  change during gameplay.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Returns the total number of levels in the game as an integer
+    /// </remarks>
+    public int GetTotalLevels();
 
     /// <summary>
     /// Gets the current score for the active game session.
@@ -79,5 +72,15 @@ public interface IObjectMatchGameModel
     ///   (i.e. if in tutorial, ready to start, or between levels).
     /// </remarks>
     public int GetLevelScore();
-    
+
+    /// <summary>
+    /// Checks if the current level has been completed, and updates the game state
+    /// accordingly.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Updates the GameState, numberOfFailures
+    public void CheckForLevelCompletion();
 }
