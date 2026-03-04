@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 
 /// <summary>
@@ -81,4 +82,50 @@ public interface IGridModel
     /// </post-condition>
     /// </remarks>
     void Initialize(int width, int height, float cellSize);
+
+
+    /// <summary>
+    ///  Checks if a cell is occupied by a pipe
+    /// <param name="x">The x-coordinate of the cell to check</param>
+    /// <param name="y">The y-coordinate of the cell to check</param>
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   x and y are valid coordinates
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   Returns true if the cell is occupied, false otherwise
+    /// </post-condition>
+    /// </remarks>
+    bool IsCellOccupied(int x, int y);
+
+    /// <summary>
+    /// Attempts to place a pipe of the specified color at the given cell coordinates
+    /// <param name="x">X-coordinate in grid</param>
+    /// <param name="y">Y-coordinate in grid</param>
+    /// <param name="pipeColor">Color of the pipe to place</param>
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   x and y are valid coordinates
+    ///     -   pipeColor is a valid color </pre-condition>
+    /// <post-condition>
+    ///     -   If the cell is unoccupied, a pipe of the specified color is placed and the method returns true
+    ///     -   If the cell is occupied, no changes are made and the method returns false
+    /// </post-condition>
+    /// </remarks>
+    bool TryPlacePipe(int x, int y, Color pipeColor);
+
+    /// <summary>
+    /// Removes all pipes from grid
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   None
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   All cells are empty
+    /// </post-condition>
+    /// </remarks>
+    void ClearGrid();
 }
