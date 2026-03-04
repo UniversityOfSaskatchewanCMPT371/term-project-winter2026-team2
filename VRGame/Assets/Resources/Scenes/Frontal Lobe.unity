@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.28
+      value: -4.68
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalRotation.w
@@ -363,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.8
+      value: -2.51
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -514,15 +514,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.111
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.111
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.111
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -530,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -579,6 +579,14 @@ PrefabInstance:
     - target: {fileID: -5568371526223589888, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_Name
       value: CurveWall
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 111
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9bc8dcbc265d4e04291be558066ba3b8, type: 3}
       propertyPath: m_Name
