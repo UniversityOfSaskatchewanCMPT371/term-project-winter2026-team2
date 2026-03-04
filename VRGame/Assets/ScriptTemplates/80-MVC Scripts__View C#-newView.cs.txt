@@ -15,7 +15,7 @@ public class #SCRIPTNAME# :
     public override void Init()
     {
         // this is used to resolve and validate the controller component
-        // this.CheckControllerRef();
+        this.CheckControllerRef();
     }
 }
 #NOTRIM#
