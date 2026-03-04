@@ -2,6 +2,12 @@ using NUnit.Framework;
 using UnityEngine;
 
 /// <summary>
+/// MonoBehaviour wrapper. This used specifically for serialized layer fields
+/// so that it shows in the inspector that a component requires a 'ControllerComponent' instead of 'MonoBehaviour'.
+/// </summary>
+public class ControllerComponent : MonoBehaviour {}
+
+/// <summary>
 /// Base class for controller component.
 /// </summary>
 /// <remarks>
@@ -11,7 +17,7 @@ using UnityEngine;
 /// that exist in this class for typecasting. Which is needed to access methods
 /// from the controller model component and view component.
 /// </remarks>
-public abstract class Controller<M, V> : MonoBehaviour, IController
+public abstract class Controller<M,V> : ControllerComponent, IController
     where M : class, IModel
     where V : class, IView
 {
@@ -23,7 +29,7 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
     /// - Only used by CheckModelRef() to set the value of 'modelInstance' to this field's value
     /// </summary>
     [SerializeField]
-    private MonoBehaviour inspectorWindowModel;
+    private ModelComponent inspectorWindowModel;
 
     /// <summary>
     /// Reference to the model layer component or
@@ -66,7 +72,7 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
     /// - Only used by CheckViewRef() to set the value of 'viewInstance' to this field's value
     /// </summary>
     [SerializeField]
-    private MonoBehaviour inspectorWindowView;
+    private ViewComponent inspectorWindowView;
 
     /// <summary>
     /// Reference to the view layer component or

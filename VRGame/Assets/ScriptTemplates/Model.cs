@@ -1,9 +1,15 @@
 using UnityEngine;
 
 /// <summary>
+/// MonoBehaviour wrapper. This used specifically for serialized layer fields
+/// so that it shows in the inspector that a component requires a 'ModelComponent' instead of 'MonoBehaviour'.
+/// </summary>
+public class ModelComponent : MonoBehaviour {}
+
+/// <summary>
 /// Base class for model component.
 /// </summary>
-public abstract class Model : MonoBehaviour, IModel
+public abstract class Model : ModelComponent, IModel
 {
     /// <inheritdoc/>
     public abstract void Init();
