@@ -72,8 +72,6 @@ public class ControllerTests
     {
         Assert.NotNull(controller, "'controllerInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Error, "'modelInstance' field is null.");
-
         MockViewComponent();
 
         Assert.Throws<AssertionException>(() => controller.CheckModelRef(), "'modelInstance' field cannot be null.");
@@ -84,8 +82,6 @@ public class ControllerTests
     public void InstantiationWithMissingViewRefs()
     {
         Assert.NotNull(controller, "'controllerInstance' field cannot be null");
-
-        LogAssert.Expect(LogType.Error, "'viewInstance' field is null.");
 
         MockModelComponent();
 
@@ -120,8 +116,6 @@ public class ControllerTests
     {
         Assert.NotNull(controller, "'controllerInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Warning, "'inspectorWindowModel' value was not set in inspector.");
-
         go.AddComponent<BaseModel>();
 
         Assert.DoesNotThrow(() => controller.CheckModelRef(), "Expected no exception to be thrown when 'modelInstance' is automatically set.");
@@ -132,8 +126,6 @@ public class ControllerTests
     public void AutomaticallySetViewField()
     {
         Assert.NotNull(controller, "'controllerInstance' field cannot be null");
-
-        LogAssert.Expect(LogType.Warning, "'inspectorWindowView' value was not set in inspector.");
 
         go.AddComponent<BaseView>();
 

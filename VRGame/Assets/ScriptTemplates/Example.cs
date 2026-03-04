@@ -1,9 +1,9 @@
-public interface ITryModel : IModel
+public interface IExampleModel : IModel
 {
     public int GetCount();
 };
 
-public class TryModel : Model 
+public class ExampleModel : Model
 {
     // nothing really new here because model class is simple enough
     // it will force you to make Init() method
@@ -17,33 +17,38 @@ public class TryModel : Model
     // init is called automatically by Start() built in the base class
     public override void Init()
     {
-        
-    }    
+
+    }
 }
 
-public interface ITryController : IController{}
+public interface IExampleController : IController { }
 
 // generics are used to declare types, and typecasting (required)
-public class TryController : Controller<ITryModel, ITryView>
+public class ExampleController : Controller<IExampleModel, IExampleView>
 {
     // init is called automatically by Start() built in the base class
     public override void Init()
     {
+        // necessary to call these
+        this.CheckModelRef();
+        this.CheckViewRef();
         // you'll have access to:
         // this.modelInstance;              accessor to view component
         // this.modelInstance.GetCount();   accessor to model component
-    }    
+    }
 }
 
-public interface ITryView : IView{}
+public interface IExampleView : IView { }
 
 // generics are used to declare types, and typecasting (required)
-public class TryView : View<ITryController>
+public class ExampleView : View<IExampleController>
 {
     // init is called automatically by Start() built in the base class
     public override void Init()
     {
+        // necessary to call this
+        CheckControllerRef();
         // you'll have access to:
         // this.controllerInstance          accessor to controller component
-    }    
+    }
 }

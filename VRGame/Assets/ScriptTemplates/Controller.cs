@@ -1,4 +1,3 @@
-using Codice.CM.Common;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -14,7 +13,8 @@ public class ControllerComponent : MonoBehaviour {}
 /// <remarks>
 /// - 'M' is the interface of the model component of your implementation.
 /// - 'V' is the interface of the view component of your implementation.
-/// These generics are used to define the type of 'modelInstance and viewInstance' and typecast. Which is needed to access methods
+/// These generics are used to define the type of 'modelInstance and viewInstance'
+/// that exist in this class for typecasting. Which is needed to access methods
 /// from the controller model component and view component.
 /// </remarks>
 public abstract class Controller<M,V> : ControllerComponent, IController
@@ -26,7 +26,7 @@ public abstract class Controller<M,V> : ControllerComponent, IController
     /// be serialized in unity, meaning otherwise this
     /// value could not be set in the inspector window
     /// - A wrapper for model
-    /// - Only used by Init() to set the value of 'modelInstance' to this field's value
+    /// - Only used by CheckModelRef() to set the value of 'modelInstance' to this field's value
     /// </summary>
     [SerializeField]
     private ModelComponent inspectorWindowModel;
@@ -38,7 +38,8 @@ public abstract class Controller<M,V> : ControllerComponent, IController
     protected M modelInstance;
 
     /// <summary>
-    /// Internal setter for 'modelInstance' layer field used for mocking.
+    /// Internal setter for 'modelInstance' serving as a testhook so that test
+    /// assemblies can set a mock model.
     /// </summary>
     internal M ModelMock
     {
@@ -56,8 +57,9 @@ public abstract class Controller<M,V> : ControllerComponent, IController
             if (value == null)
             {
                 Debug.LogError("'value' passed to set 'modelInstance' is null.");
-                Assert.IsNotNull(value, "'value' must not be null.");
+                // optionally handle gracefully
             }
+            Assert.IsNotNull(value, "'value' must not be null.");
             modelInstance = value;
         }
     }
@@ -67,7 +69,7 @@ public abstract class Controller<M,V> : ControllerComponent, IController
     /// be serialized in unity, meaning otherwise this
     /// value could not be set in the inspector window
     /// - A wrapper for view
-    /// - Only used by Init() to set the value of 'viewInstance' to this field's value
+    /// - Only used by CheckViewRef() to set the value of 'viewInstance' to this field's value
     /// </summary>
     [SerializeField]
     private ViewComponent inspectorWindowView;
@@ -79,7 +81,8 @@ public abstract class Controller<M,V> : ControllerComponent, IController
     protected V viewInstance;
 
     /// <summary>
-    /// Internal setter for 'viewInstance' field used for mocking.
+    /// Internal setter for 'viewInstance' serving as a testhook so that test
+    /// assemblies can set a mock view.
     /// </summary>
     internal V ViewMock
     {
@@ -97,8 +100,9 @@ public abstract class Controller<M,V> : ControllerComponent, IController
             if (value == null)
             {
                 Debug.LogError("'value' passed to set 'viewInstance' is null.");
-                Assert.IsNotNull(value, "'value' must not be null.");
+                // optionally handle gracefully
             }
+            Assert.IsNotNull(value, "'value' must not be null.");
             viewInstance = value;
         }
     }
@@ -106,64 +110,78 @@ public abstract class Controller<M,V> : ControllerComponent, IController
     /// <inheritdoc/>
     public void CheckModelRef()
     {
-        // if the model component is attached to the game object
-        // but 'inspectorWindowModel' value is not set, automatically
-        // set it's value
-        if (inspectorWindowModel == null && gameObject.GetComponent<M>() != null)
-        {
-            inspectorWindowModel = gameObject.GetComponent<M>() as ModelComponent;
-            Debug.LogWarning("'inspectorWindowModel' value was not set in inspector.");
-        }
-        
+        // first see if the model set in the inspector will work
         if (inspectorWindowModel != null)
         {
+            // `as` fails by returning null
             modelInstance = inspectorWindowModel as M;
-
-            if (modelInstance == null)
+            if (modelInstance != null)
             {
-                Debug.LogError($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
-                Assert.IsNotNull(modelInstance, $"'inspectorWindowModel' needs to implement {typeof(M).Name}.");   
+                return;
             }
-        } 
-        
+            // continue through the other if-case options when null
+            Debug.LogWarning($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
+        }
+
+        // next see if the model component is attached to the game object
         if (modelInstance == null)
         {
-            Debug.LogError("'modelInstance' field is null.");
-            Assert.IsNotNull(modelInstance, "'modelInstance' field cannot be null.");
+            modelInstance = gameObject.GetComponent<M>();   
+        } else
+        {
+            Debug.Log("'modelInstance' is a mock.");
         }
+
+        // see if model component was found
+        if (modelInstance == null)
+        {
+            Debug.LogWarning($"No matching component implementing {typeof(M).Name} was present.");
+            // optionally handle gracefully
+        }
+
+        Assert.IsNotNull(modelInstance, "'modelInstance' field cannot be null.");
     }
 
     /// <inheritdoc/>
     public void CheckViewRef()
     {
-        // if the view component is attached to the game object
-        // but 'inspectorWindowView' value is not set, automatically
-        // set it's value
-        if (inspectorWindowView == null && gameObject.GetComponent<V>() != null)
-        {
-            inspectorWindowView = gameObject.GetComponent<V>() as ViewComponent;
-            Debug.LogWarning("'inspectorWindowView' value was not set in inspector.");
-        }
-
+        // first see if the  view set in the inspector will work
         if (inspectorWindowView != null)
         {
+            // `as` fails by returning null
             viewInstance = inspectorWindowView as V;
-
-            if (viewInstance == null)
+            if (viewInstance != null)
             {
-                Debug.LogError($"'inspectorWindowView' does not implement {typeof(V).Name}.");
-                Assert.IsNotNull(viewInstance, $"'inspectorWindowView' needs to implement {typeof(V).Name}.");   
+                return;
             }
+            // continue through the other if-case options when null
+            Debug.LogWarning($"'inspectorWindowView' does not implement {typeof(V).Name}.");
         }
 
+        // next see if the view component is attached to the game object
         if (viewInstance == null)
         {
-            Debug.LogError("'viewInstance' field is null.");
-            Assert.IsNotNull(viewInstance, "'viewInstance' field cannot be null.");
+            viewInstance = gameObject.GetComponent<V>();
+        } else
+        {
+            Debug.Log("'viewInstance' is a mock.");
         }
+
+        // see if view component was found
+        if (viewInstance == null)
+        {
+            Debug.LogWarning($"No matching component implementing {typeof(V).Name} was present.");
+            // optionally handle gracefully
+        }
+
+        Assert.IsNotNull(viewInstance, "'viewInstance' field cannot be null.");
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Init should call CheckModelRef and CheckViewRef, override and create a
+    /// new summary. Pre-conditions and post-conditions should be those of
+    /// CheckModelRef and CheckViewRef.
+    /// </summary>
     public abstract void Init();
 
     /// <summary>
@@ -172,8 +190,10 @@ public abstract class Controller<M,V> : ControllerComponent, IController
     /// <remarks>
     /// Precondition:
     /// - 'Init()' is implemented by the subclass.
+    /// - See preconditions of CheckModelRef and CheckViewRef.
     /// Postcondition:
     /// - 'Init()' is invoked.
+    /// - See postconditions of CheckModelRef and CheckViewRef.
     /// </remarks>
     public virtual void Start()
     {

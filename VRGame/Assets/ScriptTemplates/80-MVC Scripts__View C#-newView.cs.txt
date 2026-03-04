@@ -1,10 +1,12 @@
 using UnityEngine;
 
+// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+
 /// <summary>
 /// View component of #SCRIPTNAME#.
 /// </summary>
 public class #SCRIPTNAME# : 
-    View<IController>, // reminder to switch the generic to the one you've implemented
+    View<IController>, // TODO reminder to switch the generic to the one you've implemented
     I#SCRIPTNAME#
 {
     // use 'this.controllerInstance' to access controller component
@@ -12,7 +14,7 @@ public class #SCRIPTNAME# :
     /// <inheritdoc/>
     public override void Init()
     {
-        // used to resolve and validate controller component
+        // this is used to resolve and validate the controller component
         this.CheckControllerRef();
     }
 }
