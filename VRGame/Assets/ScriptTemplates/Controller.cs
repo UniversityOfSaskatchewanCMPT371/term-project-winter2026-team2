@@ -136,7 +136,7 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
         if (inspectorWindowView != null)
         {
             // `as` fails by returning null
-            viewInstance = inspectorWindowView as M;
+            viewInstance = inspectorWindowView as V;
             if (viewInstance != null)
             {
                 return;
