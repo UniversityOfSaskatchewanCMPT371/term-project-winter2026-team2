@@ -74,6 +74,42 @@ public interface IObjectMatchGameModel
     public int GetLevelScore();
 
     /// <summary>
+    /// Updates game state to reflect completion of the current level
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Updates the GameState to levelComplete
+    /// - Updates numberOfFailures to 0
+    /// - increment level count
+    /// - adds levelScore to gameScore, then clears levelScore and gameScore
+    public void CompleteLevel();
+
+    /// <summary>
+    /// Initializes a new level. Will call model to set up the level and the 
+    /// view to display the level.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Level is a positive integer where Level <= IObjectMatchGameModel.GetTotalLevels()
+    /// Postconditions:
+    /// - The model and view are updated to reflect the new level
+    /// </remarks>
+    public void InitializeLevel(int Level);
+
+    /// <summary>
+    /// Initializes the tutorial system and prepares it for user interaction.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The tutorial system is initialized and ready for user interaction
+    /// </remarks>
+    public void InitializeTutorial();
+
+    /// <summary>
     /// Checks if the current level has been completed, and updates the game state
     /// accordingly.
     /// </summary>
