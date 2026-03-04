@@ -2,21 +2,21 @@
 /// Interface for controller component.
 /// </summary>
 public interface IController
-{   
+{
     /// <summary>
-    /// Resolves and validates the 'modelInstance' field required for this component.
+    /// Validates and initializes the the 'modelInstance' field.
+    /// Tries to deserialize 'inspectorWindowView' when not null.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - 'inspectorWindowModel' may or may not
-    ///   be assigned in the inspector. If unassigned, matching component
-    ///   implementing <typeparamref name="M"/> may
-    ///   be auto‑assigned when the inspector field is unset.
+    /// - 'inspectorWindowModel' must be non-null OR a matching component
+    ///   implementing <typeparamref name="M"/> must be non-null.
     /// Postconditions:
-    /// - 'modelInstance' is resolved from a component implementing
-    ///   <typeparamref name="M"/>.
-    /// - Errors are logged and assertions raised when either reference is missing
-    ///   or does not implement the required interface.
+    /// - IFF 'inspectorWindowModel' was non-null, 'modelInstance' will be set
+    ///   to a deserialized copy
+    /// - IFF 'inspectorWindowModel' was null AND the above described matching
+    ///   component was present and not null, 'modelInstance' will be set to a
+    ///   typecast copy
     /// </remarks>
     void CheckModelRef();
 

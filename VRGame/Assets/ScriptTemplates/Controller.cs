@@ -1,4 +1,4 @@
-using Codice.CM.Common;
+using System.Diagnostics;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -8,10 +8,11 @@ using UnityEngine;
 /// <remarks>
 /// - 'M' is the interface of the model component of your implementation.
 /// - 'V' is the interface of the view component of your implementation.
-/// These generics are used to define the type of 'modelInstance and viewInstance' and typecast. Which is needed to access methods
+/// These generics are used to define the type of 'modelInstance and viewInstance'
+/// that exist in this class for typecasting. Which is needed to access methods
 /// from the controller model component and view component.
 /// </remarks>
-public abstract class Controller<M,V> : MonoBehaviour, IController
+public abstract class Controller<M, V> : MonoBehaviour, IController
     where M : class, IModel
     where V : class, IView
 {
@@ -20,7 +21,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
     /// be serialized in unity, meaning otherwise this
     /// value could not be set in the inspector window
     /// - A wrapper for model
-    /// - Only used by Init() to set the value of 'modelInstance' to this field's value
+    /// - Only used by CheckModelRef() to set the value of 'modelInstance' to this field's value
     /// </summary>
     [SerializeField]
     private MonoBehaviour inspectorWindowModel;
@@ -32,7 +33,8 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
     protected M modelInstance;
 
     /// <summary>
-    /// Internal setter for 'modelInstance' layer field used for mocking.
+    /// Internal setter for 'modelInstance' serving as a testhook so that test
+    /// assemblies can set a mock model.
     /// </summary>
     internal M ModelMock
     {
@@ -50,8 +52,9 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
             if (value == null)
             {
                 Debug.LogError("'value' passed to set 'modelInstance' is null.");
-                Assert.IsNotNull(value, "'value' must not be null.");
+                // optionally handle gracefully
             }
+            Assert.IsNotNull(value, "'value' must not be null.");
             modelInstance = value;
         }
     }
@@ -61,7 +64,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
     /// be serialized in unity, meaning otherwise this
     /// value could not be set in the inspector window
     /// - A wrapper for view
-    /// - Only used by Init() to set the value of 'viewInstance' to this field's value
+    /// - Only used by CheckViewRef() to set the value of 'viewInstance' to this field's value
     /// </summary>
     [SerializeField]
     private MonoBehaviour inspectorWindowView;
@@ -73,7 +76,8 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
     protected V viewInstance;
 
     /// <summary>
-    /// Internal setter for 'viewInstance' field used for mocking.
+    /// Internal setter for 'viewInstance' serving as a testhook so that test
+    /// assemblies can set a mock view.
     /// </summary>
     internal V ViewMock
     {
@@ -91,8 +95,9 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
             if (value == null)
             {
                 Debug.LogError("'value' passed to set 'viewInstance' is null.");
-                Assert.IsNotNull(value, "'value' must not be null.");
+                // optionally handle gracefully
             }
+            Assert.IsNotNull(value, "'value' must not be null.");
             viewInstance = value;
         }
     }
@@ -100,31 +105,29 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
     /// <inheritdoc/>
     public void CheckModelRef()
     {
-        // if the model component is attached to the game object
-        // but 'inspectorWindowModel' value is not set, automatically
-        // set it's value
-        if (inspectorWindowModel == null && gameObject.GetComponent<M>() != null)
-        {
-            inspectorWindowModel = gameObject.GetComponent<M>() as MonoBehaviour;
-            Debug.LogWarning("'inspectorWindowModel' value was not set in inspector.");
-        }
-        
+        // first see if the model set in the inspector will work
         if (inspectorWindowModel != null)
         {
+            // as fails by returning null
             modelInstance = inspectorWindowModel as M;
-
-            if (modelInstance == null)
+            if (modelInstance != null)
             {
-                Debug.LogError($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
-                Assert.IsNotNull(modelInstance, $"'inspectorWindowModel' needs to implement {typeof(M).Name}.");   
+                return;
             }
-        } 
-        
+            // continue through the other if case options when null
+            Debug.LogWarning($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
+        }
+
+
+        // next see if the model component is attached to the game object
+        modelInstance = gameObject.GetComponent<M>();
         if (modelInstance == null)
         {
-            Debug.LogError("'modelInstance' field is null.");
-            Assert.IsNotNull(modelInstance, "'modelInstance' field cannot be null.");
+            Debug.LogWarning($"No matching component implementing {typeof(M).Name} was present.");
+            // optionally handle gracefully
         }
+
+        Assert.IsNotNull(modelInstance, "'modelInstance' field cannot be null.");
     }
 
     /// <inheritdoc/>
@@ -146,7 +149,7 @@ public abstract class Controller<M,V> : MonoBehaviour, IController
             if (viewInstance == null)
             {
                 Debug.LogError($"'inspectorWindowView' does not implement {typeof(V).Name}.");
-                Assert.IsNotNull(viewInstance, $"'inspectorWindowView' needs to implement {typeof(V).Name}.");   
+                Assert.IsNotNull(viewInstance, $"'inspectorWindowView' needs to implement {typeof(V).Name}.");
             }
         }
 
