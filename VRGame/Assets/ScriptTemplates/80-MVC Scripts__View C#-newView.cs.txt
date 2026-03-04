@@ -14,7 +14,7 @@ public class #SCRIPTNAME# :
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
+        // this is used to resolve and validate the controller component
         // this.CheckControllerRef();
     }
 }
