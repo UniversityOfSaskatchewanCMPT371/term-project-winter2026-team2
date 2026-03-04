@@ -2,22 +2,21 @@
 /// Interface for view component.
 /// </summary>
 public interface IView
-{   
+{
     /// <summary>
-    /// Resolves and validates the controller
-    /// reference required by this component.
+    /// Validates and initializes the the 'controllerInstance' field.
+    /// Tries to deserialize 'inspectorWindowController' when not null.
     /// </summary>
     /// <remarks>
-    /// Precondition:
-    /// - 'inspectorWindowController' may or may not
-    ///   be assigned in the inspector. If unassigned, matching component
-    ///   implementing <typeparamref name="C"/> may
-    ///   be auto‑assigned when the inspector field is unset.
-    /// Postcondition:
-    /// - 'controllerInstance' is resolved from a component implementing
-    ///   <typeparamref name="C"/>.
-    /// - Errors are logged and assertions raised when either reference is missing
-    ///   or does not implement the required interface.
+    /// Preconditions:
+    /// - 'inspectorWindowController' must be non-null OR a matching component
+    ///   implementing <typeparamref name="C"/> must be non-null.
+    /// Postconditions:
+    /// - IFF 'inspectorWindowController' was non-null, 'controllerInstance' will be set
+    ///   to a deserialized copy
+    /// - IFF 'inspectorWindowController' was null AND the above described matching
+    ///   component was present and not null, 'controllerInstance' will be set to a
+    ///   typecast copy
     /// </remarks>
     void CheckControllerRef();
 

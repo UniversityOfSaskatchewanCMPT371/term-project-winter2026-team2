@@ -17,7 +17,7 @@ public abstract class View<C> : MonoBehaviour, IView
     /// be serialized in unity, meaning otherwise this
     /// value could not be set in the inspector window
     /// - A wrapper for controller
-    /// - Only used by Init() to set the value of 'controllerInstance' to this field's value
+    /// - Only used by CheckControllerRef() to set the value of 'controllerInstance' to this field's value
     /// </summary>
     [SerializeField]
     private MonoBehaviour inspectorWindowController;
@@ -29,7 +29,8 @@ public abstract class View<C> : MonoBehaviour, IView
     protected C controllerInstance;
 
     /// <summary>
-    /// Internal setter for 'controllerInstance' layer field used for mocking.
+    /// Internal setter for 'controllerInstance' serving as a testhook so that test
+    /// assemblies can set a mock controller.
     /// </summary>
     internal C ControllerMock
     {
@@ -46,8 +47,9 @@ public abstract class View<C> : MonoBehaviour, IView
             if (value == null)
             {
                 Debug.LogError("'value' passed to set 'controllerInstance' is null.");
-                Assert.IsNotNull(value, "'value' must not be null.");
+                // optionally handle gracefully
             }
+            Assert.IsNotNull(value, "'value' must not be null.");
             controllerInstance = value;
         }
     }
@@ -55,34 +57,36 @@ public abstract class View<C> : MonoBehaviour, IView
     /// <inheritdoc/>
     public void CheckControllerRef()
     {
-        // if the controller component is attached to the game object
-        // but 'inspectorWindowController' value is not set, automatically
-        // set it's value
-        if (inspectorWindowController == null && gameObject.GetComponent<C>() != null)
+        // first see if the controller set in the inspector will work
+        if (inspectorWindowController != null)
         {
-            inspectorWindowController = gameObject.GetComponent<C>() as MonoBehaviour;
+            // `as` fails by returning null
+            controllerInstance = inspectorWindowController as C;
+            if (controllerInstance != null)
+            {
+                return;
+            }
+
+            // continue through the other if-case options when null
             Debug.LogWarning("'inspectorWindowController' value was not set in inspector.");
         }
 
-        if (inspectorWindowController != null)
-        {
-            controllerInstance = inspectorWindowController as C;
-
-            if (controllerInstance == null)
-            {
-                Debug.LogError($"'inspectorWindowController' does not implement {typeof(C).Name}.");
-                Assert.IsNotNull(controllerInstance, $"'inspectorWindowController' needs to implement {typeof(C).Name}.");   
-            }
-        }
-
+        // next see if the controller component is attached to the game object
+        controllerInstance = gameObject.GetComponent<M>();
         if (controllerInstance == null)
         {
-            Debug.LogError("'controllerInstance' field is null.");
-            Assert.IsNotNull(controllerInstance, "'controllerInstance' field cannot be null.");
+            Debug.LogWarning($"No matching component implementing {typeof(C).Name} was present.");
+            // optionally handle gracefully
         }
+
+        Assert.IsNotNull(controllerInstance, "'controllerInstance' field cannot be null.");
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Init should call CheckControllerRef, override and create a
+    /// new summary. Pre-conditions and post-conditions should be those of
+    /// CheckControllerRef.
+    /// </summary>
     public abstract void Init();
 
     /// <summary>
@@ -91,8 +95,10 @@ public abstract class View<C> : MonoBehaviour, IView
     /// <remarks>
     /// Precondition:
     /// - 'Init()' is implemented by the subclass.
+    /// - See preconditions of CheckControllerRef.
     /// Postcondition:
     /// - 'Init()' is invoked.
+    /// - See postconditions of CheckControllerRef.
     /// </remarks>
     public virtual void Start()
     {

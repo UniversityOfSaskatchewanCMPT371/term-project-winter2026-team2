@@ -117,7 +117,6 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
             Debug.LogWarning($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
         }
 
-
         // next see if the model component is attached to the game object
         modelInstance = gameObject.GetComponent<M>();
         if (modelInstance == null)
