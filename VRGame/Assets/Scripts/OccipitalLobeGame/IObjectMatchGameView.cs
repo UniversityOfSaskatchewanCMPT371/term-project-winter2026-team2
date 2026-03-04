@@ -18,5 +18,11 @@ public interface IObjectMatchGameView
     /// Called when the user grabs an object that was in the guess area, removing it
     /// Notifies the controller so it can update the model
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Model will be updated to reflect the guess being removed
+    /// </remarks>
     public void removeGuess();
 }
