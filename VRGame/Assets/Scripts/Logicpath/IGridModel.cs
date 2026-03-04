@@ -1,4 +1,3 @@
-using System.Drawing;
 using UnityEngine;
 
 /// <summary>
@@ -65,6 +64,22 @@ public interface IGridModel
         get;
     }
 
+    List<Endpoint> Endpoints
+    {
+        /// <summary>
+        /// Gets the list of endpoints in the grid
+        /// </summary>
+        /// <remarks>
+        /// <pre-condition>
+        ///     -   Grid has been initialized
+        /// </pre-condition>
+        /// <post-condition>
+        ///     -   Returns a list of all endpoints in the grid
+        /// </post-condition>
+        /// </remarks>
+        get;
+    }
+
     /// <summary>
     /// Method to initialize the grid model with specified parameters
     /// </summary>
@@ -82,6 +97,22 @@ public interface IGridModel
     /// </post-condition>
     /// </remarks>
     void Initialize(int width, int height, float cellSize);
+
+    /// <summary>
+    /// Gets the GridCell object at the specified coordinates
+    /// <param name="x">X-coordinate in grid</param>
+    /// <param name="y">Y-coordinate in grid</param>
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   x and y are valid coordinates within grid bounds
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   Returns the GridCell object at the specified coordinates, 
+    ///         or null if coordinates are out of bounds
+    /// </post-condition>
+    /// </remarks>
+    GridCell GetCell(int x, int y);
 
 
     /// <summary>
@@ -128,4 +159,63 @@ public interface IGridModel
     /// </post-condition>
     /// </remarks>
     void ClearGrid();
+
+    /// <summary>
+    /// Checks if all cells are filled
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   Grid has been initialized
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   Returns true if all cells are occupied by pipes, false otherwise
+    /// </post-condition>
+    /// </remarks>
+    bool IsGridFilled();
+
+    /// <summary>
+    /// Adds an endpoint to the grid model
+    /// <param name="endpoint">The endpoint to add</param>
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   endpoint is not null
+    ///     -   endpoint coordinates are within grid bounds
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   The endpoint is added to the list of endpoints
+    /// </post-condition>
+    /// </remarks>
+    void AddEndpoint(Endpoint endpoint);
+
+    /// <summary>
+    /// Gets the world position of a grid cell
+    /// <param name="x">X-coordinate in grid</param>
+    /// <param name="y">Y-coordinate in grid</param>
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   x and y are valid coordinates within grid bounds
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   Returns the world position of the cell
+    /// </post-condition>
+    /// </remarks>
+    Vector3 GetWorldPosition(int x, int y);
+
+
+    /// <summary>
+    /// Gets the grid cell at the specified world position
+    /// <param name="worldPosition">Position in world space</param>
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    ///     -   worldPosition is a valid Vector3
+    /// </pre-condition>
+    /// <post-condition>
+    ///     -   Returns the closest GridCell at the specified world position,
+    ///         or null if the position is outside the grid bounds
+    /// </post-condition>
+    /// </remarks>
+    GridCell GetCellAtWorldPosition(Vector3 worldPosition);
 }
