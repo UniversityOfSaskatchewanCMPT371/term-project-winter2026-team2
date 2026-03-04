@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -108,13 +107,13 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
         // first see if the model set in the inspector will work
         if (inspectorWindowModel != null)
         {
-            // as fails by returning null
+            // `as` fails by returning null
             modelInstance = inspectorWindowModel as M;
             if (modelInstance != null)
             {
                 return;
             }
-            // continue through the other if case options when null
+            // continue through the other if-case options when null
             Debug.LogWarning($"'inspectorWindowModel' does not implement {typeof(M).Name}.");
         }
 
@@ -133,34 +132,34 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
     /// <inheritdoc/>
     public void CheckViewRef()
     {
-        // if the view component is attached to the game object
-        // but 'inspectorWindowView' value is not set, automatically
-        // set it's value
-        if (inspectorWindowView == null && gameObject.GetComponent<V>() != null)
-        {
-            inspectorWindowView = gameObject.GetComponent<V>() as MonoBehaviour;
-            Debug.LogWarning("'inspectorWindowView' value was not set in inspector.");
-        }
-
+        // first see if the  view set in the inspector will work
         if (inspectorWindowView != null)
         {
-            viewInstance = inspectorWindowView as V;
-
-            if (viewInstance == null)
+            // `as` fails by returning null
+            viewInstance = inspectorWindowView as M;
+            if (viewInstance != null)
             {
-                Debug.LogError($"'inspectorWindowView' does not implement {typeof(V).Name}.");
-                Assert.IsNotNull(viewInstance, $"'inspectorWindowView' needs to implement {typeof(V).Name}.");
+                return;
             }
+            // continue through the other if-case options when null
+            Debug.LogWarning($"'inspectorWindowView' does not implement {typeof(V).Name}.");
         }
 
+        // next see if the view component is attached to the game object
         if (viewInstance == null)
         {
-            Debug.LogError("'viewInstance' field is null.");
-            Assert.IsNotNull(viewInstance, "'viewInstance' field cannot be null.");
+            Debug.LogWarning($"No matching component implementing {typeof(V).Name} was present.");
+            // optionally handle gracefully
         }
+
+        Assert.IsNotNull(viewInstance, "'viewInstance' field cannot be null.");
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Init should call CheckModelRef and CheckViewRef, override and create a
+    /// new summary. Pre-conditions and post-conditions should be those of
+    /// CheckModelRef and CheckViewRef.
+    /// </summary>
     public abstract void Init();
 
     /// <summary>
@@ -169,8 +168,10 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
     /// <remarks>
     /// Precondition:
     /// - 'Init()' is implemented by the subclass.
+    /// - See preconditions of CheckModelRef and CheckViewRef.
     /// Postcondition:
     /// - 'Init()' is invoked.
+    /// - See postconditions of CheckModelRef and CheckViewRef.
     /// </remarks>
     public virtual void Start()
     {
