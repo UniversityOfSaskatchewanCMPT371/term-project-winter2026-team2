@@ -118,7 +118,15 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
         }
 
         // next see if the model component is attached to the game object
-        modelInstance = gameObject.GetComponent<M>();
+        if (modelInstance == null)
+        {
+            modelInstance = gameObject.GetComponent<M>();   
+        } else
+        {
+            Debug.Log("'modelInstance' is a mock.");
+        }
+
+        // see if model component was found
         if (modelInstance == null)
         {
             Debug.LogWarning($"No matching component implementing {typeof(M).Name} was present.");
@@ -145,6 +153,15 @@ public abstract class Controller<M, V> : MonoBehaviour, IController
         }
 
         // next see if the view component is attached to the game object
+        if (viewInstance == null)
+        {
+            viewInstance = gameObject.GetComponent<V>();
+        } else
+        {
+            Debug.Log("'viewInstance' is a mock.");
+        }
+
+        // see if view component was found
         if (viewInstance == null)
         {
             Debug.LogWarning($"No matching component implementing {typeof(V).Name} was present.");

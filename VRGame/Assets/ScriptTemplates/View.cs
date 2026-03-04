@@ -72,7 +72,15 @@ public abstract class View<C> : MonoBehaviour, IView
         }
 
         // next see if the controller component is attached to the game object
-        controllerInstance = gameObject.GetComponent<M>();
+        if (controllerInstance == null)
+        {
+            controllerInstance = gameObject.GetComponent<C>();
+        } else
+        {
+            Debug.Log("'viewInstance' is a mock.");
+        }
+
+        // see if controller component was found
         if (controllerInstance == null)
         {
             Debug.LogWarning($"No matching component implementing {typeof(C).Name} was present.");

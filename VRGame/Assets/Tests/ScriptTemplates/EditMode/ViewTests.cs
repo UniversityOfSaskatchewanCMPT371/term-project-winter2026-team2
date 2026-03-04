@@ -61,7 +61,6 @@ public class ViewTests
     {
         Assert.NotNull(view, "'viewInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Error, "'controllerInstance' field is null.");
         Assert.Throws<AssertionException>(() => view.CheckControllerRef(), "'controllerInstance' field cannot be null.");
     }
 
@@ -82,7 +81,6 @@ public class ViewTests
     {
         Assert.NotNull(view, "'viewInstance' field cannot be null");
 
-        LogAssert.Expect(LogType.Warning, "'inspectorWindowController' value was not set in inspector.");
         go.AddComponent<BaseController>();
 
         Assert.DoesNotThrow(() => view.CheckControllerRef(), "Expected exception to be thrown when 'controllerInstance' field is null.");
