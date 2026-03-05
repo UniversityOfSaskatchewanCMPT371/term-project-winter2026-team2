@@ -19,6 +19,7 @@ public class BlockModel
     public Vector3Int targetPosition { get; private set; }
     public bool isPlaced; 
     public bool isGrabbed;
+    public bool correctPosition { get; private set; }
 
      
 
@@ -54,8 +55,9 @@ public class BlockModel
     /// PostConditions:
     /// - none
     /// </remarks>
-    public bool IsCorrectlyPlaced(){
-        return (gridPostion == targetPostion);
+    public void IsCorrectlyPlaced(){
+        correctPostion = (gridPostion == targetPostion);
+        
     }
 
 
