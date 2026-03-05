@@ -60,6 +60,25 @@ public class MemoryGameView : MonoBehaviour
         audioSource.Play();
     }
 
+    /// <summary>
+    /// Plays a clip one time without replacing the current `audioSource.clip`.
+    /// </summary>
+    /// <param name="clip">The clip to play once.</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - `audioSource` is non-null.
+    /// - `clip` is non-null.
+    /// Postconditions:
+    /// - A one-shot playback request is sent through `audioSource.PlayOneShot(clip)`.
+    /// - `audioSource.clip` remains unchanged by this method.
+    /// </remarks>
+    public void PlayOneShot(AudioClip clip)
+    {
+        Assert.IsNotNull(audioSource, "AudioSource must be assigned before calling PlayOneShot.");
+        Assert.IsNotNull(clip, "Audio clip cannot be null when calling PlayOneShot.");
+
+        audioSource.PlayOneShot(clip);
+    }
 
     /// <summary>
     /// Frame update hook for per-frame view behavior.
