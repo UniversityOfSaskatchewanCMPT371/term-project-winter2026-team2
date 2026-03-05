@@ -8,7 +8,7 @@ using UnityEngine;
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
 
-public class BlockView
+public class BlockView  : MonoBehaviour
 {
     
 }
