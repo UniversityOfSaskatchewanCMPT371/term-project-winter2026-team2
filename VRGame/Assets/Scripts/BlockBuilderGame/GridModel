@@ -6,6 +6,6 @@ public class GridModel
     public int width;
     public int height;
     public float CellSize;
-    public Dictionary<Vector3Int, BlockModel> placedBlocks = new();
+    public Dictionary<Vector3Int, BlockModel> placedBlocks;
 }
 
