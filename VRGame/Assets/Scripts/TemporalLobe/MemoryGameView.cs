@@ -104,6 +104,30 @@ public class MemoryGameView : MonoBehaviour
     }
 
     /// <summary>
+    /// Marks an object as incorrectly selected by changing its material color to red.
+    /// </summary>
+    /// <param name="obj">The selected object to mark as wrong.</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - `obj` is non-null.
+    /// - `obj` has a non-null `Renderer` component.
+    /// - `Renderer.material` is non-null.
+    /// Postconditions:
+    /// - The object's material color is set to `Color.red`.
+    /// </remarks>
+    public void SetWrong(GameObject obj)
+    {
+        Assert.IsNotNull(obj, "Object cannot be null when calling SetWrong.");
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        Assert.IsNotNull(renderer, "SetWrong requires the object to have a Renderer component.");
+        Assert.IsNotNull(renderer.material, "Renderer material cannot be null in SetWrong.");
+
+        renderer.material.color = Color.red;
+    }
+
+
+    /// <summary>
     /// Frame update hook for per-frame view behavior.
     /// </summary>
     /// <remarks>
