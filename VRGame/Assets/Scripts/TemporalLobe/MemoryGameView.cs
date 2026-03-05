@@ -81,6 +81,29 @@ public class MemoryGameView : MonoBehaviour
     }
 
     /// <summary>
+    /// Marks an object as correctly selected by changing its material color to green.
+    /// </summary>
+    /// <param name="obj">The selected object to mark as correct.</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - `obj` is non-null.
+    /// - `obj` has a non-null `Renderer` component.
+    /// - `Renderer.material` is non-null.
+    /// Postconditions:
+    /// - The object's material color is set to `Color.green`.
+    /// </remarks>
+    public void SetCorrect(GameObject obj)
+    {
+        Assert.IsNotNull(obj, "Object cannot be null when calling SetCorrect.");
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        Assert.IsNotNull(renderer, "SetCorrect requires the object to have a Renderer component.");
+        Assert.IsNotNull(renderer.material, "Renderer material cannot be null in SetCorrect.");
+
+        renderer.material.color = Color.green;
+    }
+
+    /// <summary>
     /// Frame update hook for per-frame view behavior.
     /// </summary>
     /// <remarks>
