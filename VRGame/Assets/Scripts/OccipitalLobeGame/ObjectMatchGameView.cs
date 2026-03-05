@@ -7,12 +7,27 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     [SerializeField] private GameObject[] allObjects;
     public override void Init()
     {
-        throw new System.NotImplementedException();
+        foreach (GameObject obj in allObjects)
+        {
+            obj.SetActive(false);
+        }
     }
 
-    public void OnGuessCollision()
+    /// </inheritdoc>
+    public void ShowObjects(string[] ObjectIDs)
     {
-        throw new System.NotImplementedException();
+        foreach (GameObject obj in allObjects)
+        {
+            if (System.Array.Exists(ObjectIDs, element => element == obj.name))
+            {
+                obj.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("ObjectMatchGameView was asked to show object with ID " + obj.name + " but that ID was not found in the list of active object IDs.");
+                obj.SetActive(false);
+            }
+        }
     }
 
     public void removeGuess()

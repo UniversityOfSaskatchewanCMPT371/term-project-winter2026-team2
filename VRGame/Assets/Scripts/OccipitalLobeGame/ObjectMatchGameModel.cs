@@ -16,7 +16,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 
     public override void Init()
     {
-        currentLevel = 0;
+        currentLevel = -1;
         totalLevels = 5;
         gameScore = 0;
         levelScore = 0;
@@ -68,9 +68,24 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     }
 
     /// <inheritdoc/>
-    public void InitializeLevel(int Level)
+    public void InitializeLevel()
     {
+        if (currentLevel >= totalLevels)
+        {
+            Debug.Log("All levels completed!");
+            return;
+        }
+        currentLevel++;
+        failedGuesses = 0;
 
+        levelData currentLevelData = levels[currentLevel];
+
+        gameState = GameState.playing;
+    }
+
+    public string[] GetActiveObjectIDs()
+    {
+        return levels[currentLevel].AllObjectIDs;
     }
 
     /// <inheritdoc/>
@@ -79,7 +94,17 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     }
 
     /// <inheritdoc/>
-    public void CheckForLevelCompletion()
+    public void CheckGuess(string Guess)
     {
+        if (Guess == levels[currentLevel].CorrectObjectID)
+        {
+            gameState = GameState.levelComplete;
+            Debug.Log("Correct guess!");
+        }
+        else
+        {
+            failedGuesses++;
+            Debug.Log("Incorrect guess. Total failed guesses: " + failedGuesses);
+        }
     }
 }

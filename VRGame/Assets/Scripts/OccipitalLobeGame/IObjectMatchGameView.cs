@@ -3,26 +3,14 @@ using ObjectMatchGame;
 public interface IObjectMatchGameView: IView
 {
     /// <summary>
-    /// Called when the collider box of any of the options to guess hit the
-    /// guess basket collider. Calls the controller to notify it of the guess.
+    /// Takes a list of object IDs corresponding to the objects that are options in
+    /// the current level and displays those objects
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - ObjectIDs is a non-empty string array containing the IDs of GameObjects
     /// Postconditions:
-    /// - Notifies the controller that a guess was made
+    /// - The objects corresponding to the IDs in ObjectIDs are displayed in the scene
     /// </remarks>
-    public void OnGuessCollision();
-
-    /// <summary>
-    /// Called when the user grabs an object that was in the guess area, removing it
-    /// Notifies the controller so it can update the model
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - Model will be updated to reflect the guess being removed
-    /// </remarks>
-    public void removeGuess();
+    public void ShowObjects(string[] ObjectIDs);
 }

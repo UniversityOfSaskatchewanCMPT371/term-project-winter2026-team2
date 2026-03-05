@@ -92,11 +92,11 @@ public interface IObjectMatchGameModel: IModel
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Level is a positive integer where Level <= IObjectMatchGameModel.GetTotalLevels()
+    /// - None
     /// Postconditions:
     /// - The model and view are updated to reflect the new level
     /// </remarks>
-    public void InitializeLevel(int Level);
+    public void InitializeLevel();
 
     /// <summary>
     /// Initializes the tutorial system and prepares it for user interaction.
@@ -110,13 +110,27 @@ public interface IObjectMatchGameModel: IModel
     public void InitializeTutorial();
 
     /// <summary>
-    /// Checks if the current level has been completed, and updates the game state
+    /// Checks if the guess made by the player is correct and updates
+    /// the game state
     /// accordingly.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Guess is a non-empty string corresponding to the name of one of the options
+    /// Postconditions:
+    /// - Updates the GameState, numberOfFailures
+    public void CheckGuess(string Guess);
+
+    /// <summary>
+    /// Returns a string array containing the IDs of the objects that are active
+    /// in the current level.
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - None
     /// Postconditions:
-    /// - Updates the GameState, numberOfFailures
-    public void CheckForLevelCompletion();
+    /// - Returns a string array containing the IDs of the objects that are active in
+    ///   the current level
+    /// </remarks>
+    public string[] GetActiveObjectIDs();
 }

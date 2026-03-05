@@ -6,16 +6,19 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
 {
     public void checkGuess(string GuessItem)
     {
-
+        this.modelInstance.CheckGuess(GuessItem);
     }
 
     public override void Init()
     {
+        this.CheckModelRef();
+        this.CheckViewRef();
     }
 
-    public void InitializeLevel(int Level)
+    public void InitializeLevel()
     {
-        throw new System.NotImplementedException();
+        this.modelInstance.InitializeLevel();
+        this.viewInstance.ShowObjects(this.modelInstance.GetActiveObjectIDs());
     }
 
     public void InitializeTutorial()

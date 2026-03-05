@@ -8,11 +8,11 @@ public interface IObjectMatchGameController: IController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Level is a positive integer where Level <= IObjectMatchGameModel.GetTotalLevels()
+    /// - None
     /// Postconditions:
     /// - The model and view are updated to reflect the new level
     /// </remarks>
-    public void InitializeLevel(int Level);
+    public void InitializeLevel();
 
     /// <summary>
     /// Initializes the tutorial system and prepares it for user interaction.
