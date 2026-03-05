@@ -61,20 +61,20 @@ public class MemoryGameController : MonoBehaviour
     /// - `PlayCurrentSound()` is invoked to begin or continue sequence playback.
     /// </remarks>
     void Start()
-    {
-        Assert.IsNotNull(view, "MemoryGameView reference must be assigned on MemoryGameController.");
-        Assert.IsNotNull(sounds, "Sounds sequence must be assigned on MemoryGameController.");
-        Assert.IsTrue(sounds.Length > 0, "Sounds sequence must contain at least one clip.");
-        Assert.IsNotNull(objects, "Objects sequence must be assigned on MemoryGameController.");
-        Assert.IsTrue(objects.Length > 0, "Objects sequence must contain at least one object.");
+{
+    Assert.IsNotNull(view, "MemoryGameView reference must be assigned on MemoryGameController.");
+    Assert.IsNotNull(sounds, "Sounds sequence must be assigned on MemoryGameController.");
+    Assert.IsTrue(sounds.Length > 0, "Sounds sequence must contain at least one clip.");
+    Assert.IsNotNull(objects, "Objects sequence must be assigned on MemoryGameController.");
+    Assert.IsTrue(objects.Length > 0, "Objects sequence must contain at least one object.");
 
-        model = new MemoryGameModel();
+    model = new MemoryGameModel();
 
-        model.sounds = sounds;
-        model.objects = objects;
+    model.sounds = sounds;
+    model.objects = objects;
 
-        PlayCurrentSound();
-    }
+    PlayCurrentSound();
+}
 
     /// <summary>
     /// Plays the sound cue at the model's current sequence index.

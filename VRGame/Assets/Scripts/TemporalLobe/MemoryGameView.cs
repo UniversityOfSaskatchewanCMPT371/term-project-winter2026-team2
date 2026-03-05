@@ -33,8 +33,13 @@ public class MemoryGameView : MonoBehaviour
     /// Postconditions:
     /// - Required references are verified through assertions.
     /// </remarks>
+
     private void Awake()
     {
+
+        if (audioSource == null)
+        audioSource = GetComponent<AudioSource>();
+
         Assert.IsNotNull(audioSource, "AudioSource reference must be assigned on MemoryGameView.");
         Assert.IsNotNull(controller, "Controller reference must be assigned on MemoryGameView.");
     }
@@ -147,7 +152,10 @@ public class MemoryGameView : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                controller.ObjectSelected(hit.collider.gameObject);
+                if (hit.collider.CompareTag("MemoryObject"))
+                {
+                    controller.ObjectSelected(hit.collider.gameObject);
+                    }
             }
         }
     }

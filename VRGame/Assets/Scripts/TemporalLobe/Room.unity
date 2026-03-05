@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 430354276}
   m_Layer: 0
   m_Name: 'ClockObject  '
-  m_TagString: Untagged
+  m_TagString: MemoryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 508513326}
   m_Layer: 0
   m_Name: 'BellObject    '
-  m_TagString: Untagged
+  m_TagString: MemoryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 611810436}
   m_Layer: 0
   m_Name: 'PhoneObject   '
-  m_TagString: Untagged
+  m_TagString: MemoryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 923219245}
   m_Layer: 0
   m_Name: 'PianoObject   '
-  m_TagString: Untagged
+  m_TagString: MemoryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f09cca4f7bac8468db7fa54edbd096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 0}
+  view: {fileID: 2044605503}
   sounds:
   - {fileID: 8300000, guid: 51181c12ff7381e4d9479fdaf5e41e8b, type: 3}
   - {fileID: 8300000, guid: 4a436e94306f52445bddaf1520096806, type: 3}
@@ -1253,7 +1253,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1423,8 +1423,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057515728}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.41505197, y: 0.00000002567653, z: 0.00000004646426, w: 0.9097977}
+  m_LocalPosition: {x: 0.103068225, y: 7.2531967, z: -7.6215267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 2104272479}
   m_Layer: 0
   m_Name: DogObject
-  m_TagString: Untagged
+  m_TagString: MemoryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,7 +12,7 @@ using UnityEngine.Assertions;
 /// Postconditions:
 /// - Game state changes only through `currentIndex` progression on correct answers.
 /// </remarks>
-public class MemoryGameModel : MonoBehaviour
+public class MemoryGameModel
 {
     /// <summary>
     /// Ordered audio sequence used by the memory game.
