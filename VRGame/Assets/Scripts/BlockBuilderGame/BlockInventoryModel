@@ -14,14 +14,10 @@ public class InventoryBlockModel
     private int blocksCurrentNum;
     private int[] blocksTotal;  // this would store the block ids
     private int[] blocksCurrent;
-    public class InventoryModel
-{
-}
+    private PuzzleData puzzleData;
 
-
-
-    
-
-
-
+    public init()
+    {
+        
+    }
 }
