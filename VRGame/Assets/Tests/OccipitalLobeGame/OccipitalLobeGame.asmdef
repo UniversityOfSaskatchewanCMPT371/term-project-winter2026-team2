@@ -6,7 +6,9 @@
         "UnityEditor.TestRunner",
         "ObjectMatchGame",
         "ScriptTemplates",
-        "TNRD.NSubstitute"
+        "TNRD.NSubstitute",
+        "Player",
+        "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
