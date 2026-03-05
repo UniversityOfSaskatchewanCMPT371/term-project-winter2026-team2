@@ -12,8 +12,10 @@ public class RoomModelTests
     [Test]
     public void Instantiation()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
         
         // confirm that roomModel is not null
@@ -22,142 +24,158 @@ public class RoomModelTests
         // initialize
         roomModel.Init();
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test getting the room id of RoomModel.
+    /// Test getting the 'roomId' of RoomModel.
     /// </summary>
     [Test]
     public void GetRoomId()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();;
 
-        // verify id values
+        // verify 'roomId' values
         Assert.NotNull(roomModel.Id, $"roomModel.Id cannot be null. Got '{roomModel.Id}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test getting the room name of RoomModel.
+    /// Test getting the 'roomName' of RoomModel.
     /// </summary>
     [Test]
     public void GetRoomName()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // verify name values
         Assert.IsNotNull(roomModel.Name, $"roomModel.Name cannot be Null. Got '{roomModel.Name}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test getting the state of MinigameCompleted of RoomModel.
+    /// Test getting the state of 'MinigameCompleted' of RoomModel.
     /// </summary>
     [Test]
     public void GetMinigameCompleted()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
-        // verify minigameComplete state
+        // verify 'MinigameComplete' state
         Assert.IsFalse(roomModel.MinigameCompleted, $"roomModel.MinigameCompleted should be initialized to false. Got '{roomModel.MinigameCompleted}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test setting the state of MinigameCompleted of RoomModel.
+    /// Test setting the state of 'MinigameCompleted' of RoomModel.
     /// </summary>
     [Test]
     public void SetMinigameComplete()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
-        // verify minigameComplete state
+        // verify 'MinigameComplete' state
         roomModel.MinigameCompleted = true;
         Assert.IsTrue(roomModel.MinigameCompleted, $"roomModel.MinigameCompleted was expected to be true. Got '{roomModel.MinigameCompleted}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test getting the state of EducationalDialogueCompleted of RoomModel.
+    /// Test getting the state of 'EducationalDialogueCompleted' of RoomModel.
     /// </summary>
     [Test]
     public void GetEducationalDialogueCompleted()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
-        // verify educationalDialgoueCompoleted state
+        // verify 'EducationalDialgoueCompoleted' state
         Assert.IsFalse(roomModel.EducationalDialogueCompleted, $"roomModel.EducationalDialogueCompleted should be initialized to false. Got '{roomModel.EducationalDialogueCompleted}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test setting the state of EducationalDialogueCompleted of RoomModel.
+    /// Test setting the state of 'EducationalDialogueCompleted' of RoomModel.
     /// </summary>
     [Test]
     public void SetEducationalDialogueCompleted()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // verify educationalDialgoueCompoleted state
         roomModel.EducationalDialogueCompleted = true;
         Assert.IsTrue(roomModel.EducationalDialogueCompleted, $"roomModel.EducationalDialogueCompleted was expected to be true. Got '{roomModel.EducationalDialogueCompleted}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling IsComplete when both minigameCompleted and 
-    /// educationalDialgoueCompleted are false.
+    /// Test calling IsComplete when both 'MinigameCompleted' and 
+    /// 'EducationalDialgoueCompleted' are false.
     /// </summary>
     [Test]
     public void IsCompleteFalse()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // verify the value returned from IsComplete()
         var result = roomModel.IsComplete();
         Assert.IsFalse(result, $"roomModel.IsCompelete was expected to return false, Got '{result}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling IsComplete when both minigameCompleted and 
-    /// educationalDialgoueCompleted are true.
+    /// Test calling IsComplete when both 'MinigameCompleted' and 
+    /// 'EducationalDialgoueCompleted' are true.
     /// </summary>
     [Test]
     public void IsCompleteTrue()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // verify the value returned from IsComplete()
@@ -166,19 +184,21 @@ public class RoomModelTests
         var result = roomModel.IsComplete();
         Assert.IsTrue(result == true, $"roomModel.IsCompelete was expected to return true, Got '{result}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling IsComplete() when either minigameCompleted or
-    /// educationalDialogueCompleted is true
+    /// Test calling IsComplete() when either 'MinigameCompleted' or
+    /// 'EducationalDialogueCompleted' is true
     /// </summary>
     [Test]
     public void IsCompleteEdgeCases()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'model' component
         IRoomModel roomModel = go.AddComponent<RoomModel>();
 
         // verify the value returned from IsComplete() when minigameCompleted is true
@@ -192,7 +212,7 @@ public class RoomModelTests
         result = roomModel.IsComplete();
         Assert.IsFalse(result, $"roomModel.IsCompelete was expected to return false, Got '{result}'");
 
-        // free up memory
+        // clean up game object
         Object.DestroyImmediate(go);
     }
 }

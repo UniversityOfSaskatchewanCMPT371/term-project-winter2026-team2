@@ -1,7 +1,7 @@
 /// <summary>
 /// Interface for RoomModel component.
 /// </summary>
-public interface IRoomModel
+public interface IRoomModel : IModel
 {
     /// DATA SECTION
 
@@ -152,5 +152,5 @@ public interface IRoomModel
     /// Postconditions:
     /// - Logs errors.
     /// </remarks>
-    void Init();
+    new void Init();
 }

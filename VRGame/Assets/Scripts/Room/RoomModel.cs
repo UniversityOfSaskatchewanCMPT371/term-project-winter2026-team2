@@ -1,14 +1,11 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 
 /// <summary>
 /// Model layer for reusable room module.
 /// </summary>
 public class RoomModel : Model, IRoomModel
 {
-
     /// DATA SECTION
 
     /// <summary>
@@ -66,8 +63,8 @@ public class RoomModel : Model, IRoomModel
         {
             if (value < 0)
             {
-                Debug.Log("Value is negative.");
-                Debug.Assert(value >= 0, "Value cannot be negative.");
+                Debug.Log("'value' is negative.");
+                Debug.Assert(value >= 0, "'value' cannot be negative.");
             }
         }
     }
@@ -102,12 +99,12 @@ public class RoomModel : Model, IRoomModel
         {
             if (value == roomName)
             {
-                Debug.Log("Value is same as current.");
-                Debug.Assert(value != roomName, "Value cannot be the same as current.");
+                Debug.Log("'value' is same as current.");
+                Debug.Assert(value != roomName, "'value' cannot be the same as current.");
             } else if (value.Trim() == "")
             {
-                Debug.Log("Value is whitespace.");
-                Debug.Assert(value.Trim() != "", "Value cannot be whitespace.");
+                Debug.Log("'value' is whitespace.");
+                Debug.Assert(value.Trim() != "", "'value' cannot be whitespace.");
             }
             roomName = value;
         }
@@ -176,52 +173,38 @@ public class RoomModel : Model, IRoomModel
         return educationalDialogueCompleted & minigameCompleted;
     }
 
-    /// <inheritdoc/>
-    public void Init()
+    /// <inheritdoc cref="IRoomModel.Init"/>
+    public override void Init()
     {
         if (roomName.Trim() == "")
         {
-            Debug.LogError("Field roomName cannot be whitespace.");
+            Debug.LogError("Field 'roomName' cannot be whitespace.");
         }
-        Debug.Assert(roomName.Trim() != "", "Field roomName must be set to a different name.");
+        Debug.Assert(roomName.Trim() != "", "Field 'roomName' must be set to a different name.");
 
         if (minigameCompleted)
         {
-            Debug.LogError("Field minigameCompleted must start as false.");
+            Debug.LogError("Field 'minigameCompleted' must start as false.");
         }
-        Debug.Assert(minigameCompleted == false, "Field minigameCompleted must be set to false.");
+        Debug.Assert(minigameCompleted == false, "Field 'minigameCompleted' must be set to false.");
 
         if (educationalDialogueCompleted)
         {
-            Debug.LogError("Field eductionalDialogueCompleted must start as false.");
+            Debug.LogError("Field 'eductionalDialogueCompleted' must start as false.");
         }
-        Debug.Assert(educationalDialogueCompleted == false, "Field eductionalDialogueCompleted must be set to false.");
+        Debug.Assert(educationalDialogueCompleted == false, "Field 'eductionalDialogueCompleted' must be set to false.");
 
         bool isKeyTaken = roomLookUp.ContainsKey(Id);
         if (isKeyTaken)
         {
-            Debug.LogError("Field roomId is already taken.");
+            Debug.LogError("Field 'roomId' is already taken.");
         } else
         {
             roomLookUp.Add(roomId,this);
         }
-        Debug.Assert(isKeyTaken == false, "Field roomId must be set to a different id.");
-    }
+        Debug.Assert(isKeyTaken == false, "Field 'roomId' must be set to a different id.");
 
-    /// <summary>
-    /// Called once after all Awake() calls finishes.
-    /// Initializes the component by calling Init().
-    /// This function is provided by Unity.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Init() function is implemented.
-    /// Postconditions:
-    /// - Init() function is called.
-    /// </remarks>
-    void Start()
-    {
-        Init();
+        Debug.Log("RoomModel successfully initialized.");
     }
 
     /// <summary>

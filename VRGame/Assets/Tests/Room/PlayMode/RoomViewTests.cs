@@ -4,7 +4,7 @@ using UnityEngine.TestTools;
 using UnityEngine.Diagnostics;
 using UnityEngine;
 using System;
-
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Unit tests for RoomView class.
@@ -12,52 +12,53 @@ using System;
 public class RoomViewTests
 {
     /// <summary>
-    /// Init() should succeed when RoomController is assigned.
+    /// Init() should succeed when 'controller' is assigned.
     /// </summary>
     [UnityTest]
     public IEnumerator Instantiation()
     {
-        // create GameObject and add components
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' and 'controller' components
         RoomView roomView = go.AddComponent<RoomView>();
         RoomController roomController = go.AddComponent<RoomController>();
 
-        // controller still needs a model, so Init() will complain about missing model
-        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
-        LogAssert.Expect(LogType.Error, "Missing field roomModel.");
-        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
-        LogAssert.Expect(LogType.Assert, "Field roomModel cannot be null.");
+        // controller still needs a 'model', so Init() will complain about missing 'model'
+        LogAssert.Expect(LogType.Exception, new Regex(".*'modelInstance' field cannot be null.*"));
 
+        // assign real components
+        roomView.ControllerMock = roomController;
+        roomController.ViewMock = roomView;
 
-        // assign controller to view
-        roomView.RoomController = roomController;
-        roomController.RoomView = roomView;
-
-        // allow Start() to run
+        // allow Start() to run which invokes Init()
         yield return null;
 
+        // no errors should occur since 'controller' is assigned
+
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Init() should log an error and assert when RoomController is missing.
+    /// Init() should log an error and assert when 'controller' is missing.
     /// </summary>
     [UnityTest]
     public IEnumerator InitMissingController()
     {
-        // create GameObject and add view only
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
-        // expect missing controller errors
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Error, "Missing field roomController.");
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
+        // expect exception to occur since 'controller' was not assigned
+        LogAssert.Expect(LogType.Exception, new Regex(".*'controllerInstance' field cannot be null.*"));
 
-        // allow Start() to run
+        // allow Start() to run which invokes Init()
         yield return null;
 
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -67,15 +68,14 @@ public class RoomViewTests
     [UnityTest]
     public IEnumerator InvokeOnRoomComplete()
     {
-        // create GameObject and add view
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
         // Init() will still complain about missing controller
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Error, "Missing field roomController.");
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
+        LogAssert.Expect(LogType.Exception, new Regex(".*'controllerInstance' field cannot be null.*"));
 
         // track if event was called
         bool called = false;
@@ -87,93 +87,98 @@ public class RoomViewTests
         // verify listener was called
         Assert.IsTrue(called);
 
+        // allow Start() to run
         yield return null;
+        
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// MinigameCompleted() should throw when RoomController is missing.
+    /// MinigameCompleted() should throw when 'controller' is missing.
     /// </summary>
     [UnityTest]
     public IEnumerator MinigameCompletedMissingController()
     {
-        // create GameObject and add view
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
         // Init() will complain about missing controller
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Error, "Missing field roomController.");
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
+        LogAssert.Expect(LogType.Exception, new Regex(".*'controllerInstance' field cannot be null.*"));
 
+        // allow Start() to run which invoked Init()
         yield return null;
 
-        // method should throw
-        Assert.Throws<MissingFieldException>(() =>
+        // expect an exception to be thrown since MinigameCompleted() requires 'controller' component
+        Assert.Throws<AssertionException>(() =>
         {
             roomView.MinigameCompleted();
         });
 
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// MinigameCompleted() should call HandleCompleteMinigame() on the controller.
+    /// MinigameCompleted() should call HandleCompleteMinigame() on the 'controller'.
     /// </summary>
     [UnityTest]
     public IEnumerator MinigameCompletedCallsControllerMethod()
     {
-        // create GameObject and add components
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view', 'controller', and 'model' components
         RoomView roomView = go.AddComponent<RoomView>();
         RoomController roomController = go.AddComponent<RoomController>();
-
-        // assign controller to view
-        roomView.RoomController = roomController;
-
-        // controller needs model + view to avoid its own Init() errors
         RoomModel roomModel = go.AddComponent<RoomModel>();
-        roomController.RoomView = roomView;
-        roomController.RoomModel = roomModel;
 
+        // assign real components
+        roomView.ControllerMock = roomController;
+        roomController.ViewMock = roomView;
+        roomController.ModelMock = roomModel;
+
+        // allow Start() to run which invoked Init()
         yield return null;
 
         // call method
         roomView.MinigameCompleted();
 
-        // verify model updated
-        Assert.IsTrue(roomModel.MinigameCompleted);
+        // verify 'model' updated
+        Assert.IsTrue(roomModel.MinigameCompleted, "'MinigameCompleted' field was not set to true.");
 
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// EducationalDialoguesCompleted() should throw when RoomController is missing.
+    /// EducationalDialoguesCompleted() should throw when 'controller' is missing.
     /// </summary>
     [UnityTest]
     public IEnumerator EducationalDialoguesCompletedMissingController()
     {
-        // create GameObject and add view
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
         // Init() will complain about missing controller
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Error, "Missing field roomController.");
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
-        LogAssert.Expect(LogType.Assert, "Field roomController cannot be null.");
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
+        LogAssert.Expect(LogType.Exception, new Regex(".*'controllerInstance' field cannot be null.*"));
 
+        // allow Start() to run which invoked Init()
         yield return null;
 
-        // method should throw
-        Assert.Throws<MissingFieldException>(() =>
+        // expect an exception to be thrown since EducationDialguesCompleted() requires 'controller' component
+        Assert.Throws<AssertionException>(() =>
         {
             roomView.EducationalDialoguesCompleted();
         });
 
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -183,27 +188,29 @@ public class RoomViewTests
     [UnityTest]
     public IEnumerator EducationalDialoguesCompletedCallsControllerMethod()
     {
-        // create GameObject and add components
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view', 'controller', and 'model' components
         RoomView roomView = go.AddComponent<RoomView>();
         RoomController roomController = go.AddComponent<RoomController>();
-
-        // assign controller to view
-        roomView.RoomController = roomController;
-
-        // controller needs model + view
         RoomModel roomModel = go.AddComponent<RoomModel>();
-        roomController.RoomView = roomView;
-        roomController.RoomModel = roomModel;
 
+        // assign real components
+        roomView.ControllerMock = roomController;
+        roomController.ViewMock = roomView;
+        roomController.ModelMock = roomModel;
+
+        // allow Start() to run which invokes Init()
         yield return null;
 
         // call method
         roomView.EducationalDialoguesCompleted();
 
-        // verify model updated
+        // verify 'model' updated
         Assert.IsTrue(roomModel.MinigameCompleted);
 
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 }

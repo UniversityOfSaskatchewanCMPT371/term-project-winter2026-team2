@@ -1,9 +1,9 @@
 /// <summary>
 /// Interface for RoomController component.
 /// </summary>
-public interface IRoomController
+public interface IRoomController : IController
 {
-
+    
 
     /// <summary>
     /// Marks the minigame as complete in the model and then checks
@@ -61,5 +61,5 @@ public interface IRoomController
     /// - Logs errors if RoomView or RoomModel is missing.
     /// - Asserts that both references are valid.
     /// </remarks>
-    void Init();
+    new void Init();
 }

@@ -1,7 +1,7 @@
 /// <summary>
 /// Interface for RoomView component.
 /// </summary>
-public interface IRoomView
+public interface IRoomView : IView
 {
    
     /// <summary>
@@ -54,5 +54,5 @@ public interface IRoomView
     /// - Logs errors if RoomController is missing.
     /// - Asserts that the references are valid.
     /// </remarks>
-    void Init();
+    new void Init();
 }

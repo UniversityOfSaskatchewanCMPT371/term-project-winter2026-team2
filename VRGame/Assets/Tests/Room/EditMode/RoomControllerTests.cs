@@ -10,205 +10,222 @@ using UnityEngine.TestTools;
 public class RoomControllerTests
 {
     /// <summary>
-    /// Test the initialization of RoomController.
+    /// Test the initialization of 'controller'.
     /// </summary>
     [Test]
     public void Instantiation()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
-        // confirm that roomController is not null
+        // confirm that 'controller' is not null
         Assert.NotNull(roomController, $"roomController cannot be null. Got {roomController}");
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
         IRoomModel roomModel = Substitute.For<IRoomModel>();
 
-        roomController.RoomView = roomView;
-        roomController.RoomModel = roomModel;
+        // assign mocks
+        roomController.ViewMock = roomView;
+        roomController.ModelMock = roomModel;
 
         // initialize the component
         roomController.Init();
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompleteEducationalDialogue() with missing model layer
+    /// Test calling HandleCompleteEducationalDialogue() with missing 'model'
     /// </summary>
     [Test]
     public void HandleCompleteEducationalDialogueMissingLayersRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
 
-        roomController.RoomView = roomView;
+        // assign mock
+        roomController.ViewMock = roomView;
 
-        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+        // expect an exception to be thrown since HandleCompleteEducationalDialogue() requires 'model' component
+        Assert.Throws<AssertionException>(() => roomController.HandleCompleteEducationalDialogue(), "Expected an exception, but no exception was thrown on missing 'model' component.");
 
-        // should throw since there's no valid references to model layer
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompleteEducationalDialogue(), "Expected an exception, but no exception was thrown on missing layers.");
-
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompleteEducationalDialogue() with model layer
+    /// Test calling HandleCompleteEducationalDialogue() with 'model' component
     /// </summary>
     [Test]
     public void HandleCompleteEducationalDialogueValidLayersRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
         IRoomModel roomModel = Substitute.For<IRoomModel>();
 
-        roomController.RoomView = roomView;
-        roomController.RoomModel = roomModel;
+        // assign mocks
+        roomController.ViewMock = roomView;
+        roomController.ModelMock = roomModel;
 
-        // should not throw since there's valid references to view and model layer
+        // expect no exception to be thrown since 'view' and 'model' components were assigned
         Assert.DoesNotThrow(() => roomController.HandleCompleteEducationalDialogue(), "Expected no exceptions, but an exception was thrown on valid layers.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompleteMinigame() with missing model layer
+    /// Test calling HandleCompleteMinigame() with missing 'model' component
     /// </summary>
     [Test]
     public void HandleCompleteMinigameMissingLayersRef()
     {
-        // test setup
+        // create Gameobject
         GameObject go = new GameObject();
         RoomController roomController = go.AddComponent<RoomController>();
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
 
-        roomController.RoomView = roomView;
+        // assign mock
+        roomController.ViewMock = roomView;
 
-        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+        // expect an exception to be thrown since HandleCompleteMinigame() requires 'model' component
+        Assert.Throws<AssertionException>(() => roomController.HandleCompleteMinigame(), "Expected an exception, but no exception was thrown on missing 'model' component.");
 
-        // should throw since there's no valid references to model layer
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompleteMinigame(), "Expected an exception, but no exception was thrown on missing layers.");
-
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompleteMinigame() with model layer
+    /// Test calling HandleCompleteMinigame() with 'model' component
     /// </summary>
     [Test]
     public void HandleCompleteMinigameValidLayersRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
         IRoomModel roomModel = Substitute.For<IRoomModel>();
 
-        roomController.RoomView = roomView;
-        roomController.RoomModel = roomModel;
+        // assign mocks
+        roomController.ViewMock = roomView;
+        roomController.ModelMock = roomModel;
 
-        // should not throw since there's valid references to view and model layer
+        // expect no exception to be thrown since 'model' component is assigned
         Assert.DoesNotThrow(() => roomController.HandleCompleteMinigame(), "Expected no exceptions, but an exception was thrown on valid layers.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompleteMinigame() with model/view layer
+    /// Test calling HandleCompleteMinigame() with 'model' and 'view' components
     /// </summary>
     [Test]
     public void HandleCompletionValidLayersRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
         IRoomModel roomModel = Substitute.For<IRoomModel>();
 
-        roomController.RoomView = roomView;
-        roomController.RoomModel = roomModel;
+        // assign mocks
+        roomController.ViewMock = roomView;
+        roomController.ModelMock = roomModel;
 
-        // should not throw since there's valid references to view and model layer
+        // expect no exception to be thrown since 'view' and 'model' components were assigned
         Assert.DoesNotThrow(() => roomController.HandleCompletion(), "Expected no exceptions, but an exceptionw as thrown on valid layers.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompletion() with missing model/view layer
+    /// Test calling HandleCompletion() with missing 'model' and 'view' components
     /// </summary>
     [Test]
     public void HandleCompletionMissingLayersRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
-        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
+        // expect an exception to be thrown since HandleCompletion() requires 'model' and 'view' component
+        Assert.Throws<AssertionException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
 
-        // confirm that roomController is not null
-        Assert.NotNull(roomController, $"roomController cannot be null. Got {roomController}");
-
-        // should throw since there is no valid references to view and model layer
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
-
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Test calling HandleCompletion() with model/view layer
+    /// Test calling HandleCompletion() with 'model' and 'view' components
     /// </summary>
     [Test]
     public void HandleCompletionEdgeCases()
     {
-        // test setup
+        // test if HandleCompletion() will work if only 'view' is assigned
+
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
         // substitute mocks
         IRoomView roomView = Substitute.For<IRoomView>();
         IRoomModel roomModel = Substitute.For<IRoomModel>();
 
-        roomController.RoomView = roomView;
+        // assign view mock
+        roomController.ViewMock = roomView;
 
-        LogAssert.Expect(LogType.Assert, "One of roomModel or roomModelMock fields cannot be null.");
-        LogAssert.Expect(LogType.Assert, "Value cannot be null.");
+        // expect an exception to be thrown since HandleCompletion() requires 'model' component
+        Assert.Throws<AssertionException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing 'model' component.");
 
-        // should throw since there is no valid reference to model
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing model layer.");
+        // test if HandleCompletion() will work if only 'model' is assigned
 
-        LogAssert.Expect(LogType.Assert, "One of roomView or roomViewMock fields cannot be null.");
+        // destroy controller since 'ViewMock' cannot be assigned null
+        UnityEngine.Object.DestroyImmediate(roomController);
 
-        roomController.RoomView = null;
-        roomController.RoomModel = roomModel;
+        // add new 'controller' component
+        roomController = go.AddComponent<RoomController>();
+
+        // assign model mock
+        roomController.ModelMock = roomModel;
         
-        // should throw since there is no valid reference to view
-        Assert.Throws<MissingFieldException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing view layer.");
+        // expect an exception to be thrown since HandleCompletion() requires 'view' component
+        Assert.Throws<AssertionException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing 'view' component.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 }

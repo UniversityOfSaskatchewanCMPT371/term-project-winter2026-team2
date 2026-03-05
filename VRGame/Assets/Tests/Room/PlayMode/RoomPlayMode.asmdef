@@ -3,10 +3,9 @@
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
         "TNRD.NSubstitute",
         "Room",
-        "MVC"
+        "ScriptTemplates"
     ],
     "includePlatforms": [
         "Android",

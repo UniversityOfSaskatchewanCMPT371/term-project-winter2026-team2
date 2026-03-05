@@ -2,7 +2,7 @@
     "name": "Room",
     "rootNamespace": "",
     "references": [
-        "MVC"
+        "ScriptTemplates"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

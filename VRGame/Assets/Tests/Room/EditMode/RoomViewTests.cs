@@ -15,8 +15,10 @@ public class RoomViewTests
     [Test]
     public void Instantiation()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
         // confirm that roomView is not null
@@ -25,102 +27,106 @@ public class RoomViewTests
         // substitute mocks
         IRoomController roomController = Substitute.For<IRoomController>();
 
-        roomView.RoomController = roomController;
+        // assign mock
+        roomView.ControllerMock = roomController;
 
         // initialize the component
         roomView.Init();
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
     /// Test to see if MinigameCompleted() will throw an error
-    /// with valid controller reference.
+    /// with valid 'controller' component.
     /// </summary>
     [Test]
     public void MinigameCompletedValidLayerRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
         // substitute mocks
         IRoomController roomController = Substitute.For<IRoomController>();
 
-        roomView.RoomController = roomController;
+        // assign mock
+        roomView.ControllerMock = roomController;
 
-        // should not throw since there is a valid reference to controller
+        // expect no exception to be thrown since 'controller' is assigned
         Assert.DoesNotThrow(() => roomView.MinigameCompleted(), "Expected no exception, but an exception was thrown on valid layers.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
     /// Test to see if MinigameCompleted() will throw an error
-    /// with missing controller reference.
+    /// with missing 'controller' component.
     /// </summary>
     [Test]
     public void MinigameCompletedMissingLayerRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
-        // substitute mocks
-        IRoomController roomController = Substitute.For<IRoomController>();
+        // expect an exception to be thrown since MinigameCompleted() requires 'controller' component
+        Assert.Throws<AssertionException>(() => roomView.MinigameCompleted(), "Expected an exception, but no exception was thrown on missing 'controller' component.");
 
-        roomView.RoomController = roomController;
-
-        // should not throw since there is a valid reference to controller
-        Assert.DoesNotThrow(() => roomView.MinigameCompleted(), "Expected no exception, but an exception was thrown on valid layers.");
-
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
 
     /// <summary>
     /// Test to see if EducationalDialoguesCompleted() will throw an error
-    /// with valid controller reference.
+    /// with valid 'controller' component.
     /// </summary>
     [Test]
     public void EducationalDialoguesCompletedValidLayerRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
         // substitute mocks
         IRoomController roomController = Substitute.For<IRoomController>();
 
-        roomView.RoomController = roomController;
+        // aassign mock
+        roomView.ControllerMock = roomController;
 
-        // should not throw since there is a valid reference to controller
+        // expect no exception to be thrown since 'controller' is assigned
         Assert.DoesNotThrow(() => roomView.EducationalDialoguesCompleted(), "Expected no exception, but an exception was thrown on valid layers.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
     /// Test to see if EducationalDialoguesCompleted() will throw an error
-    /// with missing controller reference.
+    /// with missing 'controller' component.
     /// </summary>
     [Test]
     public void EducationalDialoguesCompletedMissingLayerRef()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
-        LogAssert.Expect(LogType.Assert, "One of roomController or roomControllerMock fields cannot be null.");
+        // expect an exception to be thrown since EducationalDialoguesCompleted() requires 'controller' component
+        Assert.Throws<AssertionException>(() => roomView.EducationalDialoguesCompleted(), "Expected an exception, but no exception was thrown on missing 'controller' component.");
 
-        // should throw since there is no valid reference to controller
-        Assert.Throws<MissingFieldException>(() => roomView.EducationalDialoguesCompleted(), "Expected an exception, but no exception was thrown on missing layers.");
-
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -130,22 +136,26 @@ public class RoomViewTests
     [Test]
     public void InvokeOnRoomComplete()
     {
-        // test setup
+        // create GameObject
         GameObject go = new GameObject();
+
+        // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
+        // add a listener that can be invoked to verify that it works
         var result = false;
         roomView.onRoomCompleted.AddListener(() =>
         {
             result = true;
         });
 
+        // invoke event
         roomView.InvokeOnRoomComplete();
 
-        // result should be true since we invoked the event
+        // verify flag updated
         Assert.IsTrue(result, "Expected listeners to be invoked, but did not get invoked.");
 
-        // free up memory
+        // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
 }
