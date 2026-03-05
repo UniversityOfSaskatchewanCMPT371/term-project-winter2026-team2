@@ -30,7 +30,7 @@ public class BillBoardView : MonoBehaviour
     /// </postconditions>
     void Update ()
     {
-        // Cache camera transform and initialize PointB distance on first frame
+        // Cache camera transform and initialize PointB distance on first frame.
         if (!tCam)
         {
           Assert.IsNotNull(Camera.main, "Camera.main is null. Please ensure there is a camera in the scene tagged as 'MainCamera'.");
