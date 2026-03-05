@@ -71,4 +71,15 @@ public interface IObjectMatchGameController: IController
     /// - Calls the model to clear the current guess
     /// </remarks>
     public void RemovePotentialGuess();
+
+    /// <summary>
+    /// Submits the current guess to be evaluated by the model.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - the model has a current guess that is ready to be submitted
+    /// Postconditions:
+    /// - Calls submit guess in the model
+    /// </remarks>
+    public void SubmitGuess();
 }

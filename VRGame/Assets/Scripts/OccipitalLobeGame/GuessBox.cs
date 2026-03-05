@@ -88,4 +88,28 @@ public class GuessBox : MonoBehaviour
             Debug.LogWarning("An object with name " + other.gameObject.name + " exited the guess box, but that object was not registered as the current guess.");
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (controller == null)
+        {
+            controller = GetComponentInParent<IObjectMatchGameController>();
+            if (controller == null)
+            {
+                Debug.LogError("GuessBox could not find an instance of IObjectMatchGameController in its parent hierarchy.");
+                return;
+            }
+        }
+        if (controller.GetCurrentGuessID() != other.gameObject.name &&
+            controller.GetCurrentGuessID() != "")
+        {
+            Debug.Log("Cannot have two guess at once. Remove the current guess before" +
+                "placing another object in the box.");
+            return;
+        }
+        if (controller.GetCurrentGuessID() != other.gameObject.name)
+        {
+            controller.PotentialGuess(other.gameObject.name);
+        }
+    }
 }

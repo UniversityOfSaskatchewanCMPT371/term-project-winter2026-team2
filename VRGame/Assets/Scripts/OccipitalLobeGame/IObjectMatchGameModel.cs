@@ -155,4 +155,15 @@ public interface IObjectMatchGameModel: IModel
     /// - currentGuessID is set back to an empty string
     /// </remarks>
     public void RemovePotentialGuess();
+
+    /// <summary>
+    /// Checks if the current guess is correct, and update the model to reflect that
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - currentGuessID is a non-empty string
+    /// Postconditions:
+    /// - Update the model to reflect whether the current guess is correct or not
+    /// </remarks>
+    public void SubmitGuess();
 }
