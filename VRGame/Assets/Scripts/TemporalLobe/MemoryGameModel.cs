@@ -61,4 +61,25 @@ public class MemoryGameModel : MonoBehaviour
 
         return false;
     }
+
+    /// <summary>
+    /// Checks whether the player has completed the memory sequence.
+    /// </summary>
+    /// <returns>
+    /// `true` when the current progress index has reached or exceeded the sequence length; otherwise `false`.
+    /// </returns>
+    /// <remarks>
+    /// Preconditions:
+    /// - `sounds` is non-null.
+    /// - `currentIndex` is non-negative.
+    /// Postconditions:
+    /// - No model state is modified.
+    /// - Completion status is returned based on `currentIndex` and `sounds.Length`.
+    /// </remarks>
+    public bool IsGameComplete()
+    {
+        Assert.IsNotNull(sounds, "Sounds sequence must be assigned before checking completion.");
+        Assert.IsTrue(currentIndex >= 0, "Current index cannot be negative.");
+        return currentIndex >= sounds.Length;
+    }
 }
