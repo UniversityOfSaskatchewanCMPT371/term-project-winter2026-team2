@@ -56,7 +56,7 @@ public interface IObjectMatchGameModel: IModel
     /// - Returns the current score for the active game session as an integer.
     ///   Score is reset to 0 at the start of each new game session.
     /// </remarks>
-    public int GetCurrentScore();
+    public int GetGameScore();
 
     /// <summary>
     /// Gets the score achieved for the current level. This is the score that

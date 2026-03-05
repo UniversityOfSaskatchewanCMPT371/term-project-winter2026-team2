@@ -14,6 +14,12 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 
     public override void Init()
     {
+        currentLevel = 0;
+        totalLevels = 5;
+        gameScore = 0;
+        levelScore = 0;
+        failedGuesses = 0;
+        gameState = GameState.readyToStart;
 
     }
     // Update is called once per frame
@@ -25,31 +31,31 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public GameState GetGameState()
     {
-        return GameState.readyToStart;
+        return gameState;
     }
 
     /// <inheritdoc/>
     public int GetCurrentLevel()
     {
-        return -1;
+        return currentLevel;
     }
 
     /// <inheritdoc/>
     public int GetTotalLevels()
     {
-        return -1;
+        return totalLevels;
     }
 
     /// <inheritdoc/>
-    public int GetCurrentScore()
+    public int GetGameScore()
     {
-        return -1;
+        return gameScore;
     }
 
     /// <inheritdoc/>
     public int GetLevelScore()
     {
-        return -1;
+        return levelScore;
     }
 
     /// <inheritdoc/>
@@ -70,10 +76,5 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public void CheckForLevelCompletion()
     {
-    }
-
-    void IModel.Init()
-    {
-        Init();
     }
 }
