@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Model portion of the grid module for logic path minigame.
