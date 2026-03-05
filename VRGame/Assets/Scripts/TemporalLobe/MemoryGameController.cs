@@ -97,20 +97,49 @@ public class MemoryGameController : MonoBehaviour
 
         view.PlaySound(model.sounds[model.currentIndex]);
     }
-
-
     /// <summary>
-    /// Frame update hook for controller-specific per-frame logic.
+    /// Handles a player-selected object and updates memory-game feedback/state.
     /// </summary>
+    /// <param name="selectedObject">The object selected by the player.</param>
     /// <remarks>
     /// Preconditions:
-    /// - None.
+    /// - `model`, `view`, and `selectedObject` are non-null.
+    /// - Feedback clips (`correctSound`, `wrongSound`, `winSound`) are assigned.
     /// Postconditions:
-    /// - No controller state changes are performed (currently no-op).
+    /// - Correct selections are marked green and play correct feedback.
+    /// - Wrong selections are marked red and play wrong feedback.
+    /// - If the game is completed, win feedback is played; otherwise the next cue is played.
     /// </remarks>
-
-    void Update()
+    public void ObjectSelected(GameObject selectedObject)
     {
-        
+        Assert.IsNotNull(model, "Model must be initialized before handling object selection.");
+        Assert.IsNotNull(view, "View must be assigned before handling object selection.");
+        Assert.IsNotNull(selectedObject, "Selected object cannot be null.");
+        Assert.IsNotNull(correctSound, "Correct feedback sound must be assigned.");
+        Assert.IsNotNull(wrongSound, "Wrong feedback sound must be assigned.");
+        Assert.IsNotNull(winSound, "Win feedback sound must be assigned.");
+
+        bool correct = model.CheckAnswer(selectedObject);
+
+        if (correct)
+        {
+            view.SetCorrect(selectedObject);
+            view.PlayOneShot(correctSound);
+
+            if (!model.IsGameComplete())
+            {
+                PlayCurrentSound();
+            }
+            else
+            {
+                view.PlayOneShot(winSound);
+                Debug.Log("Memory Restored!");
+            }
+        }
+        else
+        {
+            view.SetWrong(selectedObject);
+            view.PlayOneShot(wrongSound);
+        }
     }
 }
