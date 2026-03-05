@@ -1212,8 +1212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d23e257ee8c2b4aa1289851f85a3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  controller: {fileID: 0}
+  audioSource: {fileID: 2044605505}
+  controller: {fileID: 2044605504}
 --- !u!114 &2044605504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,11 +1227,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 0}
-  sounds: []
-  objects: []
-  correctSound: {fileID: 0}
-  wrongSound: {fileID: 0}
-  winSound: {fileID: 0}
+  sounds:
+  - {fileID: 8300000, guid: 51181c12ff7381e4d9479fdaf5e41e8b, type: 3}
+  - {fileID: 8300000, guid: 4a436e94306f52445bddaf1520096806, type: 3}
+  - {fileID: 8300000, guid: 37c95dec10088e14e98cb67b4aaf10a3, type: 3}
+  - {fileID: 8300000, guid: dd1ddd813f6a69449b2a0ab81e6f0a91, type: 3}
+  - {fileID: 8300000, guid: 1723ee84c7d196640a6dc25331956043, type: 3}
+  objects:
+  - {fileID: 2104272478}
+  - {fileID: 430354275}
+  - {fileID: 923219244}
+  - {fileID: 611810435}
+  - {fileID: 508513325}
+  correctSound: {fileID: 8300000, guid: 56111fb9a9d2b19429692bb9611f0363, type: 3}
+  wrongSound: {fileID: 8300000, guid: d59fbc21e381940488eaeacec14df12d, type: 3}
+  winSound: {fileID: 8300000, guid: 30c964ed6a823854d91ce2e26f6d5120, type: 3}
 --- !u!82 &2044605505
 AudioSource:
   m_ObjectHideFlags: 0
