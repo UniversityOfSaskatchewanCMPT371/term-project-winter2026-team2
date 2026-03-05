@@ -113,7 +113,7 @@ public interface IGridModel
     ///         or null if coordinates are out of bounds
     /// </post-condition>
     /// </remarks>
-    GridCell GetCell(int x, int y);
+    Panel GetPanel(int x, int y);
 
 
     /// <summary>
@@ -129,7 +129,7 @@ public interface IGridModel
     ///     -   Returns true if the cell is occupied, false otherwise
     /// </post-condition>
     /// </remarks>
-    bool IsCellOccupied(int x, int y);
+    bool IsPanelOccupied(int x, int y);
 
     /// <summary>
     /// Attempts to place a pipe of the specified color at the given cell coordinates
@@ -218,5 +218,5 @@ public interface IGridModel
     ///         or null if the position is outside the grid bounds
     /// </post-condition>
     /// </remarks>
-    GridCell GetCellAtWorldPosition(Vector3 worldPosition);
+    Panel GetPanelAtWorldPosition(Vector3 worldPosition);
 }
