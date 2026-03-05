@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents a single panel in the logic path minigame
+/// </summary>
 public enum PanelAttribute
 {
     Normal,
@@ -10,6 +13,10 @@ public enum PanelAttribute
     Exit
 }
 
+/// <summary>
+/// Represents a single panel in the logic path minigame
+/// Manages pipe connections
+/// </summary>
 public class Panel : MonoBehaviour
 {
     private Direction entryDirection;
@@ -19,16 +26,293 @@ public class Panel : MonoBehaviour
     private Panel downNeighbor;
     private Panel leftNeighbor;
     private PanelAttribute attribute;
+    private Color pipeColor;
+    private Vector3 worldPosition;
+    private int gridX;
+    private int gridY;
 
-    void Awake()
+    /// <summary>
+    /// Accessor for entry direction
+    /// </summary>
+    public Direction EntryDirection
+    {
+        get 
+        {
+            return entryDirection;
+        }
+
+        set
+        {
+            entryDirection = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for exit direction
+    /// </summary>
+    public Direction ExitDirection
+    {
+        get
+        {
+            return exitDirection;
+        }
+
+        set 
+        {
+            exitDirection = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for top neighbour panel
+    /// </summary>
+    public Panel TopNeighbor
+    {
+        get
+        {
+            return topNeighbor;
+        }
+
+        set
+        {
+            topNeighbor = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for right neighbour panel
+    /// </summary>
+    public Panel RightNeighbor
+    {
+        get
+        {
+            return rightNeighbor;
+        }
+
+        set
+        {
+            rightNeighbor = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for down neighbour panel
+    /// </summary>
+    public Panel DownNeighbor
+    {
+        get
+        {
+            return downNeighbor;
+        }
+
+        set 
+        {
+            downNeighbor = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for left neighbour panel
+    /// </summary>
+    public Panel LeftNeighbor
+    {
+        get
+        {
+            return leftNeighbor;
+        }
+
+        set
+        {
+            leftNeighbor = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for panel attribute (normal, start, exit)
+    /// </summary>
+    public PanelAttribute Attribute
+    {
+        get
+        {
+            return attribute;
+        }
+
+        set
+        {
+            attribute = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for pipe color, or null if there is no pipe
+    /// </summary>
+    public Color? PipeColor
+    {
+        get
+        {
+
+            if (entryDirection == PipeDirection.None)
+            {
+                return null;
+            }
+            else
+            {
+                return pipeColor;
+            }
+        }
+
+        set
+        {
+            if (value.HasValue)
+            {
+                pipeColor = value.Value;
+            }
+            else
+            {
+                pipeColor = Color.White;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Accessor for world position
+    /// </summary>
+    public Vector3 WorldPosition
+    {
+        get
+        {
+            return worldPosition;
+        }
+
+        set
+        {
+            worldPosition = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for grid X coordinate
+    /// </summary>
+    public int GridX
+    {
+        get
+        {
+            return gridX;
+        }
+
+        set
+        {
+            gridX = value;
+        }
+    }
+
+    /// <summary>
+    /// Accessor for grid Y coordinate
+    /// </summary>
+    public int GridY
+    {
+        get
+        {
+            return gridY;
+        }
+
+        set
+        {
+            gridY = value;
+        }
+    }
+
+    /// <summary>
+    /// Checks if the panel has a pipe placed in it
+    /// </summary>
+    /// <remarks>
+    /// <preconditions>
+    ///     - None
+    /// </preconditions>
+    /// <postconditions>
+    ///     - Returns true if there is a pipe in the panel, false otherwise
+    /// </postconditions>
+    /// </remarks>
+    public bool IsOccupied()
+    {
+        return entryDirection != Direction.None;
+    }
+
+    /// <summary>
+    /// Sets the pipe directions for this panel
+    /// </summary>
+    /// <param name="entry">The entry direction</param>
+    /// <param name="exit">The exit direction</param>
+    /// <remarks>
+    /// <preconditions>
+    ///     - entry and exit must be valid directions (not None)
+    /// </preconditions>
+    /// <postconditions>
+    ///     - Sets the entry and exit directions for the pipe in this panel
+    /// </postconditions>
+    /// </remarks>
+    public void SetPipeDirection(Direction entry, Direction exit)
+    {
+        Assert.IsTrue(entry != Direction.None, "Entry direction cannot be None");
+        Assert.IsTrue(exit != Direction.None, "Exit direction cannot be None");
+        Assert.IsTrue(entry != exit, "Entry and exit directions cannot be the same");
+
+        entryDirection = entry;
+        exitDirection = exit;
+    }
+
+    /// <summary>
+    /// Clears the pipe from this panel, resetting entry and exit directions
+    /// </summary>
+    /// <remarks>
+    /// <preconditions>
+    ///     - None
+    /// </preconditions>
+    /// <postconditions>
+    ///     - Resets entry and exit directions to None
+    ///     - Resets pipe color to white (default)
+    /// </postconditions>
+    /// </remarks>
+    public void ClearPanel()
     {
         entryDirection = Direction.None;
         exitDirection = Direction.None;
+        pipeColor = Color.White;
+    }
+
+    /// <summary>
+    /// Initializes the panel with grid coordinates and world position
+    /// </summary>
+    /// <param name="x">Grid X coordinate</param>
+    /// <param name="y">Grid Y coordinate</param>
+    /// <param name="worldPos">World position of the panel</param>
+    /// <remarks>
+    /// <preconditions>
+    ///     - x and y must be non-negative
+    ///     - worldPos must be a valid Vector3
+    /// </preconditions>
+    /// <postconditions>
+    ///     - Panel is initialized with coodinates and position
+    ///     - Directions are set to None
+    ///     - Neighbours are null
+    /// </postconditions>
+    /// </remarks>
+    public void Initialize(int x, int y, Vector3 worldPos)
+    {
+        Assert.IsTrue(x >= 0, "Grid X coordinate cannot be negative");
+        Assert.IsTrue(y >= 0, "Grid Y coordinate cannot be negative");
+
+    
+        gridX = x;
+        gridY = y;
+        worldPosition = worldPos;
+        entryDirection = Direction.None;
+        exitDirection = Direction.None;
+        pipeColor = Color.White;
         topNeighbor = null;
         rightNeighbor = null;
         downNeighbor = null;
         leftNeighbor = null;
-        
+        attribute = PanelAttribute.Normal;
     }
-
 }
