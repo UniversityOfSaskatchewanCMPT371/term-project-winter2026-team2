@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ObjectMatchGame;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     private int levelScore;
     private int failedGuesses;
     private GameState gameState;
+    private string currentGuessID;
     [SerializeField] private levelData[] levels;
 
 
@@ -22,6 +24,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         levelScore = 0;
         failedGuesses = 0;
         gameState = GameState.readyToStart;
+        currentGuessID = "";
 
     }
     // Update is called once per frame
@@ -83,9 +86,16 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         gameState = GameState.playing;
     }
 
+    /// <inheritdoc/>
     public string[] GetActiveObjectIDs()
     {
         return levels[currentLevel].AllObjectIDs;
+    }
+
+    /// <inheritdoc/>
+    public string GetCurrentGuessID()
+    {
+        return currentGuessID;
     }
 
     /// <inheritdoc/>
@@ -94,17 +104,22 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     }
 
     /// <inheritdoc/>
-    public void CheckGuess(string Guess)
+    public void PotentialGuess(string Guess)
     {
-        if (Guess == levels[currentLevel].CorrectObjectID)
+        if (!levels[currentLevel].AllObjectIDs.Contains(Guess))
         {
-            gameState = GameState.levelComplete;
-            Debug.Log("Correct guess!");
+            Debug.LogWarning("Model got unexpected GameObject named: \"" + Guess + "\" in PotentialGuess");
+            return;
         }
-        else
-        {
-            failedGuesses++;
-            Debug.Log("Incorrect guess. Total failed guesses: " + failedGuesses);
-        }
+        currentGuessID = Guess;
+
+        Debug.Log("Model received potential guess: " + Guess);
+    }
+
+    /// <inheritdoc/>
+    public void RemovePotentialGuess()
+    {
+        currentGuessID = "";
+        Debug.Log("Model removed potential guess, current guess is now empty string");
     }
 }

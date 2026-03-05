@@ -39,14 +39,36 @@ public interface IObjectMatchGameController: IController
     public void RestartGame();
 
     /// <summary>
-    /// Calls the model to evaluate the guess to verify if it is correct
+    /// Notifies the model of the ID of object placed in guess box
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - GuessItem is a non-empty string corresponding to the name of one of the options
     ///   in the current level.
     /// Postconditions:
-    /// - Model is updated depending on correctness of the guess.
+    /// - Model is updated to reflect the guess
     /// </remarks>
-    public void checkGuess(string GuessItem);
+    public void PotentialGuess(string GuessItem);
+
+    /// <summary>
+    /// Gets the object ID corresponding to the current guess
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The string ID corresponding to the current guess
+    /// </remarks>
+    public string GetCurrentGuessID();
+
+    /// <summary>
+    /// Clears the current guess, allowing the player to make a new guess
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Calls the model to clear the current guess
+    /// </remarks>
+    public void RemovePotentialGuess();
 }

@@ -110,16 +110,14 @@ public interface IObjectMatchGameModel: IModel
     public void InitializeTutorial();
 
     /// <summary>
-    /// Checks if the guess made by the player is correct and updates
-    /// the game state
-    /// accordingly.
+    /// Takes the string name of the object that entered the guess box to store in model
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - Guess is a non-empty string corresponding to the name of one of the options
     /// Postconditions:
-    /// - Updates the GameState, numberOfFailures
-    public void CheckGuess(string Guess);
+    /// - Updates currentGuessID to Guess
+    public void PotentialGuess(string Guess);
 
     /// <summary>
     /// Returns a string array containing the IDs of the objects that are active
@@ -133,4 +131,28 @@ public interface IObjectMatchGameModel: IModel
     ///   the current level
     /// </remarks>
     public string[] GetActiveObjectIDs();
+
+
+    /// <summary>
+    /// Returns the ID of the current guess
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Returns the ID of the ccurrent guess as a string
+    /// </remarks>
+    public string GetCurrentGuessID();
+
+    /// <summary>
+    /// Removes the current potential guess from the model, setting it back to an 
+    /// empty string
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - currentGuessID is set back to an empty string
+    /// </remarks>
+    public void RemovePotentialGuess();
 }

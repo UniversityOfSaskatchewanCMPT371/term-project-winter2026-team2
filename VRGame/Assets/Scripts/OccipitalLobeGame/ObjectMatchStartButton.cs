@@ -5,6 +5,14 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ObjectMatchStartButton : MonoBehaviour
 {
+    // Store an instance of the controller so we can notify it
+    // when the start button is grabbed
+    private IObjectMatchGameController controller;
+
+    // Store an instance of the grab interactable component so we can listen for when the start
+    // button is grabbed
+    private XRGrabInteractable grabInteractable;
+
     /// <summary>
     /// Store an instance of the controller so we can notify it when an option
     /// is placed in the guess box
@@ -16,9 +24,6 @@ public class ObjectMatchStartButton : MonoBehaviour
     /// - The controller variable is assigned to an instance of IObjectMatchGameController
     ///   found in the parent hierarchy of this game object
     /// </remarks>
-    private IObjectMatchGameController controller;
-
-    private XRGrabInteractable grabInteractable;
     private void Start()
     {
         controller = GetComponentInParent<IObjectMatchGameController>();

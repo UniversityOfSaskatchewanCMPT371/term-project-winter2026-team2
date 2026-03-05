@@ -9,6 +9,10 @@ using UnityEngine;
 /// </summary>
 public class GuessBox : MonoBehaviour
 {
+    // Store an instance of the controller so we can notify it when an option
+    // enters the guess box
+    IObjectMatchGameController controller;
+
     /// <summary>
     /// Store an instance of the controller so we can notify it when an option
     /// is placed in the guess box
@@ -20,7 +24,6 @@ public class GuessBox : MonoBehaviour
     /// - The controller variable is assigned to an instance of IObjectMatchGameController
     ///   found in the parent hierarchy of this game object
     /// </remarks>
-    IObjectMatchGameController controller;
     void Start()
     {
         controller = GetComponentInParent<IObjectMatchGameController>();
@@ -38,6 +41,8 @@ public class GuessBox : MonoBehaviour
     /// <remarks>
     /// Preconditions:
     /// - The controller variable is assigned to an instance of IObjectMatchGameController
+    /// - grabInteractable is assigned to an instance of XRGrabInteractable on the game object
+    ///   corresponding to the option that entered the box
     /// Postconditions:
     /// - The controller's checkGuess method is called with the name of the game object that
     ///   was placed in the guess box as an argument
@@ -53,6 +58,34 @@ public class GuessBox : MonoBehaviour
                 return;
             }
         }
-        controller.checkGuess(other.gameObject.name);
+        if (controller.GetCurrentGuessID() != "")
+        {
+            Debug.Log("Cannot have two guess at once. Remove the current guess before" +
+                "placing another object in the box.");
+            return;
+        }
+        controller.PotentialGuess(other.gameObject.name);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (controller == null)
+        {
+            controller = GetComponentInParent<IObjectMatchGameController>();
+            if (controller == null)
+            {
+                Debug.LogError("GuessBox could not find an instance of IObjectMatchGameController in its parent hierarchy.");
+                return;
+            }
+        }
+
+        if (other.gameObject.name == controller.GetCurrentGuessID())
+        {
+            controller.RemovePotentialGuess();
+        }
+        else
+        {
+            Debug.LogWarning("An object with name " + other.gameObject.name + " exited the guess box, but that object was not registered as the current guess.");
+        }
     }
 }

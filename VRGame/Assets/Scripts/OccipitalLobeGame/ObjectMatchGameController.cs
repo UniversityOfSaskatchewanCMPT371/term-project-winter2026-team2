@@ -4,36 +4,46 @@ using UnityEngine;
 
 public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObjectMatchGameView>, IObjectMatchGameController
 {
-    public void checkGuess(string GuessItem)
+    /// </inheritdoc>
+    public void PotentialGuess(string GuessItem)
     {
-        this.modelInstance.CheckGuess(GuessItem);
+        this.modelInstance.PotentialGuess(GuessItem);
     }
 
+    /// </inheritdoc>
     public override void Init()
     {
         this.CheckModelRef();
         this.CheckViewRef();
     }
 
+    /// </inheritdoc>
     public void InitializeLevel()
     {
         this.modelInstance.InitializeLevel();
         this.viewInstance.ShowObjects(this.modelInstance.GetActiveObjectIDs());
     }
 
+    /// </inheritdoc>
     public void InitializeTutorial()
     {
         throw new System.NotImplementedException();
     }
 
+    /// </inheritdoc>
     public void RestartGame()
     {
         throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// </inheritdoc>
+    public string GetCurrentGuessID()
     {
-        
+        return this.modelInstance.GetCurrentGuessID();
+    }
+
+    public void RemovePotentialGuess()
+    {
+        this.modelInstance.RemovePotentialGuess();
     }
 }
