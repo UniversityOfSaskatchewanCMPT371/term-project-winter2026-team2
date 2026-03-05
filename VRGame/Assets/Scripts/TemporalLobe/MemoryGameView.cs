@@ -128,16 +128,27 @@ public class MemoryGameView : MonoBehaviour
 
 
     /// <summary>
-    /// Frame update hook for per-frame view behavior.
+    /// Processes per-frame input and forwards valid object selections to the controller.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None.
+    /// - `controller` is non-null.
+    /// - A main camera exists when mouse-click selection is expected.
     /// Postconditions:
-    /// - No state changes are performed (currently no-op).
+    /// - On left mouse click, a raycast is performed from the cursor position.
+    /// - If a collider is hit, `controller.ObjectSelected` is invoked with the hit object.
     /// </remarks>
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                controller.ObjectSelected(hit.collider.gameObject);
+            }
+        }
     }
 }
