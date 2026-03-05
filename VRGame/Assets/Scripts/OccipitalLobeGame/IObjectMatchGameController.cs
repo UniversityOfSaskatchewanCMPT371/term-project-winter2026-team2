@@ -1,6 +1,6 @@
 using ObjectMatchGame;
 
-public interface IObjectMatchGameController
+public interface IObjectMatchGameController: IController
 {
     /// <summary>
     /// Initializes a new level. Will call model to set up the level and the 

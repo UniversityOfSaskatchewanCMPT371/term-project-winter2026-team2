@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ObjectMatchGame;
 using UnityEngine;
 
-public class ObjectMatchGameModel : MonoBehaviour, IObjectMatchGameModel
+public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 {
     private int currentLevel;
     private int totalLevels;
@@ -12,31 +12,7 @@ public class ObjectMatchGameModel : MonoBehaviour, IObjectMatchGameModel
     private int failedGuesses;
     private GameState gameState;
 
-    /// <summary>
-    /// Called before the first frame update. Initializes the game model with default values.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - currentLevel is set to 0
-    /// - totalLevels is set to 5
-    /// - gameScore is set to 0
-    /// - levelScore is set to 0
-    /// - failedGuesses is set to 0
-    /// - gameState is set to GameState.readyToStart
-    /// <remarks/>
-    void Start()
-    {
-        currentLevel = 0;
-        totalLevels = 5;
-        gameScore = 0;
-        levelScore = 0;
-        failedGuesses = 0;
-        gameState = GameState.readyToStart;
-    }
-
-    private void Init()
+    public override void Init()
     {
 
     }
@@ -94,5 +70,10 @@ public class ObjectMatchGameModel : MonoBehaviour, IObjectMatchGameModel
     /// <inheritdoc/>
     public void CheckForLevelCompletion()
     {
+    }
+
+    void IModel.Init()
+    {
+        Init();
     }
 }

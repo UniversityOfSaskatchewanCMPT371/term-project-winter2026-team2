@@ -3,7 +3,7 @@ using ObjectMatchGame;
 /// Interface for the model of the object matching minigame for the occipital lobe
 /// The model is responsible for keeping track of the state of the game
 /// </summary>
-public interface IObjectMatchGameModel
+public interface IObjectMatchGameModel: IModel
 {
 
     /// <summary>

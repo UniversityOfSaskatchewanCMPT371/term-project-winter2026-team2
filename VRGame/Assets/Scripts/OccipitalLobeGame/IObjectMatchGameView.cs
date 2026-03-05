@@ -1,6 +1,6 @@
 using ObjectMatchGame;
 
-public interface IObjectMatchGameView
+public interface IObjectMatchGameView: IView
 {
     /// <summary>
     /// Called when the collider box of any of the options to guess hit the
