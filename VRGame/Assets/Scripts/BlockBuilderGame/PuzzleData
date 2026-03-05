@@ -17,7 +17,8 @@ public class PuzzleData : ScriptableObject
     public int GridHeight;
     
     
-    public List<TargetBlock> TargetBlocks = new();
+    public List<TargetBlock> targetBlocks = new();
+    public List<BlockModel> blocksInPlay = new();   // this would include all the blocks available for the player to play
 }
 
 public class TargetBlock
