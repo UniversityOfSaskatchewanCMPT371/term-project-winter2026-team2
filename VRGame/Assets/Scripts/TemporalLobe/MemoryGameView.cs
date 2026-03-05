@@ -1,16 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
+/// <summary>
+/// Handles memory game audio playback for player feedback.
+/// </summary>
+/// <remarks>
+/// Preconditions:
+/// - `audioSource` and `controller` are assigned before runtime use.
+/// Postconditions:
+/// - Audio feedback is produced based on controller/model actions.
+/// </remarks>
 public class MemoryGameView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Audio output component used to play memory sequence clips.
+    /// </summary>
+    public AudioSource audioSource;
+
+    /// <summary>
+    /// Controller reference used to coordinate memory game flow.
+    /// </summary>
+    public MemoryGameController controller;
+
+    /// <summary>
+    /// Validates required component references for this view.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Scene object has this view component initialized.
+    /// Postconditions:
+    /// - Required references are verified through assertions.
+    /// </remarks>
+    private void Awake()
     {
-        
+        Assert.IsNotNull(audioSource, "AudioSource reference must be assigned on MemoryGameView.");
+        Assert.IsNotNull(controller, "Controller reference must be assigned on MemoryGameView.");
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Plays a memory-game sound clip through this view's audio source.
+    /// </summary>
+    /// <param name="clip">The clip to play.</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - `audioSource` is non-null.
+    /// - `clip` is non-null.
+    /// Postconditions:
+    /// - `audioSource.clip` is set to `clip`.
+    /// - Playback is started by calling `audioSource.Play()`.
+    /// </remarks>
+    public void PlaySound(AudioClip clip)
+    {
+        Assert.IsNotNull(audioSource, "AudioSource must be assigned before calling PlaySound.");
+        Assert.IsNotNull(clip, "Audio clip cannot be null when calling PlaySound.");
+
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+
+    /// <summary>
+    /// Frame update hook for per-frame view behavior.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None.
+    /// Postconditions:
+    /// - No state changes are performed (currently no-op).
+    /// </remarks>
     void Update()
     {
         
