@@ -17,4 +17,15 @@ public class BlockController
         
     }
 
+    public void pickUpBlock(Vector3Int position)
+    {
+        
+    }
+    
+    // Remove block takes block back to inventory populates inventory
+    public void removeBlock(Vector3Int position)
+    {
+        
+    }
+
 }
