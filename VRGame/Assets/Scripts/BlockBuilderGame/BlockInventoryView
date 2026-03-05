@@ -10,10 +10,6 @@ using UnityEngine;
 
 public class InventoryView: monoBehaviour
 {
-    public void pickUpItem(String blockID)
-    {
-        // Update model for block to is grabbed.
-    }
 
 
 
