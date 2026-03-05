@@ -1,12 +1,9 @@
 using UnityEngine;
 
 /// <summary>
-/// Model portion of the reusable door module. Data is stored here
+/// Users can select block colours and those colours which can be selected are stored here.
+/// Enums chosen to designate block colour.
 /// </summary>
-/// <remarks>
-/// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
-/// targetSceneId must exist in SceneChangerModel service's path collection
-/// </remarks>
 
 public enum BlockColour
 {
