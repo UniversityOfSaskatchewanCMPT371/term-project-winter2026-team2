@@ -1,14 +1,7 @@
 using UnityEngine;
 
-/// <summary>
-/// Model portion of the reusable door module. Data is stored here
-/// </summary>
-/// <remarks>
-/// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
-/// targetSceneId must exist in SceneChangerModel service's path collection
-/// </remarks>
-
-public class BlockModel
+/// <inheritdoc/>
+public class BlockModel: IBlockModel
 {
     private string id { get; private set; }
     private BlockColour colour;
@@ -20,19 +13,11 @@ public class BlockModel
     public bool isPlaced; 
     public bool isGrabbed;
     public bool correctPosition { get; private set; }
-
      
 
-    /// <summary>
-    /// Constructor for the block model
-    /// </summary>
-    /// <returns>Block object </returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - none
-    /// PostConditions:
-    /// - A BlockModel instance created
-    /// </remarks>
+    
+
+    /// <inheritdoc/>
     public BlockModel(string id, BlockColor c, int l, int w)
     {
         BlockModel.id = id;
@@ -45,16 +30,7 @@ public class BlockModel
 
 
 
-    /// <summary>
-    /// Determines whether or not block is in the correct postion.
-    /// </summary>
-    /// <returns> boolean that represents if the block is correctly placed or not </returns>
-    /// <remarks>
-    /// Preconditions:
-    /// - `doorModel` instance var must be non-null and target position must exist.
-    /// PostConditions:
-    /// - none
-    /// </remarks>
+    /// <inheritdoc/>    
     public void IsCorrectlyPlaced(){
         correctPostion = (gridPostion == targetPostion);
         

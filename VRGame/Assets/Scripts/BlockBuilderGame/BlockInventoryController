@@ -7,14 +7,11 @@ using UnityEngine;
 /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
-
 public class InventoryController: monoBehaviour
 {
     public void pickUpItem(String blockID)
     {
         // Update model for block to is grabbed.
     }
-
-
 
 }
