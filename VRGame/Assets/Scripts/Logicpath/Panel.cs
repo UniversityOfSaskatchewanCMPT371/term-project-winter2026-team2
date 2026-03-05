@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Represents a single panel in the logic path minigame
@@ -151,7 +152,7 @@ public class Panel : MonoBehaviour
         get
         {
 
-            if (entryDirection == PipeDirection.None)
+            if (entryDirection == Direction.None)
             {
                 return null;
             }
@@ -169,7 +170,7 @@ public class Panel : MonoBehaviour
             }
             else
             {
-                pipeColor = Color.White;
+                pipeColor = Color.white;
             }
         }
     }
@@ -277,7 +278,7 @@ public class Panel : MonoBehaviour
     {
         entryDirection = Direction.None;
         exitDirection = Direction.None;
-        pipeColor = Color.White;
+        pipeColor = Color.white;
     }
 
     /// <summary>
@@ -308,7 +309,7 @@ public class Panel : MonoBehaviour
         worldPosition = worldPos;
         entryDirection = Direction.None;
         exitDirection = Direction.None;
-        pipeColor = Color.White;
+        pipeColor = Color.white;
         topNeighbor = null;
         rightNeighbor = null;
         downNeighbor = null;
