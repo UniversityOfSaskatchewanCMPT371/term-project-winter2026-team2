@@ -3,16 +3,207 @@ using UnityEngine;
 /// <inheritdoc/>
 public class BlockModel: IBlockModel
 {
-    private string id { get; private set; }
+    private string id
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
+     
+
     private BlockColour colour;
-    private int length { get; private set; }
-    private int width { get; private set; }
-    public string blockType { get;}
-    public Vector3Int gridPosition { get;  set;}
-    public Vector3Int targetPosition { get; private set; }
-    public bool isPlaced; 
-    public bool isGrabbed;
-    public bool correctPosition { get; private set; }
+
+    private int length
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
+     
+
+    private int width
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
+     
+
+    private string blockType
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
+     
+
+    private Vector3Int gridPosition
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
+     
+
+    private Vector3Int targetPosition 
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
+     
+    private bool isPlaced 
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+    }
+
+    private bool isGrabbed
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+    }
+     
+
+    bool isCorrectPostion
+    {
+        /// <summary>
+        /// Access the DoorModel's Id
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - DoorModel's id is returned
+        get;
+        /// <summary>
+        /// Set the id of this DoorModel
+        /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
+        /// scripts are usually set in a GUI window within the Unity editor 
+        /// </summary>
+        /// <remarks>
+        /// Precondintions:
+        /// - value must be positive
+        /// Postconditions:
+        /// - DoorModel's `doorId` instance variable set to input value
+        set;
+    }
      
 
     
@@ -35,7 +226,5 @@ public class BlockModel: IBlockModel
         correctPostion = (gridPostion == targetPostion);
         
     }
-
-
 
 }

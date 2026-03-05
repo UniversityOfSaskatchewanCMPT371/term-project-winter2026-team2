@@ -7,7 +7,6 @@ using UnityEngine;
 /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
-
 public interface IBlockController
 {
     BlockModel block;
