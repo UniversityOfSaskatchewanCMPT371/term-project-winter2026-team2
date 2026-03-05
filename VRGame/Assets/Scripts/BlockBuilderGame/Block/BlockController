@@ -8,7 +8,7 @@ using UnityEngine;
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
 
-public interface BlockController
+public class BlockController
 {
     BlockModel block;
 

@@ -8,7 +8,7 @@ using UnityEngine;
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
 
-public interface BlockModel
+public class BlockModel
 {
     private int blocksTotalNum;
     private int blocksCurrentNum;

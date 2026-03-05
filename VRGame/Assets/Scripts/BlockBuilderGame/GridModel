@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
@@ -8,7 +9,9 @@ using UnityEngine;
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
 
-public class BlockView
+public class GridModel
 {
-    
+    PuzzleData puzzle;
+    //TargetBlocks targetBlocks = 
 }
+

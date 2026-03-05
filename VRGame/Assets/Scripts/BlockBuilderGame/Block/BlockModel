@@ -8,15 +8,16 @@ using UnityEngine;
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
 
-public interface BlockModel
+public class BlockModel
 {
-    private int id;
+    private string id { get; private set; }
     private BlockColour colour;
-    private int length;
-    private int width;
-    public Vector3Int gridPosition;
-    public Vector3Int targetPosition;
-    public bool isPlaced;
+    private int length { get; private set; }
+    private int width { get; private set; }
+    public string blockType { get;}
+    public Vector3Int gridPosition { get;  set;}
+    public Vector3Int targetPosition { get; private set; }
+    public bool isPlaced; 
     public bool isGrabbed;
 
      
