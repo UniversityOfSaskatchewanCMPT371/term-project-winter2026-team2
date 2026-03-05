@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatchGameView
 {
+    [SerializeField] private GameObject[] allObjects;
     public override void Init()
     {
         throw new System.NotImplementedException();

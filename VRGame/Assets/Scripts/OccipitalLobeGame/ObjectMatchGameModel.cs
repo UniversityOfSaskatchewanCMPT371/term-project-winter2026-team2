@@ -11,6 +11,8 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     private int levelScore;
     private int failedGuesses;
     private GameState gameState;
+    [SerializeField] private levelData[] levels;
+
 
     public override void Init()
     {
