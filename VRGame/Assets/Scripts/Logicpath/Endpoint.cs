@@ -7,7 +7,7 @@ public class Endpoint
     /// <summary>
     /// X coordinate of the endpoint
     /// </summary>
-    public int gridX
+    public int GridX
     {
         get;
         set;
@@ -16,7 +16,7 @@ public class Endpoint
     /// <summary>
     /// Y coordinate of the endpoint
     /// </summary>
-    public int gridY
+    public int GridY
     {
         get;
         set;
@@ -25,7 +25,7 @@ public class Endpoint
     /// <summary>
     /// Color of the endpoint
     /// </summary>
-    public Color color
+    public Color EndColor
     {
         get;
         set;
@@ -34,7 +34,7 @@ public class Endpoint
     /// <summary>
     /// ID of the colour pair this endpoint belongs to
     /// </summary>
-    public int pairId
+    public int PairId
     {
         get;
         set;
@@ -44,7 +44,7 @@ public class Endpoint
     /// Whether this endpoint is currently connected to its pair
     /// Default value is false
     /// </summary>
-    public bool isConnected
+    public bool IsConnected
     {
         get;
         set;

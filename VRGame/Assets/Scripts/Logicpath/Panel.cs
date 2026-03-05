@@ -293,7 +293,7 @@ public class Panel : MonoBehaviour
     ///     - worldPos must be a valid Vector3
     /// </preconditions>
     /// <postconditions>
-    ///     - Panel is initialized with coodinates and position
+    ///     - Panel is initialized with coordinates and position
     ///     - Directions are set to None
     ///     - Neighbours are null
     /// </postconditions>
