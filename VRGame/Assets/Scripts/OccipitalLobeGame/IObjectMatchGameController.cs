@@ -43,9 +43,10 @@ public interface IObjectMatchGameController: IController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - GuessItem is a non-empty string corresponding to the name of one of the options
+    ///   in the current level.
     /// Postconditions:
     /// - Model is updated depending on correctness of the guess.
     /// </remarks>
-    public void checkGuess();
+    public void checkGuess(string GuessItem);
 }

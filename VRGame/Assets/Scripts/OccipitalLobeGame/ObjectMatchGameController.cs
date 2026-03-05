@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObjectMatchGameView>, IObjectMatchGameController
 {
-    public void checkGuess()
+    public void checkGuess(string GuessItem)
     {
+
     }
 
     public override void Init()
