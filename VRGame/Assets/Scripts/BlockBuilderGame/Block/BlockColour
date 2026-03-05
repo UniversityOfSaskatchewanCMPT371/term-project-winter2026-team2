@@ -11,9 +11,15 @@ using UnityEngine;
 public enum BlockColour
 {
     red,
+    brown,
+    grey,
     blue,
     orange,
     green,
     purple,
     pink,
+    yellow,
+    green,
+    black,
+    white
 }

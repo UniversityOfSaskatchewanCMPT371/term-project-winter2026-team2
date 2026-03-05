@@ -10,14 +10,36 @@ using UnityEngine;
 
 public interface BlockModel
 {
-    private int ID;
+    private int id;
     private BlockColour colour;
     private int length;
     private int width;
     public Vector3Int gridPosition;
     public Vector3Int targetPosition;
-    public bool IsPlaced;
-    public bool IsGrabbed;
+    public bool isPlaced;
+    public bool isGrabbed;
+
+     
+
+    /// <summary>
+    /// Constructor for the block model
+    /// </summary>
+    /// <returns>Block object </returns>
+    /// <remarks>
+    /// Preconditions:
+    /// - none
+    /// PostConditions:
+    /// - A BlockModel instance created
+    /// </remarks>
+    public BlockModel(string id, BlockColor c, int l, int w)
+    {
+        BlockModel.id = id;
+        colour = c;
+        length = l;
+        width = w;
+        isPlaced = false;
+        isGrabbed = false;
+    }
 
 
 
@@ -25,6 +47,12 @@ public interface BlockModel
     /// Determines whether or not block is in the correct postion.
     /// </summary>
     /// <returns> boolean that represents if the block is correctly placed or not </returns>
+    /// <remarks>
+    /// Preconditions:
+    /// - `doorModel` instance var must be non-null and target position must exist.
+    /// PostConditions:
+    /// - none
+    /// </remarks>
     public bool IsCorrectlyPlaced(){
         return (gridPostion == targetPostion);
     }
