@@ -8,12 +8,15 @@ using UnityEngine;
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
 
-public class BlockModel
+public class InventoryBlockModel
 {
     private int blocksTotalNum;
     private int blocksCurrentNum;
-    private int[] blocksTotal;
+    private int[] blocksTotal;  // this would store the block ids
     private int[] blocksCurrent;
+    public class InventoryModel
+{
+}
 
 
 
