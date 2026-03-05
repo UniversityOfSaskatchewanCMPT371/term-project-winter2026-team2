@@ -61,11 +61,14 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public void CompleteLevel()
     {
+        gameState = GameState.levelComplete;
+        currentLevel++;
     }
 
     /// <inheritdoc/>
     public void InitializeLevel(int Level)
     {
+
     }
 
     /// <inheritdoc/>
