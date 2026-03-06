@@ -1,82 +1,45 @@
 using UnityEngine;
+using System.Collections.Generic;
 namespace BlockBuilderGame
 {
     /// <inheritdoc/>
     public class BlockModel: IBlockModel
     {
+        /// <summary>
+        /// Gets or sets the unique identifier for this Block.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - When accessed, returns the identifier of this BlockModel.
+        /// - When set, updates the identifier for this BlockModel.
+        /// </remarks>
         private string id
         {
-            /// <summary>
-            /// Access the DoorModel's Id
-            /// </summary>
-            /// <remarks>
-            /// Preconditions:
-            /// - None
-            /// Postconditions:
-            /// - DoorModel's id is returned
             get;
-            /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
-            /// </summary>
-            /// <remarks>
-            /// Precondintions:
-            /// - value must be positive
-            /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
-            set;
+        set;
         }
         
 
-        private BlockColour colour;
-
-        private int length
-        {
+        private BlockColour colour{
             /// <summary>
-            /// Access the DoorModel's Id
+            /// Access the Block's Colour
             /// </summary>
             /// <remarks>
             /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
+            /// - None
             get;
             /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
+            /// Set the Block Colour of this BlockMode
             /// </summary>
             /// <remarks>
             /// Precondintions:
-            /// - value must be positive
-            /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
-            set;
-        }
-        
-
-        private int width
-        {
-            /// <summary>
-            /// Access the DoorModel's Id
-            /// </summary>
-            /// <remarks>
-            /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
-            get;
-            /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
-            /// </summary>
-            /// <remarks>
-            /// Precondintions:
-            /// - value must be positive
-            /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
+            /// - BlockModel's `colour` instance variable set to input value
             set;
         }
         
@@ -84,24 +47,22 @@ namespace BlockBuilderGame
         private BlockShape shape
         {
             /// <summary>
-            /// Access the DoorModel's Id
+            /// Access the BlockShape. This give information about the length width etc
             /// </summary>
             /// <remarks>
             /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
+            /// - None
             get;
             /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
+            /// Set the shape of this BlockModel
             /// </summary>
             /// <remarks>
             /// Precondintions:
-            /// - value must be positive
+            /// - None
             /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
+            /// - BlockModel's `shape` instance variable set to input value
             set;
         }
         
@@ -109,124 +70,119 @@ namespace BlockBuilderGame
         private Vector3Int gridPosition
         {
             /// <summary>
-            /// Access the DoorModel's Id
+            /// Access the position of BlockModel
             /// </summary>
             /// <remarks>
             /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
+            /// - None
             get;
             /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
-            /// </summary>
+            /// Set the positon of the Block
             /// <remarks>
             /// Precondintions:
             /// - value must be positive
             /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
+            /// - BlockModel's `gridPosition` instance variable set to input value
             set;
         }
         
 
-        private Vector3Int targetPosition 
+        private List<Vector3Int> targetPositions
         {
-            /// <summary>
-            /// Access the DoorModel's Id
+          /// <summary>
+            /// Access the position of BlockModel
             /// </summary>
             /// <remarks>
             /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
+            /// - None
             get;
             /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
-            /// </summary>
+            /// Set the positon of the Block
             /// <remarks>
             /// Precondintions:
             /// - value must be positive
             /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
+            /// - BlockModel's `targetPosition` instance variable set to input value
             set;
         }
         
         private bool isPlaced 
         {
             /// <summary>
-            /// Access the DoorModel's Id
+            /// Determines if block is placed on grid
             /// </summary>
             /// <remarks>
             /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
+            /// - BlockModel's isPlaced state is returned
             get;
+            /// <summary>
+            /// Set the placed state of the Block
+            /// <remarks>
+            /// Precondintions:
+            /// - None
+            /// Postconditions:
+            /// - None
+            set;
         }
 
         private bool isGrabbed
         {
             /// <summary>
-            /// Access the DoorModel's Id
+            /// Determines if block in player hand
             /// </summary>
             /// <remarks>
             /// Preconditions:
             /// - None
             /// Postconditions:
-            /// - DoorModel's id is returned
-            get;
-        }
-        
-
-        bool isCorrectPostion
-        {
-            /// <summary>
-            /// Access the DoorModel's Id
-            /// </summary>
-            /// <remarks>
-            /// Preconditions:
-            /// - None
-            /// Postconditions:
-            /// - DoorModel's id is returned
+            /// - BlockModel's grab state is returned
             get;
             /// <summary>
-            /// Set the id of this DoorModel
-            /// Note: This is for unit testing purposes - the instance variables of MonoBehaviour
-            /// scripts are usually set in a GUI window within the Unity editor 
-            /// </summary>
+            /// Set the grab state of the Block
             /// <remarks>
             /// Precondintions:
-            /// - value must be positive
+            /// - None
             /// Postconditions:
-            /// - DoorModel's `doorId` instance variable set to input value
+            /// - None
             set;
         }
         
 
-        
-
-        /// <inheritdoc/>
-        public BlockModel(string id, BlockColour c, int l, int w)
+        /// <summary>
+        /// Initializes a new instance of the BlockModel class.
+        /// </summary>
+        /// <param name="id">The unique identifier for the block.</param>
+        /// <param name="c">The colour of the block.</param>
+        /// <param name="s">The shape of the block.</param>
+        /// <param name="l">The length dimension of the block.</param>
+        /// <param name="w">The width dimension of the block.</param>
+        /// <remarks>
+        /// Preconditions:
+        /// - id must not be null or empty.
+        /// - l and w should be positive values.
+        /// 
+        /// Postconditions:
+        /// - A new BlockModel instance is created with the provided attributes.
+        /// - The block is initialized as not placed and not grabbed.
+        /// </remarks>
+        public BlockModel(string id, BlockColour c, BlockShape s, int l, int w)
         {
             this.id = id;
             colour = c;
-            length = l;
-            width = w;
+            shape = s;
             isPlaced = false;
             isGrabbed = false;
         }
 
 
-
         /// <inheritdoc/>    
         public bool IsCorrectlyPlaced(){
-            return (gridPosition == targetPosition);
-            
+            return (targetPositions.Contains(gridPosition));
         }
-
     }
 }
