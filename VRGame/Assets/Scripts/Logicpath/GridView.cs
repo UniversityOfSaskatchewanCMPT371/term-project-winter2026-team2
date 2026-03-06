@@ -38,7 +38,7 @@ public class GridView : MonoBehaviour, IGridView
     }
 
     /// <inheritdoc/>
-    public void RenderPipe(int gridX, int gridY, Color color, Vector3 worldPosition)
+    public void RenderPipe(int gridX, int gridY, Color color, Vector3 worldPosition, Panel panel)
     {
         Assert.IsNotNull(pipeContainer, "PipeContainer must be initialized");
         Assert.IsNotNull(pipeManager, "PipeManager must be initialized");
@@ -48,7 +48,7 @@ public class GridView : MonoBehaviour, IGridView
         GameObject pipeGO = new GameObject(key);
         pipeGO.transform.parent = pipeContainer;
         pipeGO.transform.position = worldPosition;
-        pipeGO.transform.localScale = new Vector3(cellSize, cellSize);
+        pipeGO.transform.localScale = new Vector3(cellSize, cellSize, 1f);
 
         MeshFilter meshFilter = pipeGO.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = pipeGO.AddComponent<MeshRenderer>();
@@ -56,7 +56,7 @@ public class GridView : MonoBehaviour, IGridView
         Mesh quadMesh = CreateQuadMesh();
         meshFilter.mesh = quadMesh;
 
-        Texture2D texture = pipeManager.GetPipeTexture(null);
+        Texture2D texture = pipeManager.GetPipeTexture(panel);
         Material mat = new Material(Shader.Find("Standard"));
         if (texture != null)
         {
@@ -84,11 +84,11 @@ public class GridView : MonoBehaviour, IGridView
             GameObject endpointGO = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             endpointGO.name = $"Endpoint_{endpoint.GridX}_{endpoint.GridY}";
             endpointGO.transform.parent = pipeContainer;
-            endpointGO.transform.localScale = Vector3.one;
+            endpointGO.transform.localScale = Vector3.one * cellSize;
 
             Vector3 pos = new Vector3(
-                endpoint.GridX * cellSize - (gridWidth * cellSize),
-                endpoint.GridY * cellSize - (gridHeight * cellSize),
+                endpoint.GridX * cellSize - (gridWidth * cellSize) / 2f,
+                endpoint.GridY * cellSize - (gridHeight * cellSize) / 2f,
                 -0.1f
             );
             endpointGO.transform.position = pos;

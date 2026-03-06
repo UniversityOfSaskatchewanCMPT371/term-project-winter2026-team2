@@ -42,7 +42,7 @@ public interface IGridView
     ///    -   The pipe is rendered with specified colour
     /// </post-condition>
     /// </remarks>
-    void RenderPipe(int x, int y, Color color, Vector3 worldPosition);
+    void RenderPipe(int x, int y, Color color, Vector3 worldPosition, Panel panel);
 
     /// <summary>
     /// Renders the endpoints on the grid based on the provided list of Endpoint objects.

@@ -131,7 +131,8 @@ public class GridController : MonoBehaviour, IGridController
                 toPanel.GridX,
                 toPanel.GridY,
                 currentPipeColor,
-                toPanel.WorldPosition
+                toPanel.WorldPosition,
+                toPanel
             );
 
             Debug.Log($"Pipe placed at ({toPanel.GridX}, {toPanel.GridY})");
