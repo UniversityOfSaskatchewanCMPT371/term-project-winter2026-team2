@@ -5,12 +5,17 @@ using UnityEngine;
 public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatchGameView
 {
     [SerializeField] private GameObject[] allObjects;
+    [SerializeField] private GameObject guessBox;
+    [SerializeField] private GameObject submitButton;
     public override void Init()
     {
         foreach (GameObject obj in allObjects)
         {
             obj.SetActive(false);
         }
+
+        guessBox.SetActive(false);
+        submitButton.SetActive(false);
     }
 
     /// </inheritdoc>
@@ -28,17 +33,8 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
                 obj.SetActive(false);
             }
         }
-    }
 
-    public void removeGuess()
-    {
-        throw new System.NotImplementedException();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        guessBox.SetActive(true);
+        submitButton.SetActive(true);
     }
 }
