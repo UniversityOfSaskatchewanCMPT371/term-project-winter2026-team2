@@ -27,11 +27,6 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         currentGuessID = "";
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <inheritdoc/>
     public GameState GetGameState()
@@ -121,5 +116,26 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     {
         currentGuessID = "";
         Debug.Log("Model removed potential guess, current guess is now empty string");
+    }
+
+    /// <inheritdoc/>
+    public void SubmitGuess()
+    {
+        if (currentGuessID == "")
+        {
+            Debug.LogWarning("SubmitGuess called with empty current guess");
+            return;
+        }
+
+        if (currentGuessID == levels[currentLevel].CorrectObjectID)
+        {
+            Debug.Log("Correct guess!");
+            CompleteLevel();
+        }
+        else
+        {
+            Debug.Log("Incorrect guess.");
+            failedGuesses++;
+        }
     }
 }
