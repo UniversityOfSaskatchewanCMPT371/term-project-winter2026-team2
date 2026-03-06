@@ -6,123 +6,111 @@ public interface IRoomModel : IModel
     /// DATA SECTION
 
     /// <summary>
-    /// Getter/Setter for this room's unique id.
+    /// Getter/Setter for this Model's 'roomId' variable.
     /// </summary>
     int Id { 
         /// <summary>
-        /// Retrieves this room's unique id.
+        /// Get the value of Model's 'roomId' variable
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - roomId is not null.
-        /// - roomId is non-negative.
+        /// - Model's 'roomId' variable must be non-negative.
         /// Postconditions:
-        /// - Returns this room's unique id.
+        /// - Returns Model's 'roomId' variable.
         /// </remarks>
-        /// <returns>
-        /// This room's unique id.
-        /// </returns>
         get;
         /// <summary>
-        /// Modifies the value of this room's unique id.
+        /// Set the value of Model's 'roomId' variable.
         /// </summary>
         /// <remarks
         /// Preconditions:
-        /// - Value is not null.
-        /// - Value is non-negative.
+        /// - 'value' must be non-null.
         /// Postconditions:
-        /// - The value of this room's unique id is modified.
+        /// - Model's 'roomId' variable set to input 'value'
         /// </remarks>
         set;
     }
 
     /// <summary>
-    /// Getter/Setter for this room's name.
+    /// Getter/Setter for this Model's 'roomName' variable.
     /// </summary>
     string Name {
         /// <summary>
-        /// Retrieves the value of this room's name.
+        /// Get the value of Model's 'roomName' vairable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is not null.
+        /// - Model's 'roomName' variable must be non-null.
         /// Postconditions:
-        /// - Returns this room's name.
+        /// - Returns Model's 'roomName' variable.
         /// </remarks>
-        /// <returns>
-        /// This room's name.
-        /// </returns>
         get;
         /// <summary>
-        /// Modifies the value of this room's name.
+        /// Set the value of Model's 'roomName' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - value is not null.
-        /// - value is non-whitespace.
+        /// - 'value' must be non-null.
+        /// - 'value' cannot be whitespace only.
         /// Postconditions:
-        /// - The value of this room's name is modified.
+        /// - Model's 'roomName' variable set to input 'value'.
         /// </remarks>
         set;
         }
 
     /// <summary>
-    /// Marks the minigame as complete and triggers completion logic.
+    /// Getter/Setter for this Model's 'minigameCompleted' variable.
     /// </summary>
     bool MinigameCompleted
     {
         /// <summary>
-        /// Retrieves the value of minigameCompleted.
+        /// Get the value of Model's 'minigameCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - minigameCompleted is either true or false.
+        /// - None
         /// Postconditions:
-        /// - Returns the value of minigameCompleted.
+        /// - Returns Model's'minigameCompleted' variable.
         /// </remarks>
-        /// <returns>
-        /// The value of minigameCompleted.
-        /// </returns>
         get;
-
         /// <summary>
-        /// Modifies the value of minigameCompleted.
+        /// Set the value of Model's 'minigameCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is either true or false.
+        /// - None
         /// Postconditions:
-        /// - The value of minigameCompleted is modified.
+        /// - Model's 'minigameCompleted' variable set to input 'value'.
         /// </remarks>
         set;
     }
 
     /// <summary>
-    /// Marks the educational dialogue as complete and triggers completion logic.
+    /// Getter/Setter for this Model's 'educationalDialogueCompleted' variable.
     /// </summary>
     bool EducationalDialogueCompleted
     {
         /// <summary>
-        /// Retrieves the value of educationalDialogueCompleted.
+        /// Get the value of Model's 'educationalDialogueCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - educationalDialogueCompleted is either true or false.
+        /// - None
         /// Postconditions:
-        /// - Returns the value of educationalDialogueCompleted.
+        /// - Returns Model's 'educationalDialogueCompleted' variable.
         /// </remarks>
         /// <returns>
-        /// The value of educationalDialogueCompleted.
+        /// - Returns Model's'educationalDialogueCompleted' variable.
         /// </returns>
         get;
         /// <summary>
-        /// Modifies the value of educationalDialogueCompleted.
+        /// Set the value of Model's 'educationalDialogueCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is either true or false.
+        /// - None
         /// Postconditions:
-        /// - The value of educationalDialogueCompleted is modified.
+        /// - Model's 'educationalDialogueCompleted' variable set to input 'value'.
         /// </remarks>
         set;
     }
@@ -130,27 +118,30 @@ public interface IRoomModel : IModel
     /// METHODS SECTION
 
     /// <summary>
-    /// Checks whether the room is in a valid state of completion.
+    /// Checks whether the room's Model is in a valid state of completion.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - minigameCompleted value is either true or false.
-    /// - educationalDialogue value is either true or false.
+    /// - None
     /// Postconditions:
-    /// - If the room is complete, RoomView.InvokeOnRoomComplete() is called.
+    /// - Returns True when the Model's 'minigameCompleted' and 'educationalDialogueCompleted' variables
+    /// are both True. Returns False otherwise.
     /// </remarks>
     bool IsComplete();
 
     /// <summary>
-    /// Initializes this model, and validates 
-    /// preset values of the data.
+    /// Initializes this component and validates each defined variables of its initial values.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Serialized fields should be assigned or have preset values.
-    /// - minigameCompleted and educationalDialogueCompleted should be preset to false.
+    /// - Model's 'roomId' variable must be unique, and not currently exists as a key in 'roomLookUp' dictionary variable.
+    /// - Model's 'roomName' variable cannot be initialized to whitespace only.
+    /// - Model's 'minigameCompleted' variable must be initialized to false.
+    /// - Model's 'educationalDialogueCompleted' variable must be initialized to false.
     /// Postconditions:
-    /// - Logs errors.
+    /// - Adds this Model into 'roomLookUp' dictionary variable with 'roomId' variable as the key.
+    /// - Logs errors and assertions if any of the preconditions are violated.
+    /// - Component is initialized and each variables of Model is validated.
     /// </remarks>
     new void Init();
 }

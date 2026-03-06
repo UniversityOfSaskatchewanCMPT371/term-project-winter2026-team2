@@ -9,12 +9,18 @@ public class RoomModel : Model, IRoomModel
     /// DATA SECTION
 
     /// <summary>
-    /// Dictionary of rooms available.
+    /// Static dictionary for rooms. Used to enforce uniqueness of 
+    /// each room by using 'roomId' variable as a key.
     /// </summary>
+    /// <remarks>
+    /// int       : A Model's 'roomId' variable is used as a key to look up its Model.
+    /// RoomModel : The Model that is mapped to its 'roomId' variable as a key.
+    /// </remarks>
     private static Dictionary<int, RoomModel> roomLookUp = new Dictionary<int, RoomModel>();
 
     /// <summary>
-    /// Unique identifier for this room.
+    /// Unique identifier for this room. Used as a key in 'roomLookUp' dictionary 
+    /// variable which maps to this Model.
     /// </summary>
     [SerializeField]
     private int roomId = 0;
@@ -41,23 +47,23 @@ public class RoomModel : Model, IRoomModel
     public int Id
     {
         /// <summary>
-        /// Retrieves this room's unique id.
+        /// Get the value of Model's 'roomId' variable
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - roomId is non-negative.
+        /// - Model's 'roomId' variable must be non-negative.
         /// Postconditions:
-        /// - Returns this room's unique id.
+        /// - Returns Model's 'roomId' variable.
         /// </remarks>
         get => roomId;
         /// <summary>
-        /// Modifies the value of this room's unique id.
+        /// Set the value of Model's 'roomId' variable.
         /// </summary>
         /// <remarks
         /// Preconditions:
-        /// - value is non-negative.
+        /// - 'value' must be non-null.
         /// Postconditions:
-        /// - The value of this room's unique id is modified.
+        /// - Model's 'roomId' variable set to input 'value'
         /// </remarks>
         set
         {
@@ -73,27 +79,24 @@ public class RoomModel : Model, IRoomModel
     public string Name
     {
         /// <summary>
-        /// Retrieves the value of this room's name.
+        /// Get the value of Model's 'roomName' vairable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is not null.
+        /// - Model's 'roomName' variable must be non-null.
         /// Postconditions:
-        /// - Returns this room's name.
+        /// - Returns Model's 'roomName' variable.
         /// </remarks>
-        /// <returns>
-        /// This room's name.
-        /// </returns>
         get => roomName;
         /// <summary>
-        /// Modifies the value of this room's name.
+        /// Set the value of Model's 'roomName' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - value is not null.
-        /// - value is non-whitespace.
+        /// - 'value' must be non-null.
+        /// - 'value' cannot be whitespace only.
         /// Postconditions:
-        /// - The value of this room's name is modified.
+        /// - Model's 'roomName' variable set to input 'value'.
         /// </remarks>
         set
         {
@@ -114,26 +117,23 @@ public class RoomModel : Model, IRoomModel
     public bool MinigameCompleted 
     { 
         /// <summary>
-        /// Retrieves the value of minigameCompleted.
+        /// Get the value of Model's 'minigameCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
         /// - None
         /// Postconditions:
-        /// - Returns the value of minigameCompleted.
+        /// - Returns Model's'minigameCompleted' variable.
         /// </remarks>
-        /// <returns>
-        /// The value of minigameCompleted.
-        /// </returns>
         get => minigameCompleted;
         /// <summary>
-        /// Modifies the value of minigameCompleted.
+        /// Set the value of Model's 'minigameCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is either true or false.
+        /// - None
         /// Postconditions:
-        /// - The value of minigameCompleted is modified.
+        /// - Model's 'minigameCompleted' variable set to input 'value'.
         /// </remarks>
         set => minigameCompleted = value; 
     }
@@ -142,25 +142,26 @@ public class RoomModel : Model, IRoomModel
     public bool EducationalDialogueCompleted 
     { 
         /// <summary>
-        /// Retrieves the value of educationalDialogueCompleted.
+        /// Get the value of Model's 'educationalDialogueCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - educationalDialogueCompleted is either true or false.
+        /// - None
         /// Postconditions:
-        /// - Returns the value of educationalDialogueCompleted.
+        /// - Returns Model's 'educationalDialogueCompleted' variable.
         /// </remarks>
         /// <returns>
-        /// The value of educationalDialogueCompleted.
+        /// - Returns Model's'educationalDialogueCompleted' variable.
         /// </returns>
         get => educationalDialogueCompleted;
-        /// Modifies the value of educationalDialogueCompleted.
+        /// <summary>
+        /// Set the value of Model's 'educationalDialogueCompleted' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Value is either true or false.
+        /// - None
         /// Postconditions:
-        /// - The value of educationalDialogueCompleted is modified.
+        /// - Model's 'educationalDialogueCompleted' variable set to input 'value'.
         /// </remarks>
         set => educationalDialogueCompleted = value; 
     }
@@ -176,30 +177,36 @@ public class RoomModel : Model, IRoomModel
     /// <inheritdoc cref="IRoomModel.Init"/>
     public override void Init()
     {
+        // Model's 'roomName' variable cannot be initialized to whitespace only
         if (roomName.Trim() == "")
         {
-            Debug.LogError("Field 'roomName' cannot be whitespace.");
+            Debug.LogError("Field 'roomName' cannot be whitespace only.");
         }
         Debug.Assert(roomName.Trim() != "", "Field 'roomName' must be set to a different name.");
 
+        // Model's 'minigameCompleted' variable must be initialized to false
         if (minigameCompleted)
         {
             Debug.LogError("Field 'minigameCompleted' must start as false.");
         }
         Debug.Assert(minigameCompleted == false, "Field 'minigameCompleted' must be set to false.");
 
+        // Model's 'educationalDialogueCompleted' variable must be initialized to false
         if (educationalDialogueCompleted)
         {
             Debug.LogError("Field 'eductionalDialogueCompleted' must start as false.");
         }
         Debug.Assert(educationalDialogueCompleted == false, "Field 'eductionalDialogueCompleted' must be set to false.");
 
+        // see if this Model's 'roomId' variable already exists in the 'roomLookUp' dictionary.
+        // This enforces each room Model to have a unique 'roomId'.
         bool isKeyTaken = roomLookUp.ContainsKey(Id);
         if (isKeyTaken)
         {
             Debug.LogError("Field 'roomId' is already taken.");
         } else
         {
+            // add the key => Model into 'roomLookUp' dictionary.
             roomLookUp.Add(roomId,this);
         }
         Debug.Assert(isKeyTaken == false, "Field 'roomId' must be set to a different id.");
@@ -208,10 +215,14 @@ public class RoomModel : Model, IRoomModel
     }
 
     /// <summary>
-    /// Called when the gameObject this 
+    /// Called when the gameObject this
     /// component is attached to is destroyed.
     /// This function is provided by Unity.
     /// </summary>
+    /// <remarks>
+    /// This method is called by DestroyImmediate(this.gameObject) or Destroy(this.gameObject) which is used
+    /// in testing. Otherwise calling Init() in testing would result in failure since each Model's 'roomId' variable is preset to 0.
+    /// </remarks>
     void OnDestroy()
     {
         if (roomLookUp.ContainsKey(Id))

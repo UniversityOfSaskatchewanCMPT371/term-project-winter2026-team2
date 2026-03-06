@@ -3,11 +3,16 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// View layer for reusable room module.
+/// </summary>
+/// <remarks>
+/// Requires 'controller component. This class interacts with that component.
+/// </remarks>
 public class RoomView : View<IRoomController>, IRoomView
 {
     /// <summary>
-    /// Called by controller when the minigame and 
-    /// educational dialogues are completed.
+    /// Unity event used to
     /// </summary>
     public UnityEvent onRoomCompleted = new UnityEvent();
 
