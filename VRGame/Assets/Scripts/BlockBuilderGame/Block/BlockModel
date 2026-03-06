@@ -80,7 +80,7 @@ public class BlockModel: IBlockModel
     }
      
 
-    private string blockType
+    private BlockShape shape
     {
         /// <summary>
         /// Access the DoorModel's Id

@@ -7,7 +7,6 @@ using UnityEngine;
 /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
 /// targetSceneId must exist in SceneChangerModel service's path collection
 /// </remarks>
-
 public interface IBlockModel
 {
     private string id
@@ -81,7 +80,7 @@ public interface IBlockModel
         set;
     }
 
-    public string blockType 
+    private BlockShape shape
     {
         /// <summary>
         /// Access the DoorModel's Id
@@ -104,7 +103,7 @@ public interface IBlockModel
         /// - DoorModel's `doorId` instance variable set to input value
         private set;
     }
-    public Vector3Int gridPosition
+    private Vector3Int gridPosition
     {
         /// <summary>
         /// Access the DoorModel's Id
@@ -127,7 +126,7 @@ public interface IBlockModel
         /// - DoorModel's `doorId` instance variable set to input value
         set;
     }
-    public Vector3Int targetPosition
+    private Vector3Int targetPosition
     {
         /// <summary>
         /// Access the DoorModel's Id
@@ -150,9 +149,9 @@ public interface IBlockModel
         /// - DoorModel's `doorId` instance variable set to input value
         set;
     }
-    public bool isPlaced; 
-    public bool isGrabbed;
-    public bool correctPosition
+    private bool isPlaced; 
+    private bool isGrabbed;
+    private bool correctPosition
     {
         /// <summary>
         /// Access the DoorModel's Id
