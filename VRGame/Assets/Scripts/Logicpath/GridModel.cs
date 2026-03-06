@@ -144,7 +144,7 @@ public class GridModel : MonoBehaviour, IGridModel
 
         for (int x = 0; x < gridWidth; x++)
         {
-            for (int y = 0; y < gridWidth; y++)
+            for (int y = 0; y < gridHeight; y++)
             {
                 if (!IsPanelOccupied(x, y))
                 {
