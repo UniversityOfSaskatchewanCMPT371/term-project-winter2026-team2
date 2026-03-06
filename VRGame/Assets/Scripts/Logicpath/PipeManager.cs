@@ -43,48 +43,6 @@ public class PipeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets the teture for a start endpoint based on exit direction and pipe colour
-    /// </summary>
-    /// <param name="panel">The panel containing the start endpoint</param>
-    /// <remarks>
-    /// <preconditions>
-    ///     - panel must not be null
-    ///     - panel must be a start endpoint (PanelAttribute.Start)
-    ///     - panel must have a pipe color assigned
-    /// </preconditions>
-    /// <postconditions>
-    ///     - Returns the correct start endpoint texture with appropriate exit direction
-    ///     - Returns null if the texture fails to load
-    public Texture2D GetStartEndpointTexture(Panel panel)
-    {
-        Assert.IsNotNull(panel, "Panel cannot be null");
-        Assert.IsTrue(panel.Attribute == PanelAttribute.Start, "Panel must be a start endpoint");
-        Assert.IsTrue(panel.PipeColor.HasValue, "Panel must have a pipe colour");
-
-        string colorName = GetColorName(panel.PipeColor.Value);
-        string texturePath;
-
-        if (panel.ExitDirection != Direction.None)
-        {
-            string directionName = GetDirectionName(panel.ExitDirection);
-            texturePath = TEXTURE_PATH + colorName + "_start_" + directionName;
-        }
-        else
-        {
-            texturePath = TEXTURE_PATH + colorName + "_start_blank";
-        }
-
-        Texture2D texture = Resources.Load<Texture2D>(texturePath);
-    
-        if (texture == null)
-        {
-            Debug.LogWarning($"Failed to load start endpoint texture: {texturePath}");
-        }
-
-        return texture;
-    }
-
-    /// <summary>
     /// Constructs the texture path for a pipe based on its color and entry/exit directions
     /// </summary>
     /// <param name="color">The color of the pipe</param>
