@@ -4,6 +4,13 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.0.1] - 2026-03-05
+
+### Added
+
+- Parietal lobe room mini game design
+
+
 ## [1.0.0] - 2026-02-25
 
 ### Added
