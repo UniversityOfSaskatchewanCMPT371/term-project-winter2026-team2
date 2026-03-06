@@ -102,6 +102,6 @@ being tested is mirrored. You can run the tests as in the below photos from the 
 - Friend assembly is being used to let our compiled test asseblies access
   internal methods on classes. This is our "testhook" method to keep dev
   APIs from being exposed to anything but tests
-- We are using <inheritdoc/> at the class / method level to inherit docs from
+- We are using `<inheritdoc/>` at the class / method level to inherit docs from
   interfaces to remove duplication
 - [Our license](./LICENSE) is MIT
