@@ -5,6 +5,15 @@ using UnityEngine;
 public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatchGameView
 {
     [SerializeField] private GameObject[] allObjects;
+    internal IObjectMatchGameController controller;
+    
+    // Test-accessible property for allObjects
+    internal GameObject[] AllObjects
+    {
+        get => allObjects;
+        set => allObjects = value;
+    }
+    
     public override void Init()
     {
         foreach (GameObject obj in allObjects)
