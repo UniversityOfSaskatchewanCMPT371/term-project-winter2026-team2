@@ -4,58 +4,57 @@
 public interface IRoomController : IController
 {
     /// <summary>
-    /// Validates Model component by invoking CheckModelRefs() inherited from Controller class. 
-    /// Then marks the Model's 'minigameCompleted' variable as complete and invokes HandleCompletion().
+    /// Handles minigame completion logic which marks the Model's 'minigameCompleted' variable as complete,
+    /// and invokes HandleCompletion().
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - Model component is initialized.
-    /// - HandleCompletion() method is implemented.
     /// Postconditions:
+    /// - Logs errors and assertions if CheckModelRef() fails to validate Model component.
     /// - Model's 'minigameCompleted' variable is set to True.
     /// - HandleCompletion() method is invoked.
     /// </remarks>
     void HandleCompleteMinigame();
     
     /// <summary>
-    /// Validates Model component by invoking CheckModelRefs() inherited from Controller class. 
-    /// Then marks the Model's 'handleCompleteEducationalDialogue' variable as complete and invokes HandleCompletion().
+    /// Handles educational dialogue completion logic which marks the Model's 'educationalDialogueCompleted' variable as complete,
+    /// and invokes HandleCompletion().
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - Model component is initialized.
-    /// - HandleCompletion() method is implemented.
     /// Postconditions:
-    /// - Model's 'minigameCompleted' variable is set to True.
+    /// - Model's 'educationalDialogueCompleted' variable is set to True.
     /// - HandleCompletion() method is invoked.
     /// </remarks>
     void HandleCompleteEducationalDialogue();
 
     /// <summary>
-    /// Validates the Model and View component by invoking CheckModelRefs() and CheckViewRefs() inherited from Controller class.
-    /// Then triggers View's OnRoomComplete event by calling InvokeOnRoomComplete().
+    /// Triggers View's 'OnRoomComplete' event if and only if the room is
+    /// in a state of completion, determined by calling IsComplete() from Model component.
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - Model component is initialized.
     /// - View component is initialized.
     /// Postconditions:
-    /// - If Model's IsComplete() reports completion, then View's InvokeOnRoomComplete() is called.
-    /// - Logs if the room is not in a state of completion.
+    /// - If Model's IsComplete() returns true, then View's InvokeOnRoomComplete() is called.
+    /// - Logs the current completion status of the room.
     /// </remarks>
     void HandleCompletion();
 
     /// <summary>
     /// Initializes this component, and invokes CheckModelRef() and CheckViewRef() 
-    /// inherited from Controller class to validated Model and View components.
+    /// inherited from Controller class to validate Model and View components.
     /// </summary>
     /// <remarks>
     /// Preconditions:
     /// - Model component is attached to the gameObject (and/or linked to 'inspectorWindowModel' variable).
     /// - View component is attached to the gameObject (and/or linked to 'inspectorWindowView' variable).
     /// Postconditions:
-    /// - Logs errors and assertions if Model or View components fail to initialize. Otherwise, logs
-    /// succeful initialization of Controller component.
+    /// - Logs errors and assertions if Model or View components fails to initialize. Otherwise, logs
+    /// successful initialization of Controller component.
     /// </remarks>
     new void Init();
 }

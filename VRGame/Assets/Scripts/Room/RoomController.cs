@@ -5,7 +5,7 @@ using UnityEngine.Diagnostics;
 /// Controller layer for reusable room module.
 /// </summary>
 /// <remarks>
-/// Requires 'view' and 'model' components. This class interacts with those components.
+/// Requires View and Model components which this layer interacts with.
 /// </remarks>
 public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
 {
@@ -14,11 +14,11 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     /// <inheritdoc/>
     public void HandleCompleteMinigame()
     {
-        // Inherited from Controller class. Used to validate 'model' component, 
+        // Inherited from Controller class. Used to validate Model component, 
         // in which this method interacts with.
         CheckModelRef();
 
-        // mark the 'MinigameCompelted' as complete in the 'model' component
+        // mark the 'MinigameCompleted' as complete in the Model component
         modelInstance.MinigameCompleted = true;
 
         // See if this room is fully done
@@ -28,11 +28,11 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     /// <inheritdoc/>
     public void HandleCompleteEducationalDialogue()
     {
-        // Inherited from Controller class. Used to validate 'model' component, 
+        // Inherited from Controller class. Used to validate Model component, 
         // in which this method interacts with.
         CheckModelRef();
 
-        // mark the 'EducationalDialogue' as complete in the 'model' component
+        // mark the 'EducationalDialogue' as complete in the Model component
         modelInstance.EducationalDialogueCompleted = true;
 
         // See if this room is fully done
@@ -43,14 +43,14 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     public void HandleCompletion()
     {
         // These methods are inherited from Controller class. They are
-        // used to validate 'model' and 'view' components, in which this method
+        // used to validate Model and View components, in which this method
         // interacts with.
         CheckModelRef(); 
         CheckViewRef();
 
         // see if the room is fully done. A room is considered done 
         // if 'EducationalDialogueCompleted' and 'MinigameCompleted' fields
-        // in the 'model' component are marked as true.
+        // in the Model component are marked as true.
         if (modelInstance.IsComplete())
         {
             // 'onRoomCompleted' event field is invoked by calling this method.
@@ -65,7 +65,7 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     public override void Init()
     {
         // These methods are inherited from Controller class. They are
-        // used to validate 'model' and 'view' components which 'controller'
+        // used to validate Model and View components which 'controller'
         // component interacts with.
         CheckModelRef();
         CheckViewRef();

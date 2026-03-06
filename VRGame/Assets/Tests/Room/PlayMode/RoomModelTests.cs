@@ -53,6 +53,8 @@ public class RoomModelTests
 
         // create second room with same id
         GameObject go2 = new GameObject();
+
+        LogAssert.Expect(LogType.Error, "'value' is already taken.");
         
         // setup second room WaitHandle same 'roomId'
         RoomModel roomModel2 = go2.AddComponent<RoomModel>();
@@ -63,7 +65,7 @@ public class RoomModelTests
 
         // expect error and assertion to occur since two rooms have the same id
         LogAssert.Expect(LogType.Error, "Field 'roomId' is already taken.");
-        LogAssert.Expect(LogType.Assert, "Field 'roomId' must be set to a different id.");
+        LogAssert.Expect(LogType.Assert, "Field 'roomId' must be unique.");
 
         // allow Start() to run which invokes Init()
         yield return null;
@@ -85,12 +87,14 @@ public class RoomModelTests
         // add 'model' component
         RoomModel roomModel = go.AddComponent<RoomModel>();
 
-        roomModel.Name = "   ";
-
         // expect errors and assertions to occur since 'roomName' field cannot have whitespace as a value
-        LogAssert.Expect(LogType.Assert,"'value' cannot be whitespace.");
-        LogAssert.Expect(LogType.Error, "Field 'roomName' cannot be whitespace.");
-        LogAssert.Expect(LogType.Assert, "Field 'roomName' must be set to a different name.");
+        LogAssert.Expect(LogType.Error, "'value' is only whitespace.");
+        LogAssert.Expect(LogType.Assert, "'value' cannot be whitespace only.");
+        LogAssert.Expect(LogType.Error, "Field 'roomName' is only whitespace.");
+        LogAssert.Expect(LogType.Assert, "Field 'roomName' cannot be only whitespace.");
+
+        // set 'roomName' field value to only whitespace
+        roomModel.Name = "   ";
 
         // allow Start() to run which invokes Init()
         yield return null;

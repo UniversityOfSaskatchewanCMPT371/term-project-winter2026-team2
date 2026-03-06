@@ -7,12 +7,13 @@ using UnityEngine.Events;
 /// View layer for reusable room module.
 /// </summary>
 /// <remarks>
-/// Requires 'controller component. This class interacts with that component.
+/// Requires Controller component which this layer interacts with.
 /// </remarks>
 public class RoomView : View<IRoomController>, IRoomView
 {
     /// <summary>
-    /// Unity event used to
+    /// Unity event that is triggered by completing the minigame 
+    /// and educational dialogue in this room.
     /// </summary>
     public UnityEvent onRoomCompleted = new UnityEvent();
 
@@ -25,6 +26,8 @@ public class RoomView : View<IRoomController>, IRoomView
     /// <inheritdoc/>
     public void MinigameCompleted()
     {
+        // Inherited from View class. Used to validate Controller component, 
+        // in which this method interacts with.
         CheckControllerRef();
 
         controllerInstance.HandleCompleteMinigame();
@@ -33,14 +36,18 @@ public class RoomView : View<IRoomController>, IRoomView
     /// <inheritdoc/>
     public void EducationalDialoguesCompleted()
     {
+        // Inherited from View class. Used to validate Controller component, 
+        // in which this method interacts with.
         CheckControllerRef();
 
-        controllerInstance.HandleCompleteMinigame();
+        controllerInstance.HandleCompleteEducationalDialogue();
     }
 
     /// <inheritdoc cref="IRoomView.Init"/>
     public override void Init()
     {
+        // Inherited from View class. Used to validate Controller component, 
+        // in which this method interacts with.
         CheckControllerRef();
 
         Debug.Log("RoomView successfully initialized.");

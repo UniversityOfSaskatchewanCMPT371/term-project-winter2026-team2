@@ -24,9 +24,11 @@ public interface IRoomModel : IModel
         /// </summary>
         /// <remarks
         /// Preconditions:
-        /// - 'value' must be non-null.
+        /// - 'value' must be non-negative.
+        /// - 'value' must not exist in 'roomLookUp' dictionary.
         /// Postconditions:
-        /// - Model's 'roomId' variable set to input 'value'
+        /// - Certifies that the 'value' is unique. If so, then the
+        /// Model's 'roomId' variable set to input 'value'
         /// </remarks>
         set;
     }
@@ -36,7 +38,7 @@ public interface IRoomModel : IModel
     /// </summary>
     string Name {
         /// <summary>
-        /// Get the value of Model's 'roomName' vairable.
+        /// Get the value of Model's 'roomName' variable.
         /// </summary>
         /// <remarks>
         /// Preconditions:
@@ -51,7 +53,8 @@ public interface IRoomModel : IModel
         /// <remarks>
         /// Preconditions:
         /// - 'value' must be non-null.
-        /// - 'value' cannot be whitespace only.
+        /// - 'value' is not the same as current.
+        /// - 'value' is not exclusively whitespace.
         /// Postconditions:
         /// - Model's 'roomName' variable set to input 'value'.
         /// </remarks>
@@ -99,9 +102,6 @@ public interface IRoomModel : IModel
         /// Postconditions:
         /// - Returns Model's 'educationalDialogueCompleted' variable.
         /// </remarks>
-        /// <returns>
-        /// - Returns Model's'educationalDialogueCompleted' variable.
-        /// </returns>
         get;
         /// <summary>
         /// Set the value of Model's 'educationalDialogueCompleted' variable.
@@ -130,18 +130,18 @@ public interface IRoomModel : IModel
     bool IsComplete();
 
     /// <summary>
-    /// Initializes this component and validates each defined variables of its initial values.
+    /// Initializes this component and validates initial values.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - Model's 'roomId' variable must be unique, and not currently exists as a key in 'roomLookUp' dictionary variable.
-    /// - Model's 'roomName' variable cannot be initialized to whitespace only.
-    /// - Model's 'minigameCompleted' variable must be initialized to false.
-    /// - Model's 'educationalDialogueCompleted' variable must be initialized to false.
+    /// - Model's 'roomName' variable is not null or exclusively whitespace.
+    /// - Model's 'roomId' variable is non-negative and unique in 'roomLookUp' dictionary.
+    /// - Model's 'minigameCompleted' variable are false.
+    /// - Model's 'educationalDialogueCompleted' variable are false.
     /// Postconditions:
+    /// - Component is initialized and each variables are validated.
     /// - Adds this Model into 'roomLookUp' dictionary variable with 'roomId' variable as the key.
-    /// - Logs errors and assertions if any of the preconditions are violated.
-    /// - Component is initialized and each variables of Model is validated.
+    /// - Logs errors and assertions if any of the preconditions are violated, otherwise logs successful initialization.
     /// </remarks>
     new void Init();
 }
