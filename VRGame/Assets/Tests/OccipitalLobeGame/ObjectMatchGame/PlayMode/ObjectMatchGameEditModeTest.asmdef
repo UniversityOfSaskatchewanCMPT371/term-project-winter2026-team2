@@ -1,5 +1,5 @@
 {
-    "name": "OccipitalLobeGame",
+    "name": "ObjectMatchGamePlayModeTest",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
@@ -7,7 +7,6 @@
         "ObjectMatchGame",
         "ScriptTemplates",
         "TNRD.NSubstitute",
-        "Player",
         "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [],
