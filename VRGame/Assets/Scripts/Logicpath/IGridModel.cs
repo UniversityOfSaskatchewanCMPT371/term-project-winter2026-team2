@@ -146,7 +146,7 @@ public interface IGridModel
     ///     -   If the cell is occupied, no changes are made and the method returns false
     /// </post-condition>
     /// </remarks>
-    bool TryPlacePipe(int x, int y, Color pipeColor);
+    bool TryPlacePipe(int x, int y, Direction entryDirection, Direction exitDirection, Color pipeColor);
 
     /// <summary>
     /// Removes all pipes from grid
