@@ -1,0 +1,26 @@
+using UnityEngine;
+namespace BlockBuilderGame
+{
+    /// <summary>
+    /// Model portion of the reusable door module. Data is stored here
+    /// </summary>
+    /// <remarks>
+    /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
+    /// targetSceneId must exist in SceneChangerModel service's path collection
+    /// </remarks>
+    public class BlockInventoryModel
+    {
+        private int blocksTotalNum;
+        private int blocksCurrentNum;
+        private int[] blocksTotal;  // this would store the block ids
+        private int[] blocksCurrent;
+        private PuzzleData puzzleData;
+
+
+        /// <inheritdoc/>
+        public void init()
+        {
+            
+        }
+    }
+}

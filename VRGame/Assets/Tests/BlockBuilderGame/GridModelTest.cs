@@ -1,0 +1,21 @@
+using UnityEngine;
+using System.Collections.Generic;
+namespace BlockBuilderGame
+{
+    /// <summary>
+    /// Model portion of the reusable door module. Data is stored here
+    /// </summary>
+    /// <remarks>
+    /// - doorId and targetDoorId, destinationSceneId must be set before calling Init(), targetDoorId must exist.
+    /// targetSceneId must exist in SceneChangerModel service's path collection
+    /// </remarks>
+    public class GridModel
+    {
+        public int width;
+        public int height;
+        public float CellSize;
+        public Dictionary<Vector3Int, BlockModel> placedBlocks;
+    }
+
+}
+
