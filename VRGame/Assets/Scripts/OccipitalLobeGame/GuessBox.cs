@@ -67,6 +67,16 @@ public class GuessBox : MonoBehaviour
         controller.PotentialGuess(other.gameObject.name);
     }
 
+    /// <summary>
+    /// Triggered when an item is removed from the box. Notifies the controller.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - The controller variable is assigned to an instance of IObjectMatchGameController
+    /// Postconditions:
+    /// - If the name of the game object that exited the box matches the current guess ID
+    ///   stored in the controller, then the controller's RemovePotentialGuess method is called
+    /// </remarks>
     private void OnTriggerExit(Collider other)
     {
         if (controller == null)
@@ -89,6 +99,17 @@ public class GuessBox : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Triggered every frame that an item is in the box. Needed so releasing the item in the
+    /// guess box doesn't remove it as the current guess
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - The controller variable is assigned to an instance of IObjectMatchGameController
+    /// Postconditions:
+    /// - If there is already another object set as the current guess, log a warning
+    /// - Otherwise, set the current guess in the controller to be the name of the game object currently in the box
+    /// </remarks>
     private void OnTriggerStay(Collider other)
     {
         if (controller == null)

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+/// <summary>
+/// An abstract class that serves as a base for all clickable cubes in the Object Match
+/// game. It listens for when the cube is grabbed and notifies the controller of the event.
+/// </summary>
 public abstract class ClickableCubes : MonoBehaviour
 {
     // Store an instance of the controller so we can notify it
@@ -42,5 +46,6 @@ public abstract class ClickableCubes : MonoBehaviour
         }
     }
 
+    
     abstract public void OnGrabbed(SelectEnterEventArgs args);
 }

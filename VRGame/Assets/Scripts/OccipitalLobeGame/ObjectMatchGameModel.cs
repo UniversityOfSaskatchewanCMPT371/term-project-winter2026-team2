@@ -27,11 +27,6 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         currentGuessID = "";
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <inheritdoc/>
     public GameState GetGameState()

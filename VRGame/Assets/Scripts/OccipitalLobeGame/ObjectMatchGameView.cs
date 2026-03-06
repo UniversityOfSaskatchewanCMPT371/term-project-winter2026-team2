@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatchGameView
 {
+    // Store references to all option objects in the scene so we can enable and disable them as needed
     [SerializeField] private GameObject[] allObjects;
+
+    // Store references to the guess box and submit button so we can enable and disable them as needed
     [SerializeField] private GameObject guessBox;
     [SerializeField] private GameObject submitButton;
     public override void Init()
