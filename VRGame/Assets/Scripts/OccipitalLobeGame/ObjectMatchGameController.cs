@@ -49,15 +49,8 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
         return this.modelInstance.GetCurrentGuessID();
     }
 
-    /// <inheritdoc/>
     public void RemovePotentialGuess()
     {
         this.modelInstance.RemovePotentialGuess();
-    }
-
-    /// <inheritdoc/>
-    public void SubmitGuess()
-    {
-        this.modelInstance.SubmitGuess();
     }
 }

@@ -1,6 +1,5 @@
 namespace ObjectMatchGame
 {
-    // Enum to represent the different states of the game
     public enum GameState
     {
         playing,
@@ -11,7 +10,6 @@ namespace ObjectMatchGame
         complete
     }
 
-    // Struct to hold the data for each level
     [System.Serializable]
     public struct levelData
     {

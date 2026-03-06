@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatchGameView
 {
-    // Store references to all option objects in the scene so we can enable and disable them as needed
     [SerializeField] private GameObject[] allObjects;
     internal IObjectMatchGameController controller;
     
@@ -15,19 +14,12 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         set => allObjects = value;
     }
     
-
-    // Store references to the guess box and submit button so we can enable and disable them as needed
-    [SerializeField] private GameObject guessBox;
-    [SerializeField] private GameObject submitButton;
     public override void Init()
     {
         foreach (GameObject obj in allObjects)
         {
             obj.SetActive(false);
         }
-
-        guessBox.SetActive(false);
-        submitButton.SetActive(false);
     }
 
     /// </inheritdoc>
@@ -45,8 +37,17 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
                 obj.SetActive(false);
             }
         }
+    }
 
-        guessBox.SetActive(true);
-        submitButton.SetActive(true);
+    public void removeGuess()
+    {
+        throw new System.NotImplementedException();
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

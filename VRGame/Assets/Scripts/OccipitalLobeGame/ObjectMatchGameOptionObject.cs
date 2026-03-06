@@ -58,21 +58,6 @@ public class ObjectMatchGameOptionObject : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Called when the option object is released after being grabbed. If the option
-    /// object released is not the current guess, it resets the option object to its
-    /// original position. If the option object released is the current guess, it moves
-    /// the option object to the guess box.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - The controller variable is assigned to an instance of IObjectMatchGameController
-    /// Postconditions:
-    /// - If the option object released is not the current guess, the option object is reset
-    ///   to its original position
-    /// - If the option object released is the current guess, the option object is moved to the
-    ///   guess box
-    /// </remarks>
     private void OnReleased(SelectExitEventArgs args)
     {
         if (controller == null)
