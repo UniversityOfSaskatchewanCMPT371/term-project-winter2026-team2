@@ -4,6 +4,17 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.1.0] - 2026-03-05
+
+### Added
+
+- Room prefabs and scenes for 5 brain regions:
+  - Cerebrum
+  - Frontal Lobe
+  - Parietal Lobe
+  - Occipital Lobe
+  - Temporal Lobe
+
 ## [1.0.0] - 2026-02-25
 
 ### Added
