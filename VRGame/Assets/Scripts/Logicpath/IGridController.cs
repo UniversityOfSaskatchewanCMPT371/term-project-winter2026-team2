@@ -20,22 +20,6 @@ public interface IGridController
     void Awake();
 
     /// <summary>
-    /// Handles input when a trigger is pressed at a specific world position.
-    /// <param name="worldPosition">The world position where the trigger was pressed</param>
-    /// </summary>
-    /// <remarks>
-    /// <pre-condition>
-    ///   -   Controller is initialized
-    ///   -   worldPosition is a valid Vector3
-    /// </pre-condition>
-    /// <post-condition>
-    ///   -   If the trigger press corresponds to a valid grid cell, the model is
-    ///       updated to reflect the new pipe segment, and the view is updated to render the change
-    /// </post-condition>
-    /// </remarks>
-    void OnTriggeredPressed(Vector3 worldPosition);
-
-    /// <summary>
     /// Resets the grid to its initial state, clearing all pipes and connections.
     /// </summary>
     /// <remarks>
