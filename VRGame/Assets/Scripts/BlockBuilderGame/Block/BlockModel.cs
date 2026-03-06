@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-namespace BlockBuilderGame
 {
     /// <inheritdoc/>
     public class BlockModel: IBlockModel
@@ -12,18 +10,52 @@ namespace BlockBuilderGame
         public enum BlockColour
         {
             red,
-            brown,
-            grey,
-            blue,
             orange,
+            yellow,
             green,
+            blue,
             purple,
             pink,
-            yellow,
+            brown,
+            grey,
             black,
             white
         }
-        
+
+        /// <summary>
+        /// Each Block has a property shape that corresponds with the filenames of the individual block shapes
+        /// Enums chosen to designate block shapes.
+        /// </summary>
+        public enum BlockShape
+        {
+
+            bevel_hq_brick_1x1_round,
+            bevel_hq_brick_1x1,
+            bevel_hq_brick_1x2,
+            bevel_hq_brick_1x4,
+            bevel_hq_brick_1x6,
+            bevel_hq_brick_1x8
+            // bevel_hq_brick_2x2,
+            // bevel_hq_brick_2x4,
+            // bevel_hq_brick_2x6,
+            // bevel_hq_brick_2x8,
+            // bevel_hq_brick_corner,
+            // bevel_hq_brick_slope_1x2,
+            // bevel_hq_brick_slope_2x2,
+            // bevel_hq_brick_slope_2x3,
+            // bevel_hq_brick_slope_2x4,
+            // bevel_hq_brick_slope_3x1,
+            // bevel_hq_brick_slope_3x2,
+            // bevel_hq_brick_slope_corner_inside_2x2,
+            // bevel_hq_brick_slope_corner_inside_inverted_2x2,
+            // bevel_hq_brick_slope_corner_outside_2x2,
+            // bevel_hq_brick_slope_corner_outside_inverted_2x2,
+            // bevel_hq_brick_slope_inverted_1x2,
+            // bevel_hq_brick_slope_inverted_2x2
+
+        }
+
+
         /// <summary>
         /// Gets or sets the unique identifier for this Block.
         /// </summary>
@@ -37,7 +69,7 @@ namespace BlockBuilderGame
         private string id
         {
             get;
-        set;
+            set;
         }
         
 
