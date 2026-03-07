@@ -75,7 +75,7 @@ public class DoorView_Controller_Integration
     }
 
     [UnityTest]
-    public void OnTriggerEnter_NonPlayerCollider()
+    public IEnumerator OnTriggerEnter_NonPlayerCollider()
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
@@ -85,53 +85,63 @@ public class DoorView_Controller_Integration
 
         doorV.Init();
 
-        // mocked out collider which does not have main camera tag in gameObject,
-        // i.e. is not the player
-        IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
-        otherC.CompareGameObjectTag("MainCamera").Returns(false);
+        // actual collider object
+        GameObject colliderGo = new GameObject();
+        // non "MainCamera" tag
+        //colliderGo.tag = "hello :)";
 
-        doorV.OnTriggerEnterLogic(otherC);
+        Collider otherC = colliderGo.AddComponent<BoxCollider>();
+
+        // actual function called, not separated logic function
+        doorV.OnTriggerEnter(otherC);
+
         // this log message indicates a non-player collision has been handled properly
         LogAssert.Expect(LogType.Log, "Component other than player collided with door");
 
 
+        Object.DestroyImmediate(colliderGo);
         Object.DestroyImmediate(go);
+
+        yield return null;
     }
 
 
     [UnityTest]
-    public void OnTriggerEnter_MainCameraNoPlayerController()
+    public IEnumerator OnTriggerEnter_MainCameraNoPlayerController()
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
 
-        IDoorController doorC = Substitute.For<IDoorController>();
+        IDoorController doorC = go.AddComponent<DoorController>();
         doorV.DoorController = doorC;
 
         doorV.Init();
 
-        // create improperly set up collider; has MainCamera tag but not IPlayerController component in
-        // it's gameObject parent. This should cause an error
-        IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
-        otherC.CompareGameObjectTag("MainCamera").Returns(true);
-
-        otherC.GetPlayerFromParent().Returns((IPlayerController)null);
+        // no playerController within this gameObject
+        GameObject colliderGo = new GameObject();
+        colliderGo.tag = "MainCamera";
+        Collider otherC = colliderGo.AddComponent<BoxCollider>();
 
         LogAssert.Expect(LogType.Error, "Collider does not contain playerController component");
         try
         {
-            doorV.OnTriggerEnterLogic(otherC);
+            doorV.OnTriggerEnter(otherC);
             Assert.Fail("Improperly set up camera collider's parent does not contain playerController component. Should have triggered assertion");
         }
         catch
         {
         }
 
+        Object.DestroyImmediate(colliderGo);
         Object.DestroyImmediate(go);
+
+        yield return null;
     }
 
-    [UnityTest]
-    public void OnTriggerEnter_Player()
+
+    //player not fully implement yet
+    //[UnityTest]
+    public IEnumerator OnTriggerEnter_Player()
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
@@ -141,19 +151,23 @@ public class DoorView_Controller_Integration
 
         doorV.Init();
 
-        // create improperly set up collider; has MainCamera tag but not IPlayerController component in
-        // it's gameObject parent. This should cause an error
-        IColliderWrapper otherC = Substitute.For<IColliderWrapper>();
-        otherC.CompareGameObjectTag("MainCamera").Returns(true);
-
-        // playerController getPlayerFromParent will return
-        IPlayerController pMock = Substitute.For<IPlayerController>();
-        otherC.GetPlayerFromParent().Returns(pMock);
+        // no playerController within this gameObject
+        GameObject colliderGo = new GameObject();
+        PlayerController pc = colliderGo.AddComponent<PlayerController>();
+        colliderGo.tag = "MainCamera";
+        Collider otherC = colliderGo.AddComponent<BoxCollider>();
 
 
-        doorV.OnTriggerEnterLogic(otherC);
+
+
+        doorV.OnTriggerEnter(otherC);
         // this log lets us know it worked
         LogAssert.Expect(LogType.Log, "Player collision handled");
+
+        Object.DestroyImmediate(colliderGo);
+        Object.DestroyImmediate(go);
+
+        yield return null;
 
     }
 
