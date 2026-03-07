@@ -20,8 +20,7 @@ public class DoorView_Controller_Integration
         doorV.DoorController = doorC;
 
         // if it is initialized without causing exception, we're good
-        doorV.Init();
-
+        yield return null;
 
         Object.DestroyImmediate(go);
         yield return null;
@@ -58,7 +57,8 @@ public class DoorView_Controller_Integration
 
         doorV.DoorController = doorC;
 
-        doorV.Init();
+        // init
+        yield return null;
 
         // this test should trigger assertion, tell unity to ignore associated
         // error log
@@ -83,13 +83,11 @@ public class DoorView_Controller_Integration
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
 
-        doorV.Init();
+        yield return null;
 
         // actual collider object
         GameObject colliderGo = new GameObject();
         // non "MainCamera" tag
-        //colliderGo.tag = "hello :)";
-
         Collider otherC = colliderGo.AddComponent<BoxCollider>();
 
         // actual function called, not separated logic function
@@ -115,7 +113,7 @@ public class DoorView_Controller_Integration
         IDoorController doorC = go.AddComponent<DoorController>();
         doorV.DoorController = doorC;
 
-        doorV.Init();
+        yield return null;
 
         // no playerController within this gameObject
         GameObject colliderGo = new GameObject();
@@ -139,8 +137,9 @@ public class DoorView_Controller_Integration
     }
 
 
-    //player not fully implement yet
+    //Player components don't seem to be testing ready yet, can't access fields within script
     //[UnityTest]
+    /*
     public IEnumerator OnTriggerEnter_Player()
     {
         GameObject go = new GameObject();
@@ -149,7 +148,16 @@ public class DoorView_Controller_Integration
         IDoorController doorC = Substitute.For<IDoorController>();
         doorV.DoorController = doorC;
 
-        doorV.Init();
+        yield return null;
+
+        // create player to send through our door
+        GameObject colliderGo = new GameObject();
+        PlayerModel playerM = colliderGo.AddComponent<PlayerModel>();
+        playerM.getPlayerName = ":)";
+        playerM.getPlayerId = 0;
+
+        PlayerController playerC = colliderGo.AddComponent<PlayerController>();
+        playerC.G
 
         // no playerController within this gameObject
         GameObject colliderGo = new GameObject();
@@ -170,7 +178,7 @@ public class DoorView_Controller_Integration
         yield return null;
 
     }
-
+*/
 
 
     // A UnityUnityTest behaves like a Play Mode. In Edit Mode you can use

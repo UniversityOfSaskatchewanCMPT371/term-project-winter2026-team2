@@ -19,15 +19,18 @@ public class DoorController_Model
         DoorController doorC = go.AddComponent<DoorController>();
 
         // real door model   
-        IDoorModel doorM = go.AddComponent<DoorModel>();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        DoorModel doorM = go.AddComponent<DoorModel>();
+        ISceneChangerController sceneC = Substitute.For<SceneChangerController>();
         Assert.NotNull(doorC);
 
         doorC.DoorModel = doorM;
         doorC.SceneChangerController = sceneC;
-        doorC.Init();
+
+        // instead of calling Init(), yield return null. This skips a frame, will call awake.
+        yield return null;
         // no assertion triggered, meaning it worked
 
+        doorM.ResetDoorLookup();
         UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
@@ -40,18 +43,21 @@ public class DoorController_Model
         DoorController doorC = go.AddComponent<DoorController>();
 
         // mocking out door model 
-        IDoorModel doorM = go.AddComponent<DoorModel>();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        DoorModel doorM = go.AddComponent<DoorModel>();
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.DoorModel = doorM;
+        doorM.DoorId = 1;
         doorC.SceneChangerController = sceneC;
-        doorC.Init();
 
         // trigger debounce should default to false, or else scnen change can never
         // be triggered
+        yield return null;
+
         Assert.IsFalse(doorC.TriggerDebounce);
 
         UnityEngine.Object.DestroyImmediate(go);
 
+        doorM.ResetDoorLookup();
         yield return null;
     }
 
@@ -93,7 +99,7 @@ public class DoorController_Model
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
 
-        IDoorModel doorM = go.AddComponent<DoorModel>();
+        DoorModel doorM = go.AddComponent<DoorModel>();
         doorC.DoorModel = doorM;
 
         // should fail, need to set sceneChangerController
@@ -106,6 +112,7 @@ public class DoorController_Model
         catch
         {
         }
+        doorM.ResetDoorLookup();
         UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
@@ -116,15 +123,22 @@ public class DoorController_Model
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
 
-        IDoorModel doorM = go.AddComponent<DoorModel>();
-        doorM.DestinationSceneId = 1;
+        DoorModel doorM = go.AddComponent<DoorModel>();
+        doorM.DestinationSceneId = 0;
         doorC.DoorModel = doorM;
+        doorM.TargetDoorId = 2;
 
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        // create target for our door
+        DoorModel targetDoor = go.AddComponent<DoorModel>();
+        targetDoor.DoorId = 2;
+        targetDoor.TargetDoorId = 1;
+
+
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
 
-        doorC.Init();
 
+        yield return null;
         //trying to call OnPlayerEnter with null playerController should cause error
         LogAssert.Expect(LogType.Error, new Regex(".*"));
         try
@@ -134,54 +148,33 @@ public class DoorController_Model
         }
         catch { }
 
+        doorM.ResetDoorLookup();
         UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 
+    // invalid scene ID test doesn't make sense in play mode, as this is checked when door is initialized
+    // No need to adapt it
+
+
+
     [UnityTest]
-    public IEnumerator OnPlayerEnter_InvalidSceneId()
+    public IEnumerator OnPlayerEnterValid()
     {
         GameObject go = new GameObject();
         DoorController doorC = go.AddComponent<DoorController>();
 
-        // mocking out door model 
-        IDoorModel doorM = go.AddComponent<DoorModel>();
-
-        // invalid sceneId
-        doorM.DestinationSceneId = 99999999;
-
-        doorC.DoorModel = doorM;
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        doorC.SceneChangerController = sceneC;
-
-        doorC.Init();
-
-        IPlayerController playerMock = Substitute.For<IPlayerController>();
-
-        //trying to call OnPlayerEnter with invalid scene Id
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try
-        {
-            doorC.OnPlayerEnter(playerMock);
-            Assert.Fail("DoorModel with invalid sceneId with OnPlayerEnter should've triggered assertion");
-        }
-        catch { }
-
-        UnityEngine.Object.DestroyImmediate(go);
-
-        yield return null;
-    }
-
-    [UnityTest]
-    public void OnPlayerEnterValid()
-    {
-        GameObject go = new GameObject();
-        DoorController doorC = go.AddComponent<DoorController>();
-
-        // mocking out door model 
-        IDoorModel doorM = Substitute.For<IDoorModel>();
+        DoorModel doorM = go.AddComponent<DoorModel>();
         doorM.DestinationSceneId = 0;
         doorC.DoorModel = doorM;
+        doorM.DoorId = 1;
+        doorM.TargetDoorId = 2;
+
+        // create target for our door
+        DoorModel targetDoor = go.AddComponent<DoorModel>();
+        targetDoor.DoorId = 2;
+        targetDoor.TargetDoorId = 1;
+
 
         // async operation that sceneChangerController will return
         IAsyncOperationWrapper loadingScene = Substitute.For<IAsyncOperationWrapper>();
@@ -190,7 +183,8 @@ public class DoorController_Model
         sceneC.LoadScene(0).Returns(loadingScene);
         doorC.SceneChangerController = sceneC;
 
-        doorC.Init();
+        // init
+        yield return null;
 
         // enter 
         IPlayerController playerMock = Substitute.For<IPlayerController>();
@@ -203,10 +197,17 @@ public class DoorController_Model
         // manually set mocked async event to completed
         loadingScene.Completed += Raise.Event<Action<IAsyncOperationWrapper>>(loadingScene);
 
+        // let finished event be detected
+        yield return null;
+
+        
         // trigger debounce should be false, to allow entrance again
         Assert.IsFalse(doorC.TriggerDebounce);
 
+        doorM.ResetDoorLookup();
         UnityEngine.Object.DestroyImmediate(go);
+
+        yield return null;
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
