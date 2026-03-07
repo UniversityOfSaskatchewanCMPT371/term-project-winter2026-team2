@@ -20,7 +20,7 @@ public class DoorController_Model
 
         // real door model   
         DoorModel doorM = go.AddComponent<DoorModel>();
-        ISceneChangerController sceneC = Substitute.For<SceneChangerController>();
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         Assert.NotNull(doorC);
 
         doorC.DoorModel = doorM;

@@ -10,7 +10,7 @@ public class DoorView_Controller_Integration
 {
     
     [UnityTest]
-    public IEnumerator Instantiation()
+    public IEnumerator InstantiateDoorView()
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
@@ -22,7 +22,7 @@ public class DoorView_Controller_Integration
         // if it is initialized without causing exception, we're good
         yield return null;
 
-        Object.DestroyImmediate(go);
+        Object.Destroy(go);
         yield return null;
     }
 
@@ -43,7 +43,7 @@ public class DoorView_Controller_Integration
         }
         catch { }
 
-        Object.DestroyImmediate(go);
+        Object.Destroy(go);
         yield return null;
     }
 
@@ -70,7 +70,7 @@ public class DoorView_Controller_Integration
         }
         catch { }
 
-        Object.DestroyImmediate(go);
+        Object.Destroy(go);
         yield return null;
     }
 
@@ -97,8 +97,8 @@ public class DoorView_Controller_Integration
         LogAssert.Expect(LogType.Log, "Component other than player collided with door");
 
 
-        Object.DestroyImmediate(colliderGo);
-        Object.DestroyImmediate(go);
+        Object.Destroy(colliderGo);
+        Object.Destroy(go);
 
         yield return null;
     }
@@ -130,14 +130,13 @@ public class DoorView_Controller_Integration
         {
         }
 
-        Object.DestroyImmediate(colliderGo);
-        Object.DestroyImmediate(go);
+        Object.Destroy(colliderGo);
+        Object.Destroy(go);
 
         yield return null;
     }
 
 
-    //Player components don't seem to be testing ready yet, can't access fields within script
     //[UnityTest]
     /*
     public IEnumerator OnTriggerEnter_Player()
@@ -172,8 +171,8 @@ public class DoorView_Controller_Integration
         // this log lets us know it worked
         LogAssert.Expect(LogType.Log, "Player collision handled");
 
-        Object.DestroyImmediate(colliderGo);
-        Object.DestroyImmediate(go);
+        Object.Destroy(colliderGo);
+        Object.Destroy(go);
 
         yield return null;
 
