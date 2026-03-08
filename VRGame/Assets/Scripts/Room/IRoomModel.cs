@@ -144,4 +144,15 @@ public interface IRoomModel : IModel
     /// - Component is initialized and each variables of Model is validated.
     /// </remarks>
     new void Init();
+
+    /// <summary>
+    /// Called when the gameObject this
+    /// component is attached to is destroyed.
+    /// This function is provided by Unity.
+    /// </summary>
+    /// <remarks>
+    /// This method is called by DestroyImmediate(this.gameObject) or Destroy(this.gameObject) which is used
+    /// in testing. Otherwise calling Init() in testing would result in failure since each Model's 'roomId' variable is preset to 0.
+    /// </remarks>
+    void OnDestroy();
 }

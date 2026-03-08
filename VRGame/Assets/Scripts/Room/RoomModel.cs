@@ -180,7 +180,7 @@ public class RoomModel : Model, IRoomModel
         // Model's 'roomName' variable cannot be initialized to whitespace only
         if (roomName.Trim() == "")
         {
-            Debug.LogError("Field 'roomName' cannot be whitespace only.");
+            Debug.LogError("Field 'roomName' cannot be exclusively whitespace.");
         }
         Debug.Assert(roomName.Trim() != "", "Field 'roomName' must be set to a different name.");
 
@@ -214,16 +214,8 @@ public class RoomModel : Model, IRoomModel
         Debug.Log("RoomModel successfully initialized.");
     }
 
-    /// <summary>
-    /// Called when the gameObject this
-    /// component is attached to is destroyed.
-    /// This function is provided by Unity.
-    /// </summary>
-    /// <remarks>
-    /// This method is called by DestroyImmediate(this.gameObject) or Destroy(this.gameObject) which is used
-    /// in testing. Otherwise calling Init() in testing would result in failure since each Model's 'roomId' variable is preset to 0.
-    /// </remarks>
-    void OnDestroy()
+    /// <inheritdoc/>
+    public void OnDestroy()
     {
         if (roomLookUp.ContainsKey(Id))
         {

@@ -4,8 +4,7 @@
 public interface IRoomController : IController
 {
     /// <summary>
-    /// Validates Model component by invoking CheckModelRefs() inherited from Controller class. 
-    /// Then marks the Model's 'minigameCompleted' variable as complete and invokes HandleCompletion().
+    /// Marks the Model's 'minigameCompleted' variable as complete and invokes HandleCompletion().
     /// </summary>
     /// <remarks>
     /// Preconditions:
@@ -18,8 +17,7 @@ public interface IRoomController : IController
     void HandleCompleteMinigame();
     
     /// <summary>
-    /// Validates Model component by invoking CheckModelRefs() inherited from Controller class. 
-    /// Then marks the Model's 'handleCompleteEducationalDialogue' variable as complete and invokes HandleCompletion().
+    /// Marks the Model's 'handleCompleteEducationalDialogue' variable as complete and invokes HandleCompletion().
     /// </summary>
     /// <remarks>
     /// Preconditions:
@@ -32,8 +30,7 @@ public interface IRoomController : IController
     void HandleCompleteEducationalDialogue();
 
     /// <summary>
-    /// Validates the Model and View component by invoking CheckModelRefs() and CheckViewRefs() inherited from Controller class.
-    /// Then triggers View's OnRoomComplete event by calling InvokeOnRoomComplete().
+    /// Triggers View's OnRoomComplete event by calling InvokeOnRoomComplete().
     /// </summary>
     /// <remarks>
     /// Preconditions:

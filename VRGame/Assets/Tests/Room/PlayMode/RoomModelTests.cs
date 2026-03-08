@@ -89,7 +89,7 @@ public class RoomModelTests
 
         // expect errors and assertions to occur since 'roomName' field cannot have whitespace as a value
         LogAssert.Expect(LogType.Assert,"'value' cannot be whitespace.");
-        LogAssert.Expect(LogType.Error, "Field 'roomName' cannot be whitespace.");
+        LogAssert.Expect(LogType.Error, "Field 'roomName' cannot be exclusively whitespace.");
         LogAssert.Expect(LogType.Assert, "Field 'roomName' must be set to a different name.");
 
         // allow Start() to run which invokes Init()

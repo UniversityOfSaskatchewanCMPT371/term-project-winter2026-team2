@@ -1,3 +1,4 @@
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ public class RoomModelTests
         // initialize
         roomModel.Init();
 
+        roomModel.OnDestroy();
         // clean up game object
         Object.DestroyImmediate(go);
     }
