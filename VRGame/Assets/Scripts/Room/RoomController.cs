@@ -14,9 +14,12 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     /// <inheritdoc/>
     public void HandleCompleteMinigame()
     {
-        // Inherited from Controller class. Used to validate Model component, 
-        // in which this method interacts with.
-        CheckModelRef();
+        // see if Model component is initalized
+        if (modelInstance == null)
+        {
+            Debug.LogWarning("Model component not initialized.");
+            return;
+        }
 
         // mark the 'MinigameCompleted' as complete in the Model component
         modelInstance.MinigameCompleted = true;
@@ -28,9 +31,12 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     /// <inheritdoc/>
     public void HandleCompleteEducationalDialogue()
     {
-        // Inherited from Controller class. Used to validate Model component, 
-        // in which this method interacts with.
-        CheckModelRef();
+        // see if Model component is initalized
+        if (modelInstance == null)
+        {
+            Debug.LogWarning("Model component not initialized.");
+            return;
+        }
 
         // mark the 'EducationalDialogue' as complete in the Model component
         modelInstance.EducationalDialogueCompleted = true;
@@ -42,11 +48,15 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
     /// <inheritdoc/>
     public void HandleCompletion()
     {
-        // These methods are inherited from Controller class. They are
-        // used to validate Model and View components, in which this method
-        // interacts with.
-        CheckModelRef(); 
-        CheckViewRef();
+        // see if both Model and View components are initialized
+        if (modelInstance == null)
+        {
+            Debug.LogWarning("Model component not initialized.");
+            return;
+        } else if (viewInstance == null)
+        {
+            Debug.LogWarning("View component not initialized.");
+        }
 
         // see if the room is fully done. A room is considered done 
         // if 'EducationalDialogueCompleted' and 'MinigameCompleted' fields

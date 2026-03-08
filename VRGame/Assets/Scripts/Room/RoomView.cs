@@ -26,9 +26,12 @@ public class RoomView : View<IRoomController>, IRoomView
     /// <inheritdoc/>
     public void MinigameCompleted()
     {
-        // Inherited from View class. Used to validate Controller component, 
-        // in which this method interacts with.
-        CheckControllerRef();
+        // see if Controller component is initialized
+        if (controllerInstance == null)
+        {
+            Debug.LogWarning("Controller component not initialized.");
+            return;
+        }
 
         controllerInstance.HandleCompleteMinigame();
     }
@@ -36,9 +39,12 @@ public class RoomView : View<IRoomController>, IRoomView
     /// <inheritdoc/>
     public void EducationalDialoguesCompleted()
     {
-        // Inherited from View class. Used to validate Controller component, 
-        // in which this method interacts with.
-        CheckControllerRef();
+        // see if Controller component is initialized
+        if (controllerInstance == null)
+        {
+            Debug.LogWarning("Controller component not initialized.");
+            return;
+        }
 
         controllerInstance.HandleCompleteEducationalDialogue();
     }
