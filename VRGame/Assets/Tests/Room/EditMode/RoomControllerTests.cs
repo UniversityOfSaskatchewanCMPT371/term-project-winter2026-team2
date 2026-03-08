@@ -57,8 +57,10 @@ public class RoomControllerTests
         // assign mock
         roomController.ViewMock = roomView;
 
-        // expect an exception to be thrown since HandleCompleteEducationalDialogue() requires 'model' component
-        Assert.Throws<AssertionException>(() => roomController.HandleCompleteEducationalDialogue(), "Expected an exception, but no exception was thrown on missing 'model' component.");
+        // expect a warning since 'model' component is missing
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+
+        roomController.HandleCompleteEducationalDialogue();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -107,8 +109,10 @@ public class RoomControllerTests
         // assign mock
         roomController.ViewMock = roomView;
 
-        // expect an exception to be thrown since HandleCompleteMinigame() requires 'model' component
-        Assert.Throws<AssertionException>(() => roomController.HandleCompleteMinigame(), "Expected an exception, but no exception was thrown on missing 'model' component.");
+        // expect a warning since 'model' component is missing
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+
+        roomController.HandleCompleteMinigame();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -180,8 +184,10 @@ public class RoomControllerTests
         // add 'controller' component
         RoomController roomController = go.AddComponent<RoomController>();
 
-        // expect an exception to be thrown since HandleCompletion() requires 'model' and 'view' component
-        Assert.Throws<AssertionException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing layers.");
+        // expect a warning since 'model' component is missing
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+
+        roomController.HandleCompletion();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -208,8 +214,10 @@ public class RoomControllerTests
         // assign view mock
         roomController.ViewMock = roomView;
 
-        // expect an exception to be thrown since HandleCompletion() requires 'model' component
-        Assert.Throws<AssertionException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing 'model' component.");
+        // expect a warning since 'model' component is missing
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+
+        roomController.HandleCompletion();
 
         // test if HandleCompletion() will work if only 'model' is assigned
 
@@ -222,8 +230,10 @@ public class RoomControllerTests
         // assign model mock
         roomController.ModelMock = roomModel;
         
-        // expect an exception to be thrown since HandleCompletion() requires 'view' component
-        Assert.Throws<AssertionException>(() => roomController.HandleCompletion(), "Expected an exception, but no exception was thrown on missing 'view' component.");
+        // expect a warning since 'view' component is missing
+        LogAssert.Expect(LogType.Warning, "View component not initialized.");
+
+        roomController.HandleCompletion();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);

@@ -2,7 +2,8 @@
     "name": "Room",
     "rootNamespace": "",
     "references": [
-        "ScriptTemplates"
+        "ScriptTemplates",
+        "SceneEnum"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

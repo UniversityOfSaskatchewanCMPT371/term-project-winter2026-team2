@@ -47,7 +47,7 @@ public class RoomModelTests
 
         // setup first room
         roomModel1.Name = "TestA";
-        roomModel1.Id = 1;
+        roomModel1.Id = SceneEnum.Hub;
         roomModel1.MinigameCompleted = false;
         roomModel1.EducationalDialogueCompleted = false;
 
@@ -62,7 +62,7 @@ public class RoomModelTests
         // setup second room WaitHandle same 'roomId'
         RoomModel roomModel2 = go2.AddComponent<RoomModel>();
         roomModel2.Name = "TestB";
-        roomModel2.Id = 1;
+        roomModel2.Id = SceneEnum.Hub;
         roomModel2.MinigameCompleted = false;
         roomModel2.EducationalDialogueCompleted = false;
 

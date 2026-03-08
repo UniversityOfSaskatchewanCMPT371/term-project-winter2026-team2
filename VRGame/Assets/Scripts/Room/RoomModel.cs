@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 /// <summary>
@@ -16,14 +17,14 @@ public class RoomModel : Model, IRoomModel
     /// int       : A Model's 'roomId' variable is used as a key to look up its Model.
     /// RoomModel : The Model that is mapped to its 'roomId' variable as a key.
     /// </remarks>
-    private static Dictionary<int, RoomModel> roomLookUp = new Dictionary<int, RoomModel>();
+    private static Dictionary<SceneEnum, RoomModel> roomLookUp = new Dictionary<SceneEnum, RoomModel>();
 
     /// <summary>
-    /// Unique identifier for this room. Used as a key in 'roomLookUp' dictionary 
+    /// Unique identifier for this room. Used as a key in 'roomLookUp' dictionary
     /// variable which maps to this Model.
     /// </summary>
     [SerializeField]
-    private int roomId = 0;
+    private SceneEnum roomId = SceneEnum.Hub;
 
     /// <summary>
     /// Name of this room.
@@ -44,7 +45,7 @@ public class RoomModel : Model, IRoomModel
     private bool educationalDialogueCompleted = false;
 
     /// <inheritdoc/>
-    public int Id
+    public SceneEnum Id
     {
         /// <inheritdoc/>
         get

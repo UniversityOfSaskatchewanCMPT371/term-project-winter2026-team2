@@ -76,8 +76,10 @@ public class RoomViewTests
         // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
-        // expect an exception to be thrown since MinigameCompleted() requires 'controller' component
-        Assert.Throws<AssertionException>(() => roomView.MinigameCompleted(), "Expected an exception, but no exception was thrown on missing 'controller' component.");
+        // expect a warning since 'controller' component is missing
+        LogAssert.Expect(LogType.Warning, "Controller component not initialized.");
+
+        roomView.MinigameCompleted();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -123,8 +125,10 @@ public class RoomViewTests
         // add 'view' component
         RoomView roomView = go.AddComponent<RoomView>();
 
-        // expect an exception to be thrown since EducationalDialoguesCompleted() requires 'controller' component
-        Assert.Throws<AssertionException>(() => roomView.EducationalDialoguesCompleted(), "Expected an exception, but no exception was thrown on missing 'controller' component.");
+        // expect a warning since 'controller' component is missing
+        LogAssert.Expect(LogType.Warning, "Controller component not initialized.");
+        
+        roomView.EducationalDialoguesCompleted();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);

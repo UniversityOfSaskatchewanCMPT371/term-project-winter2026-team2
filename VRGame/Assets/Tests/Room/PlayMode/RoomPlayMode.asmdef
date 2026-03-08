@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "TNRD.NSubstitute",
         "Room",
-        "ScriptTemplates"
+        "ScriptTemplates",
+        "SceneEnum"
     ],
     "includePlatforms": [
         "Android",

@@ -8,7 +8,7 @@ public interface IRoomModel : IModel
     /// <summary>
     /// Getter/Setter for this Model's 'roomId' variable.
     /// </summary>
-    int Id { 
+    SceneEnum Id { 
         /// <summary>
         /// Get the value of Model's 'roomId' variable
         /// </summary>
