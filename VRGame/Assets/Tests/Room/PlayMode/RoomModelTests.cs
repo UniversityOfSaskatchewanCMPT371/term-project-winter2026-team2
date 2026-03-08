@@ -26,6 +26,9 @@ public class RoomModelTests
 
         // no errors should occur
 
+        // manually call OnDestroy to clear Model's static roomLookUp dictionary
+        roomModel.OnDestroy();
+
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
@@ -53,6 +56,8 @@ public class RoomModelTests
 
         // create second room with same id
         GameObject go2 = new GameObject();
+
+        LogAssert.Expect(LogType.Error, "'value' is already taken.");
         
         // setup second room WaitHandle same 'roomId'
         RoomModel roomModel2 = go2.AddComponent<RoomModel>();
@@ -62,11 +67,16 @@ public class RoomModelTests
         roomModel2.EducationalDialogueCompleted = false;
 
         // expect error and assertion to occur since two rooms have the same id
+        LogAssert.Expect(LogType.Assert, "'value' must be unique.");
         LogAssert.Expect(LogType.Error, "Field 'roomId' is already taken.");
-        LogAssert.Expect(LogType.Assert, "Field 'roomId' must be set to a different id.");
+        LogAssert.Expect(LogType.Assert, "Field 'roomId' must be unique.");
 
         // allow Start() to run which invokes Init()
         yield return null;
+
+        // manually call OnDestroy to clear Model's static roomLookUp dictionary
+        roomModel1.OnDestroy();
+        roomModel2.OnDestroy();
 
         // clean up game objects
         UnityEngine.Object.DestroyImmediate(go1);
@@ -85,15 +95,20 @@ public class RoomModelTests
         // add 'model' component
         RoomModel roomModel = go.AddComponent<RoomModel>();
 
-        roomModel.Name = "   ";
-
         // expect errors and assertions to occur since 'roomName' field cannot have whitespace as a value
-        LogAssert.Expect(LogType.Assert,"'value' cannot be whitespace.");
-        LogAssert.Expect(LogType.Error, "Field 'roomName' cannot be exclusively whitespace.");
-        LogAssert.Expect(LogType.Assert, "Field 'roomName' must be set to a different name.");
+        LogAssert.Expect(LogType.Error, "'value' is exclusively whitespace.");
+        LogAssert.Expect(LogType.Assert,"'value' cannot be exclusively whitespace.");
+        LogAssert.Expect(LogType.Error, "Field 'roomName' is exclusively whitespace.");
+        LogAssert.Expect(LogType.Assert, "Field 'roomName' cannot be exclusively whitespace.");
+
+        // set 'roomName' field value to only whitespace
+        roomModel.Name = "   ";
 
         // allow Start() to run which invokes Init()
         yield return null;
+
+        // manually call OnDestroy to clear Model's static roomLookUp dictionary
+        roomModel.OnDestroy();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -115,11 +130,15 @@ public class RoomModelTests
         roomModel.MinigameCompleted = true;
 
         // expect error and assertion to occur since 'MinigameCompleted' field cannot be initialized to true
+
         LogAssert.Expect(LogType.Error, "Field 'minigameCompleted' must start as false.");
         LogAssert.Expect(LogType.Assert, "Field 'minigameCompleted' must be set to false.");
 
         // allow Start() to run which invokes Init()
         yield return null;
+
+        // manually call OnDestroy to clear Model's static roomLookUp dictionary
+        roomModel.OnDestroy();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -146,6 +165,9 @@ public class RoomModelTests
 
         // allow Start() to run which invoked Init()
         yield return null;
+
+        // manually call OnDestroy to clear Model's static roomLookUp dictionary
+        roomModel.OnDestroy();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);

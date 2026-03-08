@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 /// <summary>
@@ -9,8 +10,7 @@ public class RoomModel : Model, IRoomModel
     /// DATA SECTION
 
     /// <summary>
-    /// Static dictionary for rooms. Used to enforce uniqueness of 
-    /// each room by using 'roomId' variable as a key.
+    /// Static dictionary for rooms.
     /// </summary>
     /// <remarks>
     /// int       : A Model's 'roomId' variable is used as a key to look up its Model.
@@ -46,68 +46,65 @@ public class RoomModel : Model, IRoomModel
     /// <inheritdoc/>
     public int Id
     {
-        /// <summary>
-        /// Get the value of Model's 'roomId' variable
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Model's 'roomId' variable must be non-negative.
-        /// Postconditions:
-        /// - Returns Model's 'roomId' variable.
-        /// </remarks>
-        get => roomId;
-        /// <summary>
-        /// Set the value of Model's 'roomId' variable.
-        /// </summary>
-        /// <remarks
-        /// Preconditions:
-        /// - 'value' must be non-null.
-        /// Postconditions:
-        /// - Model's 'roomId' variable set to input 'value'
-        /// </remarks>
+        /// <inheritdoc/>
+        get
+        {
+            if (roomId < 0)
+            {
+                Debug.LogError("Field 'roomId' is negative.");
+                Debug.Assert(roomId >= 0, "Field 'roomId' must be non-negative.");
+            }
+
+            return roomId;
+        }
+        /// <inheritdoc/>
         set
         {
             if (value < 0)
             {
-                Debug.Log("'value' is negative.");
-                Debug.Assert(value >= 0, "'value' cannot be negative.");
+                Debug.LogError("'value' is negative.");
+                Debug.Assert(value >= 0, "'value' must be non-negative.");
             }
+
+            if (roomLookUp.ContainsKey(value))
+            {
+                Debug.LogError("'value' is already taken.");
+                Debug.Assert(roomLookUp.ContainsKey(value) == false, "'value' must be unique.");
+            }
+
+            roomId = value;
         }
     }
 
     /// <inheritdoc/>
     public string Name
     {
-        /// <summary>
-        /// Get the value of Model's 'roomName' vairable.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - Model's 'roomName' variable must be non-null.
-        /// Postconditions:
-        /// - Returns Model's 'roomName' variable.
-        /// </remarks>
-        get => roomName;
-        /// <summary>
-        /// Set the value of Model's 'roomName' variable.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - 'value' must be non-null.
-        /// - 'value' cannot be whitespace only.
-        /// Postconditions:
-        /// - Model's 'roomName' variable set to input 'value'.
-        /// </remarks>
+        /// <inheritdoc/>
+        get
+        {
+            if (roomName == null)
+            {
+                Debug.LogError("Field 'roomName' is null.");
+                Debug.Assert(roomName != null, "Field 'roomName' cannot be null.");
+            }
+
+            return roomName;
+        }
+        /// <inheritdoc/>
         set
         {
-            if (value == roomName)
+            if (value == null)
             {
-                Debug.Log("'value' is same as current.");
+                Debug.LogError("'value' is null.");
+                Debug.Assert(value != null, "'value' cannot be null.");
+            } else if (value == roomName)
+            {
+                Debug.LogError("'value' is same as current.");
                 Debug.Assert(value != roomName, "'value' cannot be the same as current.");
             } else if (value.Trim() == "")
             {
-                Debug.Log("'value' is whitespace.");
-                Debug.Assert(value.Trim() != "", "'value' cannot be whitespace.");
+                Debug.LogError("'value' is exclusively whitespace.");
+                Debug.Assert(value.Trim() != "", "'value' cannot be exclusively whitespace.");
             }
             roomName = value;
         }
@@ -116,53 +113,18 @@ public class RoomModel : Model, IRoomModel
     /// <inheritdoc/>
     public bool MinigameCompleted 
     { 
-        /// <summary>
-        /// Get the value of Model's 'minigameCompleted' variable.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns Model's'minigameCompleted' variable.
-        /// </remarks>
+        /// <inheritdoc/>
         get => minigameCompleted;
-        /// <summary>
-        /// Set the value of Model's 'minigameCompleted' variable.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Model's 'minigameCompleted' variable set to input 'value'.
-        /// </remarks>
+        /// <inheritdoc/>
         set => minigameCompleted = value; 
     }
 
     /// <inheritdoc/>
     public bool EducationalDialogueCompleted 
     { 
-        /// <summary>
-        /// Get the value of Model's 'educationalDialogueCompleted' variable.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Returns Model's 'educationalDialogueCompleted' variable.
-        /// </remarks>
-        /// <returns>
-        /// - Returns Model's'educationalDialogueCompleted' variable.
-        /// </returns>
+        /// <inheritdoc/>
         get => educationalDialogueCompleted;
-        /// <summary>
-        /// Set the value of Model's 'educationalDialogueCompleted' variable.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None
-        /// Postconditions:
-        /// - Model's 'educationalDialogueCompleted' variable set to input 'value'.
-        /// </remarks>
+        /// <inheritdoc/>
         set => educationalDialogueCompleted = value; 
     }
 
@@ -180,9 +142,16 @@ public class RoomModel : Model, IRoomModel
         // Model's 'roomName' variable cannot be initialized to whitespace only
         if (roomName.Trim() == "")
         {
-            Debug.LogError("Field 'roomName' cannot be exclusively whitespace.");
+            Debug.LogError("Field 'roomName' is exclusively whitespace.");
         }
-        Debug.Assert(roomName.Trim() != "", "Field 'roomName' must be set to a different name.");
+        Debug.Assert(roomName.Trim() != "", "Field 'roomName' cannot be exclusively whitespace.");
+
+        // Model's 'roomId' variable cannot be initialized to negative integer
+        if (roomId < 0)
+        {
+            Debug.LogError("Field 'roomId' is negative.");
+        }
+        Debug.Assert(roomId >= 0, "Field 'roomId' must be non-negative.");
 
         // Model's 'minigameCompleted' variable must be initialized to false
         if (minigameCompleted)
@@ -200,16 +169,16 @@ public class RoomModel : Model, IRoomModel
 
         // see if this Model's 'roomId' variable already exists in the 'roomLookUp' dictionary.
         // This enforces each room Model to have a unique 'roomId'.
-        bool isKeyTaken = roomLookUp.ContainsKey(Id);
+        bool isKeyTaken = roomLookUp.ContainsKey(roomId);
         if (isKeyTaken)
         {
             Debug.LogError("Field 'roomId' is already taken.");
         } else
         {
             // add the key => Model into 'roomLookUp' dictionary.
-            roomLookUp.Add(roomId,this);
+            roomLookUp.Add(roomId, this);
         }
-        Debug.Assert(isKeyTaken == false, "Field 'roomId' must be set to a different id.");
+        Debug.Assert(isKeyTaken == false, "Field 'roomId' must be unique.");
 
         Debug.Log("RoomModel successfully initialized.");
     }
