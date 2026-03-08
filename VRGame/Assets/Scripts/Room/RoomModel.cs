@@ -139,7 +139,7 @@ public class RoomModel : Model, IRoomModel
     /// <inheritdoc cref="IRoomModel.Init"/>
     public override void Init()
     {
-        // Model's 'roomName' variable cannot be initialized to whitespace only
+        // Model's 'roomName' variable cannot be initialized to whitespace exclusively
         if (roomName.Trim() == "")
         {
             Debug.LogError("Field 'roomName' is exclusively whitespace.");

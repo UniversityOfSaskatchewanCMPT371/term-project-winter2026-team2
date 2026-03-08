@@ -15,7 +15,8 @@ public interface IRoomView : IView
     void InvokeOnRoomComplete();
 
     /// <summary>
-    /// Called by the minigame's unity event 'onMinigameFinished', and passes onto controller layer
+    /// Called by the minigame's unity event 'onMinigameFinished', and 
+    /// passes onto controller layer to handle minigame completion logic.
     /// to handle logic.
     /// </summary>
     /// <remarks>
@@ -28,7 +29,8 @@ public interface IRoomView : IView
     void MinigameCompleted();
 
     /// <summary>
-    /// Called when all educational dialogues are completed, and passes onto controller layer
+    /// Called when all educational dialogues are completed, and 
+    /// passes onto controller layer to handle education dialogue completion logic.
     /// to handle logic.
     /// </summary>
     /// <remarks>
