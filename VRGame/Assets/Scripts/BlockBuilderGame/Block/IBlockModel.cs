@@ -1,33 +1,94 @@
 using UnityEngine;
-namespace BlockBuilderGame
+
+/// <summary>
+/// IBlockModel interface is implemented by the BlockModel class
+/// </summary>
+public interface IBlockModel
 {
     /// <summary>
-    /// Interface for the Block Model. Defines the data contract all block models must fulfill.
+    /// The accessor and mutator for the block type
     /// </summary>
-    /// <remarks>
-    /// - Any class implementing IBlockModel must expose all block state properties.
-    /// - GridPosition and TargetPosition must be settable at runtime during placement.
-    /// - IsCorrectlyPlaced() must compare GridPosition to TargetPosition.
-    /// </remarks>
-    public interface IBlockModel
-    {
-        
+    string BlockType 
+    { 
+        /// <summary>
+        /// The type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - blockType must be a valid block of type string
+        /// post-condition:
+        ///     - returns the type of the block
+        /// </remarks>
+        get;
+
+        /// <summary>
+        /// The type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+        /// </summary> 
+        /// <remarks>
+        /// pre-condition:
+        ///    - value must be a valid block of type string
+        /// post-condition:
+        ///    - sets the type of the block to the value
+        /// </remarks>
+        set; 
+    
+    }
+
+    
+    /// <summary>
+    /// The accessor and mutator method for the position of the block in game
+    /// </summary>
+    Vector3 Position 
+    { 
+        /// <summary>
+        /// The position of the block in game
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - position must be a valid Vector3
+        /// post-condition:
+        ///     - returns the position of the block in game
+        /// </remarks>
+        get; 
         
         /// <summary>
-        /// Determines whether the block is currently positioned at one of its valid target locations.
+        /// The position of the block in game
         /// </summary>
-        /// <returns>
-        /// True if the block's current grid position matches one of the target positions;
-        /// otherwise false.
-        /// </returns>
         /// <remarks>
-        /// Preconditions:
-        /// - targetPositions must not be null.
-        /// 
-        /// Postconditions:
-        /// - Returns true if gridPosition exists in targetPositions.
-        /// - Returns false otherwise.
+        /// pre-condition:
+        ///     - value must be a valid Vector3
+        /// post-condition:
+        ///     - sets the position of the block in game to the value
         /// </remarks>
-        public bool IsCorrectlyPlaced();
+        set; 
+    }
+
+
+    /// <summary>
+    /// The accessor and mutator method for the rotation of the block in game
+    /// </summary> 
+    Quaternion Rotation 
+    { 
+        /// <summary>
+        /// The rotation of the block in game
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - rotation must be a valid Quaternion
+        /// post-condition:
+        ///     - returns the rotation of the block in game
+        /// </remarks>
+        get; 
+
+        /// <summary>
+        /// The rotation of the block in game
+        /// </summary> 
+        /// <remarks>
+        /// pre-condition:
+        ///     - value must be a valid Quaternion
+        /// post-condition:
+        ///     - sets the rotation of the block in game to the value
+        /// </remarks>
+        set; 
     }
 }
