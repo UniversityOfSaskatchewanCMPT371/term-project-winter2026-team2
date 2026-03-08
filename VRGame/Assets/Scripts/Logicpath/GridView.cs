@@ -3,6 +3,9 @@ using UnityEngine.Assertions;
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// The view of the logicpath minigame that renders the puzzle visually
+/// </summary>
 public class GridView : MonoBehaviour, IGridView
 {
     private Transform pipeContainer;
@@ -24,10 +27,12 @@ public class GridView : MonoBehaviour, IGridView
         this.gridHeight = height;
         this.cellSize = cellSize;
 
+        // Create a container for all rendered pipes (for Unity hierarchy)
         pipeContainer = new GameObject("PipeContainer").transform;
         pipeContainer.parent = transform;
         pipeContainer.localPosition = Vector3.zero;
 
+        // Gets/Creates PipeManager for texture loading
         pipeManager = GetComponent<PipeManager>();
         if (pipeManager == null)
         {
@@ -43,8 +48,10 @@ public class GridView : MonoBehaviour, IGridView
         Assert.IsNotNull(pipeContainer, "PipeContainer must be initialized");
         Assert.IsNotNull(pipeManager, "PipeManager must be initialized");
 
+        // Create unique key for the pipe
         string key = $"Pipe_{gridX}_{gridY}";
 
+        // Create a GameObject for the pipe
         GameObject pipeGO = new GameObject(key);
         pipeGO.transform.parent = pipeContainer;
         pipeGO.transform.position = worldPosition;
@@ -56,7 +63,10 @@ public class GridView : MonoBehaviour, IGridView
         Mesh quadMesh = CreateQuadMesh();
         meshFilter.mesh = quadMesh;
 
+        // Loading texture from PipeManger while using the directional data
         Texture2D texture = pipeManager.GetPipeTexture(panel);
+
+        // Creating material with texture
         Material mat = new Material(Shader.Find("Standard"));
         if (texture != null)
         {
@@ -69,23 +79,29 @@ public class GridView : MonoBehaviour, IGridView
 
         meshRenderer.material = mat;
 
+        // Storing in dictionary with unique key
         renderedPipes[key] = pipeGO;
 
         Assert.IsTrue(renderedPipes.ContainsKey(key), "Pipe should be stored in dictionary");
     }
 
     /// <inheritdoc/>
+    /// TODO
     public void RenderEndpoints(List<Endpoint> endpoints)
     {
         Assert.IsNotNull(endpoints, "Endpoints list cannot be null");
 
         foreach (var endpoint in endpoints)
         {
-            GameObject endpointGO = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            endpointGO.name = $"Endpoint_{endpoint.GridX}_{endpoint.GridY}";
+            // Getting the texture for the endpoints
+            string key = $"Endpoint_{endpoint.GridX}_{endpoint.GridY}";
+            GameObject endpointGO = new GameObject(key);
             endpointGO.transform.parent = pipeContainer;
+
+            // Scaling it to size
             endpointGO.transform.localScale = Vector3.one * cellSize;
 
+            // Positioning at the grid coordinates
             Vector3 pos = new Vector3(
                 endpoint.GridX * cellSize - (gridWidth * cellSize) / 2f,
                 endpoint.GridY * cellSize - (gridHeight * cellSize) / 2f,
@@ -93,14 +109,39 @@ public class GridView : MonoBehaviour, IGridView
             );
             endpointGO.transform.position = pos;
 
-            Renderer renderer = endpointGO.GetComponent<Renderer>();
-            Material mat = new Material(Shader.Find("Standard"));
-            mat.color = endpoint.EndColor;
-            renderer.material = mat;
+            // Add mesh components
+            MeshFilter meshFilter = endpointGO.AddComponent<MeshFilter>();
+            MeshRenderer meshRenderer = endpointGO.AddComponent<MeshRenderer>();
 
-            Destroy(endpointGO.GetComponent<Collider>());
+            Mesh quadMesh = CreateQuadMesh();
+            meshFilter.mesh = quadMesh;
+
+            // Load endpoint texture
+            string colorName = GetColorName(endpoint.EndColor);
+            string texturePath = $"Textures/LogicGame/{colorName}_end_blank";
+            Texture2D texture = Resources.Load<Texture2D>(texturePath);
+
+            Material mat = new Material(Shader.Find("Standard"));
+            if (texture != null)
+            {
+                mat.mainTexture = texture;
+            }
+            else
+            {
+                mat.color = endpoint.EndColor;
+            }
+            meshRenderer.material = mat;
         }
+
     }
+    private string GetColorName(Color color)
+{
+    if (color == Color.red) return "red";
+    if (color == Color.blue) return "blue";
+    if (color == Color.green) return "green";
+    if (color == Color.yellow) return "yellow";
+    return "white";
+}
 
     /// <inheritdoc/>
     public void ClearAllPipes()
@@ -117,23 +158,30 @@ public class GridView : MonoBehaviour, IGridView
     }
 
     /// <inheritdoc/>
+    /// TODO
     public void ShowCompletionEffect()
     {
         Debug.Log("Puzzle Complete!");
     }
 
     /// <inheritdoc/>
+    /// TODO
     public void HighlightCell(Vector3 position)
     {
         
     }
 
     /// <inheritdoc/>
+    /// TODO
     public void ClearHighlight()
     {
         
     }
 
+    /// <summary>
+    /// Creates a quad mesh for rendering
+    /// </summary>
+    /// <returns></returns>
     private Mesh CreateQuadMesh()
     {
         Mesh mesh = new Mesh();
@@ -167,5 +215,4 @@ public class GridView : MonoBehaviour, IGridView
 
         return mesh;
     }
-
 }
