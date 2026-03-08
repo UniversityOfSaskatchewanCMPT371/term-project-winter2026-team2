@@ -1,0 +1,16 @@
+{
+    "name": "BlockSpawner",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ea4a24547d7d3ef44b572674fb8e01a0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
