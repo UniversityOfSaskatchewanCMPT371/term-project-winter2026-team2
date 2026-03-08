@@ -114,12 +114,32 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         }
     }
 
+    /// <summary>
+    /// Reference to the last spawned brick
+    /// </summary>
+    [SerializeField] private GameObject lastSpawnedBrick;
+
+    /// <inheritdoc/>
+    public GameObject LastSpawnedBrick
+    {
+        get
+        {
+            return lastSpawnedBrick;
+        }
+        set
+        {
+            Debug.Log("Setting LastSpawnedBrick to " + (value != null ? value.name : "null"));
+            lastSpawnedBrick = value;
+        }
+    }
+
     /// <inheritdoc/>
     private void Initialize()
     {
         currentBrickIndex = 0;
         spawnHeight = 1.0f;
         brickScale = 4.0f;
+        lastSpawnedBrick = null;
     }
 
 }

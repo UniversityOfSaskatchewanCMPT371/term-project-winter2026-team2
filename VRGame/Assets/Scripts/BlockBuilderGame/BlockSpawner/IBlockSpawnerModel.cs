@@ -142,5 +142,33 @@ public interface IBlockSpawnerModel
         ///     - Sets the BrickScale to the provided value
         /// </remarks>
         set; 
-        }
+    }
+
+    /// <summary>
+    /// Reference to the last spawned brick
+    /// </summary>
+    GameObject LastSpawnedBrick
+    {
+        /// <summary>
+        /// Getter for LastSpawnedBrick
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - None (can be null if no brick has been spawned yet)
+        /// post-condition:
+        ///     - Returns the reference to the last spawned brick GameObject
+        /// </remarks>
+        get;
+
+        /// <summary>
+        /// Setter for LastSpawnedBrick
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - Input value can be null or a valid GameObject reference
+        /// post-condition:
+        ///     - Sets the LastSpawnedBrick to the provided reference
+        /// </remarks>
+        set;
+    }
 }
