@@ -108,4 +108,17 @@ public class BlockSpawnerView : MonoBehaviour, IBlockSpawnerView
         return selectedColor;
     }
 
+    /// <inheritdoc/>
+    public void DestroyBrick(GameObject brick)
+    {
+        if (brick != null)
+        {
+            Destroy(brick);
+        }
+        else
+        {
+            Debug.Log("DestroyBrick called on null brick, nothing to destroy");
+        }
+    }
+
 }

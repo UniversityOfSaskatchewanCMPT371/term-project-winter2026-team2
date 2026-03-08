@@ -140,6 +140,15 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         Assert.IsNotNull(model, "Model is null in SpawnNextBrick");
         Assert.IsNotNull(view, "View is null in SpawnNextBrick");
 
+        // Destroy the previous brick if it exists
+        GameObject previousBrick = model.LastSpawnedBrick;
+        if (previousBrick != null)
+        {
+            Debug.Log("[BlockSpawnerController] Destroying previous brick: " + previousBrick.name);
+            view.DestroyBrick(previousBrick);
+            model.LastSpawnedBrick = null;
+        }
+
         // Get current brick prefab from model
         GameObject[] brickPrefabs = model.BrickPrefabs;
         int currentIndex = model.CurrentBrickIndex;
@@ -160,13 +169,16 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         float height = model.SpawnHeight;
         Vector3 spawnPosition = spawnTransform.position + Vector3.up * height;
 
-        Debug.Log("Spawning brick at position: " + spawnPosition);
+        Debug.Log("[BlockSpawnerController] Spawning brick at position: " + spawnPosition);
 
         // Instantiate the brick through the view
         GameObject spawnedBrick = view.InstantiateBrick(prefabToSpawn, spawnPosition, Quaternion.identity, model.BrickScale);
 
         // Configure brick visuals and physics
         view.ConfigureBrickVisuals(spawnedBrick);
+
+        // Store reference to the spawned brick
+        model.LastSpawnedBrick = spawnedBrick;
 
         // Cycle to next brick type
         int nextIndex = (currentIndex + 1) % brickPrefabs.Length;
