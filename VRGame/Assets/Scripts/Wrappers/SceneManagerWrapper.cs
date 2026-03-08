@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 /// Wrapper class for unity's SceneManager. Made so that calls to sceneManager can be mocked
 /// out for unit testign
 /// </summary>
-public class SceneManagerWrapper
+public class SceneManagerWrapper : ISceneManagerWrapper
 {
 
     /// <summary>

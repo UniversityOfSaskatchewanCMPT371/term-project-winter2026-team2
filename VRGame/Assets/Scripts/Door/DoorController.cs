@@ -187,7 +187,10 @@ public class DoorController : MonoBehaviour, IDoorController
             playerController.teleportPlayerTo(teleportPosition, teleportRotation);
             triggerDebounce = false;
         };
+    }
 
-
+    private void Start()
+    {
+        Init();
     }
 }

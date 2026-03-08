@@ -7,7 +7,28 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Resources/Scenes/FrontalLobe.unity
-    guid: 8145f1ae81847fa4db11158d76f4eadd
+    guid: 70e1cf568388562458c54ba9ba8e04fb
+  - enabled: 1
+    path: Assets/Resources/Scenes/Hub.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Resources/Scenes/PracticeRoom.unity
+    guid: 1836d79746252514f8c88d0d9314ca50
+  - enabled: 1
+    path: Assets/Resources/Scenes/Cerebrum.unity
+    guid: d9789628ae42f5f4f9b6a69f2f3bd6fa
+  - enabled: 1
+    path: Assets/Resources/Scenes/Temporal.unity
+    guid: 5e08d031b852c5845a44c9071ed408b0
+  - enabled: 1
+    path: Assets/Resources/Scenes/Occipital Lobe.unity
+    guid: 9d555d81d38223040824427546495ed2
+  - enabled: 1
+    path: Assets/Resources/Scenes/Parietal Lobe.unity
+    guid: 51810218aa2f3ae47a2fb0b6b0cd2724
+  - enabled: 1
+    path: Assets/Resources/Scenes/Frontal Lobe.unity
+    guid: 1c9e32b0f5a59c346a4e402ff023118d
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9bec1ce6a03ccba4b9a8215241b32e63, type: 2}

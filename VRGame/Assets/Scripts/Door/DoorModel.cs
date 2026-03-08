@@ -293,6 +293,24 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// </remarks>
     private void Start()
     {
+        // Init();
+    }
+
+    private void Awake()
+    {
+        // Invoking Init() in Awake() allows the doorId
+        // to be added to the dictionary before model.GetTargetDoor() 
+        // gets invoked by 'loadingScene.Completed' event.
+        // Preventing errors from occuring when model.GetTargetDoor() yields 'Target door not found'
         Init();
+    }
+
+    void OnDestroy()
+    {
+        // There was a problem with scenes loading and unloading
+        if (doorLookup.ContainsKey(doorId))
+        {
+            doorLookup.Remove(doorId);
+        }
     }
 }
