@@ -21,4 +21,16 @@ public interface IBlockSpawnerView
     /// </summary>
     /// <param name="brick">The brick GameObject to configure</param>
     void ConfigureBrickVisuals(GameObject brick);
+
+    /// <summary>
+    /// Destroys a brick GameObject
+    /// </summary>
+    /// <param name="brick">The brick GameObject to destroy</param>
+    /// <remarks>
+    /// pre-condition:
+    ///     - brick can be null or a valid GameObject reference
+    /// post-condition:
+    ///     - If brick is not null, it is destroyed from the scene
+    /// </remarks>
+    void DestroyBrick(GameObject brick);
 }
