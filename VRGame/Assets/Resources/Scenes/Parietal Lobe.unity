@@ -554,6 +554,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &322966645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 19064736505062540, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 512867996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6803edce0201f574f923fd9d10e5b30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &334599331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -852,6 +863,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3533369827395663398, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.data[1].groupMember
+      value: 
+      objectReference: {fileID: 322966645}
+    - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.data[1].overrideGroupMembers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.data[1].overrideGroupMembers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1210233837}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1293,6 +1324,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd9dfeff886144beb1db1118ec1a96e, type: 3}
+--- !u!114 &1210233837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6045481230268494804, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 512867996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4253f32900bcc4d499d675566142ded0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1218105946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1438,12 +1480,6 @@ PrefabInstance:
       addedObject: {fileID: 1246677045}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8501edab3ec9e4f20ba11dcb4459baf8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1246677044}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8501edab3ec9e4f20ba11dcb4459baf8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1246677043}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8501edab3ec9e4f20ba11dcb4459baf8, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1246677042}
   m_SourcePrefab: {fileID: 100100000, guid: 8501edab3ec9e4f20ba11dcb4459baf8, type: 3}
 --- !u!1 &1246677041 stripped
@@ -1463,34 +1499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf8ab0a969df45ac882e8d4a6f193e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSpawnerController: {fileID: 0}
-  enableXRControllerClickForTesting: 1
---- !u!114 &1246677043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1246677041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 205e0a669e9cc4b389cb1a6f4662c30e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1246677044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1246677041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e517192f848744029cd0e7723a22171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnerController: {fileID: 0}
-  enableXRControllerClickForTesting: 0
+  blockSpawnerController: {fileID: 1465769650}
+  enableMouseClick: 1
 --- !u!65 &1246677045
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1506,7 +1516,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
