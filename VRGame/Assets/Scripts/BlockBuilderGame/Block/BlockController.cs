@@ -17,10 +17,12 @@ public class BlockController : MonoBehaviour, IBlockController
     /// </summary>
     [SerializeField] private IBlockView view;
 
-    /// <inheritdoc/> 
+    /// <summary>
+    /// Awake method to initialize the Model and View components
+    /// </summary>
     private void Awake()
     {
-        
+        // Get or add Model component
         model = GetComponent<IBlockModel>();
         if (model == null)
         {
@@ -33,6 +35,7 @@ public class BlockController : MonoBehaviour, IBlockController
             Assert.IsNotNull("BlockController Model component is null on " + gameObject.name);
         }
         
+        // Get or add View component
         view = GetComponent<IBlockView>();
         if (view == null)
         {
@@ -47,8 +50,6 @@ public class BlockController : MonoBehaviour, IBlockController
         
         Assert.IsNotNull(model, "Model is null after initialization");
         Assert.IsNotNull(view, "View is null after initialization");
-        
-        Debug.Log("Awake complete on BlockController for " + gameObject.name);
     }
 
     /// <inheritdoc/>
@@ -61,6 +62,7 @@ public class BlockController : MonoBehaviour, IBlockController
             return;
         }
         
+        // Set the block type in the model and update the view
         model.BlockType = blockType;
         view.SetBlockType(blockType);
     }
@@ -78,6 +80,7 @@ public class BlockController : MonoBehaviour, IBlockController
         Assert.IsNotNull(model, "BlockController Model is null in UpdatePosition");
         Assert.IsNotNull(view, "BlockController View is null in UpdatePosition");
         
+        // Update the model's position and then update the view to transform the block in the scene
         model.Position = position;
         view.UpdateVisuals(position, model.Rotation);
     }
@@ -91,6 +94,8 @@ public class BlockController : MonoBehaviour, IBlockController
             Assert.IsNotNull("Rotation cannot be null in UpdateRotation");
             return;
         }
+
+        // Update the model's rotation and then update the view to transform the block in the scene
         model.Rotation = rotation;
         view.UpdateVisuals(model.Position, rotation);
     }

@@ -3,10 +3,17 @@ using UnityEngine.Assertions;
 
 public class BlockView : MonoBehaviour, IBlockView
 {
+    /// <summary>
+    /// Current type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+    /// </summary>
     [SerializeField] private string currentBlockType;
 
+    /// <summary>
+    /// Awake method to perform initial checks and setup
+    /// </summary>
     private void Awake()
     {
+        // Check for MeshRenderer component in children
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
         if (renderers.Length <= 0)
         {
@@ -15,6 +22,7 @@ public class BlockView : MonoBehaviour, IBlockView
         } 
     }
 
+    /// <inheritdoc/>
     public void UpdateVisuals(Vector3 position, Quaternion rotation)
     {
         if (position == null)
@@ -29,9 +37,11 @@ public class BlockView : MonoBehaviour, IBlockView
             Assert.IsNotNull("Rotation cannot be null in UpdateVisuals");
             return;
         }   
+        // Store old position and rotation for debugging
         Vector3 oldPosition = transform.position;
         Quaternion oldRotation = transform.rotation;
         
+        // Update position and rotation
         transform.position = position;
         transform.rotation = rotation;
         
@@ -39,6 +49,7 @@ public class BlockView : MonoBehaviour, IBlockView
         Debug.Log("Rotation updated from " + oldRotation.eulerAngles + " to " + transform.rotation.eulerAngles);
     }
 
+    /// <inheritdoc/>
     public void SetBlockType(string blockType)
     {
         if (blockType == null)
@@ -47,6 +58,7 @@ public class BlockView : MonoBehaviour, IBlockView
             Assert.IsNotNull(blockType, "BlockType cannot be null in SetBlockType");
             return;
         }
+        // Set the block type
         currentBlockType = blockType;
     }
 }
