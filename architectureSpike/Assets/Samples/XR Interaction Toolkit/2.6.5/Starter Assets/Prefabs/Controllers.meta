@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/Resources/FreeAssets.meta
+guid: 58d743961dcac02458684893c37b04f6
+========
 guid: 8cb8501f33d08a04fabf074fd81eaf76
+>>>>>>>> id3:architectureSpike/Assets/Samples/XR Interaction Toolkit/2.6.5/Starter Assets/Prefabs/Controllers.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
