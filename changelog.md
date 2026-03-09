@@ -4,6 +4,16 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.1.1] - 2026-03-08
+
+### Added
+
+- Room MVC
+
+### Fixed
+
+- This section is for bug fixes and patches
+
 ## [1.1.0] - 2026-03-05
 
 ### Added
