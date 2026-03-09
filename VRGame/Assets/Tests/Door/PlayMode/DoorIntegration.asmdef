@@ -1,0 +1,23 @@
+{
+    "name": "DoorIntegration",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9a88817da2cdeb94388ab1c4165583ac",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:2e88485f4337d48718af1985cd6b22fe",
+        "GUID:9e1df1f0daae94a9fb20939929bdc33c",
+        "GUID:ad05424ad703b431db9414aa4054867f",
+        "GUID:54e04f0c2d17e4d318cc9cdc167f31b3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
