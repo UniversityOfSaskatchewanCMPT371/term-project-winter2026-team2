@@ -8,17 +8,6 @@ using UnityEngine;
 /// </summary>
 public class RoomModel : Model, IRoomModel
 {
-    /// DATA SECTION
-
-    /// <summary>
-    /// Static dictionary for rooms.
-    /// </summary>
-    /// <remarks>
-    /// int       : A Model's 'roomId' variable is used as a key to look up its Model.
-    /// RoomModel : The Model that is mapped to its 'roomId' variable as a key.
-    /// </remarks>
-    private static Dictionary<SceneEnum, RoomModel> roomLookUp = new Dictionary<SceneEnum, RoomModel>();
-
     /// <summary>
     /// Unique identifier for this room. Used as a key in 'roomLookUp' dictionary
     /// variable which maps to this Model.
@@ -48,33 +37,9 @@ public class RoomModel : Model, IRoomModel
     public SceneEnum Id
     {
         /// <inheritdoc/>
-        get
-        {
-            if (roomId < 0)
-            {
-                Debug.LogError("Field 'roomId' is negative.");
-                Debug.Assert(roomId >= 0, "Field 'roomId' must be non-negative.");
-            }
-
-            return roomId;
-        }
+        get => roomId;
         /// <inheritdoc/>
-        set
-        {
-            if (value < 0)
-            {
-                Debug.LogError("'value' is negative.");
-                Debug.Assert(value >= 0, "'value' must be non-negative.");
-            }
-
-            if (roomLookUp.ContainsKey(value))
-            {
-                Debug.LogError("'value' is already taken.");
-                Debug.Assert(roomLookUp.ContainsKey(value) == false, "'value' must be unique.");
-            }
-
-            roomId = value;
-        }
+        set => roomId = value;
     }
 
     /// <inheritdoc/>
@@ -147,13 +112,6 @@ public class RoomModel : Model, IRoomModel
         }
         Debug.Assert(roomName.Trim() != "", "Field 'roomName' cannot be exclusively whitespace.");
 
-        // Model's 'roomId' variable cannot be initialized to negative integer
-        if (roomId < 0)
-        {
-            Debug.LogError("Field 'roomId' is negative.");
-        }
-        Debug.Assert(roomId >= 0, "Field 'roomId' must be non-negative.");
-
         // Model's 'minigameCompleted' variable must be initialized to false
         if (minigameCompleted)
         {
@@ -168,28 +126,6 @@ public class RoomModel : Model, IRoomModel
         }
         Debug.Assert(educationalDialogueCompleted == false, "Field 'eductionalDialogueCompleted' must be set to false.");
 
-        // see if this Model's 'roomId' variable already exists in the 'roomLookUp' dictionary.
-        // This enforces each room Model to have a unique 'roomId'.
-        bool isKeyTaken = roomLookUp.ContainsKey(roomId);
-        if (isKeyTaken)
-        {
-            Debug.LogError("Field 'roomId' is already taken.");
-        } else
-        {
-            // add the key => Model into 'roomLookUp' dictionary.
-            roomLookUp.Add(roomId, this);
-        }
-        Debug.Assert(isKeyTaken == false, "Field 'roomId' must be unique.");
-
         Debug.Log("RoomModel successfully initialized.");
-    }
-
-    /// <inheritdoc/>
-    public void OnDestroy()
-    {
-        if (roomLookUp.ContainsKey(Id))
-        {
-            roomLookUp.Remove(Id);
-        }
     }
 }

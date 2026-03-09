@@ -24,7 +24,6 @@ public class RoomModelTests
         // initialize
         roomModel.Init();
 
-        roomModel.OnDestroy();
         // clean up game object
         Object.DestroyImmediate(go);
     }
@@ -42,7 +41,7 @@ public class RoomModelTests
         IRoomModel roomModel = go.AddComponent<RoomModel>();;
 
         // verify 'roomId' values
-        Assert.NotNull(roomModel.Id, $"roomModel.Id cannot be null. Got '{roomModel.Id}'");
+        Assert.NotNull(roomModel.Id, $"roomModel.Id was not received.");
 
         // clean up game object
         Object.DestroyImmediate(go);

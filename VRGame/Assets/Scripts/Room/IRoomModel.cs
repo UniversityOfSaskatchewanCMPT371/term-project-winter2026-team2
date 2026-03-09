@@ -14,7 +14,7 @@ public interface IRoomModel : IModel
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - Model's 'roomId' variable must be non-negative.
+        /// - None.
         /// Postconditions:
         /// - Returns Model's 'roomId' variable.
         /// </remarks>
@@ -24,11 +24,9 @@ public interface IRoomModel : IModel
         /// </summary>
         /// <remarks
         /// Preconditions:
-        /// - 'value' must be non-negative.
-        /// - 'value' must not exist in 'roomLookUp' dictionary.
+        /// - 'value' must be SceneEnum.
         /// Postconditions:
-        /// - Certifies that the 'value' is unique. If so, then the
-        /// Model's 'roomId' variable set to input 'value'
+        /// - Model's 'roomId' variable set to input 'value'
         /// </remarks>
         set;
     }
@@ -135,7 +133,6 @@ public interface IRoomModel : IModel
     /// <remarks>
     /// Preconditions:
     /// - Model's 'roomName' variable is not null or exclusively whitespace.
-    /// - Model's 'roomId' variable is non-negative and unique in 'roomLookUp' dictionary.
     /// - Model's 'minigameCompleted' variable are false.
     /// - Model's 'educationalDialogueCompleted' variable are false.
     /// Postconditions:
@@ -144,15 +141,4 @@ public interface IRoomModel : IModel
     /// - Logs errors and assertions if any of the preconditions are violated, otherwise logs successful initialization.
     /// </remarks>
     new void Init();
-
-    /// <summary>
-    /// Called when the gameObject this
-    /// component is attached to is destroyed.
-    /// This function is provided by Unity.
-    /// </summary>
-    /// <remarks>
-    /// This method is called by DestroyImmediate(this.gameObject) or Destroy(this.gameObject) which is used
-    /// in testing. Otherwise calling Init() in testing would result in failure since each Model's 'roomId' variable is preset to 0.
-    /// </remarks>
-    void OnDestroy();
 }

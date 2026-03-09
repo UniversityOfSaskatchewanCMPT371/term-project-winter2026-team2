@@ -150,9 +150,6 @@ public class RoomViewTests
         // verify 'model' updated
         Assert.IsTrue(roomModel.MinigameCompleted, "'MinigameCompleted' field was not set to true.");
 
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel.OnDestroy();
-
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
@@ -212,9 +209,6 @@ public class RoomViewTests
 
         // verify 'model' updated
         Assert.IsTrue(roomModel.EducationalDialogueCompleted, "'Expected Model's 'EducationalDialogueCompleted' to be True, but got False.");
-
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel.OnDestroy();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);

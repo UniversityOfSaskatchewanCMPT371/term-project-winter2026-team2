@@ -26,61 +26,8 @@ public class RoomModelTests
 
         // no errors should occur
 
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel.OnDestroy();
-
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
-    }
-
-    /// <summary>
-    /// Test that Init() fails when the 'roomId' is already taken.
-    /// </summary>
-    [UnityTest]
-    public IEnumerator InitIdAlreadyTaken()
-    {
-        // create first room
-        GameObject go1 = new GameObject();
-
-        // add 'model' component to first room
-        RoomModel roomModel1 = go1.AddComponent<RoomModel>();
-
-        // setup first room
-        roomModel1.Name = "TestA";
-        roomModel1.Id = SceneEnum.Hub;
-        roomModel1.MinigameCompleted = false;
-        roomModel1.EducationalDialogueCompleted = false;
-
-        // allow Start() to run which invokes Init()
-        yield return null;
-
-        // create second room with same id
-        GameObject go2 = new GameObject();
-
-        LogAssert.Expect(LogType.Error, "'value' is already taken.");
-        
-        // setup second room WaitHandle same 'roomId'
-        RoomModel roomModel2 = go2.AddComponent<RoomModel>();
-        roomModel2.Name = "TestB";
-        roomModel2.Id = SceneEnum.Hub;
-        roomModel2.MinigameCompleted = false;
-        roomModel2.EducationalDialogueCompleted = false;
-
-        // expect error and assertion to occur since two rooms have the same id
-        LogAssert.Expect(LogType.Assert, "'value' must be unique.");
-        LogAssert.Expect(LogType.Error, "Field 'roomId' is already taken.");
-        LogAssert.Expect(LogType.Assert, "Field 'roomId' must be unique.");
-
-        // allow Start() to run which invokes Init()
-        yield return null;
-
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel1.OnDestroy();
-        roomModel2.OnDestroy();
-
-        // clean up game objects
-        UnityEngine.Object.DestroyImmediate(go1);
-        UnityEngine.Object.DestroyImmediate(go2);
     }
 
     /// <summary>
@@ -106,9 +53,6 @@ public class RoomModelTests
 
         // allow Start() to run which invokes Init()
         yield return null;
-
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel.OnDestroy();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -137,9 +81,6 @@ public class RoomModelTests
         // allow Start() to run which invokes Init()
         yield return null;
 
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel.OnDestroy();
-
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
     }
@@ -165,9 +106,6 @@ public class RoomModelTests
 
         // allow Start() to run which invoked Init()
         yield return null;
-
-        // manually call OnDestroy to clear Model's static roomLookUp dictionary
-        roomModel.OnDestroy();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
