@@ -1,0 +1,17 @@
+using UnityEngine;
+
+// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+
+/// <summary>
+/// Model component of #SCRIPTNAME#.
+/// </summary>
+public class #SCRIPTNAME# : Model, I#SCRIPTNAME#
+{
+
+    /// <inheritdoc/>
+    public override void Init()
+    {
+
+    }
+}
+#NOTRIM#
