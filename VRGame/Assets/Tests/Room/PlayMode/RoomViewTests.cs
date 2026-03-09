@@ -112,11 +112,10 @@ public class RoomViewTests
         // allow Start() to run which invoked Init()
         yield return null;
 
-        // expect an exception to be thrown since MinigameCompleted() requires 'controller' component
-        Assert.Throws<AssertionException>(() =>
-        {
-            roomView.MinigameCompleted();
-        });
+        // expect a warning since 'controller' component was not initialized
+        LogAssert.Expect(LogType.Warning, "Controller component not initialized.");
+            
+        roomView.MinigameCompleted();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -172,11 +171,10 @@ public class RoomViewTests
         // allow Start() to run which invoked Init()
         yield return null;
 
-        // expect an exception to be thrown since EducationDialguesCompleted() requires 'controller' component
-        Assert.Throws<AssertionException>(() =>
-        {
-            roomView.EducationalDialoguesCompleted();
-        });
+        // expect a warning since 'controller' component was not initialized
+        LogAssert.Expect(LogType.Warning, "Controller component not initialized.");
+
+        roomView.EducationalDialoguesCompleted();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);

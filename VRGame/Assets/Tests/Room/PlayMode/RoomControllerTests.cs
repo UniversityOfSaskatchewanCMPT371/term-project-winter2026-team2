@@ -115,11 +115,10 @@ public class RoomControllerTests
         // allow Start() to run which invokes Init()
         yield return null;
 
-        // expect an exception to be thrown since HandleCompleteMinigame() requires 'model' component
-        Assert.Throws<AssertionException>(() =>
-        {
-            roomController.HandleCompleteMinigame();
-        }, "Expected exception, but no exception was thrown.");
+        // expect a warning since 'model' component was not initialized
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+
+        roomController.HandleCompleteMinigame();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -180,11 +179,10 @@ public class RoomControllerTests
         // allow Start() to run which invokes Init()
         yield return null;
 
-        // expect an exception to be thrown since HandleCompleteEducationalDialogue() requires 'model' component
-        Assert.Throws<AssertionException>(() =>
-        {
-            roomController.HandleCompleteEducationalDialogue();
-        }, "Expected exception, but no exception was thrown.");
+        // expect a warning since 'model' component was not initialized
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+
+        roomController.HandleCompleteEducationalDialogue();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -245,11 +243,10 @@ public class RoomControllerTests
         // allow Start() to run which invokes Init()
         yield return null;
 
-        // expect an exception to be thrown since HandleCompletion() requires 'model' component
-        Assert.Throws<AssertionException>(() =>
-        {
-            roomController.HandleCompletion();
-        }, "Expected exception, but no exception was thrown.");
+        // expect a warning since 'model' component was not initialized
+        LogAssert.Expect(LogType.Warning, "Model component not initialized.");
+        
+        roomController.HandleCompletion();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);
@@ -277,11 +274,10 @@ public class RoomControllerTests
         // allow Start() to run which invokes Init()
         yield return null;
 
-        // expect an exception to be thrown since HandleCompletion() requires 'view' component
-        Assert.Throws<AssertionException>(() =>
-        {
-            roomController.HandleCompletion();
-        }, "Expected exception, but no exception was thrown.");
+        // expect a warning since 'view' component was not initialized
+        LogAssert.Expect(LogType.Warning, "View component not initialized.");
+
+        roomController.HandleCompletion();
 
         // clean up game object
         UnityEngine.Object.DestroyImmediate(go);

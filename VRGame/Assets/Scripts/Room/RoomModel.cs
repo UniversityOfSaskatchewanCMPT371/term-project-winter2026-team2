@@ -9,8 +9,7 @@ using UnityEngine;
 public class RoomModel : Model, IRoomModel
 {
     /// <summary>
-    /// Unique identifier for this room. Used as a key in 'roomLookUp' dictionary
-    /// variable which maps to this Model.
+    /// Unique identifier for this room. Preset to Hub so it will never be null
     /// </summary>
     [SerializeField]
     private SceneEnum roomId = SceneEnum.Hub;

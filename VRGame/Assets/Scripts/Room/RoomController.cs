@@ -82,6 +82,4 @@ public class RoomController : Controller<IRoomModel, IRoomView>, IRoomController
 
         Debug.Log("RoomController initialized succefully.");
     }
-
-    
 }
