@@ -18,15 +18,19 @@ public class DoorController_SceneChanger
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
+        doorM.ResetDoorLookup();
         doorM.DestinationSceneId = 0;
         doorC.DoorModel = doorM;
         doorM.TargetDoorId = 2;
 
         // create target for our door
         DoorModel targetDoor = go.AddComponent<DoorModel>();
+        doorM.ResetDoorLookup();
         targetDoor.DoorId = 2;
         targetDoor.TargetDoorId = 1;
 
+        doorM.Init();
+        targetDoor.Init();
 
         //create actual sceneChangerController
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
@@ -62,16 +66,20 @@ public class DoorController_SceneChanger
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
+        doorM.ResetDoorLookup();
         doorM.DestinationSceneId = 0;
-        doorC.DoorModel = doorM;
         doorM.DoorId = 1;
         doorM.TargetDoorId = 2;
 
         // create target for our door
         DoorModel targetDoor = go.AddComponent<DoorModel>();
+        doorM.ResetDoorLookup();
         targetDoor.DoorId = 2;
         targetDoor.TargetDoorId = 1;
 
+        doorM.Init();
+        targetDoor.Init();
+        doorC.DoorModel = doorM;
 
         //create actual sceneChangerController
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();

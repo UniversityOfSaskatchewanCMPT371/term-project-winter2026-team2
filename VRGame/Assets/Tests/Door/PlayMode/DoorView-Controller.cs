@@ -16,8 +16,16 @@ public class DoorView_Controller_Integration
         DoorView doorV = go.AddComponent<DoorView>();
 
         // real door controller, not mocked
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         doorV.DoorController = doorC;
+
+        // doorController needs model reference to init properly        
+        IDoorModel doorMock = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorMock;
+
+
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
 
         // if it is initialized without causing exception, we're good
         yield return null;
@@ -53,10 +61,15 @@ public class DoorView_Controller_Integration
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
 
         doorV.DoorController = doorC;
+        // doorController needs model reference to init properly        
+        IDoorModel doorMock = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorMock;
 
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
         // init
         yield return null;
 
@@ -110,9 +123,16 @@ public class DoorView_Controller_Integration
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
 
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         doorV.DoorController = doorC;
 
+        // doorController needs model reference to init properly        
+        IDoorModel doorMock = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorMock;
+
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
+        
         yield return null;
 
         // no playerController within this gameObject
