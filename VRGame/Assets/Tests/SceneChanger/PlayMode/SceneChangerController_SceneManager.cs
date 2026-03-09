@@ -19,8 +19,8 @@ public class SceneChangerController_SceneManager
     {
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
-        sceneC.SceneManagerWrapper = sceneMW;
+        //SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        //sceneC.SceneManagerWrapper = sceneMW;
         // Use yield to skip a frame.
         yield return null;
         // if no assertions triggered, passed
@@ -34,8 +34,8 @@ public class SceneChangerController_SceneManager
     {
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
-        sceneC.SceneManagerWrapper = sceneMW;
+        //SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        //sceneC.SceneManagerWrapper = sceneMW;
         // Use yield to skip a frame.
         yield return null;
 
@@ -43,26 +43,18 @@ public class SceneChangerController_SceneManager
         Assert.IsFalse(sceneC.LoadDebounce);
 
         sceneC.ResetInstance();
-        UnityEngine.Object.DestroyImmediate(go);
+        UnityEngine.Object.Destroy(go);
         yield return null;
     }
 
     [UnityTest]
-    public IEnumerator Invalid_SceneManagerWrapper()
+    public IEnumerator Check_SceneManagerWrapper()
     {
         // Use the Assert class to test conditions
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        // not setting sceneManagerWrapper 
 
-        // test should cause error, tell unity to ignore error log
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try
-        {
-            sceneC.Init();
-            Assert.Fail("Null sceneManagerWrapper should have triggered exception");
-        }
-        catch { }
+        Assert.IsNotNull(sceneC.SceneManagerWrapper);
 
         sceneC.ResetInstance();
         UnityEngine.Object.DestroyImmediate(go);
@@ -107,8 +99,6 @@ public class SceneChangerController_SceneManager
 
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
-        sceneC.SceneManagerWrapper = sceneMW;
         // Use yield to skip a frame.
         yield return null;
 
