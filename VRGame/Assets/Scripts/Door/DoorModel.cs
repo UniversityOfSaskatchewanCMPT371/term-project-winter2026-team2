@@ -241,7 +241,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
             doorLookup = new Dictionary<int, IDoorModel>();
             Debug.Log("doorLookup dictionary created");
         }
-        Assert.IsFalse(doorLookup.ContainsKey(doorId), "A doorModel with this ID already exists");
+        Assert.IsFalse(doorLookup.ContainsKey(doorId), $"A doorModel with this ID: ${doorId} already exists");
 
         if (doorId < 0)
         {
@@ -291,10 +291,10 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// PostConditions:
     /// - all side effects caused by calling Init();
     /// </remarks>
-    private void Start()
-    {
-        // Init();
-    }
+    // private void Start()
+    // {
+    //     // Init();
+    // }
 
     private void Awake()
     {

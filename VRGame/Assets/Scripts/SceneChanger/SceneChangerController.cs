@@ -48,6 +48,10 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
 
             sceneManagerWrapper = value;
         }
+        get
+        {
+            return sceneManagerWrapper;
+        }
     }
 
     /// <summary>
@@ -153,6 +157,6 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     private void Start()
     {
         Init();
-        // DontDestroyOnLoad(instance);
+        //DontDestroyOnLoad(instance);
     }
 }
