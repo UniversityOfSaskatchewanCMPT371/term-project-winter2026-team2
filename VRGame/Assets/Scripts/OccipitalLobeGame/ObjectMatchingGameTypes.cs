@@ -11,7 +11,7 @@ namespace ObjectMatchGame
     }
 
     [System.Serializable]
-    public struct levelData
+    internal struct levelData
     {
         public int levelNumber;
         public string CorrectObjectID;

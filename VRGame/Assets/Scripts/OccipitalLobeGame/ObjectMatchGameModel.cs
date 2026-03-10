@@ -6,14 +6,15 @@ using UnityEngine;
 
 public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 {
-    private int currentLevel;
+    internal int currentLevel;
     private int totalLevels;
     private int gameScore;
     private int levelScore;
     private int failedGuesses;
     private GameState gameState;
     private string currentGuessID;
-    [SerializeField] private levelData[] levels;
+    [SerializeField] internal levelData[] levels;
+    
 
 
     public override void Init()

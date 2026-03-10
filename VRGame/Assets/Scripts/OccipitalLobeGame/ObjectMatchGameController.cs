@@ -8,9 +8,9 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
     Internal references to the model and view layer. This lets us use mocks to substitute 
     for the model and view in tests, while still allowing us to assign them in the inspector
     for ease of use in the editor.
-    */
-    internal IObjectMatchGameView view;
-    internal IObjectMatchGameModel model;
+    // */
+    // internal IObjectMatchGameView view;
+    // internal IObjectMatchGameModel model;
     /// </inheritdoc>
     public void PotentialGuess(string GuessItem)
     {

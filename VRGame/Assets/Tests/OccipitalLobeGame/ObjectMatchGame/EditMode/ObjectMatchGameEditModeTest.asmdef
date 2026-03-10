@@ -6,7 +6,11 @@
         "UnityEditor.TestRunner",
         "ObjectMatchGame",
         "TNRD.NSubstitute",
-        "ScriptTemplates"
+        "ScriptTemplates",
+        "DoorTest",
+        "SceneChangerTest",
+        "Door",
+        "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
