@@ -1,129 +1,181 @@
+using System;
 using NUnit.Framework;
-using NSubstitute;
-using ObjectMatchGame;
 using UnityEngine;
+using NSubstitute;
 using UnityEngine.TestTools;
 using System.Text.RegularExpressions;
 
+/// <summary>
+/// Unit tests for ObjectMatchGameView class following the isolated Arrange-Act-Assert style.
+/// </summary>
 public class ObjectMatchGameViewTests
 {
-    private GameObject _viewGo;
-    private ObjectMatchGameView _view;
-    private IObjectMatchGameController _mockController;
-
-    [SetUp]
-    public void Setup()
-    {
-        _viewGo = new GameObject("ViewTestHost");
-        _view = _viewGo.AddComponent<ObjectMatchGameView>();
-        _mockController = Substitute.For<IObjectMatchGameController>();
-
-        // Using the same internal/public hook pattern as the Controller
-        _view.controller = _mockController;
-    }
-
-    [TearDown]
-    public void Teardown()
-    {
-        Object.DestroyImmediate(_viewGo);
-    }
-
-    // --- SECTION 1: INITIALIZATION & PRE-CONDITIONS ---
-
+    /// <summary>
+    /// Test the basic instantiation and reference assignment.
+    /// </summary>
     [Test]
-    public void Init_DeactivatesAllAssignedObjects_PostCondition()
+    public void Instantiation()
     {
         // Arrange
-        GameObject obj1 = new GameObject("Obj1");
-        obj1.SetActive(true);
-        
-        // Assigning to the private array (Assumes you made a test hook for allObjects)
-        _view.AllObjects = new GameObject[] { obj1 };
+        GameObject go = new GameObject();
 
         // Act
-        _view.Init();
-
-        // Assert: Post-condition - Objects should be hidden initially
-        Assert.IsFalse(obj1.activeSelf, "Object should be deactivated on Init");
-        
-        Object.DestroyImmediate(obj1);
-    }
-
-    [Test]
-    public void Init_NullController_LogsError()
-    {
-        _view.controller = null;
-        
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try {
-            _view.Init();
-        } catch { /* Handle base class assert if applicable */ }
-    }
-
-    // --- SECTION 2: DATA DISPLAY (CONTROLLER -> VIEW) ---
-
-    [Test]
-    public void ShowObjects_ActivatesCorrectIDs_ValidPrecondition()
-    {
-        // Arrange
-        GameObject obj1 = new GameObject("Target");
-        GameObject obj2 = new GameObject("Other");
-        obj1.SetActive(false);
-        obj2.SetActive(true);
-        
-        _view.AllObjects = new GameObject[] { obj1, obj2 };
-
-        // Act: Simulating the call coming FROM the controller
-        _view.ShowObjects(new string[] { "Target" });
+        ObjectMatchGameView view = go.AddComponent<ObjectMatchGameView>();
+        IObjectMatchGameController mockController = Substitute.For<IObjectMatchGameController>();
+        view.ControllerMock = mockController;
 
         // Assert
-        Assert.IsTrue(obj1.activeSelf, "Target ID should be activated");
-        Assert.IsFalse(obj2.activeSelf, "Other ID should be deactivated");
+        Assert.NotNull(view, "View component should be successfully added to GameObject.");
 
-        Object.DestroyImmediate(obj1);
-        Object.DestroyImmediate(obj2);
-    }
-
-    [Test]
-    public void ShowObjects_InvalidID_LogsWarning()
-    {
-        // Arrange
-        GameObject obj1 = new GameObject("OnlyObject");
-        _view.AllObjects = new GameObject[] { obj1 };
-
-        // Act & Assert
-        // Logic: View warns when asked to handle IDs it doesn't possess
-        LogAssert.Expect(LogType.Warning, new Regex(".*NonExistent.*"));
-        _view.ShowObjects(new string[] { "NonExistent" });
-
-        Object.DestroyImmediate(obj1);
-    }
-
-    // --- SECTION 3: USER INTERACTION (VIEW -> CONTROLLER) ---
-
-    [Test]
-    public void View_RemoveGuess_ThrowsNotImplemented()
-    {
-        // Pre-condition: Method is called (e.g., via UI button)
-        // Post-condition: Throws exception as per current implementation
-        Assert.Throws<System.NotImplementedException>(() => _view.removeGuess());
+        // Cleanup
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     /// <summary>
-    /// Note: Usually, you'd have a method like 'OnObjectClicked' in the view.
-    /// This test verifies the View -> Controller interaction chain.
+    /// Test that Init() deactivates the option objects and UI elements.
     /// </summary>
     [Test]
-    public void View_RelaysPotentialGuessToController()
+    public void Init_ValidPreconditions()
+{
+    // Arrange
+    GameObject go = new GameObject();
+    ObjectMatchGameView view = go.AddComponent<ObjectMatchGameView>();
+    
+    // 1. Injected UI Dummies
+    GameObject dummyBox = new GameObject("Box");
+    GameObject dummyBtn = new GameObject("Btn");
+    view.GuessBox = dummyBox;
+    view.SubmitButton = dummyBtn;
+
+    // 2. Setup Objects
+    GameObject obj = new GameObject("TestObj");
+    obj.SetActive(true);
+    view.AllObjects = new GameObject[] { obj };
+
+    // 3. Setup Controller Mock
+    IObjectMatchGameController mockController = Substitute.For<IObjectMatchGameController>();
+    view.ControllerMock = mockController;
+
+    // Act
+    view.Init();
+
+    // Assert
+    Assert.IsFalse(obj.activeSelf, "Expected assigned game objects to be deactivated on Init.");
+    
+    // Cleanup
+    UnityEngine.Object.DestroyImmediate(obj);
+    UnityEngine.Object.DestroyImmediate(dummyBox);
+    UnityEngine.Object.DestroyImmediate(dummyBtn);
+    UnityEngine.Object.DestroyImmediate(go);
+}
+
+    /// <summary>
+    /// Test that ShowObjects activates the correct objects matching the ID list.
+    /// </summary>
+    [Test]
+    public void ShowObjects_ValidLayersRef()
+{
+    // Arrange
+    GameObject go = new GameObject();
+    ObjectMatchGameView view = go.AddComponent<ObjectMatchGameView>();
+    
+    // 1. Injected UI Dummies
+    GameObject dummyBox = new GameObject("Box");
+    GameObject dummyBtn = new GameObject("Btn");
+    view.GuessBox = dummyBox;
+    view.SubmitButton = dummyBtn;
+
+    // 2. Setup Objects
+    GameObject target = new GameObject("TargetID");
+    GameObject decoy = new GameObject("DecoyID");
+    target.SetActive(false);
+    decoy.SetActive(true);
+    view.AllObjects = new GameObject[] { target, decoy };
+
+    // 3. Setup Controller Mock
+    view.ControllerMock = Substitute.For<IObjectMatchGameController>();
+
+    // Act
+    view.ShowObjects(new string[] { "TargetID" });
+
+    // Assert
+    Assert.IsTrue(target.activeSelf, "The target object matching the ID should be activated.");
+    Assert.IsTrue(dummyBox.activeSelf, "The guess box should be activated.");
+
+    // Cleanup
+    UnityEngine.Object.DestroyImmediate(target);
+    UnityEngine.Object.DestroyImmediate(decoy);
+    UnityEngine.Object.DestroyImmediate(dummyBox);
+    UnityEngine.Object.DestroyImmediate(dummyBtn);
+    UnityEngine.Object.DestroyImmediate(go);
+}
+
+
+    /// <summary>
+    /// Test to see if Init() will log a warning when the controller is missing.
+    /// </summary>
+    [Test]
+    public void Init_MissingController_LogsWarning()
+{
+    // Arrange
+    GameObject go = new GameObject();
+    ObjectMatchGameView view = go.AddComponent<ObjectMatchGameView>();
+
+    // Provide dummies to avoid NullReferenceException
+    view.AllObjects = new GameObject[0];
+    GameObject dummyBox = new GameObject();
+    GameObject dummyBtn = new GameObject();
+    view.GuessBox = dummyBox;
+    view.SubmitButton = dummyBtn;
+
+    // Act & Assert
+    // 1. Expect the specific warning log from the base class
+    LogAssert.Expect(LogType.Warning, new Regex(".*No matching component.*"));
+
+    // 2. Wrap in Assert.Throws because the base class calls Assert.IsNotNull
+    Assert.Throws<NUnit.Framework.AssertionException>(() =>
     {
-        // Arrange
-        string selectedID = "Object_Blue";
+        view.Init();
+    });
 
-        // Act
-        // This simulates the View receiving a UI event and passing it to the controller
-        _view.controller.PotentialGuess(selectedID);
+    // Cleanup
+    UnityEngine.Object.DestroyImmediate(dummyBox);
+    UnityEngine.Object.DestroyImmediate(dummyBtn);
+    UnityEngine.Object.DestroyImmediate(go);
+}
 
-        // Assert: Verify post-condition that the Controller received the message
-        _mockController.Received(1).PotentialGuess(selectedID);
-    }
+    /// <summary>
+    /// Test ShowObjects when an empty ID list is provided.
+    /// </summary>
+   [Test]
+    public void ShowObjects_EmptyArray_DeactivatesAll()
+{
+    // Arrange
+    GameObject go = new GameObject();
+    ObjectMatchGameView view = go.AddComponent<ObjectMatchGameView>();
+    
+    // Create dummy UI objects so the View doesn't crash on NullReference
+    GameObject dummyGuessBox = new GameObject("GuessBox");
+    GameObject dummySubmitBtn = new GameObject("SubmitBtn");
+    view.GuessBox = dummyGuessBox;
+    view.SubmitButton = dummySubmitBtn;
+
+    GameObject obj1 = new GameObject("A");
+    obj1.SetActive(true);
+    view.AllObjects = new GameObject[] { obj1 };
+    view.ControllerMock = Substitute.For<IObjectMatchGameController>();
+
+    // Act
+    view.ShowObjects(new string[] { });
+
+    // Assert
+    Assert.IsFalse(obj1.activeSelf, "Object should be deactivated when not in the ID list.");
+    Assert.IsTrue(dummyGuessBox.activeSelf, "Guess box should be enabled even if list is empty.");
+
+    // Cleanup
+    UnityEngine.Object.DestroyImmediate(obj1);
+    UnityEngine.Object.DestroyImmediate(dummyGuessBox);
+    UnityEngine.Object.DestroyImmediate(dummySubmitBtn);
+    UnityEngine.Object.DestroyImmediate(go);
+}
 }

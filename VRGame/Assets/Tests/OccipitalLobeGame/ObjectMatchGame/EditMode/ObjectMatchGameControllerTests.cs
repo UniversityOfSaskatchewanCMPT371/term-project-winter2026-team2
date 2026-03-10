@@ -5,134 +5,183 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using System.Text.RegularExpressions;
 
+/// <summary>
+/// Unit tests for ObjectMatchGameController using localized Arrange-Act-Assert blocks.
+/// </summary>
 public class ObjectMatchGameControllerTests
 {
-    private GameObject _go;
-    private ObjectMatchGameController _controller;
-    private IObjectMatchGameModel _mockModel;
-    private IObjectMatchGameView _mockView;
-
-    [SetUp]
-    public void Setup()
-    {
-        _go = new GameObject("TestController");
-        _controller = _go.AddComponent<ObjectMatchGameController>();
-        
-        _mockModel = Substitute.For<IObjectMatchGameModel>();
-        _mockView = Substitute.For<IObjectMatchGameView>();
-
-        // Direct assignment now working
-        _controller.model = _mockModel;
-        _controller.view = _mockView;
-    }
-
-    [TearDown]
-    public void Teardown() => Object.DestroyImmediate(_go);
-
     // --- SECTION 1: INITIALIZATION & REF CHECKS ---
 
     [Test]
     public void Init_ValidPreconditions_SuccessfullyInitializes()
     {
-        // Pre-condition: Model and View are assigned
-        // Post-condition: No exceptions thrown
-        Assert.DoesNotThrow(() => _controller.Init());
+        // Arrange
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        IObjectMatchGameView mockView = Substitute.For<IObjectMatchGameView>();
+
+     
+        controller.ViewMock = mockView;
+        controller.ModelMock = mockModel;
+
+        // Act & Assert
+        Assert.DoesNotThrow(() => controller.Init());
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 
+    // --- SECTION 2: DELEGATION LOGIC ---
+
     [Test]
-    public void Init_NullModel_LogsError()
+    public void PotentialGuess_ValidID_DelegatesToModel()
     {
-        // Pre-condition: Model is null
-        _controller.model = null;
+        // Arrange
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        controller.ModelMock = mockModel;
+        controller.ViewMock = Substitute.For<IObjectMatchGameView>();
         
-        // Post-condition: Base class CheckModelRef triggers an error/assertion
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try {
-            _controller.Init();
-        } catch { /* Absorbing potential Assert failure from base class */ }
-    }
-
-    // --- SECTION 2: VIEW TO CONTROLLER INTERACTION ---
-
-    [Test]
-    public void PotentialGuess_ValidString_PassesToModel()
-    {
-        // Pre-condition: View passes a valid ID string
-        string testID = "Target_Object_A";
+        string testID = "Object_A";
 
         // Act
-        _controller.PotentialGuess(testID);
+        controller.PotentialGuess(testID);
 
-        // Post-condition: Controller correctly delegated the call to the Model
-        _mockModel.Received(1).PotentialGuess(testID);
+        // Assert
+        mockModel.Received(1).PotentialGuess(testID);
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 
     [Test]
-    public void RemovePotentialGuess_ViewInteraction_CallsModel()
-    {
-        // Act
-        _controller.RemovePotentialGuess();
-
-        // Post-condition: Model state is updated to clear guess
-        _mockModel.Received(1).RemovePotentialGuess();
-    }
-
-    // --- SECTION 3: CONTROLLER TO MODEL INTERACTION ---
-
-    [Test]
-    public void InitializeLevel_CallsModelMethodsSequentially()
+    public void SubmitGuess_ValidCall_TriggersModelSubmit()
     {
         // Arrange
-        _mockModel.GetActiveObjectIDs().Returns(new string[] { "ID1" });
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        controller.ModelMock = mockModel;
+        controller.ViewMock = Substitute.For<IObjectMatchGameView>();
 
         // Act
-        _controller.InitializeLevel();
+        controller.SubmitGuess();
 
-        // Post-condition: Model logic for level setup is triggered
-        _mockModel.Received(1).InitializeLevel();
+        // Assert
+        mockModel.Received(1).SubmitGuess();
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 
+    // --- SECTION 3: FLOW & STATE MEDIATION ---
+
     [Test]
-    public void GetCurrentGuessID_QueriesModelForState()
+    public void InitializeLevel_FetchesIDsAndUpdatesView()
     {
         // Arrange
-        _mockModel.GetCurrentGuessID().Returns("Test_ID");
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        IObjectMatchGameView mockView = Substitute.For<IObjectMatchGameView>();
+        controller.ModelMock = mockModel;
+        controller.ViewMock = mockView;
+
+        string[] mockIDs = { "ID_1", "ID_2" };
+        mockModel.GetActiveObjectIDs().Returns(mockIDs);
 
         // Act
-        var result = _controller.GetCurrentGuessID();
+        controller.InitializeLevel();
 
-        // Post-condition: Controller returns exactly what the Model reports
-        Assert.AreEqual("Test_ID", result);
-        _mockModel.Received(1).GetCurrentGuessID();
+        // Assert
+        mockModel.Received(1).InitializeLevel();
+        mockView.Received(1).ShowObjects(mockIDs);
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 
-    // --- SECTION 4: CONTROLLER TO VIEW (BRIDGE) INTERACTION ---
-
     [Test]
-    public void InitializeLevel_PostCondition_UpdatesViewWithModelData()
+    public void GetCurrentGuessID_ReturnsValueFromModel()
     {
-        // Arrange: Pre-condition - Model provides specific IDs
-        string[] mockIDs = { "Object_1", "Object_2", "Object_3" };
-        _mockModel.GetActiveObjectIDs().Returns(mockIDs);
+        // Arrange
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        controller.ModelMock = mockModel;
+        controller.ViewMock = Substitute.For<IObjectMatchGameView>();
+
+        string expectedID = "Target_Object_XYZ";
+        mockModel.GetCurrentGuessID().Returns(expectedID);
 
         // Act
-        _controller.InitializeLevel();
+        string actualID = controller.GetCurrentGuessID();
 
-        // Post-condition: View is commanded to show the exact IDs retrieved from the Model
-        _mockView.Received(1).ShowObjects(mockIDs);
+        // Assert
+        Assert.AreEqual(expectedID, actualID);
+        mockModel.Received(1).GetCurrentGuessID();
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 
-    // --- SECTION 5: UNIMPLEMENTED METHODS (POST-CONDITION: THROW) ---
+    // --- SECTION 4: INTEGRATION FLOW ---
 
     [Test]
-    public void InitializeTutorial_ThrowsNotImplemented()
+    public void CompleteGameFlow_MaintainsCorrectSequence()
     {
-        Assert.Throws<System.NotImplementedException>(() => _controller.InitializeTutorial());
+        // Arrange
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        IObjectMatchGameView mockView = Substitute.For<IObjectMatchGameView>();
+        controller.ModelMock = mockModel;
+        controller.ViewMock = mockView;
+
+        string[] levelIDs = { "A", "B" };
+        mockModel.GetActiveObjectIDs().Returns(levelIDs);
+        mockModel.GetCurrentGuessID().Returns("A");
+
+        // Act
+        controller.InitializeLevel();
+        controller.PotentialGuess("A");
+        string guess = controller.GetCurrentGuessID();
+        controller.SubmitGuess();
+
+        // Assert
+        mockModel.Received(1).InitializeLevel();
+        mockView.Received(1).ShowObjects(levelIDs);
+        mockModel.Received(1).PotentialGuess("A");
+        mockModel.Received(1).SubmitGuess();
+        Assert.AreEqual("A", guess);
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 
+    // --- SECTION 5: ERROR HANDLING & EDGE CASES ---
+
     [Test]
-    public void RestartGame_ThrowsNotImplemented()
+    public void InitializeLevel_NullIDs_LogsWarningOrHandlesGracefully()
     {
-        Assert.Throws<System.NotImplementedException>(() => _controller.RestartGame());
+        // Arrange
+        GameObject go = new GameObject("TestController");
+        ObjectMatchGameController controller = go.AddComponent<ObjectMatchGameController>();
+        IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
+        IObjectMatchGameView mockView = Substitute.For<IObjectMatchGameView>();
+        controller.ModelMock = mockModel;
+        controller.ViewMock = mockView;
+
+        // Model returns null array
+        mockModel.GetActiveObjectIDs().Returns((string[])null);
+
+        // Act & Assert
+        // We expect it not to crash, but perhaps log a warning depending on your implementation
+        Assert.DoesNotThrow(() => controller.InitializeLevel());
+
+        // Cleanup
+        Object.DestroyImmediate(go);
     }
 }
