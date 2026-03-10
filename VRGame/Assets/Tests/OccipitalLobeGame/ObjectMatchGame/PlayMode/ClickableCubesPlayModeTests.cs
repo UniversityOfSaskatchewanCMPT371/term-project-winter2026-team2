@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Text.RegularExpressions;
-
+using ObjectMatchGame;
 /// <summary>
 /// PlayMode tests for ClickableCubes abstract base class.
 /// </summary>
