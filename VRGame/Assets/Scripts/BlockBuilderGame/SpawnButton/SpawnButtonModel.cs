@@ -1,10 +1,15 @@
 using UnityEngine;
 
 /// <summary>
-/// Model class for SpawnButton
+/// Model component for SpawnButton
 /// Contains all data related to spawn button state
 /// </summary>
-public class SpawnButtonModel : MonoBehaviour, ISpawnButtonModel
+public class SpawnButtonModel : Model, ISpawnButtonModel
 {
     // Currently no data needed for spawn button
+    
+    /// <inheritdoc/>
+    public override void Init()
+    {
+    }
 }
