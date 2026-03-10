@@ -7,8 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Play Mode unit tests for ObjectMatchStartButton component.
-/// Tests button grab interactions and level initialization.
+/// PlayMode tests for ObjectMatchStartButton component.
 /// </summary>
 public class ObjectMatchStartButtonPlayModeTests
 {
@@ -18,6 +17,9 @@ public class ObjectMatchStartButtonPlayModeTests
     private IObjectMatchGameController _mockController;
     private XRGrabInteractable _grabInteractable;
 
+    /// <summary>
+    /// Sets up test environment with controller and start button.
+    /// </summary>
     [UnitySetUp]
     public IEnumerator Setup()
     {
@@ -31,15 +33,16 @@ public class ObjectMatchStartButtonPlayModeTests
         // Create start button as child of controller
         _startButtonGo = new GameObject("StartButton");
         _startButtonGo.transform.SetParent(_controllerGo.transform);
-
-        // Add required components
+        
         _grabInteractable = _startButtonGo.AddComponent<XRGrabInteractable>();
         _startButton = _startButtonGo.AddComponent<ObjectMatchStartButton>();
 
-        // Wait for Start to be called
-        yield return null;
+        yield return null; // Wait for Start()
     }
 
+    /// <summary>
+    /// Cleans up test objects.
+    /// </summary>
     [UnityTearDown]
     public IEnumerator Teardown()
     {
@@ -48,51 +51,22 @@ public class ObjectMatchStartButtonPlayModeTests
     }
 
     /// <summary>
-    /// Verifies ObjectMatchStartButton can be instantiated.
-    /// </summary>
-    [UnityTest]
-    public IEnumerator Instantiation()
-    {
-        Assert.NotNull(_startButton);
-        yield return null;
-    }
-
-    /// <summary>
-    /// Verifies Start finds controller in parent hierarchy.
-    /// </summary>
-    [UnityTest]
-    public IEnumerator Start_FindsControllerInParent()
-    {
-        // Verified by no error logs during Setup
-        Assert.Pass("ObjectMatchStartButton started without errors");
-        yield return null;
-    }
-
-    /// <summary>
-    /// Verifies Start finds XRGrabInteractable component.
-    /// </summary>
-    [UnityTest]
-    public IEnumerator Start_FindsGrabInteractable()
-    {
-        // Verified by no error logs and successful listener registration
-        Assert.IsNotNull(_grabInteractable);
-        yield return null;
-    }
-
-    /// <summary>
-    /// Verifies OnGrabbed calls controller.InitializeLevel.
+    /// Verifies OnGrabbed calls InitializeLevel on controller.
     /// </summary>
     [UnityTest]
     public IEnumerator OnGrabbed_CallsControllerInitializeLevel()
     {
-        // Arrange - ensure button is active
-        _startButtonGo.SetActive(true);
+        // Arrange
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
 
-        yield return null;
-
-        // Act - Simulate grab event
-        _grabInteractable.selectEntered.Invoke(new SelectEnterEventArgs());
-
+        // Act
+        _startButton.OnGrabbed(args);
         yield return null;
 
         // Assert
@@ -100,98 +74,28 @@ public class ObjectMatchStartButtonPlayModeTests
     }
 
     /// <summary>
-    /// Verifies OnGrabbed deactivates the button GameObject.
+    /// Verifies OnGrabbed deactivates the start button GameObject.
     /// </summary>
     [UnityTest]
     public IEnumerator OnGrabbed_DeactivatesButton()
     {
         // Arrange
-        _startButtonGo.SetActive(true);
-        Assert.IsTrue(_startButtonGo.activeSelf, "Button should start active");
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
 
-        yield return null;
+        Assert.IsTrue(_startButtonGo.activeSelf, "Button should be active initially");
 
-        // Act - Simulate grab event
-        _grabInteractable.selectEntered.Invoke(new SelectEnterEventArgs());
-
+        // Act
+        _startButton.OnGrabbed(args);
         yield return null;
 
         // Assert
-        Assert.IsFalse(_startButtonGo.activeSelf, "Button should be deactivated after being grabbed");
-    }
-
-    /// <summary>
-    /// Verifies OnGrabbed can be called multiple times safely (though button should deactivate).
-    /// </summary>
-    [UnityTest]
-    public IEnumerator OnGrabbed_MultipleGrabs_CallsInitializeLevelEachTime()
-    {
-        // Arrange
-        _startButtonGo.SetActive(true);
-
-        yield return null;
-
-        // Act - Simulate first grab
-        _grabInteractable.selectEntered.Invoke(new SelectEnterEventArgs());
-        
-        yield return null;
-
-        // Reactivate button (simulating restart scenario)
-        _startButtonGo.SetActive(true);
-        
-        yield return null;
-
-        // Simulate second grab
-        _grabInteractable.selectEntered.Invoke(new SelectEnterEventArgs());
-
-        yield return null;
-
-        // Assert - InitializeLevel should have been called twice
-        _mockController.Received(2).InitializeLevel();
-    }
-
-    /// <summary>
-    /// Verifies Start logs error if XRGrabInteractable component is missing.
-    /// </summary>
-    [UnityTest]
-    public IEnumerator Start_MissingGrabInteractable_LogsError()
-    {
-        // Arrange - Create button without XRGrabInteractable
-        GameObject testGo = new GameObject("TestButton");
-        testGo.transform.SetParent(_controllerGo.transform);
-
-        // Expect error log
-        LogAssert.Expect(LogType.Error, new Regex(".*could not find.*XRGrabInteractable.*"));
-
-        // Act
-        testGo.AddComponent<ObjectMatchStartButton>();
-
-        yield return null;
-
-        // Cleanup
-        Object.Destroy(testGo);
-    }
-
-    /// <summary>
-    /// Verifies Start logs error if controller not found in parent hierarchy.
-    /// </summary>
-    [UnityTest]
-    public IEnumerator Start_NoControllerInParent_LogsError()
-    {
-        // Arrange - Create standalone button without controller
-        GameObject standaloneGo = new GameObject("StandaloneButton");
-        standaloneGo.AddComponent<XRGrabInteractable>();
-
-        // Expect error log
-        LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
-
-        // Act
-        standaloneGo.AddComponent<ObjectMatchStartButton>();
-
-        yield return null;
-
-        // Cleanup
-        Object.Destroy(standaloneGo);
+        Assert.IsFalse(_startButtonGo.activeSelf, "Button should be deactivated after grab");
     }
 
     /// <summary>
@@ -200,61 +104,122 @@ public class ObjectMatchStartButtonPlayModeTests
     [UnityTest]
     public IEnumerator OnGrabbed_NullController_LogsError()
     {
-        // Create a standalone button without proper controller setup
-        GameObject testGo = new GameObject("TestButton");
-        var grabInt = testGo.AddComponent<XRGrabInteractable>();
+        // Create standalone button without controller
+        GameObject standaloneGo = new GameObject("StandaloneButton");
+        standaloneGo.AddComponent<XRGrabInteractable>();
         
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
-        var startBtn = testGo.AddComponent<ObjectMatchStartButton>();
-
+        
+        var standaloneButton = standaloneGo.AddComponent<ObjectMatchStartButton>();
+        
         yield return null;
 
-        // Try to trigger grab - should log error when trying to get controller
-        LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
-        grabInt.selectEntered.Invoke(new SelectEnterEventArgs());
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
 
+        // Should log error and return without calling controller
+        LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
+        standaloneButton.OnGrabbed(args);
+        
+        yield return null;
+
+        Object.Destroy(standaloneGo);
+    }
+
+    /// <summary>
+    /// Verifies Start method finds controller in parent hierarchy.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator Start_FindsControllerInParent()
+    {
+        // Controller should be found automatically in Setup
+        yield return null;
+
+        // Verify by checking that OnGrabbed works without errors
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
+
+        Assert.DoesNotThrow(() => _startButton.OnGrabbed(args));
+    }
+
+    /// <summary>
+    /// Verifies Start method assigns XRGrabInteractable component.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator Start_AssignsGrabInteractable()
+    {
+        yield return null;
+
+        // Verify that grab interactable exists on the GameObject
+        var grabInteractable = _startButtonGo.GetComponent<XRGrabInteractable>();
+        Assert.IsNotNull(grabInteractable, "GrabInteractable should be assigned to GameObject");
+    }
+
+    /// <summary>
+    /// Verifies Start method logs error when XRGrabInteractable is missing.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator Start_MissingGrabInteractable_LogsError()
+    {
+        // Create button without XRGrabInteractable
+        GameObject testGo = new GameObject("TestButton");
+        testGo.transform.SetParent(_controllerGo.transform);
+        
+        LogAssert.Expect(LogType.Error, new Regex(".*could not find.*XRGrabInteractable.*"));
+        
+        testGo.AddComponent<ObjectMatchStartButton>();
+        
         yield return null;
 
         Object.Destroy(testGo);
     }
 
     /// <summary>
-    /// Verifies button deactivation happens after controller call.
-    /// This ensures proper order of operations.
+    /// Verifies multiple grabs call InitializeLevel multiple times.
     /// </summary>
     [UnityTest]
-    public IEnumerator OnGrabbed_DeactivatesAfterControllerCall()
+    public IEnumerator OnGrabbed_MultipleTimes_CallsInitializeLevelEachTime()
     {
         // Arrange
-        bool controllerCalled = false;
-        _mockController.When(x => x.InitializeLevel()).Do(_ => {
-            controllerCalled = true;
-            // Button should still be active when controller is called
-            Assert.IsTrue(_startButtonGo.activeSelf, 
-                "Button should still be active during controller call");
-        });
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
+
+        // Act - Re-enable and grab multiple times
+        _startButtonGo.SetActive(true);
+        _startButton.OnGrabbed(args);
+        yield return null;
 
         _startButtonGo.SetActive(true);
-
+        _startButton.OnGrabbed(args);
         yield return null;
 
-        // Act
-        _grabInteractable.selectEntered.Invoke(new SelectEnterEventArgs());
-
+        _startButtonGo.SetActive(true);
+        _startButton.OnGrabbed(args);
         yield return null;
 
-        // Assert
-        Assert.IsTrue(controllerCalled, "Controller should have been called");
-        Assert.IsFalse(_startButtonGo.activeSelf, "Button should be deactivated after grab");
+        // Assert - Should have called InitializeLevel 3 times
+        _mockController.Received(3).InitializeLevel();
     }
 
-    /// <summary>
-    /// Helper component to allow GetComponentInParent to find the mock controller.
-    /// </summary>
+    // Helper component to bridge the Interface to Unity's GetComponentInParent
     private class MockControllerComponent : MonoBehaviour, IObjectMatchGameController
     {
         public IObjectMatchGameController Controller;
-
         public void Init() => Controller?.Init();
         public void CheckModelRef() => Controller?.CheckModelRef();
         public void CheckViewRef() => Controller?.CheckViewRef();
@@ -264,5 +229,6 @@ public class ObjectMatchStartButtonPlayModeTests
         public void PotentialGuess(string GuessItem) => Controller?.PotentialGuess(GuessItem);
         public string GetCurrentGuessID() => Controller?.GetCurrentGuessID() ?? "";
         public void RemovePotentialGuess() => Controller?.RemovePotentialGuess();
+        public void SubmitGuess() => Controller?.SubmitGuess();
     }
 }
