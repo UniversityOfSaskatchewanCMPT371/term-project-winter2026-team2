@@ -19,6 +19,10 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     // Store references to the guess box and submit button so we can enable and disable them as needed
     [SerializeField] private GameObject guessBox;
     [SerializeField] private GameObject submitButton;
+
+    // Test-accessible properties for UI elements
+internal GameObject GuessBox { get => guessBox; set => guessBox = value; }
+internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
     public override void Init()
     {
         foreach (GameObject obj in allObjects)

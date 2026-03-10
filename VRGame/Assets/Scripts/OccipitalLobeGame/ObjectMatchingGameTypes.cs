@@ -13,7 +13,7 @@ namespace ObjectMatchGame
 
     // Struct to hold the data for each level
     [System.Serializable]
-    public struct levelData
+    internal struct levelData
     {
         public int levelNumber;
         public string CorrectObjectID;
