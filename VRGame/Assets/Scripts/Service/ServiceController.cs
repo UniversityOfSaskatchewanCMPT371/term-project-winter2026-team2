@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class ServiceController : Controller<IModel, IView>, IServiceController
 {
-    internal ServiceController instance;
-
-    [SerializeField]
-    public static PlayerServiceController PlayerService;
+    /// <summary>
+    /// Reference to the singleton instance of this class. Used to
+    /// see if an instance of this class already exists in Init() method.
+    /// </summary>
+    internal static ServiceController instance;
 
     /// <summary>
     /// Initializes the component and assures that it follows
     /// a persistent singleton pattern.
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Destroy duplicate instances of this instance if any exists. Otherwise, sets the
+    /// variable 'instance' to 'this' class, and keeps the gameobject persistent.
+    /// - Logs if initialization is successful or if this instance is a duplicate.
+    /// </remarks>
     public override void Init()
     {
         // see if an instance of this component already exists
@@ -20,7 +29,6 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
             Destroy(gameObject);
 
             Debug.Log("An instance of this singleton already exists.");
-
             return;
         } else
         {
@@ -30,26 +38,16 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
             // keep it persistent
             DontDestroyOnLoad(gameObject);
         }
+
+        Debug.Log("ServiceController initialized successfully.");
     }
 
-    /// <summary>
-    /// Called once after the scene loads. 
-    /// Initializes this component by calling Init().
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - Init() is implemented.
-    /// Postconditions:
-    /// - Init() is invoked.
-    /// </remarks>
-    private void Awake() {
+    /// <inheritdoc/>
+    public void Awake() 
+    {
         Init();
     }
 
-    /// <summary>
-    /// Called once after all Awake() calls.
-    /// This method does nothing, but overrides the default Start() defined in
-    /// Controller base class.
-    /// </summary
+    /// <inheritdoc/>
     public override void Start() {}
 }

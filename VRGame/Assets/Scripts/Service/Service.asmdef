@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "ScriptTemplates",
-        "PlayerService"
+        "PlayerService",
+        "SceneChanger"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
