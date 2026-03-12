@@ -1,7 +1,10 @@
 {
     "name": "Service",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "ScriptTemplates",
+        "PlayerService"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

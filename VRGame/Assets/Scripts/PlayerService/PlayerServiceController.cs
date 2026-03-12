@@ -67,7 +67,7 @@ public class PlayerServiceController : MonoBehaviour, IPlayerServiceController
     /// </summary>
     public static GameObject player;
 
-    /// <inheritdoc></inheritdoc>
+    /// <inheritdoc/>
     public void SpawnPlayer(Vector3 position, Quaternion rotation)
     {
         if (XRrigPrefab == null)
