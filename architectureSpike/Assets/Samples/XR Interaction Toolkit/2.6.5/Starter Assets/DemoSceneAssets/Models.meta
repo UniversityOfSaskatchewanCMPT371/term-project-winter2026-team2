@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/Resources/Materials.meta
+guid: b9be185e97321e549aed52d37e09507f
+========
 guid: 90a5974969e85834f8306496fd3cda4c
+>>>>>>>> id3:architectureSpike/Assets/Samples/XR Interaction Toolkit/2.6.5/Starter Assets/DemoSceneAssets/Models.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
