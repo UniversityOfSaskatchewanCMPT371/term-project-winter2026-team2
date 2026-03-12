@@ -57,7 +57,7 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
                 Debug.LogError("Hover scale multiplier must be zero or positive");
                 return;
             }
-            Assert.IsTrue(value >= 0, "Hover scale multiplier must be greater than zero");
+            Assert.IsTrue(value <= 0, "Hover scale multiplier must be greater than zero");
             hoverScaleMultiplier = value;
         }
     }
