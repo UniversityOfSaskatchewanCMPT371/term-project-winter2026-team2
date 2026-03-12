@@ -3862,7 +3862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e76471c7abe479c8bca357583678f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkedObjects: []
+  linkedObjects:
+  - {fileID: 830531267}
+  - {fileID: 830531255}
   hoverScaleMultiplier: 1.25
   scaleSpeed: 10
 --- !u!114 &1533078343
