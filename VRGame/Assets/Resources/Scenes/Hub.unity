@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 830531292}
 --- !u!114 &830531292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2331,7 +2331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 830531303}
 --- !u!65 &830531307
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2485,7 +2485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 833285135}
 --- !u!114 &833285135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2653,7 +2653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 836397967}
 --- !u!114 &836397967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2821,7 +2821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 918582187}
 --- !u!114 &918582187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2886,7 +2886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 949636722}
 --- !u!114 &949636722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3327,7 +3327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 1210769580}
 --- !u!114 &1210769580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3461,7 +3461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 1326242523}
 --- !u!114 &1326242523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3877,7 +3877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 1533078344}
 --- !u!114 &1533078344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3925,7 +3925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 1650031756}
 --- !u!114 &1650031756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4233,7 +4233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 1918733017}
 --- !u!114 &1918733017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4277,6 +4277,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 285389467476424711, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_InteractionManager
+      value: 
+      objectReference: {fileID: 1758302589}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
@@ -4527,7 +4531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c788c0812f1864bda936ba4fde54060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
+  Controller: {fileID: 2101526995}
 --- !u!114 &2101526995
 MonoBehaviour:
   m_ObjectHideFlags: 0
