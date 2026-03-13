@@ -13,9 +13,22 @@ public interface IToolTipTrigger
     /// <summary>
     /// raised when user starts hovering over the interactive element
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - All subscribers are notified that hover has entered
+    /// </remarks>
     event Action HoverEntered;
+    
     /// <summary>
     /// raised when user stops hovering over the interactive element
     /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - All subscribers are notified that hover has exited
+    /// </remarks>
     event Action HoverExited;
 }
