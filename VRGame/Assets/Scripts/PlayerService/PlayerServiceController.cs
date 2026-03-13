@@ -100,7 +100,8 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
         }
 
         // teleport the player to the specified position after it spawns
-        playerObj.GetComponent<PlayerController>().teleportPlayerTo(position, rotation);
+        // TODO: Uncomment this once teleportPlayerTo() is implemented
+        // playerObj.GetComponent<PlayerController>().teleportPlayerTo(position, rotation);
         
         Debug.Log("Player spawned successfully.");
     }
