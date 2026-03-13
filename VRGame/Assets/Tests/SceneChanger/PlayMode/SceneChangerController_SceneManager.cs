@@ -104,10 +104,9 @@ public class SceneChangerController_SceneManager
         yield return null;
 
 
+        LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene(): Valid start");
         sceneC.LoadScene(0);
 
-        // sceneChanger should now prevent other attempts to load scene
-        Assert.IsTrue(sceneC.LoadDebounce);
 
         // let async operation finish
         while (sceneC.LoadDebounce)

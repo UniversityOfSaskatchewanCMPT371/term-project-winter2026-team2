@@ -107,6 +107,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneKey));
 
+        Debug.Log("SceneChangerController.LoadScene(): Valid start");
         // get Load new scene with sceneManager through wrapper
         IAsyncOperationWrapper loadingSceneWrapper = sceneManagerWrapper.LoadSceneAsync(sceneKey);
 
