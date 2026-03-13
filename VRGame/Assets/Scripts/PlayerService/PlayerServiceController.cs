@@ -16,20 +16,20 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
     /// XR rig prefab reference. Requires PlayerController component.
     /// </summary>
     [SerializeField]
-    private static GameObject XRrigPrefab;
+    private GameObject XRrigPrefab;
 
     /// <summary>
     /// Optional reference to a game object in which its transform is used by default
     /// to spawn the player. Uses default world origin if not set.
     /// </summary>
     [SerializeField]
-    public static GameObject defaultSpawnOrigin;
+    public GameObject defaultSpawnOrigin;
 
     /// <summary>
     /// Boolean for spawning the player on scene load. Only if 'playerObj' is null.
     /// </summary>
     [SerializeField]
-    public static bool spawnPlayerOnLoad = true;
+    public bool spawnPlayerOnLoad = true;
 
     /// <summary>
     /// Reference to the persistent XRrig instantiated. 

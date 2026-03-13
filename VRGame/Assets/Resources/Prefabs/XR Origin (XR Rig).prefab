@@ -1174,8 +1174,9 @@ GameObject:
   - component: {fileID: 6232745470614056095}
   - component: {fileID: 5826056641483426609}
   - component: {fileID: 5033801203051696737}
-  - component: {fileID: 54123507875748541}
-  - component: {fileID: 1565001018680644298}
+  - component: {fileID: 6398557698230426169}
+  - component: {fileID: 5193889388028257362}
+  - component: {fileID: 8151503938653955564}
   m_Layer: 2
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -1315,7 +1316,7 @@ MonoBehaviour:
   m_AimAssistRequiredSpeed: 0.25
   m_AimAssistPercent: 0.8
   m_AimAssistMaxSpeedPercent: 10
---- !u!114 &54123507875748541
+--- !u!114 &6398557698230426169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1324,10 +1325,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1717954561962503725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b6bc324982569f4b8dc0b752cd6cb02, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5e294145c1c4591aa952dbcae49782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1565001018680644298
+  playerName: 
+  id: 0
+  alive: 0
+--- !u!114 &5193889388028257362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1336,11 +1340,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1717954561962503725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 031d8f1ada9b17241bd225a6e62a35b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 201100ac1d79f5c41a5e0fd7e8663c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftController: {fileID: 202364687}
-  rightController: {fileID: 1670256624}
+--- !u!114 &8151503938653955564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717954561962503725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a358cf9c8529b45abdfab1b713a5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 6398557698230426169}
+  view: {fileID: 5193889388028257362}
 --- !u!1 &1787516059220952802
 GameObject:
   m_ObjectHideFlags: 0

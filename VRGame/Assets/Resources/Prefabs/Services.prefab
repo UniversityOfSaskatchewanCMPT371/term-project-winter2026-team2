@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3208375274882142098}
-  - component: {fileID: 1669645746547492616}
+  - component: {fileID: 7646883154768212388}
+  - component: {fileID: 2083388311275898061}
+  - component: {fileID: 7111384735345849923}
+  - component: {fileID: 1176033680538917701}
   m_Layer: 0
   m_Name: Services
   m_TagString: Untagged
@@ -32,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1669645746547492616
+--- !u!114 &7646883154768212388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +44,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 8297361277951878919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9bf41a980c5d8048a7c1364b602b3ec, type: 3}
+  m_Script: {fileID: 11500000, guid: eb5dfb3169c11d146b66e6747f779d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inspectorWindowModel: {fileID: 0}
+  inspectorWindowView: {fileID: 0}
+--- !u!114 &2083388311275898061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8297361277951878919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb3426808ba0a443931c1255097f1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectorWindowModel: {fileID: 0}
+  inspectorWindowView: {fileID: 0}
+  XRrigPrefab: {fileID: 1717954561962503725, guid: 6efa2b3ba48884299818d60bf5b4a1d7, type: 3}
+  defaultSpawnOrigin: {fileID: 0}
+  spawnPlayerOnLoad: 1
+--- !u!114 &7111384735345849923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8297361277951878919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+--- !u!114 &1176033680538917701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8297361277951878919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017c5e3933235514c9520e1dace2a4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ActionAssets: []
