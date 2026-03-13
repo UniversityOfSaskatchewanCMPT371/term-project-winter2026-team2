@@ -47,7 +47,7 @@ public class DoorController : MonoBehaviour, IDoorController
         {
             if (value == null)
             {
-                Debug.LogError("value passed to set DoorModel is null");
+                UnityEngine.Debug.LogError("value passed to set DoorModel is null");
                 Assert.IsNotNull(value, "Door model must not be null");
             }
             doorModel = value;
@@ -89,7 +89,7 @@ public class DoorController : MonoBehaviour, IDoorController
         {
             if (value == null)
             {
-                Debug.LogError("value passed to setSceneChangerController is null");
+                UnityEngine.Debug.LogError("value passed to setSceneChangerController is null");
                 Assert.IsNotNull(value);
             }
             sceneChangerController = value;
@@ -135,17 +135,17 @@ public class DoorController : MonoBehaviour, IDoorController
         // error checking
         if (doorModel == null)
         {
-            Debug.LogError("doorModel is null");
+            UnityEngine.Debug.LogError("doorModel is null");
         }
         Assert.IsNotNull(doorModel, "DoorModel field cannot be null.");
 
         if (sceneChangerController == null)
         {
-            Debug.LogError("sceneChangerController is null");
+            UnityEngine.Debug.LogError("sceneChangerController is null");
         }
         Assert.IsNotNull(sceneChangerController, "SceneChangerController field cannot be null.");
 
-        Debug.Log("DoorController initialized");
+        UnityEngine.Debug.Log("DoorController initialized");
     }
 
     /// <inheritdoc/>
@@ -153,7 +153,7 @@ public class DoorController : MonoBehaviour, IDoorController
     {
         if (playerController == null)
         {
-            Debug.LogError("playerController passed to OnPlayerEnter is null");
+            UnityEngine.Debug.LogError("playerController passed to OnPlayerEnter is null");
         }
         Assert.IsNotNull(playerController, "Player controller must be non-null.");
 
@@ -172,7 +172,7 @@ public class DoorController : MonoBehaviour, IDoorController
         // ensure destination scene actually exists
         if (!Enum.IsDefined(typeof(SceneEnum), sceneId))
         {
-            Debug.LogError("Invalid destination scene id. Not in enum");
+            UnityEngine.Debug.LogError("Invalid destination scene id. Not in enum");
             triggerDebounce = false;
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneId));
@@ -188,8 +188,8 @@ public class DoorController : MonoBehaviour, IDoorController
 
             playerController.teleportPlayerTo(teleportPosition, teleportRotation);
             triggerDebounce = false;
-            Debug.Log("DoorController.OnPlayerEnter() success");
         };
+        UnityEngine.Debug.Log("DoorController.OnPlayerEnter() success");
     }
 
     private void Start()

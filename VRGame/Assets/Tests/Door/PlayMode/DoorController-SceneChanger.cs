@@ -101,13 +101,13 @@ public class DoorController_SceneChanger
         Assert.IsTrue(doorC.TriggerDebounce);
 
 
-        LogAssert.Expect(LogType.Log, "DoorController.OnPlayerEnter() success");
         // let finished event be detected
         while (!doorC.TriggerDebounce)
         {
             yield return null;
         }
 
+        LogAssert.Expect(LogType.Log, "DoorController.OnPlayerEnter() success");
         
 
         doorM.ResetDoorLookup();
