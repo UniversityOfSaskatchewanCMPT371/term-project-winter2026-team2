@@ -172,6 +172,7 @@ public class DoorController : MonoBehaviour, IDoorController
         if (!Enum.IsDefined(typeof(SceneEnum), sceneId))
         {
             Debug.LogError("Invalid destination scene id. Not in enum");
+            triggerDebounce = false;
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneId));
 
