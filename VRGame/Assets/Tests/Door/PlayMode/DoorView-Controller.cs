@@ -14,20 +14,16 @@ public class DoorView_Controller_Integration
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
-
-        // real door controller, not mocked
         DoorController doorC = go.AddComponent<DoorController>();
-        doorV.DoorController = doorC;
 
+        doorV.DoorController = doorC;
         // doorController needs model reference to init properly        
         IDoorModel doorMock = Substitute.For<IDoorModel>();
         doorC.DoorModel = doorMock;
 
-
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
-
-        // if it is initialized without causing exception, we're good
+        // init
         yield return null;
 
         Object.Destroy(go);

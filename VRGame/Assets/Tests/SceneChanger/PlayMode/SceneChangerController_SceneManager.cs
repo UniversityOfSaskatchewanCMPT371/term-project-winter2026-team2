@@ -113,7 +113,7 @@ public class SceneChangerController_SceneManager
         while (sceneC.LoadDebounce)
         {
             yield return null;
-        } 
+        }
         
 
         sceneC.ResetInstance();
