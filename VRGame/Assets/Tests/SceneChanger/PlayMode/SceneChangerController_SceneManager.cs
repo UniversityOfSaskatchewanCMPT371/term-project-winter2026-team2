@@ -97,6 +97,7 @@ public class SceneChangerController_SceneManager
     public IEnumerator LoadScene()
     {
 
+        LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene() success");
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
         // Use yield to skip a frame.
@@ -113,8 +114,7 @@ public class SceneChangerController_SceneManager
         {
             yield return null;
         } 
-
-        LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene() success");
+        
 
         sceneC.ResetInstance();
         UnityEngine.Object.DestroyImmediate(go);
