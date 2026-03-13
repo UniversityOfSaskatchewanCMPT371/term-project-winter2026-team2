@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1176033680538917701}
   - component: {fileID: 5718980008336523897}
   - component: {fileID: 3057615227026974476}
+  - component: {fileID: 7527680707759864212}
   m_Layer: 0
   m_Name: Services
   m_TagString: Untagged
@@ -150,3 +151,15 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
+--- !u!114 &7527680707759864212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8297361277951878919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fb10ff181fe466ba00d99491861c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -35,7 +35,7 @@ public interface IPlayerServiceController
     /// instances of this component is destroyed.
     /// - Optionally spawns the player by invoking SpawnPlayer() 
     /// if 'spawnPlayerOnLoad' variable is true.
-    /// - Logs errors if preconditions are violated.
+    /// - Logs warnings and errors if preconditions are violated.
     /// - Logs on success.
     /// </remarks>
     void Init();

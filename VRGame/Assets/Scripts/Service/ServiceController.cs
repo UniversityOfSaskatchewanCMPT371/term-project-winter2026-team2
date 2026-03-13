@@ -17,7 +17,7 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
             // destroy the instance to follow singleton pattern
             Destroy(gameObject);
 
-            Debug.Log("An instance of this singleton already exists.");
+            Debug.LogWarning("There can be only one active ServiceController.");
             return;
         } else
         {

@@ -7,11 +7,11 @@ public interface IServiceController : IController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - 'instance' variable must be null.
     /// Postconditions:
     /// - Destroy duplicate instances of this instance if any exists. Otherwise, sets the
     /// variable 'instance' to 'this' class, and keeps the gameobject persistent.
-    /// - Logs if initialization is successful or if this instance is a duplicate.
+    /// - Logs warning if this instance is a duplicate. Otherwise, logs a successful initialization.
     /// </remarks>
     new void Init();
 }
