@@ -117,7 +117,7 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
         if (playerObj == null && spawnPlayerOnLoad)
         {
             // default position and rotation
-            Vector3 position = Vector3.zero;
+            Vector3 position = new Vector3(0, 1, 0);
             Quaternion rotation = new Quaternion();
 
             // see if a default spawn point was given
