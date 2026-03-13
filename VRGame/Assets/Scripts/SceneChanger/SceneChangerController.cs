@@ -113,6 +113,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         // reset debounce when the scene finishes loading
         loadingSceneWrapper.Completed += (o) => resetDebounce();
 
+        Debug.Log("SceneChangerController.LoadScene() success");
         return loadingSceneWrapper;
     }
 

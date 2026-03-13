@@ -109,11 +109,12 @@ public class SceneChangerController_SceneManager
         Assert.IsTrue(sceneC.LoadDebounce);
 
         // let async operation finish
-        yield return null;
+        while (sceneC.LoadDebounce)
+        {
+            yield return null;
+        } 
 
-        // sceneChanger should now allow other attempts to load scene
-        Assert.IsFalse(sceneC.LoadDebounce);
-
+        LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene() success");
 
         sceneC.ResetInstance();
         UnityEngine.Object.DestroyImmediate(go);
@@ -124,8 +125,6 @@ public class SceneChangerController_SceneManager
     {
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
-        sceneC.SceneManagerWrapper = sceneMW;
         // Use yield to skip a frame.
         yield return null;
 
