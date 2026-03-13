@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Diagnostics;
 
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here
@@ -187,6 +188,7 @@ public class DoorController : MonoBehaviour, IDoorController
 
             playerController.teleportPlayerTo(teleportPosition, teleportRotation);
             triggerDebounce = false;
+            Debug.Log("DoorController.OnPlayerEnter() success");
         };
     }
 

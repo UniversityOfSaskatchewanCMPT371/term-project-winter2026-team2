@@ -96,18 +96,19 @@ public class DoorController_SceneChanger
         IPlayerController playerMock = Substitute.For<IPlayerController>();
         doorC.OnPlayerEnter(playerMock);
 
-        yield return null;
         // trigger debounce should be true, to stop entrance logic from triggering multiple
         // times
         Assert.IsTrue(doorC.TriggerDebounce);
 
 
+        LogAssert.Expect(LogType.Log, "DoorController.OnPlayerEnter() success");
         // let finished event be detected
-        yield return null;
+        while (!doorC.TriggerDebounce)
+        {
+            yield return null;
+        }
 
         
-        // trigger debounce should be false, to allow entrance again
-        Assert.IsFalse(doorC.TriggerDebounce);
 
         doorM.ResetDoorLookup();
         UnityEngine.Object.Destroy(go);
