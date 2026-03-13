@@ -8,16 +8,18 @@ using UnityEngine;
 public interface IPlayerServiceController
 {
     /// <summary>
-    /// Instantiates the player rig if it does not exist yet, otherwise teleports the existing rig instead.
+    /// Instantiates the player rig at specified position and orientation.
     /// </summary>
     /// <param name="position">The vector in which to transform the rig's position to.</param>
     /// <param name="rotation">The quaternion in which to orientate the rig's rotation to.</param>
     /// <remarks>
     /// Preconditions:
-    /// - 'XRrigPrefab' field cannot be null.
+    /// - 'XRrigPrefab' variable cannot be null.
+    /// - 'XRrigPrefab' has PlayerController component.
     /// - The TeleportPlayerTo() method must be implemented in PlayerController.
     /// Postconditions:
-    /// - 'player' field value is set to the new instantiated xr rig and teleported/orientated to the given 'position' and 'rotation'.
+    /// - 'playerObj' variable value is set to the new instantiated XR rig, 
+    /// and teleported/orientated to the given 'position' and 'rotation' input.
     /// - if 'player' field is already set, then the existing rig is teleported/orientated instead.
     /// </remarks>
     void SpawnPlayer(Vector3 position, Quaternion rotation);

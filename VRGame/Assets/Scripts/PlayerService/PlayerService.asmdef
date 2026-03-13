@@ -2,6 +2,7 @@
     "name": "PlayerService",
     "rootNamespace": "",
     "references": [
+        "ScriptTemplates",
         "Player"
     ],
     "includePlatforms": [],

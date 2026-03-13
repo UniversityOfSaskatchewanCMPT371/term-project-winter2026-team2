@@ -4,93 +4,55 @@ using UnityEngine;
 /// <summary>
 /// Manages the instantiation of XR player rig, ensuring a persistent singleton instance exists across scene changes.
 /// </summary>
-public class PlayerServiceController : MonoBehaviour, IPlayerServiceController
+public class PlayerServiceController : Controller<IModel, IView>, IPlayerServiceController
 {
     /// <summary>
-    /// The static instance of the controller used to enforce the singleton pattern.
+    /// Reference to the singleton instance of this class. Used to
+    /// follow singleton pattern.
     /// </summary>
-    private static PlayerServiceController singleton;
-
-    /// <summary>
-    /// Getter/Setter for 'singleton' field.
-    /// </summary>
-    private PlayerServiceController SingletonAccessor
-    {
-        /// <summary>
-        /// Retrieves the current static value of 'singleton' field.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - None.
-        /// Postconditions:
-        /// - Returns the current static value of 'singleton' field.
-        /// </remarks>
-        get => singleton;
-
-        /// <summary>
-        /// Attempts to set the current static value of 'singleton' field if it has not been set.
-        /// Otherwise, it destroys the calling object if a singleton already exists.
-        /// </summary>
-        /// <remarks>
-        /// Preconditions:
-        /// - 'value' is not null.
-        /// Postconditions:
-        /// - If 'singleton' is currently null, it is assigned the provided 'value'.
-        /// - If 'singleton' is already assigned and different from 'this', 
-        /// the duplicate   is destroyed to enforce the singleton pattern.
-        /// </remarks>
-        set
-        {
-            if (value == null)
-            {
-                Debug.LogError("'value' is null.");
-                Assert.IsNotNull(value,"'value' cannot be null.");
-            } else if (singleton != null && singleton != this)
-            {
-                Destroy(this);
-                Debug.Log("A duplicate of PlayerServiceController singleton has been deleted.");
-            } else
-            {
-                singleton = value;
-            }
-        }
-    }
+    internal static PlayerServiceController instance;
         
     /// <summary>
-    /// The XR rig prefab that the player controls.
+    /// XR rig prefab reference.
     /// </summary>
     [SerializeField]
     private GameObject XRrigPrefab;
 
     /// <summary>
-    /// Reference to the singleton persistent xr rig the player controls.
+    /// Reference to the persistent XRrig instantiated.
     /// </summary>
-    public static GameObject player;
+    private static GameObject playerObj;
 
     /// <inheritdoc/>
     public void SpawnPlayer(Vector3 position, Quaternion rotation)
     {
+        // see if 'XRrigPrefab' field was set in inspector
         if (XRrigPrefab == null)
         {
-            Debug.LogError("XRrigPrefab field is null.");
-            Assert.IsNotNull(XRrigPrefab, "XRrigPrefab field cannot be null.");
+            Debug.LogError("'XRrigPrefab' variable was not set in inspector.");
+        }
+        Assert.IsNotNull(XRrigPrefab, "'XRrigPrefab' cannot be null.");
+
+        // see if an XR rig already exists in the scene
+        if (playerObj == null)
+        {
+            // instantiate the XR rig
+            playerObj = Instantiate(XRrigPrefab);
+
+            // see if the XR rig has a PlayerController component. This component interacts with it.
+            if (playerObj.GetComponent<PlayerController>() == null) {
+                Debug.LogError("XR rig prefab does not have PlayerController component attached.");
+            }
+            Assert.IsTrue(playerObj.GetComponent<PlayerController>(), "XR rig prefab needs PlayerController component.");
+
+            // keep this XR rig persistent
+            DontDestroyOnLoad(playerObj);
         }
 
-        if (player != null)
-        {
-            // requires teleportPlayerTo() to be implemented in PlayerController.cs
-            Debug.Log("Player rig already exists, teleporting rig instead.");
-        } else
-        {
-            player = Instantiate(XRrigPrefab);
-
-            // keep the player rig persistent across scene changes
-            DontDestroyOnLoad(player);
-
-            Debug.Log("Player rig instantiated.");
-        }
-
-        player.GetComponent<PlayerController>().teleportPlayerTo(position, rotation);
+        // teleport the player to the specified position after it spawns
+        playerObj.GetComponent<PlayerController>().teleportPlayerTo(position, rotation);
+        
+        Debug.Log("Player spawned successfully.");
     }
 
     /// <inheritdoc/>
@@ -115,7 +77,7 @@ public class PlayerServiceController : MonoBehaviour, IPlayerServiceController
     /// Postconditions:
     /// - Invokes Init() method.
     /// </remarks>
-    void Start()
+    void Awake()
     {
         Init();
     }
