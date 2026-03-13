@@ -10,5 +10,5 @@ public interface IBrainModel : IModel
     /// <summary>
     /// TODO: Change the docstring to match your implementation.
     /// </summary>
-    public void Init();
+    new void Init();
 }
