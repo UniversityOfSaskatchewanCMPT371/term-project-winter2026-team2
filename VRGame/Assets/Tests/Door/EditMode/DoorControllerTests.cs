@@ -5,7 +5,6 @@ using UnityEngine.TestTools;
 using NSubstitute;
 using System.Text.RegularExpressions;
 using System;
-using PlasticGui.WorkspaceWindow.Diff;
 
 
 public class DoorControllerTests
