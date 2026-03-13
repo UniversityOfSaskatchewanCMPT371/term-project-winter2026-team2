@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Controller interface for component of PlayerService.
+/// Controller interface for PlayerServiceController component.
 /// </summary>
 public interface IPlayerServiceController
 {
@@ -14,8 +12,7 @@ public interface IPlayerServiceController
     /// <param name="rotation">The quaternion in which to orientate the rig's rotation to.</param>
     /// <remarks>
     /// Preconditions:
-    /// - 'XRrigPrefab' variable cannot be null.
-    /// - 'XRrigPrefab' has PlayerController component.
+    /// - 'XRrigPrefab' must be validated.
     /// - The TeleportPlayerTo() method must be implemented in PlayerController.
     /// Postconditions:
     /// - 'playerObj' variable value is set to the new instantiated XR rig, 
@@ -25,14 +22,21 @@ public interface IPlayerServiceController
     void SpawnPlayer(Vector3 position, Quaternion rotation);
 
     /// <summary>
-    /// Initializes the singleton instance and validates the required prefab references.
+    /// Initializes and validates the component and enforces singleton pattern. Also
+    /// spawns the player on scene load if enabled.
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - 'XRrigPrefab' must be set in the inspector.
+    /// - 'instance' variable must be null.
+    /// - 'XRrigPrefab' variable must be set in the inspector.
+    /// - 'XRrigPrefab' has PlayerController component.
     /// Postconditions:
-    /// - 'singleton' field is assigned to this instance.
-    /// - Any existing duplicate 'PlayerServiceController' instances are destroyed.
+    /// - 'instance' variable is assigned to this component. Any duplicate 
+    /// instances of this component is destroyed.
+    /// - Optionally spawns the player by invoking SpawnPlayer() 
+    /// if 'spawnPlayerOnLoad' variable is true.
+    /// - Logs errors if preconditions are violated.
+    /// - Logs on success.
     /// </remarks>
     void Init();
 }

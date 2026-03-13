@@ -6,7 +6,7 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
     /// Reference to the singleton instance of this class. Used to
     /// follow singleton pattern.
     /// </summary>
-    internal static ServiceController instance;
+    private static ServiceController instance;
 
     /// <inheritdoc/>
     public override void Init()
@@ -21,22 +21,41 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
             return;
         } else
         {
-            // make this the instance
+            // declare this component the instance
             instance = this;
 
-            // keep it persistent
+            // keep this game object persistent
             DontDestroyOnLoad(gameObject);
         }
 
         Debug.Log("ServiceController initialized successfully.");
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Called once after the scene loads. 
+    /// Initializes this component by calling Init().
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Init() is implemented.
+    /// Postconditions:
+    /// - Init() is invoked.
+    /// </remarks>
     public void Awake() 
     {
         Init();
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Called once after all Awake() calls.
+    /// This method does nothing, but overrides the default Start() defined in
+    /// Controller base class.
+    /// </summary
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - None
+    /// </remarks>
     public override void Start() {}
 }
