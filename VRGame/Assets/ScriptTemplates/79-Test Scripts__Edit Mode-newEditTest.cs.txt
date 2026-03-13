@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
 using System;
-
+#NOTRIM#
 public class #SCRIPTNAME#
 {
     /// <summary>

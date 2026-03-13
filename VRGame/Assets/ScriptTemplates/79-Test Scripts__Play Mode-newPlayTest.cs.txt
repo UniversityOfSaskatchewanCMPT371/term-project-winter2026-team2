@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using NSubstitute;
 using System;
-
+using System.Collections;
+#NOTRIM#
 public class #SCRIPTNAME#
 {
     /// <summary>
@@ -22,7 +22,7 @@ public class #SCRIPTNAME#
     /// Called before each tests. Handles the setup for
     /// game object and component bneing tested
     /// </summary>
-    [SetUp]
+    [Setup]
     public void Setup()
     {
         go = new GameObject();
@@ -39,8 +39,8 @@ public class #SCRIPTNAME#
         UnityEngine.Object.DestroyImmediate(go);
     }
 
-    [Test]
-    public void Instantiation()
+    [UnityTest]
+    public IEnumerator Instantiation()
     {
         
     }
