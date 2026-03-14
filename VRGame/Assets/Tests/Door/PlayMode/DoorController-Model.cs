@@ -213,7 +213,9 @@ public class DoorController_Model
         loadingScene.Completed += Raise.Event<Action<IAsyncOperationWrapper>>(loadingScene);
 
         // let finished event be detected
-        yield return null;
+        while (doorC.TriggerDebounce) {
+            yield return null;
+        }
 
         
         // trigger debounce should be false, to allow entrance again
