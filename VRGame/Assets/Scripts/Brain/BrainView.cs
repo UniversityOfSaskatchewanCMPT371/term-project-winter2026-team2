@@ -12,6 +12,20 @@ public class BrainView : View<IBrainController>, IBrainView
     }
 
     /// <inheritdoc>
+    public void SetupXREvents()
+    {
+        // Get children components
+        var children = GetComponentsInChildren<XRBaseInteractable>();
+
+        foreach (var child in children)
+        {
+            child.hoverEntered.AddListener(OnXRHoverEnter);
+            child.hoverExited.AddListener(OnXRHoverExit);
+        }
+
+    }
+
+    /// <inheritdoc>
     private void OnXRHoverEnter(HoverEnterEventArgs args)
     {
         controllerInstance.OnHoverEnter();
