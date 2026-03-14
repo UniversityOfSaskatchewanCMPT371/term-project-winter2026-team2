@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Frontal Lobe.unity
     guid: 1c9e32b0f5a59c346a4e402ff023118d
+  - enabled: 1
+    path: Assets/Resources/Scenes/TestScene.unity
+    guid: 324195e13697ef94aa8b88ea0ce7bb8a
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9bec1ce6a03ccba4b9a8215241b32e63, type: 2}
