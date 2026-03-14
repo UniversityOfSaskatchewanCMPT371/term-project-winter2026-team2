@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using UnityEngine.Assertions;
 
 /// <summary>
@@ -6,14 +7,20 @@ using UnityEngine.Assertions;
 /// </summary>
 public class AsyncOperationWrapper : IAsyncOperationWrapper
 {
+
+    private UnityEngine.AsyncOperation operation;
+
     /// <inheritdoc />
     public event Action<IAsyncOperationWrapper> Completed;
+
 
     /// <inheritdoc/>
     public AsyncOperationWrapper(UnityEngine.AsyncOperation asyncOperation)
     {
         Assert.IsNotNull(asyncOperation, "asyncOperation cannot be null");
-        asyncOperation.completed += (o) =>
+        operation = asyncOperation;
+
+        operation.completed += (o) =>
         {
 
             // event is null if nothing is subscribed to it.
@@ -23,5 +30,11 @@ public class AsyncOperationWrapper : IAsyncOperationWrapper
                 Completed.Invoke(this);
             }
         };
+    }
+
+    /// <inheritdoc/> 
+    public bool IsDone()
+    {
+        return operation.isDone;
     }
 }
