@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Model component of BrainModel.
@@ -10,22 +11,34 @@ public class BrainModel : Model, IBrainModel
     /// <inheritdoc/>
     public override void Init()
     {
-        this.animator = GetComponent<Animator>();
-        if (animator == null) {
-            Debug.LogError("Animator did not initialize properly in BrainModel Init()");
+        if (animator != null) {
+            Debug.LogError("Animator already exists on BrainModel Init()");
         }
-        Assert.IsNotNull(animator, "Animator is null on Init()");
+        this.animator = GetComponent<Animator>();
+        Assert.IsNotNull(animator, "Animator failed to initialize on Init()");
     }
 
     /// <inheritdoc/>
     public void pause()
     {
+        Assert.IsNotNull(animator, "Animator must be initialized before pause() is called");
+        if (animator.speed == 0)
+        {
+            Debug.Log("Animation is already on pause");
+        }
         animator.speed = 0f;
+        Assert.IsTrue(animator.speed == 0f, "Animation speed failed to set to 0 on pause()");
     }
 
     /// <inheritdoc/>
     public void resume()
     {
+        Assert.IsNotNull(animator, "Animator must be initialized before resume() is called");
+        if (animator.speed > 0)
+        {
+            Debug.Log("Animation is already running, cannot resume further");
+        }
         animator.speed = 1.0f;
+        Assert.IsTrue(animator.speed == 1.0f, "Animation failed to set to 1.0f on resume()");
     }
 }
