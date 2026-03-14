@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// <summary>
 /// Controller component of BrainController.
 /// </summary>
-public class BrainController : Controller<IModel, IView>, IBrainController
+public class BrainController : Controller<IBrainModel, IBrainView>, IBrainController
 {
     /// <inheritdoc/>
     public override void Init()
@@ -23,6 +23,6 @@ public class BrainController : Controller<IModel, IView>, IBrainController
     /// <inheritdoc/>
     public void OnHoverExit()
     {
-        moodelInstance.resume();
+        modelInstance.resume();
     }
 }
