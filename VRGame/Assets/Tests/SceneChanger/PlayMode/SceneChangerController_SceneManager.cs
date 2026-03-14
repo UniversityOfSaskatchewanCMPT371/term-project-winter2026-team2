@@ -97,6 +97,7 @@ public class SceneChangerController_SceneManager
     public IEnumerator LoadScene()
     {
 
+        LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene(): Valid start");
         LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene() success");
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
@@ -104,12 +105,11 @@ public class SceneChangerController_SceneManager
         yield return null;
 
 
-        LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene(): Valid start");
-        IAsyncOperationWrapper op = sceneC.LoadScene(0);
+        IAsyncOperationWrapper op = sceneC.LoadScene(7); //testscene
 
 
         // let async operation finish
-        while (!op.IsDone())
+        while (sceneC.LoadDebounce)
         {
             yield return null;
         }

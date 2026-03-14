@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 using NSubstitute;
 using System.Text.RegularExpressions;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public class DoorController_SceneChanger
 {
@@ -62,24 +62,30 @@ public class DoorController_SceneChanger
     [UnityTest]
     public IEnumerator OnPlayerEnterValid()
     {
+
+
         GameObject go = new GameObject();
+        // this test loads a new scene, but I want instantiated objects to still exist
+        UnityEngine.Object.DontDestroyOnLoad(go);
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
         doorM.ResetDoorLookup();
-        doorM.DestinationSceneId = 0;
+        doorM.DestinationSceneId = 7; //testscene
         doorM.DoorId = 1;
         doorM.TargetDoorId = 2;
+        doorC.DoorModel = doorM;
 
         // create target for our door
         DoorModel targetDoor = go.AddComponent<DoorModel>();
-        doorM.ResetDoorLookup();
+        targetDoor.ResetDoorLookup();
         targetDoor.DoorId = 2;
         targetDoor.TargetDoorId = 1;
 
-        doorM.Init();
         targetDoor.Init();
-        doorC.DoorModel = doorM;
+        doorM.Init();
+
+        Assert.AreEqual(doorM.GetTargetDoor(), targetDoor);
 
         //create actual sceneChangerController
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();

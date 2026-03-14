@@ -176,18 +176,17 @@ public class DoorController_Model
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
-        doorM.ResetDoorLookup();
-        doorM.DestinationSceneId = 0;
+        doorM.DestinationSceneId = 7; // test scene
         doorC.DoorModel = doorM;
         doorM.DoorId = 1;
         doorM.TargetDoorId = 2;
+        doorM.ResetDoorLookup();
 
         // create target for our door
         DoorModel targetDoor = go.AddComponent<DoorModel>();
-        doorM.ResetDoorLookup();
         targetDoor.DoorId = 2;
         targetDoor.TargetDoorId = 1;
-
+        targetDoor.ResetDoorLookup();
 
         doorM.Init();
         targetDoor.Init();
@@ -195,7 +194,7 @@ public class DoorController_Model
         IAsyncOperationWrapper loadingScene = Substitute.For<IAsyncOperationWrapper>();
 
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
-        sceneC.LoadScene(0).Returns(loadingScene);
+        sceneC.LoadScene(7).Returns(loadingScene);
         doorC.SceneChangerController = sceneC;
 
         // init
