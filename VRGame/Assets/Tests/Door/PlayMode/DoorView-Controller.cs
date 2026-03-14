@@ -26,7 +26,7 @@ public class DoorView_Controller_Integration
         // init
         yield return null;
 
-        Object.Destroy(go);
+        Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -47,7 +47,7 @@ public class DoorView_Controller_Integration
         }
         catch { }
 
-        Object.Destroy(go);
+        Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -79,7 +79,7 @@ public class DoorView_Controller_Integration
         }
         catch { }
 
-        Object.Destroy(go);
+        Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -106,8 +106,8 @@ public class DoorView_Controller_Integration
         LogAssert.Expect(LogType.Log, "Component other than player collided with door");
 
 
-        Object.Destroy(colliderGo);
-        Object.Destroy(go);
+        Object.DestroyImmediate(colliderGo);
+        Object.DestroyImmediate(go);
 
         yield return null;
     }
@@ -146,8 +146,8 @@ public class DoorView_Controller_Integration
         {
         }
 
-        Object.Destroy(colliderGo);
-        Object.Destroy(go);
+        Object.DestroyImmediate(colliderGo);
+        Object.DestroyImmediate(go);
 
         yield return null;
     }

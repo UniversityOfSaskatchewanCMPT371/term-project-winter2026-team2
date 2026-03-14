@@ -31,7 +31,7 @@ public class DoorController_Model
         // no assertion triggered, meaning it worked
 
         doorM.ResetDoorLookup();
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -63,7 +63,7 @@ public class DoorController_Model
 
 
         doorM.ResetDoorLookup();
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -94,7 +94,7 @@ public class DoorController_Model
         }
 
 
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -121,7 +121,7 @@ public class DoorController_Model
         catch
         {
         }
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 

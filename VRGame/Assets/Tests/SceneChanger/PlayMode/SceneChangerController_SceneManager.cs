@@ -25,7 +25,7 @@ public class SceneChangerController_SceneManager
         yield return null;
         // if no assertions triggered, passed
         sceneC.ResetInstance();
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -43,7 +43,7 @@ public class SceneChangerController_SceneManager
         Assert.IsFalse(sceneC.LoadDebounce);
 
         sceneC.ResetInstance();
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 

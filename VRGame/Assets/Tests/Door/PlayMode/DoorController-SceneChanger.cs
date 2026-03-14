@@ -111,7 +111,7 @@ public class DoorController_SceneChanger
         
 
         doorM.ResetDoorLookup();
-        UnityEngine.Object.Destroy(go);
+        UnityEngine.Object.DestroyImmediate(go);
 
         yield return null;
     }
