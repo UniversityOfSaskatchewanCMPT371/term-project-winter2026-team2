@@ -74,6 +74,7 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// - ToolTipController is instantiated and ready to manage tooltip display logic
     void Start()
     {
+        // validate interactiveElement - cant go without it
         Debug.Assert(interactiveElement != null, "interactiveElement must be assigned in the Unity Editor.");
         
         if (interactiveElement == null)
@@ -88,14 +89,34 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
             return;
         }
 
-        /// forward XR events to our own events
-        interactable.hoverEntered.AddListener(_ => HoverEntered?.Invoke());
-        interactable.hoverExited.AddListener(_ => HoverExited?.Invoke());
-
+        ///XR events that only works for left controller
+        interactable.hoverEntered.AddListener(OnHoverEntered);
+        interactable.hoverExited.AddListener(OnHoverExited);
+        
         /// create controller and pass in the interactive element and this trigger
         toolTipController = new ToolTipController(interactiveElement, this);
         
     }
+
+  private void OnHoverEntered(HoverEnterEventArgs args)
+    {
+        if (IsLeftController(args.interactorObject))
+            HoverEntered?.Invoke();
+    }
+
+    private void OnHoverExited(HoverExitEventArgs args)
+    {
+        if (IsLeftController(args.interactorObject))
+            HoverExited?.Invoke();
+    }
+
+ 
+    private bool IsLeftController(IXRInteractor interactor)
+    {
+        var controller = (interactor as MonoBehaviour)?.GetComponentInParent<ActionBasedController>();
+        return controller != null && controller.name.Contains("Left");
+    }
+
 
     /// <summary>
     /// Cleans up resources when the GameObject is destroyed.
