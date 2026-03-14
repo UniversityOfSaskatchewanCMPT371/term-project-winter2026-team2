@@ -6,11 +6,22 @@ public interface IBrainView : IView
     /// <summary>
     /// Initializes the Brain view component
     /// </summary>
+    /// <remarks
+    /// Pre-condition:
+    ///     requires controllerInstance != null
+    /// Post-condition:
+    ///     ensures view is initialized
+    /// </remarks>
     new void Init();
 
     /// <summary>
-    /// Method sets up XR interaction events
+    /// Sets up XR interaction events on all XRBaseInteractable children
     /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires controllerInstance != null
+    /// Post-condition:
+    ///     ensures eventListeners (OnHoverEnter & OnHoverExit) are attached to all XRBaseInteractable children
     void SetupXREvents();
 
     /// void OnXRHoverExit(HoverExitEventArgs args);

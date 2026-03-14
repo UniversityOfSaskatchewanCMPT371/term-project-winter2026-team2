@@ -21,7 +21,7 @@ public interface IBrainModel : IModel
     /// Pre-condition:
     ///     requires animator != null
     /// Post-condition:
-    ///     ensures animator.speed == 0f
+    ///     modifies animator.speed == 0f
     /// </remarks>
     void pause();
 
@@ -32,7 +32,7 @@ public interface IBrainModel : IModel
     /// Pre-condition:
     ///     requires (model != null) && (animator != null)
     /// Post-condition:
-    ///     ensures animator.speed == 1.0f
+    ///     modifies animator.speed == 1.0f
     /// </remarks>
     void resume();
 
