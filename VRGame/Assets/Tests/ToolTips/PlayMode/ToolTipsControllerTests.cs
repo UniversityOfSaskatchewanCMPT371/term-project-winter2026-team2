@@ -3,34 +3,36 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Text.RegularExpressions;
+
 
 /// <summary>
-/// This test runs the whole ToolTipTrigger in a real scene with an XRSimpleInteractable.
-/// It ensures that Awake and Start run without errors, and that the interactive element starts disabled
+/// Play mode tests for ToolTipController.
 /// </summary>
 public class ToolTipsControllerTests
 {
     /// <summary>
-    /// Create a real ToolTipTrigger with XRSimpleInteractable and ToolTipView as the interactive element.
-    /// After Awake and Start run, verifies the interactive element is disabled (correct initial state).
+    /// Verifies that when the controller is created, it disables the interactive element.
     /// </summary>
     [UnityTest]
     public IEnumerator AwakeAndStart_DisablesInteractiveElement()
     {
         // Build a trigger object with a real XRSimpleInteractable
-        var triggerGo = new GameObject("Trigger");
-        var interactable = triggerGo.AddComponent<XRSimpleInteractable>();
-        var trigger = triggerGo.AddComponent<ToolTipTrigger>();
+        GameObject triggerGo = new GameObject("Trigger");
+        XRSimpleInteractable interactable = triggerGo.AddComponent<XRSimpleInteractable>();
+        
+        //add ToolTIpTrigger component
+        ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
         trigger.interactable = interactable;
 
         // Create a view object and link it as the interactive element
-        var viewGo = new GameObject("ToolTipView");
-        var view = viewGo.AddComponent<ToolTipView>();
+        GameObject viewGo = new GameObject("ToolTipView");
+        ToolTipView view = viewGo.AddComponent<ToolTipView>();
         viewGo.transform.SetParent(triggerGo.transform);
         trigger.interactiveElement = viewGo;
 
         // Give it a model so the view doesn't complain about missing data
-        var model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
+        ToolTipModel model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
         model.Title = "Test";
         model.Description = "Test";
         view.data = model;
@@ -42,6 +44,92 @@ public class ToolTipsControllerTests
         Assert.IsFalse(viewGo.activeSelf);
 
         // Clean up
+        UnityEngine.Object.DestroyImmediate(triggerGo);
+        UnityEngine.Object.DestroyImmediate(model);
+    }
+
+    /// <summary>
+    /// Verifies that Start asserts if interactiveElement is not assigned
+    /// </summary>
+    [UnityTest]
+    public IEnumerator Start_MissingInteractiveElement_Asserts()
+    {
+        // Build a trigger object with a real XRSimpleInteractable but no interactive element
+        GameObject triggerGo = new GameObject("Trigger");
+        XRSimpleInteractable interactable = triggerGo.AddComponent<XRSimpleInteractable>();
+        
+        //add ToolTipTrigger component but leave interactiveElement unassigned
+        ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
+        trigger.interactable = interactable;
+
+        //expect an assertion exceiption about missing interactiveElement
+        LogAssert.Expect(LogType.Exception, new Regex(".*interactiveElement must be assigned.*"));
+
+        //wait one frame
+        yield return null;
+
+        //clean up
+        UnityEngine.Object.DestroyImmediate(triggerGo);
+    }
+
+    /// <summary>
+    /// Verifies that Awake asserts if XRBaseInteractable is missing.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator Awake_MissingInteractable()
+    {
+        // create a GameObject for the trigger without an XRBaseInteractable
+        GameObject triggerGo = new GameObject("Trigger");
+        
+        // add the ToolTipTrigger component - awake will run automatically
+        ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
+
+        // expect an assertion exception about missing XRBaseInteractable
+        LogAssert.Expect(LogType.Exception, new Regex(".*No XRBaseInteractable component found.*"));
+
+        // wait one frame
+        yield return null;
+
+        // clean up
+        UnityEngine.Object.DestroyImmediate(triggerGo);
+    }
+
+    /// <summary>
+    /// Verifies that hover events properly show and hide the interactive element.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator HoverEvents_ShowAndHideElement()
+    {
+        // create GameObject and add components
+        GameObject triggerGo = new GameObject("Trigger");
+        XRSimpleInteractable interactable = triggerGo.AddComponent<XRSimpleInteractable>();
+        ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
+        trigger.interactable = interactable;
+
+        // Create a view object and set as the interactive element
+        GameObject viewGo = new GameObject("ToolTipView");
+        ToolTipView view = viewGo.AddComponent<ToolTipView>();
+        viewGo.transform.SetParent(triggerGo.transform);
+        trigger.interactiveElement = viewGo;
+
+        // create model and assign
+        ToolTipModel model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
+        model.Title = "Test";
+        model.Description = "Test";
+        view.data = model;
+
+        // wait one frame for Start to run
+        yield return null;
+
+        // simulate hover enter
+        interactable.hoverEntered.Invoke(new HoverEnterEventArgs());
+        Assert.IsTrue(viewGo.activeSelf, "Element should be active after hover enter.");
+
+        // simulate hover exit
+        interactable.hoverExited.Invoke(new HoverExitEventArgs());
+        Assert.IsFalse(viewGo.activeSelf, "Element should be inactive after hover exit.");
+
+        // clean up
         UnityEngine.Object.DestroyImmediate(triggerGo);
         UnityEngine.Object.DestroyImmediate(model);
     }

@@ -3,34 +3,35 @@ using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.TestTools;
+using System.Text.RegularExpressions;
 
 
 ///<summary>
-/// It verifies that the text fields in the view have been updated with the data from the model
+/// Play mode tests for ToolTipView.
 /// </summary>
 public class ToolTipsViewTests
 {
     /// <summary>
-    /// Create a real ToolTipView with TMP components and a real ToolTipModel with data,
-    /// After waiting a frame for Start() to run, verifies the text fields were updated from the model.
+    /// Verifies that Start sets the text from the assigned model.
     /// </summary>
     [UnityTest]
     public IEnumerator Start_SetsTextFromAssignedModel()
     {
         // Build a real view with TMP children
-        var go = new GameObject("ToolTipView");
-        var view = go.AddComponent<ToolTipView>();
+        GameObject go = new GameObject("ToolTipView");
+        ToolTipView view = go.AddComponent<ToolTipView>();
 
-        var titleGo = new GameObject("Title");
+        // create and assign child TextMeshPro objects
+        GameObject titleGo = new GameObject("Title");
         titleGo.transform.SetParent(go.transform);
         view.title = titleGo.AddComponent<TextMeshProUGUI>();
 
-        var descGo = new GameObject("Description");
+        GameObject descGo = new GameObject("Description");
         descGo.transform.SetParent(go.transform);
         view.description = descGo.AddComponent<TextMeshProUGUI>();
 
         // Create a real model and assign it
-        var model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
+        ToolTipModel model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
         model.Title = "Play Title";
         model.Description = "Play Description";
         view.data = model;
