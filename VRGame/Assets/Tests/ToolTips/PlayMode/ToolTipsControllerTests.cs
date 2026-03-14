@@ -105,20 +105,29 @@ public class ToolTipsControllerTests
     [UnityTest]
     public IEnumerator HoverEvents_ShowAndHideElement()
     {
-        // create GameObject and add components
+        // create left controller parent
+        GameObject controllerGo = new GameObject("Left Controller");
+        controllerGo.AddComponent<ActionBasedController>();
+
+        // Create interactor child
+        GameObject interactorGo = new GameObject("Ray Interactor");
+        interactorGo.transform.SetParent(controllerGo.transform);
+        XRRayInteractor rayInteractor = interactorGo.AddComponent<XRRayInteractor>();
+
+        // create interactable then add tooltiptrigger
         GameObject triggerGo = new GameObject("Trigger");
         XRSimpleInteractable interactable = triggerGo.AddComponent<XRSimpleInteractable>();
-        ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
-        trigger.interactable = interactable;
+         ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
 
-        // Create a view object and set as the interactive element
+        // Create view object and set as the interactive element
         GameObject viewGo = new GameObject("ToolTipView");
         ToolTipView view = viewGo.AddComponent<ToolTipView>();
         viewGo.transform.SetParent(triggerGo.transform);
+
         trigger.interactiveElement = viewGo;
 
         // create model and assign
-        ToolTipModel model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
+        ToolTipModel model = ScriptableObject.CreateInstance<ToolTipModel>();
         model.Title = "Test";
         model.Description = "Test";
         view.data = model;
@@ -126,16 +135,23 @@ public class ToolTipsControllerTests
         // wait one frame for Start to run
         yield return null;
 
-        // simulate hover enter
-        interactable.hoverEntered.Invoke(new HoverEnterEventArgs());
+        // simulate HoverEnter event with left controller interactor
+        interactable.hoverEntered.Invoke(new HoverEnterEventArgs
+        {
+            interactorObject = rayInteractor
+        });
         Assert.IsTrue(viewGo.activeSelf, "Element should be active after hover enter.");
 
-        // simulate hover exit
-        interactable.hoverExited.Invoke(new HoverExitEventArgs());
+        // simulate HoverExit
+        interactable.hoverExited.Invoke(new HoverExitEventArgs
+        {
+            interactorObject = rayInteractor
+        });
         Assert.IsFalse(viewGo.activeSelf, "Element should be inactive after hover exit.");
 
         // clean up
-        UnityEngine.Object.DestroyImmediate(triggerGo);
-        UnityEngine.Object.DestroyImmediate(model);
+        Object.DestroyImmediate(triggerGo);
+        Object.DestroyImmediate(controllerGo);
+        Object.DestroyImmediate(model);
     }
 }
