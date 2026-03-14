@@ -105,11 +105,11 @@ public class SceneChangerController_SceneManager
 
 
         LogAssert.Expect(LogType.Log, "SceneChangerController.LoadScene(): Valid start");
-        sceneC.LoadScene(0);
+        IAsyncOperationWrapper op = sceneC.LoadScene(0);
 
 
         // let async operation finish
-        while (sceneC.LoadDebounce)
+        while (!op.IsDone())
         {
             yield return null;
         }
