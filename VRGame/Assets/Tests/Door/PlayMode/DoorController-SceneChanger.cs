@@ -102,7 +102,7 @@ public class DoorController_SceneChanger
 
 
         // let finished event be detected
-        while (!doorC.TriggerDebounce)
+        while (doorC.TriggerDebounce)
         {
             yield return null;
         }
