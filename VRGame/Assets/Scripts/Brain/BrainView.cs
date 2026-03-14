@@ -16,6 +16,7 @@ public class BrainView : View<IBrainController>, IBrainView
         }
         this.CheckControllerRef();
         Assert.IsNotNull(controllerInstance, "Controller failed to initialize in BrainView");
+        SetupXREvents();
     }
 
     /// <inheritdoc>
