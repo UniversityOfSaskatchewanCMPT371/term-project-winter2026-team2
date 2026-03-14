@@ -5,10 +5,32 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface IBrainController : IModel
+public interface IBrainController : IController
 {
     /// <summary>
-    /// TODO: Change the docstring to match your implementation.
+    /// 
     /// </summary>
     new void Init();
+
+    /// <summary>
+    /// Pauses the animation
+    /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires modelInstance != null
+    /// Post-condition:
+    ///     ensures modelInstance.pause() is invoked
+    /// </remarks>
+    void OnHoverEnter();
+
+    /// <summary>
+    /// Resumes the animation
+    /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires modelInstance != null
+    /// Post-condition:
+    ///     ensures modelInstance.resume() is invoked
+    /// </remarks>
+    void OnHoverExit();
 }
