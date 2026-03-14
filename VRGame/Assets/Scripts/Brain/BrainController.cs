@@ -1,22 +1,28 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// Controller component of BrainController.
 /// </summary>
-public class BrainController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
-    IBrainController
+public class BrainController : Controller<IModel, IView>, IBrainController
 {
-    // use 'this.viewInstance' to access view component, and
-    // 'this.modelInstance' to access model component
-
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
+        // Validate model and view components
         this.CheckModelRef();
         this.CheckViewRef();
+    }
+
+    /// <inheritdoc/>
+    public void OnHoverEnter()
+    {
+        modelInstance.pause();
+    }
+
+    /// <inheritdoc/>
+    public void OnHoverExit()
+    {
+        moodelInstance.resume();
     }
 }
