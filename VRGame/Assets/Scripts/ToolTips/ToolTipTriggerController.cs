@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using System;
 
+/// <summary>
+/// Controls the visibility of a tooltip based on hover events
+/// Raised by ToolTipTrigger.
+/// </summary>
 public class ToolTipController
 {
     /// <summary>
@@ -20,14 +25,28 @@ public class ToolTipController
     /// </summary>
     /// <param name="interactiveElement">The GameObject to show/hide as a tooltip.</param>
     /// <param name="trigger">The trigger that provides hover events.</param>
-    /// <preconditions>
-    /// <c>interactiveElement</c> and <c>trigger</c> must not be null.
-    /// </preconditions>
-    /// <postconditions>
-    /// Event handlers are subscribed to trigger events and the interactive element is hidden.
-    /// </postconditions>
+    /// <remarks>
+    /// Preconditions:
+    /// - `interactiveElement` must not be null
+    /// - `trigger` must not be null
+    /// Postconditions:
+    /// - Event handlers are subscribed to trigger events
+    /// - the interactive element is initialliy hidden (SetActive(false)).
+    /// </remarks>
     public ToolTipController(GameObject interactiveElement, IToolTipTrigger trigger)
     {
+        if (interactiveElement == null)
+        {
+            Debug.LogError("interactiveElement cannot be null.");
+            Assert.IsNotNull(interactiveElement, "interactiveElement cannot be null.");
+        }
+
+        if (trigger == null)
+        {
+            Debug.LogError("trigger cannot be null.");
+            Assert.IsNotNull(trigger, "trigger cannot be null.");
+        }
+
         this.interactiveElement = interactiveElement;
         this.trigger = trigger;
 
@@ -42,12 +61,12 @@ public class ToolTipController
     /// <summary>
     /// Shows the tooltip when hover enters.
     /// </summary>
-    /// <preconditions>
-    /// <c>interactiveElement</c> must be initialized.
-    /// </preconditions>
-    /// <postconditions>
-    /// The interactive element is visible and active.
-    /// </postconditions>
+    /// <remark>
+    /// Preconditions:
+    /// - `interactiveElement` must be initialized.
+    /// Postconditions:
+    /// - The interactive element is visible and active.
+    /// </remark>
     private void OnHoverEnter()
     {
         interactiveElement.SetActive(true);
@@ -56,12 +75,12 @@ public class ToolTipController
     /// <summary>
     /// Hides the tooltip when hover exits.
     /// </summary>
-    /// <preconditions>
-    /// <c>interactiveElement</c> must be initialized.
-    /// </preconditions>
-    /// <postconditions>
-    /// The interactive element is hidden and inactive.
-    /// </postconditions>
+    /// <remarks>
+    /// Preconditions:
+    /// - `interactiveElement` must be initialized.
+    /// Postconditions:
+    /// - The interactive element is hidden and inactive.
+    /// </remarks>
     private void OnHoverExit()
     {
         interactiveElement.SetActive(false);
@@ -70,12 +89,12 @@ public class ToolTipController
     /// <summary>
     /// Cleans up event subscriptions to prevent memory leaks.
     /// </summary>
-    /// <preconditions>
-    /// Event handlers must be subscribed to trigger events.
-    /// </preconditions>
-    /// <postconditions>
-    /// All event handlers are unsubscribed from trigger events.
-    /// </postconditions>
+    /// <remarks>
+    /// Preconditions:
+    /// - Event handlers must be subscribed to trigger events.
+    /// Postconditions:
+    /// - All event handlers are unsubscribed from trigger events.
+    /// </remarks>
     public void Dispose()
     {
         //unsubscribe from the trigger events to prevent memory leaks
