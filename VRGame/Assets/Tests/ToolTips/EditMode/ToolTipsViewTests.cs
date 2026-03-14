@@ -24,6 +24,7 @@ public class ToolTipsViewTests
         viewGo = new GameObject("ToolTipView");
         view = viewGo.AddComponent<ToolTipView>();
 
+        // create and assign child TextMeshPro objects
         var titleGo = new GameObject("Title");
         titleGo.transform.SetParent(viewGo.transform);
         view.title = titleGo.AddComponent<TextMeshProUGUI>();
@@ -44,6 +45,7 @@ public class ToolTipsViewTests
     [TearDown]
     public void TearDown()
     {
+        // destroy the view GameObject
         Object.DestroyImmediate(viewGo);
     }
 
@@ -53,7 +55,9 @@ public class ToolTipsViewTests
     [Test]
     public void UpdateContent_SetsTextFromModel()
     {
+        // call UpdateContent with the mock model
         view.UpdateContent(mockModel);
+        // verify the text fields are updated
         Assert.AreEqual("Mock Title", view.title.text);
         Assert.AreEqual("Mock Description", view.description.text);
     }
@@ -71,4 +75,5 @@ public class ToolTipsViewTests
         view.SetActive(false);
         Assert.IsFalse(viewGo.activeSelf);
     }
+
 }

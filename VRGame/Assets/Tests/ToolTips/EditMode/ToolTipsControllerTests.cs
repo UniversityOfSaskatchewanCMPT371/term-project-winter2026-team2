@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 using NSubstitute;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Verify the logic of ToolTipController
@@ -19,7 +20,7 @@ public class ToolTipsControllerTests
     [SetUp]
     public void SetUp()
     {
-        // just a GameObject
+        // create a GameObject
         interactiveElement = new GameObject("Interactive");
         mockTrigger = Substitute.For<IToolTipTrigger>();
 
@@ -45,6 +46,7 @@ public class ToolTipsControllerTests
     [Test]
     public void Constructor_DisablesElement()
     {
+        // assert that the element starts disabled
         Assert.IsFalse(interactiveElement.activeSelf);
     }
 
@@ -69,6 +71,7 @@ public class ToolTipsControllerTests
         mockTrigger.HoverEntered += Raise.Event<Action>();
         Assert.IsTrue(interactiveElement.activeSelf);
 
+        //now raise HoverExited and verify it hides the element again
         mockTrigger.HoverExited += Raise.Event<Action>();
         Assert.IsFalse(interactiveElement.activeSelf);
     }
@@ -80,9 +83,12 @@ public class ToolTipsControllerTests
     [Test]
     public void Dispose_UnsubscribesFromEvents()
     {
+        // dispose the controller
         controller.Dispose();
 
+        // Now raise HoverEntered and verify it does NOT show the element (because we unsubscribed)
         mockTrigger.HoverEntered += Raise.Event<Action>();
         Assert.IsFalse(interactiveElement.activeSelf); // Should still be hidden.
     }
+
 }

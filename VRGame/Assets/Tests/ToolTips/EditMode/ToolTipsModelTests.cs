@@ -16,6 +16,7 @@ public class ToolTipsModelTests
     [SetUp]
     public void SetUp()
     {
+        //create a ScriptableObject instance of ToolTipModel
         model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
     }
 
@@ -25,6 +26,7 @@ public class ToolTipsModelTests
     [TearDown]
     public void TearDown()
     {
+        //destroy the model to prevent memory leaks
         Object.DestroyImmediate(model);
     }
 
@@ -44,6 +46,7 @@ public class ToolTipsModelTests
     [Test]
     public void Title_ShouldBeSet_WhenAssigned()
     {
+        // assign and verify it was stored correctly
         model.Title = "Test Title";
         Assert.AreEqual("Test Title", model.Title);
     }
@@ -64,6 +67,7 @@ public class ToolTipsModelTests
     [Test]
     public void Description_ShouldBeSet_WhenAssigned()
     {
+        //assign and verify it was stored correctly
         model.Description = "Test Description";
         Assert.AreEqual("Test Description", model.Description);
     }
