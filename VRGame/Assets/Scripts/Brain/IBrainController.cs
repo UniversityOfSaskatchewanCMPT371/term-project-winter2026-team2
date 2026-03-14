@@ -1,15 +1,17 @@
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
-// If you are making Model layer, inherit from IModel.
-// Same goes for other layers. (IController/IView)
-
 /// <summary>
-/// TODO: Change the docstring to match your implementation.
+/// Controller component of BrainController that manages hover interactions
 /// </summary>
 public interface IBrainController : IController
 {
     /// <summary>
-    /// 
+    /// Initializes the model and view instance
     /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires (modelInstance == null) && (viewInstance == null)
+    /// Post-condition:
+    ///     ensures (modelInstance != null) && (viewInstance != null)
+    /// </remarks>
     new void Init();
 
     /// <summary>
