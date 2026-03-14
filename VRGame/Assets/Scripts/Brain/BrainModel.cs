@@ -12,10 +12,10 @@ public class BrainModel : Model, IBrainModel
     public override void Init()
     {
         if (animator != null) {
-            Debug.LogError("Animator already exists on BrainModel Init()");
+            Debug.LogError("Animator already exists");
         }
         this.animator = GetComponent<Animator>();
-        Assert.IsNotNull(animator, "Animator failed to initialize on Init()");
+        Assert.IsNotNull(animator, "Animator failed to initialize in BrainModel");
     }
 
     /// <inheritdoc/>

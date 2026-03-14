@@ -11,10 +11,10 @@ public class BrainView : View<IBrainController>, IBrainView
     {
         if (controllerInstance != null)
         {
-            Debug.Log("Controller instance already exists");
+            Debug.LogWarning("Controller instance already exists");
         }
         this.CheckControllerRef();
-        Assert.IsNotNull(controllerInstance, "Failed to initialize controller instance in BrainView");
+        Assert.IsNotNull(controllerInstance, "Controller failed to initialize in BrainView");
     }
 
     /// <inheritdoc>
