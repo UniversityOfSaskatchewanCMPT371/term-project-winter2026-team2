@@ -2,11 +2,9 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 using NSubstitute;
-using UnityEngine.Assertions;
 
 /// <summary>
-/// Verify the logic of ToolTipController
-/// It listens to hover events and shows/hides the interactive element
+/// Unit tests for ToolTipController
 /// </summary>
 public class ToolTipsControllerTests
 {

@@ -3,8 +3,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Verify the logic of ToolTipModel, which is just a simple data container
-/// (Test getters and setters to ensure they work as expected)
+/// Unit tests for ToolTipModel
 /// </summary>
 public class ToolTipsModelTests
 {

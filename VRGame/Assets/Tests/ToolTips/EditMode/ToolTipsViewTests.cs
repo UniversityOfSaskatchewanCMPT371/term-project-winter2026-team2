@@ -4,8 +4,7 @@ using UnityEngine;
 using NSubstitute;
 
 /// <summary>
-/// Verify the logic of ToolTipView, for displaying the tooltip data in the UI
-/// (Test that it correctly updates the text fields from the model and toggles visibility)
+/// Unit tests for ToolTipView
 /// </summary>
 public class ToolTipsViewTests
 {
