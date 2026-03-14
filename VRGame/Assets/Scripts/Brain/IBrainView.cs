@@ -11,8 +11,9 @@ public interface IBrainView : IView
     /// <summary>
     /// Method sets up XR interaction events
     /// </summary>
-    void setupXREvents();
+    void SetupXREvents();
 
+    /// void OnXRHoverExit(HoverExitEventArgs args);
     /// <summary>
     /// Calls controllerInstance.OnHoverEnter() on XR hover enter 
     /// </summary>
@@ -22,8 +23,8 @@ public interface IBrainView : IView
     /// Post-condition:
     ///     ensures controllerInstance.OnHoverEnter() is called on XR hover enter
     /// </remarks>
-    void OnXRHoverEnter(HoverEnterEventArgs args);
-
+    
+    /// void OnXRHoverExit(HoverExitEventArgs args);
     /// <summary>
     /// Calls controllerInstance.OnHoverExit() on XR hover exit
     /// </summary>
@@ -33,5 +34,5 @@ public interface IBrainView : IView
     /// Post-condition:
     ///     ensures controllerInstance.OnHoverExit() is called on XR hover exit
     /// </remarks>
-    void OnXRHoverExit(HoverExitEventArgs args);
+
 }
