@@ -287,8 +287,8 @@ public class DoorModel : MonoBehaviour, IDoorModel
 
     /// <summary>
     /// A `MonoBehaviour` function, called on the frame when a script is enabled, before
-    /// any `Update()` functions are called. - Important to call on Start() instead of Awake(),
-    /// as it depends on the existence of other elements.
+    /// any `Update()` functions are called. - Important to call on Awake() instead of Start()
+    /// since loadingScene.Completed event is triggered on Start().
     /// </summary>
     /// <remarks>
     /// Preconditions:
@@ -296,11 +296,6 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// PostConditions:
     /// - all side effects caused by calling Init();
     /// </remarks>
-    // private void Start()
-    // {
-    //     // Init();
-    // }
-
     private void Awake()
     {
         // Invoking Init() in Awake() allows the doorId
