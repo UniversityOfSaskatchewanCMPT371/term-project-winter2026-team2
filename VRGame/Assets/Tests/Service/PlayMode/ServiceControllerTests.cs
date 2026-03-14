@@ -30,22 +30,24 @@ public class ServiceControllerTest
         Object.DestroyImmediate(go);
     }
 
-    [Test]
-    public void Instantiation()
+    [UnityTest]
+    public IEnumerable Instantiation()
     {
-        controller.Init();
+        yield return null;
 
         // no errors should occur since it doesn't interact with
         // any other layers
     }
 
-    [Test]
-    public void Singleton()
+    [UnityTest]
+    public IEnumerable Singleton()
     {
         controller.Init();
 
         GameObject go2 = new GameObject();
-        go2.AddComponent<ServiceController>().Init();
+        go2.AddComponent<ServiceController>();
+
+        yield return null;
 
         // expected a warning since this is a duplicate of this singleton
         // game object of the duplicate its attached to is expected to be destroyed
