@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.Assertions;
 using System;
 
 /// <summary>
@@ -52,8 +51,7 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     void Awake()
     {
         interactable = GetComponent<XRBaseInteractable>();
-        Assert.IsNotNull(interactable, "No XRBaseInteractable component found on this GameObject.");
-        
+        Debug.Assert(interactable != null, "No XRBaseInteractable component found on the GameObject. Please add one to use ToolTipTrigger.");
     }
 
     /// <summary>
@@ -76,10 +74,23 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// - ToolTipController is instantiated and ready to manage tooltip display logic
     void Start()
     {
-        Assert.IsNotNull(interactiveElement, "interactiveElement must be assigned in the Unity Editor.");
+        Debug.Assert(interactiveElement != null, "interactiveElement must be assigned in the Unity Editor.");
+        
+        if (interactiveElement == null)
+        {
+            return;
+        }
+
+        //dont create controller if interactable is missing since it will cause null ref exceptions in the event handlers
+        if (interactable == null)
+        {
+            Debug.LogError("XRBaseInteractable component is missing. Please ensure this GameObject has an XRBaseInteractable component attached.");
+            return;
+        }
+
         /// forward XR events to our own events
-        interactable.hoverEntered.AddListener(_=> HoverEntered?.Invoke());
-        interactable.hoverExited.AddListener(_=> HoverExited?.Invoke());
+        interactable.hoverEntered.AddListener(_ => HoverEntered?.Invoke());
+        interactable.hoverExited.AddListener(_ => HoverExited?.Invoke());
 
         /// create controller and pass in the interactive element and this trigger
         toolTipController = new ToolTipController(interactiveElement, this);

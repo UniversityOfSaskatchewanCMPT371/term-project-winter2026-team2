@@ -46,10 +46,10 @@ public class ToolTipView : MonoBehaviour, IToolTipView
     /// </remarks>
     void Start()
     {
-        Assert.IsNotNull(title, "Title TextMeshProUGUI component is not assigned in the inspector.");
-        Assert.IsNotNull(description, "Description TextMeshProUGUI component is not assigned in the inspector.");
-        Assert.IsNotNull(data, "ToolTipModel data is not assigned in the inspector.");
-        
+        Debug.Assert(title != null, "Title TextMeshProUGUI component is not assigned in the inspector.");
+        Debug.Assert(description != null, "Description TextMeshProUGUI component is not assigned in the inspector.");
+        Debug.Assert(data != null, "ToolTipModel data is not assigned in the inspector.");
+
         title.SetText(data.Title);
         description.SetText(data.Description);
     }
@@ -61,14 +61,14 @@ public class ToolTipView : MonoBehaviour, IToolTipView
         if (model == null)
         {
             Debug.LogError("ToolTipModel cannot be null.");
-            Assert.IsNotNull(model, "ToolTipModel cannot be null.");
+            Debug.Assert(model != null, "ToolTipModel cannot be null.");
             return;
         }
         if (title == null || description == null)
         {
             Debug.LogError("UpdateContent called before UI components are initialized.");
-            Assert.IsNotNull(title, "Title component is null.");
-            Assert.IsNotNull(description, "Description component is null.");
+            Debug.Assert(title != null, "Title component is null.");
+            Debug.Assert(description != null, "Description component is null.");
             return;
         }
         title.SetText(model.Title);

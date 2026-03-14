@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 using System;
 
 /// <summary>
@@ -38,13 +37,15 @@ public class ToolTipController
         if (interactiveElement == null)
         {
             Debug.LogError("interactiveElement cannot be null.");
-            Assert.IsNotNull(interactiveElement, "interactiveElement cannot be null.");
+            Debug.Assert(interactiveElement != null, "interactiveElement cannot be null.");
+            return;
         }
 
         if (trigger == null)
         {
             Debug.LogError("trigger cannot be null.");
-            Assert.IsNotNull(trigger, "trigger cannot be null.");
+            Debug.Assert(trigger != null, "trigger cannot be null.");
+            return;
         }
 
         this.interactiveElement = interactiveElement;
@@ -97,8 +98,12 @@ public class ToolTipController
     /// </remarks>
     public void Dispose()
     {
-        //unsubscribe from the trigger events to prevent memory leaks
-        trigger.HoverEntered -= OnHoverEnter;
-        trigger.HoverExited -= OnHoverExit;
+        if (trigger != null)
+        {
+            //unsubscribe from the trigger events to prevent memory leaks
+            trigger.HoverEntered -= OnHoverEnter;
+            trigger.HoverExited -= OnHoverExit;
+        }
+       
     }
 }

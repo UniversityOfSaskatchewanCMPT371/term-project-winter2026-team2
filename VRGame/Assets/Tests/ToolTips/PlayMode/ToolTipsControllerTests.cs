@@ -63,7 +63,7 @@ public class ToolTipsControllerTests
         trigger.interactable = interactable;
 
         //expect an assertion exceiption about missing interactiveElement
-        LogAssert.Expect(LogType.Exception, new Regex(".*interactiveElement must be assigned.*"));
+        LogAssert.Expect(LogType.Assert, new Regex(".*interactiveElement must be assigned.*"));
 
         //wait one frame
         yield return null;
@@ -80,12 +80,17 @@ public class ToolTipsControllerTests
     {
         // create a GameObject for the trigger without an XRBaseInteractable
         GameObject triggerGo = new GameObject("Trigger");
+        GameObject dummyViewGo = new GameObject("DummyView");
+        dummyViewGo.transform.SetParent(triggerGo.transform);
         
         // add the ToolTipTrigger component - awake will run automatically
         ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
 
+        trigger.interactiveElement = dummyViewGo; // assign to avoid the interactiveElement null check
+
         // expect an assertion exception about missing XRBaseInteractable
-        LogAssert.Expect(LogType.Exception, new Regex(".*No XRBaseInteractable component found.*"));
+        LogAssert.Expect(LogType.Assert, new Regex(".*No XRBaseInteractable component found.*"));
+        LogAssert.Expect(LogType.Error, new Regex(".*XRBaseInteractable component is missing.*"));
 
         // wait one frame
         yield return null;
