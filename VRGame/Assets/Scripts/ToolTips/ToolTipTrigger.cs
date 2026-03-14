@@ -98,12 +98,34 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
         
     }
 
-  private void OnHoverEntered(HoverEnterEventArgs args)
+    /// <summary>
+    /// handles the hover entered event, 
+    /// raises HoverEntered only if the left controller is hovering.
+    /// </summary>
+    /// <param name="args"> Event arguments containing the interactor</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - <c>args.interactorObject</c> must not be null.
+    /// Postconditions:
+    /// - HoverEntered is invoked if the left controller triggered the event.
+    /// </remarks>
+    private void OnHoverEntered(HoverEnterEventArgs args)
     {
         if (IsLeftController(args.interactorObject))
             HoverEntered?.Invoke();
     }
 
+    /// <summary>
+    /// handles the hover exited event, 
+    /// raises HoverExited only if the left controller is hovering.
+    /// </summary>
+    /// <param name="args"> Event arguments containing the interactor</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - <c>args.interactorObject</c> must not be null.
+    /// Postconditions:
+    /// - HoverExited is invoked if the left controller triggered the event.
+    /// </remarks>
     private void OnHoverExited(HoverExitEventArgs args)
     {
         if (IsLeftController(args.interactorObject))
@@ -111,9 +133,24 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     }
 
  
+    /// <summary>
+    /// Checks if the interactor belongs to the left controller
+    /// Finds the ActionBasedController in the parent hierarchy and checks if its GameObject name contains "Left".
+    /// </summary>
+    /// <param name="interactor">The interactor to check.</param>
+    /// <returns>True if its the left controller, false otherwise.</returns>
+    /// <remarks>
+    /// Preconditions:
+    /// - <c>interactor</c> is not null.
+    /// Postconditions:
+    /// - Returns true if an ActionBasedController is found in the parent hierarchy and its name contains "Left".
+    /// - False if can't find a Left controller
+    /// </remarks>
     private bool IsLeftController(IXRInteractor interactor)
     {
+        //find ActionBasedController (its in XROrigin (XR Rig))
         var controller = (interactor as MonoBehaviour)?.GetComponentInParent<ActionBasedController>();
+        // if we find it and it contains "Left" (Left Controller (it does)), we're good
         return controller != null && controller.name.Contains("Left");
     }
 
