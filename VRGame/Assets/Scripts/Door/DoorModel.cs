@@ -263,11 +263,11 @@ public class DoorModel : MonoBehaviour, IDoorModel
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), destinationSceneId));
 
         doorLookup[doorId] = this;
+        Debug.Log("DoorLookup dict:");
         foreach (var i in doorLookup)
         {
-            Debug.Log($"{i.Key}: {i.Value.TargetDoorId}");
+            Debug.Log($"    {i.Key}: {i.Value.TargetDoorId}");
         }
-        Debug.Log(doorLookup);
         Debug.Log("DoorModel Initialized");
     }
 
