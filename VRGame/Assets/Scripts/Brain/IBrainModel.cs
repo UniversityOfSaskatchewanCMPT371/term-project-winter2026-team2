@@ -6,6 +6,12 @@ public interface IBrainModel : IModel
     /// <summary>
     /// Method to initialize the model component
     /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires animator != null
+    /// Post-condition:
+    ///     animator is assigned to the Animator component
+    /// </remarks>
     new void Init();
 
     /// <summary>
@@ -13,9 +19,9 @@ public interface IBrainModel : IModel
     /// </summary>
     /// <remarks>
     /// Pre-condition:
-    ///     requires (model != null) && (animator != null)
+    ///     requires animator != null
     /// Post-condition:
-    ///     ensures animator.speed == 0
+    ///     ensures animator.speed == 0f
     /// </remarks>
     void pause();
 
