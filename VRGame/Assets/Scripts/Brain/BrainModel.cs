@@ -16,4 +16,16 @@ public class BrainModel : Model, IBrainModel
         }
         Assert.IsNotNull(animator, "Animator is null on Init()");
     }
+
+    /// <inheritdoc/>
+    public void pause()
+    {
+        animator.speed = 0f;
+    }
+
+    /// <inheritdoc/>
+    public void resume()
+    {
+        animator.speed = 1.0f;
+    }
 }
