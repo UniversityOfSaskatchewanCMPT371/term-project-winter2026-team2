@@ -19,8 +19,7 @@ public class SceneChangerController_SceneManager
     {
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        //SceneManagerWrapper sceneMW = new SceneManagerWrapper();
-        //sceneC.SceneManagerWrapper = sceneMW;
+
         // Use yield to skip a frame.
         yield return null;
         // if no assertions triggered, passed
@@ -34,8 +33,7 @@ public class SceneChangerController_SceneManager
     {
         GameObject go = new GameObject();
         SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-        //SceneManagerWrapper sceneMW = new SceneManagerWrapper();
-        //sceneC.SceneManagerWrapper = sceneMW;
+
         // Use yield to skip a frame.
         yield return null;
 
