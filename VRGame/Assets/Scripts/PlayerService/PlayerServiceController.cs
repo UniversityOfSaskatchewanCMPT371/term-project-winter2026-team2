@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -17,6 +18,55 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
     /// </summary>
     [SerializeField]
     private GameObject XRrigPrefab;
+
+    /// <summary>
+    /// Getter/Setter for 'XRrigPrefab' variable.
+    /// </summary>
+    internal GameObject MockXRrigPrefab
+    {
+        /// <summary>
+        /// Get the value of 'XRrigPrefab' variable.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - None
+        /// Postconditions:
+        /// - Return the value of 'XRrigPrefab' variable.
+        /// </remarks>
+        get => XRrigPrefab;
+
+        /// <summary>
+        /// Set the value of 'XRrigPrefab' variable to the input value.
+        /// </summary>
+        /// <remarks>
+        /// Preconditions:
+        /// - 'value' must not be null.
+        /// - 'value' must contain PlayerController component.
+        /// Postconditions:
+        /// - Set the value of 'XRrigPrefab' variable to the input value.
+        /// - Log errors and assertions if any preconditions are violated.
+        /// </remarks>
+        set
+        {
+            if (value == null)
+            {
+                Debug.LogError("'value' is null.");
+            }
+            Assert.IsNotNull(value, "'value' cannot be null.");
+            
+            // see if 'value' contains PlayerController component
+            if (value.TryGetComponent<PlayerController>(out PlayerController component))
+            {
+                // it does have it
+            } else
+            {
+                Debug.LogError("'XRrigPrefab' does not have PlayerController component attached.");
+            }
+            Assert.IsNotNull(component, "'XRrigPrefab' must contain PlayerController component.");
+
+            XRrigPrefab = value;
+        }
+    }
 
     /// <summary>
     /// Optional reference to a game object in which its transform is used by default
