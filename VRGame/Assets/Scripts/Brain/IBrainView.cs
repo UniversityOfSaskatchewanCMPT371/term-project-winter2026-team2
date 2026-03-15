@@ -10,7 +10,7 @@ public interface IBrainView : IView
     /// Pre-condition:
     ///     requires controllerInstance != null
     /// Post-condition:
-    ///     ensures view is initialized
+    ///     ensures view is initialized && SetupXREvents() is ran
     /// </remarks>
     new void Init();
 

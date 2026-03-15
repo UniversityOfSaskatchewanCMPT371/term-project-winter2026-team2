@@ -14,6 +14,7 @@ public class BrainView : View<IBrainController>, IBrainView
         {
             Debug.LogWarning("Controller instance already exists");
         }
+        Assert.IsNull(controllerInstance, "Controller instance must be null prior to initialize");
         this.CheckControllerRef();
         Assert.IsNotNull(controllerInstance, "Controller failed to initialize in BrainView");
         SetupXREvents();
@@ -22,6 +23,11 @@ public class BrainView : View<IBrainController>, IBrainView
     /// <inheritdoc>
     public void SetupXREvents()
     {
+        if (controllerInstance == null)
+        {
+            Debug.LogWarning("Controller instance cannot be null on XR events setup");
+        }
+        Assert.IsNotNull(controllerInstance, "Controller must Not be null on XR events setup");
         var components = GetComponentsInChildren<XRBaseInteractable>();
         // Assign listeners on each component
         if (components.Length == 0)
@@ -30,9 +36,10 @@ public class BrainView : View<IBrainController>, IBrainView
         }
         foreach (var c in components)
         {
+            Assert.IsNotNull(c, "Null component found in components");
             if (c == null)
             {
-                Debug.LogWarning("Null component detected");
+                Debug.LogError("Null component detected");
             }
             c.hoverEntered.AddListener(OnXRHoverEnter);
             c.hoverExited.AddListener(OnXRHoverExit);
