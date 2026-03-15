@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
+
+[ExecuteInEditMode]
 /// <summary>
 /// Draws a line between two points using a LineRenderer.
 /// </summary>
