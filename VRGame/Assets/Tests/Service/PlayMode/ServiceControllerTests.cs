@@ -17,7 +17,6 @@ public class ServiceControllerTest
     public void SetUp()
     {
         go = new GameObject();
-        controller = go.AddComponent<ServiceController>();
     }
 
     /// <summary>
@@ -33,46 +32,54 @@ public class ServiceControllerTest
     [UnityTest]
     public IEnumerator Instantiation()
     {
-        // skip a frame to call Awake() and invoke Init()
-        yield return null;
+        // adding the component immediately invokes Awake()
+        controller = go.AddComponent<ServiceController>();
 
         // no errors should occur since it doesn't interact with
         // any other layers
+
+        yield return null;
     }
 
     [UnityTest]
     public IEnumerator Singleton()
     {
-        // skip a frame to call Awake() and invoke Init()
-        yield return null;
+        // adding the component immediately invokes Awake()
+        controller = go.AddComponent<ServiceController>();
 
         // set up the duplicate
         GameObject go2 = new GameObject();
-        go2.AddComponent<ServiceController>();
 
         // expect a warning since this is a duplicate of this singleton
         LogAssert.Expect(LogType.Warning, "There can be only one active ServiceController.");
 
-        // skip a frame to call Awake() and invoke Init()
+        // add component to invoke Awake()
+        go2.AddComponent<ServiceController>();
+
+        // yield to let Destroy() run
         yield return null;
 
         // game object of the duplicate its attached to is expected to be destroyed
         Assert.IsTrue(go2 == null, "Expected duplicate game object to be destroyed.");
+
+        yield return null;
     }
 
     [UnityTest]
     public IEnumerator Peristence()
     {
-        // skip a frame to call Awake() and invoke Init()
-        yield return null;
+        // adding the component immediately invokes Awake()
+        controller = go.AddComponent<ServiceController>();
 
         // load a new scene
         SceneManager.LoadSceneAsync((int)SceneEnum.TestScene);
 
-        // skip a frame to allow the scene to load
+        // let scene load
         yield return null;
 
         // game object should not be destroyed since it is kept persistent
-        Assert.IsFalse(go == null, "Expected game object to not be destroyed on scene transition.");
+        Assert.IsNotNull(go, "Expected game object to not be destroyed on scene transition.");
+
+        yield return null;
     }
 }
