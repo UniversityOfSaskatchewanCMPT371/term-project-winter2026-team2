@@ -20,18 +20,16 @@ public class BillBoardView : MonoBehaviour
     /// </remarks>
     public Vector3 offset = new Vector3(-0.6f, 0.15f, 2.63f); // left, up, forward
 
-
     /// <summary>
-    /// Updates the billboard to face the camera each frame.
+    /// Updates the object's position and rotation
+    /// positions object at target + offset then rotates to face
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - <c>PointB</c> must be assigned in the Unity Editor.
-    /// - A camera tagged as 'MainCamera' must exist in the scene.
+    /// - <c>target</c> must be assigned in the Unity Editor.
+    /// - A camera tagged as 'Main Camera' must exist in the scene.
     /// Postconditions:
-    /// - The GameObject faces the camera position.
-    /// - <c>tCam</c> is cached for subsequent frames.
-    /// - <c>PointB</c> local position is set based on camera distance on first frame.
+    /// - The object's rotation is set to face the camera (so its readable)
     /// </remarks>
     void LateUpdate()
     {
