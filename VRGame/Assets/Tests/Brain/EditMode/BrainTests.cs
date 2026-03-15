@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
-public class BrainEditTests : MonoBehaviour
+public class BrainModelTests
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameObject gameObject;
+    private BrainModel brainModel;
+    private Animator animator;
+
+    [SetUp]
+    public void Setup()
     {
-        
+        gameObject = new GameObject("Brain Model Test Object");
+        brainModel = gameObject.AddComponent<BrainModel>();
+        animator = gameObject.AddComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    [TearDown]
+    public void Teardown()
     {
-        
+        Object.DestroyImmediate(gameObject);
+    }
+
+    [Test]
+    public void InitializeTest()
+    {
+        brainModel.Init();
+        Assert.IsNotNull(animator, "Brain model instance failed to initialize");
     }
 }
