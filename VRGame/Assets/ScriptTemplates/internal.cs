@@ -4,5 +4,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("ScriptTemplatesPlayTests")]
 [assembly: InternalsVisibleTo("RoomEditMode")]
 [assembly: InternalsVisibleTo("RoomPlayMode")]
-[assembly: InternalsVisibleTo("ServiceEditMode")]
 [assembly: InternalsVisibleTo("ServicePlayMode")]
+[assembly: InternalsVisibleTo("PlayerServicePlayMode")]
