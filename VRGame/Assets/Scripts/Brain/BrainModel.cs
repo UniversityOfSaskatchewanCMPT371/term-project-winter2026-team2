@@ -34,7 +34,6 @@ public class BrainModel : Model, IBrainModel
     /// <inheritdoc/>
     public void resume()
     {
-        Assert.IsNotNull(modelInstance, "Model instance must be initialized before resume() is called");
         Assert.IsNotNull(animator, "Animator must be initialized before resume() is called");
         if (animator.speed > 0)
         {

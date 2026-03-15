@@ -19,7 +19,7 @@ public interface IBrainModel : IModel
     /// </summary>
     /// <remarks>
     /// Pre-condition:
-    ///     requires (model != null) && (animator != null)
+    ///     requires animator != null
     /// Post-condition:
     ///     modifies animator.speed == 0f
     /// </remarks>
@@ -30,7 +30,7 @@ public interface IBrainModel : IModel
     /// </summary>
     /// <remarks>
     /// Pre-condition:
-    ///     requires (model != null) && (animator != null)
+    ///     requires animator != null
     /// Post-condition:
     ///     modifies animator.speed == 1.0f
     /// </remarks>
