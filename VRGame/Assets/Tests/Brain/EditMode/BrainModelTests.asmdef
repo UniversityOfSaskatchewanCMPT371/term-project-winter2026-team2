@@ -1,9 +1,10 @@
 {
-    "name": "EditMode",
+    "name": "BrainModelTests",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "Brain",
+        "ScriptTemplates"
     ],
     "includePlatforms": [
         "Editor"
@@ -14,7 +15,7 @@
     "precompiledReferences": [
         "nunit.framework.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
     ],
