@@ -3,9 +3,9 @@
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
         "ScriptTemplates",
-        "Service"
+        "Service",
+        "SceneEnum"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

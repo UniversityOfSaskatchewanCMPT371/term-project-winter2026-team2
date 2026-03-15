@@ -5,4 +5,5 @@
 public enum SceneEnum
 {
     Hub = 0,
+    TestScene = 1,
 }

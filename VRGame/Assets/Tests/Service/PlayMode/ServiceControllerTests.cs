@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-
+using UnityEngine.SceneManagement;
 public class ServiceControllerTest
 {
     GameObject go;
@@ -27,12 +27,13 @@ public class ServiceControllerTest
     [TearDown]
     public void TearDown()
     {
-        Object.DestroyImmediate(go);
+        UnityEngine.Object.DestroyImmediate(go);
     }
 
     [UnityTest]
-    public IEnumerable Instantiation()
+    public IEnumerator Instantiation()
     {
+        // skip a frame to call Awake() and invoke Init()
         yield return null;
 
         // no errors should occur since it doesn't interact with
@@ -40,16 +41,38 @@ public class ServiceControllerTest
     }
 
     [UnityTest]
-    public IEnumerable Singleton()
+    public IEnumerator Singleton()
     {
-        controller.Init();
+        // skip a frame to call Awake() and invoke Init()
+        yield return null;
 
+        // set up the duplicate
         GameObject go2 = new GameObject();
         go2.AddComponent<ServiceController>();
 
+        // expect a warning since this is a duplicate of this singleton
+        LogAssert.Expect(LogType.Warning, "There can be only one active ServiceController.");
+
+        // skip a frame to call Awake() and invoke Init()
         yield return null;
 
-        // expected a warning since this is a duplicate of this singleton
         // game object of the duplicate its attached to is expected to be destroyed
+        Assert.IsTrue(go2 == null, "Expected duplicate game object to be destroyed.");
+    }
+
+    [UnityTest]
+    public IEnumerator Peristence()
+    {
+        // skip a frame to call Awake() and invoke Init()
+        yield return null;
+
+        // load a new scene
+        SceneManager.LoadSceneAsync((int)SceneEnum.TestScene);
+
+        // skip a frame to allow the scene to load
+        yield return null;
+
+        // game object should not be destroyed since it is kept persistent
+        Assert.IsFalse(go == null, "Expected game object to not be destroyed on scene transition.");
     }
 }
