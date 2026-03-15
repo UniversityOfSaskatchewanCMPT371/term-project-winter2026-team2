@@ -159,6 +159,5 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     private void Start()
     {
         Init();
-        //DontDestroyOnLoad(instance);
     }
 }

@@ -1,6 +1,6 @@
 using System;
-using System.ComponentModel;
 using UnityEngine.Assertions;
+using UnityEngine;
 
 /// <summary>
 /// Wrapper class for AsyncOperations. Made for mocking purposes
@@ -35,6 +35,12 @@ public class AsyncOperationWrapper : IAsyncOperationWrapper
     /// <inheritdoc/> 
     public bool IsDone()
     {
+        if (operation == null)
+        {
+            Debug.LogError("'operation' vairable is null.");
+        }
+        Assert.IsNotNull(operation, "'operation' variable must be non-null.");
+
         return operation.isDone;
     }
 }
