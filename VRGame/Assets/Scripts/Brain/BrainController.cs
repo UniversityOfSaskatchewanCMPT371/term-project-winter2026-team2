@@ -14,10 +14,12 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
         {
             Debug.LogError("Model instance already exists");
         }
+        Assert.IsNull(modelInstance, "Model instance must be null prior to initialization");
         if (viewInstance != null)
         {
             Debug.LogError("View instance already exists");
         }
+        Assert.IsNull(viewInstance, "View instance must be null prior to initialization");
     
         this.CheckModelRef();
         this.CheckViewRef();
@@ -33,6 +35,7 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
         {
             Debug.LogError("Model instance is null on hover enter");
         }
+        Assert.IsNull(modelInstance, "Model instance cannot be null on hover enter");
         modelInstance.pause();
     }
 
@@ -43,6 +46,7 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
         {
             Debug.LogError("Model instance is null on hover enter");
         }
+        Assert.IsNull(modelInstance, "Model instance cannot be null on hover enter");
         modelInstance.resume();
     }
 }
