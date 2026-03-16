@@ -4,6 +4,11 @@
 public interface IBrainModel : IModel
 {
     /// <summary>
+    /// Overrides base Start() to prevent double-initialization since Awake() already called Init()
+    /// </summary>
+    void Start();
+
+    /// <summary>
     /// Method to initialize the model component
     /// </summary>
     /// <remarks>

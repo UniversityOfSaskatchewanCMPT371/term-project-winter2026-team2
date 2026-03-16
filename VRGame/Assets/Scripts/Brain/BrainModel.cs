@@ -6,7 +6,13 @@ using UnityEngine.Assertions;
 /// </summary>
 public class BrainModel : Model, IBrainModel
 {
+    /// <summary>
+    /// Reference to the Animator component (used to control brain spin animation)
+    /// </summary>
     private Animator animator;
+
+    /// <inheritdoc/>
+    public override void Start() { }
 
     /// <inheritdoc/>
     public override void Init()
