@@ -3,10 +3,16 @@ using UnityEngine;
 
 public class BrainModelTests
 {
+    /// <summary>
+    /// Attributes necessary to test model component
+    /// </summary>
     private GameObject gameObject;
     private BrainModel brainModel;
     private Animator animator;
 
+    /// <summary>
+    /// Initializes attributes and calls on Init() method to initialize Brain Model component
+    /// </summary>
     [SetUp]
     public void Setup()
     {
@@ -16,18 +22,18 @@ public class BrainModelTests
         brainModel.Init();
     }
 
-    [TearDown]
-    public void Teardown()
-    {
-        Object.DestroyImmediate(gameObject);
-    }
-
+    /// <summary>
+    /// Tests the animator built on Init()
+    /// </summary>
     [Test]
     public void InitializeTest()
     {
         Assert.IsNotNull(animator, "Brain model instance failed to initialize");
     }
 
+    /// <summary>
+    /// Tests the pause state of the model component on pause()
+    /// </summary>
     [Test]
     public void PauseStateTest()
     {
@@ -36,6 +42,9 @@ public class BrainModelTests
         Assert.AreEqual(animator.speed, 0f, "Animator speed failed to set to 0 on pause() test");
     }
 
+    /// <summary>
+    /// Tests the resume state of the model component after calling pause()
+    /// </summary>
     [Test]
     public void ResumeStateTest()
     {
