@@ -1,5 +1,5 @@
 {
-    "name": "BrainModelTests",
+    "name": "BrainTests",
     "rootNamespace": "",
     "references": [
         "UnityEditor.TestRunner",
