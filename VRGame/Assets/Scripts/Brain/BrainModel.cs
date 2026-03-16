@@ -34,7 +34,7 @@ public class BrainModel : Model, IBrainModel
     /// <inheritdoc/>
     public void pause()
     {
-        Assert.IsNull(animator, "Animator must be initialized before pause() is called");
+        Assert.IsNotNull(animator, "Animator must be initialized before pause() is called");
         if (animator.speed == 0)
         {
             Debug.Log("Animation is already on pause");
