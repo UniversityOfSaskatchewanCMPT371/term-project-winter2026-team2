@@ -1,0 +1,155 @@
+
+using System.Collections;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+using NSubstitute;
+using System.Text.RegularExpressions;
+using System;
+using System.Runtime.CompilerServices;
+using System.Reflection;
+
+public class SceneChangerController_SceneManager
+{
+
+    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
+    // `yield return null;` to skip a frame.
+    [UnityTest]
+    public IEnumerator Init()
+    {
+        GameObject go = new GameObject();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        sceneC.SceneManagerWrapper = sceneMW;
+        // Use yield to skip a frame.
+        yield return null;
+        // if no assertions triggered, passed
+        sceneC.ResetInstance();
+        UnityEngine.Object.Destroy(go);
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator DebounceCheck()
+    {
+        GameObject go = new GameObject();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        sceneC.SceneManagerWrapper = sceneMW;
+        // Use yield to skip a frame.
+        yield return null;
+
+        // loadDebounce should be false, allows scene to be loaded
+        Assert.IsFalse(sceneC.LoadDebounce);
+
+        sceneC.ResetInstance();
+        UnityEngine.Object.DestroyImmediate(go);
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator Invalid_SceneManagerWrapper()
+    {
+        // Use the Assert class to test conditions
+        GameObject go = new GameObject();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        // not setting sceneManagerWrapper 
+
+        // test should cause error, tell unity to ignore error log
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try
+        {
+            sceneC.Init();
+            Assert.Fail("Null sceneManagerWrapper should have triggered exception");
+        }
+        catch { }
+
+        sceneC.ResetInstance();
+        UnityEngine.Object.DestroyImmediate(go);
+        yield return null;
+    }
+
+
+    [UnityTest]
+    public IEnumerator SingletonTest()
+    {
+
+        GameObject go = new GameObject();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        sceneC.SceneManagerWrapper = sceneMW;
+        // Use yield to skip a frame.
+        yield return null;
+
+        SceneChangerController sceneC2 = go.AddComponent<SceneChangerController>();
+        sceneC2.SceneManagerWrapper = sceneMW;
+        // attempting to create another instance should fail
+
+        // tell unity to ignore error log so test can pass
+        LogAssert.Expect(LogType.Error, new Regex(".*"));
+        try
+        {
+            sceneC2.Init();
+            Assert.IsTrue(1 == 2);
+        }
+        catch
+        {
+        }
+        sceneC.ResetInstance();
+        UnityEngine.Object.DestroyImmediate(go);
+        yield return null;
+    }
+
+
+    [UnityTest]
+    public IEnumerator LoadScene()
+    {
+
+        GameObject go = new GameObject();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        sceneC.SceneManagerWrapper = sceneMW;
+        // Use yield to skip a frame.
+        yield return null;
+
+
+        sceneC.LoadScene(0);
+
+        // sceneChanger should now prevent other attempts to load scene
+        Assert.IsTrue(sceneC.LoadDebounce);
+
+        // let async operation finish
+        yield return null;
+
+        // sceneChanger should now allow other attempts to load scene
+        Assert.IsFalse(sceneC.LoadDebounce);
+
+
+        sceneC.ResetInstance();
+        UnityEngine.Object.DestroyImmediate(go);
+    }
+
+    [UnityTest]
+    public IEnumerator NonExistent_LoadScene()
+    {
+        GameObject go = new GameObject();
+        SceneChangerController sceneC = go.AddComponent<SceneChangerController>();
+        SceneManagerWrapper sceneMW = new SceneManagerWrapper();
+        sceneC.SceneManagerWrapper = sceneMW;
+        // Use yield to skip a frame.
+        yield return null;
+
+        LogAssert.Expect(LogType.Error, "Invalid sceneKey passed to LoadScene. Not in enum");
+        try
+        {
+            // won't have negative scene ids ever
+            sceneC.LoadScene(-1);
+            Assert.Fail("Loading invalid sceneId should've triggered assertion");
+        }
+        catch { }
+
+        sceneC.ResetInstance();
+        UnityEngine.Object.DestroyImmediate(go);
+        yield return null;
+    }
+}
