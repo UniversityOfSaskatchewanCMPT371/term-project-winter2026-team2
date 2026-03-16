@@ -12,6 +12,12 @@ public class BrainModel : Model, IBrainModel
     private Animator animator;
 
     /// <inheritdoc/>
+    public void Awake()
+    {
+        Init();
+    }
+
+    /// <inheritdoc/>
     public override void Start() { }
 
     /// <inheritdoc/>

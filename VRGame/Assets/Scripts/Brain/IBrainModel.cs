@@ -4,6 +4,11 @@
 public interface IBrainModel : IModel
 {
     /// <summary>
+    /// Guarantees model is fully initialized before Start() runs
+    /// </summary>
+    void Awake();
+
+    /// <summary>
     /// Overrides base Start() to prevent double-initialization since Awake() already called Init()
     /// </summary>
     void Start();
