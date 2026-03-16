@@ -4,6 +4,12 @@
 public interface IBrainController : IController
 {
     /// <summary>
+    /// Called before Start()
+    /// Ensures controller is ready before view Sets up XR events
+    /// </summary>
+    void Awake();
+
+    /// <summary>
     /// Initializes the model and view instance
     /// </summary>
     /// <remarks>

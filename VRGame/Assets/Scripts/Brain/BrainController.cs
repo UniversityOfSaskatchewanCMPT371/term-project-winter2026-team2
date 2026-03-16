@@ -13,6 +13,12 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
     private int hoverCount = 0;
 
     /// <inheritdoc/>
+    public void Awake()
+    {
+        Init();
+    }
+
+    /// <inheritdoc/>
     public override void Init()
     {
         if (modelInstance != null)
