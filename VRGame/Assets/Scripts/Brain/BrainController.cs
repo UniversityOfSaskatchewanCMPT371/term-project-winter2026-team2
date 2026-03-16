@@ -19,6 +19,10 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
     }
 
     /// <inheritdoc/>
+    public override void Start()
+    {}
+
+    /// <inheritdoc/>
     public override void Init()
     {
         if (modelInstance != null)
@@ -47,7 +51,7 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
             Debug.LogError("Model instance is null on hover enter");
             return;
         }
-        Assert.IsNull(modelInstance, "Model instance must be initialized before hover enter");
+        Assert.IsNotNull(modelInstance, "Model instance must be initialized before hover enter");
         // Increment count of regions hovered
         hoverCount++;
         if (hoverCount == 1)

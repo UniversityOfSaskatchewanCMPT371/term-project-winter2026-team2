@@ -10,6 +10,11 @@ public interface IBrainController : IController
     void Awake();
 
     /// <summary>
+    /// Overrides base Start() to prevent double-initialization since Awake() already called Init()
+    /// </summary>
+    void Start();
+
+    /// <summary>
     /// Initializes the model and view instance
     /// </summary>
     /// <remarks>
