@@ -29,6 +29,7 @@ public class BrainModelTests
     public void InitializeTest()
     {
         Assert.IsNotNull(animator, "Brain model instance failed to initialize");
+        Assert.IsNotNull(brainModel, "brainModel failed to initialize on test");
     }
 
     /// <summary>
