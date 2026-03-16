@@ -24,8 +24,9 @@ public interface IBrainView : IView
     ///     ensures eventListeners (OnHoverEnter & OnHoverExit) are attached to all XRBaseInteractable children
     void SetupXREvents();
 
-    /// void OnXRHoverExit(HoverExitEventArgs args);
+    /// void OnXRHoverEnter(HoverEnterEventArgs args);
     /// <summary>
+    /// An internal event that nothing outside the class needs to call directly
     /// Calls controllerInstance.OnHoverEnter() on XR hover enter 
     /// </summary>
     /// <remarks>
@@ -37,6 +38,7 @@ public interface IBrainView : IView
     
     /// void OnXRHoverExit(HoverExitEventArgs args);
     /// <summary>
+    /// An internal event that nothing outside the class needs to call directly
     /// Calls controllerInstance.OnHoverExit() on XR hover exit
     /// </summary>
     /// <remarks>
