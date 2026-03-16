@@ -31,8 +31,17 @@ public class BrainModelTests
     [Test]
     public void PauseStateTest()
     {
+        Assert.IsNotNull(animator, "Brain model instance is not initialized on pause() test");
         brainModel.pause();
-        Assert.IsNotNull(animator, "Brain model instance failed to initialize on pause() test");
         Assert.AreEqual(animator.speed, 0f, "Animator speed failed to set to 0 on pause() test");
+    }
+
+    [Test]
+    public void ResumeStateTest()
+    {
+        Assert.IsNotNull(animator, "Brain model instance is not initialized on resume() test");
+        brainModel.pause();
+        brainModel.resume();
+        Assert.AreEqual(animator.speed, 1.0f, "Animator speed failed to set to 1.0 on pause() test");
     }
 }
