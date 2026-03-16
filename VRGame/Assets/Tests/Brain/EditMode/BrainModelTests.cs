@@ -13,6 +13,7 @@ public class BrainModelTests
         gameObject = new GameObject("Brain Model Test Object");
         brainModel = gameObject.AddComponent<BrainModel>();
         animator = gameObject.AddComponent<Animator>();
+        brainModel.Init();
     }
 
     [TearDown]
@@ -24,14 +25,12 @@ public class BrainModelTests
     [Test]
     public void InitializeTest()
     {
-        brainModel.Init();
         Assert.IsNotNull(animator, "Brain model instance failed to initialize");
     }
 
     [Test]
     public void PauseStateTest()
     {
-        brainModel.Init();
         brainModel.pause();
         Assert.IsNotNull(animator, "Brain model instance failed to initialize on pause() test");
         Assert.AreEqual(animator.speed, 0f, "Animator speed failed to set to 0 on pause() test");
