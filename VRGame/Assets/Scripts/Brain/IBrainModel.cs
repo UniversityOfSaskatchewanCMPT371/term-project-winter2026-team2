@@ -18,9 +18,10 @@ public interface IBrainModel : IModel
     /// </summary>
     /// <remarks>
     /// Pre-condition:
-    ///     requires animator != null
+    ///     requires animator == null
     /// Post-condition:
-    ///     animator is assigned to the Animator component
+    ///     ensures (animator != null) &&
+    ///     (animator is assigned to the Animator component)
     /// </remarks>
     new void Init();
 
