@@ -6,6 +6,7 @@ public interface IBrainController : IController
     /// <summary>
     /// Called before Start()
     /// Ensures controller is ready before view Sets up XR events
+    /// Calls Init() to initialize model and view instance in BrainController component
     /// </summary>
     void Awake();
 
