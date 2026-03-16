@@ -7,6 +7,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class BrainController : Controller<IBrainModel, IBrainView>, IBrainController
 {
+    /// <summary>
+    /// An integer counter for brain regions hovered
+    /// </summary>
+    private int hoverCount = 0;
+
     /// <inheritdoc/>
     public override void Init()
     {
@@ -34,9 +39,15 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
         if (modelInstance == null)
         {
             Debug.LogError("Model instance is null on hover enter");
+            return;
         }
-        Assert.IsNull(modelInstance, "Model instance cannot be null on hover enter");
-        modelInstance.pause();
+        Assert.IsNull(modelInstance, "Model instance must be initialized before hover enter");
+        // Increment count of regions hovered
+        hoverCount++;
+        if (hoverCount == 1)
+        {
+            modelInstance.pause();
+        }
     }
 
     /// <inheritdoc/>
@@ -44,9 +55,17 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
     {
         if (modelInstance == null)
         {
-            Debug.LogError("Model instance is null on hover enter");
+            Debug.LogError("Model instance is null on hover exit");
+            return;
         }
-        Assert.IsNull(modelInstance, "Model instance cannot be null on hover enter");
-        modelInstance.resume();
+        Assert.IsNotNull(modelInstance, "Model instance must be initialized before hover exit");
+        // Decrement count of regions hovered
+        hoverCount--;
+        if (hoverCount <= 0)
+        {
+            // Reset to 0 if counter touches negative
+            hoverCount = 0;
+            modelInstance.resume();
+        }
     }
 }
