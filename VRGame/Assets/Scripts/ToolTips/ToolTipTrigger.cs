@@ -92,6 +92,7 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
         
         /// create controller and pass in the interactive element and this trigger
         toolTipController = new ToolTipController(interactiveElement, this);
+        Debug.Assert(toolTipController != null, "ToolTipController failed to be created.");
         
     }
 
@@ -114,7 +115,10 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
             Debug.LogError("OnHoverEntered called with null interactor.");
         }
         if (IsLeftController(args.interactorObject))
+        {
+            Debug.Log("Left controller hover entered - ToolTip now shows.");
             HoverEntered?.Invoke();
+        }
     }
 
     /// <summary>
@@ -136,7 +140,10 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
             Debug.LogError("OnHoverExited called with null interactor.");
         }
         if (IsLeftController(args.interactorObject))
+        {
+            Debug.Log("Left controller hover exited - ToolTip is hidden.");
             HoverExited?.Invoke();
+        }
     }
 
  
@@ -161,10 +168,21 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
             Debug.LogError("IsLeftController called with null interactor.");
             return false;
         }
-        //find ActionBasedController (its in XROrigin (XR Rig))
-        var controller = (interactor as MonoBehaviour)?.GetComponentInParent<ActionBasedController>();
-        // if we find it and it contains "Left" (Left Controller (it does)), we're good
-        return controller != null && controller.name.Contains("Left");
+        //find ActionBasedController from interactor's parent hierarchy (its in XROrigin (XR Rig))
+        if (interactor is MonoBehaviour mb)
+        {
+            var controller = mb.GetComponentInParent<ActionBasedController>();
+            if (controller != null)
+            {
+                // if we find it and it contains "Left" (Left Controller (it does)), we're good
+                return controller.name.Contains("Left");
+            }
+            else
+            {
+                Debug.Log("No ActionBasedController found in parent.");
+            }
+        }
+        return false;
     }
 
 

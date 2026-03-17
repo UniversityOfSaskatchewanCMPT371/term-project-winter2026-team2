@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public interface IToolTipModel
 {
+    
     /// <summary>
     /// Gets or sets the title associated with the object.
     /// </summary>
@@ -33,7 +34,7 @@ public interface IToolTipModel
         /// </remarks>
         set; 
     }
-    
+
     /// <summary>
     /// Gets or sets the description associated with the object.
     /// </summary>

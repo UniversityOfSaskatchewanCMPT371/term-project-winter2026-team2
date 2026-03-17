@@ -13,6 +13,7 @@ public class TwoPointLine : MonoBehaviour
 {
     /// <summary>
     /// The starting point of the line.
+    /// The one end of the line connecting to the interactable object.
     /// </summary>
     /// <remarks>
     /// Must be assigned in the Unity Editor.
@@ -21,6 +22,7 @@ public class TwoPointLine : MonoBehaviour
     
     /// <summary>
     /// The ending point of the line.
+    /// The other end of the line connecting to the tooltip.
     /// </summary>
     /// <remarks>
     /// Must be assigned in the Unity Editor.
@@ -29,6 +31,7 @@ public class TwoPointLine : MonoBehaviour
     
     /// <summary>
     /// The LineRenderer component used to draw the line.
+    /// automatically obtained in Start()
     /// </summary>
     private LineRenderer line;
 

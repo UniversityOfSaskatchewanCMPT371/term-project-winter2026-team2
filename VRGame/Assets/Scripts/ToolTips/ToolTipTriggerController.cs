@@ -57,6 +57,7 @@ public class ToolTipController
 
         //start with the interactive element hidden
         interactiveElement.SetActive(false);
+        Debug.Assert(!interactiveElement.activeSelf, "Interactive element should be inactive after initialization.");
     }
 
     /// <summary>
