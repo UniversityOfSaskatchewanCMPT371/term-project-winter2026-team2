@@ -121,6 +121,15 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <inheritdoc/>
     public void Init()
     {
+        // see if an existing persistent service prefab exists,
+        // if one exists then it should be used instead
+        if (sceneChangerController == null)
+        {
+            GameObject persistent = GameObject.Find("Services");
+
+            SceneChangerController = persistent.GetComponentInChildren<SceneChangerController>();
+        }
+
         // If field was set in inspector window, set the internal values to that
         if (serializableDoorModel != null)
         {

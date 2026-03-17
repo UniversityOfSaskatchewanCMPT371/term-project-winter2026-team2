@@ -17,10 +17,10 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
     {
         // see if an instance of this component already exists
         if (instance != null && instance != this)
-        {   
+        {
             // destroy the instance to follow singleton pattern
             Destroy(gameObject);
-
+            
             Debug.LogWarning("There can be only one active ServiceController.");
             return;
         } else
