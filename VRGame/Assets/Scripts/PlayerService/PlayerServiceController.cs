@@ -89,6 +89,18 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
     private static GameObject playerObj;
 
     /// <summary>
+    /// Getter for 'playerObj' variable. This is specifically used for
+    /// testing purposes.
+    /// </summary>
+    internal GameObject playerObjAccessor
+    {
+        /// <summary>
+        /// Gets the value of 'playerObj' variable/
+        /// </summary>
+        get => playerObj;
+    }
+
+    /// <summary>
     /// Verifies 'XRrigPrefab' variable.
     /// </summary>
     /// <remarks>

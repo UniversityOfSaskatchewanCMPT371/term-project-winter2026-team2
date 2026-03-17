@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -95,5 +92,33 @@ public class PlayerServiceControllerTests
 
         // destroy the xr rig
         UnityEngine.Object.DestroyImmediate(XRrigMock);
+    }
+
+    [Test]
+    public void SpawnPlayerOnLoadEnabled()
+    {
+        // mock the xr rig with player controller component
+        GameObject XRrigMock = new GameObject();
+        XRrigMock.AddComponent<PlayerController>();
+        Assert.DoesNotThrow(() => {controller.MockXRrigPrefab = XRrigMock;}, "No exception expected.");
+
+        Assert.DoesNotThrow(() => controller.Init(), "No exception expected.");
+
+        Assert.IsNotNull(controller.playerObjAccessor, "Player did not spawn.");
+    }
+
+    [Test]
+    public void SpawnPlayerOnLoadDisabled()
+    {
+        // mock the xr rig with player controller component
+        GameObject XRrigMock = new GameObject();
+        XRrigMock.AddComponent<PlayerController>();
+        Assert.DoesNotThrow(() => {controller.MockXRrigPrefab = XRrigMock;}, "No exception expected.");
+
+        controller.spawnPlayerOnLoad = false;
+
+        Assert.DoesNotThrow(() => controller.Init(), "No exception expected.");
+
+        Assert.IsNull(controller.playerObjAccessor, "Player spawned.");
     }
 }
