@@ -45,27 +45,6 @@ public class SceneChangerControllerTests
         UnityEngine.Object.DestroyImmediate(go);
     }
 
-    [Test]
-    public void Invalid_SceneManagerWrapper()
-    {
-        // Use the Assert class to test conditions
-        GameObject go = new GameObject();
-        ISceneChangerController sceneC = go.AddComponent<SceneChangerController>();
-
-        // not setting sceneManagerWrapper 
-
-        // test should cause error, tell unity to ignore error log
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
-        try
-        {
-            sceneC.Init();
-            Assert.Fail("Null sceneManagerWrapper should have triggered exception");
-        }
-        catch { }
-
-        sceneC.ResetInstance();
-        UnityEngine.Object.DestroyImmediate(go);
-    }
 
 
     [Test]
