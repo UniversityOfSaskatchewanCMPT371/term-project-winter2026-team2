@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using System;
 
+using System.Diagnostics.Contracts;
+
+
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
 /// </summary>
@@ -41,6 +44,8 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// - DoorModel's id is returned
         get
         {
+            // the return value will be >= 0 
+            Contract.Ensures(Contract.Result<int>() == this.doorId);
             return doorId;
         }
 
@@ -56,6 +61,9 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// - DoorModel's `doorId` instance variable set to input value
         set
         {
+            Contract.Requires(value >= 0);
+            Contract.Ensures(doorId == value);
+
             if (value < 0)
             {
                 Debug.LogError("value passed to setDoorId is negative");
@@ -88,6 +96,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         get
         {
+            Contract.Ensures(Contract.Result<int>() == this.targetDoorId);
             return targetDoorId;
         }
 
@@ -136,6 +145,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         get
         {
+            Contract.Ensures(Contract.Result<int>() == this.destinationSceneId);
             return destinationSceneId;
         }
         /// <summary>
@@ -151,6 +161,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         set
         {
+            Contract.Requires(value >= 0);
             if (value < 0)
             {
                 Debug.LogError("value passed to set destinationSceneId is negative");
