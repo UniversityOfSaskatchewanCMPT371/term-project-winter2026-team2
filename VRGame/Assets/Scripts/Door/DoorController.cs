@@ -127,7 +127,10 @@ public class DoorController : MonoBehaviour, IDoorController
         {
             GameObject persistent = GameObject.Find("Services");
 
-            SceneChangerController = persistent.GetComponentInChildren<SceneChangerController>();
+            if (persistent)
+            {
+                SceneChangerController = persistent.GetComponentInChildren<SceneChangerController>();
+            }
         }
 
         // If field was set in inspector window, set the internal values to that
