@@ -26,6 +26,9 @@ public class #SCRIPTNAME#
     public void Setup()
     {
         go = new GameObject();
+
+        // NOTE: adding component in play mode will automatically call Awake() & Start().
+        // If necessary, you may move this directly in the test function instead
         comp = go.AddComponent<>(); // TODO : Replace generic with component you are testing
     }
 
