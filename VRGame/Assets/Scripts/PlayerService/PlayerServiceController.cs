@@ -205,4 +205,20 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
 
     /// <inheritdoc cref="IPlayerServiceController"/>
     public override void Start() {}
+
+    /// <summary>
+    /// Sets the value of all static variables in this component to null.
+    /// Used for testing purposes only.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - values 'playerObj' and 'instance' variables are set to null.
+    /// </remarks>
+    internal void ResetStatic()
+    {
+        playerObj = null;
+        instance = null;
+    }
 }
