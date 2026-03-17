@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parietal Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 5130002145225928899, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
+      propertyPath: serializableSceneChangerController
+      value: 
+      objectReference: {fileID: 1122981515}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.22
@@ -461,6 +465,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36ede45f5eff96242a04d936a5c10bfb, type: 3}
+--- !u!114 &1122981515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7901714563058151831, guid: 36ede45f5eff96242a04d936a5c10bfb, type: 3}
+  m_PrefabInstance: {fileID: 1122981514}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fb10ff181fe466ba00d99491861c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1323446785
 GameObject:
   m_ObjectHideFlags: 0

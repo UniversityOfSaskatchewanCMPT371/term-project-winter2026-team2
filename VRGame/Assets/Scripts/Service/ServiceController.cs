@@ -30,6 +30,12 @@ public class ServiceController : Controller<IModel, IView>, IServiceController
 
             // keep this game object persistent
             DontDestroyOnLoad(gameObject);
+
+            // activate other child game objects to allow runtime to call their component's Awake()
+            foreach (Transform child in gameObject.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
         }
 
         Debug.Log("ServiceController initialized successfully.");

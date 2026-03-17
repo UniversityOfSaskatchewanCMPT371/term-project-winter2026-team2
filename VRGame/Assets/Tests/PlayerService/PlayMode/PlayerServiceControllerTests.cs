@@ -43,13 +43,16 @@ public class PlayerServiceControllerTests
 
     public IEnumerator SpawnPlayerCreatesNewObjectWhenNoneExists()
     {
-        contr
+        yield return null;
     }
 
     public IEnumerator SingletonDestroysDuplicateOnAwake()
     {
-        
+        yield return null;
     }
 
-    public IEnumerator SpawnPlayerOnLoadWorksWhenEnabled();
+    public IEnumerator SpawnPlayerOnLoadWorksWhenEnabled()
+    {
+        yield return null;
+    }
 }
