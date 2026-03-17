@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 1326242528}
   - {fileID: 1326242527}
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 1533078351}
   - {fileID: 1533078350}
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 1650031759}
   m_InteractionLayerMask:
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 1918733020}
   m_InteractionLayerMask:
@@ -1421,7 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 949636729}
   - {fileID: 949636728}
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 830531307}
   m_InteractionLayerMask:
@@ -2407,7 +2407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 830531297}
   m_InteractionLayerMask:
@@ -2588,7 +2588,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2636,12 +2636,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.018343966, y: 0.02387364, z: 0.01751316}
-  m_Center: {x: 0.0062004793, y: 0.004303507, z: -0.020885872}
+  m_Size: {x: 0.027068486, y: 0.029781427, z: 0.013996098}
+  m_Center: {x: 0.001838212, y: 0.0027555418, z: -0.022644635}
 --- !u!114 &833285127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2654,7 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 833285138}
   m_InteractionLayerMask:
@@ -2804,7 +2804,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2822,7 +2822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 836397970}
   m_InteractionLayerMask:
@@ -2972,7 +2972,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2990,7 +2990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 918582190}
   m_InteractionLayerMask:
@@ -3140,7 +3140,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3223,8 +3223,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.016387098, y: 0.020958846, z: 0.004987884}
-  m_Center: {x: -0.010984938, y: -0.00042585016, z: -0.009065011}
+  m_Size: {x: 0.02341693, y: 0.020958846, z: 0.0049878843}
+  m_Center: {x: -0.0144998515, y: -0.00042585016, z: -0.0090650115}
 --- !u!65 &949636729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3240,12 +3240,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.016387098, y: 0.026628343, z: 0.011831067}
-  m_Center: {x: -0.010984938, y: 0.007955769, z: -0.0007098496}
+  m_Size: {x: 0.023557821, y: 0.026628343, z: 0.011831067}
+  m_Center: {x: -0.014570299, y: 0.007955769, z: -0.0007098496}
 --- !u!1001 &1146750528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3609,7 +3609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 1210769586}
   m_InteractionLayerMask:
@@ -3773,7 +3773,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3932,8 +3932,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.020778649, y: 0.012727115, z: 0.010351502}
-  m_Center: {x: -0.009225965, y: 0.022494392, z: 0.017311012}
+  m_Size: {x: 0.025312046, y: 0.012727115, z: 0.010351502}
+  m_Center: {x: -0.011492659, y: 0.022494392, z: 0.017311012}
 --- !u!65 &1326242527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3953,8 +3953,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.020778649, y: 0.009946256, z: 0.017014595}
-  m_Center: {x: -0.009225965, y: 0.011439696, z: 0.01397957}
+  m_Size: {x: 0.025783012, y: 0.009946257, z: 0.017014593}
+  m_Center: {x: -0.011728147, y: 0.0114397425, z: 0.013979617}
 --- !u!65 &1326242528
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3970,7 +3970,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4541,8 +4541,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01762065, y: 0.022296662, z: 0.0051130424}
-  m_Center: {x: 0.011601713, y: 0.00024305702, z: -0.00847875}
+  m_Size: {x: 0.022682646, y: 0.022296662, z: 0.0051130424}
+  m_Center: {x: 0.014132709, y: 0.00024305702, z: -0.00847875}
 --- !u!65 &1533078351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4558,12 +4558,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.018239046, y: 0.026958587, z: 0.010738607}
-  m_Center: {x: 0.011910915, y: 0.007222968, z: -0.0005144346}
+  m_Size: {x: 0.022598304, y: 0.026958587, z: 0.010738607}
+  m_Center: {x: 0.014090547, y: 0.007222968, z: -0.0005144346}
 --- !u!1001 &1547115054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4716,7 +4716,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5159,12 +5159,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.011019481, y: 0.017657978, z: 0.020031365}
-  m_Center: {x: -0.0010888875, y: 0.0035965515, z: -0.021354869}
+  m_Size: {x: 0.029859513, y: 0.017657978, z: 0.005970516}
+  m_Center: {x: 0.00073899503, y: 0.0035965515, z: -0.013902925}
 --- !u!1001 &2051303878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5246,7 +5246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 2101527003}
   - {fileID: 2101527002}
@@ -5416,8 +5416,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.023558278, y: 0.009192121, z: 0.01972539}
-  m_Center: {x: 0.010615785, y: 0.0008290595, z: 0.012623993}
+  m_Size: {x: 0.02565574, y: 0.009192121, z: 0.01972539}
+  m_Center: {x: 0.011664522, y: 0.0008290595, z: 0.012623993}
 --- !u!65 &2101527002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5437,8 +5437,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.023677325, y: 0.010072278, z: 0.01700989}
-  m_Center: {x: 0.010675299, y: 0.010391563, z: 0.01398179}
+  m_Size: {x: 0.025596771, y: 0.010072278, z: 0.01700989}
+  m_Center: {x: 0.011635022, y: 0.010391605, z: 0.01398179}
 --- !u!65 &2101527003
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5454,12 +5454,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02437468, y: 0.011056787, z: 0.009616565}
-  m_Center: {x: 0.011023991, y: 0.021116666, z: 0.01767853}
+  m_Size: {x: 0.025421645, y: 0.011056787, z: 0.009616565}
+  m_Center: {x: 0.011547476, y: 0.021116666, z: 0.01767853}
 --- !u!1001 &4975396878712761407
 PrefabInstance:
   m_ObjectHideFlags: 0
