@@ -20,7 +20,7 @@ public class #SCRIPTNAME#
 
     /// <summary>
     /// Called before each tests. Handles the setup for
-    /// game object and component bneing tested
+    /// game object and component being tested
     /// </summary>
     [Setup]
     public void Setup()
