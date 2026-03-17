@@ -14,7 +14,7 @@ public class ToolTipView : MonoBehaviour, IToolTipView
     /// <remarks>
     /// Must be assigned in the Unity Editor.
     /// </remarks>
-    [SerializeField] private TextMeshProUGUI title;
+    [SerializeField] internal TextMeshProUGUI title;
 
     /// <summary>
     /// Text component for the description.
@@ -22,7 +22,7 @@ public class ToolTipView : MonoBehaviour, IToolTipView
     /// <remarks>
     /// Must be assigned in the Unity Editor.
     /// </remarks>
-    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] internal TextMeshProUGUI description;
 
     /// <summary>
     /// Data model containing the title and description to display in the tooltip.
@@ -31,38 +31,8 @@ public class ToolTipView : MonoBehaviour, IToolTipView
      /// Must be assigned in the Unity Editor. The tooltip will display the title and description from this model.
      /// </remarks>
     /// </summary>
-    [SerializeField] private ToolTipModel data;
+    [SerializeField] internal ToolTipModel data;
 
-    /// <inheritdoc/>
-    public TextMeshProUGUI Title
-    {
-        /// <inheritdoc/>
-        get => title;
-        /// <inheritdoc/>
-        set => title = value;
-    }
-
-    /// <inheritdoc/>
-    public TextMeshProUGUI Description
-    {
-        /// <inheritdoc/>
-        get => description;
-        /// <inheritdoc/>
-        set => description = value;
-    }
-
-    /// <inheritdoc/>
-    public ToolTipModel Data
-    {
-        /// <inheritdoc/>
-        get => data;
-        /// <inheritdoc/>
-        set => data = value;
-    }
-
-
-
-    
     /// <summary>
     /// <Initializes the view by populating text from the data model.
     /// </summary>

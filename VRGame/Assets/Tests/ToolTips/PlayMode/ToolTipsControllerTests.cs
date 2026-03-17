@@ -23,19 +23,19 @@ public class ToolTipsControllerTests
         
         //add ToolTIpTrigger component
         ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
-        trigger.Interactable = interactable;
+        trigger.interactable = interactable;
 
         // Create a view object and link it as the interactive element
         GameObject viewGo = new GameObject("ToolTipView");
         ToolTipView view = viewGo.AddComponent<ToolTipView>();
         viewGo.transform.SetParent(triggerGo.transform);
-        trigger.InteractiveElement = viewGo;
+        trigger.interactiveElement = viewGo;
 
         // Give it a model so the view doesn't complain about missing data
         ToolTipModel model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
         model.Title = "Test";
         model.Description = "Test";
-        view.Data = model;
+        view.data = model;
 
         // Wait a frame – Awake and Start run automatically
         yield return null;
@@ -60,7 +60,7 @@ public class ToolTipsControllerTests
         
         //add ToolTipTrigger component but leave interactiveElement unassigned
         ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
-        trigger.Interactable = interactable;
+        trigger.interactable = interactable;
 
         //expect an assertion exceiption about missing interactiveElement
         LogAssert.Expect(LogType.Assert, new Regex(".*interactiveElement must be assigned.*"));
@@ -86,7 +86,7 @@ public class ToolTipsControllerTests
         // add the ToolTipTrigger component - awake will run automatically
         ToolTipTrigger trigger = triggerGo.AddComponent<ToolTipTrigger>();
 
-        trigger.InteractiveElement = dummyViewGo; // assign to avoid the interactiveElement null check
+        trigger.interactiveElement = dummyViewGo; // assign to avoid the interactiveElement null check
 
         // expect an assertion exception about missing XRBaseInteractable
         LogAssert.Expect(LogType.Assert, new Regex(".*No XRBaseInteractable component found.*"));
@@ -124,13 +124,13 @@ public class ToolTipsControllerTests
         ToolTipView view = viewGo.AddComponent<ToolTipView>();
         viewGo.transform.SetParent(triggerGo.transform);
 
-        trigger.InteractiveElement = viewGo;
+        trigger.interactiveElement = viewGo;
 
         // create model and assign
         ToolTipModel model = ScriptableObject.CreateInstance<ToolTipModel>();
         model.Title = "Test";
         model.Description = "Test";
-        view.Data = model;
+        view.data = model;
 
         // wait one frame for Start to run
         yield return null;

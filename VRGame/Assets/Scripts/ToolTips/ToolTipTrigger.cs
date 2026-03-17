@@ -14,7 +14,7 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// <remarks>
     /// Must be assigned in the Unity Editor. This GameObject should contain the tooltip view.
     /// </remarks>
-    [SerializeField] private GameObject interactiveElement;
+    [SerializeField] internal GameObject interactiveElement;
 
     /// <summary>
     /// This one is needed so that it can interact with our vr controller ray
@@ -22,30 +22,12 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// <remarks>
     /// Automatacillay obtained via GetComponent in Awake(). Must exist on same GameObject.
     /// </remarks>
-    [SerializeField] private  XRBaseInteractable interactable;
+    [SerializeField] internal  XRBaseInteractable interactable;
 
     /// <inheritdoc/>
     public event Action HoverEntered;
     /// <inheritdoc/>
     public event Action HoverExited;
-
-     /// <inheritdoc/>
-    public GameObject InteractiveElement
-    {
-        /// <inheritdoc/>
-        get => interactiveElement;
-        /// <inheritdoc/>
-        set => interactiveElement = value;
-    }
-
-    /// <inheritdoc/>
-    public XRBaseInteractable Interactable
-    {
-        /// <inheritdoc/>
-        get => interactable;
-        /// <inheritdoc/>
-        set => interactable = value;
-    }
 
     private ToolTipController toolTipController;
 
