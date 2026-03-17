@@ -52,12 +52,12 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         /// <inheritdoc/>
         set
         {
-            if (value < 0)
+            if (value <= 0)
             {
-                Debug.LogError("Hover scale multiplier must be zero or positive");
+                Debug.LogError("Hover scale multiplier must be greater than zero");
                 return;
             }
-            Assert.IsTrue(value >= 0, "Hover scale multiplier must be greater than zero");
+            Assert.IsTrue(value > 0, "Hover scale multiplier must be greater than zero");
             hoverScaleMultiplier = value;
         }
     }
@@ -284,29 +284,16 @@ public class ScaleOnHoverModel : MonoBehaviour, IScaleOnHoverModel
         }
     }
 
-
-
     /// <inheritdoc/>
     public void Awake()
     {
-
-        // Check for null or empty linkedObjects array and log a warning if so (scales cannot be initialized)
-        if (linkedObjects == null)
+        // Initialize scales on linkedObjects
+        Assert.IsTrue(linkedObjects != null, "Linked objects shouldn't be null on Awake()");
+        if (linkedObjects != null && linkedObjects.Length > 0)
         {
-            Debug.LogError("Cannot initialize scales. linked objects array is null on Awake");
-            return;
-        }
-        else if (linkedObjects.Length <= 0)
-        {
-            Debug.LogError("Cannot initialize scales. linked objects array is empty on Awake");
-            return;
-        }
+            InitializeScales();
 
-        Assert.IsNotNull(linkedObjects, "Linked objects array cannot be null on Awake");
-        Assert.IsTrue(linkedObjects.Length > 0, "Linked objects array must have at least one element on Awake");
-
-        // All checks passed
-        InitializeScales();
+        }
     }
 
 }

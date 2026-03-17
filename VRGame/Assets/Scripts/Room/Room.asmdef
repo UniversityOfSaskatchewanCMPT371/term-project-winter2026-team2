@@ -1,0 +1,17 @@
+{
+    "name": "Room",
+    "rootNamespace": "",
+    "references": [
+        "ScriptTemplates",
+        "SceneEnum"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
