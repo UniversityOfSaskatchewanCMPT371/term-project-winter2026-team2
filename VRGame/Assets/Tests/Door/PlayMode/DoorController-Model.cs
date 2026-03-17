@@ -44,20 +44,26 @@ public class DoorController_Model
 
         // mocking out door model 
         DoorModel doorM = go.AddComponent<DoorModel>();
-        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
-        doorC.DoorModel = doorM;
+        doorM.ResetDoorLookup();
         doorM.DoorId = 1;
+        doorM.Init();
+        doorC.DoorModel = doorM;
+
+        
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
+
 
         // trigger debounce should default to false, or else scnen change can never
         // be triggered
+        
         yield return null;
 
         Assert.IsFalse(doorC.TriggerDebounce);
 
-        UnityEngine.Object.DestroyImmediate(go);
 
         doorM.ResetDoorLookup();
+        UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -100,8 +106,11 @@ public class DoorController_Model
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
+        doorM.ResetDoorLookup();
         doorC.DoorModel = doorM;
+        doorM.DoorId = 1;
 
+        doorM.Init();
         // should fail, need to set sceneChangerController
         LogAssert.Expect(LogType.Error, new Regex(".*"));
         try
@@ -112,7 +121,6 @@ public class DoorController_Model
         catch
         {
         }
-        doorM.ResetDoorLookup();
         UnityEngine.Object.DestroyImmediate(go);
         yield return null;
     }
@@ -124,15 +132,18 @@ public class DoorController_Model
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
-        doorM.DestinationSceneId = 0;
+        doorM.DoorId = 1;
         doorC.DoorModel = doorM;
         doorM.TargetDoorId = 2;
+        doorM.ResetDoorLookup();
 
         // create target for our door
         DoorModel targetDoor = go.AddComponent<DoorModel>();
         targetDoor.DoorId = 2;
         targetDoor.TargetDoorId = 1;
+        doorM.ResetDoorLookup();
 
+        doorM.Init();
 
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
         doorC.SceneChangerController = sceneC;
@@ -165,22 +176,25 @@ public class DoorController_Model
         DoorController doorC = go.AddComponent<DoorController>();
 
         DoorModel doorM = go.AddComponent<DoorModel>();
-        doorM.DestinationSceneId = 0;
+        doorM.DestinationSceneId = 7; // test scene
         doorC.DoorModel = doorM;
         doorM.DoorId = 1;
         doorM.TargetDoorId = 2;
+        doorM.ResetDoorLookup();
 
         // create target for our door
         DoorModel targetDoor = go.AddComponent<DoorModel>();
         targetDoor.DoorId = 2;
         targetDoor.TargetDoorId = 1;
+        targetDoor.ResetDoorLookup();
 
-
+        doorM.Init();
+        targetDoor.Init();
         // async operation that sceneChangerController will return
         IAsyncOperationWrapper loadingScene = Substitute.For<IAsyncOperationWrapper>();
 
         ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
-        sceneC.LoadScene(0).Returns(loadingScene);
+        sceneC.LoadScene(7).Returns(loadingScene);
         doorC.SceneChangerController = sceneC;
 
         // init
@@ -198,13 +212,14 @@ public class DoorController_Model
         loadingScene.Completed += Raise.Event<Action<IAsyncOperationWrapper>>(loadingScene);
 
         // let finished event be detected
-        yield return null;
+        while (doorC.TriggerDebounce) {
+            yield return null;
+        }
 
         
         // trigger debounce should be false, to allow entrance again
         Assert.IsFalse(doorC.TriggerDebounce);
 
-        doorM.ResetDoorLookup();
         UnityEngine.Object.DestroyImmediate(go);
 
         yield return null;
