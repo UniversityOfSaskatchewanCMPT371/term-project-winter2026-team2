@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
 
-/// <summary>
-/// Component that listens to XR hover events and raises custom events for tooltip display.
-/// Also creates and manages a ToolTipController to show/hide a tooltip.
-/// </summary>
+/// <inheritdoc/>
 public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
 
 {
@@ -17,7 +14,7 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// <remarks>
     /// Must be assigned in the Unity Editor. This GameObject should contain the tooltip view.
     /// </remarks>
-    public GameObject interactiveElement;
+    [SerializeField] private GameObject interactiveElement;
 
     /// <summary>
     /// This one is needed so that it can interact with our vr controller ray
@@ -25,7 +22,7 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// <remarks>
     /// Automatacillay obtained via GetComponent in Awake(). Must exist on same GameObject.
     /// </remarks>
-    public  XRBaseInteractable interactable;
+    [SerializeField] private  XRBaseInteractable interactable;
 
     /// <inheritdoc/>
     public event Action HoverEntered;
@@ -111,6 +108,11 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// </remarks>
     private void OnHoverEntered(HoverEnterEventArgs args)
     {
+        //null check
+        if (args.interactorObject == null)
+        {
+            Debug.LogError("OnHoverEntered called with null interactor.");
+        }
         if (IsLeftController(args.interactorObject))
             HoverEntered?.Invoke();
     }
@@ -128,6 +130,11 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// </remarks>
     private void OnHoverExited(HoverExitEventArgs args)
     {
+        //null check
+        if (args.interactorObject == null)
+        {
+            Debug.LogError("OnHoverExited called with null interactor.");
+        }
         if (IsLeftController(args.interactorObject))
             HoverExited?.Invoke();
     }
@@ -148,6 +155,12 @@ public class ToolTipTrigger : MonoBehaviour, IToolTipTrigger
     /// </remarks>
     private bool IsLeftController(IXRInteractor interactor)
     {
+        //null check
+        if (interactor == null)
+        {
+            Debug.LogError("IsLeftController called with null interactor.");
+            return false;
+        }
         //find ActionBasedController (its in XROrigin (XR Rig))
         var controller = (interactor as MonoBehaviour)?.GetComponentInParent<ActionBasedController>();
         // if we find it and it contains "Left" (Left Controller (it does)), we're good

@@ -7,7 +7,7 @@ using UnityEngine;
 public class BillBoardView : MonoBehaviour
 {
     /// <summary>
-    /// the main camera
+    /// the main camera. Must be assigned in the Unity Editor.
     /// </summary>
     public Transform target; 
 

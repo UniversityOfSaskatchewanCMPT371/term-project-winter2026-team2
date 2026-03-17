@@ -70,6 +70,11 @@ public class ToolTipController
     /// </remark>
     private void OnHoverEnter()
     {
+        //null check
+        if (interactiveElement == null)
+        {
+            Debug.LogError("OnHoverEnter called but interactiveElement is null.");
+        }
         interactiveElement.SetActive(true);
     }
 
@@ -84,6 +89,11 @@ public class ToolTipController
     /// </remarks>
     private void OnHoverExit()
     {
+        //null check
+        if (interactiveElement == null)
+        {
+            Debug.LogError("OnHoverExit called but interactiveElement is null.");
+        }
         interactiveElement.SetActive(false);
     }
 
@@ -100,7 +110,8 @@ public class ToolTipController
     {
         if (trigger != null)
         {
-            //unsubscribe from the trigger events to prevent memory leaks
+            //unsubscribe to prevent memory leaks
+            //unsubscribing is safe even if it were never subscribed (does nothing)
             trigger.HoverEntered -= OnHoverEnter;
             trigger.HoverExited -= OnHoverExit;
         }

@@ -62,15 +62,14 @@ public class ToolTipView : MonoBehaviour, IToolTipView
         {
             Debug.LogError("ToolTipModel cannot be null.");
             Debug.Assert(model != null, "ToolTipModel cannot be null.");
-            return;
         }
         if (title == null || description == null)
         {
             Debug.LogError("UpdateContent called before UI components are initialized.");
             Debug.Assert(title != null, "Title component is null.");
             Debug.Assert(description != null, "Description component is null.");
-            return;
         }
+        
         title.SetText(model.Title);
         description.SetText(model.Description);
     }

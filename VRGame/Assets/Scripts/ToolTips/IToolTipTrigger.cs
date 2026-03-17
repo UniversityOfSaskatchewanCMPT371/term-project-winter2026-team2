@@ -5,8 +5,8 @@ using System;
 
 /// <summary>
 /// defines the interface for objects that can trigger tooltips.
-/// implementing should manage hover events and give
-/// references to the interactive element
+/// implementing classes should listen to XR hover events
+/// and manage a ToolTipController to show/hide a tooltip
 /// </summary>
 public interface IToolTipTrigger
 {
