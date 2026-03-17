@@ -33,6 +33,35 @@ public class ToolTipView : MonoBehaviour, IToolTipView
     /// </summary>
     [SerializeField] private ToolTipModel data;
 
+    /// <inheritdoc/>
+    public TextMeshProUGUI Title
+    {
+        /// <inheritdoc/>
+        get => title;
+        /// <inheritdoc/>
+        set => title = value;
+    }
+
+    /// <inheritdoc/>
+    public TextMeshProUGUI Description
+    {
+        /// <inheritdoc/>
+        get => description;
+        /// <inheritdoc/>
+        set => description = value;
+    }
+
+    /// <inheritdoc/>
+    public ToolTipModel Data
+    {
+        /// <inheritdoc/>
+        get => data;
+        /// <inheritdoc/>
+        set => data = value;
+    }
+
+
+
     
     /// <summary>
     /// <Initializes the view by populating text from the data model.
@@ -69,7 +98,7 @@ public class ToolTipView : MonoBehaviour, IToolTipView
             Debug.Assert(title != null, "Title component is null.");
             Debug.Assert(description != null, "Description component is null.");
         }
-        
+
         title.SetText(model.Title);
         description.SetText(model.Description);
     }

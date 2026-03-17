@@ -24,24 +24,24 @@ public class ToolTipsViewTests
         // create and assign child TextMeshPro objects
         GameObject titleGo = new GameObject("Title");
         titleGo.transform.SetParent(go.transform);
-        view.title = titleGo.AddComponent<TextMeshProUGUI>();
+        view.Title = titleGo.AddComponent<TextMeshProUGUI>();
 
         GameObject descGo = new GameObject("Description");
         descGo.transform.SetParent(go.transform);
-        view.description = descGo.AddComponent<TextMeshProUGUI>();
+        view.Description = descGo.AddComponent<TextMeshProUGUI>();
 
         // Create a real model and assign it
         ToolTipModel model = (ToolTipModel)ScriptableObject.CreateInstance(typeof(ToolTipModel));
         model.Title = "Play Title";
         model.Description = "Play Description";
-        view.data = model;
+        view.Data = model;
 
         // Wait one frame – Start() will run automatically
         yield return null;
 
         // Now the text fields should be filled with the model's data
-        Assert.AreEqual("Play Title", view.title.text);
-        Assert.AreEqual("Play Description", view.description.text);
+        Assert.AreEqual("Play Title", view.Title.text);
+        Assert.AreEqual("Play Description", view.Description.text);
 
         // Clean up
         UnityEngine.Object.DestroyImmediate(go);

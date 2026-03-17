@@ -26,11 +26,11 @@ public class ToolTipsViewTests
         // create and assign child TextMeshPro objects
         var titleGo = new GameObject("Title");
         titleGo.transform.SetParent(viewGo.transform);
-        view.title = titleGo.AddComponent<TextMeshProUGUI>();
+        view.Title = titleGo.AddComponent<TextMeshProUGUI>();
 
         var descGo = new GameObject("Description");
         descGo.transform.SetParent(viewGo.transform);
-        view.description = descGo.AddComponent<TextMeshProUGUI>();
+        view.Description = descGo.AddComponent<TextMeshProUGUI>();
 
         // Create a mock model with known return values.
         mockModel = Substitute.For<IToolTipModel>();
@@ -57,8 +57,8 @@ public class ToolTipsViewTests
         // call UpdateContent with the mock model
         view.UpdateContent(mockModel);
         // verify the text fields are updated
-        Assert.AreEqual("Mock Title", view.title.text);
-        Assert.AreEqual("Mock Description", view.description.text);
+        Assert.AreEqual("Mock Title", view.Title.text);
+        Assert.AreEqual("Mock Description", view.Description.text);
     }
 
     /// <summary>
