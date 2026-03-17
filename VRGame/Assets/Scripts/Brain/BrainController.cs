@@ -49,7 +49,6 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
         if (modelInstance == null)
         {
             Debug.LogError("Model instance is null on hover enter");
-            return;
         }
         Assert.IsNotNull(modelInstance, "Model instance must be initialized before hover enter");
         // Increment count of regions hovered
