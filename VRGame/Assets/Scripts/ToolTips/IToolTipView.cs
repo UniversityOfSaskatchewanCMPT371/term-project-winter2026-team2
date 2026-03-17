@@ -14,7 +14,7 @@ public interface IToolTipView
     /// <remarks>
     /// Preconditions:
     /// - `model` must not be null
-    /// - The UI components (like TestMeshProGUI) must be assigned
+    /// - The UI components <c>title</c> and <c>description</c> must be assigned non-null values.
     /// Postconditions:
     /// - The title and description text are updated to match the model.
     /// </remarks>

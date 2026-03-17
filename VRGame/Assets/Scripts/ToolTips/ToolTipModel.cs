@@ -22,9 +22,6 @@ public class ToolTipModel : ScriptableObject, IToolTipModel
     /// </summary>
     [SerializeField, TextArea] private string description;
     
-    /// <summary>
-    /// <para>Gets or sets the title associated with the object.</para>
-    /// </summary>
     /// <inheritdoc/>
     public string Title 
     { 
@@ -34,9 +31,6 @@ public class ToolTipModel : ScriptableObject, IToolTipModel
         set => title = value;
     }
 
-    /// <summary>
-    /// <para>Gets or sets the description associated with the object.</para>
-    /// </summary>
     /// <inheritdoc/>
     public string Description 
     { 

@@ -6,10 +6,10 @@ using UnityEngine;
 /// Interface defining ToolTipModel for mocking in tests.
 /// </summary>
 public interface IToolTipModel
-
-{/// <summary>
- /// Gets or sets the title associated with the object.
- /// </summary>
+{
+    /// <summary>
+    /// Gets or sets the title associated with the object.
+    /// </summary>
     string Title 
     { 
         /// <summary>
@@ -33,6 +33,7 @@ public interface IToolTipModel
         /// </remarks>
         set; 
     }
+    
     /// <summary>
     /// Gets or sets the description associated with the object.
     /// </summary>

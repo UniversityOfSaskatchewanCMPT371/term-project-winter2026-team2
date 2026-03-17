@@ -4,6 +4,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+//Allows the line renderer to be edited in EditMode
 [ExecuteInEditMode]
 /// <summary>
 /// Draws a line between two points using a LineRenderer.
@@ -16,7 +17,7 @@ public class TwoPointLine : MonoBehaviour
     /// <remarks>
     /// Must be assigned in the Unity Editor.
     /// </remarks>
-    public Transform pointA;
+    [SerializeField] private Transform pointA;
     
     /// <summary>
     /// The ending point of the line.
@@ -24,7 +25,7 @@ public class TwoPointLine : MonoBehaviour
     /// <remarks>
     /// Must be assigned in the Unity Editor.
     /// </remarks>
-    public Transform pointB;
+    [SerializeField] private Transform pointB;
     
     /// <summary>
     /// The LineRenderer component used to draw the line.
