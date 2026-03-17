@@ -96,4 +96,4 @@ public class PlayerServiceControllerTests
         // destroy the xr rig
         UnityEngine.Object.DestroyImmediate(XRrigMock);
     }
-}
+}d

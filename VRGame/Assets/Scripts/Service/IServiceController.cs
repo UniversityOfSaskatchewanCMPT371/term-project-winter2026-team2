@@ -1,4 +1,7 @@
 
+/// <summary>
+/// Interface for Service component.
+/// </summary>
 public interface IServiceController : IController
 {
     /// <summary>

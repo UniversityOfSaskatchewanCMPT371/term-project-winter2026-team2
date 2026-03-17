@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Service component that keeps the attached game object singleton and persistent. This game object
+/// is then used as a saddle for other service components to keep them persistent.
+/// </summary>
 public class ServiceController : Controller<IModel, IView>, IServiceController
 {
     /// <summary>
