@@ -14,15 +14,19 @@ public class DoorView_Controller_Integration
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
+        DoorController doorC = go.AddComponent<DoorController>();
 
-        // real door controller, not mocked
-        IDoorController doorC = go.AddComponent<DoorController>();
         doorV.DoorController = doorC;
+        // doorController needs model reference to init properly        
+        IDoorModel doorMock = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorMock;
 
-        // if it is initialized without causing exception, we're good
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
+        // init
         yield return null;
 
-        Object.Destroy(go);
+        Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -43,7 +47,7 @@ public class DoorView_Controller_Integration
         }
         catch { }
 
-        Object.Destroy(go);
+        Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -53,10 +57,15 @@ public class DoorView_Controller_Integration
     {
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
 
         doorV.DoorController = doorC;
+        // doorController needs model reference to init properly        
+        IDoorModel doorMock = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorMock;
 
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
         // init
         yield return null;
 
@@ -70,7 +79,7 @@ public class DoorView_Controller_Integration
         }
         catch { }
 
-        Object.Destroy(go);
+        Object.DestroyImmediate(go);
         yield return null;
     }
 
@@ -97,8 +106,8 @@ public class DoorView_Controller_Integration
         LogAssert.Expect(LogType.Log, "Component other than player collided with door");
 
 
-        Object.Destroy(colliderGo);
-        Object.Destroy(go);
+        Object.DestroyImmediate(colliderGo);
+        Object.DestroyImmediate(go);
 
         yield return null;
     }
@@ -110,9 +119,16 @@ public class DoorView_Controller_Integration
         GameObject go = new GameObject();
         DoorView doorV = go.AddComponent<DoorView>();
 
-        IDoorController doorC = go.AddComponent<DoorController>();
+        DoorController doorC = go.AddComponent<DoorController>();
         doorV.DoorController = doorC;
 
+        // doorController needs model reference to init properly        
+        IDoorModel doorMock = Substitute.For<IDoorModel>();
+        doorC.DoorModel = doorMock;
+
+        ISceneChangerController sceneC = Substitute.For<ISceneChangerController>();
+        doorC.SceneChangerController = sceneC;
+        
         yield return null;
 
         // no playerController within this gameObject
@@ -130,8 +146,8 @@ public class DoorView_Controller_Integration
         {
         }
 
-        Object.Destroy(colliderGo);
-        Object.Destroy(go);
+        Object.DestroyImmediate(colliderGo);
+        Object.DestroyImmediate(go);
 
         yield return null;
     }

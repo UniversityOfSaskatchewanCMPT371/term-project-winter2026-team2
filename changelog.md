@@ -4,7 +4,7 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.1.2] - 2026-03-17
+## [1.3.0] - 2026-03-17
 
 ### Added
 
@@ -19,6 +19,12 @@ do not change functionality nor do you need to when you you write tests.
   - Cerebrum ---> Parietal Lobe
   - Cerebrum ---> Occipital Lobe
   - Cerebrum ---> Temporal Lobe
+
+## [1.2.0] - 2026-03-17
+
+### Added
+
+- ToolTips (UI educational display)
 
 ## [1.1.1] - 2026-03-08
 
