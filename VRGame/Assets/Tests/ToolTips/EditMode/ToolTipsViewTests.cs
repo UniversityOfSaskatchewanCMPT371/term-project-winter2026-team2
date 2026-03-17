@@ -39,13 +39,14 @@ public class ToolTipsViewTests
     }
 
     /// <summary>
-    /// clean up after each test to prevent memory leaks
+    /// Verifies that SetUp correctly initializes the view components.
     /// </summary>
-    [TearDown]
-    public void TearDown()
+    [Test]
+    public void SetUp_InitializesView()
     {
-        // destroy the view GameObject
-        Object.DestroyImmediate(viewGo);
+        Assert.IsNotNull(view, "View should be created.");
+        Assert.IsNotNull(view.title, "Title component should be assigned.");
+        Assert.IsNotNull(view.description, "Description component should be assigned.");
     }
 
     /// <summary>

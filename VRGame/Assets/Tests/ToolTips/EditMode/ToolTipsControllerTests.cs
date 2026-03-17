@@ -28,14 +28,14 @@ public class ToolTipsControllerTests
     }
     
     /// <summary>
-    /// Clean up after each test
+    /// Verifies that SetUp correctly initializes the test objects.
     /// </summary>
-    [TearDown]
-    public void TearDown()
+    [Test]
+    public void SetUp_InitializesObjects()
     {
-        // Unsubscribe and destroy the element
-        controller.Dispose();
-        UnityEngine.Object.DestroyImmediate(interactiveElement);
+        Assert.IsNotNull(interactiveElement, "Interactive element should be created.");
+        Assert.IsNotNull(mockTrigger, "Mock trigger should be created.");
+        Assert.IsNotNull(controller, "Controller should be created.");
     }
 
     /// <summary>

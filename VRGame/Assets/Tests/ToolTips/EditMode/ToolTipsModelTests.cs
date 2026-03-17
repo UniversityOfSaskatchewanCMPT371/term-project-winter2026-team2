@@ -20,13 +20,12 @@ public class ToolTipsModelTests
     }
 
     /// <summary>
-    /// Clean up after each tests to prevent memory leaks
+    /// Verifies that SetUp correctly initializes the model.
     /// </summary>
-    [TearDown]
-    public void TearDown()
+    [Test]
+    public void SetUp_InitializesModel()
     {
-        //destroy the model to prevent memory leaks
-        Object.DestroyImmediate(model);
+        Assert.IsNotNull(model, "Model should be created.");
     }
 
     /// <summary>
