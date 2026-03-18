@@ -3,17 +3,18 @@ using UnityEngine;
 public interface IBlockController
 {
     /// <summary>
-    /// Initializes the block with the specified type
+    /// Initializes the block with the specified types
     /// </summary>
-    /// <param name="blockType">The type of the block to initialize</param>
+    /// <param name="shape">The shape of the block to initialize</param>
+    /// <param name="colour">The colour of the block to initialize</param>
     /// <remarks>
     /// pre-condition:
-    ///     - blockType is a valid (string) block type (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+    ///     - none
     /// post-condition:
-    ///     - The block's model is initialized with the specified block type
-    ///     - The block's view is updated to reflect the specified block type
+    ///     - The block's model is initialized with the specified BlockShape and BlockColour
+    ///     - The block's view is updated to reflect the specified shape and colour.
     /// </remarks>
-    void Initialize(string blockType);
+    void Initialize(BlockShape shape, BlockColour colour);
 
     /// <summary>
     /// Updates the block's position in the scene

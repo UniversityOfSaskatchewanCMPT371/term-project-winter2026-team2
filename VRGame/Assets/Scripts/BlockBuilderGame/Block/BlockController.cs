@@ -53,18 +53,13 @@ public class BlockController : MonoBehaviour, IBlockController
     }
 
     /// <inheritdoc/>
-    public void Initialize(string blockType)
+    public void Initialize(BlockShape shape, BlockColour colour)
     {
-        if (blockType == null)
-        {
-            Debug.LogError("Cannot initialize null BlockType");
-            Assert.IsNotNull(blockType, "BlockType cannot be null in Initialize");
-            return;
-        }
-        
         // Set the block type in the model and update the view
-        model.BlockType = blockType;
-        view.SetBlockType(blockType);
+        model.Shape = shape;
+        model.Colour = colour;
+        view.SetBlockShape(shape);
+        view.SetBlockColour(colour);
     }
 
     /// <inheritdoc/>
