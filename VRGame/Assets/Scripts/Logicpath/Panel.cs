@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// Represents a single panel in the logic path minigame
@@ -31,6 +32,7 @@ public class Panel : MonoBehaviour
     private Vector3 worldPosition;
     private int gridX;
     private int gridY;
+    private XRSimpleInteractable xRSimpleInteractable;
 
     /// <summary>
     /// Accessor for entry direction
@@ -315,5 +317,36 @@ public class Panel : MonoBehaviour
         downNeighbor = null;
         leftNeighbor = null;
         attribute = PanelAttribute.Normal;
+    }
+
+    public void Awake()
+    {
+        xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
+
+        xRSimpleInteractable.activated.AddListener(OnActivate);
+        xRSimpleInteractable.deactivated.AddListener(OnDeactivate);
+        xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
+    }
+
+    public void OnDestroy()
+    {
+        xRSimpleInteractable.activated.RemoveListener(OnActivate);
+        xRSimpleInteractable.deactivated.RemoveListener(OnDeactivate);
+        xRSimpleInteractable.hoverExited.RemoveListener(OnHoverExited);
+    }
+
+    private void OnActivate(ActivateEventArgs args)
+    {
+        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is now pressed (activated)");
+    }
+
+    private void OnDeactivate(DeactivateEventArgs args)
+    {
+        Debug.Log("Panel at ({this.gridX},{this.gridY}) is now unpressed (deactivated)");
+    }
+
+    private void OnHoverExited(HoverExitEventArgs args)
+    {
+        Debug.Log("Panel at ({this.gridX},{this.gridY}) is no longer being hovered over");
     }
 }
