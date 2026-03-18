@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1] - 2026-03-17
+
+### Fixed
+
+- Updated project settings to enable building of the game
+
+
 API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
