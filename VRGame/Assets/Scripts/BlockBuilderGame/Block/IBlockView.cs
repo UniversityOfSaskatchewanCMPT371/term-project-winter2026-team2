@@ -17,14 +17,27 @@ public interface IBlockView
 
 
     /// <summary>
-    /// Sets the type of the block
+    /// Sets the shape of the block
     /// </summary>
-    /// <param name="blockType">The type of the block</param>
+    /// <param name="shape">The shape of the block</param>
     /// <remarks>
     /// pre-condition:
-    ///     - blockType is a valid (string) block type (e.g., )
+    ///     - none
     /// post-condition:
-    ///     - The block's visual appearance is updated to match the specified block type
+    ///     - The block's visual appearance is updated to match the specified block shape
     /// </remarks>
-    void SetBlockType(string blockType);
+    void SetBlockShape(BlockShape shape);
+
+
+    /// <summary>
+    /// Sets the colour of the block
+    /// </summary>
+    /// <param name="colour">The colour of the block</param>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - The block's visual appearance is updated to match the specified block colour
+    /// </remarks>
+    void SetBlockColour(BlockColour colour);
 }

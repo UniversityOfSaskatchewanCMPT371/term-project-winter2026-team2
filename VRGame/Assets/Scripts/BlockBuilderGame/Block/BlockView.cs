@@ -4,9 +4,14 @@ using UnityEngine.Assertions;
 public class BlockView : MonoBehaviour, IBlockView
 {
     /// <summary>
-    /// Current type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+    /// Current shape of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
     /// </summary>
-    [SerializeField] private string currentBlockType;
+    [SerializeField] private BlockShape currentBlockShape;
+
+    /// <summary>
+    /// Current colour of the block (e.g., red, blue, green etc.)
+    /// </summary>
+    [SerializeField] private BlockColour currentBlockColour;
 
     /// <summary>
     /// Awake method to perform initial checks and setup
@@ -50,15 +55,16 @@ public class BlockView : MonoBehaviour, IBlockView
     }
 
     /// <inheritdoc/>
-    public void SetBlockType(string blockType)
+    public void SetBlockShape(BlockShape shape)
     {
-        if (blockType == null)
-        {
-            Debug.LogError("Cannot set block type to null");
-            Assert.IsNotNull(blockType, "BlockType cannot be null in SetBlockType");
-            return;
-        }
-        // Set the block type
-        currentBlockType = blockType;
+        // Set the block shape
+        currentBlockShape = shape;
+    }
+
+    /// <inheritdoc/>
+    public void SetBlockColour(BlockColour colour)
+    {
+        // Set the block colour
+        currentBlockColour = colour;
     }
 }
