@@ -8,17 +8,12 @@ using UnityEngine.Assertions;
 public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 {
     /// <summary>
-    /// Array of brick prefabs to cycle through
+    /// Array of blockshapes to choose from
     /// </summary>
-    [SerializeField] private GameObject[] brickPrefabs;
-
-    /// <summary>
-    /// Array of brick prefabs to cycle through
-    /// </summary>
-    [SerializeField] private GameObject[] brickPrefabs;
+    [SerializeField] private BlockShape[] brickPrefabs;
 
     /// <inheritdoc/>
-    public GameObject[] BrickPrefabs
+    public BlockShape[] BlocksAvailable
     {
         get
         {
@@ -35,7 +30,7 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
 
     /// <summary>
-    /// Current index in the brick cycle (0-3 since I wanna do 4 different bricks for now)
+    /// Current index in the brick cycle
     /// </summary>
     [SerializeField] private int currentBrickIndex;
 
@@ -52,6 +47,15 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
             Debug.Log("Setting CurrentBrickIndex from " + currentBrickIndex + " to " + value);
             currentBrickIndex = value;
         }
+    }
+
+
+    /// <summary>
+    /// Current index in the block cycle
+    /// </summary>
+    public BlockShape CurrentBlockShapeSelected()
+    {
+        return BrickPrefabs[CurrentBrickIndex];
     }
 
 
@@ -119,24 +123,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         }
     }
 
-    /// <summary>
-    /// Reference to the last spawned brick
-    /// </summary>
-    [SerializeField] private GameObject lastSpawnedBrick;
-
-    /// <inheritdoc/>
-    public GameObject LastSpawnedBrick
-    {
-        get
-        {
-            return lastSpawnedBrick;
-        }
-        set
-        {
-            Debug.Log("Setting LastSpawnedBrick to " + (value != null ? value.name : "null"));
-            lastSpawnedBrick = value;
-        }
-    }
 
     /// <inheritdoc/>
     private void Initialize()
@@ -144,13 +130,11 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         currentBrickIndex = 0;
         spawnHeight = 1.0f;
         brickScale = 4.0f;
-        lastSpawnedBrick = null;
     }
 
     /// <inheritdoc/>
-    public BlockModel SpawnBlock()
+    void SetBrickPrefabsAvailable(int level, BlockShape[] shapesToInclude)
     {
         
     }
-
 }
