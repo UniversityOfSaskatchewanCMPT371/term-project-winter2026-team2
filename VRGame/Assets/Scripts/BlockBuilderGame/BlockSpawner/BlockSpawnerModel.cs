@@ -12,6 +12,11 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// </summary>
     [SerializeField] private GameObject[] brickPrefabs;
 
+    /// <summary>
+    /// Array of brick prefabs to cycle through
+    /// </summary>
+    [SerializeField] private GameObject[] brickPrefabs;
+
     /// <inheritdoc/>
     public GameObject[] BrickPrefabs
     {
@@ -140,6 +145,12 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         spawnHeight = 1.0f;
         brickScale = 4.0f;
         lastSpawnedBrick = null;
+    }
+
+    /// <inheritdoc/>
+    public BlockModel SpawnBlock()
+    {
+        
     }
 
 }

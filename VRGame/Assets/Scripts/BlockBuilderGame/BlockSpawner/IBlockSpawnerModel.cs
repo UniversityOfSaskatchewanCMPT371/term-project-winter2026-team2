@@ -171,4 +171,20 @@ public interface IBlockSpawnerModel
         /// </remarks>
         set;
     }
+
+
+    /// <summary>
+    /// Selects block to spawn
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - BrickPrefabs array has been initialized with 4 elements
+    /// post-condition:
+    ///     - Returns the current array of brick prefabs
+    /// </remarks>
+    public BlockModel SpawnBlock()
+    {
+        
+    }
+
 }
