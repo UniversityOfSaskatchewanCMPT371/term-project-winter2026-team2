@@ -135,15 +135,4 @@ public interface IBlockSpawnerModel
         set; 
     }
 
-    /// <summary>
-    /// Sets the brick prefabs available in play
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - Input array must not be null
-    ///     - Input array must have exactly 4 elements
-    /// post-condition:
-    ///     - Sets the BrickPrefabs array to the provided value
-    /// </remarks>
-    void SetBrickPrefabsAvailable(int level, BlockShape[] shapesToInclude); 
 }

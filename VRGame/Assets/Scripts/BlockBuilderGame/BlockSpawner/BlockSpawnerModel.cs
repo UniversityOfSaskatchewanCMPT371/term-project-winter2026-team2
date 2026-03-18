@@ -10,21 +10,20 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// <summary>
     /// Array of blockshapes to choose from
     /// </summary>
-    [SerializeField] private BlockShape[] brickPrefabs;
+    [SerializeField] private BlockShape[] blocksAvailable;
 
     /// <inheritdoc/>
     public BlockShape[] BlocksAvailable
     {
         get
         {
-            return brickPrefabs;
+            return blocksAvailable;
         }
         set
         {
-            Assert.IsNotNull(value, "BrickPrefabs cannot be null");
-            Assert.AreEqual(4, value.Length, "BrickPrefabs array must have exactly 4 elements");
-            Debug.Log("Setting BrickPrefabs array with " + value.Length + " elements");
-            brickPrefabs = value;
+            Assert.IsNotNull(value, "blocksAvailable cannot be null");
+            Debug.Log("Setting BlocksAvailable array with " + value.Length + " elements");
+            blocksAvailable = value;
         }
     }
 
@@ -55,7 +54,7 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// </summary>
     public BlockShape CurrentBlockShapeSelected()
     {
-        return BrickPrefabs[CurrentBrickIndex];
+        return BlocksAvailable[CurrentBrickIndex];
     }
 
 
@@ -132,9 +131,5 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         brickScale = 4.0f;
     }
 
-    /// <inheritdoc/>
-    void SetBrickPrefabsAvailable(int level, BlockShape[] shapesToInclude)
-    {
-        
-    }
+    
 }
