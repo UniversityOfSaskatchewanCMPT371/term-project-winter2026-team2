@@ -7,18 +7,17 @@ using UnityEngine.Assertions;
 /// </summary>
 public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
 {
-    /// <summary>
-    /// Brick prefabs for different sizes
-    /// </summary>
-    [SerializeField] private GameObject brick1x1Prefab;
-    [SerializeField] private GameObject brick1x2Prefab;
-    [SerializeField] private GameObject brick1x4Prefab;
-    [SerializeField] private GameObject brick1x6Prefab;
+    
 
     /// <summary>
     /// Spawn area transform indicating where bricks should spawn
     /// </summary>
     [SerializeField] private Transform spawnArea;
+
+    /// <summary>
+    /// Current Selection of blocks representing an index in the brickPrefab array
+    /// </summary>
+    [SerializeField] private int currentSelection;
 
     /// <summary>
     /// Height above the spawn area where bricks will be instantiated
