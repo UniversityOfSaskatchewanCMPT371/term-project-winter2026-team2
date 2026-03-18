@@ -6,7 +6,6 @@ using UnityEngine;
 /// </summary>
 public enum BlockShape
 {
-    bevel_hq_brick_1x1_round,
     bevel_hq_brick_1x1,
     bevel_hq_brick_1x2,
     bevel_hq_brick_1x4,
