@@ -1,0 +1,50 @@
+/// <summary>
+/// Controller component of BrainController that manages hover interactions
+/// </summary>
+public interface IBrainController : IController
+{
+    /// <summary>
+    /// Called before Start()
+    /// Ensures controller is ready before view Sets up XR events
+    /// Calls Init() to initialize model and view instance in BrainController component
+    /// </summary>
+    void Awake();
+
+    /// <summary>
+    /// Overrides base Start() to prevent double-initialization since Awake() already called Init()
+    /// </summary>
+    void Start();
+
+    /// <summary>
+    /// Initializes the model and view instance
+    /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires (modelInstance == null) && (viewInstance == null)
+    /// Post-condition:
+    ///     ensures (modelInstance != null) && (viewInstance != null)
+    /// </remarks>
+    new void Init();
+
+    /// <summary>
+    /// Pauses the animation
+    /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires modelInstance != null
+    /// Post-condition:
+    ///     ensures modelInstance.pause() is invoked
+    /// </remarks>
+    void OnHoverEnter();
+
+    /// <summary>
+    /// Resumes the animation
+    /// </summary>
+    /// <remarks>
+    /// Pre-condition:
+    ///     requires modelInstance != null
+    /// Post-condition:
+    ///     ensures modelInstance.resume() is invoked
+    /// </remarks>
+    void OnHoverExit();
+}
