@@ -29,8 +29,9 @@ public class Panel : MonoBehaviour
     private Panel leftNeighbor;
     private PanelAttribute attribute;
     private Color pipeColor;
-    private Vector3 worldPosition;
+    [SerializeField]
     private int gridX;
+    [SerializeField]
     private int gridY;
     private XRSimpleInteractable xRSimpleInteractable;
 
@@ -178,22 +179,6 @@ public class Panel : MonoBehaviour
     }
 
     /// <summary>
-    /// Accessor for world position
-    /// </summary>
-    public Vector3 WorldPosition
-    {
-        get
-        {
-            return worldPosition;
-        }
-
-        set
-        {
-            worldPosition = value;
-        }
-    }
-
-    /// <summary>
     /// Accessor for grid X coordinate
     /// </summary>
     public int GridX
@@ -300,15 +285,13 @@ public class Panel : MonoBehaviour
     ///     - Neighbours are null
     /// </postconditions>
     /// </remarks>
-    public void Initialize(int x, int y, Vector3 worldPos)
+    public void Initialize(int x, int y)
     {
         Assert.IsTrue(x >= 0, "Grid X coordinate cannot be negative");
         Assert.IsTrue(y >= 0, "Grid Y coordinate cannot be negative");
-
     
         gridX = x;
         gridY = y;
-        worldPosition = worldPos;
         entryDirection = Direction.None;
         exitDirection = Direction.None;
         pipeColor = Color.white;
