@@ -1,9 +1,9 @@
 {
-    "name": "BlockSpawner",
+    "name": "GameState",
     "rootNamespace": "",
     "references": [
-        "GUID:ea4a24547d7d3ef44b572674fb8e01a0",
-        "GUID:5ad40a9289c4d4ba59615dcd5b927c7e"
+		"GUID:ea4a24547d7d3ef44b572674fb8e01a0",
+        "GUID:0af53da75bfcf45ec8d0fe0cc8df9251"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
