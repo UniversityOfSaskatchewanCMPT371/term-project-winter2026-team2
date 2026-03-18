@@ -342,11 +342,11 @@ public class Panel : MonoBehaviour
 
     private void OnDeactivate(DeactivateEventArgs args)
     {
-        Debug.Log("Panel at ({this.gridX},{this.gridY}) is now unpressed (deactivated)");
+        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is now unpressed (deactivated)");
     }
 
     private void OnHoverExited(HoverExitEventArgs args)
     {
-        Debug.Log("Panel at ({this.gridX},{this.gridY}) is no longer being hovered over");
+        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is no longer being hovered over");
     }
 }
