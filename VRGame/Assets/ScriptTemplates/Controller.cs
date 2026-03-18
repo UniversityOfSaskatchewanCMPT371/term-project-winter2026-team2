@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// MonoBehaviour wrapper. This used specifically for serialized layer fields
