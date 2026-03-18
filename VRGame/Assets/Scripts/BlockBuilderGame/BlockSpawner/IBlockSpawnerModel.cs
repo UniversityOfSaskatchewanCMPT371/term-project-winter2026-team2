@@ -7,32 +7,20 @@ using UnityEngine;
 public interface IBlockSpawnerModel
 {
     /// <summary>
-    /// Array of brick prefabs to spawn
+    /// Array of brick prefabs available to spawn
     /// </summary>
-    GameObject[] BrickPrefabs 
+    BlockShape[] BlocksAvailable
     { 
         /// <summary>
         /// Getter for BrickPrefabs array
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BrickPrefabs array has been initialized with 4 elements
+        ///     - BrickPrefabs array cannot be null
         /// post-condition:
-        ///     - Returns the current array of brick prefabs
+        ///     - Returns the current array of brick prefabs avialable in level
         /// </remarks>
         get; 
-
-        /// <summary>
-        /// Setter for BrickPrefabs array
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - Input array must not be null
-        ///     - Input array must have exactly 4 elements
-        /// post-condition:
-        ///     - Sets the BrickPrefabs array to the provided value
-        /// </remarks>
-        set; 
     }
 
     /// <summary>
@@ -62,6 +50,7 @@ public interface IBlockSpawnerModel
         /// </remarks>
         set; }
 
+
     /// <summary>
     /// Transform where bricks should spawn
     /// </summary>
@@ -89,6 +78,7 @@ public interface IBlockSpawnerModel
         /// </remarks>
         set; }
 
+
     /// <summary>
     /// Height offset above spawn area point
     /// </summary>
@@ -115,6 +105,7 @@ public interface IBlockSpawnerModel
         ///     - Sets the SpawnHeight to the provided value
         /// </remarks>
         set; }
+
 
     /// <summary>
     /// Scale multiplier for spawned bricks
@@ -145,46 +136,14 @@ public interface IBlockSpawnerModel
     }
 
     /// <summary>
-    /// Reference to the last spawned brick
-    /// </summary>
-    GameObject LastSpawnedBrick
-    {
-        /// <summary>
-        /// Getter for LastSpawnedBrick
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - None (can be null if no brick has been spawned yet)
-        /// post-condition:
-        ///     - Returns the reference to the last spawned brick GameObject
-        /// </remarks>
-        get;
-
-        /// <summary>
-        /// Setter for LastSpawnedBrick
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - Input value can be null or a valid GameObject reference
-        /// post-condition:
-        ///     - Sets the LastSpawnedBrick to the provided reference
-        /// </remarks>
-        set;
-    }
-
-
-    /// <summary>
-    /// Selects block to spawn
+    /// Sets the brick prefabs available in play
     /// </summary>
     /// <remarks>
     /// pre-condition:
-    ///     - BrickPrefabs array has been initialized with 4 elements
+    ///     - Input array must not be null
+    ///     - Input array must have exactly 4 elements
     /// post-condition:
-    ///     - Returns the current array of brick prefabs
+    ///     - Sets the BrickPrefabs array to the provided value
     /// </remarks>
-    public BlockModel SpawnBlock()
-    {
-        
-    }
-
+    void SetBrickPrefabsAvailable(int level, BlockShape[] shapesToInclude); 
 }
