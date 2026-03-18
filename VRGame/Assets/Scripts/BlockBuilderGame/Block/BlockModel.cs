@@ -108,13 +108,13 @@ public class BlockModel : MonoBehaviour, IBlockModel
     /// <summary>
     /// Initializes the BlockModel with default values
     /// </summary>
-    public void initialization()
+    public void initialization(BlockShape s, BlockColour c)
     {
-        Shape = string.Empty;
+        Shape = s; 
+        Colour = c;
         Position = Vector3.zero;
-        otation = Quaternion.identity;
+        rotation = Quaternion.identity;
         Debug.Log("BlockModel initialized with default values");
-        Assert.IsNotNull(shape, "BlockType should not be null after initialization");
     }
 
 
