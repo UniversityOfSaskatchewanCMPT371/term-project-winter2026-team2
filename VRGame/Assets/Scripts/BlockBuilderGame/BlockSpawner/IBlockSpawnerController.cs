@@ -15,14 +15,41 @@ public interface IBlockSpawnerController
     /// <param name="brick1x6">1x6 brick prefab</param>
     void Initialize(GameObject brick1x1, GameObject brick1x2, GameObject brick1x4, GameObject brick1x6);
 
+    
     /// <summary>
-    /// Spawns the next brick in the cycle
+    /// Spawns and already initalized block
     /// </summary>
-    void SpawnNextBrick();
+    /// <remarks>
+    /// pre-condition:
+    ///     - current selection is not null
+    /// post-condition:
+    ///     - Returns a GameObject that is a brick prefabs
+    /// </remarks>
+    GameObject SpawnBlock();
+
 
     /// <summary>
-    /// Gets the current brick index
+    /// Selects the next brick in the cycle
     /// </summary>
-    /// <returns>Current index in the brick cycle</returns>
-    int GetCurrentBrickIndex();
+    void SelectNextBlock();
+
+    
+    /// <summary>
+    /// Selects the next brick in the cycle
+    /// </summary>
+    void SelectPreviousBlock();
+
+
+    /// <summary>
+    /// Gets the current block index
+    /// </summary>
+    /// <returns>Current Shape in the block cycle</returns>
+    BlockShape GetCurrentBlockShape();
+
+
+    /// <summary>
+    /// Gets the current block colour
+    /// </summary>
+    /// <returns>Current colour in the block colour selector</returns>
+    BlockColour GetCurrentBlockColour();
 }
