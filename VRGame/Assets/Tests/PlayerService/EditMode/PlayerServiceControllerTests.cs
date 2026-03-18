@@ -25,6 +25,7 @@ public class PlayerServiceControllerTests
     [TearDown]
     public void TearDown()
     {
+        controller.ResetStatic();
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -102,7 +103,8 @@ public class PlayerServiceControllerTests
         XRrigMock.AddComponent<PlayerController>();
         Assert.DoesNotThrow(() => {controller.MockXRrigPrefab = XRrigMock;}, "No exception expected.");
 
-        Assert.DoesNotThrow(() => controller.Init(), "No exception expected.");
+        // expect an exception to occur since OnLoadDontDestroy() only works at runtime
+        Assert.Throws<InvalidOperationException>(() => controller.Init(), "Expected exception to be thrown.");
 
         Assert.IsNotNull(controller.playerObjAccessor, "Player did not spawn.");
     }
@@ -115,10 +117,13 @@ public class PlayerServiceControllerTests
         XRrigMock.AddComponent<PlayerController>();
         Assert.DoesNotThrow(() => {controller.MockXRrigPrefab = XRrigMock;}, "No exception expected.");
 
+        // don't spawn the player when this component is initialized
         controller.spawnPlayerOnLoad = false;
 
-        Assert.DoesNotThrow(() => controller.Init(), "No exception expected.");
+        // expect an exception to occur since OnLoadDontDestroy() only works at runtime
+        Assert.Throws<InvalidOperationException>(() => controller.Init(), "Expected exception to be thrown.");
 
+        // there should be no rig spawned
         Assert.IsNull(controller.playerObjAccessor, "Player spawned.");
     }
 }

@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.XR;
+using System.Text.RegularExpressions;
+using System;
+
 public class PlayerServiceControllerTests
 {
     GameObject go;
@@ -28,6 +27,7 @@ public class PlayerServiceControllerTests
     [TearDown]
     public void TearDown()
     {
+        controller.ResetStatic();
         UnityEngine.Object.DestroyImmediate(go);
     }
 
@@ -46,35 +46,34 @@ public class PlayerServiceControllerTests
         yield return null;
     }
 
-    public IEnumerator SpawnPlayerCreatesNewObjectWhenNoneExists()
+    [UnityTest]
+    public IEnumerator Singleton()
     {
+        // expect errors to occur since 'XRrigPrefab' variable is null.
+        // these errors cannot be avoided since Awake() is called 
+        // immediately after component is added.
+        LogAssert.Expect(LogType.Error, "'XRrigPrefab' variable was not set in inspector.");
+        LogAssert.Expect(LogType.Exception, new Regex("'XRrigPrefab' cannot be null.*"));
+
+        // immediately calls Awake() when component is added
+        controller = go.AddComponent<PlayerServiceController>();
+
         // expect errors to occur since 'XRrigPrefab' variable is null.
         LogAssert.Expect(LogType.Error, "'XRrigPrefab' variable was not set in inspector.");
         LogAssert.Expect(LogType.Exception, new Regex("'XRrigPrefab' cannot be null.*"));
 
-        // immediately calls Awake()
-        controller = go.AddComponent<PlayerServiceController>();
+        // expect a warning since this is a duplicate of this singleton
+        LogAssert.Expect(LogType.Warning, "There can be only one active ServiceController.");
 
-        GameObject XRrig = new GameObject();
-        XRrig.AddComponent<PlayerController>();
+        // create a duplicate
+        GameObject go2 = new GameObject();
+        go2.AddComponent<PlayerServiceController>();
 
-        controller.MockXRrigPrefab = XRrig;
-
-        Vector3 position = Vector3.zero;
-        Quaternion rotation = new Quaternion();
-
-        controller.SpawnPlayer(position, rotation);
-
+        // yield to let Destroy() run
         yield return null;
-    }
 
-    public IEnumerator SingletonDestroysDuplicateOnAwake()
-    {
-        yield return null;
-    }
+        Assert.IsTrue(go2 == null, "Expected duplicate game object to be destroyed.");
 
-    public IEnumerator SpawnPlayerOnLoadWorksWhenEnabled()
-    {
         yield return null;
     }
 }
