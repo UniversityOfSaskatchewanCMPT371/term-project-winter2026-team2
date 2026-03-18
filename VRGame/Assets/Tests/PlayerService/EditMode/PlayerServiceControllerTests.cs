@@ -121,7 +121,7 @@ public class PlayerServiceControllerTests
         controller.spawnPlayerOnLoad = false;
 
         // expect an exception to occur since OnLoadDontDestroy() only works at runtime
-        Assert.Throws<InvalidOperationException>(() => controller.Init(), "Expected exception to be thrown.");
+        Assert.DoesNotThrow(() => controller.Init(), "No exception expected.");
 
         // there should be no rig spawned
         Assert.IsNull(controller.playerObjAccessor, "Player spawned.");

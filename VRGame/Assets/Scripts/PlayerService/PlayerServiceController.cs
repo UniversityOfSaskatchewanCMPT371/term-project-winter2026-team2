@@ -149,8 +149,7 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
         }
 
         // teleport the player to the specified position after it spawns
-        // TODO: Uncomment this once teleportPlayerTo() is implemented
-        // playerObj.GetComponent<PlayerController>().teleportPlayerTo(position, rotation);
+        playerObj.GetComponent<PlayerController>().teleportPlayerTo(position, rotation);
         
         Debug.Log("Player spawned successfully.");
     }
@@ -158,9 +157,6 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
     /// <inheritdoc/>
     public override void Init()
     {
-        // validate 'XRrigPrefab' variable
-        checkXRrigPrefab();
-
         // see if an instance of this component already exists
         if (instance != null && instance != this)
         {
@@ -174,6 +170,9 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
             // declare this component as the instance
             instance = this;
         }
+
+        // validate 'XRrigPrefab' variable
+        checkXRrigPrefab();
 
         // optionally spawn player on scene load only if its enabled
         if (playerObj == null && spawnPlayerOnLoad)
