@@ -52,6 +52,7 @@ public class Panel : MonoBehaviour
         set
         {
             entryDirection = value;
+            panelTextureManager.RefreshTexture();
         }
     }
 
@@ -68,6 +69,7 @@ public class Panel : MonoBehaviour
         set 
         {
             exitDirection = value;
+            panelTextureManager.RefreshTexture();
         }
     }
 
@@ -148,6 +150,7 @@ public class Panel : MonoBehaviour
         set
         {
             attribute = value;
+            panelTextureManager.RefreshTexture();
         }
     }
 
@@ -156,8 +159,15 @@ public class Panel : MonoBehaviour
     /// </summary>
     public PanelColour PanelColour
     {
-        get;
-        set;
+        get
+        {
+            return panelColour;
+        }
+        set
+        {
+            panelColour = value;
+            panelTextureManager.RefreshTexture();
+        }
     }
 
     /// <summary>
@@ -217,14 +227,13 @@ public class Panel : MonoBehaviour
     /// </preconditions>
     /// <postconditions>
     ///     - Resets entry and exit directions to None
-    ///     - Resets pipe color to white (default)
     /// </postconditions>
     /// </remarks>
     public void ClearPanel()
     {
         entryDirection = Direction.None;
         exitDirection = Direction.None;
-        //pipeColor = Color.white;
+        panelTextureManager.RefreshTexture();
     }
 
     /// <summary>
@@ -249,16 +258,19 @@ public class Panel : MonoBehaviour
         leftNeighbor = null;
 
         panelTextureManager = GetComponent<PanelTextureManager>();
+        Assert.IsNotNull(panelTextureManager, "Could not find texture manager!");
         panelTextureManager.RefreshTexture();
 
         xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
+        Assert.IsNotNull(xRSimpleInteractable, "Could not find the XR interactable!");
         xRSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
         xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
     }
 
     public void OnDestroy()
     {
-        xRSimpleInteractable.hoverExited.RemoveListener(OnHoverExited);
+        xRSimpleInteractable.hoverEntered.RemoveListener(OnHoverEntered);
+        xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
     }
 
     private void OnHoverEntered(HoverEnterEventArgs args)
