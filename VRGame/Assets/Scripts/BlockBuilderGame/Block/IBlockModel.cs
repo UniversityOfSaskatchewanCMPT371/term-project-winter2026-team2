@@ -72,7 +72,7 @@ public interface IBlockModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - position must be a valid Vector3
+        ///     - none
         /// post-condition:
         ///     - returns the target position of the block in game
         /// </remarks>
@@ -83,7 +83,7 @@ public interface IBlockModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - value must be a valid Vector3
+        ///     - none
         /// post-condition:
         ///     - sets the target position of the block in game to the value
         /// </remarks>
