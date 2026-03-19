@@ -131,6 +131,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502880451}
+  - component: {fileID: 502880452}
+  - component: {fileID: 502880453}
   m_Layer: 0
   m_Name: LogicGameMaster
   m_TagString: Untagged
@@ -155,6 +157,30 @@ Transform:
   - {fileID: 1190394734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &502880452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502880450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35b3ce8d7c1b5641909526fc23fb11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &502880453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502880450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e6e147bb101c804db5cd556f0bc0612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &516251981
 PrefabInstance:
   m_ObjectHideFlags: 0

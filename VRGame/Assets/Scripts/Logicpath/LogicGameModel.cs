@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class LogicGameModel : MonoBehaviour, IGridModel
 {
-    private const int MAX_GRID_SIZE = 10; // look, there ain't no way that we're gonna have puzzles larger than 10x10
+    public static int MAX_GRID_SIZE = 10; // look, there ain't no way that we're gonna have puzzles larger than 10x10
     // please note that the panel's array layout is not going to be the orthodox [row, collumn] layout for ease of visualization
     // instead, we'll be using [x, y] where x is the horizontal axis and y is the vertical axis
     private Panel[,] panelGrid;

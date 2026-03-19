@@ -38,6 +38,7 @@ public class Panel : MonoBehaviour
     private int gridY;
     private PanelTextureManager panelTextureManager;
     private XRSimpleInteractable xRSimpleInteractable;
+    private LogicGameController logicGameController;
 
     /// <summary>
     /// Accessor for entry direction
@@ -264,6 +265,10 @@ public class Panel : MonoBehaviour
         Assert.IsNotNull(xRSimpleInteractable, "Could not find the XR interactable!");
         xRSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
         xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
+
+        Assert.IsNotNull(transform.parent, "There is no parent object for this panel!");
+        logicGameController = transform.parent.gameObject.GetComponent<LogicGameController>();
+        Assert.IsNotNull(logicGameController, "Could not find LogicGameController!");
     }
 
     public void OnDestroy()
