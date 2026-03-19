@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class LogicGameModel : MonoBehaviour, IGridModel
 {
+    private const int MAX_GRID_SIZE = 10; // look, there ain't no way that we're gonna have puzzles larger than 10x10
     // please note that the panel's array layout is not going to be the orthodox [row, collumn] layout for ease of visualization
     // instead, we'll be using [x, y] where x is the horizontal axis and y is the vertical axis
     private Panel[,] panelGrid;
@@ -13,7 +14,7 @@ public class LogicGameModel : MonoBehaviour, IGridModel
 
     public void Awake()
     {
-        panelGrid = new Panel[10,10]; // look, there ain't no way that we're gonna have puzzles larger than 10x10
+        panelGrid = new Panel[MAX_GRID_SIZE,MAX_GRID_SIZE];
         endpoints = new Dictionary<PanelColour, (Panel start, Panel end)>();
 
         foreach(Transform childTransform in transform)
@@ -39,6 +40,27 @@ public class LogicGameModel : MonoBehaviour, IGridModel
                 }
                 Assert.IsNull(endpoints[panel.PanelColour].end, $"Duplicate end endpoint of colour {panel.PanelColour}");
                 endpoints[panel.PanelColour] = (endpoints[panel.PanelColour].start, panel);
+            }
+
+            if(panel.GridX > 0 && panelGrid[panel.GridX-1, panel.GridY] != null)
+            {
+                panel.LeftNeighbor = panelGrid[panel.GridX-1, panel.GridY];
+                panelGrid[panel.GridX-1, panel.GridY].RightNeighbor = panel;
+            }
+            if(panel.GridY > 0 && panelGrid[panel.GridX, panel.GridY-1] != null)
+            {
+                panel.DownNeighbor = panelGrid[panel.GridX, panel.GridY-1];
+                panelGrid[panel.GridX, panel.GridY-1].TopNeighbor = panel;
+            }
+            if(panel.GridX < MAX_GRID_SIZE-1 && panelGrid[panel.GridX+1, panel.GridY] != null)
+            {
+                panel.RightNeighbor = panelGrid[panel.GridX+1, panel.GridY];
+                panelGrid[panel.GridX+1, panel.GridY].LeftNeighbor = panel;
+            }
+            if(panel.GridY < MAX_GRID_SIZE-1 && panelGrid[panel.GridX, panel.GridY+1] != null)
+            {
+                panel.TopNeighbor = panelGrid[panel.GridX, panel.GridY+1];
+                panelGrid[panel.GridX, panel.GridY+1].DownNeighbor = panel;
             }
         }
         foreach((PanelColour colour, (Panel start, Panel end) pair) in endpoints)
