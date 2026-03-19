@@ -30,7 +30,10 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// <inheritdoc/>
     public BlockShape[] BlocksForPuzzle
     {
-        get;
+        get
+        {
+            return blocksForPuzzle;
+        }
     }
 
 
