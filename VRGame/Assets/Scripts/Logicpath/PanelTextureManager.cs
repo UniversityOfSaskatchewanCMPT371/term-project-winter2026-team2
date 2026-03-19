@@ -26,6 +26,7 @@ public class PanelTextureManager : MonoBehaviour
     /// </summary>
     /// <remarks>
     /// <preconditions>
+    ///     - The panel's state must be valid (ex: no entry direction for a start panel)
     /// </preconditions>
     /// <postconditions>
     ///     - Returns a string representing the correct texture path
@@ -41,9 +42,27 @@ public class PanelTextureManager : MonoBehaviour
             return TEXTURE_PATH + "blank";
         }
         string colourName = GetColorName(panel.PanelColour);
-
-        //return TEXTURE_PATH + colorName + "_" + visualDirection;
-        return "";
+        string maybeEndpoint;
+        switch (panel.Attribute)
+        {
+            case PanelAttribute.Normal:
+                maybeEndpoint = "";
+                break;
+            case PanelAttribute.Start:
+                Assert.AreEqual(panel.EntryDirection, Direction.None, "Start endpoint's entry direction must be None");
+                maybeEndpoint = "_start";
+                break;
+            case PanelAttribute.Exit:
+                Assert.AreEqual(panel.ExitDirection, Direction.None, "End endpoint's exit direction must be None");
+                maybeEndpoint = "_end";
+                break;
+            case PanelAttribute.Block:
+                throw new AssertionException("Block textures cannot be coloured! Is the control flow wrong?","Block textures cannot be coloured! Is the control flow wrong?");
+            default:
+                throw new AssertionException($"Unknown PanelAttribute \"{panel.Attribute}\"",$"Unknown PanelAttribute \"{panel.Attribute}\"");
+        }
+        string directionName = GetDirectionName(panel.EntryDirection, panel.ExitDirection);
+        return $"{colourName}{maybeEndpoint}_{directionName}";
     }
 
     /// <summary>
