@@ -44,4 +44,9 @@ class CoordinateRef
             y = value;
         }
     }
+
+    public override string ToString()
+    {
+        return $"({x},{y})";
+    }
 }

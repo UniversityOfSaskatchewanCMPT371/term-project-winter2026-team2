@@ -279,11 +279,13 @@ public class Panel : MonoBehaviour
 
     private void OnHoverEntered(HoverEnterEventArgs args)
     {
-        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is hovered over");
+        Debug.Log($"Panel at ({gridX},{gridY}) is hovered over");
+        logicGameController.HandleHover(gridX, gridY);
     }
 
     private void OnHoverExited(HoverExitEventArgs args)
     {
-        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is no longer being hovered over");
+        Debug.Log($"Panel at ({gridX},{gridY}) is no longer being hovered over");
+        logicGameController.HandleUnhover(gridX, gridY);
     }
 }

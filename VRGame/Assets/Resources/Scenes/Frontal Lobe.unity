@@ -181,6 +181,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6e147bb101c804db5cd556f0bc0612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightTriggerAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Trigger
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 12c2081e-e0d4-4f3a-b25b-821bc6abb81e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6756787485274679044, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1001 &516251981
 PrefabInstance:
   m_ObjectHideFlags: 0
