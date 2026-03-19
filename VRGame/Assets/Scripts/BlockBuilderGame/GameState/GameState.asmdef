@@ -2,8 +2,9 @@
     "name": "GameState",
     "rootNamespace": "",
     "references": [
-		"GUID:ea4a24547d7d3ef44b572674fb8e01a0",
-        "GUID:0af53da75bfcf45ec8d0fe0cc8df9251"
+        "GUID:ea4a24547d7d3ef44b572674fb8e01a0",
+        "GUID:0af53da75bfcf45ec8d0fe0cc8df9251",
+        "GUID:4e035efe9a13e18448974cf8d38d4bab"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
