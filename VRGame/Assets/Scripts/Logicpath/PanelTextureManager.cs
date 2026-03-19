@@ -41,7 +41,7 @@ public class PanelTextureManager : MonoBehaviour
         {
             return TEXTURE_PATH + "blank";
         }
-        string colourName = GetColorName(panel.PanelColour);
+        string colourName = GetColourName(panel.PanelColour);
         string maybeEndpoint;
         switch (panel.Attribute)
         {
@@ -159,18 +159,17 @@ public class PanelTextureManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Converts a Color to a string name for texture lookup
+    /// Converts a PanelColour to a string name for texture lookup
     /// </summary>
-    /// <param name="color">The color to convert</param>
+    /// <param name="colour">The Panelcolour to convert</param>
     /// <remarks>
     /// <preconditions>
-    ///     - color must be a valid pipe color (red, green, blue, yellow)
     /// </preconditions>
     /// <postconditions>
     ///     - Returns a string name for the color used in texture naming
-    ///     - Defaults to "white" if the color is unknown
+    ///     - Defaults to "red" if the color is unknown
     /// </postconditions>
-    private string GetColorName(PanelColour colour)
+    private string GetColourName(PanelColour colour)
     {
         switch(colour)
         {
