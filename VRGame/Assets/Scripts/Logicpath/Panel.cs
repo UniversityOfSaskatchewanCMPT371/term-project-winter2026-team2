@@ -232,16 +232,11 @@ public class Panel : MonoBehaviour
     /// </summary>
     /// <remarks>
     /// <preconditions>
-    ///     - x and y must be non-negative
-    ///     - worldPos must be a valid Vector3
     /// </preconditions>
     /// <postconditions>
-    ///     - Panel is initialized with coordinates and position
-    ///     - Directions are set to None
-    ///     - Neighbours are null
     /// </postconditions>
     /// </remarks>
-    public void Initialize()
+    public void Awake()
     {
         Assert.IsTrue(this.gridX >= 0, "Grid X coordinate cannot be negative");
         Assert.IsTrue(this.gridY >= 0, "Grid Y coordinate cannot be negative");
@@ -254,12 +249,9 @@ public class Panel : MonoBehaviour
         leftNeighbor = null;
 
         panelTextureManager = GetComponent<PanelTextureManager>();
-    }
+        panelTextureManager.RefreshTexture();
 
-    public void Awake()
-    {
         xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
-
         xRSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
         xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
     }

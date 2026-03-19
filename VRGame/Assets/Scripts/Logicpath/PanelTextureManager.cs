@@ -10,15 +10,32 @@ public class PanelTextureManager : MonoBehaviour
     private const string TEXTURE_PATH = "Materials/LogicGame/";
     private Panel panel;
 
+    /// <summary>
+    /// Unity's Awake() method for the texture manager
+    /// </summary>
     public void Awake()
     {
         panel = gameObject.GetComponent<Panel>();
         Assert.IsNotNull(panel, "Panel cannot be null");
     }
-
+    
+    /// <summary>
+    /// Refresh the texture for this panel
+    /// </summary>
+    /// <preconditions>
+    ///     - The panel's state must be valid so that its state can point to a valid texture
+    /// </preconditions>
+    /// <postconditions>
+    ///     - The panel's texture is updated accordingly
+    /// </postconditions>
     public void RefreshTexture()
     {
-        
+        string textureName = GetTexturePath();
+        Material newTexture = Resources.Load(textureName, typeof(Material)) as Material;
+        Assert.IsNotNull(newTexture, $"\"{textureName}\" does not point to a valid material!");
+        Renderer renderer = GetComponent<Renderer>();
+        Assert.IsNotNull(renderer, "Could not find the Renderer for this panel! Something has gone horribly, terribly wrong");
+        renderer.material = newTexture;
     }
 
     /// <summary>
@@ -37,7 +54,7 @@ public class PanelTextureManager : MonoBehaviour
         {
             return TEXTURE_PATH + "block";
         }
-        if(panel.EntryDirection == Direction.None && panel.ExitDirection == Direction.None)
+        if(panel.Attribute == PanelAttribute.Normal && panel.EntryDirection == Direction.None && panel.ExitDirection == Direction.None)
         {
             return TEXTURE_PATH + "blank";
         }
@@ -62,7 +79,7 @@ public class PanelTextureManager : MonoBehaviour
                 throw new AssertionException($"Unknown PanelAttribute \"{panel.Attribute}\"",$"Unknown PanelAttribute \"{panel.Attribute}\"");
         }
         string directionName = GetDirectionName(panel.EntryDirection, panel.ExitDirection);
-        return $"{colourName}{maybeEndpoint}_{directionName}";
+        return $"{TEXTURE_PATH}{colourName}{maybeEndpoint}_{directionName}";
     }
 
     /// <summary>
@@ -72,7 +89,7 @@ public class PanelTextureManager : MonoBehaviour
     /// <param name="exit">The exit direction</param>
     /// <remarks>
     /// <preconditions>
-    ///     - entry != exit
+    ///     - entry != exit && entry != Direction.None && exit != Direction.None
     /// </preconditions>
     /// <postconditions>
     ///     - Returns a string representing the visual orientation of the pipe for texture naming
@@ -80,7 +97,10 @@ public class PanelTextureManager : MonoBehaviour
     
     private string GetDirectionName(Direction entry, Direction exit)
     {
-        Assert.AreNotEqual(entry, exit, "Entry and exit directions cannot be equal");
+        if(entry != exit && entry != Direction.None && exit != Direction.None)
+        {
+            throw new AssertionException("Panel's entry and exit cannot point in the same non-none direction","Panel's entry and exit cannot point in the same non-none direction");
+        }
         switch(entry)
         {
             case Direction.Left:
@@ -150,6 +170,9 @@ public class PanelTextureManager : MonoBehaviour
                         return "up";
                     case Direction.Down:
                         return "down";
+                    case Direction.None:
+                        // note: this should only display if and only if the panel is an endpoint
+                        return "blank";
                     default:
                         throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
                 }

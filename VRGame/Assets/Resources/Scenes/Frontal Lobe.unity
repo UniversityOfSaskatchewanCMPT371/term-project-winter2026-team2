@@ -556,9 +556,10 @@ GameObject:
   - component: {fileID: 1091345111}
   - component: {fileID: 1091345110}
   - component: {fileID: 1091345109}
+  - component: {fileID: 1091345115}
   - component: {fileID: 1091345114}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,7 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1161a25d9e3701049b096fb751f049f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attribute: 0
+  attribute: 2
+  panelColour: 0
   gridX: 0
   gridY: 0
 --- !u!64 &1091345110
@@ -768,6 +770,18 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1091345115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091345108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fad704ebd4e04379a8fd5ee8bd1755e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1423415081
 PrefabInstance:
   m_ObjectHideFlags: 0
