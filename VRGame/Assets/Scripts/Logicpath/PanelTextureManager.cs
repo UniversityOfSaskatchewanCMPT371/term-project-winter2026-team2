@@ -4,7 +4,7 @@ using UnityEngine.Assertions;
 /// <summary>
 /// Manages pipe textures and pathing for the logic path minigame
 /// </summary>
-public class PipeManager : MonoBehaviour
+public class PanelTextureManager : MonoBehaviour
 {
 
     private const string TEXTURE_PATH = "Textures/LogicGame/";
