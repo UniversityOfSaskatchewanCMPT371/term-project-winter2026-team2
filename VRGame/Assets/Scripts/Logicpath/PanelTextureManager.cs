@@ -47,18 +47,84 @@ public class PanelTextureManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Maps entry and exit directions to visual direction for texture lookup
+    /// Maps entry and exit directions of the panel's line to visual direction for texture lookup
     /// </summary>
+    /// <param name="entry">The entry direction</param>
+    /// <param name="exit">The exit direction</param>
     /// <remarks>
     /// <preconditions>
+    ///     - entry must not be None
+    ///     - entry != exit
     /// </preconditions>
     /// <postconditions>
     ///     - Returns a string representing the visual orientation of the pipe for texture naming
     ///     - Examples: "up_down", "left_right", "left_down", etc.
     
-    private string GetDirectionName()
+    private string GetDirectionName(Direction entry, Direction exit)
     {
-        return "";
+        Assert.AreNotEqual(Direction.None, entry, "Entry direction cannot be None");
+        Assert.AreNotEqual(entry, exit, "Entry and exit directions cannot be equal");
+        switch(entry)
+        {
+            case Direction.Left:
+                switch(exit)
+                {
+                    case Direction.Right:
+                        return "left_right";
+                    case Direction.Up:
+                        return "left_up";
+                    case Direction.Down:
+                        return "left_down";
+                    case Direction.None:
+                        return "left";
+                    default:
+                        throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
+                }
+            case Direction.Right:
+                switch(exit)
+                {
+                    case Direction.Left:
+                        return "left_right";
+                    case Direction.Up:
+                        return "right_up";
+                    case Direction.Down:
+                        return "right_down";
+                    case Direction.None:
+                        return "right";
+                    default:
+                        throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
+                }
+            case Direction.Up:
+                switch(exit)
+                {
+                    case Direction.Left:
+                        return "left_up";
+                    case Direction.Right:
+                        return "right_up";
+                    case Direction.Down:
+                        return "up_down";
+                    case Direction.None:
+                        return "up";
+                    default:
+                        throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
+                }
+            case Direction.Down:
+                switch(exit)
+                {
+                    case Direction.Left:
+                        return "left_down";
+                    case Direction.Right:
+                        return "right_down";
+                    case Direction.Up:
+                        return "up_down";
+                    case Direction.None:
+                        return "down";
+                    default:
+                        throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
+                }
+            default:
+                throw new AssertionException($"Unknown entry direction \"{entry}\"",$"Unknown entry direction \"{entry}\"");
+        }
     }
 
     /// <summary>
