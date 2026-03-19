@@ -7,15 +7,17 @@ using UnityEngine.Assertions;
 /// </summary>
 public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
 {
-    
+    /// <summary>
+    /// Instance of the Model and View components
+    /// </summary>
+    private IBlockSpawnerModel model;
+    private IBlockSpawnerView view;
 
-    /// <inheritdoc/>
-    public void SpawnBlock()
+
+    public GameObject SpawnBlock()
     {
-        // to be implemented later
-
+        return null;
     }
-
 
     private void Awake()
     {
