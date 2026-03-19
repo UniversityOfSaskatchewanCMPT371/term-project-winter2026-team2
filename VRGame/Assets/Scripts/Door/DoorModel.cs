@@ -5,6 +5,10 @@ using UnityEngine.Assertions;
 using System;
 
 using System.Diagnostics.Contracts;
+using System.Numerics;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks.Dataflow;
+using System.Runtime.CompilerServices;
 
 
 /// <summary>
@@ -113,6 +117,9 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         set
         {
+            Contract.Requires(value >= 0);
+            Contract.Ensures(this.TargetDoorId == value);
+
             if (value < 0)
             {
                 Debug.LogError("value passed to setTargetDoorId is negative");
@@ -162,6 +169,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         set
         {
             Contract.Requires(value >= 0);
+            Contract.Ensures(this.DestinationSceneId == value);
             if (value < 0)
             {
                 Debug.LogError("value passed to set destinationSceneId is negative");
@@ -195,6 +203,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         get
         {
+            Contract.Ensures(Contract.Result<Vector3>() == this.teleportOffset);
             return teleportOffset;
         }
 
@@ -203,12 +212,13 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - `value` must be valid Vector3
+        /// - none
         /// Postconditions:
         /// - DoorModel's teleportOffset is set to value
         /// </remarks>
         set
         {
+            Contract.Ensures(this.teleportOffset == value);
             teleportOffset = value;
         }
 
@@ -219,6 +229,9 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public IDoorModel GetTargetDoor()
     {
+        Contract.Requires(doorLookup.ContainsKey(targetDoorId));
+        Contract.Ensures(Contract.Result<IDoorModel>() == doorLookup[targetDoorId]);
+
         if (!doorLookup.ContainsKey(targetDoorId))
         {
             Debug.LogError("Target door does not exist");
@@ -233,12 +246,15 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public Vector3 GetTeleportPosition()
     {
+        Contract.Ensures(Contract.Result<>() == (this.transform.position + this.teleportOffset));
         return transform.position + teleportOffset;
     }
 
     /// <inheritdoc/>
     public Quaternion GetTeleportRotation()
     {
+        Contract.Ensures(Contract.Result<>() == Quaternion.LookRotation(TransformBlock.forward, Vector3.up));
+
         return Quaternion.LookRotation(transform.forward, Vector3.up);
     }
 
@@ -246,6 +262,16 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public void Init()
     {
+        Contract.Requires(this.doorId >= 0);
+        Contract.Requires(this.targetDoorId >= 0);
+        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), thi.destinationSceneId));
+        Contract.Requires(this.doorLookup == null || !doorLookup.ContainsKey(doorId));
+
+        Contract.Ensures(this.doorLookup != null);
+        Contract.Ensures(this.doorLookup.ContainsKey(this.doorId));
+        Contract.Ensures(this.doorLookup[this.doorId] == this);
+
+
         // check fields to see if they have proper values
         if (doorLookup == null)
         {
@@ -287,6 +313,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// - doorLookup is cleared.
     internal void ResetDoorLookup()
     {
+        Contract.Ensures(this.doorLookup.Count() == 0);
         doorLookup.Clear();
         Debug.Log("doorLookup dictionary cleared");
     }
@@ -304,6 +331,15 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// </remarks>
     private void Start()
     {
+        Contract.Requires(this.doorId >= 0);
+        Contract.Requires(this.targetDoorId >= 0);
+        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), thi.destinationSceneId));
+        Contract.Requires(this.doorLookup == null || !doorLookup.ContainsKey(doorId));
+
+        Contract.Ensures(this.doorLookup != null);
+        Contract.Ensures(this.doorLookup.ContainsKey(this.doorId));
+        Contract.Ensures(this.doorLookup[this.doorId] == this);
+        
         Init();
     }
 }
