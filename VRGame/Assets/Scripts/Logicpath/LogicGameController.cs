@@ -39,6 +39,7 @@ public class LogicGameController : MonoBehaviour
     public void HandleHover(int x, int y)
     {
         targetedPanel = new CoordinateRef(x,y);
+        Debug.Log(targetedPanel);
     }
 
     public void HandleUnhover(int x, int y)
@@ -46,6 +47,7 @@ public class LogicGameController : MonoBehaviour
         if(targetedPanel != null && targetedPanel.X == x && targetedPanel.Y == y)
         {
             targetedPanel = null;
+            Debug.Log("No longer hovering!");
         }
     }
 
