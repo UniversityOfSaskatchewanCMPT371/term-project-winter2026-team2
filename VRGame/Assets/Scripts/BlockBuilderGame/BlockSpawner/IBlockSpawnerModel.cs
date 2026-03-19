@@ -9,46 +9,19 @@ public interface IBlockSpawnerModel
     /// <summary>
     /// Array of brick prefabs available to spawn
     /// </summary>
-    BlockShape[] BlocksAvailable
+    BlockShape[] BlocksForPuzzle
     { 
         /// <summary>
-        /// Getter for BrickPrefabs array
+        /// Getter for Block shape array
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BrickPrefabs array cannot be null
+        ///     - BlocksForPuzzle array cannot be null
         /// post-condition:
         ///     - Returns the current array of brick prefabs avialable in level
         /// </remarks>
         get; 
     }
-
-    /// <summary>
-    /// Current index in the brick cycle
-    /// </summary>
-    int CurrentBrickIndex 
-    { 
-        /// <summary>
-        /// Getter for CurrentBrickIndex
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - CurrentBrickIndex has been initialized to a non-negative value
-        /// post-condition:
-        ///     - Returns the current index for brick spawning
-        /// </remarks>
-        get; 
-        
-        /// <summary>
-        /// Setter for CurrentBrickIndex
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - Input value must be non-negative
-        /// post-condition:
-        ///     - Sets the CurrentBrickIndex to the provided value
-        /// </remarks>
-        set; }
 
 
     /// <summary>
@@ -134,5 +107,111 @@ public interface IBlockSpawnerModel
         /// </remarks>
         set; 
     }
+
+
+    /// <summary>
+    /// Current Current Block Shape Selected in block spawner model
+    /// </summary>
+    BlockShape CurrentBlockShapeSelected
+    { 
+        /// <summary>
+        /// Getter for CurrentBlockShapeSelected
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - CurrentBlockShapeSelected has been initialized
+        /// post-condition:
+        ///     - Returns the CurrentBlockShapeSelected selected for brick spawning
+        /// </remarks>
+        get; 
+        
+        /// <summary>
+        /// Setter for CurrentBlockShapeSelected
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - input value must not be null
+        /// post-condition:
+        ///     - Sets the CurrentBlockShapeSelected to the provided value
+        /// </remarks>
+        set; }
+
+
+
+    /// <summary>
+    /// Selects the next brick in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
+    /// </remarks>
+    void SelectNextBlockShape();
+
+    
+    /// <summary>
+    /// Selects the next brick in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
+    /// </remarks>
+    void SelectPreviousBlockShape();
+
+
+    /// <summary>
+    /// The colour selected spawned bricks would be
+    /// </summary>
+    BlockColour CurrentBlockColourSelected
+    {
+        /// <summary>
+        /// Getter for the colour selected for bricks
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - none
+        /// post-condition:
+        ///     - Returns the colour for spawned bricks
+        /// </remarks> 
+        get; 
+
+        /// <summary>
+        /// Setter for colour
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - none
+        /// post-condition:
+        ///     - Sets the ColourSelected to the provided value
+        /// </remarks>
+        set; 
+    }
+
+
+    /// <summary>
+    /// Selects the next colour for bricks in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentColourSelected in BlockSpawnerModel is changed to next colour in cycle
+    /// </remarks>
+    void SelectNextColour();
+
+    
+    /// <summary>
+    /// Selects the previous colour for bricks in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentColourSelected in BlockSpawnerModel is changed to previous colour
+    /// </remarks>
+    void SelectPreviousColour();
 
 }
