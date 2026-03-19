@@ -56,26 +56,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
             spawnArea = value;
         }
     }
-
-
-    /// <summary>
-    /// Current Selection of blocks representing an index in the brickPrefab array
-    /// </summary>
-    [SerializeField] private BlockShape currentBlockShapeSelected;
-    public BlockShape CurrentBlockShapeSelected
-    {
-        get
-        {
-            return currentBlockShapeSelected;
-        }
-        set
-        {
-            Assert.IsTrue(value != null, "CurrentBrickIndex cannot be null");
-            Debug.Log("Setting currentBlockShapeSelected from " + currentBlockShapeSelected + " to " + value);
-            currentBlockShapeSelected = value;
-        }
-    }
-
     
 
     /// <summary>
@@ -96,6 +76,7 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
             spawnHeight = value;
         }
     }
+
 
     /// <summary>>
     /// Scale multiplier for spawned bricks
@@ -119,6 +100,25 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
 
+
+    /// <summary>
+    /// Current Selection of blocks representing an index in the brickPrefab array
+    /// </summary>
+    [SerializeField] private BlockShape currentBlockShapeSelected;
+    public BlockShape CurrentBlockShapeSelected
+    {
+        get
+        {
+            return currentBlockShapeSelected;
+        }
+        set
+        {
+            Assert.IsTrue(value != null, "CurrentBrickIndex cannot be null");
+            Debug.Log("Setting currentBlockShapeSelected from " + currentBlockShapeSelected + " to " + value);
+            currentBlockShapeSelected = value;
+        }
+    }
+
     
 
     /// <inheritdoc/>
@@ -128,12 +128,52 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
     }
 
+
     /// <inheritdoc/>
     public void SelectPreviousBlockShape()
     {
         // to be implemented later
 
     }
+
+
+
+    /// <inheritdoc/>
+    public void GetNextBlockShape()
+    {
+        // to be implemented later
+
+    }
+
+
+    /// <inheritdoc/>
+    public void GetPreviousBlockShape()
+    {
+        // to be implemented later
+
+    }
+
+
+    /// <summary>
+    /// Selected colour for blocks to spawn
+    /// </summary>
+    [SerializeField] BlockColour currentBlockColourSelected;
+
+    public BlockColour CurrentBlockColourSelected
+    {
+        get
+        {
+            Debug.Log("Getting SelectedColour: " + currentBlockColourSelected);
+            return currentBlockColourSelected;
+        }
+        set
+        {
+            Debug.Log("Setting SelectedColour from " + currentBlockColourSelected + " to " + value);
+            currentBlockColourSelected = value;
+        }
+    }
+
+
 
     /// <inheritdoc/>
     public void SelectNextColour()
@@ -149,17 +189,18 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
     }
 
+    /// <inheritdoc/>
+    public void GetNextColour()
+    {
+        // to be implemented later
+
+    }
 
     /// <inheritdoc/>
-
-    public void SetBlocksForPuzzle(int level, BlockShape requiredBlockShapes)
+    public void GetPreviousColour()
     {
-        /*
-        Assert.IsNotNull(value, "blocksAvailable cannot be null");
-        Debug.Log("Setting BlocksAvailable array with " + value.Length + " elements");
-        blocksAvailable = value;
-        */
-        
+        // to be implemented later
+
     }
 
 
@@ -187,45 +228,22 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// <summary>
     /// Current index in the colour cycle
     /// </summary>
-    [SerializeField] private int currentColourIndex;
+    [SerializeField] private int currentBlockColourIndex;
 
     /// <inheritdoc/>
-    public int CurrentColourIndex
+    public int CurrentBlockColourIndex
     {
         get
         {
-            return currentColourIndex;
+            return currentBlockColourIndex;
         }
         set
         {
             Assert.IsTrue(value >= 0, "CurrentColourIndex cannot be negative");
-            Debug.Log("Setting CurrentColourIndex from " + currentColourIndex + " to " + value);
-            currentColourIndex = value;
+            Debug.Log("Setting CurrentColourIndex from " + currentBlockColourIndex + " to " + value);
+            currentBlockColourIndex = value;
         }
     }
-
-
-    /// <summary>
-    /// Selected colour for blocks to spawn
-    /// </summary>
-    [SerializeField] BlockColour currentBlockColourSelected;
-
-    public BlockColour CurrentBlockColourSelected
-    {
-        get
-        {
-            Debug.Log("Getting SelectedColour: " + currentBlockColourSelected);
-            return currentBlockColourSelected;
-        }
-        set
-        {
-            Debug.Log("Setting SelectedColour from " + currentBlockColourSelected + " to " + value);
-            currentBlockColourSelected = value;
-        }
-    }
-
-
-
 
 
     /// <inheritdoc/>

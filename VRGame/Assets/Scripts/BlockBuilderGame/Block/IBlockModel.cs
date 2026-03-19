@@ -65,35 +65,6 @@ public interface IBlockModel
     /// <summary>
     /// The accessor and mutator method for the position of the block in game
     /// </summary>
-    Vector3 TargetPosition 
-    { 
-        /// <summary>
-        /// The desiredPosition of the block in game
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - returns the target position of the block in game
-        /// </remarks>
-        get; 
-        
-        /// <summary>
-        /// The target position of the block in game
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - sets the target position of the block in game to the value
-        /// </remarks>
-        set; 
-    }
-
-    
-    /// <summary>
-    /// The accessor and mutator method for the position of the block in game
-    /// </summary>
     Vector3 Position 
     { 
         /// <summary>
@@ -120,6 +91,35 @@ public interface IBlockModel
     }
 
 
+    /// <summary>
+    /// The accessor and mutator method for the position of the block in game
+    /// </summary>
+    Vector3 TargetPosition 
+    { 
+        /// <summary>
+        /// The desiredPosition of the block in game
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - none
+        /// post-condition:
+        ///     - returns the target position of the block in game
+        /// </remarks>
+        get; 
+        
+        /// <summary>
+        /// The target position of the block in game
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - none
+        /// post-condition:
+        ///     - sets the target position of the block in game to the value
+        /// </remarks>
+        set; 
+    }
+
+    
     /// <summary>
     /// The accessor and mutator method for the rotation of the block in game
     /// </summary> 

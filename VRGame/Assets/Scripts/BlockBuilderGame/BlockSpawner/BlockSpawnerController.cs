@@ -14,11 +14,6 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
     private IBlockSpawnerView view;
 
 
-    public void SpawnBlock()
-    {
-        // to be implemented
-    }
-
     private void Awake()
     {
         // Get or add Model component
@@ -122,7 +117,8 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         }
         */
     }
-
+    
+/*
     /// <inheritdoc/>
     public void SpawnNextBrick()
     {
@@ -130,7 +126,7 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         Assert.IsNotNull(view, "View is null in SpawnNextBrick");
 
         // Destroy the previous brick if it exists
-        /*
+        
         GameObject previousBrick = model.LastSpawnedBrick;
         if (previousBrick != null)
         {
@@ -173,7 +169,13 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         // Cycle to next brick type
         int nextIndex = (currentIndex + 1) % brickPrefabs.Length;
         model.CurrentBrickIndex = nextIndex;
-        */
+        
+    }
+    */
+
+    public void SpawnBlock()
+    {
+        // to be implemented
     }
 
 }

@@ -162,6 +162,31 @@ public interface IBlockSpawnerModel
     void SelectPreviousBlockShape();
 
 
+
+    /// <summary>
+    /// Selects the next brick in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
+    /// </remarks>
+    void GetNextBlockShape();
+
+    
+    /// <summary>
+    /// Selects the next brick in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
+    /// </remarks>
+    void GetPreviousBlockShape();
+
+
     /// <summary>
     /// The colour selected spawned bricks would be
     /// </summary>
@@ -214,4 +239,80 @@ public interface IBlockSpawnerModel
     /// </remarks>
     void SelectPreviousColour();
 
+
+
+    /// <summary>
+    /// Selects the next colour for bricks in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentColourSelected in BlockSpawnerModel is changed to next colour in cycle
+    /// </remarks>
+    void GetNextColour();
+
+    
+    /// <summary>
+    /// Selects the previous colour for bricks in the cycle
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - CurrentColourSelected in BlockSpawnerModel is changed to previous colour
+    /// </remarks>
+    void GetPreviousColour();
+
+
+    int CurrentBlockShapeIndex
+    {
+        /// <summary>
+        /// Gets Current index in the block cycle for shapes
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - none
+        /// post-condition:
+        ///     - Returns an integer representing the current shape selected for blocks to spawn
+        /// </remarks> 
+        get; 
+
+        /// <summary>
+        /// Gets Current index in the block cycle for shapes
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - currentBlockShapeIndex >= 0
+        /// post-condition:
+        ///     - current index in block shape cycle is changed
+        /// </remarks>
+        set; 
+    }
+
+
+    int CurrentBlockColourIndex
+    {
+        /// <summary>
+        /// Getter for the for current colour index
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - none
+        /// post-condition:
+        ///     - Returns an integer representing the current colour selected giving blocks.
+        /// </remarks> 
+        get; 
+
+        /// <summary>
+        /// Setter for current colour index
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - currentBlockShapeIndex >= 0
+        /// post-condition:
+        ///     - Sets the currentBlockColourIndex to the provided value
+        /// </remarks>
+        set; 
+    }
 }

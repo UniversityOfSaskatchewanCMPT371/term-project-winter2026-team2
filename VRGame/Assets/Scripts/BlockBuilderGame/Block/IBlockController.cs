@@ -2,20 +2,7 @@ using UnityEngine;
 
 public interface IBlockController
 {
-    /// <summary>
-    /// Initializes the block with the specified types
-    /// </summary>
-    /// <param name="shape">The shape of the block to initialize</param>
-    /// <param name="colour">The colour of the block to initialize</param>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - The block's model is initialized with the specified BlockShape and BlockColour
-    ///     - The block's view is updated to reflect the specified shape and colour.
-    /// </remarks>
-    void Initialize(BlockShape shape, BlockColour colour);
-
+    
     /// <summary>
     /// Updates the block's position in the scene
     /// </summary> 
@@ -41,4 +28,19 @@ public interface IBlockController
     ///     - The block's view is updated to reflect the new rotation
     /// </remarks>
     void UpdateRotation(Quaternion rotation);
+
+
+    /// <summary>
+    /// Initializes the block with the specified types
+    /// </summary>
+    /// <param name="shape">The shape of the block to initialize</param>
+    /// <param name="colour">The colour of the block to initialize</param>
+    /// <remarks>
+    /// pre-condition:
+    ///     - none
+    /// post-condition:
+    ///     - The block's model is initialized with the specified BlockShape and BlockColour
+    ///     - The block's view is updated to reflect the specified shape and colour.
+    /// </remarks>
+    void Initialize(BlockShape shape, BlockColour colour);
 }

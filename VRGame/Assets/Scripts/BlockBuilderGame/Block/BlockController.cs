@@ -53,16 +53,6 @@ public class BlockController : MonoBehaviour, IBlockController
     }
 
     /// <inheritdoc/>
-    public void Initialize(BlockShape shape, BlockColour colour)
-    {
-        // Set the block type in the model and update the view
-        model.Shape = shape;
-        model.Colour = colour;
-        view.SetBlockShape(shape);
-        view.SetBlockColour(colour);
-    }
-
-    /// <inheritdoc/>
     public void UpdatePosition(Vector3 position)
     {
         if (position == null)
@@ -93,5 +83,17 @@ public class BlockController : MonoBehaviour, IBlockController
         // Update the model's rotation and then update the view to transform the block in the scene
         model.Rotation = rotation;
         view.UpdateVisuals(model.Position, rotation);
+    }
+
+
+
+    /// <inheritdoc/>
+    public void Initialize(BlockShape shape, BlockColour colour)
+    {
+        // Set the block type in the model and update the view
+        model.Shape = shape;
+        model.Colour = colour;
+        view.SetBlockShape(shape);
+        view.SetBlockColour(colour);
     }
 }
