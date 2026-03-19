@@ -53,7 +53,6 @@ public class PanelTextureManager : MonoBehaviour
     /// <param name="exit">The exit direction</param>
     /// <remarks>
     /// <preconditions>
-    ///     - entry must not be None
     ///     - entry != exit
     /// </preconditions>
     /// <postconditions>
@@ -62,7 +61,6 @@ public class PanelTextureManager : MonoBehaviour
     
     private string GetDirectionName(Direction entry, Direction exit)
     {
-        Assert.AreNotEqual(Direction.None, entry, "Entry direction cannot be None");
         Assert.AreNotEqual(entry, exit, "Entry and exit directions cannot be equal");
         switch(entry)
         {
@@ -118,6 +116,20 @@ public class PanelTextureManager : MonoBehaviour
                     case Direction.Up:
                         return "up_down";
                     case Direction.None:
+                        return "down";
+                    default:
+                        throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
+                }
+            case Direction.None:
+                switch(exit)
+                {
+                    case Direction.Left:
+                        return "left";
+                    case Direction.Right:
+                        return "right";
+                    case Direction.Up:
+                        return "up";
+                    case Direction.Down:
                         return "down";
                     default:
                         throw new AssertionException($"Unknown exit direction \"{exit}\"",$"Unknown entry direction \"{exit}\"");
