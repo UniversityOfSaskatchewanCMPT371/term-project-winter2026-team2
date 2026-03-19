@@ -8,7 +8,13 @@ public class PanelTextureManager : MonoBehaviour
 {
 
     private const string TEXTURE_PATH = "Textures/LogicGame/";
+    private Panel panel;
 
+    public void Awake()
+    {
+        panel = gameObject.GetComponent<Panel>();
+        Assert.IsNotNull(panel, "Panel cannot be null");
+    }
 
     /// <summary>
     /// Gets the appropriate pipe texture for a given panel based on its entry and exit directions and pipe color
@@ -17,17 +23,13 @@ public class PanelTextureManager : MonoBehaviour
     /// <remarks>
     /// <preconditions>
     ///     - panel must not be null
-    ///     - panel must have valid entry and exit directions (not None)
-    ///     - panel must have a pipe color assigned
     /// </preconditions>
     /// <postconditions>
     ///     - Returns the correct pipe texture based on the panel's pipe color and directions
     ///     - Returns null if the texture fails to load
     /// </postconditions>
-    public Texture2D GetPipeTexture(Panel panel)
+    public Texture2D GetPipeTexture()
     {
-        Assert.IsNotNull(panel, "Panel cannot be null");
-        //Assert.IsTrue(panel.PipeColor.HasValue, "Panel must have a pipe colour");
 
         //string texturePath = GetTexturePath(panel.PipeColor.Value, panel.EntryDirection, panel.ExitDirection);
         //Texture2D texture = Resources.Load<Texture2D>(texturePath);
@@ -56,12 +58,12 @@ public class PanelTextureManager : MonoBehaviour
     ///     - Returns a string representing the correct texture path
     ///     - Filename is based on the visual orientation of the pipe
     /// </postconditions>
-    private string GetTexturePath(Color color, Direction entryDirection, Direction exitDirection)
+    /*private string GetTexturePath(Color color, Direction entryDirection, Direction exitDirection)
     {
         string colorName = GetColorName(color);
         string visualDirection = GetVisualDirection(entryDirection, exitDirection);
         return TEXTURE_PATH + colorName + "_" + visualDirection;
-    }
+    }*/
 
     /// <summary>
     /// Maps entry and exit directions to visual direction for texture lookup
@@ -126,57 +128,21 @@ public class PanelTextureManager : MonoBehaviour
     ///     - Returns a string name for the color used in texture naming
     ///     - Defaults to "white" if the color is unknown
     /// </postconditions>
-    private string GetColorName(Color color)
+    private string GetColorName(PanelColour colour)
     {
-        if (color == Color.red)
+        switch(colour)
         {
-            return "red";
-        }
-        else if (color == Color.green)
-        {
-            return "green";
-        }
-        else if (color == Color.blue)
-        {
-            return "blue";
-        }
-        else if (color == Color.yellow)
-        {
-            return "yellow";
-        }
-        else
-        {
-            Debug.LogWarning($"Unknown pipe color: {color}. Defaulting to white.");
-            return "white";
-        }
-    }
-
-    /// <summary>
-    /// Converts a Direction enum value to its string name
-    /// </summary>
-    /// <param name="direction">The direction to convert</param>
-    /// <remarks>
-    /// <preconditions>
-    ///     - direction must be a valid Direction enum value (Up, Down, Left, Right)
-    /// </preconditions>
-    /// <postconditions>
-    ///     - Returns a string name for the direction used in texture naming
-    /// </postconditions>
-    private string GetDirectionName(Direction direction)
-    {
-        switch (direction)
-        {
-            case Direction.Up:
-                return "up";
-            case Direction.Down:
-                return "down";
-            case Direction.Left:
-                return "left";
-            case Direction.Right:
-                return "right";
+            case PanelColour.Red:
+                return "red";
+            case PanelColour.Green:
+                return "green";
+            case PanelColour.Blue:
+                return "blue";
+            case PanelColour.Yellow:
+                return "yellow";
             default:
-                Debug.LogWarning($"Unknown direction: {direction}. Defaulting to 'none'.");
-                return "none";
+                Debug.LogWarning($"Unknown pipe color: {colour}. Defaulting to red.");
+                return "red";
         }
     }
 }

@@ -13,7 +13,8 @@ public enum PanelAttribute
 {
     Normal,
     Start,
-    Exit
+    Exit,
+    Block
 }
 
 /// <summary>
@@ -30,11 +31,13 @@ public class Panel : MonoBehaviour
     private Panel? leftNeighbor;
     [SerializeField]
     private PanelAttribute attribute;
-    //private PanelColor? pipeColor;
+    [SerializeField]
+    private PanelColour panelColour;
     [SerializeField]
     private int gridX;
     [SerializeField]
     private int gridY;
+    private PanelTextureManager panelTextureManager;
     private XRSimpleInteractable xRSimpleInteractable;
 
     /// <summary>
@@ -150,35 +153,24 @@ public class Panel : MonoBehaviour
     }
 
     /// <summary>
-    /// Accessor for pipe color, or null if there is no pipe
+    /// Accessor for panel color - null if irrelevant
     /// </summary>
-    /*public Color? PipeColor
+    public PanelColour? getPanelColour()
     {
-        get
-        {
-
-            if (entryDirection == Direction.None)
+            if (entryDirection == Direction.None || attribute == PanelAttribute.Block)
             {
                 return null;
             }
             else
             {
-                return pipeColor;
+                return panelColour;
             }
-        }
+    }
 
-        set
-        {
-            if (value.HasValue)
-            {
-                pipeColor = value.Value;
-            }
-            else
-            {
-                pipeColor = Color.white;
-            }
-        }
-    }*/
+    public void setPanelColour(PanelColour panelColour)
+    {
+        this.panelColour = panelColour;
+    }
 
     /// <summary>
     /// Accessor for grid X coordinate
@@ -225,30 +217,7 @@ public class Panel : MonoBehaviour
     /// </remarks>
     public bool IsOccupied()
     {
-        return entryDirection != Direction.None;
-    }
-
-    /// <summary>
-    /// Sets the pipe directions for this panel
-    /// </summary>
-    /// <param name="entry">The entry direction</param>
-    /// <param name="exit">The exit direction</param>
-    /// <remarks>
-    /// <preconditions>
-    ///     - entry and exit must be valid directions (not None)
-    /// </preconditions>
-    /// <postconditions>
-    ///     - Sets the entry and exit directions for the pipe in this panel
-    /// </postconditions>
-    /// </remarks>
-    public void SetPipeDirection(Direction entry, Direction exit)
-    {
-        Assert.IsTrue(entry != Direction.None, "Entry direction cannot be None");
-        Assert.IsTrue(exit != Direction.None, "Exit direction cannot be None");
-        Assert.IsTrue(entry != exit, "Entry and exit directions cannot be the same");
-
-        entryDirection = entry;
-        exitDirection = exit;
+        return entryDirection != Direction.None || attribute == PanelAttribute.Block;
     }
 
     /// <summary>
@@ -287,21 +256,19 @@ public class Panel : MonoBehaviour
     ///     - Neighbours are null
     /// </postconditions>
     /// </remarks>
-    public void Initialize(int x, int y, Vector3 worldPos)
+    public void Initialize()
     {
-        Assert.IsTrue(x >= 0, "Grid X coordinate cannot be negative");
-        Assert.IsTrue(y >= 0, "Grid Y coordinate cannot be negative");
-
+        Assert.IsTrue(this.gridX >= 0, "Grid X coordinate cannot be negative");
+        Assert.IsTrue(this.gridY >= 0, "Grid Y coordinate cannot be negative");
     
-        gridX = x;
-        gridY = y;
         entryDirection = Direction.None;
         exitDirection = Direction.None;
         topNeighbor = null;
         rightNeighbor = null;
         downNeighbor = null;
         leftNeighbor = null;
-        attribute = PanelAttribute.Normal;
+
+        panelTextureManager = GetComponent<PanelTextureManager>();
     }
 
     public void Awake()
