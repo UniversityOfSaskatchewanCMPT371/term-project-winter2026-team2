@@ -5,7 +5,7 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface INextColourButtonView : IModel
+public interface INextColourButtonView : IView
 {
     /// <summary>
     /// TODO: Change the docstring to match your implementation.

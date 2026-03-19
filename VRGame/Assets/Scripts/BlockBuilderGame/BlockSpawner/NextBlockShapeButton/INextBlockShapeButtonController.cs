@@ -5,7 +5,7 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface INextBlockShapeView : IModel
+public interface INextBlockShapeButtonController : IController
 {
     /// <summary>
     /// TODO: Change the docstring to match your implementation.

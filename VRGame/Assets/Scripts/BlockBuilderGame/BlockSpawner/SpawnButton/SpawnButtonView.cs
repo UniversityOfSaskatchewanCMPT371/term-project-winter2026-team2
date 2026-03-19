@@ -6,7 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// View class for SpawnButton
 /// Handles visual representation and interaction events for the spawn button
 /// </summary>
-public class SpawnButtonView : MonoBehaviour, ISpawnButtonView
+public class SpawnButtonView :  View<ISpawnButtonController>, // TODO reminder to switch the generic to the one you've implemented
+    ISpawnButtonView
 {
     /// <summary>
     /// Reference to the XRSimpleInteractable component

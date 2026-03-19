@@ -6,7 +6,7 @@ using UnityEngine;
 /// Controller component of NextColourButtonController.
 /// </summary>
 public class NextColourButtonController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
+    Controller<IBlockSpawnerModel, INextColourButtonView>, // TODO reminder to switch the generics to the ones you've implemented
     INextColourButtonController
 {
     // use 'this.viewInstance' to access view component, and

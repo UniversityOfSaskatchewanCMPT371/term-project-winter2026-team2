@@ -5,7 +5,7 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface IPrevBlockShapeButtonView : IModel
+public interface IPrevBlockShapeButtonView : IView
 {
     /// <summary>
     /// TODO: Change the docstring to match your implementation.

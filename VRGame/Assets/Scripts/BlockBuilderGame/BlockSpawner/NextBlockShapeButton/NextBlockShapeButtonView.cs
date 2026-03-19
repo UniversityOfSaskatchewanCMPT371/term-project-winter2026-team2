@@ -5,9 +5,9 @@ using UnityEngine;
 /// <summary>
 /// View component of NextBlockShapeView.
 /// </summary>
-public class NextBlockShapeView : 
-    View<IController>, // TODO reminder to switch the generic to the one you've implemented
-    INextBlockShapeView
+public class NextBlockShapeButtonView : 
+    View<INextBlockShapeButtonController>, // TODO reminder to switch the generic to the one you've implemented
+    INextBlockShapeButtonView
 {
     // use 'this.controllerInstance' to access controller component
 

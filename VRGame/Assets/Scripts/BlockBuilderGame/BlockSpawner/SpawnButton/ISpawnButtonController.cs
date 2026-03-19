@@ -5,8 +5,14 @@ using UnityEngine;
 /// Interface for the SpawnButton Controller
 /// Manages the logic for handling button press events to spawn bricks
 /// </summary>
-public interface ISpawnButtonController
+public interface ISpawnButtonController : IController
 {
+    /// <summary>
+    /// TODO: Change the docstring to match your implementation.
+    /// </summary>
+    new void Init();
+
+    
     /// <summary>
     /// Initializes the spawn button with a reference to the BlockSpawnerController
     /// </summary>

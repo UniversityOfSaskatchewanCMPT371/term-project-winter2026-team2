@@ -6,8 +6,8 @@ using UnityEngine;
 /// View component of NextColourButton.
 /// </summary>
 public class NextColourButton : 
-    View<IController>, // TODO reminder to switch the generic to the one you've implemented
-    INextColourButton
+    View<INextColourButtonController>, // TODO reminder to switch the generic to the one you've implemented
+    INextColourButtonView
 {
     // use 'this.controllerInstance' to access controller component
 

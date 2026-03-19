@@ -6,7 +6,7 @@ using UnityEngine;
 /// Controller component of PrevBlockColourButtonController.
 /// </summary>
 public class PrevBlockColourButtonController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
+    Controller<IBlockSpawnerModel, IPrevBlockColourButtonView>, // TODO reminder to switch the generics to the ones you've implemented
     IPrevBlockColourButtonController
 {
     // use 'this.viewInstance' to access view component, and

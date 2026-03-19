@@ -6,7 +6,7 @@ using UnityEngine;
 /// Controller component of NextBlockShapeButtonController.
 /// </summary>
 public class NextBlockShapeButtonController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
+    Controller<IBlockSpawnerModel, INextBlockShapeButtonView>, // TODO reminder to switch the generics to the ones you've implemented
     INextBlockShapeButtonController
 {
     // use 'this.viewInstance' to access view component, and

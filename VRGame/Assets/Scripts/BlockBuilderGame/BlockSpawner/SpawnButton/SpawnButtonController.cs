@@ -5,7 +5,8 @@ using UnityEngine.Assertions;
 /// Controller class for SpawnButton
 /// Manages the logic for handling button press events to spawn bricks
 /// </summary>
-public class SpawnButtonController : MonoBehaviour, ISpawnButtonController
+public class SpawnButtonController : Controller<IBlockSpawnerModel, ISpawnButtonView>, // TODO reminder to switch the generics to the ones you've implemented
+    ISpawnButtonController
 {
     /// <summary>
     /// Reference to the BlockSpawnerController 

@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// Interface for the SpawnButton View
 /// Handles visual representation and interaction events for the spawn button
 /// </summary>
-public interface ISpawnButtonView
+public interface ISpawnButtonView : IView
 {
     /// <summary>
     /// Subscribes to button interaction events
