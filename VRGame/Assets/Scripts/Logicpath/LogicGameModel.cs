@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
+/// <summary>
+/// The model of the LogicGame itself. Manages the initial setup of panels
+/// </summary>
+
 public class LogicGameModel : MonoBehaviour, IGridModel
 {
     private const int MAX_GRID_SIZE = 10; // look, there ain't no way that we're gonna have puzzles larger than 10x10
@@ -72,21 +76,31 @@ public class LogicGameModel : MonoBehaviour, IGridModel
 
     public void ClearGrid()
     {
-        throw new NotImplementedException();
+        foreach(Panel panel in panelGrid)
+        {
+            panel.ClearPanel();
+        }
     }
 
     public Panel GetPanel(int x, int y)
     {
-        throw new NotImplementedException();
+        return panelGrid[x,y];
     }
 
     public bool IsGridFilled()
     {
-        throw new NotImplementedException();
+        foreach(Panel panel in panelGrid)
+        {
+            if (!panel.IsOccupied())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public bool IsPanelOccupied(int x, int y)
     {
-        throw new NotImplementedException();
+        return GetPanel(x, y).IsOccupied();
     }
 }

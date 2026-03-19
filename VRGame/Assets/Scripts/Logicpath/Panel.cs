@@ -203,14 +203,13 @@ public class Panel : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if the panel has a pipe placed in it
+    /// Checks if the panel is occupied, whether by a line or by its own block
     /// </summary>
     /// <remarks>
     /// <preconditions>
-    ///     - None
     /// </preconditions>
     /// <postconditions>
-    ///     - Returns true if there is a pipe in the panel, false otherwise
+    ///     - Returns true if the panel is occupied, false otherwise
     /// </postconditions>
     /// </remarks>
     public bool IsOccupied()
@@ -219,7 +218,7 @@ public class Panel : MonoBehaviour
     }
 
     /// <summary>
-    /// Clears the pipe from this panel, resetting entry and exit directions
+    /// Clears any line status from this panel, resetting entry and exit directions
     /// </summary>
     /// <remarks>
     /// <preconditions>
