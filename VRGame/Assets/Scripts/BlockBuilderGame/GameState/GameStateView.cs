@@ -6,7 +6,7 @@ using UnityEngine;
 /// View component of GameStateView.
 /// </summary>
 public class GameStateView : 
-    View<IController>, // TODO reminder to switch the generic to the one you've implemented
+    View<IGameStateController>, // TODO reminder to switch the generic to the one you've implemented
     IGameStateView
 {
     // use 'this.controllerInstance' to access controller component
