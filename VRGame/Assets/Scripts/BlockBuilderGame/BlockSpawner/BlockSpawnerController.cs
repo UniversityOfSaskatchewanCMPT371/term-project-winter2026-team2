@@ -9,31 +9,13 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
 {
     
 
-    /// <summary>
-    /// Spawn area transform indicating where bricks should spawn
-    /// </summary>
-    [SerializeField] private Transform spawnArea;
+    /// <inheritdoc/>
+    public void SpawnBlock()
+    {
+        // to be implemented later
 
-    /// <summary>
-    /// Current Selection of blocks representing an index in the brickPrefab array
-    /// </summary>
-    [SerializeField] private int currentSelection;
+    }
 
-    /// <summary>
-    /// Height above the spawn area where bricks will be instantiated
-    /// </summary>
-    [SerializeField] private float spawnHeight = 1.0f;
-
-    /// <summary>>
-    /// Scale factor for spawned bricks
-    /// </summary>
-    [SerializeField] private float brickScale = 4.0f;
-
-    /// <summary>
-    /// Instance of the Model and View components
-    /// </summary>
-    private IBlockSpawnerModel model;
-    private IBlockSpawnerView view;
 
     private void Awake()
     {
@@ -184,12 +166,4 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         model.CurrentBrickIndex = nextIndex;
     }
 
-    /// <inheritdoc/>
-    public int GetCurrentBrickIndex()
-    {
-        Assert.IsNotNull(model, "Model is null in GetCurrentBrickIndex");
-        // Get current brick index from model
-        int index = model.CurrentBrickIndex;
-        return index;
-    }
 }
