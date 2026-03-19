@@ -14,9 +14,9 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
     private IBlockSpawnerView view;
 
 
-    public GameObject SpawnBlock()
+    public void SpawnBlock()
     {
-        return null;
+        // to be implemented
     }
 
     private void Awake()
@@ -42,6 +42,7 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
     private void Start()
     {
         // Load brick prefabs from Kenny's Brick Kit 
+        /*
         if (brick1x1Prefab == null)
         {
             brick1x1Prefab = Resources.Load<GameObject>("FreeAssets/KennyBrickKit/bevel_hq_brick_1x1");
@@ -79,6 +80,7 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         model.BrickScale = brickScale;
 
         Debug.Log("[BlockSpawnerController] Initialization complete");
+        */
     }
 
     /// <inheritdoc/>
@@ -93,7 +95,10 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
 
         Debug.Log("[BlockSpawnerController] Initialize called with 4 brick prefabs");
 
-        // Set up the model with the brick prefabs
+
+        //CONTROLLER SHOULD NOT HAVE ACCESS TO ALL OF THIS IT SHOULD BE IN THE MODEL
+        /*
+        // Set up the model with the brick prefabs 
         GameObject[] brickPrefabs = new GameObject[4];
         brickPrefabs[0] = brick1x1;
         brickPrefabs[1] = brick1x2;
@@ -115,6 +120,7 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
                 Debug.Log("Brick prefab at index " + i + ": " + brickPrefabs[i].name);
             }
         }
+        */
     }
 
     /// <inheritdoc/>
@@ -124,6 +130,7 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         Assert.IsNotNull(view, "View is null in SpawnNextBrick");
 
         // Destroy the previous brick if it exists
+        /*
         GameObject previousBrick = model.LastSpawnedBrick;
         if (previousBrick != null)
         {
@@ -166,6 +173,7 @@ public class BlockSpawnerController : MonoBehaviour, IBlockSpawnerController
         // Cycle to next brick type
         int nextIndex = (currentIndex + 1) % brickPrefabs.Length;
         model.CurrentBrickIndex = nextIndex;
+        */
     }
 
 }
