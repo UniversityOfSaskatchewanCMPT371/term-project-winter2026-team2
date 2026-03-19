@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,10 +24,10 @@ public class Panel : MonoBehaviour
 {
     private Direction entryDirection;
     private Direction exitDirection;
-    private Panel? topNeighbor;
-    private Panel? rightNeighbor;
-    private Panel? downNeighbor;
-    private Panel? leftNeighbor;
+    private Panel topNeighbor;
+    private Panel rightNeighbor;
+    private Panel downNeighbor;
+    private Panel leftNeighbor;
     [SerializeField]
     private PanelAttribute attribute;
     [SerializeField]
@@ -75,7 +74,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Accessor for top neighbour panel
     /// </summary>
-    public Panel? TopNeighbor
+    public Panel TopNeighbor
     {
         get
         {
@@ -91,7 +90,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
-    public Panel? RightNeighbor
+    public Panel RightNeighbor
     {
         get
         {
@@ -153,23 +152,12 @@ public class Panel : MonoBehaviour
     }
 
     /// <summary>
-    /// Accessor for panel color - null if irrelevant
+    /// Accessor for panel colour
     /// </summary>
-    public PanelColour? getPanelColour()
+    public PanelColour PanelColour
     {
-            if (entryDirection == Direction.None || attribute == PanelAttribute.Block)
-            {
-                return null;
-            }
-            else
-            {
-                return panelColour;
-            }
-    }
-
-    public void setPanelColour(PanelColour panelColour)
-    {
-        this.panelColour = panelColour;
+        get;
+        set;
     }
 
     /// <summary>
@@ -242,9 +230,6 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Initializes the panel with grid coordinates and world position
     /// </summary>
-    /// <param name="x">Grid X coordinate</param>
-    /// <param name="y">Grid Y coordinate</param>
-    /// <param name="worldPos">World position of the panel</param>
     /// <remarks>
     /// <preconditions>
     ///     - x and y must be non-negative
