@@ -22,14 +22,17 @@ public class LogicGameController : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Enable();
-        inputActions.XRIRightHandInteraction.UIPress.performed += OnTriggerPress;
-        inputActions.XRIRightHandInteraction.UIPress.canceled += OnTriggerRelease;
+        inputActions.XRIRightHandInteraction.Activate.performed += OnTriggerPress;
+        inputActions.XRIRightHandInteraction.Activate.canceled += OnTriggerRelease;
+        //this is not the greatest button to use for cancelling but fuck it
+        inputActions.XRIRightHandInteraction.Select.performed += OnResetPress;
     }
 
     private void OnDisable()
     {
-        inputActions.XRIRightHandInteraction.UIPress.performed -= OnTriggerPress;
-        inputActions.XRIRightHandInteraction.UIPress.canceled -= OnTriggerRelease;
+        inputActions.XRIRightHandInteraction.Activate.performed -= OnTriggerPress;
+        inputActions.XRIRightHandInteraction.Activate.canceled -= OnTriggerRelease;
+        inputActions.XRIRightHandInteraction.Select.performed -= OnResetPress;
         inputActions.Disable();
     }
 
