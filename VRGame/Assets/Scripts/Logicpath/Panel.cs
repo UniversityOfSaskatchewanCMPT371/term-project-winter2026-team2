@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,14 +24,16 @@ public class Panel : MonoBehaviour
 {
     private Direction entryDirection;
     private Direction exitDirection;
-    private Panel topNeighbor;
-    private Panel rightNeighbor;
-    private Panel downNeighbor;
-    private Panel leftNeighbor;
+    private Panel? topNeighbor;
+    private Panel? rightNeighbor;
+    private Panel? downNeighbor;
+    private Panel? leftNeighbor;
+    [SerializeField]
     private PanelAttribute attribute;
-    private Color pipeColor;
-    private Vector3 worldPosition;
+    //private PanelColor? pipeColor;
+    [SerializeField]
     private int gridX;
+    [SerializeField]
     private int gridY;
     private XRSimpleInteractable xRSimpleInteractable;
 
@@ -69,7 +72,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Accessor for top neighbour panel
     /// </summary>
-    public Panel TopNeighbor
+    public Panel? TopNeighbor
     {
         get
         {
@@ -85,7 +88,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
-    public Panel RightNeighbor
+    public Panel? RightNeighbor
     {
         get
         {
@@ -149,7 +152,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Accessor for pipe color, or null if there is no pipe
     /// </summary>
-    public Color? PipeColor
+    /*public Color? PipeColor
     {
         get
         {
@@ -175,23 +178,7 @@ public class Panel : MonoBehaviour
                 pipeColor = Color.white;
             }
         }
-    }
-
-    /// <summary>
-    /// Accessor for world position
-    /// </summary>
-    public Vector3 WorldPosition
-    {
-        get
-        {
-            return worldPosition;
-        }
-
-        set
-        {
-            worldPosition = value;
-        }
-    }
+    }*/
 
     /// <summary>
     /// Accessor for grid X coordinate
@@ -280,7 +267,7 @@ public class Panel : MonoBehaviour
     {
         entryDirection = Direction.None;
         exitDirection = Direction.None;
-        pipeColor = Color.white;
+        //pipeColor = Color.white;
     }
 
     /// <summary>
@@ -308,10 +295,8 @@ public class Panel : MonoBehaviour
     
         gridX = x;
         gridY = y;
-        worldPosition = worldPos;
         entryDirection = Direction.None;
         exitDirection = Direction.None;
-        pipeColor = Color.white;
         topNeighbor = null;
         rightNeighbor = null;
         downNeighbor = null;
@@ -323,26 +308,18 @@ public class Panel : MonoBehaviour
     {
         xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
 
-        xRSimpleInteractable.activated.AddListener(OnActivate);
-        xRSimpleInteractable.deactivated.AddListener(OnDeactivate);
+        xRSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
         xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
     }
 
     public void OnDestroy()
     {
-        xRSimpleInteractable.activated.RemoveListener(OnActivate);
-        xRSimpleInteractable.deactivated.RemoveListener(OnDeactivate);
         xRSimpleInteractable.hoverExited.RemoveListener(OnHoverExited);
     }
 
-    private void OnActivate(ActivateEventArgs args)
+    private void OnHoverEntered(HoverEnterEventArgs args)
     {
-        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is now pressed (activated)");
-    }
-
-    private void OnDeactivate(DeactivateEventArgs args)
-    {
-        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is now unpressed (deactivated)");
+        Debug.Log($"Panel at ({this.gridX},{this.gridY}) is hovered over");
     }
 
     private void OnHoverExited(HoverExitEventArgs args)

@@ -27,19 +27,18 @@ public class PipeManager : MonoBehaviour
     public Texture2D GetPipeTexture(Panel panel)
     {
         Assert.IsNotNull(panel, "Panel cannot be null");
-        Assert.IsTrue(panel.EntryDirection != Direction.None, "Panel entry direction cannot be None");
-        Assert.IsTrue(panel.ExitDirection != Direction.None, "Panel exit direction cannot be None");
-        Assert.IsTrue(panel.PipeColor.HasValue, "Panel must have a pipe colour");
+        //Assert.IsTrue(panel.PipeColor.HasValue, "Panel must have a pipe colour");
 
-        string texturePath = GetTexturePath(panel.PipeColor.Value, panel.EntryDirection, panel.ExitDirection);
-        Texture2D texture = Resources.Load<Texture2D>(texturePath);
+        //string texturePath = GetTexturePath(panel.PipeColor.Value, panel.EntryDirection, panel.ExitDirection);
+        //Texture2D texture = Resources.Load<Texture2D>(texturePath);
     
-        if (texture == null)
+        /*if (texture == null)
         {
             Debug.LogWarning("Failed to load pipe texture from path: " + texturePath);
         }
 
-        return texture;
+        return texture;*/
+        return null;
     }
 
     /// <summary>
