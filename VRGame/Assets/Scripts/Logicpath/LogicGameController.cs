@@ -5,14 +5,35 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// This class handles the logic of the logicgame, taking in inputs and changing panels as needed
+/// </summary>
 public class LogicGameController : MonoBehaviour
 {
+    /// <summary>
+    /// Are we in a valid, dragging state?
+    /// </summary>
     private bool isDragging;
+    /// <summary>
+    /// The data of the game (panels)
+    /// </summary>
     private LogicGameModel data;
+    /// <summary>
+    /// What are the coordinates of the panel we're aiming at, if any?
+    /// </summary>
     private CoordinateRef targetedPanel;
+    /// <summary>
+    /// InputActions reference
+    /// </summary>
     private XRIInputActions inputActions;
+    /// <summary>
+    /// The current path we're taking
+    /// </summary>
     private Stack<Panel> currentPath;
 
+    /// <summary>
+    /// Unity Awake() method, gets initial state set up
+    /// </summary>
     public void Awake()
     {
         isDragging = false;
@@ -22,6 +43,9 @@ public class LogicGameController : MonoBehaviour
         currentPath = new Stack<Panel>();
     }
 
+    /// <summary>
+    /// Unity OnEnable() method, initializes InputActions mapping
+    /// </summary>
     private void OnEnable()
     {
         inputActions.Enable();
@@ -31,6 +55,9 @@ public class LogicGameController : MonoBehaviour
         inputActions.XRIRightHandInteraction.Select.performed += OnResetPress;
     }
 
+    /// <summary>
+    /// Unity OnDisable() method, tears down InputActions mapping
+    /// </summary>
     private void OnDisable()
     {
         inputActions.XRIRightHandInteraction.Activate.performed -= OnTriggerPress;
@@ -39,6 +66,21 @@ public class LogicGameController : MonoBehaviour
         inputActions.Disable();
     }
 
+    /// <summary>
+    /// Handles a hover event from a Panel, changing the game state where necessary
+    /// </summary>
+    /// <param name="x">The X coordinate of a Panel</param>
+    /// <param name="y">The Y coordinate of a Panel</param>
+    /// <preconditions>
+    ///     - X and Y must be valid coordinates
+    /// </preconditions>
+    /// <postconditions>
+    ///     - If we're not dragging, then no post-conditions
+    ///     - If we are dragging:
+    ///     - Cancels the current drag and resets the path if we change our hover to an occupied Panel
+    ///     - Cancels the current drag and resets the path if we change our hover to a non-adjacent Panel
+    ///     - Continues the current drag if we change our hover to an adjacent, non-occupied Panel
+    /// </postconditions>
     public void HandleHover(int x, int y)
     {
         targetedPanel = new CoordinateRef(x,y);
@@ -89,6 +131,17 @@ public class LogicGameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the end of hovering on a Panel
+    /// </summary>
+    /// <param name="x">The X coordinate of a Panel</param>
+    /// <param name="y">The Y coordinate of a Panel</param>
+    /// <preconditions>
+    ///     - X and Y must be valid coordinates
+    /// </preconditions>
+    /// <postconditions>
+    ///     - If we're not hovering on a new panel, clear the targetedPanel coordinates
+    /// </postconditions>
     public void HandleUnhover(int x, int y)
     {
         if(targetedPanel != null && targetedPanel.X == x && targetedPanel.Y == y)
@@ -98,6 +151,17 @@ public class LogicGameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles pressing the (right) trigger
+    /// </summary>
+    /// <param name="context">The CallbackContext for this action</param>
+    /// <preconditions>
+    ///     We are not pressing the right trigger
+    /// </preconditions>
+    /// <postconditions>
+    ///     - If we're hovering over a non-occupied Panel, begin a drag movement
+    ///     - Otherwise, do nothing
+    /// </postconditions>
     private void OnTriggerPress(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger pressed!");
@@ -116,6 +180,18 @@ public class LogicGameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles releasing the (right) trigger
+    /// </summary>
+    /// <param name="context">The CallbackContext for this action</param>
+    /// <preconditions>
+    ///     We are holding down the right trigger
+    /// </preconditions>
+    /// <postconditions>
+    ///     - If we are not in a dragging state, do nothing
+    ///     - If our drag ends on an endpoint, complete the drag movement
+    ///     - If our drag doesn't end on an endpoint (or any Panel), cancel the drag movement and clear the path
+    /// </postconditions>
     private void OnTriggerRelease(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger released!");
@@ -130,12 +206,31 @@ public class LogicGameController : MonoBehaviour
         isDragging = false;
     }
 
+    /// <summary>
+    /// Handles pressing the designated reset button
+    /// </summary>
+    /// <param name="context">The CallbackContext for this action</param>
+    /// <preconditions>
+    ///     None
+    /// </preconditions>
+    /// <postconditions>
+    ///     Resets the game state
+    /// </postconditions>
     private void OnResetPress(InputAction.CallbackContext context)
     {
         Debug.Log("This is where I would reset everything");
         data.ClearGrid();
     }
 
+    /// <summary>
+    /// Clear the current path we're drawing
+    /// </summary>
+    /// <preconditions>
+    ///     None
+    /// </preconditions>
+    /// <postconditions>
+    ///     Clears the current path being drawn by resetting the panels in the path and the path stack
+    /// </postconditions>
     private void ClearPath()
     {
         Debug.Log("Clearing path!");
