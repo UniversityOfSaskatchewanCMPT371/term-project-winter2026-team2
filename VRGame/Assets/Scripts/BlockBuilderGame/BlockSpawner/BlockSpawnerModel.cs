@@ -5,22 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-                       
 /// <summary>
 /// Model class for BlockSpawner
 /// Contains all data related to brick spawning
 /// </summary>
 public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 {
-    // Get as a List<BlockColour>
-    private List<BlockColour> AllColours = Enum.GetValues(typeof(BlockColour))
+
+    /// <summary>
+    /// Get as a List<BlockColour> These are all the possible shapes that exist in a puzzle
+    /// </summary>
+    private List<BlockColour> allBlockColours = Enum.GetValues(typeof(BlockColour))
                                 .Cast<BlockColour>()
                                 .ToList();
 
-    // Get as a List<Colors>
-    private List<BlockShape> AllBlockShapes = Enum.GetValues(typeof(BlockShape))
+
+    /// <summary>
+    ///Get as a List<Colors> These are all the colours to choose from for blocks
+    /// </summary>
+    private List<BlockShape> allBlockShapes = Enum.GetValues(typeof(BlockShape))
                                 .Cast<BlockShape>()
                                 .ToList();      
+
 
     /// <summary>
     /// Array of blockshapes to choose from for a specific puzzle
@@ -102,6 +108,28 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
 
     /// <summary>
+    /// Current index in the block cycle
+    /// </summary>
+    private int currentBlockShapeIndex;
+
+    /// <inheritdoc/>
+    public int CurrentBlockShapeIndex
+    {
+        get
+        {
+            return currentBlockShapeIndex;
+        }
+        set
+        {
+            Assert.IsTrue(value >= 0, "CurrentBlockIndex cannot be negative");
+            Debug.Log("Setting CurrentBlockIndex from " + currentBlockShapeIndex + " to " + value);
+            currentBlockShapeIndex = value;
+        }
+    }
+
+
+
+    /// <summary>
     /// Current Selection of blocks representing an index in the brickPrefab array
     /// </summary>
     [SerializeField] private BlockShape currentBlockShapeSelected;
@@ -113,7 +141,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         }
         set
         {
-            Assert.IsTrue(value != null, "CurrentBrickIndex cannot be null");
             Debug.Log("Setting currentBlockShapeSelected from " + currentBlockShapeSelected + " to " + value);
             currentBlockShapeSelected = value;
         }
@@ -121,18 +148,88 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
     
 
+    /// <summary>
+    /// Next in Selection of blocks representing an index in the brickPrefab array
+    /// </summary>
+    private BlockShape nextBlockShapeSelected;
+    public BlockShape NextBlockShapeSelected{
+        get
+        {
+            return nextBlockShapeSelected;
+        }
+    }
+
+
+    /// <summary>
+    /// Previous in Selection of blocks representing an index in the brickPrefab array
+    /// </summary>
+    private BlockShape prevBlockShapeSelected;
+    public BlockShape PrevBlockShapeSelected{
+        get
+        {
+            return prevBlockShapeSelected;
+        }
+    }
+
+
+
     /// <inheritdoc/>
     public void SelectNextBlockShape()
     {
-        // to be implemented later
+        int count = blocksForPuzzle.Length; // Count of block shape types in puzzle
 
+        Assert.IsTrue(currentBlockShapeIndex >= 0, "currentBlockShapeIndex must be greater than 0");
+        Assert.IsTrue(currentBlockShapeIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
+        
+        currentBlockShapeIndex ++;
+        if(currentBlockShapeIndex >= count )
+        {
+            currentBlockShapeIndex = 0;
+            prevBlockShapeSelected = blocksForPuzzle[count - 1];
+        }
+        currentBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex];
+        if ((currentBlockShapeIndex + 1 ) == count )
+        {
+            nextBlockShapeSelected = blocksForPuzzle[0];
+        }
+        else
+        {
+            nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
+        }
+        
+        Debug.Log("Selecting Next block shape. \nPrevious: " + prevBlockShapeSelected +
+        "Current: " + currentBlockShapeSelected + "Next: " + nextBlockShapeSelected);
     }
 
 
     /// <inheritdoc/>
     public void SelectPreviousBlockShape()
     {
-        // to be implemented later
+        
+        int count = blocksForPuzzle.Length; // Count of block shape types in puzzle
+
+        Assert.IsTrue(currentBlockShapeIndex >= 0, "currentBlockShapeIndex must be greater than 0");
+        Assert.IsTrue(currentBlockShapeIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
+        
+        currentBlockShapeIndex --;
+        if(currentBlockShapeIndex < 0 )
+        {
+            currentBlockShapeIndex = count - 1;
+            prevBlockShapeSelected = blocksForPuzzle[0];
+        }
+        currentBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex];
+        if (currentBlockShapeIndex == 0 )
+        {
+            prevBlockShapeSelected = blocksForPuzzle[count - 1];
+        }
+        else
+        {
+            nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
+        }
+        
+        Debug.Log("Selecting Previous block shape. \nPrevious: " + prevBlockShapeSelected +
+        "Current: " + currentBlockShapeSelected + "Next: " + nextBlockShapeSelected);
+    
 
     }
 
@@ -155,6 +252,27 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
 
     /// <summary>
+    /// Current index in the colour cycle
+    /// </summary>
+    [SerializeField] private int currentBlockColourIndex;
+
+    /// <inheritdoc/>
+    public int CurrentBlockColourIndex
+    {
+        get
+        {
+            return currentBlockColourIndex;
+        }
+        set
+        {
+            Assert.IsTrue(value >= 0, "CurrentColourIndex cannot be negative");
+            Debug.Log("Setting CurrentColourIndex from " + currentBlockColourIndex + " to " + value);
+            currentBlockColourIndex = value;
+        }
+    }
+
+
+    /// <summary>
     /// Selected colour for blocks to spawn
     /// </summary>
     [SerializeField] BlockColour currentBlockColourSelected;
@@ -173,6 +291,30 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         }
     }
 
+
+
+    /// <summary>
+    /// Next in Selection for colour blocks would spawn
+    /// </summary>
+    private BlockColour nextBlockColourSelected;
+    public BlockColour NextBlockColourSelected{
+        get
+        {
+            return nextBlockColourSelected;
+        }
+    }
+
+
+    /// <summary>
+    /// Previous in Selection for colour blocks would spawn
+    /// </summary>
+    private BlockColour prevBlockColourSelected;
+    public BlockColour PrevBlockColourSelected{
+        get
+        {
+            return prevBlockColourSelected;
+        }
+    }
 
 
     /// <inheritdoc/>
@@ -204,48 +346,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
 
-    /// <summary>
-    /// Current index in the block cycle
-    /// </summary>
-    private int currentBlockShapeIndex;
-
-    /// <inheritdoc/>
-    public int CurrentBlockShapeIndex
-    {
-        get
-        {
-            return currentBlockShapeIndex;
-        }
-        set
-        {
-            Assert.IsTrue(value >= 0, "CurrentBlockIndex cannot be negative");
-            Debug.Log("Setting CurrentBlockIndex from " + currentBlockShapeIndex + " to " + value);
-            currentBlockShapeIndex = value;
-        }
-    }
-
-
-    /// <summary>
-    /// Current index in the colour cycle
-    /// </summary>
-    [SerializeField] private int currentBlockColourIndex;
-
-    /// <inheritdoc/>
-    public int CurrentBlockColourIndex
-    {
-        get
-        {
-            return currentBlockColourIndex;
-        }
-        set
-        {
-            Assert.IsTrue(value >= 0, "CurrentColourIndex cannot be negative");
-            Debug.Log("Setting CurrentColourIndex from " + currentBlockColourIndex + " to " + value);
-            currentBlockColourIndex = value;
-        }
-    }
-
-
     /// <inheritdoc/>
     private void Initialize()
     {
@@ -255,5 +355,11 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         brickScale = 4.0f;
     }
 
+
+    /// <inheritdoc/>
+    public void Init()
+    {
+        
+    }
     
 }
