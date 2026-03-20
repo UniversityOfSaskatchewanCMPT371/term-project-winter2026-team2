@@ -233,23 +233,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
 
-
-    /// <inheritdoc/>
-    public void GetNextBlockShape()
-    {
-        // to be implemented later
-
-    }
-
-
-    /// <inheritdoc/>
-    public void GetPreviousBlockShape()
-    {
-        // to be implemented later
-
-    }
-
-
     /// <summary>
     /// Current index in the colour cycle
     /// </summary>
@@ -291,7 +274,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
 
-
     /// <summary>
     /// Next in Selection for colour blocks would spawn
     /// </summary>
@@ -322,7 +304,7 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         int count = allBlockColours.Count; // Count of all colours in puzzle
 
         Assert.IsTrue(currentBlockColourIndex >= 0, "currentBlockShapeIndex must be greater than 0");
-        Assert.IsTrue(currentBlockColourIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
+        Assert.IsTrue(currentBlockColourIndex <= count, "currentBlockShapeIndex must be less or equal to allBlockColours.count");
         
         currentBlockColourIndex ++;
 
@@ -351,23 +333,31 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// <inheritdoc/>
     public void SelectPreviousColour()
     {
-        // to be implemented later
+                
+        int count = allBlockColours.Count; // Count of block shape types in puzzle
 
-    }
-
-    /// <inheritdoc/>
-    public BlockColour GetNextColour()
-    {
+        Assert.IsTrue(currentBlockColourIndex >= 0, "currentBlockColourIndex must be greater than 0");
+        Assert.IsTrue(currentBlockColourIndex <= count, "currentBlockColoureIndex must be less or equal to count of allcolours");
         
-        // to be implemented later
-        return BlockColour.white;
-    }
+        currentBlockColourIndex --;
+        nextBlockColourSelected = allBlockColours[currentBlockColourIndex + 1];
 
-    /// <inheritdoc/>
-    public BlockColour GetPreviousColour()
-    {
-        // to be implemented later
-        return BlockColour.white;
+        if(currentBlockShapeIndex < 0 )
+        {
+            currentBlockShapeIndex = count - 1;
+            nextBlockColourSelected = allBlockColours[0];
+        }
+        currentBlockColourSelected = allBlockColours[currentBlockColourIndex];
+        prevBlockColourSelected = allBlockColours[currentBlockShapeIndex - 1];
+
+        if (currentBlockShapeIndex == 0 )
+        {
+            prevBlockColourSelected = allBlockColours[count - 1];
+        }
+        
+        Debug.Log("Selecting Previous block colour. \nPrevious: " + prevBlockColourSelected +
+        "Current: " + currentBlockColourSelected + "Next: " + nextBlockColourSelected);
+    
 
     }
 
