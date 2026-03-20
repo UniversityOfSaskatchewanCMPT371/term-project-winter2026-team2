@@ -44,6 +44,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     {
         isDragging = false;
         data = gameObject.GetComponent<LogicGameModel>();
+        Assert.IsNotNull(data, "There is no LogicGameModel attached to this GameObject!");
         targetedPanel = null;
         inputActions = new XRIInputActions();
         currentPath = new Stack<Panel>();

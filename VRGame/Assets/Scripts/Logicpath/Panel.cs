@@ -80,8 +80,15 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     private LogicGameController logicGameController;
 
     /// <summary>
-    /// Accessor for entry direction
+    /// Getter for entry direction
     /// </summary>
+    /// <returns>The entry direction of this Panel</returns>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - The entry direction is returned
+    /// </remarks>
     public Direction GetEntryDirection()
     {
             return entryDirection;
@@ -91,10 +98,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// Setter for entry direction
     /// </summary>
     /// <param name="entryDirection">The new entry direction</param>
-    /// <postconditions>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
     ///     - This panel's entryDirection is changed
     ///     - This panel's texture updates to match the new direction
-    /// </postconditions>
+    /// </remarks>
     public void SetEntryDirection(Direction entryDirection)
     {
         this.entryDirection = entryDirection;
@@ -103,8 +113,15 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     }
 
     /// <summary>
-    /// Accessor for exit direction
+    /// Getter for exit direction
     /// </summary>
+    /// <returns>The exit direction of this Panel</returns>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - The exit direction is returned
+    /// </remarks>
     public Direction GetExitDirection()
     {
         return exitDirection;
@@ -114,10 +131,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// Setter for exit direction
     /// </summary>
     /// <param name="exitDirection">The new exit direction</param>
-    /// <postconditions>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
     ///     - This panel's exitDirection is changed
     ///     - This panel's texture updates to match the new direction
-    /// </postconditions>
+    /// </remarks>
 
     public void SetExitDirection(Direction exitDirection)
     {
@@ -129,6 +149,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for top neighbour panel
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the top neighbor of this Panel is returned if it exists, null otherwise
+    ///     - If setting, the top neighbor of this Panel is written
+    /// </remarks>
     public Panel TopNeighbor
     {
         get
@@ -145,6 +172,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the right neighbor of this Panel is returned if it exists, null otherwise
+    ///     - If setting, the right neighbor of this Panel is written
+    /// </remarks>
     public Panel RightNeighbor
     {
         get
@@ -161,6 +195,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for down neighbour panel
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the lower neighbor of this Panel is returned if it exists, null otherwise
+    ///     - If setting, the lower neighbor of this Panel is written
+    /// </remarks>
     public Panel DownNeighbor
     {
         get
@@ -177,6 +218,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for left neighbour panel
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the left neighbor of this Panel is returned if it exists, null otherwise
+    ///     - If setting, the left neighbor of this Panel is written
+    /// </remarks>
     public Panel LeftNeighbor
     {
         get
@@ -193,6 +241,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for panel attribute (normal, start, exit, block)
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the attribute of this Panel is returned
+    ///     - If setting, the attribute of this Panel is overwritten, and the texture is refreshed to reflect the state
+    /// </remarks>
     public PanelAttribute Attribute
     {
         get
@@ -210,6 +265,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for panel colour
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the colour of this Panel is returned
+    ///     - If setting, the colour of this Panel is overwritten, and the texture is refreshed to reflect the state
+    /// </remarks>
     public PanelColour PanelColour
     {
         get
@@ -226,6 +288,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for grid X coordinate
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the X-coordinate of this Panel is returned
+    ///     - If setting, the X-coordinate of this Panel is overwritten
+    /// </remarks>
     public int GridX
     {
         get
@@ -242,6 +311,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for grid Y coordinate
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the Y-coordinate of this Panel is returned
+    ///     - If setting, the Y-coordinate of this Panel is overwritten
+    /// </remarks>
     public int GridY
     {
         get
@@ -258,12 +334,12 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Checks if the panel is occupied, whether by a line or by its own block
     /// </summary>
+    /// <returns>true if the panel is occupied, false otherwise</returns>
     /// <remarks>
-    /// <preconditions>
-    /// </preconditions>
-    /// <postconditions>
-    ///     - Returns true if the panel is occupied, false otherwise
-    /// </postconditions>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - The truth value of whether or not this panel is occupied is returned
     /// </remarks>
     public bool IsOccupied()
     {
@@ -274,13 +350,11 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// Clears any line status from this panel, resetting entry and exit directions
     /// </summary>
     /// <remarks>
-    /// <preconditions>
+    /// preconditions:
     ///     - None
-    /// </preconditions>
-    /// <postconditions>
+    /// postconditions:
     ///     - Resets entry and exit directions to None
     ///     - Texture is refreshed
-    /// </postconditions>
     /// </remarks>
     public void ClearPanel()
     {
@@ -293,12 +367,13 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// Unity Awake() method, initializes the panel with grid coordinates, texture manager, XR interactable, and parenting game controller
     /// </summary>
     /// <remarks>
-    /// <preconditions>
+    /// preconditions:
     ///     - There is a PanelTextureManager and XRSimpleInteractable attached to this GameObject
     ///     - There is a parenting GameObject with a LogicGameController attached to it
-    /// </preconditions>
-    /// <postconditions>
-    /// </postconditions>
+    /// postconditions:
+    ///     - all variables (besides *Neighbors) are initialized
+    ///     - Texture is refreshed to reflect state
+    ///     - Hover event listener functions are mapped
     /// </remarks>
     public void Awake()
     {
@@ -329,6 +404,12 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Unity OnDestroy() method, tears down hover event listeners
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - Hover event listener functions are unmapped
+    /// </remarks>
     public void OnDestroy()
     {
         xRSimpleInteractable.hoverEntered.RemoveListener(OnHoverEntered);
@@ -357,6 +438,12 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// Creates a string representation of this Panel
     /// </summary>
     /// <returns>A string representation of this Panel</returns>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - A string representation of this Panel is returned
+    /// </remarks>
     public override string ToString()
     {
         return $"({gridX},{gridY}), {panelColour}, {Attribute}, Entry {entryDirection}, Exit {exitDirection}";
@@ -367,9 +454,12 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// </summary>
     /// <param name="other">Another Panel to compare with</param>
     /// <returns>true if the Panels are equivalent, false otherwise</returns>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     - other != null
-    /// </preconditions>
+    /// postconditions:
+    ///     - The truth value of whether the two Panels are equivalent is returned
+    /// </remarks>
     public bool Equals(Panel other)
     {
         return this.gridX == other.gridX && this.gridY == other.GridY && this.Attribute == other.Attribute && this.entryDirection == other.entryDirection && this.exitDirection == other.exitDirection && this.panelColour == other.panelColour;
