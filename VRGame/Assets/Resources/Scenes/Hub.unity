@@ -1423,7 +1423,6 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 949636729}
-  - {fileID: 0}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3219,8 +3218,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017993879, y: 0.02818022, z: 0.019062724}
-  m_Center: {x: -0.015396399, y: 0.0044297967, z: -0.0043256814}
+  m_Size: {x: 0.006904051, y: 0.02818022, z: 0.019062724}
+  m_Center: {x: -0.009851481, y: 0.0044297967, z: -0.0043256814}
 --- !u!1001 &1146750528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4516,8 +4515,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01668622, y: 0.030460982, z: 0.017502403}
-  m_Center: {x: 0.015364666, y: 0.004410453, z: -0.0031861835}
+  m_Size: {x: 0.01448116, y: 0.030460982, z: 0.017502403}
+  m_Center: {x: 0.014262129, y: 0.004410453, z: -0.0031861835}
 --- !u!1001 &1547115054
 PrefabInstance:
   m_ObjectHideFlags: 0
