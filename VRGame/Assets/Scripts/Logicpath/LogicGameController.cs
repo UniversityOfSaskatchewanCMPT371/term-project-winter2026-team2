@@ -55,6 +55,7 @@ public class LogicGameController : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Enable();
+        //TODO: handle the left controller's actions
         inputActions.XRIRightHandInteraction.Activate.performed += OnTriggerPress;
         inputActions.XRIRightHandInteraction.Activate.canceled += OnTriggerRelease;
         //this is not the greatest button to use for cancelling but fuck it
@@ -207,6 +208,7 @@ public class LogicGameController : MonoBehaviour
         }
         else if(isDragging && targetedPanel != null && currentPath.Peek().Attribute == PanelAttribute.Exit && data.IsGridFilled())
         {
+            //TODO: make a proper celebration
             Debug.Log("Game is complete!");
         }
         isDragging = false;
