@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// This class handles the logic of the logicgame, taking in inputs and changing panels as needed
 /// </summary>
-public class LogicGameController : MonoBehaviour
+public class LogicGameController : MonoBehaviour //TODO: implement IController
 {
     /// <summary>
     /// Are we in a valid, dragging state?
@@ -34,12 +34,12 @@ public class LogicGameController : MonoBehaviour
     /// <summary>
     /// Unity Awake() method, gets initial state set up
     /// </summary>
-    /// <preconditions>
-    ///     - We have a LogicGameModel script attached to this object
-    /// </preconditions>
-    /// <postconditions>
+    /// <remarks>
+    /// preconditions:
+    ///     - A LogicGameModel script is attached to this object
+    /// postconditions:
     ///     - All variables are initialized
-    /// </postconditions>
+    /// </remarks>
     public void Awake()
     {
         isDragging = false;
@@ -52,6 +52,12 @@ public class LogicGameController : MonoBehaviour
     /// <summary>
     /// Unity OnEnable() method, initializes InputActions mapping
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - XR controller action event listeners are mapped to their functions
+    /// </remarks>
     private void OnEnable()
     {
         inputActions.Enable();
@@ -65,6 +71,12 @@ public class LogicGameController : MonoBehaviour
     /// <summary>
     /// Unity OnDisable() method, tears down InputActions mapping
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - XR controller action event listeners are already mapped to their functions (there is no way this ISN'T the case)
+    /// postconditions:
+    ///     - XR controller action event listeners are unmapped from their functions
+    /// </remarks>
     private void OnDisable()
     {
         inputActions.XRIRightHandInteraction.Activate.performed -= OnTriggerPress;
@@ -78,16 +90,16 @@ public class LogicGameController : MonoBehaviour
     /// </summary>
     /// <param name="x">The X coordinate of a Panel</param>
     /// <param name="y">The Y coordinate of a Panel</param>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     - X and Y must be valid coordinates
-    /// </preconditions>
-    /// <postconditions>
+    /// postconditions:
     ///     - If we're not dragging, then no post-conditions
     ///     - If we are dragging:
     ///     - Cancels the current drag and resets the path if we change our hover to an occupied Panel
     ///     - Cancels the current drag and resets the path if we change our hover to a non-adjacent Panel
     ///     - Continues the current drag if we change our hover to an adjacent, non-occupied Panel
-    /// </postconditions>
+    /// </remarks>
     public void HandleHover(int x, int y)
     {
         targetedPanel = new CoordinateRef(x,y);
@@ -143,12 +155,12 @@ public class LogicGameController : MonoBehaviour
     /// </summary>
     /// <param name="x">The X coordinate of a Panel</param>
     /// <param name="y">The Y coordinate of a Panel</param>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     - X and Y must be valid coordinates
-    /// </preconditions>
-    /// <postconditions>
+    /// postconditions:
     ///     - If we're not hovering on a new panel, clear the targetedPanel coordinates
-    /// </postconditions>
+    /// </remarks>
     public void HandleUnhover(int x, int y)
     {
         if(targetedPanel != null && targetedPanel.X == x && targetedPanel.Y == y)
@@ -162,13 +174,13 @@ public class LogicGameController : MonoBehaviour
     /// Handles pressing the (right) trigger
     /// </summary>
     /// <param name="context">The CallbackContext for this action</param>
-    /// <preconditions>
-    ///     We are not pressing the right trigger
-    /// </preconditions>
-    /// <postconditions>
+    /// <remarks>
+    /// preconditions:
+    ///     - We are not pressing the right trigger
+    /// postconditions:
     ///     - If we're hovering over a non-occupied Panel, begin a drag movement
     ///     - Otherwise, do nothing
-    /// </postconditions>
+    /// </remarks>
     private void OnTriggerPress(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger pressed!");
@@ -191,14 +203,14 @@ public class LogicGameController : MonoBehaviour
     /// Handles releasing the (right) trigger
     /// </summary>
     /// <param name="context">The CallbackContext for this action</param>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     We are holding down the right trigger
-    /// </preconditions>
-    /// <postconditions>
+    /// postconditions:
     ///     - If we are not in a dragging state, do nothing
     ///     - If our drag ends on an endpoint, complete the drag movement
     ///     - If our drag doesn't end on an endpoint (or any Panel), cancel the drag movement and clear the path
-    /// </postconditions>
+    /// </remarks>
     private void OnTriggerRelease(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger released!");
@@ -218,12 +230,12 @@ public class LogicGameController : MonoBehaviour
     /// Handles pressing the designated reset button
     /// </summary>
     /// <param name="context">The CallbackContext for this action</param>
-    /// <preconditions>
-    ///     None
-    /// </preconditions>
-    /// <postconditions>
-    ///     Resets the game state
-    /// </postconditions>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - The game state is reset
+    /// </remarks>
     private void OnResetPress(InputAction.CallbackContext context)
     {
         Debug.Log("This is where I would reset everything");
@@ -233,12 +245,12 @@ public class LogicGameController : MonoBehaviour
     /// <summary>
     /// Clear the current path we're drawing
     /// </summary>
-    /// <preconditions>
-    ///     None
-    /// </preconditions>
-    /// <postconditions>
-    ///     Clears the current path being drawn by resetting the panels in the path and the path stack
-    /// </postconditions>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - The current path being drawn is cleared by resetting the panels in the path and the path stack
+    /// </remarks>
     private void ClearPath()
     {
         Debug.Log("Clearing path!");
