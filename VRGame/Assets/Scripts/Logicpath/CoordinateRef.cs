@@ -22,12 +22,12 @@ class CoordinateRef
     /// </summary>
     /// <param name="x">The X-coordinate for a panel</param>
     /// <param name="y">The Y-coordinate for a panel</param>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     - X and Y must be non-negative and be less than the LogicGameModel's grid size
-    /// </preconditions>
-    /// <postconditions>
-    ///     None
-    /// </postconditions>
+    /// postconditions:
+    ///     - The object is initialized
+    /// </remarks>
     public CoordinateRef(int x, int y)
     {
         Assert.IsTrue(x >= 0, "X coordinate must be greater than 0");
@@ -41,6 +41,12 @@ class CoordinateRef
     /// <summary>
     /// Accessor for the X-coordinate
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - when writing, x must be non-negative and less than the LogicGameModel's grid size
+    /// postconditions:
+    ///     - when getting, returns the X-coordinate
+    /// </remarks>
     public int X
     {
         get
@@ -49,13 +55,21 @@ class CoordinateRef
         }
         set
         {
+            Assert.IsTrue(value >= 0, "X coordinate must be greater than 0");
+            Assert.IsTrue(value <= LogicGameModel.MAX_GRID_SIZE-1, "X coordinate must be less than the LogicGameModel's max grid size");
             x = value;
         }
     }
 
     /// <summary>
-    /// Accessor for the X-coordinate
+    /// Accessor for the Y-coordinate
     /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - when writing, y must be non-negative and less than the LogicGameModel's grid size
+    /// postconditions:
+    ///     - when getting, returns the Y-coordinate
+    /// </remarks>
     public int Y
     {
         get
@@ -64,6 +78,8 @@ class CoordinateRef
         }
         set
         {
+            Assert.IsTrue(value >= 0, "Y coordinate must be greater than 0");
+            Assert.IsTrue(value <= LogicGameModel.MAX_GRID_SIZE-1, "Y coordinate must be less than the LogicGameModel's max grid size");
             y = value;
         }
     }
@@ -72,6 +88,11 @@ class CoordinateRef
     /// Gets a string representation of the coordinates
     /// </summary>
     /// <returns>A string representation of the coordinates</returns>
+    /// <remarks>
+    /// preconditions:
+    ///     - none
+    /// postconditions:
+    ///     - A string representation of the coordinates is returned
     public override string ToString()
     {
         return $"({x},{y})";
