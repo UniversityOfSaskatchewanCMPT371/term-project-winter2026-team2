@@ -222,31 +222,7 @@ public interface IBlockSpawnerModel: IModel
     ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
     /// </remarks>
     void SelectPreviousBlockShape();
-
-
-
-    /// <summary>
-    /// Selects the next brick in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
-    /// </remarks>
-    BlockShape GetNextBlockShape();
-
     
-    /// <summary>
-    /// Selects the next brick in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
-    /// </remarks>
-    BlockShape GetPreviousBlockShape();
 
 
     int CurrentBlockColourIndex
@@ -360,32 +336,6 @@ public interface IBlockSpawnerModel: IModel
     ///     - CurrentColourSelected in BlockSpawnerModel is changed to previous colour
     /// </remarks>
     void SelectPreviousColour();
-
-
-
-    /// <summary>
-    /// Selects the next colour for bricks in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentColourSelected in BlockSpawnerModel is changed to next colour in cycle
-    /// </remarks>
-    BlockColour GetNextColour();
-
-
-    
-    /// <summary>
-    /// Selects the previous colour for bricks in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentColourSelected in BlockSpawnerModel is changed to previous colour
-    /// </remarks>
-    BlockColour GetPreviousColour();
 
 
 }
