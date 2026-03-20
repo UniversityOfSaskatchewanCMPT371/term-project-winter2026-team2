@@ -34,6 +34,12 @@ public class LogicGameController : MonoBehaviour
     /// <summary>
     /// Unity Awake() method, gets initial state set up
     /// </summary>
+    /// <preconditions>
+    ///     - We have a LogicGameModel script attached to this object
+    /// </preconditions>
+    /// <postconditions>
+    ///     - All variables are initialized
+    /// </postconditions>
     public void Awake()
     {
         isDragging = false;

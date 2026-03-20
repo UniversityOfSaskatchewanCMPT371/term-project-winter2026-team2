@@ -10,12 +10,36 @@ using UnityEngine;
 
 public class LogicGameModel : MonoBehaviour, IGridModel
 {
+    /// <summary>
+    /// The bounds of any logic game grid
+    /// </summary>
     public static int MAX_GRID_SIZE = 10; // look, there ain't no way that we're gonna have puzzles larger than 10x10
+
     // please note that the panel's array layout is not going to be the orthodox [row, collumn] layout for ease of visualization
     // instead, we'll be using [x, y] where x is the horizontal axis and y is the vertical axis
+    /// <summary>
+    /// Every panel associated with this game
+    /// </summary>
     private Panel[,] panelGrid;
+    /// <summary>
+    /// A dictionary of all the endpoints in this game
+    /// </summary>
     private Dictionary<PanelColour, (Panel start, Panel end)> endpoints;
 
+    /// <summary>
+    /// Unity Start() method, initializes the game's data
+    /// </summary>
+    /// <preconditions>
+    ///     - The only children beneath this GameObject are Panels
+    ///     - No two Panels have the same coordinates
+    ///     - All Panel coordinates are non-negative and are less than MAX_GRID_SIZE
+    ///     - Every start endpoint has an end endpoint, and vice versa
+    ///     - There are no duplicate endpoints
+    /// </preconditions>
+    /// <postconditions>
+    ///     - All Panels are saved in this model
+    ///     - Adjacent Panels have their *Neighbor fields set where necessary
+    /// </postconditions>
     public void Start()
     {
         panelGrid = new Panel[MAX_GRID_SIZE,MAX_GRID_SIZE];
@@ -74,6 +98,15 @@ public class LogicGameModel : MonoBehaviour, IGridModel
         }
     }
 
+    /// <summary>
+    /// Clears the state of all Panels
+    /// </summary>
+    /// <preconditions>
+    ///     None
+    /// <preconditions>
+    /// <postconditions>
+    ///     Every Panel has its state reset
+    /// </postconditions>
     public void ClearGrid()
     {
         foreach(Panel panel in panelGrid)
@@ -82,11 +115,33 @@ public class LogicGameModel : MonoBehaviour, IGridModel
         }
     }
 
+    /// <summary>
+    /// Gets a panel at specific coordinates
+    /// </summary>
+    /// <param name="x">The X-coordinate of the panel you want</param>
+    /// <param name="y">The Y-coordinate of the panel you want</param>
+    /// <returns>The panel with the XY coordinates</returns>
+    /// <preconditions>
+    ///     - X and Y are valid coordinates
+    /// </preconditions>
+    /// <postconditions>
+    ///     None
+    /// </postconditions>
     public Panel GetPanel(int x, int y)
     {
         return panelGrid[x,y];
     }
 
+    /// <summary>
+    /// Is the current grid filled? (I.e, is the game complete?)
+    /// </summary>
+    /// <returns>true if every Panel is occupied, false otherwise</returns>
+    /// <preconditions>
+    ///     None
+    /// </preconditions>
+    /// <postconditions>
+    ///     None
+    /// </postconditions>
     public bool IsGridFilled()
     {
         foreach(Panel panel in panelGrid)
@@ -103,6 +158,18 @@ public class LogicGameModel : MonoBehaviour, IGridModel
         return true;
     }
 
+    /// <summary>
+    /// Checks if a Panel is occupied
+    /// </summary>
+    /// <param name="x">The X-coordinate of the panel</param>
+    /// <param name="y">The Y-coordinate of the panel</param>
+    /// <returns>true if the panel is occupied, false otherwise</returns>
+    /// <preconditions>
+    ///     - X and Y point to a valid Panel
+    /// </preconditions>
+    /// <postcondidions>
+    ///     None
+    /// </postconditions>
     public bool IsPanelOccupied(int x, int y)
     {
         return GetPanel(x, y).IsOccupied();
