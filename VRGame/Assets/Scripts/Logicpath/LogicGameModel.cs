@@ -16,7 +16,7 @@ public class LogicGameModel : MonoBehaviour, IGridModel
     private Panel[,] panelGrid;
     private Dictionary<PanelColour, (Panel start, Panel end)> endpoints;
 
-    public void Awake()
+    public void Start()
     {
         panelGrid = new Panel[MAX_GRID_SIZE,MAX_GRID_SIZE];
         endpoints = new Dictionary<PanelColour, (Panel start, Panel end)>();
@@ -78,7 +78,7 @@ public class LogicGameModel : MonoBehaviour, IGridModel
     {
         foreach(Panel panel in panelGrid)
         {
-            panel.ClearPanel();
+            panel?.ClearPanel();
         }
     }
 

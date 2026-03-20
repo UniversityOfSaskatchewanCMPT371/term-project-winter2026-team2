@@ -54,7 +54,7 @@ public class PanelTextureManager : MonoBehaviour
         {
             return TEXTURE_PATH + "block";
         }
-        if(panel.Attribute == PanelAttribute.Normal && panel.EntryDirection == Direction.None && panel.ExitDirection == Direction.None)
+        if(panel.Attribute == PanelAttribute.Normal && panel.GetEntryDirection() == Direction.None && panel.GetExitDirection() == Direction.None)
         {
             return TEXTURE_PATH + "blank";
         }
@@ -66,11 +66,11 @@ public class PanelTextureManager : MonoBehaviour
                 maybeEndpoint = "";
                 break;
             case PanelAttribute.Start:
-                Assert.AreEqual(panel.EntryDirection, Direction.None, "Start endpoint's entry direction must be None");
+                Assert.AreEqual(panel.GetEntryDirection(), Direction.None, "Start endpoint's entry direction must be None");
                 maybeEndpoint = "_start";
                 break;
             case PanelAttribute.Exit:
-                Assert.AreEqual(panel.ExitDirection, Direction.None, "End endpoint's exit direction must be None");
+                Assert.AreEqual(panel.GetExitDirection(), Direction.None, "End endpoint's exit direction must be None");
                 maybeEndpoint = "_end";
                 break;
             case PanelAttribute.Block:
@@ -78,7 +78,7 @@ public class PanelTextureManager : MonoBehaviour
             default:
                 throw new AssertionException($"Unknown PanelAttribute \"{panel.Attribute}\"",$"Unknown PanelAttribute \"{panel.Attribute}\"");
         }
-        string directionName = GetDirectionName(panel.EntryDirection, panel.ExitDirection);
+        string directionName = GetDirectionName(panel.GetEntryDirection(), panel.GetExitDirection());
         return $"{TEXTURE_PATH}{colourName}{maybeEndpoint}_{directionName}";
     }
 

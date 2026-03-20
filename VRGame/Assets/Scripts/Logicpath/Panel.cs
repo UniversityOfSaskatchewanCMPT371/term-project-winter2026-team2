@@ -20,7 +20,7 @@ public enum PanelAttribute
 /// Represents a single panel in the logic path minigame
 /// Manages pipe connections
 /// </summary>
-public class Panel : MonoBehaviour
+public class Panel : MonoBehaviour, IEquatable<Panel>
 {
     private Direction entryDirection;
     private Direction exitDirection;
@@ -43,35 +43,48 @@ public class Panel : MonoBehaviour
     /// <summary>
     /// Accessor for entry direction
     /// </summary>
-    public Direction EntryDirection
+    public Direction GetEntryDirection()
     {
-        get 
-        {
             return entryDirection;
-        }
+    }
 
-        set
-        {
-            entryDirection = value;
-            panelTextureManager.RefreshTexture();
-        }
+    /// <summary>
+    /// Setter for entry direction
+    /// </summary>
+    /// <param name="entryDirection">The new entry direction</param>
+    /// <postconditions>
+    ///     - This panel's entryDirection is changed
+    ///     - This panel's texture updates to match the new direction
+    /// </postconditions>
+    public void SetEntryDirection(Direction entryDirection)
+    {
+        this.entryDirection = entryDirection;
+        Debug.Log("Entry direction is being changed");
+        panelTextureManager.RefreshTexture();
     }
 
     /// <summary>
     /// Accessor for exit direction
     /// </summary>
-    public Direction ExitDirection
+    public Direction GetExitDirection()
     {
-        get
-        {
-            return exitDirection;
-        }
+        return exitDirection;
+    }
 
-        set 
-        {
-            exitDirection = value;
-            panelTextureManager.RefreshTexture();
-        }
+    /// <summary>
+    /// Setter for exit direction
+    /// </summary>
+    /// <param name="exitDirection">The new exit direction</param>
+    /// <postconditions>
+    ///     - This panel's exitDirection is changed
+    ///     - This panel's texture updates to match the new direction
+    /// </postconditions>
+
+    public void SetExitDirection(Direction exitDirection)
+    {
+        this.exitDirection = exitDirection;
+        Debug.Log("Exit direction is being changed");
+        panelTextureManager.RefreshTexture();
     }
 
     /// <summary>
@@ -215,7 +228,7 @@ public class Panel : MonoBehaviour
     /// </remarks>
     public bool IsOccupied()
     {
-        return entryDirection != Direction.None || attribute == PanelAttribute.Block;
+        return entryDirection != Direction.None || exitDirection != Direction.None || attribute == PanelAttribute.Block;
     }
 
     /// <summary>
@@ -286,4 +299,15 @@ public class Panel : MonoBehaviour
     {
         logicGameController.HandleUnhover(gridX, gridY);
     }
+
+    public override string ToString()
+    {
+        return $"({gridX},{gridY}), {panelColour}, {Attribute}, Entry {entryDirection}, Exit {exitDirection}";
+    }
+
+    public bool Equals(Panel other)
+    {
+        return this.gridX == other.gridX && this.gridY == other.GridY && this.Attribute == other.Attribute && this.entryDirection == other.entryDirection && this.exitDirection == other.exitDirection && this.panelColour == other.panelColour;
+    }
+
 }
