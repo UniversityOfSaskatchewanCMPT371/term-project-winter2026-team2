@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.1] - 2026-03-19
+
+### Fixed
+
+- Fixed overlapping ScaleOnHover system on brain region hover. Now, it only scales one brain region at a time.
+
+## [1.4.0] - 2026-03-18
+
+### Added
+
+- A new Brain component that accesses the spin animation attached to the big 3D brain model in the Hub
+- With the ScaleOnHover System, along with the new Brain component, the 3D brain pauses spin animation and scales brain region on hover
+
 ## [1.3.1] - 2026-03-17
 
 ### Fixed
