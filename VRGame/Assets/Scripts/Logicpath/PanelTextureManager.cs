@@ -6,13 +6,24 @@ using UnityEngine.Assertions;
 /// </summary>
 public class PanelTextureManager : MonoBehaviour
 {
-
-    private const string TEXTURE_PATH = "Materials/LogicGame/";
+    /// <summary>
+    /// The relative path to the materials needed (starting from the Resources folder)
+    /// </summary>
+    private static string TEXTURE_PATH = "Materials/LogicGame/";
+    /// <summary>
+    /// The Panel this manager is associated with
+    /// </summary>
     private Panel panel;
 
     /// <summary>
-    /// Unity's Awake() method for the texture manager
+    /// Unity's Awake() method for the texture manager, saves the Panel this manager is associated with
     /// </summary>
+    /// <preconditions>
+    ///     - There is a Panel attached to the same GameObject
+    /// </preconditions>
+    /// <postconditions>
+    ///     - The manager has its associated Panel saved
+    /// </postconditions>
     public void Awake()
     {
         panel = gameObject.GetComponent<Panel>();
@@ -39,14 +50,14 @@ public class PanelTextureManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Constructs the texture path for a pipe based on its color and entry/exit directions
+    /// Constructs the texture path for a Panel based on its state
     /// </summary>
     /// <remarks>
     /// <preconditions>
     ///     - The panel's state must be valid (ex: no entry direction for a start panel)
     /// </preconditions>
     /// <postconditions>
-    ///     - Returns a string representing the correct texture path
+    ///     - Returns a string representing the texture path
     /// </postconditions>
     private string GetTexturePath()
     {
@@ -83,7 +94,7 @@ public class PanelTextureManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Maps entry and exit directions of the panel's line to visual direction for texture lookup
+    /// Maps entry and exit directions of the panel's path direction to visual direction for texture lookup
     /// </summary>
     /// <param name="entry">The entry direction</param>
     /// <param name="exit">The exit direction</param>
