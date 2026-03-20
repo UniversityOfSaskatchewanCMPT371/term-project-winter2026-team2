@@ -1,17 +1,5 @@
 # Changelog
 
-<<<<<<< HEAD
-API changes / Backward compatible features / Backward compatible bug fixes.
-You do not need to update the version for refactors or code improvements that
-do not change functionality nor do you need to when you you write tests.
-
-## [1.3.2] - 2026-03-19
-
-### Fixed
-
-- Fixed ToolTips clipping out of screen.
-
-=======
 ## [1.4.1] - 2026-03-19
 
 ### Fixed
@@ -24,7 +12,6 @@ do not change functionality nor do you need to when you you write tests.
 
 - A new Brain component that accesses the spin animation attached to the big 3D brain model in the Hub
 - With the ScaleOnHover System, along with the new Brain component, the 3D brain pauses spin animation and scales brain region on hover
->>>>>>> 69d58cb2ed72ba25b9296a4381ca45c74c0a543d
 
 ## [1.3.1] - 2026-03-17
 
@@ -32,6 +19,10 @@ do not change functionality nor do you need to when you you write tests.
 
 - Updated project settings to enable building of the game
 
+
+API changes / Backward compatible features / Backward compatible bug fixes.
+You do not need to update the version for refactors or code improvements that
+do not change functionality nor do you need to when you you write tests.
 
 ## [1.3.0] - 2026-03-17
 
