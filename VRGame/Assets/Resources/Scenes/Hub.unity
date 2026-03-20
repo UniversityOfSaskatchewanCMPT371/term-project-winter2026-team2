@@ -679,8 +679,6 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 1326242528}
-  - {fileID: 1326242527}
-  - {fileID: 1326242526}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2137,12 +2135,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -131245991516130162, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1326242528}
-    - targetCorrespondingSourceObject: {fileID: -131245991516130162, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1326242527}
-    - targetCorrespondingSourceObject: {fileID: -131245991516130162, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1326242526}
     - targetCorrespondingSourceObject: {fileID: -4282753655730498294, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       insertIndex: -1
       addedObject: {fileID: 671474461}
@@ -2635,8 +2627,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017355744, y: 0.015488031, z: 0.017486751}
-  m_Center: {x: 0.0023371559, y: 0.0025804401, z: -0.02090001}
+  m_Size: {x: 0.013988594, y: 0.015488031, z: 0.017486751}
+  m_Center: {x: 0.0040207296, y: 0.0025804401, z: -0.020900073}
 --- !u!114 &833285127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3218,8 +3210,13 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
+<<<<<<< HEAD
+  m_Size: {x: 0.015897311, y: 0.026943687, z: 0.016790856}
+  m_Center: {x: -0.014696138, y: 0.0054485933, z: -0.0031897463}
+=======
   m_Size: {x: 0.006904051, y: 0.02818022, z: 0.019062724}
   m_Center: {x: -0.009851481, y: 0.0044297967, z: -0.0043256814}
+>>>>>>> 69d58cb2ed72ba25b9296a4381ca45c74c0a543d
 --- !u!1001 &1146750528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3887,48 +3884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Model: {fileID: 1326242521}
   View: {fileID: 1326242522}
---- !u!65 &1326242526
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830531258}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.022256231, y: 0.012727115, z: 0.010351502}
-  m_Center: {x: -0.009964755, y: 0.022494392, z: 0.017311012}
---- !u!65 &1326242527
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830531258}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.023115091, y: 0.009946257, z: 0.017014595}
-  m_Center: {x: -0.010394184, y: 0.011439769, z: 0.013979643}
 --- !u!65 &1326242528
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3948,8 +3903,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0, y: 0.0096961185, z: 0.019328823}
-  m_Center: {x: 0.001163352, y: 0.0018205569, z: 0.012822476}
+  m_Size: {x: 0.019364301, y: 0.022600517, z: 0.017976198}
+  m_Center: {x: -0.008518799, y: 0.008272775, z: 0.013498962}
 --- !u!1001 &1353618076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4515,8 +4470,13 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
+<<<<<<< HEAD
+  m_Size: {x: 0.012969529, y: 0.031004626, z: 0.017502403}
+  m_Center: {x: 0.015596906, y: 0.004806291, z: -0.0031861835}
+=======
   m_Size: {x: 0.01448116, y: 0.030460982, z: 0.017502403}
   m_Center: {x: 0.014262129, y: 0.004410453, z: -0.0031861835}
+>>>>>>> 69d58cb2ed72ba25b9296a4381ca45c74c0a543d
 --- !u!1001 &1547115054
 PrefabInstance:
   m_ObjectHideFlags: 0
