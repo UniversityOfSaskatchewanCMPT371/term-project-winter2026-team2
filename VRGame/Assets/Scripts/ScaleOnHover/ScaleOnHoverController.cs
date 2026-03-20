@@ -16,6 +16,11 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
     internal IScaleOnHoverView view;
     internal IScaleOnHoverModel model;
 
+    /// <summary>
+    /// Tracks the currently hovered region so only one scales at a time
+    /// </summary>
+    private static ScaleOnHoverController currentlyHovered = null;
+
     /// <inheritdoc/>
     public void Start()
     {
@@ -143,6 +148,13 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
         // Assert to ensure model reference is not null before calling OnHoverEnter
         Assert.IsNotNull(model, "Model reference cannot be null in OnHoverEnter");
 
+        // If one region is already hovered, exit first so only one region scales at a time
+        if (currentlyHovered != null && currentlyHovered != this)
+        {
+            currentlyHovered.model.OnHoverExit();
+        }
+
+        currentlyHovered = this;
         model.OnHoverEnter();
     }
 
@@ -157,6 +169,12 @@ public class ScaleOnHoverController : MonoBehaviour, IScaleOnHoverController
 
         // Assert to ensure model reference is not null before calling OnHoverExit
         Assert.IsNotNull(model, "Model reference cannot be null in OnHoverExit");
+
+        // Only process exit if this region is the one currently hovered
+        if (currentlyHovered == this)
+        {
+            currentlyHovered = null;
+        }
 
         model.OnHoverExit();
     }
