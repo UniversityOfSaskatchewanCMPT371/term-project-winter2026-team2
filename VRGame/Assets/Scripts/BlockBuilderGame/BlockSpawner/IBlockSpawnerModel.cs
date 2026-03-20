@@ -234,7 +234,7 @@ public interface IBlockSpawnerModel: IModel
     /// post-condition:
     ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
     /// </remarks>
-    void GetNextBlockShape();
+    BlockShape GetNextBlockShape();
 
     
     /// <summary>
@@ -246,7 +246,7 @@ public interface IBlockSpawnerModel: IModel
     /// post-condition:
     ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
     /// </remarks>
-    void GetPreviousBlockShape();
+    BlockShape GetPreviousBlockShape();
 
 
     int CurrentBlockColourIndex
@@ -372,7 +372,7 @@ public interface IBlockSpawnerModel: IModel
     /// post-condition:
     ///     - CurrentColourSelected in BlockSpawnerModel is changed to next colour in cycle
     /// </remarks>
-    void GetNextColour();
+    BlockColour GetNextColour();
 
 
     
@@ -385,7 +385,7 @@ public interface IBlockSpawnerModel: IModel
     /// post-condition:
     ///     - CurrentColourSelected in BlockSpawnerModel is changed to previous colour
     /// </remarks>
-    void GetPreviousColour();
+    BlockColour GetPreviousColour();
 
 
 }
