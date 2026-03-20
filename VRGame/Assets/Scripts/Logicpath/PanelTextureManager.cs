@@ -97,7 +97,7 @@ public class PanelTextureManager : MonoBehaviour
     
     private string GetDirectionName(Direction entry, Direction exit)
     {
-        if(entry != exit && entry != Direction.None && exit != Direction.None)
+        if(entry == exit && entry != Direction.None && exit != Direction.None)
         {
             throw new AssertionException("Panel's entry and exit cannot point in the same non-none direction","Panel's entry and exit cannot point in the same non-none direction");
         }

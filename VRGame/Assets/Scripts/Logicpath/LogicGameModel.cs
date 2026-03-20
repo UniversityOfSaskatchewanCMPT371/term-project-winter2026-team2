@@ -91,6 +91,10 @@ public class LogicGameModel : MonoBehaviour, IGridModel
     {
         foreach(Panel panel in panelGrid)
         {
+            if(panel == null)
+            {
+                continue;
+            }
             if (!panel.IsOccupied())
             {
                 return false;

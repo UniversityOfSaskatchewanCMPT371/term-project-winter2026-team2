@@ -83,6 +83,7 @@ public class LogicGameController : MonoBehaviour
                 currentPath.Push(hoveredPanel);
             } else
             {
+                isDragging = false;
                 ClearPath();
             }
         }
@@ -118,6 +119,15 @@ public class LogicGameController : MonoBehaviour
     private void OnTriggerRelease(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger released!");
+        if(isDragging && (targetedPanel == null || currentPath.Peek().Attribute != PanelAttribute.Exit))
+        {
+            ClearPath();
+        }
+        else if(isDragging && targetedPanel != null && currentPath.Peek().Attribute == PanelAttribute.Exit && data.IsGridFilled())
+        {
+            Debug.Log("Game is complete!");
+        }
+        isDragging = false;
     }
 
     private void OnResetPress(InputAction.CallbackContext context)
