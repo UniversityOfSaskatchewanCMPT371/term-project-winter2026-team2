@@ -182,19 +182,18 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         Assert.IsTrue(currentBlockShapeIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
         
         currentBlockShapeIndex ++;
+        prevBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex - 1];
+
         if(currentBlockShapeIndex >= count )
         {
             currentBlockShapeIndex = 0;
             prevBlockShapeSelected = blocksForPuzzle[count - 1];
         }
         currentBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex];
+        nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
         if ((currentBlockShapeIndex + 1 ) == count )
         {
             nextBlockShapeSelected = blocksForPuzzle[0];
-        }
-        else
-        {
-            nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
         }
         
         Debug.Log("Selecting Next block shape. \nPrevious: " + prevBlockShapeSelected +
@@ -212,19 +211,19 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         Assert.IsTrue(currentBlockShapeIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
         
         currentBlockShapeIndex --;
+        nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
+
         if(currentBlockShapeIndex < 0 )
         {
             currentBlockShapeIndex = count - 1;
-            prevBlockShapeSelected = blocksForPuzzle[0];
+            nextBlockShapeSelected = blocksForPuzzle[0];
         }
         currentBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex];
+        prevBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex - 1];
+
         if (currentBlockShapeIndex == 0 )
         {
             prevBlockShapeSelected = blocksForPuzzle[count - 1];
-        }
-        else
-        {
-            nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
         }
         
         Debug.Log("Selecting Previous block shape. \nPrevious: " + prevBlockShapeSelected +
@@ -320,7 +319,32 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     /// <inheritdoc/>
     public void SelectNextColour()
     {
-        // to be implemented later
+        int count = allBlockColours.Count; // Count of all colours in puzzle
+
+        Assert.IsTrue(currentBlockColourIndex >= 0, "currentBlockShapeIndex must be greater than 0");
+        Assert.IsTrue(currentBlockColourIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
+        
+        currentBlockColourIndex ++;
+
+        if(currentBlockColourIndex >= count )
+        {
+            currentBlockColourIndex = 0;
+            prevBlockColourSelected = allBlockColours[count - 1];
+        } else
+        {
+            prevBlockColourSelected = allBlockColours[currentBlockColourIndex - 1];
+        }
+
+        nextBlockColourSelected = allBlockColours[currentBlockColourIndex + 1];
+        if ((currentBlockColourIndex + 1 ) == count )
+        {
+            nextBlockColourSelected = allBlockColours[0];
+        }        
+
+        currentBlockColourSelected = allBlockColours[currentBlockColourIndex];
+
+        Debug.Log("Selecting Next block Colour. \nPrevious: " + prevBlockColourSelected +
+        "Current: " + currentBlockColourSelected + "Next: " + nextBlockColourSelected);
 
     }
 
@@ -332,16 +356,18 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
     /// <inheritdoc/>
-    public void GetNextColour()
+    public BlockColour GetNextColour()
     {
+        
         // to be implemented later
-
+        return BlockColour.white;
     }
 
     /// <inheritdoc/>
-    public void GetPreviousColour()
+    public BlockColour GetPreviousColour()
     {
         // to be implemented later
+        return BlockColour.white;
 
     }
 
