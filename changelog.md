@@ -8,7 +8,8 @@ do not change functionality nor do you need to when you you write tests.
 
 ### Fixed
 
-- Fixed ToolTips clipping out of screen.
+- Adjusted ToolTips To bottom-center of view to reduce clipping.
+- Allow only one ToolTip to appear at a time.
 
 
 ## [1.3.1] - 2026-03-17

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Ensures only one tooltip is visible at a time by managing show/hide requests.
+/// Ensures only one tooltip is visible at a time by managing show and hide tooltips.
 /// </summary>
 public static class ToolTipManager
 {
