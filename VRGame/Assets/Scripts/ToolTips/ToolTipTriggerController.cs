@@ -21,8 +21,9 @@ public class ToolTipController
 
     /// <summary>
     /// Track the currently visible tooltip.
-    private static GameObject activeTooltip;
     /// </summary>
+    private static GameObject activeTooltip;
+    
 
     /// <summary>
     /// Initializes a new instance of the ToolTipController class.
@@ -129,7 +130,7 @@ public class ToolTipController
     /// - All event handlers are unsubscribed from trigger events.
     /// </remarks>
     public void Dispose()
-     {
+    {
         if (trigger != null)
         {
             //unsubscribe to prevent memory leaks
