@@ -43,8 +43,10 @@ public interface IDoorController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - `doorModel` and `sceneChangerController` instance vars must be non-null
+    /// - `doorModel` must be non-null
+    /// - Service.prefab exists within the scene
     /// PostConditions:
+    /// - `scenecChangerController` instance variable is automatically set to SceneChangerController component within Service.prefab
     /// - Checked to make sure DoorController will be able to function properly, has values set for instance variables
     /// </remarks>
     public void Init();
