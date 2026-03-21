@@ -57,4 +57,18 @@ public class BrainModelTests
         brainModel.resume();
         Assert.AreEqual(animator.speed, 1.0f, "Animator speed failed to set to 1.0 on pause() test");
     }
+
+    /// <summary>
+    /// Property based test to check pause() sets the animation speed to 0f
+    /// </summary>
+    [Test]
+    public void PausePropertyTest()
+    {
+        Prop.ForAll<float>(speed =>
+        {
+            animator.speed = speed;
+            brainModel.pause();
+            return animator.speed == 0f;
+        }).QuickCheckThrowOnFailure();
+    }
 }
