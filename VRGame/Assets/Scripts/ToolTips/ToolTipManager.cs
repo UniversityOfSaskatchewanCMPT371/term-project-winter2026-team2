@@ -40,6 +40,8 @@ public static class ToolTipManager
 
     /// <summary>
     /// Hides a tooltip, but only if it's the one that's currently visible.
+    /// For example, if you quickly hover over two objects,
+    /// the first tooltip gets hidden automatically when the second appears
     /// </summary>
     /// <param name="tooltip">The tooltip GameObject to hide. Must not be null.</param>
     /// <remarks>
@@ -56,7 +58,7 @@ public static class ToolTipManager
         }
         Debug.Assert(tooltip != null, "tooltip cannot be null.");
 
-        // Only hide if this is the active tooltip
+        // Hide prev tooltip, not hide current also
         if (activeTooltip == tooltip)
         {
             tooltip.SetActive(false);

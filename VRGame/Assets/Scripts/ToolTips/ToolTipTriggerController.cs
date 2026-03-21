@@ -95,7 +95,7 @@ public class ToolTipController
         {
             Debug.LogError("OnHoverExit called but interactiveElement is null.");
         }
-       ToolTipManager.ShowToolTip(interactiveElement);
+       ToolTipManager.HideToolTip(interactiveElement);
     }
 
     /// <summary>
