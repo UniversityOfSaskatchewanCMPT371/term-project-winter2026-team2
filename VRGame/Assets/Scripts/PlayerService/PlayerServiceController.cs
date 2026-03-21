@@ -54,15 +54,7 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
             }
             Assert.IsNotNull(value, "'value' cannot be null.");
             
-            // see if 'value' contains PlayerController component
-            if (value.TryGetComponent<PlayerController>(out PlayerController component))
-            {
-                // it does have it
-            } else
-            {
-                Debug.LogError("'XRrigPrefab' does not have PlayerController component attached.");
-            }
-            Assert.IsNotNull(component, "'XRrigPrefab' must contain PlayerController component.");
+            checkXRrigPrefab(value);
 
             XRrigPrefab = value;
         }
@@ -105,42 +97,41 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - 'XRrigPrefab' variable cannot be null.
-    /// - 'XRrigPrefab' must contain PlayerController component.
+    /// - 'rig' param cannot be null.
+    /// - 'rig' game object contains PlayerController component
     /// Postconditions:
-    /// - Verifies 'XRrigPrefab' variable and ensures that it contains the PlayerController component.
+    /// - Verifies 'rig' param and ensures that it contains the PlayerController component.
     /// - Logs errors if any of the preconditions are violated.
     /// </remarks>
-    private void checkXRrigPrefab()
+    private void checkXRrigPrefab(GameObject rig)
     {
-        // see if 'XRrigPrefab' field was set in inspector
-        if (XRrigPrefab == null)
+        // see if is null
+        if (rig == null)
         {
-            Debug.LogError("'XRrigPrefab' variable was not set in inspector.");
+            Debug.LogError("'rig' game object passed is null.");
         }
-        Assert.IsNotNull(XRrigPrefab, "'XRrigPrefab' cannot be null."); 
-        
+        Assert.IsNotNull(rig, "'rig' game object passed must not be null.");
+
         // see if 'XRrigPrefab' contains PlayerController component
-        if (XRrigPrefab.TryGetComponent<PlayerController>(out PlayerController component))
+        if (rig.TryGetComponent<PlayerController>(out PlayerController component))
         {
             // it does have it
         } else
         {
-            Debug.LogError("'XRrigPrefab' does not have PlayerController component attached.");
+            Debug.LogError("'rig' game object passed does not have PlayerController component attached.");
         }
-        Assert.IsNotNull(component, "'XRrigPrefab' must contain PlayerController component.");
+        Assert.IsNotNull(component, "'rig' game object passed must contain PlayerController component.");
     }
 
     /// <inheritdoc/>
     public void SpawnPlayer(Vector3 position, Quaternion rotation)
     {
         // verifies 'XRrigPrefab' variable
-        checkXRrigPrefab();
+        checkXRrigPrefab(XRrigPrefab);
 
         // see if an XR rig already exists in the scene
         if (playerObj == null)
         {
-
             // instantiate the XR rig
             playerObj = Instantiate(XRrigPrefab);
 
@@ -172,7 +163,7 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
         }
 
         // validate 'XRrigPrefab' variable
-        checkXRrigPrefab();
+        checkXRrigPrefab(XRrigPrefab);
 
         // optionally spawn player on scene load only if its enabled
         if (playerObj == null && spawnPlayerOnLoad)

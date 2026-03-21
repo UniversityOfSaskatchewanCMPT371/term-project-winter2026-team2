@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Controller interface for PlayerServiceController component.
 /// </summary>
-public interface IPlayerServiceController
+public interface IPlayerServiceController : IController
 {
     /// <summary>
     /// Instantiates the player rig at specified position and orientation.
@@ -27,18 +27,17 @@ public interface IPlayerServiceController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - 'instance' variable must be null.
-    /// - 'XRrigPrefab' variable must be set in the inspector.
-    /// - 'XRrigPrefab' has PlayerController component.
+    /// - 'instance' variable must be either null or 'this'.
+    /// - 'XRrigPrefab' variable must be non-null, and contain PlayerController component.
     /// Postconditions:
-    /// - 'instance' variable is assigned to this component. Any duplicate 
-    /// instances of this component is destroyed.
+    /// - 'instance' variable is assigned to 'this' component if not already assigned.
+    /// Otherwise remains unchanged and destroys the game object its attached to.
     /// - Optionally spawns the player by invoking SpawnPlayer() 
     /// if 'spawnPlayerOnLoad' variable is true.
     /// - Logs warnings and errors if preconditions are violated.
     /// - Logs on success.
     /// </remarks>
-    void Init();
+    new void Init();
 
     /// <summary>
     /// Called once after the scene loads. 
