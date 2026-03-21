@@ -163,6 +163,12 @@ public class PlayerServiceController : Controller<IModel, IView>, IPlayerService
         }
 
         // validate 'XRrigPrefab' variable
+        if (XRrigPrefab == null)
+        {
+            Debug.LogError("'XRrigPrefab' variable is null.");
+        }
+        Assert.IsNotNull(XRrigPrefab, "'XRrigPrefab' variable was not set in inspector.");
+        
         checkXRrigPrefab(XRrigPrefab);
 
         // optionally spawn player on scene load only if its enabled

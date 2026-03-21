@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -33,7 +34,10 @@ public class PlayerServiceControllerTests
     public void Instantiation()
     {
         // expect errors to occur since 'XRrigPrefab' variable is null
-        LogAssert.Expect(LogType.Error, "'XRrigPrefab' variable was not set in inspector.");
+        LogAssert.Expect(LogType.Error, "'XRrigPrefab' variable is null.");
+        //LogAssert.Expect(LogType.Exception, "'XRrigPrefab' variable was not set in inspector.");
+        //LogAssert.Expect(LogType.Error, "'rig' game object passed is null.");
+        //LogAssert.Expect(LogType.Exception, new Regex("'rig' game object passed must not be null.*"));
         Assert.Throws<AssertionException>(() => controller.Init(), "Expected exception to be thrown.");
     }
 
@@ -55,7 +59,7 @@ public class PlayerServiceControllerTests
         GameObject XRrigMock = new GameObject();
 
         // expect errors to occur since xr rig does not contain player controller component
-        LogAssert.Expect(LogType.Error, "'XRrigPrefab' does not have PlayerController component attached.");
+        LogAssert.Expect(LogType.Error, "'rig' game object passed does not have PlayerController component attached.");
         Assert.Throws<AssertionException>(() => {controller.MockXRrigPrefab = XRrigMock;}, "Expected exception to be thrown.");
 
     }
