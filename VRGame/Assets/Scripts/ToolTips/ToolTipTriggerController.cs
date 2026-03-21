@@ -76,7 +76,7 @@ public class ToolTipController
         {
             Debug.LogError("OnHoverEnter called but interactiveElement is null.");
         }
-        interactiveElement.SetActive(true);
+        ToolTipManager.ShowToolTip(interactiveElement);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public class ToolTipController
         {
             Debug.LogError("OnHoverExit called but interactiveElement is null.");
         }
-        interactiveElement.SetActive(false);
+       ToolTipManager.ShowToolTip(interactiveElement);
     }
 
     /// <summary>
@@ -108,14 +108,18 @@ public class ToolTipController
     /// - All event handlers are unsubscribed from trigger events.
     /// </remarks>
     public void Dispose()
-    {
+     {
         if (trigger != null)
         {
             //unsubscribe to prevent memory leaks
-            //unsubscribing is safe even if it were never subscribed (does nothing)
             trigger.HoverEntered -= OnHoverEnter;
             trigger.HoverExited -= OnHoverExit;
         }
-       
+
+        // If this tooltip is still the active one, hide it via manager
+        if (interactiveElement != null)
+        {
+            ToolTipManager.HideToolTip(interactiveElement);
+        }
     }
 }
