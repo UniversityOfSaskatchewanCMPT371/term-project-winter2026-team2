@@ -4,13 +4,20 @@ using UnityEngine.TestTools;
 using System;
 using System.Collections;
 
+/// <summary>
+/// System test for the door/scene transition
+/// </summary>
 public class DoorTransitionSystemTest
 {
     /// <summary>
-    /// The game object the component being test will be
-    /// attached to.
+    /// All necessary objects to conduct the System Test
     /// </summary>
-    GameObject go;
+    private GameObject playerRig;
+    private GameObject doorObject;
+    private GameObject sceneChangerObject;
+    private DoorModel sourceDoor;
+    private DoorModel targetDoor;
+    private SceneChangerController sceneChanger;
 
     /// <summary>
     /// The component that is being tested.
