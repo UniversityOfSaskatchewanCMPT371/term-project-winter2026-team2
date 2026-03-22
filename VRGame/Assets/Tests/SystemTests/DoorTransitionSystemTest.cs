@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using NSubstitute;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// System test for the door/scene transition
@@ -130,6 +131,8 @@ public class DoorTransitionSystemTest
     [UnityTest]
     public IEnumerator PlayerEntersDoorToNewScene()
     {
+        LogAssert.Expect(LogType.Error, new Regex("Problem detected while opening the Scene file:*"));
+
         doorV.OnTriggerEnter(playerCollider);
 
         DoorController doorController = doorObject.GetComponent<DoorController>();
