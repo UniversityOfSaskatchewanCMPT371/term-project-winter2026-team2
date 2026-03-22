@@ -983,7 +983,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
-      value: Auditory Processing
+      value: '
+
+
+        Helps retrieve memories & understand language & emotions'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5577820386585612431, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Name
@@ -4294,7 +4301,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
-      value: I am responsible for spatial awareness!
+      value: '
+
+        Receives & interprets signals from other parts of the brain,
+        enables you to understand your environment & state of
+
+        your body'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5577820386585612431, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Name
@@ -5006,7 +5022,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
-      value: The Decision Maker!
+      value: '
+
+
+        Controls voluntary movements, social understanding, thinking
+        and learning'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5577820386585612431, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Name
@@ -5646,7 +5670,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
-      value: I make you see things
+      value: '
+
+
+        Allows you to process & interpret visual information from
+        the eyes'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5577820386585612431, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Name
