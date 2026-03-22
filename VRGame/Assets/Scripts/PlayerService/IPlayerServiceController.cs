@@ -12,8 +12,8 @@ public interface IPlayerServiceController : IController
     /// <param name="rotation">The quaternion in which to orientate the rig's rotation to.</param>
     /// <remarks>
     /// Preconditions:
-    /// - 'XRrigPrefab' must be validated.
-    /// - The TeleportPlayerTo() method must be implemented in PlayerController.
+    /// - 'XRrigPrefab' must be valid.
+    /// - requires TeleportPlayerTo() method defined at PlayerController.
     /// Postconditions:
     /// - 'playerObj' variable value is set to the new instantiated XR rig, 
     /// and teleported/orientated to the given 'position' and 'rotation' input.
@@ -27,7 +27,6 @@ public interface IPlayerServiceController : IController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - 'instance' variable must be either null or 'this'.
     /// - 'XRrigPrefab' variable must be non-null, and contain PlayerController component.
     /// Postconditions:
     /// - 'instance' variable is assigned to 'this' component if not already assigned.
