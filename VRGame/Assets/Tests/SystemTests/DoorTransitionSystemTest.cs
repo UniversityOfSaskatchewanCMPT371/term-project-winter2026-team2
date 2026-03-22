@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using System;
 using System.Collections;
+using NSubstitute;
 
 /// <summary>
 /// System test for the door/scene transition
@@ -78,23 +79,19 @@ public class DoorTransitionSystemTest
     }
 
     /// <summary>
-    /// The component that is being tested.
-    /// TODO : Replace the type to the class you are testing.
-    /// </summary>
-    MonoBehaviour comp;
-
-    /// <summary>
     /// Called before each tests. Handles the setup for
     /// game object and component being tested
     /// </summary>
-    [Setup]
+    [UnitySetUp]
     public void Setup()
     {
-        go = new GameObject();
+    SetupSceneChanger();
+    yield return null;
 
-        // NOTE: adding component in play mode will automatically call Awake() & Start().
-        // If necessary, you may move this directly in the test function instead
-        comp = go.AddComponent<>(); // TODO : Replace generic with component you are testing
+    SetupPlayer();
+    SetupDoor();
+
+    yield return null;
     }
 
     /// <summary>
