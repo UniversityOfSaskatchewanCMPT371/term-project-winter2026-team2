@@ -37,20 +37,20 @@ public class DoorTransitionSystemTest
         mainCamera.transform.SetParent(playerRig.transform);
         BoxCollider collider = mainCamera.AddComponent<BoxCollider>();
 
-        Object.DontDestroyOnLoad(playerRig);
+        UnityEngine.Object.DontDestroyOnLoad(playerRig);
         return collider;
     }
 
     public void SetupDoor()
     {
         doorObject = new GameObject("Door");
-        Object.DontDestroyOnLoad(doorObject);
+        UnityEngine.Object.DontDestroyOnLoad(doorObject);
 
         // Creates the initial door
         sourceDoor = doorObject.AddComponent<DoorModel>();
         sourceDoor.ResetDoorLookup();
         sourceDoor.DoorId = 1;
-        sourceDoor.TargerDoorId = 2;
+        sourceDoor.TargetDoorId = 2;
         sourceDoor.DestinationSceneId = 6; // Frontal Lobe
 
         // Creates a target for the door
@@ -66,13 +66,13 @@ public class DoorTransitionSystemTest
         doorC.SceneChangerController = sceneChanger;
 
         DoorView doorV = doorObject.AddComponent<DoorView>();
-        doorV.DoorController = doorController;
+        doorV.DoorController = doorC;
     }
 
     public void SetupSceneChanger()
     {
         sceneChangerObject = new GameObject("SceneChanger");
-        Object.DontDestroyOnLoad(sceneChangerObject);
+        UnityEngine.Object.DontDestroyOnLoad(sceneChangerObject);
 
         sceneChanger = sceneChangerObject.AddComponent<SceneChangerController>();
         sceneChanger.SceneManagerWrapper = new SceneManagerWrapper();
