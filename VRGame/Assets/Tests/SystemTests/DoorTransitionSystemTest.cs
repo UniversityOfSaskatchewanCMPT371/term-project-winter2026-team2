@@ -4,6 +4,7 @@ using UnityEngine.TestTools;
 using System;
 using System.Collections;
 using NSubstitute;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// System test for the door/scene transition
@@ -19,6 +20,8 @@ public class DoorTransitionSystemTest
     private DoorModel sourceDoor;
     private DoorModel targetDoor;
     private SceneChangerController sceneChanger;
+    private DoorView doorV;
+    private Collider playerCollider;
 
 
     /// <summary>
@@ -51,7 +54,7 @@ public class DoorTransitionSystemTest
         sourceDoor.ResetDoorLookup();
         sourceDoor.DoorId = 1;
         sourceDoor.TargetDoorId = 2;
-        sourceDoor.DestinationSceneId = 6; // Frontal Lobe
+        sourceDoor.DestinationSceneId = 1; // Frontal Lobe
 
         // Creates a target for the door
         targetDoor = doorObject.AddComponent<DoorModel>();
@@ -65,7 +68,7 @@ public class DoorTransitionSystemTest
         doorC.DoorModel = sourceDoor;
         doorC.SceneChangerController = sceneChanger;
 
-        DoorView doorV = doorObject.AddComponent<DoorView>();
+        doorV = doorObject.AddComponent<DoorView>();
         doorV.DoorController = doorC;
     }
 
@@ -83,12 +86,12 @@ public class DoorTransitionSystemTest
     /// game object and component being tested
     /// </summary>
     [UnitySetUp]
-    public void Setup()
+    public IEnumerator Setup()
     {
     SetupSceneChanger();
     yield return null;
 
-    SetupPlayer();
+    playerCollider = SetupPlayer();
     SetupDoor();
 
     yield return null;
@@ -101,12 +104,27 @@ public class DoorTransitionSystemTest
     [TearDown]
     public void TearDown()
     {
-        UnityEngine.Object.DestroyImmediate(go);
+        sourceDoor.ResetDoorLookup();
+        sceneChanger.ResetInstance();
+        UnityEngine.Object.Destroy(playerRig);
+        UnityEngine.Object.Destroy(doorObject);
+        UnityEngine.Object.Destroy(sceneChangerObject);
     }
 
     [UnityTest]
-    public IEnumerator Instantiation()
+    public IEnumerator PlayerEntersDoorToNewScene()
     {
-        
+        doorV.OnTriggerEnter(playerCollider);
+
+        DoorController doorController = doorObject.GetComponent<DoorController>();
+        float timeout = Time.time + 10f;
+        while (doorController.TriggerDebounce)
+        {
+            Assert.IsTrue(Time.time < timeout, "Scene load timed out");
+            yield return null;
+        }
+
+        Assert.AreEqual((int)SceneEnum.PracticeRoom, SceneManager.GetActiveScene().buildIndex,
+        "Active scene should be FrontalLobe after door transition");
     }
 }
