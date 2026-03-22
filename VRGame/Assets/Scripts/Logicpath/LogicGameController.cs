@@ -129,6 +129,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
                 Debug.Log("Moving left!");
                 currentPath.Peek().SetExitDirection(Direction.Left);
                 hoveredPanel.SetEntryDirection(Direction.Right);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
                 currentPath.Push(hoveredPanel);
             }
             else if(currentPath.Peek().TopNeighbor != null && hoveredPanel.Equals(currentPath.Peek().TopNeighbor)) //moving up
@@ -136,6 +137,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
                 Debug.Log("Moving up!");
                 currentPath.Peek().SetExitDirection(Direction.Up);
                 hoveredPanel.SetEntryDirection(Direction.Down);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
                 currentPath.Push(hoveredPanel);
             }
             else if(currentPath.Peek().RightNeighbor != null && hoveredPanel.Equals(currentPath.Peek().RightNeighbor)) //moving right
@@ -143,6 +145,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
                 Debug.Log("Moving right!");
                 currentPath.Peek().SetExitDirection(Direction.Right);
                 hoveredPanel.SetEntryDirection(Direction.Left);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
                 currentPath.Push(hoveredPanel);
             }
             else if(currentPath.Peek().DownNeighbor != null && hoveredPanel.Equals(currentPath.Peek().DownNeighbor)) //moving down
@@ -150,9 +153,11 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
                 Debug.Log("Moving down!");
                 currentPath.Peek().SetExitDirection(Direction.Down);
                 hoveredPanel.SetEntryDirection(Direction.Up);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
                 currentPath.Push(hoveredPanel);
             } else //the hovered Panel is not adjacent to the previous Panel in our path
             {
+                Debug.Log("But the hover changed to a non-adjacent Panel!");
                 isDragging = false;
                 ClearPath();
             }
