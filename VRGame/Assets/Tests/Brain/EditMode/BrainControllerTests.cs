@@ -1,8 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 using NSubstitute;
-using System;
 using FsCheck;
 using FsCheck.Fluent;
 
@@ -84,4 +82,30 @@ public class BrainControllerTests
     }
 
 
+    [Test]
+    public void ExitThenEnterChangesNothing()
+    {
+        Prop.ForAll<PositiveInt>(count =>
+        {
+            controller.hoverCount = count.Get;
+            controller.OnHoverExit();
+            controller.OnHoverEnter();
+            return controller.hoverCount == count.Get;
+        }).QuickCheckThrowOnFailure();
+    }
+
+    /// <summary>
+    /// Property based test to verify that OnHoverEnter() followed by OnHoverExit() does not change hoverCount.
+    /// </summary>
+    [Test]
+    public void EnterThenExitChangesNothing()
+    {
+        Prop.ForAll<PositiveInt>(count =>
+        {
+            controller.hoverCount = count.Get;
+            controller.OnHoverEnter();
+            controller.OnHoverExit();
+            return controller.hoverCount == count.Get;
+        }).QuickCheckThrowOnFailure();
+    }
 }

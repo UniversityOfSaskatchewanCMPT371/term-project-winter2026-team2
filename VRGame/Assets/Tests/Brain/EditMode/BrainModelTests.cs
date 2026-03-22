@@ -1,10 +1,7 @@
-using System;
-using System.Linq;
 using FsCheck;
 using FsCheck.Fluent;
 using NUnit.Framework;
 using UnityEngine;
-using FsCheck;
 
 public class BrainModelTests
 {
