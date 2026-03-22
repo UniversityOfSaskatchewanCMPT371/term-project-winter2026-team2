@@ -15,9 +15,9 @@ public interface IDoorView
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - `doorController` instance var must be non-null
+    /// - internal `doorController` instance var must be non-null, or equivalent [SerializeField] instance var must be non-null
     /// PostConditions:
-    /// - Checked to make sure DoorView will be able to function properly, has necessary values set for instance vars
+    /// - all internal instance variables of DoorView set to valid non-null references
     /// </remarks>
     public void Init();
 

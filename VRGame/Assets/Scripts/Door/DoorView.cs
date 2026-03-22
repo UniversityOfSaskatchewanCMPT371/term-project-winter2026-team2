@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -40,6 +41,9 @@ public class DoorView : MonoBehaviour, IDoorView
         /// </remarks>
         set
         {
+            Contract.Requires(value != null);
+            Contract.Ensures(this.doorController == value);
+
             if (value == null)
             {
                 Debug.LogError("value passed to setDoorController is null");
@@ -53,6 +57,9 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void Init()
     {
+        Contract.Requires(this.doorController != null || this.serializableDoorController != null);
+        Contract.Ensures(this.doorController != null);
+
         // If values set through inspector window, set the inner value to those
         if (serializableDoorController != null)
         {
