@@ -7,7 +7,6 @@ using UnityEngine.Assertions;
 /// <summary>
 /// The model of the LogicGame itself. Manages the initial setup of panels
 /// </summary>
-
 public class LogicGameModel : MonoBehaviour, IGridModel
 {
     /// <summary>
@@ -48,7 +47,15 @@ public class LogicGameModel : MonoBehaviour, IGridModel
         foreach(Transform childTransform in transform)
         {
             Panel panel = childTransform.gameObject.GetComponent<Panel>();
+            if(panel == null)
+            {
+                Debug.LogError("Could not find a panel script attached to one of my children!");
+            }
             Assert.IsNotNull(panel, "Could not find a panel script attached to one of my children!");
+            if(panelGrid[panel.GridX,panel.GridY] != null)
+            {
+                Debug.LogError($"There is already a panel at ({panel.GridX},{panel.GridY})");
+            }
             Assert.IsNull(panelGrid[panel.GridX,panel.GridY], $"There is already a panel at ({panel.GridX},{panel.GridY})");
             panelGrid[panel.GridX,panel.GridY] = panel;
             if(panel.Attribute == PanelAttribute.Start)
@@ -56,6 +63,10 @@ public class LogicGameModel : MonoBehaviour, IGridModel
                 if(!endpoints.ContainsKey(panel.PanelColour))
                 {
                     endpoints[panel.PanelColour] = (null, null);
+                }
+                if(endpoints[panel.PanelColour].start != null)
+                {
+                    Debug.LogError($"Duplicate start endpoint of colour {panel.PanelColour}");
                 }
                 Assert.IsNull(endpoints[panel.PanelColour].start, $"Duplicate start endpoint of colour {panel.PanelColour}");
                 endpoints[panel.PanelColour] = (panel, endpoints[panel.PanelColour].end);
@@ -65,6 +76,10 @@ public class LogicGameModel : MonoBehaviour, IGridModel
                 if(!endpoints.ContainsKey(panel.PanelColour))
                 {
                     endpoints[panel.PanelColour] = (null, null);
+                }
+                if(endpoints[panel.PanelColour].end != null)
+                {
+                    Debug.LogError($"Duplicate end endpoint of colour {panel.PanelColour}");
                 }
                 Assert.IsNull(endpoints[panel.PanelColour].end, $"Duplicate end endpoint of colour {panel.PanelColour}");
                 endpoints[panel.PanelColour] = (endpoints[panel.PanelColour].start, panel);
@@ -93,7 +108,15 @@ public class LogicGameModel : MonoBehaviour, IGridModel
         }
         foreach((PanelColour colour, (Panel start, Panel end) pair) in endpoints)
         {
+            if(pair.start == null)
+            {
+                Debug.LogError($"Missing {colour}'s start endpoint");
+            }
             Assert.IsNotNull(pair.start, $"Missing {colour}'s start endpoint");
+            if(pair.end == null)
+            {
+                Debug.LogError($"Missing {colour}'s end endpoint");
+            }
             Assert.IsNotNull(pair.end, $"Missing {colour}'s end endpoint");
         }
     }
