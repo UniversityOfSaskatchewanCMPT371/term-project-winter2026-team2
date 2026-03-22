@@ -122,11 +122,12 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// <inheritdoc/>
     public void Init()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
-            Debug.LogError("SceneChangerController instance already exists");
+            Debug.Log("SceneChangerController duplicate destroyed");
+            Destroy(gameObject);
+            return;
         }
-        Assert.IsNull(instance, "static var instance should be null, only one sceneChangerController may exist at a time");
 
         if (sceneManagerWrapper == null)
         {

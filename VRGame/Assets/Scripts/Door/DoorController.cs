@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Diagnostics.Contracts;
+using System.ComponentModel.Design;
 
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here
@@ -44,6 +46,9 @@ public class DoorController : MonoBehaviour, IDoorController
         /// - DoorController's `doorModel` instance variable set to input value
         set
         {
+            Contract.Requires(value != null);
+            Contract.Ensures(this.doorModel == value);
+
             if (value == null)
             {
                 Debug.LogError("value passed to set DoorModel is null");
@@ -86,6 +91,9 @@ public class DoorController : MonoBehaviour, IDoorController
         /// </remarks>
         set
         {
+            Contract.Requires(value != null);
+            Contract.Ensures(this.sceneChangerController == value);
+
             if (value == null)
             {
                 Debug.LogError("value passed to setSceneChangerController is null");
@@ -113,6 +121,8 @@ public class DoorController : MonoBehaviour, IDoorController
         /// - triggerDebounce is returned 
         get
         {
+            Contract.Ensures(Contract.Result<bool>() == triggerDebounce);
+
             return triggerDebounce;
         }
     }
@@ -121,6 +131,12 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <inheritdoc/>
     public void Init()
     {
+        Contract.Requires(this.doorModel != null || this.serializableDoorModel != null);
+        Contract.Requires(this.sceneChangerController != null || this.serializableSceneChangerController != null);
+
+        Contract.Ensures(this.doorModel != null);
+        Contract.Ensures(this.sceneChangerController != null);
+
         // see if an existing persistent service prefab exists,
         // if one exists then it should be used instead
         if (sceneChangerController == null)
@@ -162,6 +178,9 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <inheritdoc/>
     public void OnPlayerEnter(IPlayerController playerController)
     {
+
+        Contract.Requires(playerController != null);
+
         if (playerController == null)
         {
             Debug.LogError("playerController passed to OnPlayerEnter is null");

@@ -4,13 +4,11 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.4.0] - 2026-03-22
+## [1.3.3] - 2026-03-22
 
 ### Added
 
-- Peristent XR rig. Now we have a PlayerService component that spawns the XR rig 
-that stays singleton
-- Services.prefab which is a persistent mount for PlayerService component
+- dll files so everyone can use FsCheck without installing it themselves
 
 ## [1.3.2] - 2026-03-19
 

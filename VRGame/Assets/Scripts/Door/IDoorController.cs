@@ -32,7 +32,8 @@ public interface IDoorController
     /// - playerController must be non-null
     /// PostConditions:
     /// - Changes to state made in argument, `teleportPlayerTo` called on playerController,
-    /// moving them to position of `doorModel`s target door
+    /// moving them to position of `doorModel`s target door. Their rotation will be set to the door's
+    /// rotation as well
     /// </remarks>
     void OnPlayerEnter(IPlayerController player);
 
@@ -43,11 +44,9 @@ public interface IDoorController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - `doorModel` must be non-null
-    /// - Service.prefab exists within the scene
+    /// - `doorModel` and `sceneChangerController` instance vars must be non-null, or [SerializeField] equivalents must be non null
     /// PostConditions:
-    /// - `scenecChangerController` instance variable is automatically set to SceneChangerController component within Service.prefab
-    /// - Checked to make sure DoorController will be able to function properly, has values set for instance variables
+    /// - All internal instance variables will be valid non-null references
     /// </remarks>
     public void Init();
 }

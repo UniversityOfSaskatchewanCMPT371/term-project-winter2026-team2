@@ -75,8 +75,6 @@ public class SceneChangerController_SceneManager
         sceneC2.SceneManagerWrapper = sceneMW;
         // attempting to create another instance should fail
 
-        // tell unity to ignore error log so test can pass
-        LogAssert.Expect(LogType.Error, new Regex(".*"));
         try
         {
             sceneC2.Init();
