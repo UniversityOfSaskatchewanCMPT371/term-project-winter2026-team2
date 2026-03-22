@@ -216,9 +216,9 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
         Panel hoveredPanel = data.GetPanel(targetedPanel.X, targetedPanel.Y);
         if(hoveredPanel == null)
         {
-            Debug.LogError($"The panel we're trying to hover over ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+            Debug.LogError($"The panel we're trying press on ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
         }
-        Assert.IsNotNull(hoveredPanel, $"The panel we're trying to hover over ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+        Assert.IsNotNull(hoveredPanel, $"The panel we're trying to press on ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
         if(hoveredPanel.IsOccupied())
         {
             Debug.Log("But the panel I'm aiming at is occupied!");
