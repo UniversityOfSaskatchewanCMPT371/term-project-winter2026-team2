@@ -68,6 +68,15 @@ public class DoorTransitionSystemTest
         doorV.DoorController = doorController;
     }
 
+    public void SetupSceneChanger()
+    {
+        sceneChangerObject = new GameObject("SceneChanger");
+        Object.DontDestroyOnLoad(sceneChangerObject);
+
+        sceneChanger = sceneChangerObject.AddComponent<SceneChangerController>();
+        sceneChanger.SceneManagerWrapper = new SceneManagerWrapper();
+    }
+
     /// <summary>
     /// The component that is being tested.
     /// TODO : Replace the type to the class you are testing.
