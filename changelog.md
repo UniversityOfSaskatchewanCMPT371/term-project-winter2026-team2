@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.2]
+
+### Added
+
+- Added (and modified pre-existing) tooltips on all brain regions and portals
+
+
+## [1.4.1] - 2026-03-19
+
+### Fixed
+
+- Fixed overlapping ScaleOnHover system on brain region hover. Now, it only scales one brain region at a time.
+
+## [1.4.0] - 2026-03-18
 API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
