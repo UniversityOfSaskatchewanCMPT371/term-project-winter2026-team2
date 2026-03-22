@@ -40,6 +40,34 @@ public class DoorTransitionSystemTest
         return collider;
     }
 
+    public void SetupDoor()
+    {
+        doorObject = new GameObject("Door");
+        Object.DontDestroyOnLoad(doorObject);
+
+        // Creates the initial door
+        sourceDoor = doorObject.AddComponent<DoorModel>();
+        sourceDoor.ResetDoorLookup();
+        sourceDoor.DoorId = 1;
+        sourceDoor.TargerDoorId = 2;
+        sourceDoor.DestinationSceneId = 6; // Frontal Lobe
+
+        // Creates a target for the door
+        targetDoor = doorObject.AddComponent<DoorModel>();
+        targetDoor.DoorId = 2;
+        targetDoor.TargetDoorId = 1;
+
+        sourceDoor.Init();
+        targetDoor.Init();
+
+        DoorController doorC = doorObject.AddComponent<DoorController>();
+        doorC.DoorModel = sourceDoor;
+        doorC.SceneChangerController = sceneChanger;
+
+        DoorView doorV = doorObject.AddComponent<DoorView>();
+        doorV.DoorController = doorController;
+    }
+
     /// <summary>
     /// The component that is being tested.
     /// TODO : Replace the type to the class you are testing.
