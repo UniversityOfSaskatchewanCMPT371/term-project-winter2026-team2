@@ -20,6 +20,12 @@ public class ToolTipController
     private readonly IToolTipTrigger trigger;
 
     /// <summary>
+    /// Track the currently visible tooltip.
+    /// </summary>
+    private static GameObject activeTooltip;
+    
+
+    /// <summary>
     /// Initializes a new instance of the ToolTipController class.
     /// </summary>
     /// <param name="interactiveElement">The GameObject to show/hide as a tooltip.</param>
@@ -68,6 +74,7 @@ public class ToolTipController
     /// - `interactiveElement` must be initialized.
     /// Postconditions:
     /// - The interactive element is visible and active.
+    /// - Any previously visible tooltip is hidden.
     /// </remark>
     private void OnHoverEnter()
     {
@@ -76,7 +83,16 @@ public class ToolTipController
         {
             Debug.LogError("OnHoverEnter called but interactiveElement is null.");
         }
+        // Hide the previous active tooltip if it's different
+        if (activeTooltip != null && activeTooltip != interactiveElement)
+        {
+            activeTooltip.SetActive(false);
+        }
+
+        // Show the new tooltip and remember it as active
         interactiveElement.SetActive(true);
+        Debug.Assert(interactiveElement.activeSelf, "Tooltip should be active after OnHoverEnter.");
+        activeTooltip = interactiveElement;
     }
 
     /// <summary>
@@ -86,7 +102,7 @@ public class ToolTipController
     /// Preconditions:
     /// - `interactiveElement` must be initialized.
     /// Postconditions:
-    /// - The interactive element is hidden and inactive.
+    /// - If this tooltip is still the active one, it is hidden.
     /// </remarks>
     private void OnHoverExit()
     {
@@ -95,7 +111,13 @@ public class ToolTipController
         {
             Debug.LogError("OnHoverExit called but interactiveElement is null.");
         }
-        interactiveElement.SetActive(false);
+       // Only hide prev tooltip, not current one also
+        if (activeTooltip == interactiveElement)
+        {
+            interactiveElement.SetActive(false);
+            Debug.Assert(!interactiveElement.activeSelf, "Tooltip should be inactive after OnHoverExit.");
+            activeTooltip = null;
+        }
     }
 
     /// <summary>
@@ -112,10 +134,15 @@ public class ToolTipController
         if (trigger != null)
         {
             //unsubscribe to prevent memory leaks
-            //unsubscribing is safe even if it were never subscribed (does nothing)
             trigger.HoverEntered -= OnHoverEnter;
             trigger.HoverExited -= OnHoverExit;
         }
-       
+
+         // If this tooltip is still the active one, hide it
+        if (interactiveElement != null && activeTooltip == interactiveElement)
+        {
+            interactiveElement.SetActive(false);
+            activeTooltip = null;
+        }
     }
 }
