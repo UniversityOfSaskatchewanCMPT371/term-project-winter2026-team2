@@ -76,12 +76,14 @@ public interface IScaleOnHoverController
     void OnHoverEnter();
 
     /// <summary>
-    /// Hover exit event handler
+    /// Hover exit event handler.
+    /// This ensures only one brain region is hovered at a time by cancelling out other active (scaled) ones
     /// </summary>
     /// <pre-condition>
     ///     -   model != null
     /// </pre-condition>
     /// <post-condition>
+    ///     -   ensures only one brain region is hovered at a time
     ///     -   OnHoverExit() is called in model
     /// </post-condition>
     void OnHoverExit();
