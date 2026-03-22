@@ -15,7 +15,8 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "FsCheck.dll"
+        "FsCheck.dll",
+        "FSharp.Core.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [
