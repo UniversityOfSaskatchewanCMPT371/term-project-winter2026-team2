@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -44,12 +42,17 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     {
         isDragging = false;
         data = gameObject.GetComponent<LogicGameModel>();
+        if(data == null)
+        {
+            Debug.LogError("There is no LogicGameModel attached to this GameObject!");
+        }
         Assert.IsNotNull(data, "There is no LogicGameModel attached to this GameObject!");
         targetedPanel = null;
         inputActions = new XRIInputActions();
         currentPath = new Stack<Panel>();
     }
 
+#pragma warning disable IDE0051 //no, these methods ARE used by Unity, c#.
     /// <summary>
     /// Unity OnEnable() method, initializes InputActions mapping
     /// </summary>
@@ -86,6 +89,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
         inputActions.Disable();
     }
 
+#pragma warning disable IDE0051
     /// <summary>
     /// Handles a hover event from a Panel, changing the game state where necessary
     /// </summary>
@@ -93,7 +97,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// <param name="y">The Y coordinate of a Panel</param>
     /// <remarks>
     /// preconditions:
-    ///     - X and Y must be valid coordinates
+    ///     - X and Y must be valid coordinates (i.e, 0 <= X,Y < LogicGameModel.MAX_GRID_SIZE, must point to a valid Panel in the LogicGameModel)
     /// postconditions:
     ///     - If we're not dragging, then no post-conditions
     ///     - If we are dragging:
@@ -108,7 +112,11 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
         {
             Debug.Log("Dragging!");
             Panel hoveredPanel = data.GetPanel(targetedPanel.X, targetedPanel.Y);
-            Assert.IsNotNull(hoveredPanel, "The currently-hovered panel is null");
+            if(hoveredPanel == null)
+            {
+                Debug.LogError("The currently-hovered panel is apparently null");
+            }
+            Assert.IsNotNull(hoveredPanel, "The currently-hovered panel is apparently null");
             if(hoveredPanel.IsOccupied())
             {
                 Debug.Log("But the hovered panel is occupied!");
@@ -143,7 +151,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
                 currentPath.Peek().SetExitDirection(Direction.Down);
                 hoveredPanel.SetEntryDirection(Direction.Up);
                 currentPath.Push(hoveredPanel);
-            } else
+            } else //the hovered Panel is not adjacent to the previous Panel in our path
             {
                 isDragging = false;
                 ClearPath();
@@ -239,7 +247,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// </remarks>
     private void OnResetPress(InputAction.CallbackContext context)
     {
-        Debug.Log("This is where I would reset everything");
+        Debug.Log("Resetting game state...");
         data.ClearGrid();
     }
 
