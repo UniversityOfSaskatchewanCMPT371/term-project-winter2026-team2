@@ -89,12 +89,12 @@ class CoordinateRef
             {
                 Debug.LogError("CoordinateRef cannot have a negative X-coordinate");
             }
-            Assert.IsTrue(x >= 0, "X coordinate must be greater than 0");
+            Assert.IsTrue(value >= 0, "X coordinate must be greater than 0");
             if(value >= LogicGameModel.MAX_GRID_SIZE)
             {
                 Debug.LogError("CoordinateRef cannot have an X-coordinate larger than the LogicGameModel's max grid size");
             }
-            Assert.IsTrue(x <= LogicGameModel.MAX_GRID_SIZE - 1, "X coordinate must be less than the LogicGameModel's max grid size");
+            Assert.IsTrue(value <= LogicGameModel.MAX_GRID_SIZE - 1, "X coordinate must be less than the LogicGameModel's max grid size");
             x = value;
         }
     }
@@ -133,12 +133,12 @@ class CoordinateRef
             {
                 Debug.LogError("CoordinateRef cannot have a negative Y-coordinate");
             }
-            Assert.IsTrue(x >= 0, "Y coordinate must be greater than 0");
+            Assert.IsTrue(value >= 0, "Y coordinate must be greater than 0");
             if(value >= LogicGameModel.MAX_GRID_SIZE)
             {
                 Debug.LogError("CoordinateRef cannot have an Y-coordinate larger than the LogicGameModel's max grid size");
             }
-            Assert.IsTrue(x <= LogicGameModel.MAX_GRID_SIZE - 1, "Y coordinate must be less than the LogicGameModel's max grid size");
+            Assert.IsTrue(value <= LogicGameModel.MAX_GRID_SIZE - 1, "Y coordinate must be less than the LogicGameModel's max grid size");
             y = value;
         }
     }
