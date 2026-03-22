@@ -18,7 +18,12 @@ public class BillBoardView : MonoBehaviour
     /// X = left/right,  Y = up/down, Z = forward/back
     /// default values to be top left
     /// </remarks>
-    public Vector3 offset = new Vector3(-0.6f, 0.15f, 2.63f); // left, up, forward
+    public Vector3 offset = new Vector3(0.0f, 0.0f, 2.63f); // middle, forward
+
+    /// <summary>
+    /// Additional tilt applied after facing the camera (in degrees).
+    /// </summary>
+    public float tiltAngle = -10f; // tilt bottom side towards camera
 
     /// <summary>
     /// Updates the object's position and rotation
@@ -29,7 +34,7 @@ public class BillBoardView : MonoBehaviour
     /// - <c>target</c> must be assigned in the Unity Editor.
     /// - A camera tagged as 'Main Camera' must exist in the scene.
     /// Postconditions:
-    /// - The object's rotation is set to face the camera (so its readable)
+    /// - The object's rotation is set to face the camera with extra tilt (so its readable)
     /// </remarks>
     void LateUpdate()
     {
@@ -42,5 +47,8 @@ public class BillBoardView : MonoBehaviour
 
         // Rotate the tooltip so it faces the camera.
         transform.LookAt(target.position, Vector3.up);
+
+        // Then apply an additional tilt around the local X axis.
+        transform.Rotate(Vector3.right, tiltAngle, Space.Self);
     }
 }
