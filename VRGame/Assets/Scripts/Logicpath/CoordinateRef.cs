@@ -25,7 +25,8 @@ class CoordinateRef
     /// <param name="y">The Y-coordinate for a panel</param>
     /// <remarks>
     /// preconditions:
-    ///     - X and Y must be non-negative and be less than the LogicGameModel's grid size
+    ///     - X and Y are non-negative
+    ///     - X and Y are less than the LogicGameModel's grid size
     /// postconditions:
     ///     - The object is initialized
     /// </remarks>
@@ -74,12 +75,14 @@ class CoordinateRef
         {
             return x;
         }
+
         /// <summary>
         /// Setter for the X-coordinate
         /// </summary>
         /// <remarks>
         /// preconditions:
-        ///     - when writing, X must be non-negative and less than the LogicGameModel's grid size
+        ///     - X is non-negative
+        ///     - X is than the LogicGameModel's grid size
         /// postconditions:
         ///     - the X-coordinate is updated to the new value
         /// </remarks>
@@ -118,12 +121,14 @@ class CoordinateRef
         {
             return y;
         }
+
         /// <summary>
         /// Setter for the Y-coordinate
         /// </summary>
         /// <remarks>
         /// preconditions:
-        ///     - when writing, Y must be non-negative and less than the LogicGameModel's grid size
+        ///     - Y is non-negative
+        ///     - Y is less than the LogicGameModel's grid size
         /// postconditions:
         ///     - the Y-coordinate is updated to the new value
         /// </remarks>

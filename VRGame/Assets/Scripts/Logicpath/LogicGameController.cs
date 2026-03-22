@@ -97,7 +97,9 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// <param name="y">The Y coordinate of a Panel</param>
     /// <remarks>
     /// preconditions:
-    ///     - X and Y must be valid coordinates (i.e, 0 <= X,Y < LogicGameModel.MAX_GRID_SIZE, must point to a valid Panel in the LogicGameModel)
+    ///     - X and Y are non-negative
+    ///     - X and Y are than LogicGameModel.MAX_GRID_SIZE
+    ///     - X and Y point to a panel in data
     /// postconditions:
     ///     - If we're not dragging, then no post-conditions
     ///     - If we are dragging:
@@ -171,7 +173,9 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// <param name="y">The Y coordinate of a Panel</param>
     /// <remarks>
     /// preconditions:
-    ///     - X and Y must be valid coordinates
+    ///     - X and Y are non-negative
+    ///     - X and Y are than LogicGameModel.MAX_GRID_SIZE
+    ///     - X and Y point to a panel in data
     /// postconditions:
     ///     - If we're not hovering on a new panel, clear the targetedPanel coordinates
     /// </remarks>

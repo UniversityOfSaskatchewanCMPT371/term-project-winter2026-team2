@@ -400,7 +400,8 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
         /// </summary>
         /// <remarks>
         /// preconditions:
-        ///     - when writing, X must be non-negative and less than the LogicGameModel's grid size
+        ///     - X is non-negative
+        ///     - X is less than the LogicGameModel's grid size
         /// postconditions:
         ///     - the X-coordinate is updated to the new value
         /// </remarks>
@@ -445,7 +446,8 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
         /// </summary>
         /// <remarks>
         /// preconditions:
-        ///     - when writing, Y must be non-negative and less than the LogicGameModel's grid size
+        ///     - Y is non-negative
+        ///     - Y is less than the LogicGameModel's grid size
         /// postconditions:
         ///     - the Y-coordinate is updated to the new value
         /// </remarks>
