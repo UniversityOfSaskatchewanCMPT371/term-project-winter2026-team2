@@ -125,6 +125,12 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
                 ClearPath();
                 return;
             }
+            if(hoveredPanel.PanelColour != currentPath.Peek().PanelColour && hoveredPanel.Attribute != PanelAttribute.Normal)
+            {
+                Debug.Log("But we're trying to enter an endpoint of the wrong colour!");
+                ClearPath();
+                return;
+            }
             // why can't i use a switch statement here???
             if(currentPath.Peek().LeftNeighbor != null && hoveredPanel.Equals(currentPath.Peek().LeftNeighbor)) //moving left
             {
