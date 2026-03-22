@@ -1,4 +1,5 @@
-using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// A coordinate reference to a targeted Panel.

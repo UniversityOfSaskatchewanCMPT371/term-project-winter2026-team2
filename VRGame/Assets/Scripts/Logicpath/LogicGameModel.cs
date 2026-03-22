@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// The model of the LogicGame itself. Manages the initial setup of panels
