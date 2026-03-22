@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.3]
+
+### Added
+
+- Added unfinished mini game signs to all scenes except Frontal Lobe scene
+
 ## [1.4.2]
 
 ### Added
