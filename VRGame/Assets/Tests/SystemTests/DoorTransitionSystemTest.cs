@@ -131,9 +131,6 @@ public class DoorTransitionSystemTest
     [UnityTest]
     public IEnumerator PlayerEntersDoorToNewScene()
     {
-        LogAssert.Expect(LogType.Error, new Regex("Problem detected while opening the Scene file:*"));
-        LogAssert.Expect(LogType.Error, new Regex("Prefab instance problem. Missing Prefab*"));
-
         doorV.OnTriggerEnter(playerCollider);
 
         DoorController doorController = doorObject.GetComponent<DoorController>();
