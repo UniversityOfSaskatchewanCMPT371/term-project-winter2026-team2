@@ -19,6 +19,27 @@ public class DoorTransitionSystemTest
     private DoorModel targetDoor;
     private SceneChangerController sceneChanger;
 
+
+    /// <summary>
+    /// This constructs the hierarchy that DoorView expects
+    /// (Mirrors the XR Rig structure of the scenes)
+    /// </summary>
+    private Collider SetupPlayer()
+    {
+        playerRig = new GameObject("PlayerRig");
+        playerRig.AddComponent<PlayerModel>();
+        playerRig.AddComponent<PlayerView>();
+        playerRig.AddComponent<PlayerController>();
+
+        GameObject mainCamera = new GameObject("MainCamera");
+        mainCamera.tag = "MainCamera";
+        mainCamera.transform.SetParent(playerRig.transform);
+        BoxCollider collider = mainCamera.AddComponent<BoxCollider>();
+
+        Object.DontDestroyOnLoad(playerRig);
+        return collider;
+    }
+
     /// <summary>
     /// The component that is being tested.
     /// TODO : Replace the type to the class you are testing.
