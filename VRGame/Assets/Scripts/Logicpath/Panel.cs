@@ -504,6 +504,7 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// preconditions:
     ///     - There is a PanelTextureManager and XRSimpleInteractable attached to this GameObject
     ///     - There is a parenting GameObject with a LogicGameController attached to it
+    ///     - gridX and grid Y are non-negative and are less than LogicGameModel.MAX_GRID_SIZE
     /// postconditions:
     ///     - all variables (besides *Neighbors) are initialized
     ///     - Texture is refreshed to reflect state
@@ -511,8 +512,26 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// </remarks>
     public void Awake()
     {
-        Assert.IsTrue(this.gridX >= 0, "Grid X coordinate cannot be negative");
-        Assert.IsTrue(this.gridY >= 0, "Grid Y coordinate cannot be negative");
+        if(gridX < 0)
+        {
+            Debug.LogError("Panel cannot have a negative X-coordinate");
+        }
+        Assert.IsTrue(gridX >= 0, "X coordinate must be greater than 0");
+        if(gridX >= LogicGameModel.MAX_GRID_SIZE)
+        {
+            Debug.LogError("Panel cannot have an X-coordinate larger than the LogicGameModel's max grid size");
+        }
+        Assert.IsTrue(gridX <= LogicGameModel.MAX_GRID_SIZE - 1, "X coordinate must be less than the LogicGameModel's max grid size");
+        if(gridY < 0)
+        {
+            Debug.LogError("Panel cannot have a negative Y-coordinate");
+        }
+        Assert.IsTrue(gridY >= 0, "Y coordinate must be greater than 0");
+        if(gridY >= LogicGameModel.MAX_GRID_SIZE)
+        {
+            Debug.LogError("Panel cannot have an X-coordinate larger than the LogicGameModel's max grid size");
+        }
+        Assert.IsTrue(gridY <= LogicGameModel.MAX_GRID_SIZE - 1, "Y coordinate must be less than the LogicGameModel's max grid size");
     
         entryDirection = Direction.None;
         exitDirection = Direction.None;
@@ -522,17 +541,33 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
         leftNeighbor = null;
 
         panelTextureManager = GetComponent<PanelTextureManager>();
+        if(panelTextureManager == null)
+        {
+            Debug.LogError("Could not find texture manager!");
+        }
         Assert.IsNotNull(panelTextureManager, "Could not find texture manager!");
         panelTextureManager.RefreshTexture();
 
         xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
+        if(xRSimpleInteractable == null)
+        {
+            Debug.LogError("Could not find the XR interactable!");
+        }
         Assert.IsNotNull(xRSimpleInteractable, "Could not find the XR interactable!");
         xRSimpleInteractable.hoverEntered.AddListener(OnHoverEntered);
         xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
 
+        if(transform.parent == null)
+        {
+            Debug.LogError("There is no parent object for this panel!");
+        }
         Assert.IsNotNull(transform.parent, "There is no parent object for this panel!");
         logicGameController = transform.parent.gameObject.GetComponent<LogicGameController>();
-        Assert.IsNotNull(logicGameController, "Could not find LogicGameController!");
+        if(logicGameController == null)
+        {
+            Debug.LogError("Could not find the parent's LogicGameController!");
+        }
+        Assert.IsNotNull(logicGameController, "Could not find the parent's LogicGameController!");
     }
 
     /// <summary>
