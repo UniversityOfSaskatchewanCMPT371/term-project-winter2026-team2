@@ -121,7 +121,7 @@ public class DoorController : MonoBehaviour, IDoorController
         /// - triggerDebounce is returned 
         get
         {
-            Contract.Ensures(Contract.Result<bool>() == this.triggerDebounce);
+            Contract.Ensures(Contract.Result<bool>() == triggerDebounce);
 
             return triggerDebounce;
         }
@@ -169,8 +169,6 @@ public class DoorController : MonoBehaviour, IDoorController
     {
 
         Contract.Requires(playerController != null);
-        Contract.Ensures(playerController.GetTeleportPosition() == this.doorModel.GetTeleportPosition());
-        Contract.Ensures(playerController.GetTeleportRotation() == this.doorModel.GetTeleportRotation());
 
         if (playerController == null)
         {

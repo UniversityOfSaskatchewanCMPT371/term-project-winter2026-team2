@@ -77,6 +77,9 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void OnTriggerEnter(Collider other)
     {
+        Contract.Requires(other != null);
+        Contract.Requires(this.doorController != null);
+
         if (other == null)
         {
             Debug.LogError("Collider other is null");
@@ -93,6 +96,9 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void OnTriggerEnterLogic(IColliderWrapper colliderWrapper)
     {
+
+        Contract.Requires(colliderWrapper != null);
+
         if (!colliderWrapper.CompareGameObjectTag("MainCamera"))
         {
             Debug.Log("Component other than player collided with door");
@@ -125,6 +131,8 @@ public class DoorView : MonoBehaviour, IDoorView
     /// </remarks>
     private void Start()
     {
+        Contract.Requires(this.doorController != null || this.serializableDoorController != null);
+        Contract.Ensures(this.doorController != null);
         Init();
     }
 }
