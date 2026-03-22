@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2]
+
+### Added
+
+- Added (and modified pre-existing) tooltips on all brain regions and portals
+
+
 ## [1.4.1] - 2026-03-19
 
 ### Fixed
