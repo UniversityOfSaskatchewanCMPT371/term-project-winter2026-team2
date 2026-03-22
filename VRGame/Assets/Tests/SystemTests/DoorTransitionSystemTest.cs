@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// System test for the door/scene transition
+/// An end-to-end pipling of the player collider entering a door,
+/// the door controller initiates a scene from the scene changer controller,
+/// then the correct scene becomes active
 /// </summary>
 public class DoorTransitionSystemTest
 {
@@ -44,7 +47,11 @@ public class DoorTransitionSystemTest
         return collider;
     }
 
-    public void SetupDoor()
+    /// <summary>
+    /// Creates a door GameObject with a source and target door.
+    /// The source door is configured to transition to the Occipital Lobe
+    /// </summary>
+    private void SetupDoor()
     {
         doorObject = new GameObject("Door");
         UnityEngine.Object.DontDestroyOnLoad(doorObject);
@@ -54,7 +61,7 @@ public class DoorTransitionSystemTest
         sourceDoor.ResetDoorLookup();
         sourceDoor.DoorId = 1;
         sourceDoor.TargetDoorId = 2;
-        sourceDoor.DestinationSceneId = 1; // Frontal Lobe
+        sourceDoor.DestinationSceneId = 4; // Occipital Lobe
 
         // Creates a target for the door
         targetDoor = doorObject.AddComponent<DoorModel>();
@@ -72,7 +79,11 @@ public class DoorTransitionSystemTest
         doorV.DoorController = doorC;
     }
 
-    public void SetupSceneChanger()
+    /// <summary>
+    /// Creates a SceneChangerController with a SceneManagerWrapper
+    /// Needs to be called first, since other components depend on this
+    /// </summary>
+    private void SetupSceneChanger()
     {
         sceneChangerObject = new GameObject("SceneChanger");
         UnityEngine.Object.DontDestroyOnLoad(sceneChangerObject);
@@ -111,6 +122,11 @@ public class DoorTransitionSystemTest
         UnityEngine.Object.Destroy(sceneChangerObject);
     }
 
+    /// <summary>
+    /// Simulates a player entering a door and verifies that the scene transitions
+    /// to the expected destination scene (in this case, the Occipital Lobe)
+    /// Also has a 10 second timeout to prevent any hanging
+    /// </summary>
     [UnityTest]
     public IEnumerator PlayerEntersDoorToNewScene()
     {
@@ -124,7 +140,7 @@ public class DoorTransitionSystemTest
             yield return null;
         }
 
-        Assert.AreEqual((int)SceneEnum.PracticeRoom, SceneManager.GetActiveScene().buildIndex,
-        "Active scene should be FrontalLobe after door transition");
+        Assert.AreEqual((int)SceneEnum.OccipitalLobe, SceneManager.GetActiveScene().buildIndex,
+        "Active scene should be OccipitalLobe after door transition");
     }
 }
