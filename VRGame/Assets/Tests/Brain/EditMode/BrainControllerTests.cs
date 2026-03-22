@@ -28,12 +28,14 @@ public class BrainControllerTests
     public void Setup()
     {
         go = new GameObject();
-        BrainController controller = go.AddComponent<BrainController>();
+        controller = go.AddComponent<BrainController>();
         mockModel = Substitute.For<IBrainModel>();
         mockView = Substitute.For<IBrainView>();
 
         controller.ModelMock = mockModel;
         controller.ViewMock = mockView;
+
+        
     }
 
     /// <summary>
@@ -68,7 +70,7 @@ public class BrainControllerTests
     [Test]
     public void OnHoverExitDecrementsUnlessZero()
     {
-        Prop.ForAll<PositiveInt>(count =>
+        Prop.ForAll<NonNegativeInt>(count =>
         {
             controller.hoverCount = count.Get;
             controller.OnHoverExit();
