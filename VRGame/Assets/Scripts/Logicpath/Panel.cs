@@ -147,7 +147,7 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     }
 
     /// <summary>
-    /// Accessor for top neighbour panel
+    /// Accessor for top neighbour Panel
     /// </summary>
     /// <remarks>
     /// preconditions:
@@ -158,11 +158,30 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// </remarks>
     public Panel TopNeighbor
     {
+        /// <summary>
+        /// Getter for the top neighbor Panel
+        /// </summary>
+        /// <returns>A reference to the top neighbor Panel if it exists, null otherwise</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - either null or the top neighbor Panel is returned
+        /// </remarks>
         get
         {
             return topNeighbor;
         }
 
+        /// <summary>
+        /// Setter for the top neighbor Panel
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - the reference to the top neighbor Panel is updated
+        /// </remarks>
         set
         {
             topNeighbor = value;
@@ -172,20 +191,32 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - If getting, the right neighbor of this Panel is returned if it exists, null otherwise
-    ///     - If setting, the right neighbor of this Panel is written
-    /// </remarks>
     public Panel RightNeighbor
     {
+        /// <summary>
+        /// Getter for the right neighbor Panel
+        /// </summary>
+        /// <returns>A reference to the right neighbor Panel if it exists, null otherwise</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - either null or the right neighbor Panel is returned
+        /// </remarks>
         get
         {
             return rightNeighbor;
         }
 
+        /// <summary>
+        /// Setter for the right neighbor Panel
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - the reference to the right neighbor Panel is updated
+        /// </remarks>
         set
         {
             rightNeighbor = value;
@@ -195,20 +226,32 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for down neighbour panel
     /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - If getting, the lower neighbor of this Panel is returned if it exists, null otherwise
-    ///     - If setting, the lower neighbor of this Panel is written
-    /// </remarks>
     public Panel DownNeighbor
     {
+        /// <summary>
+        /// Getter for the down neighbor Panel
+        /// </summary>
+        /// <returns>A reference to the down neighbor Panel if it exists, null otherwise</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - either null or the down neighbor Panel is returned
+        /// </remarks>
         get
         {
             return downNeighbor;
         }
 
+        /// <summary>
+        /// Setter for the down neighbor Panel
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - the reference to the down neighbor Panel is updated
+        /// </remarks>
         set 
         {
             downNeighbor = value;
@@ -218,20 +261,32 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for left neighbour panel
     /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - If getting, the left neighbor of this Panel is returned if it exists, null otherwise
-    ///     - If setting, the left neighbor of this Panel is written
-    /// </remarks>
     public Panel LeftNeighbor
     {
+        /// <summary>
+        /// Getter for the left neighbor Panel
+        /// </summary>
+        /// <returns>A reference to the left neighbor Panel if it exists, null otherwise</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - either null or the left neighbor Panel is returned
+        /// </remarks>
         get
         {
             return leftNeighbor;
         }
 
+        /// <summary>
+        /// Setter for the left neighbor Panel
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - the reference to the left neighbor Panel is updated
+        /// </remarks>
         set
         {
             leftNeighbor = value;
@@ -239,22 +294,36 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     }
 
     /// <summary>
-    /// Accessor for panel attribute (normal, start, exit, block)
+    /// Accessor for Panel attribute (normal, start, exit, block)
     /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - If getting, the attribute of this Panel is returned
-    ///     - If setting, the attribute of this Panel is overwritten, and the texture is refreshed to reflect the state
     /// </remarks>
     public PanelAttribute Attribute
     {
+        /// <summary>
+        /// Getter for this Panel's attribute
+        /// </summary>
+        /// <returns>This Panel's attribute</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - this Panel's attribute is returned
+        /// </remarks>
         get
         {
             return attribute;
         }
 
+        /// <summary>
+        /// Setter for this Panel's attribute
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - this Panel's attribute is overwritten with the new value
+        ///     - this Panel's texture is updated to match the change
+        /// </remarks>
         set
         {
             attribute = value;
@@ -274,10 +343,31 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// </remarks>
     public PanelColour PanelColour
     {
+        /// <summary>
+        /// Getter for this Panel's colour
+        /// </summary>
+        /// <returns>This Panel's colour</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - this Panel's colour is returned
+        /// </remarks>
         get
         {
             return panelColour;
         }
+
+        /// <summary>
+        /// Setter for this Panel's colour
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - this Panel's colour is overwritten with the new value
+        ///     - this Panel's texture is updated to match the change
+        /// </remarks>
         set
         {
             panelColour = value;
@@ -286,24 +376,46 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     }
 
     /// <summary>
-    /// Accessor for grid X coordinate
+    /// Accessor for this Panel's X-coordinate
     /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - If getting, the X-coordinate of this Panel is returned
-    ///     - If setting, the X-coordinate of this Panel is overwritten
-    /// </remarks>
     public int GridX
     {
+        /// <summary>
+        /// Getter for the X-coordinate
+        /// </summary>
+        /// <returns>This Panel's X-coordinate</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - The X-coordinate is returned
+        /// </remarks>
         get
         {
             return gridX;
         }
 
+        /// <summary>
+        /// Setter for the X-coordinate
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - when writing, X must be non-negative and less than the LogicGameModel's grid size
+        /// postconditions:
+        ///     - the X-coordinate is updated to the new value
+        /// </remarks>
         set
         {
+            if(value < 0)
+            {
+                Debug.LogError("Panel cannot have a negative X-coordinate");
+            }
+            Assert.IsTrue(value >= 0, "X coordinate must be greater than 0");
+            if(value >= LogicGameModel.MAX_GRID_SIZE)
+            {
+                Debug.LogError("Panel cannot have an X-coordinate larger than the LogicGameModel's max grid size");
+            }
+            Assert.IsTrue(value <= LogicGameModel.MAX_GRID_SIZE - 1, "X coordinate must be less than the LogicGameModel's max grid size");
             gridX = value;
         }
     }
@@ -311,22 +423,44 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <summary>
     /// Accessor for grid Y coordinate
     /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - If getting, the Y-coordinate of this Panel is returned
-    ///     - If setting, the Y-coordinate of this Panel is overwritten
-    /// </remarks>
     public int GridY
     {
+        /// <summary>
+        /// Getter for the Y-coordinate
+        /// </summary>
+        /// <returns>This Panel's Y-coordinate</returns>
+        /// <remarks>
+        /// preconditions:
+        ///     - None
+        /// postconditions:
+        ///     - The Y-coordinate is returned
+        /// </remarks>
         get
         {
             return gridY;
         }
 
+        /// <summary>
+        /// Setter for the Y-coordinate
+        /// </summary>
+        /// <remarks>
+        /// preconditions:
+        ///     - when writing, Y must be non-negative and less than the LogicGameModel's grid size
+        /// postconditions:
+        ///     - the Y-coordinate is updated to the new value
+        /// </remarks>
         set
         {
+            if(value < 0)
+            {
+                Debug.LogError("Panel cannot have a negative Y-coordinate");
+            }
+            Assert.IsTrue(value >= 0, "Y coordinate must be greater than 0");
+            if(value >= LogicGameModel.MAX_GRID_SIZE)
+            {
+                Debug.LogError("Panel cannot have an X-coordinate larger than the LogicGameModel's max grid size");
+            }
+            Assert.IsTrue(value <= LogicGameModel.MAX_GRID_SIZE - 1, "Y coordinate must be less than the LogicGameModel's max grid size");
             gridY = value;
         }
     }
