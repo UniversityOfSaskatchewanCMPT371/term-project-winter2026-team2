@@ -179,9 +179,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// <param name="y">The Y coordinate of a Panel</param>
     /// <remarks>
     /// preconditions:
-    ///     - X and Y are non-negative
-    ///     - X and Y are than LogicGameModel.MAX_GRID_SIZE
-    ///     - X and Y point to a panel in data
+    ///     - None
     /// postconditions:
     ///     - If we're not hovering on a new panel, clear the targetedPanel coordinates
     /// </remarks>
@@ -200,7 +198,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// <param name="context">The CallbackContext for this action</param>
     /// <remarks>
     /// preconditions:
-    ///     - We are not pressing the right trigger
+    ///     - None
     /// postconditions:
     ///     - If we're hovering over a non-occupied Panel, begin a drag movement
     ///     - Otherwise, do nothing
@@ -238,7 +236,7 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     /// <param name="context">The CallbackContext for this action</param>
     /// <remarks>
     /// preconditions:
-    ///     We are holding down the right trigger
+    ///     - None
     /// postconditions:
     ///     - If we are not in a dragging state, do nothing
     ///     - If our drag ends on an endpoint, complete the drag movement
