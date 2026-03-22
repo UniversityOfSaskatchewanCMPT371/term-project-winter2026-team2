@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 /// <summary>
 /// The model of the LogicGame itself. Manages the initial setup of panels
 /// </summary>
-public class LogicGameModel : MonoBehaviour, IGridModel
+public class LogicGameModel : MonoBehaviour, ILogicGameModel
 {
     /// <summary>
     /// The bounds of any logic game grid

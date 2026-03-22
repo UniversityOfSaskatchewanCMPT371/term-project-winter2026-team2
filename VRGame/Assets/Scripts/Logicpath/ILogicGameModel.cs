@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Model portion of the grid module for logic path minigame.
 /// </summary>
-public interface IGridModel
+public interface ILogicGameModel
 {
     /// <summary>
     /// Gets the GridCell object at the specified coordinates
