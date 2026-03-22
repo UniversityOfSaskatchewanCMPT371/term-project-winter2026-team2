@@ -22,7 +22,7 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// Wrapper for unity's sceneManager. Created to make unit testing easier. Will
     /// be used to asynchronously load new scenes
     /// </summary>
-    private ISceneManagerWrapper sceneManagerWrapper;
+    private ISceneManagerWrapper sceneManagerWrapper = new SceneManagerWrapper();
 
     /// <summary>
     /// Public accessor for sceneManagerWrapper
@@ -47,6 +47,10 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
             Assert.IsNotNull(value, "sceneManagerWrapper cannot be null");
 
             sceneManagerWrapper = value;
+        }
+        get
+        {
+            return sceneManagerWrapper;
         }
     }
 
@@ -103,12 +107,14 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneKey));
 
+        Debug.Log("SceneChangerController.LoadScene(): Valid start");
         // get Load new scene with sceneManager through wrapper
         IAsyncOperationWrapper loadingSceneWrapper = sceneManagerWrapper.LoadSceneAsync(sceneKey);
 
         // reset debounce when the scene finishes loading
         loadingSceneWrapper.Completed += (o) => resetDebounce();
 
+        Debug.Log("SceneChangerController.LoadScene() success");
         return loadingSceneWrapper;
     }
 
@@ -116,7 +122,6 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     /// <inheritdoc/>
     public void Init()
     {
-
         if (instance != null)
         {
             Debug.LogError("SceneChangerController instance already exists");
@@ -154,6 +159,5 @@ public class SceneChangerController : MonoBehaviour, ISceneChangerController
     private void Start()
     {
         Init();
-        DontDestroyOnLoad(instance);
     }
 }

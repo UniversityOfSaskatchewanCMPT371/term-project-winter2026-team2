@@ -1,0 +1,26 @@
+{
+    "name": "BrainTests",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor.TestRunner",
+        "Brain",
+        "ScriptTemplates"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "FsCheck.dll",
+        "FSharp.Core.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

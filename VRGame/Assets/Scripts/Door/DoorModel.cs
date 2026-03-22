@@ -276,7 +276,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
             doorLookup = new Dictionary<int, IDoorModel>();
             Debug.Log("doorLookup dictionary created");
         }
-        Assert.IsFalse(doorLookup.ContainsKey(doorId), "A doorModel with this ID already exists");
+        Assert.IsFalse(doorLookup.ContainsKey(doorId), $"A doorModel with this ID: ${doorId} already exists");
 
         if (doorId < 0)
         {
@@ -298,6 +298,11 @@ public class DoorModel : MonoBehaviour, IDoorModel
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), destinationSceneId));
 
         doorLookup[doorId] = this;
+        Debug.Log("DoorLookup dict:");
+        foreach (var i in doorLookup)
+        {
+            Debug.Log($"    {i.Key}: {i.Value.TargetDoorId}");
+        }
         Debug.Log("DoorModel Initialized");
     }
 
@@ -318,8 +323,8 @@ public class DoorModel : MonoBehaviour, IDoorModel
 
     /// <summary>
     /// A `MonoBehaviour` function, called on the frame when a script is enabled, before
-    /// any `Update()` functions are called. - Important to call on Start() instead of Awake(),
-    /// as it depends on the existence of other elements.
+    /// any `Update()` functions are called. - Important to call on Awake() instead of Start()
+    /// since loadingScene.Completed event is triggered on Start().
     /// </summary>
     /// <remarks>
     /// Preconditions:
@@ -327,7 +332,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// PostConditions:
     /// - all side effects caused by calling Init();
     /// </remarks>
-    private void Start()
+    private void Awake()
     {
         Contract.Requires(this.doorId >= 0);
         Contract.Requires(this.targetDoorId >= 0);
@@ -338,6 +343,19 @@ public class DoorModel : MonoBehaviour, IDoorModel
         Contract.Ensures(doorLookup.ContainsKey(this.doorId));
         Contract.Ensures(doorLookup[this.doorId] == this);
         
+        // Invoking Init() in Awake() allows the doorId
+        // to be added to the dictionary before model.GetTargetDoor() 
+        // gets invoked by 'loadingScene.Completed' event.
+        // Preventing errors from occuring when model.GetTargetDoor() yields 'Target door not found'
         Init();
+    }
+
+    void OnDestroy()
+    {
+        // There was a problem with scenes loading and unloading
+        if (doorLookup.ContainsKey(doorId))
+        {
+            doorLookup.Remove(doorId);
+        }
     }
 }

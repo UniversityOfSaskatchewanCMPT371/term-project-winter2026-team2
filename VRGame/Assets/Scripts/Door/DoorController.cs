@@ -192,6 +192,7 @@ public class DoorController : MonoBehaviour, IDoorController
         if (!Enum.IsDefined(typeof(SceneEnum), sceneId))
         {
             Debug.LogError("Invalid destination scene id. Not in enum");
+            triggerDebounce = false;
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneId));
 
@@ -207,7 +208,11 @@ public class DoorController : MonoBehaviour, IDoorController
             playerController.teleportPlayerTo(teleportPosition, teleportRotation);
             triggerDebounce = false;
         };
+        Debug.Log("DoorController.OnPlayerEnter() success");
+    }
 
-
+    private void Start()
+    {
+        Init();
     }
 }

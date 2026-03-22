@@ -5,4 +5,12 @@
 public enum SceneEnum
 {
     Hub = 0,
+    PracticeRoom = 1,
+    Cerebrum = 2,
+    Temporal = 3,
+    OccipitalLobe = 4,
+    ParietalLobe = 5,
+    FrontalLobe = 6,
+
+    TestScene = 7,
 }
