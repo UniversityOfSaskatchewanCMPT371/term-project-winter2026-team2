@@ -166,8 +166,11 @@ public interface IDoorModel
     /// </summary>
     /// <remarks>
     /// Precondtions:
-    /// - All instance variables of DoorModel must be set. Another doorModel with
-    /// the same Id must not already exist
+    /// - All instance variables of DoorModel must be set.
+    /// - doorId must be non-negative
+    /// - targetDoorId must be non-negative
+    /// - destinationSceneId must be defined in SceneEnum 
+    /// - Another doorModel with the same doorId must not already exist
     /// Postconditions:
     /// - Static lookup table for all DoorModels allocated if doesn't already exits.
     /// This door is added to it.

@@ -7,6 +7,22 @@
 - Fixed overlapping ScaleOnHover system on brain region hover. Now, it only scales one brain region at a time.
 
 ## [1.4.0] - 2026-03-18
+API changes / Backward compatible features / Backward compatible bug fixes.
+You do not need to update the version for refactors or code improvements that
+do not change functionality nor do you need to when you you write tests.
+
+## [1.3.3] - 2026-03-22
+
+### Added
+
+- dll files so everyone can use FsCheck without installing it themselves
+
+## [1.3.2] - 2026-03-19
+
+### Fixed
+
+- Adjusted ToolTips To bottom-center of view to reduce clipping.
+- Allow only one ToolTip to appear at a time.
 
 ### Added
 

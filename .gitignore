@@ -126,3 +126,10 @@ CodeCoverage/
 .env
 .env.*
 
+#############################################
+# Plugins that need exemption
+#############################################
+!Assets/Plugins/**/*.dll
+!Assets/Plugins/**/*.dll.meta
+!Assets/Plugins/**/*.meta
+

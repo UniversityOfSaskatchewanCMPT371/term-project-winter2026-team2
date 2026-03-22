@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -40,6 +41,9 @@ public class DoorView : MonoBehaviour, IDoorView
         /// </remarks>
         set
         {
+            Contract.Requires(value != null);
+            Contract.Ensures(this.doorController == value);
+
             if (value == null)
             {
                 Debug.LogError("value passed to setDoorController is null");
@@ -53,6 +57,9 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void Init()
     {
+        Contract.Requires(this.doorController != null || this.serializableDoorController != null);
+        Contract.Ensures(this.doorController != null);
+
         // If values set through inspector window, set the inner value to those
         if (serializableDoorController != null)
         {
@@ -70,6 +77,9 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void OnTriggerEnter(Collider other)
     {
+        Contract.Requires(other != null);
+        Contract.Requires(this.doorController != null);
+
         if (other == null)
         {
             Debug.LogError("Collider other is null");
@@ -86,6 +96,9 @@ public class DoorView : MonoBehaviour, IDoorView
     /// <inheritdoc/>
     public void OnTriggerEnterLogic(IColliderWrapper colliderWrapper)
     {
+
+        Contract.Requires(colliderWrapper != null);
+
         if (!colliderWrapper.CompareGameObjectTag("MainCamera"))
         {
             Debug.Log("Component other than player collided with door");
@@ -118,6 +131,8 @@ public class DoorView : MonoBehaviour, IDoorView
     /// </remarks>
     private void Start()
     {
+        Contract.Requires(this.doorController != null || this.serializableDoorController != null);
+        Contract.Ensures(this.doorController != null);
         Init();
     }
 }
