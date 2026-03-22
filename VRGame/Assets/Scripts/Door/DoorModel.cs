@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using System;
 
+using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
+
+
 /// <summary>
 /// Model portion of the reusable door module. Data is stored here
 /// </summary>
@@ -41,6 +46,8 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// - DoorModel's id is returned
         get
         {
+            // the return value will be >= 0 
+            Contract.Ensures(Contract.Result<int>() == this.doorId);
             return doorId;
         }
 
@@ -56,6 +63,9 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// - DoorModel's `doorId` instance variable set to input value
         set
         {
+            Contract.Requires(value >= 0);
+            Contract.Ensures(doorId == value);
+
             if (value < 0)
             {
                 Debug.LogError("value passed to setDoorId is negative");
@@ -88,6 +98,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         get
         {
+            Contract.Ensures(Contract.Result<int>() == this.targetDoorId);
             return targetDoorId;
         }
 
@@ -104,6 +115,9 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         set
         {
+            Contract.Requires(value >= 0);
+            Contract.Ensures(this.TargetDoorId == value);
+
             if (value < 0)
             {
                 Debug.LogError("value passed to setTargetDoorId is negative");
@@ -136,6 +150,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         get
         {
+            Contract.Ensures(Contract.Result<int>() == this.destinationSceneId);
             return destinationSceneId;
         }
         /// <summary>
@@ -151,6 +166,8 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         set
         {
+            Contract.Requires(value >= 0);
+            Contract.Ensures(this.DestinationSceneId == value);
             if (value < 0)
             {
                 Debug.LogError("value passed to set destinationSceneId is negative");
@@ -184,6 +201,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </remarks>
         get
         {
+            Contract.Ensures(Contract.Result<Vector3>() == this.teleportOffset);
             return teleportOffset;
         }
 
@@ -192,12 +210,13 @@ public class DoorModel : MonoBehaviour, IDoorModel
         /// </summary>
         /// <remarks>
         /// Preconditions:
-        /// - `value` must be valid Vector3
+        /// - none
         /// Postconditions:
         /// - DoorModel's teleportOffset is set to value
         /// </remarks>
         set
         {
+            Contract.Ensures(this.teleportOffset == value);
             teleportOffset = value;
         }
 
@@ -208,6 +227,9 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public IDoorModel GetTargetDoor()
     {
+        Contract.Requires(doorLookup.ContainsKey(targetDoorId));
+        Contract.Ensures(Contract.Result<IDoorModel>() == doorLookup[targetDoorId]);
+
         if (!doorLookup.ContainsKey(targetDoorId))
         {
             Debug.LogError("Target door does not exist");
@@ -222,12 +244,15 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public Vector3 GetTeleportPosition()
     {
+        Contract.Ensures(Contract.Result<Vector3>() == (this.transform.position + this.teleportOffset));
         return transform.position + teleportOffset;
     }
 
     /// <inheritdoc/>
     public Quaternion GetTeleportRotation()
     {
+        Contract.Ensures(Contract.Result<Quaternion>() == Quaternion.LookRotation(this.transform.forward, Vector3.up));
+
         return Quaternion.LookRotation(transform.forward, Vector3.up);
     }
 
@@ -235,6 +260,16 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public void Init()
     {
+        Contract.Requires(this.doorId >= 0);
+        Contract.Requires(this.targetDoorId >= 0);
+        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), this.destinationSceneId));
+        Contract.Requires(doorLookup == null || !doorLookup.ContainsKey(doorId));
+
+        Contract.Ensures(doorLookup != null);
+        Contract.Ensures(doorLookup.ContainsKey(this.doorId));
+        Contract.Ensures(doorLookup[this.doorId] == this);
+
+
         // check fields to see if they have proper values
         if (doorLookup == null)
         {
@@ -281,6 +316,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// - doorLookup is cleared.
     internal void ResetDoorLookup()
     {
+        Contract.Ensures(doorLookup.Count == 0);
         doorLookup.Clear();
         Debug.Log("doorLookup dictionary cleared");
     }
@@ -298,6 +334,15 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// </remarks>
     private void Awake()
     {
+        Contract.Requires(this.doorId >= 0);
+        Contract.Requires(this.targetDoorId >= 0);
+        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), this.destinationSceneId));
+        Contract.Requires(doorLookup == null || !doorLookup.ContainsKey(doorId));
+
+        Contract.Ensures(doorLookup != null);
+        Contract.Ensures(doorLookup.ContainsKey(this.doorId));
+        Contract.Ensures(doorLookup[this.doorId] == this);
+        
         // Invoking Init() in Awake() allows the doorId
         // to be added to the dictionary before model.GetTargetDoor() 
         // gets invoked by 'loadingScene.Completed' event.
