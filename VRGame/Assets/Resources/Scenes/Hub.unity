@@ -2161,6 +2161,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -131245991516130162, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1326242528}
+    - targetCorrespondingSourceObject: {fileID: -131245991516130162, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1326242531}
     - targetCorrespondingSourceObject: {fileID: -4282753655730498294, guid: 0f54c243c72f844cb8b677e652da9094, type: 3}
       insertIndex: -1
       addedObject: {fileID: 671474461}
@@ -3935,6 +3938,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019364301, y: 0.022600517, z: 0.017976198}
   m_Center: {x: -0.008518799, y: 0.008272775, z: 0.013498962}
+--- !u!114 &1326242531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830531258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c9accd131512e41b0af0a81489a87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactiveElement: {fileID: 1483298332}
+  interactable: {fileID: 0}
 --- !u!1001 &1353618076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5130,8 +5147,6 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 1758302589}
   m_Colliders:
   - {fileID: 2101527003}
-  - {fileID: 0}
-  - {fileID: 0}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
