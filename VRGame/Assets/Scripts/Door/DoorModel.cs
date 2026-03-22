@@ -5,9 +5,7 @@ using UnityEngine.Assertions;
 using System;
 
 using System.Diagnostics.Contracts;
-using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks.Dataflow;
 using System.Runtime.CompilerServices;
 
 
@@ -246,14 +244,14 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// <inheritdoc/>
     public Vector3 GetTeleportPosition()
     {
-        Contract.Ensures(Contract.Result<>() == (this.transform.position + this.teleportOffset));
+        Contract.Ensures(Contract.Result<Vector3>() == (this.transform.position + this.teleportOffset));
         return transform.position + teleportOffset;
     }
 
     /// <inheritdoc/>
     public Quaternion GetTeleportRotation()
     {
-        Contract.Ensures(Contract.Result<>() == Quaternion.LookRotation(TransformBlock.forward, Vector3.up));
+        Contract.Ensures(Contract.Result<Quaternion>() == Quaternion.LookRotation(this.transform.forward, Vector3.up));
 
         return Quaternion.LookRotation(transform.forward, Vector3.up);
     }
@@ -264,12 +262,12 @@ public class DoorModel : MonoBehaviour, IDoorModel
     {
         Contract.Requires(this.doorId >= 0);
         Contract.Requires(this.targetDoorId >= 0);
-        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), thi.destinationSceneId));
-        Contract.Requires(this.doorLookup == null || !doorLookup.ContainsKey(doorId));
+        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), this.destinationSceneId));
+        Contract.Requires(doorLookup == null || !doorLookup.ContainsKey(doorId));
 
-        Contract.Ensures(this.doorLookup != null);
-        Contract.Ensures(this.doorLookup.ContainsKey(this.doorId));
-        Contract.Ensures(this.doorLookup[this.doorId] == this);
+        Contract.Ensures(doorLookup != null);
+        Contract.Ensures(doorLookup.ContainsKey(this.doorId));
+        Contract.Ensures(doorLookup[this.doorId] == this);
 
 
         // check fields to see if they have proper values
@@ -313,7 +311,7 @@ public class DoorModel : MonoBehaviour, IDoorModel
     /// - doorLookup is cleared.
     internal void ResetDoorLookup()
     {
-        Contract.Ensures(this.doorLookup.Count() == 0);
+        Contract.Ensures(doorLookup.Count == 0);
         doorLookup.Clear();
         Debug.Log("doorLookup dictionary cleared");
     }
@@ -333,12 +331,12 @@ public class DoorModel : MonoBehaviour, IDoorModel
     {
         Contract.Requires(this.doorId >= 0);
         Contract.Requires(this.targetDoorId >= 0);
-        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), thi.destinationSceneId));
-        Contract.Requires(this.doorLookup == null || !doorLookup.ContainsKey(doorId));
+        Contract.Requires(Enum.IsDefined(typeof(SceneEnum), this.destinationSceneId));
+        Contract.Requires(doorLookup == null || !doorLookup.ContainsKey(doorId));
 
-        Contract.Ensures(this.doorLookup != null);
-        Contract.Ensures(this.doorLookup.ContainsKey(this.doorId));
-        Contract.Ensures(this.doorLookup[this.doorId] == this);
+        Contract.Ensures(doorLookup != null);
+        Contract.Ensures(doorLookup.ContainsKey(this.doorId));
+        Contract.Ensures(doorLookup[this.doorId] == this);
         
         Init();
     }
