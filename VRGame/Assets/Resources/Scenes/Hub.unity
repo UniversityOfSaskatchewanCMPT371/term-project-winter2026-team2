@@ -3232,7 +3232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c9accd131512e41b0af0a81489a87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveElement: {fileID: 0}
+  interactiveElement: {fileID: 505696229}
   interactable: {fileID: 0}
 --- !u!65 &949636729
 BoxCollider:
