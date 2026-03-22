@@ -208,13 +208,22 @@ public class LogicGameController : MonoBehaviour //TODO: implement IController
     private void OnTriggerPress(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger pressed!");
-        if(targetedPanel == null || data.GetPanel(targetedPanel.X, targetedPanel.Y).IsOccupied())
+        if(targetedPanel == null)
         {
-            Debug.Log("But I can't select this panel!");
+            Debug.Log("But I'm not aiming at a panel!");
             return;
         }
         Panel hoveredPanel = data.GetPanel(targetedPanel.X, targetedPanel.Y);
-        Assert.IsNotNull(hoveredPanel, "The currently-hovered panel that you pressed the trigger on is null");
+        if(hoveredPanel == null)
+        {
+            Debug.LogError($"The panel we're trying to hover over ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+        }
+        Assert.IsNotNull(hoveredPanel, $"The panel we're trying to hover over ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+        if(hoveredPanel.IsOccupied())
+        {
+            Debug.Log("But the panel I'm aiming at is occupied!");
+            return;
+        }
         if(hoveredPanel.Attribute == PanelAttribute.Start)
         {
             Debug.Log("Starting drag!");
