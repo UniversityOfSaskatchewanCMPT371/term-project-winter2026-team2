@@ -463,31 +463,13 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
         }
     }
 
-    /// <summary>
-    /// Checks if the panel is occupied, whether by a line or by its own block
-    /// </summary>
-    /// <returns>true if the panel is occupied, false otherwise</returns>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - The truth value of whether or not this panel is occupied is returned
-    /// </remarks>
+    /// <inheritdoc/>
     public bool IsOccupied()
     {
         return entryDirection != Direction.None || exitDirection != Direction.None || attribute == PanelAttribute.Block;
     }
 
-    /// <summary>
-    /// Clears any line status from this panel, resetting entry and exit directions
-    /// </summary>
-    /// <remarks>
-    /// preconditions:
-    ///     - None
-    /// postconditions:
-    ///     - Resets entry and exit directions to None
-    ///     - Texture is refreshed
-    /// </remarks>
+    /// <inheritdoc/>
     public void ClearPanel()
     {
         entryDirection = Direction.None;
@@ -568,6 +550,9 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
         Assert.IsNotNull(controllerInstance, "Could not find the parent's LogicGameController!");
     }
 
+    /// <summary>
+    /// Unity's Awake() method - initialize the Panel with grid coordinates and such
+    /// </summary>
     public void Awake()
     {
         Init();
@@ -588,20 +573,14 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
         xRSimpleInteractable.hoverExited.AddListener(OnHoverExited);
     }
 
-    /// <summary>
-    /// Event listener function for hover start events
-    /// </summary>
-    /// <param name="args">Arguments for this event</param>
-    private void OnHoverEntered(HoverEnterEventArgs args)
+    /// <inheritdoc/>
+    public void OnHoverEntered(HoverEnterEventArgs args)
     {
         controllerInstance.HandleHover(gridX, gridY);
     }
 
-    /// <summary>
-    /// Event listener function for hover end events
-    /// </summary>
-    /// <param name="args">Arguments for this event</param>
-    private void OnHoverExited(HoverExitEventArgs args)
+    /// <inheritdoc/>
+    public void OnHoverExited(HoverExitEventArgs args)
     {
         controllerInstance.HandleUnhover(gridX, gridY);
     }
