@@ -39,6 +39,7 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
                 Debug.LogError("Could not find a panel script attached to one of my children!");
             }
             Assert.IsNotNull(panel, "Could not find a panel script attached to one of my children!");
+            // the Panel initiation process guarantees the coordinates are within bounds so we won't bother checking that
             if(panelGrid[panel.GridX,panel.GridY] != null)
             {
                 Debug.LogError($"There is already a panel at ({panel.GridX},{panel.GridY})");
@@ -128,6 +129,31 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     /// <inheritdoc/>
     public Panel GetPanel(int x, int y)
     {
+        if(x < 0)
+        {
+            Debug.LogError("Panels cannot have a negative X-coordinate");
+        }
+        Assert.IsTrue(x >= 0, "X coordinate must be greater than 0");
+        if(x >= MAX_GRID_SIZE)
+        {
+            Debug.LogError("Panels cannot have an X-coordinate larger than the LogicGameModel's max grid size");
+        }
+        Assert.IsTrue(x <= MAX_GRID_SIZE - 1, "X coordinate must be less than the LogicGameModel's max grid size");
+        if(y < 0)
+        {
+            Debug.LogError("Panels cannot have a negative Y-coordinate");
+        }
+        Assert.IsTrue(y >= 0, "Y coordinate must be greater than 0");
+        if(y >= MAX_GRID_SIZE)
+        {
+            Debug.LogError("Panels cannot have an X-coordinate larger than the LogicGameModel's max grid size");
+        }
+        Assert.IsTrue(y <= MAX_GRID_SIZE - 1, "Y coordinate must be less than the LogicGameModel's max grid size");
+        if(panelGrid[x,y] == null)
+        {
+            Debug.LogError($"Panel not found at ({x},{y})");
+        }
+        Assert.IsNotNull(panelGrid[x,y], $"Panel not found at ({x},{y})");
         return panelGrid[x,y];
     }
 
