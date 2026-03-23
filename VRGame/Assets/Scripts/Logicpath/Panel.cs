@@ -19,7 +19,7 @@ public enum PanelAttribute
 /// <summary>
 /// Represents a single panel in the logic path minigame - is essentially the "view" of the game
 /// </summary>
-public class Panel : MonoBehaviour, IEquatable<Panel>
+public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
 {
     /// <summary>
     /// The entry direction of this Panel, if any
@@ -74,10 +74,6 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// The Interactable used for hover events
     /// </summary>
     private XRSimpleInteractable xRSimpleInteractable;
-    /// <summary>
-    /// The parenting game controller
-    /// </summary>
-    private LogicGameController logicGameController;
 
     /// <summary>
     /// Getter for entry direction
@@ -91,7 +87,7 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// </remarks>
     public Direction GetEntryDirection()
     {
-            return entryDirection;
+        return entryDirection;
     }
 
     /// <summary>
@@ -512,7 +508,7 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     ///     - Texture is refreshed to reflect state
     ///     - Hover event listener functions are mapped
     /// </remarks>
-    public void Awake()
+    public override void Init()
     {
         if(gridX < 0)
         {
@@ -564,12 +560,17 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
             Debug.LogError("There is no parent object for this panel!");
         }
         Assert.IsNotNull(transform.parent, "There is no parent object for this panel!");
-        logicGameController = transform.parent.gameObject.GetComponent<LogicGameController>();
-        if(logicGameController == null)
+        controllerInstance = transform.parent.gameObject.GetComponent<LogicGameController>();
+        if(controllerInstance == null)
         {
             Debug.LogError("Could not find the parent's LogicGameController!");
         }
-        Assert.IsNotNull(logicGameController, "Could not find the parent's LogicGameController!");
+        Assert.IsNotNull(controllerInstance, "Could not find the parent's LogicGameController!");
+    }
+
+    public void Awake()
+    {
+        Init();
     }
 
     /// <summary>
@@ -593,7 +594,7 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <param name="args">Arguments for this event</param>
     private void OnHoverEntered(HoverEnterEventArgs args)
     {
-        logicGameController.HandleHover(gridX, gridY);
+        controllerInstance.HandleHover(gridX, gridY);
     }
 
     /// <summary>
@@ -602,7 +603,7 @@ public class Panel : MonoBehaviour, IEquatable<Panel>
     /// <param name="args">Arguments for this event</param>
     private void OnHoverExited(HoverExitEventArgs args)
     {
-        logicGameController.HandleUnhover(gridX, gridY);
+        controllerInstance.HandleUnhover(gridX, gridY);
     }
 
     /// <summary>
