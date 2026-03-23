@@ -47,7 +47,6 @@ do not change functionality nor do you need to when you you write tests.
 
 - Updated project settings to enable building of the game
 
-
 ## [1.3.0] - 2026-03-17
 
 ### Added
@@ -122,8 +121,7 @@ do not change functionality nor do you need to when you you write tests.
 
 ### Added
 
-- Added reusable door prefab, teleportation logic 
-
+- Added reusable door prefab, teleportation logic
 
 ## [0.0.2] - 2026-02-18
 
@@ -160,4 +158,3 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed
 
 - This section is for bug fixes and patches
-

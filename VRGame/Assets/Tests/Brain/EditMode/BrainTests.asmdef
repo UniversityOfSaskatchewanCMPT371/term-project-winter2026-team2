@@ -4,6 +4,7 @@
     "references": [
         "UnityEditor.TestRunner",
         "Brain",
+        "TNRD.NSubstitute",
         "ScriptTemplates"
     ],
     "includePlatforms": [
