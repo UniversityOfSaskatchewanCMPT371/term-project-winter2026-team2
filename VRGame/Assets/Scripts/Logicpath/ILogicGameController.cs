@@ -10,7 +10,7 @@ public interface ILogicGameController
     /// preconditions:
     ///     - A LogicGameModel script is attached to this object
     /// postconditions:
-    ///     - All variables are initialized
+    ///     - All properties are initialized
     /// </remarks>
     public void Init();
 

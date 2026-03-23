@@ -486,7 +486,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     ///     - There is a parenting GameObject with a LogicGameController attached to it
     ///     - gridX and grid Y are non-negative and are less than LogicGameModel.MAX_GRID_SIZE
     /// postconditions:
-    ///     - all variables (besides *Neighbors) are initialized
+    ///     - all properties (besides *Neighbors) are initialized
     ///     - Texture is refreshed to reflect state
     ///     - Hover event listener functions are mapped
     /// </remarks>
