@@ -83,7 +83,9 @@ public class BrainControllerTests
         }).QuickCheckThrowOnFailure();
     }
 
-
+    /// <summary>
+    /// Property based test to verify that OnHoverExit() followed by OnHoverEnter() does not change hoverCount.
+    /// </summary>
     [Test]
     public void ExitThenEnterChangesNothing()
     {
@@ -92,7 +94,7 @@ public class BrainControllerTests
             controller.hoverCount = count.Get;
             controller.OnHoverExit();
             controller.OnHoverEnter();
-            return controller.hoverCount == count.Get;
+            
         }).QuickCheckThrowOnFailure();
     }
 

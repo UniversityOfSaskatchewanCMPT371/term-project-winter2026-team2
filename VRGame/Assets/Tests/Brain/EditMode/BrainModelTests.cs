@@ -112,7 +112,6 @@ public class BrainModelTests
 
     /// <summary>
     /// Property based test to check that calling pause() is the same as calling resume() followed by pause()
-    /// 
     /// </summary>
     [Test]
     public void PauseEqualsResumePauseTest()
@@ -132,6 +131,9 @@ public class BrainModelTests
         }).QuickCheckThrowOnFailure();
     }
 
+    /// <summary>
+    /// Property based test to check that calling resume() is the same as calling pause() followed by resume()
+    /// </summary>
     [Test]
     public void ResumeEqualsPauseResumeTest()
     {
