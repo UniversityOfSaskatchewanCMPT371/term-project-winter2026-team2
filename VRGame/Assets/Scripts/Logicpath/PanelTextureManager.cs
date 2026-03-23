@@ -18,47 +18,59 @@ public class PanelTextureManager : MonoBehaviour
     /// <summary>
     /// Unity's Awake() method for the texture manager, saves the Panel this manager is associated with
     /// </summary>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     - There is a Panel attached to the same GameObject
-    /// </preconditions>
-    /// <postconditions>
+    /// postconditions:
     ///     - The manager has its associated Panel saved
-    /// </postconditions>
+    /// </remarks>
     public void Awake()
     {
         panel = gameObject.GetComponent<Panel>();
-        Assert.IsNotNull(panel, "Panel cannot be null");
+        if(panel == null)
+        {
+            Debug.LogError("There is no panel attached to this GameObject!");
+        }
+        Assert.IsNotNull(panel, "There is no panel attached to this GameObject!");
     }
     
     /// <summary>
     /// Refresh the texture for this panel
     /// </summary>
-    /// <preconditions>
+    /// <remarks>
+    /// preconditions:
     ///     - The panel's state must be valid so that its state can point to a valid texture
-    /// </preconditions>
-    /// <postconditions>
+    /// postconditions:
     ///     - The panel's texture is updated accordingly
-    /// </postconditions>
+    /// </remarks>
     public void RefreshTexture()
     {
         string textureName = GetTexturePath();
         Material newTexture = Resources.Load(textureName, typeof(Material)) as Material;
+        if(newTexture == null)
+        {
+            Debug.LogError($"\"{textureName}\" does not point to a valid material!");
+        }
         Assert.IsNotNull(newTexture, $"\"{textureName}\" does not point to a valid material!");
         Renderer renderer = GetComponent<Renderer>();
-        Assert.IsNotNull(renderer, "Could not find the Renderer for this panel! Something has gone horribly, terribly wrong");
+        if(renderer == null)
+        {
+            Debug.LogError("Could not find the Renderer for this Panel! Something has gone horribly, terribly wrong");
+        }
+        Assert.IsNotNull(renderer, "Could not find the Renderer for this Panel! Something has gone horribly, terribly wrong");
         renderer.material = newTexture;
     }
 
     /// <summary>
     /// Constructs the texture path for a Panel based on its state
     /// </summary>
+    /// <returns>A string representing the texture path</returns>
     /// <remarks>
-    /// <preconditions>
+    /// preconditions:
     ///     - The panel's state must be valid (ex: no entry direction for a start panel)
-    /// </preconditions>
-    /// <postconditions>
-    ///     - Returns a string representing the texture path
-    /// </postconditions>
+    /// postconditions:
+    ///     - A string representing the texture path is returned
+    /// </remarks>
     private string GetTexturePath()
     {
         if(panel.Attribute == PanelAttribute.Block)
@@ -77,16 +89,26 @@ public class PanelTextureManager : MonoBehaviour
                 maybeEndpoint = "";
                 break;
             case PanelAttribute.Start:
+                if(panel.GetEntryDirection() != Direction.None)
+                {
+                    Debug.LogError("Start endpoint's entry direction must be None");
+                }
                 Assert.AreEqual(panel.GetEntryDirection(), Direction.None, "Start endpoint's entry direction must be None");
                 maybeEndpoint = "_start";
                 break;
             case PanelAttribute.Exit:
+                if(panel.GetExitDirection() != Direction.None)
+                {
+                    Debug.LogError("End endpoint's exit direction must be None");
+                }
                 Assert.AreEqual(panel.GetExitDirection(), Direction.None, "End endpoint's exit direction must be None");
                 maybeEndpoint = "_end";
                 break;
             case PanelAttribute.Block:
+                Debug.LogError("Block textures cannot be coloured! Is the control flow wrong?");
                 throw new AssertionException("Block textures cannot be coloured! Is the control flow wrong?","Block textures cannot be coloured! Is the control flow wrong?");
             default:
+                Debug.LogError($"Unknown PanelAttribute \"{panel.Attribute}\"");
                 throw new AssertionException($"Unknown PanelAttribute \"{panel.Attribute}\"",$"Unknown PanelAttribute \"{panel.Attribute}\"");
         }
         string directionName = GetDirectionName(panel.GetEntryDirection(), panel.GetExitDirection());
@@ -98,14 +120,13 @@ public class PanelTextureManager : MonoBehaviour
     /// </summary>
     /// <param name="entry">The entry direction</param>
     /// <param name="exit">The exit direction</param>
+    /// <returns>A string representation of the entry and exit directions provided</returns>
     /// <remarks>
-    /// <preconditions>
+    /// preconditions:
     ///     - entry != exit && entry != Direction.None && exit != Direction.None
-    /// </preconditions>
-    /// <postconditions>
-    ///     - Returns a string representing the visual orientation of the pipe for texture naming
-    ///     - Examples: "up_down", "left_right", "left_down", etc.
-    
+    /// postconditions:
+    ///     - Returns a string representing the visual orientation of the pipe for texture naming (ex: "up_down", "left_right", "left_down", etc.)
+    /// </remarks>
     private string GetDirectionName(Direction entry, Direction exit)
     {
         if(entry == exit && entry != Direction.None && exit != Direction.None)
@@ -197,12 +218,12 @@ public class PanelTextureManager : MonoBehaviour
     /// </summary>
     /// <param name="colour">The Panelcolour to convert</param>
     /// <remarks>
-    /// <preconditions>
-    /// </preconditions>
-    /// <postconditions>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
     ///     - Returns a string name for the color used in texture naming
     ///     - Defaults to "red" if the color is unknown
-    /// </postconditions>
+    /// </remarks>
     private string GetColourName(PanelColour colour)
     {
         switch(colour)

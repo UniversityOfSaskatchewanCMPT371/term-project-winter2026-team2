@@ -4,11 +4,16 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.0] - 2026-03-22
+
+### Added
+
+- Added the current implementation of the frontal lobe minigame
+
 ## [1.4.1] - 2026-03-22
 
 - Persistent XR rig
 - Service.prefab which mounts all our services and managers
-
 ## [1.4.0] - 2026-03-22
 
 ### Added

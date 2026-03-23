@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6e147bb101c804db5cd556f0bc0612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inspectorWindowModel: {fileID: 0}
+  inspectorWindowView: {fileID: 0}
 --- !u!1001 &516251981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -584,37 +586,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &1011303518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1011303519}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1011303519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011303518}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1027563, y: 2.028149, z: 3.8038726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1190394734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9051862589501147850, guid: eca12a10448b10c469fd6c8ab62fe2fc, type: 3}
@@ -804,6 +775,10 @@ PrefabInstance:
     - target: {fileID: 8800128702037119074, guid: eca12a10448b10c469fd6c8ab62fe2fc, type: 3}
       propertyPath: gridX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800128702037119074, guid: eca12a10448b10c469fd6c8ab62fe2fc, type: 3}
+      propertyPath: panelColour
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9051862589501147850, guid: eca12a10448b10c469fd6c8ab62fe2fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1094,6 +1069,5 @@ SceneRoots:
   - {fileID: 917231778}
   - {fileID: 516251981}
   - {fileID: 608759682}
-  - {fileID: 1011303519}
   - {fileID: 502880451}
   - {fileID: 2034612730}
