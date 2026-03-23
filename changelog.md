@@ -4,12 +4,17 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.4.0] - 2026-03-22
+
+### Added
+
+- Added unfinished mini game signs to all scenes except Frontal Lobe scene
+
 ## [1.3.5] - 2026-03-22
 
 ### Added
 
 - Added (and modified pre-existing) tooltips on all brain regions and portals
-
 
 ## [1.3.4] - 2026-03-22
 
