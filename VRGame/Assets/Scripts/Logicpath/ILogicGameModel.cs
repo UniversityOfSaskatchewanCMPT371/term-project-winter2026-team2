@@ -4,62 +4,72 @@ using System.Collections.Generic;
 /// <summary>
 /// Model portion of the grid module for logic path minigame.
 /// </summary>
-public interface ILogicGameModel
+public interface ILogicGameModel : IModel
 {
     /// <summary>
-    /// Gets the GridCell object at the specified coordinates
-    /// <param name="x">X-coordinate in grid</param>
-    /// <param name="y">Y-coordinate in grid</param>
+    /// Initialize the logic game's data
     /// </summary>
     /// <remarks>
-    /// <pre-condition>
-    ///     -   x and y are valid coordinates within grid bounds
-    /// </pre-condition>
-    /// <post-condition>
-    ///     -   Returns the GridCell object at the specified coordinates, 
-    ///         or null if coordinates are out of bounds
-    /// </post-condition>
+    /// preconditions:
+    ///     - The only children beneath this GameObject are Panels
+    ///     - No two Panels have the same coordinates
+    ///     - All Panel coordinates are non-negative and are less than MAX_GRID_SIZE
+    ///     - Every start endpoint has an end endpoint, and vice versa
+    ///     - There are no duplicate endpoints
+    /// postconditions:
+    ///     - All Panels are saved in this model
+    ///     - Adjacent Panels have their *Neighbor fields set where necessary
+    /// </remarks>
+    public void Init();
+
+    /// <summary>
+    /// Gets a panel at specific coordinates
+    /// </summary>
+    /// <param name="x">The X-coordinate of the panel you want</param>
+    /// <param name="y">The Y-coordinate of the panel you want</param>
+    /// <returns>The panel with the XY coordinates</returns>
+    /// <remarks>
+    /// preconditions:
+    ///     - X and Y are valid coordinates
+    /// postconditions:
+    ///     - None
     /// </remarks>
     Panel GetPanel(int x, int y);
 
     /// <summary>
-    ///  Checks if a cell is occupied by a pipe
-    /// <param name="x">The x-coordinate of the cell to check</param>
-    /// <param name="y">The y-coordinate of the cell to check</param>
+    /// Checks if a Panel is occupied
     /// </summary>
+    /// <param name="x">The X-coordinate of the panel</param>
+    /// <param name="y">The Y-coordinate of the panel</param>
+    /// <returns>true if the Panel is occupied, false otherwise</returns>
     /// <remarks>
-    /// <pre-condition>
-    ///     -   x and y are valid coordinates
-    /// </pre-condition>
-    /// <post-condition>
-    ///     -   Returns true if the cell is occupied, false otherwise
-    /// </post-condition>
+    /// preconditions:
+    ///     - X and Y point to a valid Panel
+    /// postcondidions:
+    ///     - The truth value of if the Panel is occupied or not
     /// </remarks>
     bool IsPanelOccupied(int x, int y);
 
     /// <summary>
-    /// Removes all pipes from grid
+    /// Clears the state of all Panels
     /// </summary>
     /// <remarks>
-    /// <pre-condition>
-    ///     -   None
-    /// </pre-condition>
-    /// <post-condition>
-    ///     -   All cells are empty
-    /// </post-condition>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - Every Panel has its state reset
     /// </remarks>
     void ClearGrid();
 
     /// <summary>
-    /// Checks if all cells are filled
+    /// Is the current grid filled? (I.e, is the game complete?)
     /// </summary>
+    /// <returns>true if every Panel is occupied, false otherwise</returns>
     /// <remarks>
-    /// <pre-condition>
-    ///     -   Grid has been initialized
-    /// </pre-condition>
-    /// <post-condition>
-    ///     -   Returns true if all cells are occupied by pipes, false otherwise
-    /// </post-condition>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - The truth value of whether the current grid is filled or not is returned
     /// </remarks>
     bool IsGridFilled();
 }
