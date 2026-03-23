@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Diagnostics.Contracts;
+using System.ComponentModel.Design;
 
 /// <summary>
 /// Controller Portion of the reusable door module. Interaction logic is handled here
@@ -44,6 +46,9 @@ public class DoorController : MonoBehaviour, IDoorController
         /// - DoorController's `doorModel` instance variable set to input value
         set
         {
+            Contract.Requires(value != null);
+            Contract.Ensures(this.doorModel == value);
+
             if (value == null)
             {
                 Debug.LogError("value passed to set DoorModel is null");
@@ -86,6 +91,9 @@ public class DoorController : MonoBehaviour, IDoorController
         /// </remarks>
         set
         {
+            Contract.Requires(value != null);
+            Contract.Ensures(this.sceneChangerController == value);
+
             if (value == null)
             {
                 Debug.LogError("value passed to setSceneChangerController is null");
@@ -113,6 +121,8 @@ public class DoorController : MonoBehaviour, IDoorController
         /// - triggerDebounce is returned 
         get
         {
+            Contract.Ensures(Contract.Result<bool>() == triggerDebounce);
+
             return triggerDebounce;
         }
     }
@@ -121,7 +131,27 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <inheritdoc/>
     public void Init()
     {
-        // If field was set in inspector window, set the internal values to that
+        Contract.Requires(this.doorModel != null || this.serializableDoorModel != null);
+        Contract.Requires(this.sceneChangerController != null || this.serializableSceneChangerController != null);
+
+        Contract.Ensures(this.doorModel != null);
+        Contract.Ensures(this.sceneChangerController != null);
+
+        // see if an existing persistent service prefab exists,
+        // if one exists then it should be used instead
+        if (sceneChangerController == null)
+        {
+            GameObject persistent = GameObject.Find("Services");
+
+            if (persistent)
+            {
+                SceneChangerController = persistent.GetComponentInChildren<SceneChangerController>();
+            }
+        }
+
+        // If field was set in inspector window, set the internal values to.
+        // serializableDoorModel will never override the sceneChangerControllerInstance set
+        // by the condition above. Even if serializableDoorModel is non-null.
         if (serializableDoorModel != null)
         {
             doorModel = (IDoorModel)serializableDoorModel;
@@ -150,6 +180,9 @@ public class DoorController : MonoBehaviour, IDoorController
     /// <inheritdoc/>
     public void OnPlayerEnter(IPlayerController playerController)
     {
+
+        Contract.Requires(playerController != null);
+
         if (playerController == null)
         {
             Debug.LogError("playerController passed to OnPlayerEnter is null");
@@ -172,6 +205,7 @@ public class DoorController : MonoBehaviour, IDoorController
         if (!Enum.IsDefined(typeof(SceneEnum), sceneId))
         {
             Debug.LogError("Invalid destination scene id. Not in enum");
+            triggerDebounce = false;
         }
         Assert.IsTrue(Enum.IsDefined(typeof(SceneEnum), sceneId));
 
@@ -187,7 +221,11 @@ public class DoorController : MonoBehaviour, IDoorController
             playerController.teleportPlayerTo(teleportPosition, teleportRotation);
             triggerDebounce = false;
         };
+        Debug.Log("DoorController.OnPlayerEnter() success");
+    }
 
-
+    private void Start()
+    {
+        Init();
     }
 }
