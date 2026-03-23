@@ -1,13 +1,10 @@
 {
-    "name": "Door",
+    "name": "Service",
     "rootNamespace": "",
     "references": [
-        "SceneEnum",
-        "SceneChanger",
-        "Player",
-        "Wrappers",
         "ScriptTemplates",
-        "Service"
+        "PlayerService",
+        "SceneChanger"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

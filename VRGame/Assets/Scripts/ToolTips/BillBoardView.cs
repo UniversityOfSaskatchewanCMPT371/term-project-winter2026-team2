@@ -1,3 +1,4 @@
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 /// <summary>
@@ -50,5 +51,28 @@ public class BillBoardView : MonoBehaviour
 
         // Then apply an additional tilt around the local X axis.
         transform.Rotate(Vector3.right, tiltAngle, Space.Self);
+    }
+
+    /// <summary>
+    /// Unity runtime method that is called after all Awake() calls finishes.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - An XR rig exists in the scene.
+    /// Postconditions:
+    /// - auto-assigns 'target' variable if its null.
+    /// </remarks>
+    void Start()
+    {
+        // auto assign 'target' variable if its null and main camera exists.
+        if (target == null)
+        {
+            Camera mainCamera = GameObject.FindWithTag("Player").GetComponentInChildren<Camera>();
+
+            if (mainCamera != null)
+            {
+                target = mainCamera.transform;
+            }
+        }
     }
 }
