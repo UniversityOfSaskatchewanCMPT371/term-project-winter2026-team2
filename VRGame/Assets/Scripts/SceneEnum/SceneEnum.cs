@@ -11,6 +11,5 @@ public enum SceneEnum
     OccipitalLobe = 4,
     ParietalLobe = 5,
     FrontalLobe = 6,
-
     TestScene = 7,
 }
