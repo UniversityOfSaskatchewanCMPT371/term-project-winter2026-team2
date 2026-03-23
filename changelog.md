@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.3.4] - 2026-03-22
+
+### Fixed
+
+- Fixed overlapping ScaleOnHover system on brain region hover. Now, it only scales one brain region at a time.
+
 ## [1.3.3] - 2026-03-22
 
 ### Added
@@ -17,6 +23,10 @@ do not change functionality nor do you need to when you you write tests.
 - Adjusted ToolTips To bottom-center of view to reduce clipping.
 - Allow only one ToolTip to appear at a time.
 
+### Added
+
+- A new Brain component that accesses the spin animation attached to the big 3D brain model in the Hub
+- With the ScaleOnHover System, along with the new Brain component, the 3D brain pauses spin animation and scales brain region on hover
 
 ## [1.3.1] - 2026-03-17
 
@@ -24,6 +34,9 @@ do not change functionality nor do you need to when you you write tests.
 
 - Updated project settings to enable building of the game
 
+API changes / Backward compatible features / Backward compatible bug fixes.
+You do not need to update the version for refactors or code improvements that
+do not change functionality nor do you need to when you you write tests.
 
 ## [1.3.0] - 2026-03-17
 
@@ -99,8 +112,7 @@ do not change functionality nor do you need to when you you write tests.
 
 ### Added
 
-- Added reusable door prefab, teleportation logic 
-
+- Added reusable door prefab, teleportation logic
 
 ## [0.0.2] - 2026-02-18
 
@@ -137,4 +149,3 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed
 
 - This section is for bug fixes and patches
-
