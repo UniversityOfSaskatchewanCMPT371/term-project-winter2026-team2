@@ -149,7 +149,9 @@ public class DoorController : MonoBehaviour, IDoorController
             }
         }
 
-        // If field was set in inspector window, set the internal values to that
+        // If field was set in inspector window, set the internal values to.
+        // serializableDoorModel will never override the sceneChangerControllerInstance set
+        // by the condition above. Even if serializableDoorModel is non-null.
         if (serializableDoorModel != null)
         {
             doorModel = (IDoorModel)serializableDoorModel;
