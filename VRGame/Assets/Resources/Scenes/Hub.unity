@@ -1973,7 +1973,7 @@ PrefabInstance:
     - target: {fileID: 830690373327028670, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1150685100}
+      objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
       value: Parietal Portal
@@ -2353,7 +2353,7 @@ PrefabInstance:
     - target: {fileID: 830690373327028670, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1150685100}
+      objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
       value: Frontal Portal
@@ -5320,7 +5320,7 @@ PrefabInstance:
     - target: {fileID: 830690373327028670, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1150685100}
+      objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
       value: Temporal Portal
@@ -5481,7 +5481,7 @@ PrefabInstance:
     - target: {fileID: 830690373327028670, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1150685100}
+      objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
       value: Brain Stem Portal
@@ -6611,7 +6611,7 @@ PrefabInstance:
     - target: {fileID: 830690373327028670, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1150685100}
+      objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
       value: Brain Stem
@@ -6795,7 +6795,7 @@ PrefabInstance:
     - target: {fileID: 830690373327028670, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1150685100}
+      objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
       value: Occipital Portal
