@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// The model of the LogicGame itself. Manages the initial setup of panels
+/// The model of the LogicGame itself. Manages the initial setup of panels and the game's functional state
 /// </summary>
 public class LogicGameModel : MonoBehaviour, ILogicGameModel
 {

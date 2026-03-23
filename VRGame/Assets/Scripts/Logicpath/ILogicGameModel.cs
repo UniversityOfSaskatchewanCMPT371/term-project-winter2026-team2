@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// Model portion of the grid module for logic path minigame.
+/// The model of the LogicGame itself. Manages the initial setup of panels and the game's functional state
 /// </summary>
 public interface ILogicGameModel : IModel
 {
