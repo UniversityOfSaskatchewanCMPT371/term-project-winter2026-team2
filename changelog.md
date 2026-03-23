@@ -10,6 +10,7 @@ do not change functionality nor do you need to when you you write tests.
 
 - Added (and modified pre-existing) tooltips on all brain regions and portals
 
+
 ## [1.3.4] - 2026-03-22
 
 ### Fixed
@@ -40,7 +41,6 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed
 
 - Updated project settings to enable building of the game
-
 
 API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
@@ -120,8 +120,7 @@ do not change functionality nor do you need to when you you write tests.
 
 ### Added
 
-- Added reusable door prefab, teleportation logic 
-
+- Added reusable door prefab, teleportation logic
 
 ## [0.0.2] - 2026-02-18
 
@@ -158,4 +157,3 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed
 
 - This section is for bug fixes and patches
-
