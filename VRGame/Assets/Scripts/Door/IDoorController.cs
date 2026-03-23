@@ -44,7 +44,8 @@ public interface IDoorController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - `doorModel` and `sceneChangerController` instance vars must be non-null, or [SerializeField] equivalents must be non null
+    /// - 'sceneChangeController' must be non-null or Service.Prefab must exist within the scene.
+    /// - `doorModel` instance var must be non-null, or [SerializeField] equivalents must be non null
     /// PostConditions:
     /// - All internal instance variables will be valid non-null references
     /// </remarks>
