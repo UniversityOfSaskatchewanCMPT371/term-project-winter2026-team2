@@ -4,7 +4,7 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.3.4] - 2026-03-19
+## [1.3.4] - 2026-03-22
 
 ### Fixed
 
