@@ -10,7 +10,7 @@ public class BrainController : Controller<IBrainModel, IBrainView>, IBrainContro
     /// <summary>
     /// An integer counter for brain regions hovered
     /// </summary>
-    private int hoverCount = 0;
+    internal int hoverCount = 0;
 
     /// <inheritdoc/>
     public void Awake()
