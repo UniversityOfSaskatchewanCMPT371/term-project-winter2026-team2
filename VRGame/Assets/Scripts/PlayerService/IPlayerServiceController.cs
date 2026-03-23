@@ -30,7 +30,7 @@ public interface IPlayerServiceController : IController
     /// - 'XRrigPrefab' variable must be non-null, and contain PlayerController component.
     /// Postconditions:
     /// - 'instance' variable is assigned to 'this' component if not already assigned.
-    /// Otherwise remains unchanged and destroys the game object its attached to.
+    /// Otherwise remains unchanged and destroys itself.
     /// - Optionally spawns the player by invoking SpawnPlayer() 
     /// if 'spawnPlayerOnLoad' variable is true.
     /// - Logs warnings and errors if preconditions are violated.
