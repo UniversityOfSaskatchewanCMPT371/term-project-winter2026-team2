@@ -30,3 +30,4 @@ public interface ISpawnButtonController
     /// </remarks>
     void HandleButtonPress();
 }
+
