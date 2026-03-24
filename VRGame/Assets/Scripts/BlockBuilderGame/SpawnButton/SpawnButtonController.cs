@@ -21,7 +21,7 @@ public class SpawnButtonController : MonoBehaviour, ISpawnButtonController
     /// <summary>
     /// Instance of the Model and View components
     /// </summary>
-    private ISpawnButtonModel model;
+    // private ISpawnButtonModel model;
     private ISpawnButtonView view;
 
 
@@ -30,12 +30,12 @@ public class SpawnButtonController : MonoBehaviour, ISpawnButtonController
     /// </summary>
     private void Awake()
     {
-        // Get or add Model component
-        model = GetComponent<ISpawnButtonModel>();
-        if (model == null)
-        {
-            model = gameObject.AddComponent<SpawnButtonModel>();
-        }
+        // // Get or add Model component
+        // model = GetComponent<ISpawnButtonModel>();
+        // if (model == null)
+        // {
+        //     model = gameObject.AddComponent<SpawnButtonModel>();
+        // }
 
         // Get or add View component
         view = GetComponent<ISpawnButtonView>();
@@ -45,9 +45,9 @@ public class SpawnButtonController : MonoBehaviour, ISpawnButtonController
             view = gameObject.AddComponent<SpawnButtonView>();
         }
 
-        Assert.IsNotNull(model, "Model is null after initialization!");
+        // Assert.IsNotNull(model, "Model is null after initialization!");
         Assert.IsNotNull(view, "View is null after initialization!");
-        
+
         Debug.Log("SpawnButtonController Model and View initialized successfully");
     }
 
@@ -126,5 +126,5 @@ public class SpawnButtonController : MonoBehaviour, ISpawnButtonController
         Debug.Log("SpawnButtonController Button pressed with VR controller!");
         HandleButtonPress();
     }
-    
+
 }
