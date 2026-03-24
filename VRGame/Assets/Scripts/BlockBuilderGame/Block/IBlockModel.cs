@@ -8,60 +8,33 @@ public interface IBlockModel
     /// <summary>
     /// The accessor and mutator for the block type
     /// </summary>
-    BlockShape Shape
+    string BlockType 
     { 
         /// <summary>
         /// The type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - Shape must be of type BlockShape
+        ///     - blockType must be a valid block of type string
         /// post-condition:
-        ///     - returns the shape of the block
+        ///     - returns the type of the block
         /// </remarks>
         get;
 
         /// <summary>
-        /// The shape of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+        /// The type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
         /// </summary> 
         /// <remarks>
         /// pre-condition:
-        ///    - none
+        ///    - value must be a valid block of type string
         /// post-condition:
-        ///    - sets the blockShape to the value
+        ///    - sets the type of the block to the value
         /// </remarks>
         set; 
+    
     }
 
-    /// <summary>
-    /// The accessor and mutator for the block type
-    /// </summary>
-    BlockColour Colour
-    { 
-        /// <summary>
-        /// The colour of the block (e.g., red, blue, etc.)
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - returns the colour of the block
-        /// </remarks>
-        get;
-
-        /// <summary>
-        /// The colour of the block (e.g., red, blue, etc.)
-        /// </summary> 
-        /// <remarks>
-        /// pre-condition:
-        ///    - none
-        /// post-condition:
-        ///    - sets the colour of the block
-        /// </remarks>
-        set; 
-    }
-
-
+    
     /// <summary>
     /// The accessor and mutator method for the position of the block in game
     /// </summary>
@@ -91,35 +64,6 @@ public interface IBlockModel
     }
 
 
-    /// <summary>
-    /// The accessor and mutator method for the position of the block in game
-    /// </summary>
-    Vector3 TargetPosition 
-    { 
-        /// <summary>
-        /// The desiredPosition of the block in game
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - returns the target position of the block in game
-        /// </remarks>
-        get; 
-        
-        /// <summary>
-        /// The target position of the block in game
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - sets the target position of the block in game to the value
-        /// </remarks>
-        set; 
-    }
-
-    
     /// <summary>
     /// The accessor and mutator method for the rotation of the block in game
     /// </summary> 

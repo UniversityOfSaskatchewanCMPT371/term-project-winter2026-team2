@@ -4,25 +4,63 @@ using UnityEngine;
 /// Interface for the BlockSpawner Model
 /// Defines the data structure for managing brick spawning
 /// </summary>
-public interface IBlockSpawnerModel: IModel
+public interface IBlockSpawnerModel
 {
     /// <summary>
-    /// Array of brick prefabs available to spawn
+    /// Array of brick prefabs to spawn
     /// </summary>
-    BlockShape[] BlocksForPuzzle
+    GameObject[] BrickPrefabs 
     { 
         /// <summary>
-        /// Getter for Block shape array
+        /// Getter for BrickPrefabs array
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BlocksForPuzzle array cannot be null
+        ///     - BrickPrefabs array has been initialized with 4 elements
         /// post-condition:
-        ///     - Returns the current array of brick prefabs avialable in level
+        ///     - Returns the current array of brick prefabs
         /// </remarks>
         get; 
+
+        /// <summary>
+        /// Setter for BrickPrefabs array
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - Input array must not be null
+        ///     - Input array must have exactly 4 elements
+        /// post-condition:
+        ///     - Sets the BrickPrefabs array to the provided value
+        /// </remarks>
+        set; 
     }
 
+    /// <summary>
+    /// Current index in the brick cycle
+    /// </summary>
+    int CurrentBrickIndex 
+    { 
+        /// <summary>
+        /// Getter for CurrentBrickIndex
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - CurrentBrickIndex has been initialized to a non-negative value
+        /// post-condition:
+        ///     - Returns the current index for brick spawning
+        /// </remarks>
+        get; 
+        
+        /// <summary>
+        /// Setter for CurrentBrickIndex
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:
+        ///     - Input value must be non-negative
+        /// post-condition:
+        ///     - Sets the CurrentBrickIndex to the provided value
+        /// </remarks>
+        set; }
 
     /// <summary>
     /// Transform where bricks should spawn
@@ -51,7 +89,6 @@ public interface IBlockSpawnerModel: IModel
         /// </remarks>
         set; }
 
-
     /// <summary>
     /// Height offset above spawn area point
     /// </summary>
@@ -78,7 +115,6 @@ public interface IBlockSpawnerModel: IModel
         ///     - Sets the SpawnHeight to the provided value
         /// </remarks>
         set; }
-
 
     /// <summary>
     /// Scale multiplier for spawned bricks
@@ -108,234 +144,31 @@ public interface IBlockSpawnerModel: IModel
         set; 
     }
 
-
-    int CurrentBlockShapeIndex
+    /// <summary>
+    /// Reference to the last spawned brick
+    /// </summary>
+    GameObject LastSpawnedBrick
     {
         /// <summary>
-        /// Gets Current index in the block cycle for shapes
+        /// Getter for LastSpawnedBrick
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - none
+        ///     - None (can be null if no brick has been spawned yet)
         /// post-condition:
-        ///     - Returns an integer representing the current shape selected for blocks to spawn
-        /// </remarks> 
-        get; 
+        ///     - Returns the reference to the last spawned brick GameObject
+        /// </remarks>
+        get;
 
         /// <summary>
-        /// Gets Current index in the block cycle for shapes
+        /// Setter for LastSpawnedBrick
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - currentBlockShapeIndex >= 0
+        ///     - Input value can be null or a valid GameObject reference
         /// post-condition:
-        ///     - current index in block shape cycle is changed
+        ///     - Sets the LastSpawnedBrick to the provided reference
         /// </remarks>
-        set; 
+        set;
     }
-
-
-    /// <summary>
-    /// Current Block Shape Selected in block spawner model
-    /// </summary>
-    BlockShape CurrentBlockShapeSelected
-    { 
-        /// <summary>
-        /// Getter for CurrentBlockShapeSelected
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - CurrentBlockShapeSelected has been initialized
-        /// post-condition:
-        ///     - Returns the CurrentBlockShapeSelected selected for brick spawning
-        /// </remarks>
-        get; 
-        
-        /// <summary>
-        /// Setter for CurrentBlockShapeSelected
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - input value must not be null
-        /// post-condition:
-        ///     - Sets the CurrentBlockShapeSelected to the provided value
-        /// </remarks>
-        set; }
-
-
-
-    /// <summary>
-    ///  Next Block Shape Selected in block spawner model
-    /// </summary>
-    BlockShape NextBlockShapeSelected
-    { 
-        /// <summary>
-        /// Getter for NextBlockShapeSelected
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - NextBlockShapeSelected has been initialized
-        /// post-condition:
-        ///     - Returns the NextBlockShapeSelected selected for brick spawning
-        /// </remarks>
-        get; 
-    }
-
-
-    /// <summary>
-    /// Previous Block Shape Selected in block spawner model
-    /// </summary>
-    BlockShape PrevBlockShapeSelected
-    { 
-        /// <summary>
-        /// Getter for PrevBlockShapeSelected
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - PrevBlockShapeSelected has been initialized
-        /// post-condition:
-        ///     - Returns the PrevBlockShapeSelected selected for brick spawning
-        /// </remarks>
-        get; 
-    }
-
-
-    /// <summary>
-    /// Selects the next brick in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
-    /// </remarks>
-    void SelectNextBlockShape();
-
-    
-    /// <summary>
-    /// Selects the next brick in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentBlockShapeSelected in BlockSpawnerModel is changed
-    /// </remarks>
-    void SelectPreviousBlockShape();
-    
-
-
-    int CurrentBlockColourIndex
-    {
-        /// <summary>
-        /// Getter for the for current colour index
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - Returns an integer representing the current colour selected giving blocks.
-        /// </remarks> 
-        get; 
-
-        /// <summary>
-        /// Setter for current colour index
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - currentBlockShapeIndex >= 0
-        /// post-condition:
-        ///     - Sets the currentBlockColourIndex to the provided value
-        /// </remarks>
-        set; 
-    }
-
-
-    /// <summary>
-    /// The colour selected spawned bricks would be
-    /// </summary>
-    BlockColour CurrentBlockColourSelected
-    {
-        /// <summary>
-        /// Getter for the colour selected for bricks
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - Returns the colour for spawned bricks
-        /// </remarks> 
-        get; 
-
-        /// <summary>
-        /// Setter for colour
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - none
-        /// post-condition:
-        ///     - Sets the ColourSelected to the provided value
-        /// </remarks>
-        set; 
-    }
-
-    /// <summary>
-    ///  Next Block colour Selected in block spawner model
-    /// </summary>
-    BlockColour NextBlockColourSelected
-    { 
-        /// <summary>
-        /// Getter for NextBlockShapeSelected
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - NextBlockColourSelected has been initialized
-        /// post-condition:
-        ///     - Returns the NextBlockColourSelected selected for block spawning
-        /// </remarks>
-        get; 
-    }
-
-
-    /// <summary>
-    /// Previous Block Colour Selected in block spawner model
-    /// </summary>
-    BlockColour PrevBlockColourSelected
-    { 
-        /// <summary>
-        /// Getter for PrevBlockColourSelected
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - PrevBlockColoureSelected has been initialized
-        /// post-condition:
-        ///     - Returns the PrevBlockColourSelected selected for block spawning
-        /// </remarks>
-        get; 
-    }
-
-    /// <summary>
-    /// Selects the next colour for bricks in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentColourSelected in BlockSpawnerModel is changed to next colour in cycle
-    /// </remarks>
-    void SelectNextColour();
-
-    
-    /// <summary>
-    /// Selects the previous colour for bricks in the cycle
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - none
-    /// post-condition:
-    ///     - CurrentColourSelected in BlockSpawnerModel is changed to previous colour
-    /// </remarks>
-    void SelectPreviousColour();
-
-
 }

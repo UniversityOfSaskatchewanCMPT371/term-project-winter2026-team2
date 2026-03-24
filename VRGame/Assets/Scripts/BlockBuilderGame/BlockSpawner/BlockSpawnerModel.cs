@@ -1,9 +1,5 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 
 /// <summary>
 /// Model class for BlockSpawner
@@ -11,34 +7,45 @@ using System.Linq;
 /// </summary>
 public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 {
-
     /// <summary>
-    /// Get as a List<BlockColour> These are all the possible shapes that exist in a puzzle
+    /// Array of brick prefabs to cycle through
     /// </summary>
-    private List<BlockColour> allBlockColours = Enum.GetValues(typeof(BlockColour))
-                                .Cast<BlockColour>()
-                                .ToList();
-
-
-    /// <summary>
-    ///Get as a List<Colors> These are all the colours to choose from for blocks
-    /// </summary>
-    private List<BlockShape> allBlockShapes = Enum.GetValues(typeof(BlockShape))
-                                .Cast<BlockShape>()
-                                .ToList();      
-
-
-    /// <summary>
-    /// Array of blockshapes to choose from for a specific puzzle
-    /// </summary>
-    private BlockShape[] blocksForPuzzle;
+    [SerializeField] private GameObject[] brickPrefabs;
 
     /// <inheritdoc/>
-    public BlockShape[] BlocksForPuzzle
+    public GameObject[] BrickPrefabs
     {
         get
         {
-            return blocksForPuzzle;
+            return brickPrefabs;
+        }
+        set
+        {
+            Assert.IsNotNull(value, "BrickPrefabs cannot be null");
+            Assert.AreEqual(4, value.Length, "BrickPrefabs array must have exactly 4 elements");
+            Debug.Log("Setting BrickPrefabs array with " + value.Length + " elements");
+            brickPrefabs = value;
+        }
+    }
+
+
+    /// <summary>
+    /// Current index in the brick cycle (0-3 since I wanna do 4 different bricks for now)
+    /// </summary>
+    [SerializeField] private int currentBrickIndex;
+
+    /// <inheritdoc/>
+    public int CurrentBrickIndex
+    {
+        get
+        {
+            return currentBrickIndex;
+        }
+        set
+        {
+            Assert.IsTrue(value >= 0, "CurrentBrickIndex cannot be negative");
+            Debug.Log("Setting CurrentBrickIndex from " + currentBrickIndex + " to " + value);
+            currentBrickIndex = value;
         }
     }
 
@@ -62,12 +69,13 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
             spawnArea = value;
         }
     }
-    
+
 
     /// <summary>
-    /// Height above the spawn area where bricks will be instantiated
+    /// Height offset above spawn point
     /// </summary>
     [SerializeField] private float spawnHeight;
+
 
     /// <inheritdoc/>
     public float SpawnHeight
@@ -84,11 +92,12 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
 
-    /// <summary>>
+    /// <summary>
     /// Scale multiplier for spawned bricks
     /// </summary>
-    [SerializeField] private float brickScale = 4.0f;
-    
+    [SerializeField] private float brickScale;
+
+
     /// <inheritdoc/>
     public float BrickScale
     {
@@ -105,277 +114,32 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
         }
     }
 
-
-
     /// <summary>
-    /// Current index in the block cycle
+    /// Reference to the last spawned brick
     /// </summary>
-    private int currentBlockShapeIndex;
+    [SerializeField] private GameObject lastSpawnedBrick;
 
     /// <inheritdoc/>
-    public int CurrentBlockShapeIndex
+    public GameObject LastSpawnedBrick
     {
         get
         {
-            return currentBlockShapeIndex;
+            return lastSpawnedBrick;
         }
         set
         {
-            Assert.IsTrue(value >= 0, "CurrentBlockIndex cannot be negative");
-            Debug.Log("Setting CurrentBlockIndex from " + currentBlockShapeIndex + " to " + value);
-            currentBlockShapeIndex = value;
+            Debug.Log("Setting LastSpawnedBrick to " + (value != null ? value.name : "null"));
+            lastSpawnedBrick = value;
         }
     }
-
-
-
-    /// <summary>
-    /// Current Selection of blocks representing an index in the brickPrefab array
-    /// </summary>
-    [SerializeField] private BlockShape currentBlockShapeSelected;
-    public BlockShape CurrentBlockShapeSelected
-    {
-        get
-        {
-            return currentBlockShapeSelected;
-        }
-        set
-        {
-            Debug.Log("Setting currentBlockShapeSelected from " + currentBlockShapeSelected + " to " + value);
-            currentBlockShapeSelected = value;
-        }
-    }
-
-    
-
-    /// <summary>
-    /// Next in Selection of blocks representing an index in the brickPrefab array
-    /// </summary>
-    private BlockShape nextBlockShapeSelected;
-    public BlockShape NextBlockShapeSelected{
-        get
-        {
-            return nextBlockShapeSelected;
-        }
-    }
-
-
-    /// <summary>
-    /// Previous in Selection of blocks representing an index in the brickPrefab array
-    /// </summary>
-    private BlockShape prevBlockShapeSelected;
-    public BlockShape PrevBlockShapeSelected{
-        get
-        {
-            return prevBlockShapeSelected;
-        }
-    }
-
-
-
-    /// <inheritdoc/>
-    public void SelectNextBlockShape()
-    {
-        int count = blocksForPuzzle.Length; // Count of block shape types in puzzle
-
-        Assert.IsTrue(currentBlockShapeIndex >= 0, "currentBlockShapeIndex must be greater than 0");
-        Assert.IsTrue(currentBlockShapeIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
-        
-        currentBlockShapeIndex ++;
-        prevBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex - 1];
-
-        if(currentBlockShapeIndex >= count )
-        {
-            currentBlockShapeIndex = 0;
-            prevBlockShapeSelected = blocksForPuzzle[count - 1];
-        }
-        currentBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex];
-        nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
-        if ((currentBlockShapeIndex + 1 ) == count )
-        {
-            nextBlockShapeSelected = blocksForPuzzle[0];
-        }
-        
-        Debug.Log("Selecting Next block shape. \nPrevious: " + prevBlockShapeSelected +
-        "Current: " + currentBlockShapeSelected + "Next: " + nextBlockShapeSelected);
-    }
-
-
-    /// <inheritdoc/>
-    public void SelectPreviousBlockShape()
-    {
-        
-        int count = blocksForPuzzle.Length; // Count of block shape types in puzzle
-
-        Assert.IsTrue(currentBlockShapeIndex >= 0, "currentBlockShapeIndex must be greater than 0");
-        Assert.IsTrue(currentBlockShapeIndex <= count, "currentBlockShapeIndex must be less or equal to blocks in puzzle");
-        
-        currentBlockShapeIndex --;
-        nextBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex + 1];
-
-        if(currentBlockShapeIndex < 0 )
-        {
-            currentBlockShapeIndex = count - 1;
-            nextBlockShapeSelected = blocksForPuzzle[0];
-        }
-        currentBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex];
-        prevBlockShapeSelected = blocksForPuzzle[currentBlockShapeIndex - 1];
-
-        if (currentBlockShapeIndex == 0 )
-        {
-            prevBlockShapeSelected = blocksForPuzzle[count - 1];
-        }
-        
-        Debug.Log("Selecting Previous block shape. \nPrevious: " + prevBlockShapeSelected +
-        "Current: " + currentBlockShapeSelected + "Next: " + nextBlockShapeSelected);
-    
-
-    }
-
-
-    /// <summary>
-    /// Current index in the colour cycle
-    /// </summary>
-    [SerializeField] private int currentBlockColourIndex;
-
-    /// <inheritdoc/>
-    public int CurrentBlockColourIndex
-    {
-        get
-        {
-            return currentBlockColourIndex;
-        }
-        set
-        {
-            Assert.IsTrue(value >= 0, "CurrentColourIndex cannot be negative");
-            Debug.Log("Setting CurrentColourIndex from " + currentBlockColourIndex + " to " + value);
-            currentBlockColourIndex = value;
-        }
-    }
-
-
-    /// <summary>
-    /// Selected colour for blocks to spawn
-    /// </summary>
-    [SerializeField] BlockColour currentBlockColourSelected;
-
-    public BlockColour CurrentBlockColourSelected
-    {
-        get
-        {
-            Debug.Log("Getting SelectedColour: " + currentBlockColourSelected);
-            return currentBlockColourSelected;
-        }
-        set
-        {
-            Debug.Log("Setting SelectedColour from " + currentBlockColourSelected + " to " + value);
-            currentBlockColourSelected = value;
-        }
-    }
-
-
-    /// <summary>
-    /// Next in Selection for colour blocks would spawn
-    /// </summary>
-    private BlockColour nextBlockColourSelected;
-    public BlockColour NextBlockColourSelected{
-        get
-        {
-            return nextBlockColourSelected;
-        }
-    }
-
-
-    /// <summary>
-    /// Previous in Selection for colour blocks would spawn
-    /// </summary>
-    private BlockColour prevBlockColourSelected;
-    public BlockColour PrevBlockColourSelected{
-        get
-        {
-            return prevBlockColourSelected;
-        }
-    }
-
-
-    /// <inheritdoc/>
-    public void SelectNextColour()
-    {
-        int count = allBlockColours.Count; // Count of all colours in puzzle
-
-        Assert.IsTrue(currentBlockColourIndex >= 0, "currentBlockShapeIndex must be greater than 0");
-        Assert.IsTrue(currentBlockColourIndex <= count, "currentBlockShapeIndex must be less or equal to allBlockColours.count");
-        
-        currentBlockColourIndex ++;
-
-        if(currentBlockColourIndex >= count )
-        {
-            currentBlockColourIndex = 0;
-            prevBlockColourSelected = allBlockColours[count - 1];
-        } else
-        {
-            prevBlockColourSelected = allBlockColours[currentBlockColourIndex - 1];
-        }
-
-        nextBlockColourSelected = allBlockColours[currentBlockColourIndex + 1];
-        if ((currentBlockColourIndex + 1 ) == count )
-        {
-            nextBlockColourSelected = allBlockColours[0];
-        }        
-
-        currentBlockColourSelected = allBlockColours[currentBlockColourIndex];
-
-        Debug.Log("Selecting Next block Colour. \nPrevious: " + prevBlockColourSelected +
-        "Current: " + currentBlockColourSelected + "Next: " + nextBlockColourSelected);
-
-    }
-
-    /// <inheritdoc/>
-    public void SelectPreviousColour()
-    {
-                
-        int count = allBlockColours.Count; // Count of block shape types in puzzle
-
-        Assert.IsTrue(currentBlockColourIndex >= 0, "currentBlockColourIndex must be greater than 0");
-        Assert.IsTrue(currentBlockColourIndex <= count, "currentBlockColoureIndex must be less or equal to count of allcolours");
-        
-        currentBlockColourIndex --;
-        nextBlockColourSelected = allBlockColours[currentBlockColourIndex + 1];
-
-        if(currentBlockShapeIndex < 0 )
-        {
-            currentBlockShapeIndex = count - 1;
-            nextBlockColourSelected = allBlockColours[0];
-        }
-        currentBlockColourSelected = allBlockColours[currentBlockColourIndex];
-        prevBlockColourSelected = allBlockColours[currentBlockShapeIndex - 1];
-
-        if (currentBlockShapeIndex == 0 )
-        {
-            prevBlockColourSelected = allBlockColours[count - 1];
-        }
-        
-        Debug.Log("Selecting Previous block colour. \nPrevious: " + prevBlockColourSelected +
-        "Current: " + currentBlockColourSelected + "Next: " + nextBlockColourSelected);
-    
-
-    }
-
 
     /// <inheritdoc/>
     private void Initialize()
     {
-        currentBlockColourSelected = BlockColour.white;
-        currentBlockShapeIndex = 0;
+        currentBrickIndex = 0;
         spawnHeight = 1.0f;
         brickScale = 4.0f;
+        lastSpawnedBrick = null;
     }
 
-
-    /// <inheritdoc/>
-    public void Init()
-    {
-        
-    }
-    
 }

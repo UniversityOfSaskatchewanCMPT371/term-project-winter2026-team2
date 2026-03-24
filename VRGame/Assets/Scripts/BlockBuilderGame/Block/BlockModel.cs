@@ -8,46 +8,27 @@ using UnityEngine.Assertions;
 public class BlockModel : MonoBehaviour, IBlockModel
 {
     /// <summary>
-    /// The shape of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
+    /// The type of the block (e.g., bevel_lq_brick_1x1, bevel_lq_brick_1x2, etc.)
     /// </summary>
-    [SerializeField] private BlockShape shape;
+    [SerializeField] private string blockType;
 
     /// <inheritdoc/>
-    public BlockShape Shape
+    public string BlockType
     {
         get
         {
-            return Shape;
+            return blockType;
         }
         set
         {
-            Assert.IsNotNull("BlockModel: BlockShape cannot be null");
-            Debug.Log("BlockModel Setting BlockShape from " + shape + " to " + value);
-            shape = value;
+            Assert.IsNotNull("BlockModel BlockType cannot be null");
+            Debug.Log("BlockModel Setting BlockType from " + blockType + " to " + value);
+            blockType = value;
         }
     }
 
     /// <summary>
-    /// The colour of the block (e.g., red, blue, green etc.)
-    /// </summary>
-    [SerializeField] private BlockColour colour;
-
-    /// <inheritdoc/>
-    public BlockColour Colour
-    {
-        get
-        {
-            return colour;
-        }
-        set
-        {
-            Debug.Log("BlockModel Setting BlockColour from " + colour + " to " + value);
-            colour = value;
-        }
-    }
-
-    /// <summary>
-    /// The current postion of the block.
+    /// The position of the block in game
     /// </summary>
     [SerializeField] private Vector3 position;
 
@@ -62,26 +43,6 @@ public class BlockModel : MonoBehaviour, IBlockModel
         {
             Debug.Log("BlockModel Setting Position from " + position + " to " + value);
             position = value;
-        }
-    }
-
-
-    /// <summary>
-    /// The target postion of the block.
-    /// </summary>
-    [SerializeField] private Vector3 targetPosition;
-
-    /// <inheritdoc/>
-    public Vector3 TargetPosition
-    {
-        get
-        {
-            return targetPosition;
-        }
-        set
-        {
-            Debug.Log("BlockModel Setting TargetPosition from " + targetPosition + " to " + value);
-            targetPosition = value;
         }
     }
 
@@ -108,13 +69,13 @@ public class BlockModel : MonoBehaviour, IBlockModel
     /// <summary>
     /// Initializes the BlockModel with default values
     /// </summary>
-    public void initialization(BlockShape s, BlockColour c)
+    public void initialization()
     {
-        Shape = s; 
-        Colour = c;
-        Position = Vector3.zero;
+        blockType = string.Empty;
+        position = Vector3.zero;
         rotation = Quaternion.identity;
         Debug.Log("BlockModel initialized with default values");
+        Assert.IsNotNull(blockType, "BlockType should not be null after initialization");
     }
 
 
