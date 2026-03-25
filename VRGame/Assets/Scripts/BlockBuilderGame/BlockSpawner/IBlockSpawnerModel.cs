@@ -4,7 +4,7 @@ using UnityEngine;
 /// Interface for the BlockSpawner Model
 /// Defines the data structure for managing brick spawning
 /// </summary>
-public interface IBlockSpawnerModel
+public interface IBlockSpawnerModel : IModel
 {
     /// <summary>
     /// Array of brick prefabs to spawn
