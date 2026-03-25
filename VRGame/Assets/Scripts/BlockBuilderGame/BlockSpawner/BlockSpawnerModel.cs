@@ -51,27 +51,6 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
 
 
     /// <summary>
-    /// Transform indicating where bricks should spawn
-    /// </summary>
-    [SerializeField] private Transform spawnArea;
-
-    /// <inheritdoc/>
-    public Transform SpawnArea
-    {
-        get
-        {
-            return spawnArea;
-        }
-        set
-        {
-            Debug.Log("Setting SpawnArea to value to" + value);
-            Assert.IsNotNull(value, "SpawnArea cannot be null");
-            spawnArea = value;
-        }
-    }
-
-
-    /// <summary>
     /// Height offset above spawn point
     /// </summary>
     [SerializeField] private float spawnHeight;

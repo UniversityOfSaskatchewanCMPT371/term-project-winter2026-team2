@@ -62,32 +62,7 @@ public interface IBlockSpawnerModel
         /// </remarks>
         set; }
 
-    /// <summary>
-    /// Transform where bricks should spawn
-    /// </summary>
-    Transform SpawnArea 
-    {
-        /// <summary>
-        /// Getter for SpawnArea
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - SpawnArea has been initialized to a valid Transform
-        /// post-condition:
-        ///     - Returns the Transform indicating the spawn area for bricks
-        /// </remarks> 
-        get; 
-
-        /// <summary>
-        /// Setter for SpawnArea
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - Input value must not be null
-        /// post-condition:
-        ///     - Sets the SpawnArea to the provided Transform
-        /// </remarks>
-        set; }
+    
 
     /// <summary>
     /// Height offset above spawn area point
