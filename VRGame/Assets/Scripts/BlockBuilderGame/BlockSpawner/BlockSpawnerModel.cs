@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 /// Model class for BlockSpawner
 /// Contains all data related to brick spawning
 /// </summary>
-public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
+public class BlockSpawnerModel : Model, IBlockSpawnerModel
 {
     /// <summary>
     /// Array of brick prefabs to cycle through
@@ -113,7 +113,7 @@ public class BlockSpawnerModel : MonoBehaviour, IBlockSpawnerModel
     }
 
     /// <inheritdoc/>
-    private void Initialize()
+    public override void Init()
     {
         currentBrickIndex = 0;
         spawnHeight = 1.0f;
