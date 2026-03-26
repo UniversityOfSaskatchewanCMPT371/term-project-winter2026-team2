@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections.Generic;
-
 /// <summary>
 /// The model of the LogicGame itself. Manages the initial setup of panels and the game's functional state
 /// </summary>
@@ -20,7 +17,7 @@ public interface ILogicGameModel : IModel
     ///     - All Panels are saved in this model
     ///     - Adjacent Panels have their *Neighbor fields set where necessary
     /// </remarks>
-    public void Init();
+    public new void Init();
 
     /// <summary>
     /// Gets a panel at specific coordinates
