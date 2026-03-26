@@ -3,138 +3,100 @@ using UnityEngine.Assertions;
 
 /// <summary>
 /// Model class for BlockSpawner
-/// Contains all data related to brick spawning
+/// Contains all data related to block spawning
 /// </summary>
 public class BlockSpawnerModel : Model, IBlockSpawnerModel
 {
     /// <summary>
-    /// The transform at which new blocks are spawned
+    /// Array of block prefabs to cycle through
     /// </summary>
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject[] blockPrefabs;
 
     /// <inheritdoc/>
-    public Transform SpawnPoint
-    {
-        get => spawnPoint;
-        set
-        {
-            Assert.IsNotNull(value, "SpawnPoint cannot be null");
-            spawnPoint = value;
-        }
-    }
-
-    /// <summary>
-    /// Array of brick prefabs to cycle through
-    /// </summary>
-    [SerializeField] private GameObject[] brickPrefabs;
-
-    /// <inheritdoc/>
-    public GameObject[] BrickPrefabs
+    public GameObject[] BlockPrefabs
     {
         get
         {
-            return brickPrefabs;
+            return blockPrefabs;
         }
         set
         {
-            Assert.IsNotNull(value, "BrickPrefabs cannot be null");
-            Assert.AreEqual(4, value.Length, "BrickPrefabs array must have exactly 4 elements");
-            Debug.Log("Setting BrickPrefabs array with " + value.Length + " elements");
-            brickPrefabs = value;
+            Assert.IsNotNull(value, "value to set for blockPrefabs must not be null");
+            Assert.IsTrue(value.Length > 0, "blockPrefabs array must have at least 1 element");
+            blockPrefabs = value;
         }
     }
 
 
     /// <summary>
-    /// Current index in the brick cycle (0-3 since I wanna do 4 different bricks for now)
+    /// Current index in the block cycle (0-3 since I wanna do 4 different blocks for now)
     /// </summary>
-    [SerializeField] private int currentBrickIndex;
+    [SerializeField] private int currentBlockIndex;
 
     /// <inheritdoc/>
-    public int CurrentBrickIndex
+    public int CurrentBlockIndex
     {
         get
         {
-            return currentBrickIndex;
+            return currentBlockIndex;
         }
         set
         {
-            Assert.IsTrue(value >= 0, "CurrentBrickIndex cannot be negative");
-            Debug.Log("Setting CurrentBrickIndex from " + currentBrickIndex + " to " + value);
-            currentBrickIndex = value;
+            Assert.IsTrue(value >= 0, "CurrentblockIndex cannot be negative");
+            currentBlockIndex = value;
         }
     }
 
 
     /// <summary>
-    /// Height offset above spawn point
+    /// Scale multiplier for spawned blocks
     /// </summary>
-    [SerializeField] private float spawnHeight;
+    [SerializeField] private float blockScale;
 
 
     /// <inheritdoc/>
-    public float SpawnHeight
+    public float BlockScale
     {
         get
         {
-            return spawnHeight;
+            return blockScale;
         }
         set
         {
-            Debug.Log("Setting SpawnHeight from " + spawnHeight + " to " + value);
-            spawnHeight = value;
-        }
-    }
-
-
-    /// <summary>
-    /// Scale multiplier for spawned bricks
-    /// </summary>
-    [SerializeField] private float brickScale;
-
-
-    /// <inheritdoc/>
-    public float BrickScale
-    {
-        get
-        {
-            Debug.Log("Getting BrickScale: " + brickScale);
-            return brickScale;
-        }
-        set
-        {
-            Assert.IsTrue(value > 0, "BrickScale must be greater than 0");
-            Debug.Log("Setting BrickScale from " + brickScale + " to " + value);
-            brickScale = value;
+            Assert.IsTrue(value > 0, "blockScale must be greater than 0");
+            blockScale = value;
         }
     }
 
     /// <summary>
-    /// Reference to the last spawned brick
+    /// Reference to the last spawned block
     /// </summary>
-    [SerializeField] private GameObject lastSpawnedBrick;
+    [SerializeField] private GameObject lastSpawnedBlock;
 
     /// <inheritdoc/>
-    public GameObject LastSpawnedBrick
+    public GameObject LastSpawnedBlock
     {
         get
         {
-            return lastSpawnedBrick;
+            return lastSpawnedBlock;
         }
         set
         {
-            Debug.Log("Setting LastSpawnedBrick to " + (value != null ? value.name : "null"));
-            lastSpawnedBrick = value;
+            Assert.IsNotNull(value, "Cannot set null value for LastSpawned Block");
+            lastSpawnedBlock = value;
         }
     }
 
     /// <inheritdoc/>
     public override void Init()
     {
-        currentBrickIndex = 0;
-        spawnHeight = 1.0f;
-        brickScale = 4.0f;
-        lastSpawnedBrick = null;
+        currentBlockIndex = 0;
+        blockScale = 4.0f;
+        lastSpawnedBlock = null;
+
+        Assert.AreEqual(currentBlockIndex, 0, "currentBlockIndex failed to set on Init");
+        Assert.AreEqual(blockScale, 4.0f, "blockScale failed to set on Init");
+        Assert.IsNull(lastSpawnedBlock, "lastSpawnedBlock failed to set on Init");
     }
 
 }
