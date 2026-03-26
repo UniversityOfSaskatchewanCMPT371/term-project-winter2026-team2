@@ -26,19 +26,19 @@ public class BlockSpawnerController : Controller<IBlockSpawnerModel, IBlockSpawn
     /// <inheritdoc/>
     public void SpawnBlock()
     {
-        GameObject[] prefabs = modelInstance.BrickPrefabs;
-        Assert.IsNotNull(prefabs, "BrickPrefabs must not be null");
-        Assert.IsTrue(prefabs.Length > 0, "BrickPrefabs must not be empty");
+        GameObject[] prefabs = modelInstance.BlockPrefabs;
+        Assert.IsNotNull(prefabs, "BlockPrefabs must not be null");
+        Assert.IsTrue(prefabs.Length > 0, "BlockPrefabs must not be empty");
 
-        int index = modelInstance.CurrentBrickIndex;
-        Assert.IsTrue(index < prefabs.Length, "CurrentBrickIndex is out of bounds");
+        int index = modelInstance.CurrentBlockIndex;
+        Assert.IsTrue(index < prefabs.Length, "CurrentBlockIndex is out of bounds");
 
         GameObject prefab = prefabs[index];
-        modelInstance.CurrentBrickIndex = (index + 1) % prefabs.Length;
+        modelInstance.CurrentBlockIndex = (index + 1) % prefabs.Length;
 
         GameObject block = Instantiate(prefab, transform.position, transform.rotation);
-        block.transform.localScale = Vector3.one * modelInstance.BrickScale;
+        block.transform.localScale = Vector3.one * modelInstance.BlockScale;
 
-        modelInstance.LastSpawnedBrick = block;
+        modelInstance.LastSpawnedBlock = block;
     }
 }
