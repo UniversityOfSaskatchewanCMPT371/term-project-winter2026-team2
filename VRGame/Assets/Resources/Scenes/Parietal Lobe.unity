@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectorWindowModel: {fileID: 4953831}
   inspectorWindowView: {fileID: 4953830}
-  blockSpawnerController: {fileID: 0}
+  blockSpawnerController: {fileID: 653265019}
 --- !u!114 &4953830
 MonoBehaviour:
   m_ObjectHideFlags: 0
