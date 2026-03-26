@@ -1,124 +1,52 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
-/// View class for BlockSpawner
-/// Handles visual representation and instantiation of bricks
+/// View component of BlockSpawnerView.
 /// </summary>
-public class BlockSpawnerView : MonoBehaviour, IBlockSpawnerView
+public class BlockSpawnerView : View<IBlockSpawnerController>, IBlockSpawnerView
 {
+    // use 'this.controllerInstance' to access controller component
+
     /// <inheritdoc/>
-    public GameObject InstantiateBrick(GameObject prefab, Vector3 position, Quaternion rotation, float scale)
+    public override void Init()
     {
-        if (prefab == null)
-        {
-            Debug.LogError("Cannot instantiate brick. Prefab is null");
-            return null;
-        }
-        Assert.IsNotNull(prefab, "Prefab cannot be null");
-        
+        this.CheckControllerRef();
 
-        if (scale <= 0)
-        {
-            Debug.LogError("Scale must be greater than 0");
-            return null;
-        }
-        Assert.IsTrue(scale > 0, "Scale must be greater than 0");
-
-        // Instantiate the brick and set its scale
-        GameObject spawnedBrick = Instantiate(prefab, position, rotation);
-        spawnedBrick.transform.localScale = Vector3.one * scale;
-
-        return spawnedBrick;
+        SetupXREvents();
     }
 
-    /// <inheritdoc/>
-    public void ConfigureBrickVisuals(GameObject brick)
+    /// <inheritdoc>
+    public void SetupXREvents()
     {
-        if (brick == null)
+        if (controllerInstance == null)
         {
-            Debug.LogError("Cannot configure visuals for brick. Brick is null");
-            return;
+            Debug.LogWarning("Controller instance cannot be null on XR events setup");
         }
-        Assert.IsNotNull(brick, "Brick GameObject cannot be null");
-
-        // Enable all MeshRenderers and assign random colors if material is missing
-        MeshRenderer[] renderers = brick.GetComponentsInChildren<MeshRenderer>();
-        if (renderers.Length <= 0)
+        Assert.IsNotNull(controllerInstance, "Controller must Not be null on XR events setup");
+        var components = GetComponentsInChildren<XRBaseInteractable>();
+        // Assign listeners on each component
+        if (components.Length == 0)
         {
-            Debug.LogWarning("No MeshRenderer found on brick " + brick.name);
-            return;
+            Debug.LogWarning("Cannot get components, none exist");
         }
-        else
+        foreach (var c in components)
         {
-            // Enable all renderers and assign random colors if material is missing
-            foreach (MeshRenderer renderer in renderers)
+            Assert.IsNotNull(c, "Null component found in components");
+            if (c == null)
             {
-                renderer.enabled = true;
-                if (renderer.sharedMaterial == null)
-                {
-                    renderer.material = new Material(Shader.Find("Standard"));
-                    renderer.material.color = GetRandomBrickColor();
-                }
+                Debug.LogError("Null component detected");
             }
+            c.selectEntered.AddListener(OnClick);
+            Assert.IsNotNull(c, "Failed to add XR events to a (null) component");
         }
-
-        // Add MeshColliders to all child objects
-        MeshFilter[] meshFilters = brick.GetComponentsInChildren<MeshFilter>();
-        foreach (MeshFilter meshFilter in meshFilters)
-        {
-            if (meshFilter.gameObject.GetComponent<Collider>() == null)
-            {
-                MeshCollider meshCollider = meshFilter.gameObject.AddComponent<MeshCollider>();
-                meshCollider.convex = true;
-            }
-
-        }
-
-        // Add Rigidbody to the root object if it doesn't have one
-        if (brick.GetComponent<Rigidbody>() == null)
-        {
-            Rigidbody rb = brick.AddComponent<Rigidbody>();
-            rb.mass = 0.5f;
-            rb.useGravity = false;
-            rb.isKinematic = true;
-        }
-        else
-        {
-            Rigidbody rb = brick.GetComponent<Rigidbody>();
-            rb.useGravity = false;
-            rb.isKinematic = true;
-        }
-
     }
 
-    /// <inheritdoc/>
-    private Color GetRandomBrickColor()
+    private void OnXRClick()
     {
-        Color[] brickColors = new Color[]
-        {
-            Color.red,
-            Color.blue,
-            Color.green,
-            Color.yellow,
-            new Color(1f, 0.5f, 0f), // Orange
-            new Color(0.5f, 0f, 1f)  // Purple
-        };
-        Color selectedColor = brickColors[Random.Range(0, brickColors.Length)];
-        return selectedColor;
-    }
-
-    /// <inheritdoc/>
-    public void DestroyBrick(GameObject brick)
-    {
-        if (brick != null)
-        {
-            Destroy(brick);
-        }
-        else
-        {
-            Debug.Log("DestroyBrick called on null brick, nothing to destroy");
-        }
+        return;
     }
 
 }
+
