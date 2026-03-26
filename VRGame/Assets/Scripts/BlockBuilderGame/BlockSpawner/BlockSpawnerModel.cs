@@ -82,8 +82,8 @@ public class BlockSpawnerModel : Model, IBlockSpawnerModel
         }
         set
         {
-            Assert.IsNotNull(value, "Cannot set null value for LastSpawned Block");
             lastSpawnedBlock = value;
+            // No assertions due to lastSpawnedBlock will be null on next block spawn
         }
     }
 
