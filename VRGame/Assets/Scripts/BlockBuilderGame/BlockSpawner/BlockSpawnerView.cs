@@ -38,14 +38,14 @@ public class BlockSpawnerView : View<IBlockSpawnerController>, IBlockSpawnerView
             {
                 Debug.LogError("Null component detected");
             }
-            c.selectEntered.AddListener(OnClick);
+            c.selectEntered.AddListener(OnXRClick);
             Assert.IsNotNull(c, "Failed to add XR events to a (null) component");
         }
     }
 
-    private void OnXRClick()
+    private void OnXRClick(SelectEnterEventArgs args)
     {
-        return;
+        controllerInstance.SpawnBlock();
     }
 
 }
