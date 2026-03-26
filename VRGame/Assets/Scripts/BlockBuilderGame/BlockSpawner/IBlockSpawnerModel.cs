@@ -16,9 +16,9 @@ public interface IBlockSpawnerModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BlockPrefabs array must (at least) have one element
+        ///     -   requires BlockPrefabs.length > 0
         /// post-condition:
-        ///     - Returns the current array of block prefabs
+        ///     -   ensures the return of the block prefabs array
         /// </remarks>
         get; 
 
@@ -27,9 +27,9 @@ public interface IBlockSpawnerModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BlockPrefabs array must (at least) have one element
+        ///     -   requires BlockPrefabs.length > 0
         /// post-condition:
-        ///     - Sets the BlockPrefabs array to the provided value
+        ///     -   ensures BlockPrefabs = value
         /// </remarks>
         set; 
     }
