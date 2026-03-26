@@ -2,148 +2,131 @@ using UnityEngine;
 
 /// <summary>
 /// Interface for the BlockSpawner Model
-/// Defines the data structure for managing brick spawning
+/// Defines the data structure for managing block spawning
 /// </summary>
 public interface IBlockSpawnerModel : IModel
 {
     /// <summary>
-    /// Array of brick prefabs to spawn
+    /// Array of block prefabs to spawn
     /// </summary>
-    GameObject[] BrickPrefabs 
+    GameObject[] BlockPrefabs 
     { 
         /// <summary>
-        /// Getter for BrickPrefabs array
+        /// Getter for BlockPrefabs array
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BrickPrefabs array has been initialized with 4 elements
+        ///     - BlockPrefabs array must (at least) have one element
         /// post-condition:
-        ///     - Returns the current array of brick prefabs
+        ///     - Returns the current array of block prefabs
         /// </remarks>
         get; 
 
         /// <summary>
-        /// Setter for BrickPrefabs array
+        /// Setter for BlockPrefabs array
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - Input array must not be null
-        ///     - Input array must have exactly 4 elements
+        ///     - BlockPrefabs array must (at least) have one element
         /// post-condition:
-        ///     - Sets the BrickPrefabs array to the provided value
+        ///     - Sets the BlockPrefabs array to the provided value
         /// </remarks>
         set; 
     }
 
     /// <summary>
-    /// Current index in the brick cycle
+    /// Current index in the block cycle
     /// </summary>
-    int CurrentBrickIndex 
+    int CurrentBlockIndex 
     { 
         /// <summary>
-        /// Getter for CurrentBrickIndex
+        /// Getter for CurrentBlockIndex
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - CurrentBrickIndex has been initialized to a non-negative value
+        ///     - requires none
         /// post-condition:
-        ///     - Returns the current index for brick spawning
+        ///     - ensures that the current index for block to spawn is returned
         /// </remarks>
         get; 
         
         /// <summary>
-        /// Setter for CurrentBrickIndex
+        /// Setter for CurrentBlockIndex
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - Input value must be non-negative
+        ///     - requires value >= 0
         /// post-condition:
-        ///     - Sets the CurrentBrickIndex to the provided value
+        ///     - ensures currentBlockIndex = value
         /// </remarks>
         set; }
 
     
 
     /// <summary>
-    /// Height offset above spawn area point
+    /// Scale multiplier for spawned blocks
     /// </summary>
-    float SpawnHeight 
-    { 
-        /// <summary>
-        /// Getter for SpawnHeight
-        /// </summary>
-        /// <remarks>        
-        /// pre-condition:
-        ///     - SpawnHeight has been initialized to a valid float value
-        /// post-condition:
-        ///     - Returns the height offset for spawning bricks
-        /// </remarks>
-        get; 
-        
-        /// <summary>
-        /// Setter for SpawnHeight
-        /// </summary>
-        /// <remarks>
-        /// pre-condition:
-        ///     - Input value can be any float (positive, negative, or zero)
-        /// post-condition:
-        ///     - Sets the SpawnHeight to the provided value
-        /// </remarks>
-        set; }
-
-    /// <summary>
-    /// Scale multiplier for spawned bricks
-    /// </summary>
-    float BrickScale 
+    float BlockScale 
     {
         /// <summary>
-        /// Getter for BrickScale
+        /// Getter for BlockScale
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - BrickScale has been initialized to a positive float value
+        ///     - requires none
         /// post-condition:
-        ///     - Returns the scale multiplier for spawned bricks
+        ///     - ensures blockScale is returned
         /// </remarks> 
         get; 
 
         /// <summary>
-        /// Setter for BrickScale
+        /// Setter for BlockScale
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - Input value must be greater than 0
+        ///     - requires value > 0
         /// post-condition:
-        ///     - Sets the BrickScale to the provided value
+        ///     - ensures blockScale = value
         /// </remarks>
         set; 
     }
 
     /// <summary>
-    /// Reference to the last spawned brick
+    /// Reference to the last spawned block
     /// </summary>
-    GameObject LastSpawnedBrick
+    GameObject LastSpawnedBlock
     {
         /// <summary>
-        /// Getter for LastSpawnedBrick
+        /// Getter for LastSpawnedBlock
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - None (can be null if no brick has been spawned yet)
+        ///     - requires none
         /// post-condition:
-        ///     - Returns the reference to the last spawned brick GameObject
+        ///     - ensures lastSpawnedBlock is returned
         /// </remarks>
         get;
 
         /// <summary>
-        /// Setter for LastSpawnedBrick
+        /// Setter for LastSpawnedBlock
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - Input value can be null or a valid GameObject reference
+        ///     - requires value != null
         /// post-condition:
-        ///     - Sets the LastSpawnedBrick to the provided reference
+        ///     - ensures lastSpawnedBlock = value
         /// </remarks>
         set;
     }
+
+    /// <summary>
+    /// Initializes the currentBlockIndex, blockScale, and lastSpawnedBlock
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - requires none
+    /// post-condition:
+    ///     - ensures (currentBlockIndex == 0) &&
+    ///                 (blockScale == 4.0f) && (lastSpawnedBlock == null)
+    new void Init();
 }
