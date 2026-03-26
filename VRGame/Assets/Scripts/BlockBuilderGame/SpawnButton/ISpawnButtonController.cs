@@ -1,14 +1,28 @@
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
-// If you are making Model layer, inherit from IModel.
-// Same goes for other layers. (IController/IView)
-
 /// <summary>
-/// TODO: Change the docstring to match your implementation.
+/// Interface for the SpawnButton Controller.
+/// Manages block spawning via button press.
 /// </summary>
-public interface ISpawnButtonController : IModel
+public interface ISpawnButtonController : IController
 {
     /// <summary>
-    /// TODO: Change the docstring to match your implementation.
+    /// Initializes the controller and checks model and view references.
     /// </summary>
+    /// <remarks>
+    /// pre-conditions:
+    ///     - requires (modelInstance != null) && (viewInstance != null) && (blockSpawner != null)
+    /// post-condition:
+    ///     - ensures controller is ready to handle button presses
+    /// </remarks>
     new void Init();
+
+    /// <summary>
+    /// Triggers SpawnBlock on the referenced BlockSpawner controller.
+    /// </summary>
+    /// <remarks>
+    /// pre-conditions:
+    ///     - requires blockSpawner != null
+    /// post-conditions:
+    ///     - ensures blockSpawner.SpawnBlock() is called
+    /// </remarks>
+    void OnButtonPressed();
 }
