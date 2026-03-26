@@ -5,7 +5,7 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface ISpawnButtonController : IModel
+public interface ISpawnButtonModel : IModel
 {
     /// <summary>
     /// TODO: Change the docstring to match your implementation.

@@ -1,67 +1,21 @@
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.XR.Interaction.Toolkit;
+
+// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
 
 /// <summary>
-/// View class for SpawnButton
-/// Handles visual representation and interaction events for the spawn button
+/// View component of SpawnButtonView.
 /// </summary>
-public class SpawnButtonView : MonoBehaviour, ISpawnButtonView
+public class SpawnButtonView : 
+    View<IController>, // TODO reminder to switch the generic to the one you've implemented
+    ISpawnButtonView
 {
-    /// <summary>
-    /// Reference to the XRSimpleInteractable component
-    /// </summary>
-    private XRSimpleInteractable interactable;
-
-    /// <summary>
-    /// Awake method to initialize the interactable component
-    /// </summary>
-    private void Awake()
-    {
-        interactable = GetComponent<XRSimpleInteractable>();
-        
-        if (interactable == null)
-        {
-            Debug.LogWarning("XRSimpleInteractable component is missing (XR interactions will not work)");
-        }
-    }
+    // use 'this.controllerInstance' to access controller component
 
     /// <inheritdoc/>
-    public void Subscribe(System.Action<SelectEnterEventArgs> onButtonPressed)
+    public override void Init()
     {
-        if (onButtonPressed == null)
-        {
-            Debug.LogError("SpawnButtonView Cannot subscribe to events with null callback");
-            Assert.IsNotNull(onButtonPressed, "onButtonPressed callback cannot be null");
-            return;
-        }
-
-        if (interactable != null)
-        {
-            interactable.selectEntered.AddListener(onButtonPressed.Invoke);
-        }
-        else
-        {
-            Debug.LogWarning("SpawnButtonView Cannot subscribe to XR events, interactable is null");
-        }
-    }
-
-    /// <inheritdoc/>
-    public void Unsubscribe(System.Action<SelectEnterEventArgs> onButtonPressed)
-    {
-        if (onButtonPressed == null)
-        {
-            Debug.LogError("SpawnButtonView Cannot unsubscribe from events with null callback");
-            return;
-        }
-
-        if (interactable != null)
-        {
-            interactable.selectEntered.RemoveListener(onButtonPressed.Invoke);
-        }
-        else
-        {
-            Debug.LogWarning("SpawnButtonView Cannot unsubscribe from XR events, interactable is null");
-        }
+        // this is used to resolve and validate the controller component
+        this.CheckControllerRef();
     }
 }
+
