@@ -1,28 +1,30 @@
-using UnityEngine;
-
 /// <summary>
 /// Interface for the BlockSpawner Controller
 /// Manages the logic for spawning bricks in sequence
 /// </summary>
-public interface IBlockSpawnerController
+public interface IBlockSpawnerController : IController
 {
     /// <summary>
-    /// Initializes the spawner with brick prefabs
+    /// Initializes the controller and Checks model and view references
     /// </summary>
-    /// <param name="brick1x1">1x1 brick prefab</param>
-    /// <param name="brick1x2">1x2 brick prefab</param>
-    /// <param name="brick1x4">1x4 brick prefab</param>
-    /// <param name="brick1x6">1x6 brick prefab</param>
-    void Initialize(GameObject brick1x1, GameObject brick1x2, GameObject brick1x4, GameObject brick1x6);
+    /// <remarks>
+    /// pre-conditions:
+    ///     - requires (modelInstance != null) && (viewInstance != null)
+    /// post-condition:
+    ///     - ensures controller is ready to spawn blocks
+    /// </remarks>
+    new void Init();
 
     /// <summary>
-    /// Spawns the next brick in the cycle
+    /// Spawns the next brick prefab at this GameObject's transform.
     /// </summary>
-    void SpawnNextBrick();
-
-    /// <summary>
-    /// Gets the current brick index
-    /// </summary>
-    /// <returns>Current index in the brick cycle</returns>
-    int GetCurrentBrickIndex();
+    /// <remarks>
+    /// pre-conditions:
+    ///     - requires (BrickPrefabs.length > 0) && (0 <= CurrentBrickIndex < BrickPrefabs.Length)
+    /// post-conditions:
+    ///     - ensures a new block is instantiated at transform.position / transform.rotation,
+    ///     - CurrentBrickIndex is advanced to the next cycle position, &&
+    ///     - LastSpawnedBrick is updated to the new block
+    /// </remarks>
+    void SpawnBlock();
 }
