@@ -528,7 +528,6 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
             Debug.LogError("Could not find texture manager!");
         }
         Assert.IsNotNull(panelTextureManager, "Could not find texture manager!");
-        panelTextureManager.RefreshTexture();
 
         xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
         if(xRSimpleInteractable == null)
@@ -550,6 +549,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
             Debug.LogError("Could not find the parent's LogicGameController!");
         }
         Assert.IsNotNull(controllerInstance, "Could not find the parent's LogicGameController!");
+        panelTextureManager.Invoke("RefreshTexture", 0.25f);
     }
 
     /// <summary>
