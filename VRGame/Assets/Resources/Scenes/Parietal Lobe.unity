@@ -1400,7 +1400,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 566a5f1587a3b40da85323c137f72317, type: 3}
   - {fileID: 919132149155446097, guid: b4f2e55c98f6b47ec9eec7a8f725aebf, type: 3}
   currentBlockIndex: 0
-  blockScale: 4
+  blockScale: 2
   lastSpawnedBlock: {fileID: 0}
 --- !u!1001 &705965185
 PrefabInstance:
