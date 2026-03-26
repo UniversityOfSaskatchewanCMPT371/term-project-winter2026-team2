@@ -8,6 +8,22 @@ using UnityEngine.Assertions;
 public class BlockSpawnerModel : Model, IBlockSpawnerModel
 {
     /// <summary>
+    /// The transform at which new blocks are spawned
+    /// </summary>
+    [SerializeField] private Transform spawnPoint;
+
+    /// <inheritdoc/>
+    public Transform SpawnPoint
+    {
+        get => spawnPoint;
+        set
+        {
+            Assert.IsNotNull(value, "SpawnPoint cannot be null");
+            spawnPoint = value;
+        }
+    }
+
+    /// <summary>
     /// Array of brick prefabs to cycle through
     /// </summary>
     [SerializeField] private GameObject[] brickPrefabs;
