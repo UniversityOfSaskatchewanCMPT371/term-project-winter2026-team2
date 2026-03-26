@@ -31,7 +31,7 @@ public class BlockSpawnerModel : Model, IBlockSpawnerModel
     /// <summary>
     /// Current index in the block cycle (0-3 since I wanna do 4 different blocks for now)
     /// </summary>
-    [SerializeField] private int currentBlockIndex;
+    private int currentBlockIndex;
 
     /// <inheritdoc/>
     public int CurrentBlockIndex
@@ -51,7 +51,7 @@ public class BlockSpawnerModel : Model, IBlockSpawnerModel
     /// <summary>
     /// Scale multiplier for spawned blocks
     /// </summary>
-    [SerializeField] private float blockScale;
+    private float blockScale;
 
 
     /// <inheritdoc/>
@@ -71,7 +71,7 @@ public class BlockSpawnerModel : Model, IBlockSpawnerModel
     /// <summary>
     /// Reference to the last spawned block
     /// </summary>
-    [SerializeField] private GameObject lastSpawnedBlock;
+    private GameObject lastSpawnedBlock;
 
     /// <inheritdoc/>
     public GameObject LastSpawnedBlock
