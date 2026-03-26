@@ -1264,9 +1264,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPrefabs: []
+  blockPrefabs:
+  - {fileID: 919132149155446097, guid: 9da6c0804f24e4bbc9271e2f950911f6, type: 3}
+  - {fileID: 919132149155446097, guid: 560ff14cd59bc4dd6ba166931824f69e, type: 3}
+  - {fileID: 919132149155446097, guid: 566a5f1587a3b40da85323c137f72317, type: 3}
+  - {fileID: 919132149155446097, guid: b4f2e55c98f6b47ec9eec7a8f725aebf, type: 3}
   currentBlockIndex: 0
-  blockScale: 0
+  blockScale: 4
   lastSpawnedBlock: {fileID: 0}
 --- !u!1001 &705965185
 PrefabInstance:
