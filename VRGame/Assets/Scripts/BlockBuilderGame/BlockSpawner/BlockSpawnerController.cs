@@ -33,6 +33,11 @@ public class BlockSpawnerController : Controller<IBlockSpawnerModel, IBlockSpawn
         int index = modelInstance.CurrentBlockIndex;
         Assert.IsTrue(index < prefabs.Length, "CurrentBlockIndex is out of bounds");
 
+        if (modelInstance.LastSpawnedBlock != null)
+        {
+            Destroy(modelInstance.LastSpawnedBlock);
+        }
+
         GameObject prefab = prefabs[index];
         modelInstance.CurrentBlockIndex = (index + 1) % prefabs.Length;
 
