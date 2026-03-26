@@ -215,6 +215,10 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <inheritdoc/>
     public void OnResetPress(InputAction.CallbackContext context)
     {
+        if(targetedPanel == null)
+        {
+            return;
+        }
         Debug.Log("Resetting game state...");
         modelInstance.ClearGrid();
     }
