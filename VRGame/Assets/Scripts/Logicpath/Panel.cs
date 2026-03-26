@@ -549,7 +549,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
             Debug.LogError("Could not find the parent's LogicGameController!");
         }
         Assert.IsNotNull(controllerInstance, "Could not find the parent's LogicGameController!");
-        panelTextureManager.Invoke("RefreshTexture", 0.25f);
+        panelTextureManager.Invoke("RefreshTexture", 0.25f); //TODO: find a better way to wait
     }
 
     /// <summary>
