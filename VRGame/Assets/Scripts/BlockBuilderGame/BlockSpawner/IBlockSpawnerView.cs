@@ -14,16 +14,4 @@ public interface IBlockSpawnerView : IView
     /// post-conditions:
     ///     -   ensures XR events initialized
     new void Init();
-
-    /// <summary>
-    /// Sets up XR interactable listeners on child components
-    /// </summary>
-    /// <remarks>
-    /// pre-conditions:
-    ///     -   requires (controllerInstance != null) and
-    ///                 at least one XRBaseInteractable child must exist
-    /// post-conditions:
-    ///     -   ensures selectEntered listeners are registered on all child XRBaseInteractables
-    /// </remarks>
-    void SetupXREvents();
 }
