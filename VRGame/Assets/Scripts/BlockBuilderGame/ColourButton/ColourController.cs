@@ -53,7 +53,6 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
 
         // Get colours assigned in Inspector
         Material[] colours = modelInstance.Colours;
-        Assert.IsNotNull(colours, "Colours must not be null");
         Assert.IsTrue(colours.Length > 0, "Colours[] must not be empty");
 
         // Get access to the renderer component (materials live on Renderer component)
