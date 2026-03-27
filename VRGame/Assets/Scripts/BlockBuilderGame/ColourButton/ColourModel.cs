@@ -22,7 +22,7 @@ public class ColourModel : Model, IColourModel
         {
             Assert.IsNotNull(value, "value to set for materials must not be null");
             Assert.IsTrue(value.Length > 0, "materials array must have at least 1 element");
-            materials = value;
+            colours = value;
         }
     }
 
