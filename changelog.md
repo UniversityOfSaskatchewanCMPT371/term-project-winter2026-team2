@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.4] - 2026-03-27
+
+### Added 
+
+- Added a ColourButton component that changes the spawned block's colour material on every button press. Colours go in cycle.
+
 ## [1.5.3] - 2026-03-27
 
 ### Added 
