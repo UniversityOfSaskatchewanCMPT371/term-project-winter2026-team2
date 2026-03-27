@@ -5,7 +5,7 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface IColour : IModel
+public interface IColourModel : IModel
 {
     /// <summary>
     /// TODO: Change the docstring to match your implementation.
