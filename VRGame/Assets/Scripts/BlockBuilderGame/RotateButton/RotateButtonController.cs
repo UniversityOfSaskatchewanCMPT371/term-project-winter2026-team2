@@ -50,7 +50,11 @@ public class RotateButtonController : Controller<IRotateButtonModel, IRotateButt
     public void OnButtonPressed()
     {
         GameObject block = blockSpawnerModel.LastSpawnedBlock;
-        Assert.IsNotNull(block, "blockSpawnerModel must not be null to rotate");
+        if (block == null)
+        {
+            Debug.LogWarning("No spawned block to rotate");
+            return;
+        }
 
         block.transform.Rotate(0f, 90f, 0f);
     }

@@ -26,13 +26,15 @@ public interface IRotateButtonController : IController
     new void Init();
 
     /// <summary>
-    /// Rotates the spawned block by 90 degrees on the y-axis
+    /// Rotates the spawned block by 90 degrees on the y-axis.
+    /// Does nothing if no block has been spawned yet.
     /// </summary>
     /// <remarks>
     /// pre-conditions:
-    ///     - requires blockSpawnerModel.LastSpawnedBlock != null
+    ///     - requires none
     /// post-conditions:
-    ///     - ensures block is rotated 90 degrees on the y-axis
+    ///     - ensures block is rotated 90 degrees on the y-axis if LastSpawnedBlock != null.
+    ///         Otherwise, logs a warning and returns early
     /// </remarks>
     void OnButtonPressed();
 }
