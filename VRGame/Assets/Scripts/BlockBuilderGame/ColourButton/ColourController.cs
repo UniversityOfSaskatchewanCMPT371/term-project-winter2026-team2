@@ -1,22 +1,48 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Controller component of ColourController.
 /// </summary>
-public class ColourController : 
-    Controller<IColourModel, IColourView>, // TODO reminder to switch the generics to the ones you've implemented
-    IColourController
+public class ColourController : Controller<IColourModel, IColourView>, IColourController
 {
-    // use 'this.viewInstance' to access view component, and
-    // 'this.modelInstance' to access model component
+    /// <summary>
+    /// Serialized reference to the BlockSpawner model set via the inspector
+    /// </summary>
+    [SerializeField] private ModelComponent BlockSpawnerModel;
+
+    /// <summary>
+    /// Reference to the BlockSpawner model to read LastSpawnedBlock from
+    /// </summary>
+    private IBlockSpawnerModel blockSpawnerModel;
+
+    /// <inheritdoc/>
+    public void Awake()
+    {
+        this.CheckModelRef();
+        this.CheckViewRef();
+    }
+
+    /// <inheritdoc/>
+    public override void Start()
+    {
+        Init();
+    }
 
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
-        this.CheckModelRef();
-        this.CheckViewRef();
+        if (blockSpawnerModel != null)
+        {
+            blockSpawnerModel = blockSpawnerModel as IBlockSpawnerModel;
+            if (blockSpawnerModel == null)
+            {
+                Debug.LogWarning("'blockSpawnerModel' does not implement IBlockSpawnerModel.");
+            }
+        }
+
+        Assert.IsNotNull(blockSpawnerModel, "'blockSpawnerModel' inspector field must be assigned to the Block Spawner GameObject.");
     }
+
+    
 }
