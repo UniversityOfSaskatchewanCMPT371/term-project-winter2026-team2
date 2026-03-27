@@ -26,6 +26,7 @@ public class RotateButtonView : View<IRotateButtonController>, IRotateButtonView
         }
         Assert.IsNotNull(controllerInstance, "Controller must not be null on XR events setup");
 
+        // Assign listeners to all XR Base Interactable components 
         var components = GetComponentsInChildren<XRBaseInteractable>();
         if (components.Length == 0)
         {
