@@ -21,14 +21,15 @@ public interface IColourController : IController
     new void Init();
 
     /// <summary>
-    /// Sets colour material based on (spawned) block's index
+    /// Sets colour material based on (spawned) block's index.
+    /// Does nothing if no block has been spawned yet.
     /// </summary>
     /// <remarks>
     /// pre-conditions:
-    ///     - requires (blockSpawnerModel.LastSpawnedBlock != null) &&
-    ///                (modelInstance.Colours.Length > 0)
+    ///     - requires (modelInstance.Colours.Length > 0)
     /// post-conditions:
-    ///     - ensures colour material is set on the spawned block prefab based on index
+    ///     - ensures colour material is set on the spawned block prefab based on index if LastSpawnedBlock != null.
+    ///         Otherwise, logs a warning and returns early
     /// </remarks>
     void OnButtonPressed();
 }
