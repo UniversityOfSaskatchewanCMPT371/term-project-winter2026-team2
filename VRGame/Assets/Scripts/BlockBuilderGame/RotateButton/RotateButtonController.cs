@@ -32,12 +32,12 @@ public class RotateButtonController : Controller<IRotateButtonModel, IRotateButt
         this.CheckModelRef();
         this.CheckViewRef();
 
-        if (inspectorBlockSpawnerModel != null)
+        if (BlockSpawnerModel != null)
         {
-            blockSpawnerModel = inspectorBlockSpawnerModel as IBlockSpawnerModel;
+            blockSpawnerModel = BlockSpawnerModel as IBlockSpawnerModel;
             if (blockSpawnerModel == null)
             {
-                Debug.LogWarning("'inspectorBlockSpawnerModel' does not implement IBlockSpawnerModel.");
+                Debug.LogWarning("'BlockSpawnerModel' does not implement IBlockSpawnerModel.");
             }
         }
 
