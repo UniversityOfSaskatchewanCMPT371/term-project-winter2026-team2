@@ -32,16 +32,16 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
     /// <inheritdoc/>
     public override void Init()
     {
-        if (blockSpawnerModel != null)
+        if (BlockSpawnerModel != null)
         {
-            blockSpawnerModel = blockSpawnerModel as IBlockSpawnerModel;
+            blockSpawnerModel = BlockSpawnerModel as IBlockSpawnerModel;
             if (blockSpawnerModel == null)
             {
-                Debug.LogWarning("'blockSpawnerModel' does not implement IBlockSpawnerModel.");
+                Debug.LogWarning("'BlockSpawnerModel' does not implement IBlockSpawnerModel.");
             }
         }
 
-        Assert.IsNotNull(blockSpawnerModel, "'blockSpawnerModel' inspector field must be assigned to the Block Spawner GameObject.");
+        Assert.IsNotNull(blockSpawnerModel, "'BlockSpawnerModel' inspector field must be assigned to the Block Spawner GameObject.");
     }
 
     /// <inheritdoc/>
