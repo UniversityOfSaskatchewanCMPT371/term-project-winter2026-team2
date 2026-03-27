@@ -12,7 +12,7 @@ public class ColourModel : Model, IColourModel
     [SerializeField] private Material[] colours;
 
     /// <inheritdoc/>
-    public Material[] Materials
+    public Material[] Colours
     {
         get 
         { 
