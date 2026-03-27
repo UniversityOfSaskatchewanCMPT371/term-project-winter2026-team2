@@ -1,22 +1,60 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
 
 /// <summary>
-/// Controller component of RotateButtonController.
+/// Controller class for RotateButton.
+/// Rotates the last spawned block by 90 degrees on the Y axis each press.
 /// </summary>
-public class RotateButtonController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
-    IRotateButtonController
+public class RotateButtonController : Controller<IRotateButtonModel, IRotateButtonView>, IRotateButtonController
 {
-    // use 'this.viewInstance' to access view component, and
-    // 'this.modelInstance' to access model component
+    /// <summary>
+    /// Serialized reference to the BlockSpawner model set via the inspector.
+    /// </summary>
+    [SerializeField] private ModelComponent BlockSpawnerModel;
+
+    /// <summary>
+    /// Reference to the BlockSpawner model to read LastSpawnedBlock from
+    /// </summary>
+    private IBlockSpawnerModel blockSpawnerModel;
+
+    /// <inheritdoc/>
+    public void Awake()
+    {
+        Init();
+    }
+
+    /// <inheritdoc/>
+    public override void Start() {}
 
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
         this.CheckModelRef();
         this.CheckViewRef();
+
+        if (inspectorBlockSpawnerModel != null)
+        {
+            blockSpawnerModel = inspectorBlockSpawnerModel as IBlockSpawnerModel;
+            if (blockSpawnerModel == null)
+            {
+                Debug.LogWarning("'inspectorBlockSpawnerModel' does not implement IBlockSpawnerModel.");
+            }
+        }
+
+        if (blockSpawnerModel == null)
+        {
+            blockSpawnerModel = gameObject.GetComponent<IBlockSpawnerModel>();
+        }
+
+        Assert.IsNotNull(blockSpawnerModel, "'blockSpawnerModel' field cannot be null.");
+    }
+
+    /// <inheritdoc/>
+    public void OnButtonPressed()
+    {
+        GameObject block = blockSpawnerModel.LastSpawnedBlock;
+        Assert.IsNotNull(block, "blockSpawnerModel must not be null to rotate");
+
+        block.transform.Rotate(0f, 90f, 0f);
     }
 }
