@@ -24,9 +24,6 @@ public class RotateButtonController : Controller<IRotateButtonModel, IRotateButt
     }
 
     /// <inheritdoc/>
-    public override void Start() {}
-
-    /// <inheritdoc/>
     public override void Init()
     {
         this.CheckModelRef();
