@@ -6,7 +6,7 @@ using UnityEngine;
 /// Controller component of BlockPlacerController.
 /// </summary>
 public class BlockPlacerController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
+    Controller<IBlockPlacerModel, IBlockPlacerView>, // TODO reminder to switch the generics to the ones you've implemented
     IBlockPlacerController
 {
     // use 'this.viewInstance' to access view component, and
