@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.2] - 2026-03-27
+
+### Fixed
+
+- BlockSpawner and SpawnButton components refactored. SpawnButton triggers BlockSpawner to spawn block prefabs
+
 ## [1.5.1] - 2026-03-27
 
 ### Added 
