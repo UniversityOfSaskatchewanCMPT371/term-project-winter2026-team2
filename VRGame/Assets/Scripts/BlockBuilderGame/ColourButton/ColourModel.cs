@@ -29,7 +29,7 @@ public class ColourModel : Model, IColourModel
     /// <summary>
     /// Current index in the materials cycle.
     /// </summary>
-    [SerializeField] private int currentMaterialIndex;
+    private int currentMaterialIndex;
 
     /// <inheritdoc/>
     public int CurrentMaterialIndex
