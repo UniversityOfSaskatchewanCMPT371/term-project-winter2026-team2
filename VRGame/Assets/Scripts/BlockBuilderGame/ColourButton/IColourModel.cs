@@ -30,7 +30,7 @@ public interface IColourModel : IModel
     /// <summary>
     /// Current index in the materials cycle.
     /// </summary>
-    int CurrentMaterialIndex
+    int CurrentIndex
     {
         /// <remarks>
         /// pre-condition:
