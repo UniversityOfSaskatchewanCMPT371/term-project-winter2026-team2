@@ -1,14 +1,29 @@
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
-// If you are making Model layer, inherit from IModel.
-// Same goes for other layers. (IController/IView)
-
 /// <summary>
-/// TODO: Change the docstring to match your implementation.
+/// Interface for the ColourButton View.
+/// Handles wiring XR button events to the controller.
 /// </summary>
 public interface IColourView : IView
 {
     /// <summary>
-    /// TODO: Change the docstring to match your implementation.
+    /// Checks for controller reference and calls SetupXREvents.
     /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - requires controllerInstance != null
+    /// post-conditions:
+    ///     - ensures XR events initialized
+    /// </remarks>
     new void Init();
+
+    /// <summary>
+    /// Sets up XR interactable listeners on child components.
+    /// </summary>
+    /// <remarks>
+    /// pre-conditions:
+    ///     - requires (controllerInstance != null) and
+    ///                 at least one XRBaseInteractable child must exist
+    /// post-conditions:
+    ///     - ensures selectEntered listeners are registered on all child XRBaseInteractables
+    /// </remarks>
+    void SetupXREvents();
 }

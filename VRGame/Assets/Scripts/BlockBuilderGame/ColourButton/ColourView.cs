@@ -1,16 +1,16 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// View component of ColourView.
 /// </summary>
-public class ColourView : 
-    View<IColourController>, // TODO reminder to switch the generic to the one you've implemented
-    IColourView
+public class ColourView : View<IColourController>, IColourView
 {
     // use 'this.controllerInstance' to access controller component
-public override void Init()
+
+    /// <inheritdoc/>
+    public override void Init()
     {
         this.CheckControllerRef();
 
@@ -26,7 +26,6 @@ public override void Init()
         }
         Assert.IsNotNull(controllerInstance, "Controller must not be null on XR events setup");
 
-        // Assign listeners to all XR Base Interactable components 
         var components = GetComponentsInChildren<XRBaseInteractable>();
         if (components.Length == 0)
         {
@@ -48,6 +47,4 @@ public override void Init()
     {
         controllerInstance.OnButtonPressed();
     }
-    
 }
-
