@@ -5,7 +5,7 @@
 /// <summary>
 /// TODO: Change the docstring to match your implementation.
 /// </summary>
-public interface IColourView : IModel
+public interface IColourView : IView
 {
     /// <summary>
     /// TODO: Change the docstring to match your implementation.

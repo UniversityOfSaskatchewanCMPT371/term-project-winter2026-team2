@@ -6,7 +6,7 @@ using UnityEngine;
 /// Controller component of ColourController.
 /// </summary>
 public class ColourController : 
-    Controller<IModel, IView>, // TODO reminder to switch the generics to the ones you've implemented
+    Controller<IColourModel, IColourView>, // TODO reminder to switch the generics to the ones you've implemented
     IColourController
 {
     // use 'this.viewInstance' to access view component, and
