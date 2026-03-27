@@ -52,7 +52,7 @@ public class RotateButtonController : Controller<IRotateButtonModel, IRotateButt
         GameObject block = blockSpawnerModel.LastSpawnedBlock;
         if (block == null)
         {
-            Debug.LogWarning("No spawned block to rotate");
+            Debug.LogWarning("No spawned block to rotate. Please click on Spawn Button first to spawn a block.");
             return;
         }
 
