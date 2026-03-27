@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.3] - 2026-03-27
+
+### Added 
+
+- Added a RotateButton component that rotates the spawned block 90 degrees on the y-axis on button press
+
 ## [1.5.2] - 2026-03-27
 
 ### Fixed
