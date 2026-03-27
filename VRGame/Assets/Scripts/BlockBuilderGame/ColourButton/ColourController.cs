@@ -49,7 +49,11 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
     {
         // Get access to the block spawned
         GameObject block = blockSpawnerModel.LastSpawnedBlock;
-        Assert.IsNotNull(block, "LastSpawnedBlock must not be null to change colour");
+        if (block == null)
+        {
+            Debug.LogWarning("No spawned block to change colour. Please spawn a block first by pressing the 'Spawn' button.");
+            return;
+        }
 
         // Get colours assigned in Inspector
         Material[] colours = modelInstance.Colours;
