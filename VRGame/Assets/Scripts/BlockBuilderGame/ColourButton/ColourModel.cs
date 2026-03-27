@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 public class ColourModel : Model, IColourModel
 {
     /// <summary>
-    /// Array of materials to cycle through on colour change button press
+    /// Array of colours to cycle through on colour change button press
     /// </summary>
     [SerializeField] private Material[] colours;
 
@@ -20,35 +20,35 @@ public class ColourModel : Model, IColourModel
         }
         set
         {
-            Assert.IsNotNull(value, "value to set for materials must not be null");
-            Assert.IsTrue(value.Length > 0, "materials array must have at least 1 element");
+            Assert.IsNotNull(value, "value to set for colours must not be null");
+            Assert.IsTrue(value.Length > 0, "colours array must have at least 1 element");
             colours = value;
         }
     }
 
     /// <summary>
-    /// Current index in the materials cycle.
+    /// Current index in the colours cycle.
     /// </summary>
-    private int currentMaterialIndex;
+    private int currentIndex;
 
     /// <inheritdoc/>
-    public int CurrentMaterialIndex
+    public int CurrentIndex
     {
         get 
         { 
-            return currentMaterialIndex; 
+            return currentIndex; 
         }
         set
         {
-            Assert.IsTrue(value >= 0, "currentMaterialIndex cannot be negative");
-            currentMaterialIndex = value;
+            Assert.IsTrue(value >= 0, "currentIndex for colours cannot be negative");
+            currentIndex = value;
         }
     }
 
     /// <inheritdoc/>
     public override void Init()
     {
-        currentMaterialIndex = 0;
-        Assert.AreEqual(currentMaterialIndex, 0, "currentMaterialIndex failed to set on Init");
+        currentIndex = 0;
+        Assert.AreEqual(currentIndex, 0, "currentIndex for colours failed to set on Init");
     }
 }
