@@ -91,11 +91,11 @@ public class BlockSpawnerModel : Model, IBlockSpawnerModel
     public override void Init()
     {
         currentBlockIndex = 0;
-        blockScale = 2.0f;
+        blockScale = 1.0f;
         lastSpawnedBlock = null;
 
         Assert.AreEqual(currentBlockIndex, 0, "currentBlockIndex failed to set on Init");
-        Assert.AreEqual(blockScale, 2.0f, "blockScale failed to set on Init");
+        Assert.AreEqual(blockScale, 1.0f, "blockScale failed to set on Init");
         Assert.IsNull(lastSpawnedBlock, "lastSpawnedBlock failed to set on Init");
     }
 
