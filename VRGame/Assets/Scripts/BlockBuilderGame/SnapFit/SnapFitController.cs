@@ -111,18 +111,22 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                 }
             }
         }
-        // Check if we found a snap target 
-        if (currentSnapPoint != null && otherSnapPoint != null)
-        {
-            // Calculate the offset between the snap points
-            Vector3 offset = otherSnapPoint.position - currentSnapPoint.position;
+        // Change state to snapped
+        modelInstance.IsSnapped = true;
 
-            // Move the block into position to snap the snap points together
-            transform.position += offset;
+        // Update position of this block to match the snap point of the target block
+        transform.position += otherSnapPoint.position - currentSnapPoint.position;
 
-            // Change state to snapped
-            modelInstance.IsSnapped = true;
-        }
+        // Create a joint to connect this block to the target block
+        var joint = gameObject.AddComponent<FixedJoint>();
+
+        // Connect the joint to the target block's rigidbody
+        joint.connectedBody = snapFitController.GetComponent<Rigidbody>();
+        // Set the break force and torque of the joint to infinity so it doesn't break under normal conditions
+        joint.breakForce = joint.breakTorque = Mathf.Infinity;
+        // Set the snap joint in the model to the joint we just created
+        modelInstance.SnapJoint = joint;
+    
     }
 
     /// </inheritdoc/>
