@@ -2,7 +2,8 @@
     "name": "TargetBlock",
     "rootNamespace": "",
     "references": [
-        "GUID:4e035efe9a13e18448974cf8d38d4bab"
+        "GUID:4e035efe9a13e18448974cf8d38d4bab",
+        "GUID:51da384e2930f4c79bc46490845121e1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
