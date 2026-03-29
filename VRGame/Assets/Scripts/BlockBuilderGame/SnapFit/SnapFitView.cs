@@ -28,6 +28,9 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
     public void OnGrabbed(SelectEnterEventArgs args)
     {
         controllerInstance.Detach();
+        // Reset to upright orientation
+        Vector3 upright = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(0f, upright.y, 0f);
     }
 
     /// </inheritdoc/>
