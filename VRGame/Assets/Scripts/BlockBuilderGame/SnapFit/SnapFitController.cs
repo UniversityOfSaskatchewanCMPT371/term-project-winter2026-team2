@@ -140,6 +140,8 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
     /// </inheritdoc/>
     public bool IsMatch(string name1, string name2)
     {
+        Assert.IsNotNull(name1, "name1 must not be null in IsMatch");
+        Assert.IsNotNull(name2, "name2 must not be null in IsMatch");
         // Check if the snap point names match
         if ((name1.StartsWith("Top") && name2.StartsWith("Bottom")) || 
             (name1.StartsWith("Bottom") && name2.StartsWith("Top")))
