@@ -62,26 +62,36 @@ public class SnapFitModel : Model, ISnapFitModel
     }
 
     /// <summary>
-    /// The point that connects one block to another (when snapped)
+    /// The joint that connects one block to another (when snapped)
     /// </summary>
-    private FixedJoint snapPoint = null;
+    private FixedJoint snapJoint = null;
 
     /// <inheritdoc/>
-    public FixedJoint SnapPoint
+    public FixedJoint SnapJoint
     {
         get
         {
-            return snapPoint;
+            return snapJoint;
         }
         set
         {
-            snapPoint = value;
+            snapJoint = value;
         }
     }
 
     /// <inheritdoc/>
     public override void Init()
-    {
-
+    {  
+        isSnapped = false;
+        snapPoints = new Transform[0];
+        snapJoint = null;
+        if (snapRadius <= 0)
+        {
+            snapRadius = 0.5f;
+        }
+        Assert.IsFalse(isSnapped, "isSnapped must be false on Init");
+        Assert.IsNotNull(snapPoints, "SnapPoints must not be null on Init");
+        Assert.IsNull(snapJoint, "snapJoint must be null on Init");
+        Assert.IsTrue(snapRadius > 0, "snapRadius must be > 0 on Init");
     }
 }
