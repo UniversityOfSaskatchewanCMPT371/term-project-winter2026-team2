@@ -57,7 +57,36 @@ public interface ISnapFitModel : IModel
         /// post-condition: 
         ///     - ensures SnapRadius == value
         /// </remarks>
-        set; }
+        set; 
+    }
+
+    /// <summary>
+    /// Accessor method for whether the block is currently snapped to another block
+    /// </summary>
+    bool IsSnapped 
+    {
+        /// <summary>
+        /// Returns true if the block is currently snapped to another block, false otherwise
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires none
+        /// post-condition: 
+        ///     - ensures IsSnapped is returned
+        /// </remarks> 
+        get; 
+
+        /// <summary>
+        /// Sets whether the block is currently snapped to another block
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires value != null
+        /// post-condition: 
+        ///     - ensures IsSnapped == value
+        /// </remarks>
+        set; 
+    }
     
     
     new void Init();
