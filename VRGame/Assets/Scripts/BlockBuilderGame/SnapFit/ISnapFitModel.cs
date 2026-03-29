@@ -1,14 +1,37 @@
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
-// If you are making Model layer, inherit from IModel.
-// Same goes for other layers. (IController/IView)
+using UnityEngine;
 
 /// <summary>
-/// TODO: Change the docstring to match your implementation.
+/// Interface for the SnapFit Model
 /// </summary>
 public interface ISnapFitModel : IModel
 {
     /// <summary>
-    /// TODO: Change the docstring to match your implementation.
+    /// Accessor method for the snap point transforms of the block prefab
     /// </summary>
+    Transform[] SnapPoints 
+    {
+        /// <summary>
+        /// Returns the snap point transforms of the block prefab
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires none
+        /// post-condition: 
+        ///     - ensures SnapPoints are returned
+        /// </remarks> 
+        get; 
+
+        /// <summary>
+        /// Sets the snap point transforms of the block prefab
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires value != null
+        /// post-condition: 
+        ///     - ensures SnapPoints == value
+        /// </remarks>
+        set; 
+    }
+
     new void Init();
 }
