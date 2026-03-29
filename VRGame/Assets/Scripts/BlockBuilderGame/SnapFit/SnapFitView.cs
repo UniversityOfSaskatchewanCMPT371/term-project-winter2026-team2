@@ -7,6 +7,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class SnapFitView : View<ISnapFitController>, ISnapFitView
 {
+    /// <summary>
+    /// Reference to the XRGrabInteractable component on this block
+    /// </summary>
     private XRGrabInteractable grab;
 
     /// <inheritdoc/>
@@ -27,9 +30,10 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         controllerInstance.Detach();
     }
 
+    /// </inheritdoc/>
     private void OnReleased(SelectExitEventArgs args)
     {
-        controllerInstance.TrySnap();
+        controllerInstance.Snap();
     }
 
     /// </inheritdoc>
