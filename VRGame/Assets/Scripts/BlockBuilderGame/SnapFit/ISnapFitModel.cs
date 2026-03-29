@@ -48,6 +48,7 @@ public interface ISnapFitModel : IModel
         ///     - ensures SnapRadius is returned
         /// </remarks>
         get; 
+
         /// <summary>
         /// Sets the snap radius of the block prefab
         /// </summary>
@@ -88,6 +89,41 @@ public interface ISnapFitModel : IModel
         set; 
     }
     
-    
+    /// <summary>
+    /// Accessor method for the snap joint that connects this block to another block when snapped
+    /// </summary>
+    FixedJoint SnapJoint 
+    { 
+        /// <summary>
+        /// Returns the snap joint that connects this block to another block when snapped
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires none
+        /// post-condition: 
+        ///     - ensures SnapJoint is returned
+        /// </remarks>
+        get; 
+        
+        /// <summary>
+        /// Sets the snap joint that connects this block to another block when snapped
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires none
+        /// post-condition: 
+        ///     - ensures SnapJoint == value
+        /// </remarks>
+        set; }
+
+    /// <summary>
+    /// Initializes default values.
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:  
+    ///     - requires (isSnapped == false) && (SnapPoints != null) && (SnapJoint == null) && (SnapRadius > 0)
+    /// post-condition: 
+    ///     - ensures SnapRadius > 0, IsSnapped == false
+    /// </remarks>
     new void Init();
 }

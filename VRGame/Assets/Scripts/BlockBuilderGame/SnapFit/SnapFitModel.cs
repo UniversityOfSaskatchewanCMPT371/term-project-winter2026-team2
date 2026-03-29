@@ -57,6 +57,7 @@ public class SnapFitModel : Model, ISnapFitModel
         }
         set
         {
+            Assert.IsNotNull(value, "isSnapped value must not be null");
             isSnapped = value;
         }
     }
