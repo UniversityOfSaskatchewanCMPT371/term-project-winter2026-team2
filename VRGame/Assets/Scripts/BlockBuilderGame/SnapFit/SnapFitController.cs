@@ -59,4 +59,69 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
     {
         modelInstance.IsSnapped = true;
     }
+
+    public void FindSnapTarget()
+    {
+        // Get snap radius from model
+        float radius = modelInstance.SnapRadius;
+
+        // The snap points of the current block and the block we are trying to snap to
+        Transform currentSnapPoint = null;
+        Transform otherSnapPoint = null;
+
+        // The SnapFitController of the block we are trying to snap to
+        SnapFitController snapFitController = null;
+
+        // Find all other SnapFitControllers in the scene
+        var controllers = FindObjectsByType<SnapFitController>();
+
+        foreach (var controller in controllers)
+        {
+            if (controller == this) continue;
+
+            // Only snap to blocks that are already placed
+            if (!controller.modelInstance.IsSnapped) 
+            {
+                continue;
+            }
+
+            // Check all snap points of the current block
+            foreach (var currentSP in modelInstance.SnapPoints)
+            {
+                // Check all snap points of the target/other block
+                foreach (var targetSP in controller.modelInstance.SnapPoints)
+                {
+                    // Only snap to snap points with matching names 
+                    if (!IsMatch(currentSP.name, targetSP.name)) 
+                    {
+                        continue;
+                    }
+
+                    // Check distance between snap points
+                    float distance = Vector3.Distance(currentSP.position, targetSP.position);
+                    
+                    // If distance is within radius and is closest, set as snap target
+                    if (distance < radius)
+                    {
+                        radius = distance;
+                        currentSnapPoint = currentSP;
+                        otherSnapPoint = targetSP;
+                        snapFitController = controller;
+                    }
+                }
+            }
+        }
+    }
+
+    /// </inheritdoc/>
+    public bool IsMatch(string name1, string name2)
+    {
+        // Check if the snap point names match
+        if ((name1.StartsWith("Top") && name2.StartsWith("Bottom")) || 
+            (name1.StartsWith("Bottom") && name2.StartsWith("Top")))
+        {
+            return true;
+        }
+        return false;
+    }
 }
