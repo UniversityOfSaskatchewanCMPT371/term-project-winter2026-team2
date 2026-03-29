@@ -82,7 +82,7 @@ public interface ISnapFitModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:  
-        ///     - requires value != null
+        ///     - requires none
         /// post-condition: 
         ///     - ensures IsSnapped == value
         /// </remarks>
