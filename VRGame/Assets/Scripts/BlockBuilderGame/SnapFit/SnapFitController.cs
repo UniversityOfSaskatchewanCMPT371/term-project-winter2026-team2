@@ -85,12 +85,6 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                 continue;
             }
 
-            // Only snap to blocks that are already placed
-            if (!sf.modelInstance.IsSnapped) 
-            {
-                continue;
-            }
-
             // Check all snap points of the current block
             foreach (var currentSP in modelInstance.SnapPoints)
             {
@@ -141,5 +135,12 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
             return true;
         }
         return false;
+    }
+
+    /// <inheritdoc/>
+    private void OnJointBreak()
+    {
+        modelInstance.SnapJoint = null;
+        modelInstance.IsSnapped = false;
     }
 }
