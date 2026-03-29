@@ -27,9 +27,18 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         controllerInstance.Detach();
     }
 
-    /// </inheritdoc/>
     private void OnReleased(SelectExitEventArgs args)
     {
         controllerInstance.TrySnap();
+    }
+
+    /// </inheritdoc>
+    private void OnDestroy()
+    {
+        if (grab != null)
+        {
+            grab.selectEntered.RemoveListener(OnGrabbed);
+            grab.selectExited.RemoveListener(OnReleased);
+        }
     }
 }
