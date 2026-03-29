@@ -67,6 +67,7 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
     public void Snap()
     {
         modelInstance.IsSnapped = true;
+        FindSnapTarget();
     }
 
     public void FindSnapTarget()
@@ -82,14 +83,18 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         SnapFitController snapFitController = null;
 
         // Find all other SnapFitControllers in the scene
-        var controllers = FindObjectsByType<SnapFitController>();
+        var snapFitControllers = FindObjectsByType<SnapFitController>();
 
-        foreach (var controller in controllers)
+        foreach (var sf in snapFitControllers)
         {
-            if (controller == this) continue;
+            // Check if 
+            if (sf == this || !sf.modelInstance.IsSnapped) 
+            {
+                continue;
+            }
 
             // Only snap to blocks that are already placed
-            if (!controller.modelInstance.IsSnapped) 
+            if (!sf.modelInstance.IsSnapped) 
             {
                 continue;
             }
@@ -98,7 +103,7 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
             foreach (var currentSP in modelInstance.SnapPoints)
             {
                 // Check all snap points of the target/other block
-                foreach (var targetSP in controller.modelInstance.SnapPoints)
+                foreach (var targetSP in sf.modelInstance.SnapPoints)
                 {
                     // Only snap to snap points with matching names 
                     if (!IsMatch(currentSP.name, targetSP.name)) 
@@ -115,7 +120,7 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                         radius = distance;
                         currentSnapPoint = currentSP;
                         otherSnapPoint = targetSP;
-                        snapFitController = controller;
+                        snapFitController = sf;
                     }
                 }
             }
