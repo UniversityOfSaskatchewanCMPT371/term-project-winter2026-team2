@@ -52,12 +52,6 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
     /// <inheritdoc/>
     public void Snap()
     {
-        modelInstance.IsSnapped = true;
-        FindSnapTarget();
-    }
-
-    public void FindSnapTarget()
-    {
         // Check if already snapped, if so do nothing
         if (modelInstance.IsSnapped) 
         {
@@ -91,30 +85,39 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                 // Check all snap points of the target/other block
                 foreach (var targetSP in sf.modelInstance.SnapPoints)
                 {
-                    // Only snap to snap points with matching names 
-                    if (!IsMatch(currentSP.name, targetSP.name)) 
+                    // Check if the snap points match
+                    bool isMatch = (currentSP.name.StartsWith("Top") && targetSP.name.StartsWith("Bottom")) ||
+                                   (currentSP.name.StartsWith("Bottom") && targetSP.name.StartsWith("Top"));
+
+                    // Continue if the snap points don't match
+                    if (!isMatch) 
+                    {
+                        continue;
+                    }
+                    // Calculate the distance between the snap points
+                    // If it's greater than the current radius, continue
+                    float distance = Vector3.Distance(currentSP.position, targetSP.position);
+                    if (distance >= radius) 
                     {
                         continue;
                     }
 
-                    // Check distance between snap points
-                    float distance = Vector3.Distance(currentSP.position, targetSP.position);
-                    
-                    // If distance is within radius and is closest, set as snap target
-                    if (distance < radius)
-                    {
-                        radius = distance;
-                        currentSnapPoint = currentSP;
-                        otherSnapPoint = targetSP;
-                        snapFitController = sf;
-                    }
+                    radius = distance;
+                    currentSnapPoint = currentSP;
+                    otherSnapPoint = targetSP;
+                    snapFitController = controller;
                 }
             }
         }
         // Change state to snapped
         modelInstance.IsSnapped = true;
 
-        // Update position of this block to match the snap point of the target block
+        // If no snap point was found within the snap radius, do nothing
+        if (snapFitController == null) 
+        {
+            return;
+        }
+
         transform.position += otherSnapPoint.position - currentSnapPoint.position;
 
         // Create a joint to connect this block to the target block
