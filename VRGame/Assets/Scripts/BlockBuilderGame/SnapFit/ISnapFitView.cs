@@ -24,7 +24,7 @@ public interface ISnapFitView : IView
     /// pre-condition:
     ///     - requires (controllerInstance != null) && (grab != null)
     /// post-condition:
-    ///     - ensures Detach() is invoked (in controller component)
+    ///     - ensures (Detach() is invoked) && (block is reset to upright orientation)
     /// </remarks>
     void OnGrabbed(SelectEnterEventArgs args);
 
