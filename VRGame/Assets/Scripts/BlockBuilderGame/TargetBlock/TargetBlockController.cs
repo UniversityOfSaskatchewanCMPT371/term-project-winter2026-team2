@@ -1,22 +1,35 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
 
 /// <summary>
-/// Controller component of TargetBlockController.
+/// Controller component of TargetBlock.
 /// </summary>
-public class TargetBlockController : 
-    Controller<ITargetBlockModel, ITargetBlockView>, // TODO reminder to switch the generics to the ones you've implemented
-    ITargetBlockController
+public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockView>, ITargetBlockController
 {
-    // use 'this.viewInstance' to access view component, and
-    // 'this.modelInstance' to access model component
+    /// <summary>
+    /// The block configuration that the player must match
+    /// </summary>
+    private Transform[] targetBlocks;
+
+    /// <inheritdoc/>
+    public void Awake()
+    {
+        Init();
+    }
 
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
         this.CheckModelRef();
         this.CheckViewRef();
+
+        // Count child transforms
+        int count = transform.childCount;
+        targetBlocks = new Transform[count];
+        for (int i = 0; i < count; i++)
+            targetBlocks[i] = transform.GetChild(i);
+
+        Assert.IsTrue(targetBlocks.Length > 0, "TargetBlock has no children to define the target configuration.");
     }
+    
 }
