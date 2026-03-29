@@ -43,7 +43,11 @@ public class SnapFitModel : Model, ISnapFitModel
         }
     }
     
+    /// <summary>
+    /// The state of whether this block is currently snapped to another block
+    /// </summary>
     private bool isSnapped = false;
+
     /// <inheritdoc/>
     public bool IsSnapped
     {
@@ -53,11 +57,27 @@ public class SnapFitModel : Model, ISnapFitModel
         }
         set
         {
-            Assert.IsNotNull(value, "IsSnapped value must not be null");
             isSnapped = value;
         }
     }
 
+    /// <summary>
+    /// The point that connects one block to another (when snapped)
+    /// </summary>
+    private FixedJoint snapPoint = null;
+
+    /// <inheritdoc/>
+    public FixedJoint SnapPoint
+    {
+        get
+        {
+            return snapPoint;
+        }
+        set
+        {
+            snapPoint = value;
+        }
+    }
 
     /// <inheritdoc/>
     public override void Init()
