@@ -1,21 +1,35 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// View component of SnapFitView.
 /// </summary>
-public class SnapFitView : 
-    View<IController>, // TODO reminder to switch the generic to the one you've implemented
-    ISnapFitView
+public class SnapFitView : View<ISnapFitController>, ISnapFitView
 {
-    // use 'this.controllerInstance' to access controller component
+    private XRGrabInteractable grab;
 
     /// <inheritdoc/>
     public override void Init()
     {
-        // this is used to resolve and validate the controller component
         this.CheckControllerRef();
+
+        grab = GetComponent<XRGrabInteractable>();
+        Assert.IsNotNull(grab, "grab component must not be null on SnapFitView");
+
+        grab.selectEntered.AddListener(OnGrabbed);
+        grab.selectExited.AddListener(OnReleased);
+    }
+
+    /// </inheritdoc/>
+    private void OnGrabbed(SelectEnterEventArgs args)
+    {
+        controllerInstance.Detach();
+    }
+
+    /// </inheritdoc/>
+    private void OnReleased(SelectExitEventArgs args)
+    {
+        controllerInstance.TrySnap();
     }
 }
-
