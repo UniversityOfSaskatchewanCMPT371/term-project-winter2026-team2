@@ -22,8 +22,16 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         this.CheckModelRef();
         this.CheckViewRef();
 
-        // Find snap points of the block prefab 
-        FindSnapPoints();
+        // Find snap points of the block prefab by looking for components named "Top" or "Bottom"
+        var points = new List<Transform>();
+        foreach (Transform component in GetComponentsInChildren<Transform>())
+            if (component.name.StartsWith("Top") || component.name.StartsWith("Bottom"))
+                points.Add(component);
+
+        // Set snap points in model
+        modelInstance.SnapPoints = points.ToArray();
+        if (modelInstance.SnapPoints.Length == 0)
+            Debug.LogError("No snap points found for SnapFitController");
     }
 
     /// <inheritdoc/>
