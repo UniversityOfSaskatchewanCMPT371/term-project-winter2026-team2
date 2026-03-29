@@ -33,5 +33,32 @@ public interface ISnapFitModel : IModel
         set; 
     }
 
+    /// <summary>
+    /// Accessor method for the snap radius of the block prefab
+    /// </summary>
+    float SnapRadius 
+    { 
+        /// <summary>
+        /// Returns the (float) snap radius of the block prefab
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires none
+        /// post-condition: 
+        ///     - ensures SnapRadius is returned
+        /// </remarks>
+        get; 
+        /// <summary>
+        /// Sets the snap radius of the block prefab
+        /// </summary>
+        /// <remarks>
+        /// pre-condition:  
+        ///     - requires value > 0
+        /// post-condition: 
+        ///     - ensures SnapRadius == value
+        /// </remarks>
+        set; }
+    
+    
     new void Init();
 }
