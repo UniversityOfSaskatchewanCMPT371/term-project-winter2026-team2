@@ -111,6 +111,18 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                 }
             }
         }
+        // Check if we found a snap target 
+        if (currentSnapPoint != null && otherSnapPoint != null)
+        {
+            // Calculate the offset between the snap points
+            Vector3 offset = otherSnapPoint.position - currentSnapPoint.position;
+
+            // Move the block into position to snap the snap points together
+            transform.position += offset;
+
+            // Change state to snapped
+            modelInstance.IsSnapped = true;
+        }
     }
 
     /// </inheritdoc/>
