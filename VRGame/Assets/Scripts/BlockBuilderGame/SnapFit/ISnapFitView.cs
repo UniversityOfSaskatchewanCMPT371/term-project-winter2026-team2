@@ -1,3 +1,5 @@
+using UnityEngine.XR.Interaction.Toolkit;
+
 /// <summary>
 /// Interface for the SnapFit View.
 /// Sets up listeners for grab and release events to trigger snapping and detaching in the controller.
@@ -24,7 +26,7 @@ public interface ISnapFitView : IView
     /// post-condition:
     ///     - ensures Detach() is invoked (in controller component)
     /// </remarks>
-    void OnGrab();
+    void OnGrabbed(SelectEnterEventArgs args);
 
     /// <summary>
     /// Listener for release event, triggers snap in controller
@@ -35,7 +37,7 @@ public interface ISnapFitView : IView
     /// post-condition:
     ///     - ensures Snap() is invoked (in controller component)
     /// </remarks>
-    void OnRelease();
+    void OnReleased(SelectExitEventArgs args);
 
     /// <summary>
     /// Unregisters listeners on destroy

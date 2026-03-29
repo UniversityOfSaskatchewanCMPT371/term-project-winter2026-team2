@@ -25,19 +25,19 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
     }
 
     /// </inheritdoc/>
-    private void OnGrabbed(SelectEnterEventArgs args)
+    public void OnGrabbed(SelectEnterEventArgs args)
     {
         controllerInstance.Detach();
     }
 
     /// </inheritdoc/>
-    private void OnReleased(SelectExitEventArgs args)
+    public void OnReleased(SelectExitEventArgs args)
     {
         controllerInstance.Snap();
     }
 
     /// </inheritdoc>
-    private void OnDestroy()
+    public void OnDestroy()
     {
         if (grab != null)
         {
