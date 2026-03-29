@@ -68,9 +68,6 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         // The SnapFitController of the block we are trying to snap to
         SnapFitController snapFitController = null;
 
-        // Find all other SnapFitControllers in the scene
-        var snapFitControllers = FindObjectsByType<SnapFitController>();
-
         foreach (var sf in FindObjectsOfType<SnapFitController>())
         {
             // Check if the current SnapFitController is not this block and is already snapped to another block
@@ -123,10 +120,18 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
 
         // Connect the joint to the target block's rigidbody
         joint.connectedBody = snapFitController.GetComponent<Rigidbody>();
+        
         // Set the break force and torque of the joint to infinity so it doesn't break under normal conditions
-        joint.breakForce = joint.breakTorque = Mathf.Infinity;
-        // Set the snap joint in the model to the joint we just created
+        joint.breakTorque = Mathf.Infinity;
+        joint.breakForce = Mathf.Infinity;
+
+        // Set the snap joint in the model to the joint we just created        
         modelInstance.SnapJoint = joint;
+
+        // Disable collision and preprocessing on the joint to prevent physics issues
+        joint.enableCollision = false;
+        joint.enablePreprocessing = false;
+
         // Set the state to snapped in the model
         modelInstance.IsSnapped = true;
     
