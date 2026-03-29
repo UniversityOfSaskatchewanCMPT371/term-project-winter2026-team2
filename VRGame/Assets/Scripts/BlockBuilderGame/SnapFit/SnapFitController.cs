@@ -58,6 +58,12 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
 
     public void FindSnapTarget()
     {
+        // Check if already snapped, if so do nothing
+        if (modelInstance.IsSnapped) 
+        {
+            return;
+        }
+
         // Get snap radius from model
         float radius = modelInstance.SnapRadius;
 
@@ -71,9 +77,9 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         // Find all other SnapFitControllers in the scene
         var snapFitControllers = FindObjectsByType<SnapFitController>();
 
-        foreach (var sf in snapFitControllers)
+        foreach (var sf in FindObjectsOfType<SnapFitController>())
         {
-            // Check if 
+            // Check if the current SnapFitController is not this block and is already snapped to another block
             if (sf == this || !sf.modelInstance.IsSnapped) 
             {
                 continue;
