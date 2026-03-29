@@ -105,16 +105,14 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                     radius = distance;
                     currentSnapPoint = currentSP;
                     otherSnapPoint = targetSP;
-                    snapFitController = controller;
+                    snapFitController = sf;
                 }
             }
         }
-        // Change state to snapped
-        modelInstance.IsSnapped = true;
-
-        // If no snap point was found within the snap radius, do nothing
-        if (snapFitController == null) 
+        // Set the state to snapped in the model if no snap point was found
+        if (snapFitController == null)
         {
+            modelInstance.IsSnapped = true;
             return;
         }
 
@@ -129,6 +127,8 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         joint.breakForce = joint.breakTorque = Mathf.Infinity;
         // Set the snap joint in the model to the joint we just created
         modelInstance.SnapJoint = joint;
+        // Set the state to snapped in the model
+        modelInstance.IsSnapped = true;
     
     }
 
