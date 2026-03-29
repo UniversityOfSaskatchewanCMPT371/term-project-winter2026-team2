@@ -43,7 +43,22 @@ public class SnapFitModel : Model, ISnapFitModel
         }
     }
     
-    
+    private bool isSnapped = false;
+    /// <inheritdoc/>
+    public bool IsSnapped
+    {
+        get
+        {
+            return isSnapped;
+        }
+        set
+        {
+            Assert.IsNotNull(value, "IsSnapped value must not be null");
+            isSnapped = value;
+        }
+    }
+
+
     /// <inheritdoc/>
     public override void Init()
     {
