@@ -1,22 +1,35 @@
 using UnityEngine;
 
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
-
 /// <summary>
-/// Controller component of CheckAreaController.
+/// Controller component of CheckArea.
+/// Tracks colliders entering and exiting the check area
 /// </summary>
-public class CheckAreaController : 
-    Controller<ICheckAreaModel, ICheckAreaView>, // TODO reminder to switch the generics to the ones you've implemented
-    ICheckAreaController
+public class CheckAreaController : Controller<ICheckAreaModel, ICheckAreaView>, ICheckAreaController
 {
-    // use 'this.viewInstance' to access view component, and
-    // 'this.modelInstance' to access model component
+    /// <inheritdoc/>
+    public void Awake()
+    {
+        Init();
+    }
 
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
         this.CheckModelRef();
         this.CheckViewRef();
     }
+
+    /// <inheritdoc/>
+    public void OnEnter(Collider collider)
+    {
+        modelInstance.InsideColliders.Add(collider);
+    }
+
+    /// <inheritdoc/>
+    public void OnExit(Collider collider)
+    {
+        modelInstance.InsideColliders.Remove(collider);
+    }
+
+    
 }
