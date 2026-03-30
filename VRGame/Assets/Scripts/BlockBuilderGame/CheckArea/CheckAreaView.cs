@@ -1,21 +1,26 @@
 using UnityEngine;
 
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
-
 /// <summary>
-/// View component of CheckAreaView.
+/// View component of CheckArea.
+/// Handles trigger events for the check area and passes them to the controller
 /// </summary>
-public class CheckAreaView : 
-    View<ICheckAreaController>, // TODO reminder to switch the generic to the one you've implemented
-    ICheckAreaView
+public class CheckAreaView : View<ICheckAreaController>, ICheckAreaView
 {
-    // use 'this.controllerInstance' to access controller component
-
     /// <inheritdoc/>
     public override void Init()
     {
-        // this is used to resolve and validate the controller component
         this.CheckControllerRef();
     }
-}
 
+    /// <inheritdoc/>
+    public void OnEnter(Collider collider)
+    {
+        controllerInstance.OnEnter(collider);
+    }
+
+    /// <inheritdoc/>
+    public void OnExit(Collider collider)
+    {
+        controllerInstance.OnExit(collider);
+    }
+}
