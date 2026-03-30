@@ -44,22 +44,29 @@ public class CheckButtonController : Controller<ICheckButtonModel, ICheckButtonV
 
     /// <inheritdoc/>
     public void OnButtonPressed()
-    {
-        // Trigger scan animation on the check area
-        modelInstance.Scanner.SetTrigger("scan");
-        // Count colliders inside the check area
-        var found = new HashSet<SnapFitController>();
-        foreach (var collider in checkAreaController.GetInside())
         {
-            var c = collider.GetComponent<SnapFitController>();
-            if (c != null)
-            {
-                found.Add(c);
-            }
+            // Trigger scan animation on the check area
+            modelInstance.Scanner.SetTrigger("scan");
+            StartCoroutine(CheckAfterDelay());
         }
 
-        Debug.Log($"[CheckButton] {found.Count} blocks found in area.");
-        // Call CheckCompletion on found blocks in the check area
-        targetBlockController.CheckCompletion(new List<SnapFitController>(found).ToArray());
-    }
+        private System.Collections.IEnumerator CheckAfterDelay()
+        {
+            yield return new WaitForSeconds(4f);
+
+            // Count colliders inside the check area
+            var found = new HashSet<SnapFitController>();
+            foreach (var collider in checkAreaController.GetInside())
+            {
+                var c = collider.GetComponent<SnapFitController>();
+                if (c != null) 
+                {
+                    found.Add(c);
+                }
+            }
+
+            Debug.Log(found.Count + " blocks found in area");
+            // Call CheckCompletion on found blocks in the check area
+            targetBlockController.CheckCompletion(new List<SnapFitController>(found).ToArray());
+        }
 }
