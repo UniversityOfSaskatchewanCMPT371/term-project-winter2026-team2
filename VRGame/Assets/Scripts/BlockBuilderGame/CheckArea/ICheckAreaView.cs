@@ -1,3 +1,4 @@
+using UnityEngine;
 /// <summary>
 /// Interface for the CheckArea View
 /// Handles trigger events for the check area and passes them to the controller

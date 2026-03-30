@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using System.Collections.Generic;
 
 /// <summary>
 /// Controller component of CheckButton.
