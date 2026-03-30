@@ -31,5 +31,12 @@ public class CheckAreaController : Controller<ICheckAreaModel, ICheckAreaView>, 
         modelInstance.InsideColliders.Remove(collider);
     }
 
-    
+    /// <inheritdoc/>
+    public Collider[] GetInside()
+    {
+        // Return a copy of the colliders currently inside the check area
+        var colliders = new Collider[modelInstance.InsideColliders.Count];
+        modelInstance.InsideColliders.CopyTo(colliders);
+        return colliders;
+    }
 }
