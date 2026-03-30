@@ -16,11 +16,6 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
     /// </summary>
     private const float RotationTolerance = 5f;
 
-    /// <summary>
-    /// The tolerance (in world units) for position matching
-    /// </summary>
-    private const float PositionTolerance = 0.1f;
-
     /// <inheritdoc/>
     public void Awake()
     {
@@ -54,31 +49,29 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
             return;
         }
 
-        // Check built blocks:
-        //      name match (bevel-hq-brick-1x1, bevel-hq-brick-1x2, etc.)
-        //      position match (within PositionTolerance)
-        //      rotation match (within RotationTolerance) 
-        foreach (var target in targetBlocks)
-        {
-            bool matched = false;
-            foreach (var block in builtBlocks)
-            {
-                bool nameMatch = (block.gameObject.name.Replace("(Clone)", "").Trim()) == target.gameObject.name;
-                Assert.IsTrue(nameMatch, "Built block name does not match target block name");
-                bool posMatch  = Vector3.Distance(block.transform.position, target.position) <= PositionTolerance;
-                Assert.IsTrue(posMatch, "Built block is not within position tolerance of target block");
-                bool rotMatch  = Mathf.Abs(Mathf.DeltaAngle(block.transform.eulerAngles.y, target.eulerAngles.y)) <= RotationTolerance;
-                Assert.IsTrue(rotMatch, "Built block is not within rotation tolerance of target block");
+        // Use bubble sort to sort built blocks by y position (bottom to top) for comparison against targetBlocks order
+        SnapFitController[] builtSorted = new SnapFitController[builtBlocks.Length];
+        builtBlocks.CopyTo(builtSorted, 0);
+        for (int i = 0; i < builtSorted.Length - 1; i++)
+            for (int j = i + 1; j < builtSorted.Length; j++)
+                if (builtSorted[j].transform.position.y < builtSorted[i].transform.position.y)
+                    (builtSorted[i], builtSorted[j]) = (builtSorted[j], builtSorted[i]);
 
-                if (nameMatch && posMatch && rotMatch)
-                {
-                    matched = true;
-                    break;
-                }
-            }
-            if (!matched)
+        // Check:
+        //      name match (bevel-hq-brick-1x1, bevel-hq-brick-1x2, etc.)
+        //      rotation match (within RotationTolerance)
+        for (int i = 0; i < targetBlocks.Length; i++)
+        {
+            string builtName  = builtSorted[i].gameObject.name.Replace("(Clone)", "").Trim();
+            string targetName = targetBlocks[i].gameObject.name;
+            bool nameMatch = builtName == targetName;
+            bool rotMatch  = Mathf.Abs(Mathf.DeltaAngle(builtSorted[i].transform.eulerAngles.y, targetBlocks[i].eulerAngles.y)) <= RotationTolerance;
+    
+            Debug.Log(i + "Name: " + builtName + ". Rotation: " + builtSorted[i].transform.eulerAngles.y + ". Matches target? " + nameMatch + " Rotation matches target? " + rotMatch);
+
+            if (!nameMatch || !rotMatch)
             {
-                Debug.LogError("Player's built block does not match target block");
+                Debug.Log($"Block " + i + " does not match target. Try again!");
                 return;
             }
         }
