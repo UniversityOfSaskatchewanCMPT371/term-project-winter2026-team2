@@ -26,7 +26,7 @@ public interface ICheckButtonController : IController
     new void Init();
 
     /// <summary>
-    /// Plays the scanner animation, counts the SnapFitControllers of the colliders in the CheckArea, and 
+    /// Plays the scanner animation, waits 4 seconds, counts the SnapFitControllers of the colliders in the CheckArea, and 
     /// calls CheckCompletion on the TargetBlockController with the found blocks
     /// </summary>
     /// <remarks>
