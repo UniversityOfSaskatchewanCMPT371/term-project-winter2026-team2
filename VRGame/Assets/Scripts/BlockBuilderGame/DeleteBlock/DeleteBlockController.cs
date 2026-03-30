@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Controller component of DeleteBlockController.

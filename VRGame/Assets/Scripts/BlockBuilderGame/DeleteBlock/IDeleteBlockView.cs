@@ -1,3 +1,4 @@
+using UnityEngine;
 /// <summary>
 /// Interface for the view component of DeleteBlock.
 /// Handles the OnColliderEnter event and passes it to the controller.
