@@ -45,6 +45,8 @@ public class CheckButtonController : Controller<ICheckButtonModel, ICheckButtonV
     /// <inheritdoc/>
     public void OnButtonPressed()
     {
+        // Trigger scan animation on the check area
+        modelInstance.Scanner.SetTrigger("scan");
         // Count colliders inside the check area
         var found = new HashSet<SnapFitController>();
         foreach (var collider in checkAreaController.GetInside())
