@@ -114,12 +114,6 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
             return;
         }
 
-        // Calculate the rotation difference between the snap points
-        Quaternion rotationDifference = otherSnapPoint.rotation * Quaternion.Inverse(currentSnapPoint.rotation);
-
-        // Rotate the block to align the snap points
-        transform.rotation = rotationDifference * transform.rotation;
-
         // Move the block to align the snap points
         transform.position += otherSnapPoint.position - currentSnapPoint.position;
 
