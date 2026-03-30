@@ -63,8 +63,8 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
             bool matched = false;
             foreach (var block in builtBlocks)
             {
-                bool nameMatch = block.gameObject.name == target.gameObject.name;
-                Assert.IsTrue(nameMatch, "Built block name does not match target block target block's name");
+                bool nameMatch = (block.gameObject.name.Replace("(Clone)", "").Trim()) == target.gameObject.name;
+                Assert.IsTrue(nameMatch, "Built block name does not match target block name");
                 bool posMatch  = Vector3.Distance(block.transform.position, target.position) <= PositionTolerance;
                 Assert.IsTrue(posMatch, "Built block is not within position tolerance of target block");
                 bool rotMatch  = Mathf.Abs(Mathf.DeltaAngle(block.transform.eulerAngles.y, target.eulerAngles.y)) <= RotationTolerance;
