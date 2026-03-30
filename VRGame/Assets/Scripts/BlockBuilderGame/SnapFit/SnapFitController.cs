@@ -126,6 +126,11 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         // Move the block to align the snap points
         transform.position += otherSnapPoint.position - currentSnapPoint.position;
 
+        // Force flat orientation (round Y to nearest 90 degrees)
+        float currentY = transform.eulerAngles.y;
+        float snappedY = Mathf.Round(currentY / 90f) * 90f;
+        transform.rotation = Quaternion.Euler(0f, snappedY, 0f);
+
         // Create a joint to connect this block to the target block
         var joint = gameObject.AddComponent<FixedJoint>();
 
