@@ -29,7 +29,10 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public override void Init()
     {
         isDragging = false;
-        modelInstance = gameObject.GetComponent<LogicGameModel>();
+        // check if model instance set through mock var in test first
+        if (modelInstance == null) {
+            modelInstance = gameObject.GetComponent<LogicGameModel>();
+        }
         if(modelInstance == null)
         {
             Debug.LogError("There is no LogicGameModel attached to this GameObject!");
