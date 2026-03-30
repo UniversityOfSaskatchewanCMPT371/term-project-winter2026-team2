@@ -1,21 +1,40 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
-/// View component of CheckButtonView.
+/// View component of CheckButton.
+/// Sets up XR event listeners for button press 
 /// </summary>
-public class CheckButtonView : 
-    View<ICheckButtonController>, // TODO reminder to switch the generic to the one you've implemented
-    ICheckButtonView
+public class CheckButtonView : View<ICheckButtonController>, ICheckButtonView
 {
-    // use 'this.controllerInstance' to access controller component
-
     /// <inheritdoc/>
     public override void Init()
     {
-        // this is used to resolve and validate the controller component
         this.CheckControllerRef();
+        SetupXREvents();
+    }
+
+    /// <inheritdoc/>
+    public void SetupXREvents()
+    {
+        Assert.IsNotNull(controllerInstance, "Controller must not be null on XR events setup");
+
+        // Find all XRBaseInteractable components in children and add events
+        var components = GetComponentsInChildren<XRBaseInteractable>();
+        if (components.Length == 0)
+            Debug.LogWarning("No XRBaseInteractable components found on CheckButton.");
+
+        foreach (var c in components)
+        {
+            Assert.IsNotNull(c, "Null component found in XRBaseInteractable components");
+            c.selectEntered.AddListener(OnXRClick);
+        }
+    }
+
+    /// <inheritdoc/>
+    private void OnXRClick(SelectEnterEventArgs args)
+    {
+        controllerInstance.OnButtonPressed();
     }
 }
-
