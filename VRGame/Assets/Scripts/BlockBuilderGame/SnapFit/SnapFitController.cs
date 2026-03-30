@@ -38,9 +38,10 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
     /// <inheritdoc/>
     public void Detach()
     {
-        // If not snapped or no snap joint, do nothing
+        // If not snapped or no snap joint, set snapped to false
         if (!modelInstance.IsSnapped || modelInstance.SnapJoint == null) 
         {
+            modelInstance.IsSnapped = false;
             return;
         }
         // Destroy the joint connecting this block to another block
