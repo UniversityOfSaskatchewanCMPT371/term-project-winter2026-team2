@@ -27,7 +27,7 @@ public class SnapFitModel : Model, ISnapFitModel
     /// <summary>
      /// The radius in which the snap points will trigger snap
      /// </summary>
-    private float snapRadius = 0.5f;
+    private float snapRadius = 0.25f;
 
     /// <inheritdoc/>
     public float SnapRadius
@@ -87,7 +87,7 @@ public class SnapFitModel : Model, ISnapFitModel
         snapJoint = null;
         if (snapRadius <= 0)
         {
-            snapRadius = 0.5f;
+            snapRadius = 0.25f;
         }
         Assert.IsFalse(isSnapped, "isSnapped must be false on Init");
         Assert.IsNotNull(snapPoints, "SnapPoints must not be null on Init");
