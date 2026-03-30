@@ -14,7 +14,7 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
     /// <summary>
     /// The tolerance (in degrees) for y-axis rotation
     /// </summary>
-    private const float RotationTolerance = 5f;
+    private const float RotationTolerance = 10f;
 
     /// <inheritdoc/>
     public void Awake()
@@ -60,16 +60,22 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
         // Check:
         //      name match (bevel-hq-brick-1x1, bevel-hq-brick-1x2, etc.)
         //      rotation match (within RotationTolerance)
+        //      material match
         for (int i = 0; i < targetBlocks.Length; i++)
         {
             string builtName  = builtSorted[i].gameObject.name.Replace("(Clone)", "").Trim();
             string targetName = targetBlocks[i].gameObject.name;
             bool nameMatch = builtName == targetName;
             bool rotMatch  = Mathf.Abs(Mathf.DeltaAngle(builtSorted[i].transform.eulerAngles.y, targetBlocks[i].eulerAngles.y)) <= RotationTolerance;
-    
-            Debug.Log(i + "Name: " + builtName + ". Rotation: " + builtSorted[i].transform.eulerAngles.y + ". Matches target? " + nameMatch + " Rotation matches target? " + rotMatch);
 
-            if (!nameMatch || !rotMatch)
+            var builtRenderer  = builtSorted[i].GetComponentInChildren<Renderer>();
+            var targetRenderer = targetBlocks[i].GetComponentInChildren<Renderer>();
+            bool matMatch = builtRenderer != null && targetRenderer != null &&
+                            builtRenderer.sharedMaterial == targetRenderer.sharedMaterial;
+
+            Debug.Log(i + "Name: " + builtName + ". Rotation: " + builtSorted[i].transform.eulerAngles.y + ". Matches target? " + nameMatch + " Rotation matches target? " + rotMatch + " Material matches target? " + matMatch);
+
+            if (!nameMatch || !rotMatch || !matMatch)
             {
                 Debug.Log($"Block " + i + " does not match target. Try again!");
                 return;
