@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Model component of DeleteBlockModel.
@@ -15,7 +16,7 @@ public class DeleteBlockModel : Model, IDeleteBlockModel
     /// <summary>
     /// Reference to the block's collider component
     /// </summary>
-    [SerializeField] private Collider collider;
+    [SerializeField] private Collider blockCollider;
 
 
     /// </inheritdoc/>
@@ -23,12 +24,12 @@ public class DeleteBlockModel : Model, IDeleteBlockModel
     {
         get
         {
-            return this.collider;
+            return this.blockCollider;
         }
         set
         {
             Assert.IsNotNull(value, "Collider reference cannot be null");
-            this.collider = value;
+            this.blockCollider = value;
         }
 
     }
