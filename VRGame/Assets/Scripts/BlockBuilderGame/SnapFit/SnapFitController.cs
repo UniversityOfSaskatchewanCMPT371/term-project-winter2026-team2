@@ -92,6 +92,15 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                     {
                         continue;
                     }
+
+                    // Current bottom snap points should only snap to top snap points and vice versa
+                    bool grabbedIsAbove = transform.position.y > sf.transform.position.y;
+                    bool isDirectionValid = (currentSP.name.StartsWith("Bottom") && targetSP.name.StartsWith("Top") && grabbedIsAbove) ||
+                                           (currentSP.name.StartsWith("Top") && targetSP.name.StartsWith("Bottom") && !grabbedIsAbove);
+                    if (!isDirectionValid)
+                    {
+                        continue;
+                    }
                     // Calculate the distance between the snap points
                     // If it's greater than the current radius, continue
                     float distance = Vector3.Distance(currentSP.position, targetSP.position);
