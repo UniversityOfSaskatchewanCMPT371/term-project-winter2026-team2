@@ -41,4 +41,22 @@ public class CheckButtonController : Controller<ICheckButtonModel, ICheckButtonV
         Assert.IsNotNull(checkAreaController, "'checkAreaController' must not be null.");
     }
 
+    /// <inheritdoc/>
+    public void OnButtonPressed()
+    {
+        // Count colliders inside the check area
+        var found = new HashSet<SnapFitController>();
+        foreach (var collider in checkAreaController.GetInside())
+        {
+            var c = collider.GetComponent<SnapFitController>();
+            if (c != null)
+            {
+                found.Add(c);
+            }
+        }
+
+        Debug.Log($"[CheckButton] {found.Count} blocks found in area.");
+        // Call CheckCompletion on found blocks in the check area
+        targetBlockController.CheckCompletion(new List<SnapFitController>(found).ToArray());
+    }
 }
