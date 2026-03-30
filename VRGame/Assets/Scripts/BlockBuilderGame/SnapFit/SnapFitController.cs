@@ -71,8 +71,8 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
 
         foreach (var sf in FindObjectsOfType<SnapFitController>())
         {
-            // Check if the current SnapFitController is not this block and is already snapped to another block
-            if (sf == this || !sf.modelInstance.IsSnapped) 
+            // Only snap to other blocks, not itself
+            if (sf == this) 
             {
                 continue;
             }
@@ -107,10 +107,9 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                 }
             }
         }
-        // Set the state to snapped in the model if no snap point was found
+        // No valid snap points found within radius, do nothing
         if (snapFitController == null)
         {
-            modelInstance.IsSnapped = true;
             return;
         }
 
