@@ -12,7 +12,7 @@ public interface ICheckButtonController : IController
     /// post-condition:
     ///     - ensures Init() is called
     /// </remarks>
-    new void Awake();
+    void Awake();
 
     /// <summary>
     /// Reference checks for model, view, TargetBlockController, and CheckAreaController
