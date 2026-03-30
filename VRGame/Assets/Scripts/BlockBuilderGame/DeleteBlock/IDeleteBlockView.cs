@@ -18,5 +18,5 @@ public interface IDeleteBlockView : IView
     /// postcondition:
     ///     - ensures controllerInstance.HandleColliderEnter(collider) is called
     /// </remarks>
-    void OnColliderEnter(Collider collider);
+    void OnTriggerEnter(Collider collider);
 }

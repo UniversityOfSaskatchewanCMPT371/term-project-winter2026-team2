@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// View component of DeleteBlockView.
 /// Handle the OnColliderEnter event and pass it to the controller.
 /// </summary>
 public class DeleteBlockView : 
-    View<IDeleteBlockController>, // TODO reminder to switch the generic to the one you've implemented
+    View<IDeleteBlockController>,
     IDeleteBlockView
 {
 
@@ -17,12 +18,10 @@ public class DeleteBlockView :
     }
 
     /// <inheritdoc/>
-    public void OnColliderEnter(Collider collider)
+    public void OnTriggerEnter(Collider collider)
     {
         Assert.IsNotNull(collider, "collider parameter cannot be null");
         controllerInstance.HandleColliderEnter(collider);
     }
-
-
 }
 
