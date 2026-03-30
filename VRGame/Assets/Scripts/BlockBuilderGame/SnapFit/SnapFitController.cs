@@ -136,9 +136,8 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         // Set the snap joint in the model to the joint we just created        
         modelInstance.SnapJoint = joint;
 
-        // Disable collision and preprocessing on the joint to prevent physics issues
+        // Disable collision on the joint to prevent physics issues
         joint.enableCollision = false;
-        joint.enablePreprocessing = false;
 
         // Set the state to snapped in the model
         modelInstance.IsSnapped = true;
