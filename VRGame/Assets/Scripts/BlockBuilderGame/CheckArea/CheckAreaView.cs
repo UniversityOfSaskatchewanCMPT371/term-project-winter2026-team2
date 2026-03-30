@@ -12,14 +12,32 @@ public class CheckAreaView : View<ICheckAreaController>, ICheckAreaView
         this.CheckControllerRef();
     }
 
-    /// <inheritdoc/>
-    public void OnEnter(Collider collider)
+    /// <summary>
+    /// Sends enter trigger events to controller
+    /// <param name="collider">The collider that entered the trigger</param>
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - requires onEnter != null
+    /// post-condition:
+    ///     - ensures onEnter events are sent to controller
+    /// </remarks>
+    private void OnTriggerEnter(Collider collider)
     {
         controllerInstance.OnEnter(collider);
     }
 
-    /// <inheritdoc/>
-    public void OnExit(Collider collider)
+    /// <summary>
+    /// Sends exit trigger events to controller
+    /// <param name="collider">The collider that exited the trigger</param>
+    /// </summary>
+    /// <remarks>
+    /// pre-condition:
+    ///     - requires onExit != null
+    /// post-condition:
+    ///     - ensures onExit events are sent to controller
+    /// </remarks>
+    private void OnTriggerExit(Collider collider)
     {
         controllerInstance.OnExit(collider);
     }
