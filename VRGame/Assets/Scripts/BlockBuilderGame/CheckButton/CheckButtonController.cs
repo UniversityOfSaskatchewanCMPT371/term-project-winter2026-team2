@@ -1,22 +1,44 @@
 using UnityEngine;
-
-// TODO look at /VRGame/Assets/ScriptTemplate/Example.cs to see how to use this
+using UnityEngine.Assertions;
 
 /// <summary>
-/// Controller component of CheckButtonController.
+/// Controller component of CheckButton.
 /// </summary>
-public class CheckButtonController : 
-    Controller<ICheckButtonModel, ICheckButtonView>, // TODO reminder to switch the generics to the ones you've implemented
-    ICheckButtonController
+public class CheckButtonController : Controller<ICheckButtonModel, ICheckButtonView>, ICheckButtonController
 {
-    // use 'this.viewInstance' to access view component, and
-    // 'this.modelInstance' to access model component
+    // References to other controllers
+    [SerializeField] private ControllerComponent TargetBlockController;
+    [SerializeField] private ControllerComponent CheckAreaController;
+
+    // Rederences to the controllers as interfaces
+    private ITargetBlockController targetBlockController;
+    private ICheckAreaController checkAreaController;
+
+    /// <inheritdoc/>
+    public void Awake()
+    {
+        Init();
+    }
 
     /// <inheritdoc/>
     public override void Init()
     {
-        // these are used to resolve and validate model and view components
         this.CheckModelRef();
         this.CheckViewRef();
+
+        // Set up reference to TargetBlockController 
+        if (TargetBlockController != null)
+        {
+            targetBlockController = TargetBlockController as ITargetBlockController;
+        }
+        Assert.IsNotNull(targetBlockController, "'targetBlockController' must not be null.");
+
+        // Set up reference to CheckAreaController
+        if (CheckAreaController != null)
+        {
+            checkAreaController = CheckAreaController as ICheckAreaController;
+        }
+        Assert.IsNotNull(checkAreaController, "'checkAreaController' must not be null.");
     }
+
 }
