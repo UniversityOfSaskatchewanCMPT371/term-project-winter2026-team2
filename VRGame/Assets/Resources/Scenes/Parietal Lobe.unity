@@ -1070,6 +1070,9 @@ GameObject:
   - component: {fileID: 358875793}
   - component: {fileID: 358875792}
   - component: {fileID: 358875791}
+  - component: {fileID: 358875797}
+  - component: {fileID: 358875796}
+  - component: {fileID: 358875795}
   m_Layer: 0
   m_Name: Check Area
   m_TagString: Untagged
@@ -1163,6 +1166,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358875795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358875790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c187fdebc184cc89bb6b72dc7713cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectorWindowModel: {fileID: 358875797}
+  inspectorWindowView: {fileID: 358875796}
+--- !u!114 &358875796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358875790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07d42549420a4f2b983500213e65f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectorWindowController: {fileID: 358875795}
+--- !u!114 &358875797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358875790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2302a89cd88a44307b574fdba3e14a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &375789431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4679617273699696885, guid: 9e7c44ca1eea1e24bb80582d282db340, type: 3}
@@ -4003,6 +4045,7 @@ MonoBehaviour:
   inspectorWindowModel: {fileID: 2067838613}
   inspectorWindowView: {fileID: 2067838612}
   TargetBlockController: {fileID: 1119559065}
+  CheckAreaController: {fileID: 358875795}
 --- !u!114 &2067838612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4028,7 +4071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c680fb85e9f4759b3e2a269c7bc59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkArea: {fileID: 358875791}
 --- !u!1 &2120206183
 GameObject:
   m_ObjectHideFlags: 0
