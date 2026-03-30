@@ -16,6 +16,11 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
     /// </summary>
     private const float RotationTolerance = 5f;
 
+    /// <summary>
+    /// The tolerance (in world units) for position matching
+    /// </summary>
+    private const float PositionTolerance = 0.1f;
+
     /// <inheritdoc/>
     public void Awake()
     {
@@ -49,19 +54,36 @@ public class TargetBlockController : Controller<ITargetBlockModel, ITargetBlockV
             return;
         }
 
-        for (int i = 0; i < targetBlocks.Length; i++)
+        // Check built blocks:
+        //      name match (bevel-hq-brick-1x1, bevel-hq-brick-1x2, etc.)
+        //      position match (within PositionTolerance)
+        //      rotation match (within RotationTolerance) 
+        foreach (var target in targetBlocks)
         {
-            // Get y-axis rotations for both built and target blocks
-            float builtY  = builtBlocks[i].transform.eulerAngles.y;
-            float targetY = targetBlocks[i].eulerAngles.y;
-
-            // Check if the angles are within the specified tolerance
-            if (Mathf.Abs(Mathf.DeltaAngle(builtY, targetY)) > RotationTolerance) 
+            bool matched = false;
+            foreach (var block in builtBlocks)
             {
-                Debug.Log("Block " + i + " is not aligned correctly.");
+                bool nameMatch = block.gameObject.name == target.gameObject.name;
+                Assert.IsTrue(nameMatch, "Built block name does not match target block target block's name");
+                bool posMatch  = Vector3.Distance(block.transform.position, target.position) <= PositionTolerance;
+                Assert.IsTrue(posMatch, "Built block is not within position tolerance of target block");
+                bool rotMatch  = Mathf.Abs(Mathf.DeltaAngle(block.transform.eulerAngles.y, target.eulerAngles.y)) <= RotationTolerance;
+                Assert.IsTrue(rotMatch, "Built block is not within rotation tolerance of target block");
+
+                if (nameMatch && posMatch && rotMatch)
+                {
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched)
+            {
+                Debug.LogError("Player's built block does not match target block");
                 return;
             }
         }
+        modelInstance.IsComplete = true;
+        viewInstance.OnComplete();
     }
     
 }
