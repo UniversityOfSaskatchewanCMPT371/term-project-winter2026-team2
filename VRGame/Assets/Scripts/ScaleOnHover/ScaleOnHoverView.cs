@@ -142,10 +142,10 @@ public class ScaleOnHoverView : MonoBehaviour, IScaleOnHoverView
         Vector3[] targetScales = controller.retrieveTargetScale();
         float scaleSpeed = controller.retrieveScaleSpeed();
 
-        // Additional null checks for safety - return if not initialized
-        if (linkedObjects == null || targetScales == null)
+        // Additional null checks for safety - return if not initialized yet
+        if (linkedObjects == null || targetScales == null || linkedObjects.Length == 0 || targetScales.Length == 0)
         {
-            Debug.LogError("Linked objects or target scales are not initialized in Update");
+
             return;
         }
 

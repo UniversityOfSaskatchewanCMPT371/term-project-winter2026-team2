@@ -1,0 +1,233 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
+
+/// <summary>
+/// This class handles the logic of the logicgame, taking in inputs and changing panels as needed
+/// </summary>
+public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGameController
+{
+    /// <summary>
+    /// Are we in a valid, dragging state?
+    /// </summary>
+    private bool isDragging;
+    /// <summary>
+    /// What are the coordinates of the panel we're aiming at, if any?
+    /// </summary>
+    private CoordinateRef targetedPanel;
+    /// <summary>
+    /// InputActions reference
+    /// </summary>
+    private XRIInputActions inputActions;
+    /// <summary>
+    /// The current path we're taking
+    /// </summary>
+    private Stack<Panel> currentPath;
+
+    /// <inheritdoc/>
+    public override void Init()
+    {
+        isDragging = false;
+        modelInstance = gameObject.GetComponent<LogicGameModel>();
+        if(modelInstance == null)
+        {
+            Debug.LogError("There is no LogicGameModel attached to this GameObject!");
+        }
+        Assert.IsNotNull(modelInstance, "There is no LogicGameModel attached to this GameObject!");
+        targetedPanel = null;
+        inputActions = new XRIInputActions();
+        currentPath = new Stack<Panel>();
+    }
+
+    /// <summary>
+    /// Unity Awake() method - gets initial interaction state set up
+    /// </summary>
+    public void Awake()
+    {
+        Init();
+    }
+
+#pragma warning disable IDE0051 //no, these methods ARE used by Unity, c#.
+    /// <summary>
+    /// Unity OnEnable() method, initializes InputActions mapping
+    /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - XR controller action event listeners are mapped to their functions
+    /// </remarks>
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        //TODO: handle the left controller's actions
+        inputActions.XRIRightHandInteraction.Activate.performed += OnTriggerPress;
+        inputActions.XRIRightHandInteraction.Activate.canceled += OnTriggerRelease;
+        //this is not the greatest button to use for cancelling but fuck it
+        inputActions.XRIRightHandInteraction.Select.performed += OnResetPress;
+    }
+
+    /// <summary>
+    /// Unity OnDisable() method, tears down InputActions mapping
+    /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - XR controller action event listeners are already mapped to their functions (there is no way this ISN'T the case)
+    /// postconditions:
+    ///     - XR controller action event listeners are unmapped from their functions
+    /// </remarks>
+    private void OnDisable()
+    {
+        inputActions.XRIRightHandInteraction.Activate.performed -= OnTriggerPress;
+        inputActions.XRIRightHandInteraction.Activate.canceled -= OnTriggerRelease;
+        inputActions.XRIRightHandInteraction.Select.performed -= OnResetPress;
+        inputActions.Disable();
+    }
+
+#pragma warning disable IDE0051
+    /// <inheritdoc/>
+    public void HandleHover(int x, int y)
+    {
+        targetedPanel = new CoordinateRef(x,y);
+        if(isDragging)
+        {
+            Debug.Log("Dragging!");
+            Panel hoveredPanel = modelInstance.GetPanel(targetedPanel.X, targetedPanel.Y);
+            if(hoveredPanel == null)
+            {
+                Debug.LogError("The currently-hovered panel is apparently null");
+            }
+            Assert.IsNotNull(hoveredPanel, "The currently-hovered panel is apparently null");
+            if(hoveredPanel.GridX == currentPath.Peek().GridX && hoveredPanel.GridY == currentPath.Peek().GridY)
+            {
+                Debug.LogWarning("Somehow you're re-hovering on the same panel as before, which doesn't really have any effect. We're just going to exit out of the hover function entirely and preserve the dragging state");
+                return;
+            }
+            if(hoveredPanel.IsOccupied())
+            {
+                Debug.Log(hoveredPanel);
+                Debug.Log("But the hovered panel is occupied!");
+                ClearPath();
+                return;
+            }
+            if(hoveredPanel.PanelColour != currentPath.Peek().PanelColour && hoveredPanel.Attribute != PanelAttribute.Normal)
+            {
+                Debug.Log("But we're trying to enter an endpoint of the wrong colour!");
+                ClearPath();
+                return;
+            }
+            // why can't i use a switch statement here???
+            if(currentPath.Peek().LeftNeighbor != null && hoveredPanel.Equals(currentPath.Peek().LeftNeighbor)) //moving left
+            {
+                Debug.Log("Moving left!");
+                currentPath.Peek().SetExitDirection(Direction.Left);
+                hoveredPanel.SetEntryDirection(Direction.Right);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
+                currentPath.Push(hoveredPanel);
+            }
+            else if(currentPath.Peek().TopNeighbor != null && hoveredPanel.Equals(currentPath.Peek().TopNeighbor)) //moving up
+            {
+                Debug.Log("Moving up!");
+                currentPath.Peek().SetExitDirection(Direction.Up);
+                hoveredPanel.SetEntryDirection(Direction.Down);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
+                currentPath.Push(hoveredPanel);
+            }
+            else if(currentPath.Peek().RightNeighbor != null && hoveredPanel.Equals(currentPath.Peek().RightNeighbor)) //moving right
+            {
+                Debug.Log("Moving right!");
+                currentPath.Peek().SetExitDirection(Direction.Right);
+                hoveredPanel.SetEntryDirection(Direction.Left);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
+                currentPath.Push(hoveredPanel);
+            }
+            else if(currentPath.Peek().DownNeighbor != null && hoveredPanel.Equals(currentPath.Peek().DownNeighbor)) //moving down
+            {
+                Debug.Log("Moving down!");
+                currentPath.Peek().SetExitDirection(Direction.Down);
+                hoveredPanel.SetEntryDirection(Direction.Up);
+                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
+                currentPath.Push(hoveredPanel);
+            } else //the hovered Panel is not adjacent to the previous Panel in our path
+            {
+                Debug.Log("But the hover changed to a non-adjacent Panel!");
+                isDragging = false;
+                ClearPath();
+            }
+        }
+    }
+
+    /// <inheritdoc/>
+    public void HandleUnhover(int x, int y)
+    {
+        if(targetedPanel != null && targetedPanel.X == x && targetedPanel.Y == y)
+        {
+            targetedPanel = null;
+            Debug.Log("No longer hovering!");
+        }
+    }
+
+    /// <inheritdoc/>
+    public void OnTriggerPress(InputAction.CallbackContext context)
+    {
+        Debug.Log("Trigger pressed!");
+        if(targetedPanel == null)
+        {
+            Debug.Log("But I'm not aiming at a panel!");
+            return;
+        }
+        Panel hoveredPanel = modelInstance.GetPanel(targetedPanel.X, targetedPanel.Y);
+        if(hoveredPanel == null)
+        {
+            Debug.LogError($"The panel we're trying press on ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+        }
+        Assert.IsNotNull(hoveredPanel, $"The panel we're trying to press on ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+        if(hoveredPanel.IsOccupied())
+        {
+            Debug.Log("But the panel I'm aiming at is occupied!");
+            return;
+        }
+        if(hoveredPanel.Attribute == PanelAttribute.Start)
+        {
+            Debug.Log("Starting drag!");
+            currentPath.Push(hoveredPanel);
+            isDragging = true;
+        }
+    }
+
+    /// <inheritdoc/>
+    public void OnTriggerRelease(InputAction.CallbackContext context)
+    {
+        Debug.Log("Trigger released!");
+        if(isDragging && (targetedPanel == null || currentPath.Peek().Attribute != PanelAttribute.Exit))
+        {
+            ClearPath();
+        }
+        else if(isDragging && targetedPanel != null && currentPath.Peek().Attribute == PanelAttribute.Exit && modelInstance.IsGridFilled())
+        {
+            //TODO: make a proper celebration
+            Debug.Log("Game is complete!");
+        }
+        isDragging = false;
+    }
+
+    /// <inheritdoc/>
+    public void OnResetPress(InputAction.CallbackContext context)
+    {
+        Debug.Log("Resetting game state...");
+        modelInstance.ClearGrid();
+    }
+
+    /// <inheritdoc/>
+    public void ClearPath()
+    {
+        Debug.Log("Clearing path!");
+        foreach(Panel panel in currentPath)
+        {
+            panel.ClearPanel();
+        }
+        currentPath.Clear();
+        isDragging = false;
+    }
+}
