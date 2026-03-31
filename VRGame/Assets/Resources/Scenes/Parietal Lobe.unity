@@ -897,7 +897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8380157826906577798, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Name
-      value: Schwann Cell 4
+      value: Myelin Sheath 4
       objectReference: {fileID: 0}
     - target: {fileID: -8039216694009765281, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -909,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c574d3c204d2149e3a3ef809bb1d6100, type: 2}
     - target: {fileID: -6733177361254619370, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Name
-      value: Schwann Cell 2
+      value: Myelin Sheath 2
       objectReference: {fileID: 0}
     - target: {fileID: -6288895652948404182, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1105,7 +1105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8513859187771203891, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Name
-      value: Schwann Cell 1
+      value: Myelin Sheath 1
       objectReference: {fileID: 0}
     - target: {fileID: 8670761335428686811, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1121,7 +1121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8700725330082129686, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Name
-      value: Schwann Cell 3
+      value: Myelin Sheath 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
