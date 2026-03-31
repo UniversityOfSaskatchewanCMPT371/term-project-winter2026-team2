@@ -552,8 +552,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019999992, y: 0.019999992, z: 0.0078498}
-  m_Center: {x: 0.030703397, y: 0.038312726, z: -0.0036177046}
+  m_Size: {x: 0.014561044, y: 0.017042696, z: 0.0063843587}
+  m_Center: {x: 0.030938014, y: 0.03782219, z: -0.0028849845}
 --- !u!114 &110313216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,12 +905,28 @@ PrefabInstance:
       value: Nucleus
       objectReference: {fileID: 0}
     - target: {fileID: -2577548232221058511, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577548232221058511, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577548232221058511, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577548232221058511, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577548232221058511, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -2577548232221058511, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.03
+      value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: -1439730007547781893, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1087,9 +1103,12 @@ GameObject:
   - component: {fileID: 201732334}
   - component: {fileID: 201732339}
   - component: {fileID: 201732338}
-  - component: {fileID: 201732336}
   - component: {fileID: 201732335}
+  - component: {fileID: 201732336}
   - component: {fileID: 201732340}
+  - component: {fileID: 201732343}
+  - component: {fileID: 201732342}
+  - component: {fileID: 201732341}
   m_Layer: 0
   m_Name: Cell Body
   m_TagString: Untagged
@@ -1142,6 +1161,9 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders:
   - {fileID: 201732340}
+  - {fileID: 201732343}
+  - {fileID: 201732342}
+  - {fileID: 201732341}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1299,8 +1321,71 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9999999, y: 2.35369, z: 1.0451397}
-  m_Center: {x: 0.00000005960465, y: -0.1768446, z: -0.022569597}
+  m_Size: {x: 1.1222926, y: 2.0392268, z: 0.39671284}
+  m_Center: {x: 0.019217493, y: -0.019613149, z: 0.3641768}
+--- !u!65 &201732341
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201732333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.36589655, y: 2.0000007, z: 0.3777167}
+  m_Center: {x: -0.3170516, y: 3.6835227e-15, z: -0.022335246}
+--- !u!65 &201732342
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201732333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7724771, y: 2.0000007, z: 0.36785868}
+  m_Center: {x: -0.11376135, y: 9.832056e-14, z: -0.3959348}
+--- !u!65 &201732343
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201732333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.34993175, y: 2.0000007, z: 0.6631968}
+  m_Center: {x: 0.44734675, y: 1.23354425e-14, z: -0.16840151}
 --- !u!1 &206838765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,27 +3939,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: -1.5930023
+      value: -2.7104013
       objectReference: {fileID: 0}
     - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: 2.290001
+      value: 2.4160008
       objectReference: {fileID: 0}
     - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Positions.Array.data[0].z
-      value: 3.0100007
+      value: 2.9940004
       objectReference: {fileID: 0}
     - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: -1.5930023
+      value: -2.7104013
       objectReference: {fileID: 0}
     - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: 2.2900007
+      value: 2.4160006
       objectReference: {fileID: 0}
     - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_Positions.Array.data[1].z
-      value: 0.07000089
+      value: 0.64200044
       objectReference: {fileID: 0}
     - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
       propertyPath: m_text
