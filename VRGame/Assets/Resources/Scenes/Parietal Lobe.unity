@@ -1227,15 +1227,15 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: 1fa2ee5d30f7a4ba5a4054ca1ab740c1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 46e9fddee57d040a483f30bd64bcf856, type: 2}
+      objectReference: {fileID: 2100000, guid: 951036b4b4daa4f36b4386361159c565, type: 2}
     - target: {fileID: -1461304994638716399, guid: 1fa2ee5d30f7a4ba5a4054ca1ab740c1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 46e9fddee57d040a483f30bd64bcf856, type: 2}
+      objectReference: {fileID: 2100000, guid: d689bfa4cae714a999453b39c174ab68, type: 2}
     - target: {fileID: -804731622281664130, guid: 1fa2ee5d30f7a4ba5a4054ca1ab740c1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 46e9fddee57d040a483f30bd64bcf856, type: 2}
+      objectReference: {fileID: 2100000, guid: d689bfa4cae714a999453b39c174ab68, type: 2}
     - target: {fileID: 919132149155446097, guid: 1fa2ee5d30f7a4ba5a4054ca1ab740c1, type: 3}
       propertyPath: m_Name
       value: Table
@@ -2462,7 +2462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c539facd0c07cf4b9ed5e671e7b2446, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.04
+      value: 0.959
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c539facd0c07cf4b9ed5e671e7b2446, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4927,6 +4927,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d1fdc2d1ce6c84d02af3beacfa5b160f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e4233d0568cbfe46ae6d01b2d11711e, type: 2}
     - target: {fileID: 919132149155446097, guid: d1fdc2d1ce6c84d02af3beacfa5b160f, type: 3}
       propertyPath: m_Name
       value: Block Spawner Rectangle
