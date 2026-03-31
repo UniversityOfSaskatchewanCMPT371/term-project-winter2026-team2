@@ -21,6 +21,13 @@ public class DeleteBlockView :
     public void OnTriggerEnter(Collider collider)
     {
         Assert.IsNotNull(collider, "collider parameter cannot be null");
+
+        // Only restrict to spawned block prefabs
+        if (collider.GetComponent<SnapFitController>() == null)
+        {
+            return;
+        }
+
         controllerInstance.HandleColliderEnter(collider);
     }
 }
