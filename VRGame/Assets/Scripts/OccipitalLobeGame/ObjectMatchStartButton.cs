@@ -53,7 +53,7 @@ public class ObjectMatchStartButton : MonoBehaviour
     /// Postconditions:
     /// - The controller's InitializeLevel method is called
     /// </remarks>
-    private void OnGrabbed(SelectEnterEventArgs args)
+    internal void OnGrabbed(SelectEnterEventArgs args)
     {
         if (controller == null)
         {
