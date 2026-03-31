@@ -2792,10 +2792,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -8380157826906577798, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Myelin Sheath 4
+      objectReference: {fileID: 0}
     - target: {fileID: -8039216694009765281, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8710b51f5687b410dab13337f075c2cc, type: 2}
+    - target: {fileID: -6733177361254619370, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Myelin Sheath 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Nucleus
+      objectReference: {fileID: 0}
+    - target: {fileID: -4841695797154171690, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Axon 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -382641576403523837, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Axon Terminal
+      objectReference: {fileID: 0}
     - target: {fileID: 490939697822461851, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2812,6 +2832,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8710b51f5687b410dab13337f075c2cc, type: 2}
+    - target: {fileID: 5999186763907468791, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Axon 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938978007382601096, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Axon 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715626668051313982, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Dendrites
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Myelin Sheath 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700725330082129686, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
+      propertyPath: m_Name
+      value: Myelin Sheath 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6207,10 +6247,10 @@ SceneRoots:
   - {fileID: 807822918}
   - {fileID: 358875794}
   - {fileID: 607164445}
+  - {fileID: 846352206}
   - {fileID: 1344359446}
   - {fileID: 2015176604}
   - {fileID: 2103302821}
   - {fileID: 1923569153}
   - {fileID: 1905326706}
   - {fileID: 1244621575}
-  - {fileID: 846352206}
