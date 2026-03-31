@@ -84,8 +84,8 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         inputActions.XRIRightHandInteraction.Select.performed -= OnResetPress;
         inputActions.Disable();
     }
+#pragma warning restore IDE0051
 
-#pragma warning disable IDE0051
     /// <inheritdoc/>
     public void HandleHover(int x, int y)
     {
