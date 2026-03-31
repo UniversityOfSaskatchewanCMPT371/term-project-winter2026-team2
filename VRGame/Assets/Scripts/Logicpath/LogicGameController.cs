@@ -13,17 +13,25 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// </summary>
     private bool isDragging;
     /// <summary>
-    /// What are the coordinates of the panel we're aiming at, if any?
+    /// What are the coordinates of the panel the left controller is aiming at, if any?
     /// </summary>
-    private CoordinateRef targetedPanel;
+    private CoordinateRef targetedPanelLeft;
+    /// <summary>
+    /// What are the coordinates of the panel the right controller is aiming at, if any?
+    /// </summary>
+    private CoordinateRef targetedPanelRight;
     /// <summary>
     /// InputActions reference
     /// </summary>
     private XRIInputActions inputActions;
     /// <summary>
-    /// The current path we're taking
+    /// The current path the left hand is taking
     /// </summary>
-    private Stack<Panel> currentPath;
+    private Stack<Panel> currentPathLeft;
+    /// <summary>
+    /// The current path the right hand is taking
+    /// </summary>
+    private Stack<Panel> currentPathRight;
 
     /// <inheritdoc/>
     public override void Init()
@@ -35,9 +43,9 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
             Debug.LogError("There is no LogicGameModel attached to this GameObject!");
         }
         Assert.IsNotNull(modelInstance, "There is no LogicGameModel attached to this GameObject!");
-        targetedPanel = null;
+        targetedPanelRight = null;
         inputActions = new XRIInputActions();
-        currentPath = new Stack<Panel>();
+        currentPathRight = new Stack<Panel>();
     }
 
     /// <summary>
@@ -89,17 +97,17 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <inheritdoc/>
     public void HandleHover(int x, int y)
     {
-        targetedPanel = new CoordinateRef(x,y);
+        targetedPanelRight = new CoordinateRef(x,y);
         if(isDragging)
         {
             Debug.Log("Dragging!");
-            Panel hoveredPanel = modelInstance.GetPanel(targetedPanel.X, targetedPanel.Y);
+            Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
             if(hoveredPanel == null)
             {
                 Debug.LogError("The currently-hovered panel is apparently null");
             }
             Assert.IsNotNull(hoveredPanel, "The currently-hovered panel is apparently null");
-            if(hoveredPanel.GridX == currentPath.Peek().GridX && hoveredPanel.GridY == currentPath.Peek().GridY)
+            if(hoveredPanel.GridX == currentPathRight.Peek().GridX && hoveredPanel.GridY == currentPathRight.Peek().GridY)
             {
                 Debug.LogWarning("Somehow you're re-hovering on the same panel as before, which doesn't really have any effect. We're just going to exit out of the hover function entirely and preserve the dragging state");
                 return;
@@ -111,44 +119,44 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
                 ClearPath();
                 return;
             }
-            if(hoveredPanel.PanelColour != currentPath.Peek().PanelColour && hoveredPanel.Attribute != PanelAttribute.Normal)
+            if(hoveredPanel.PanelColour != currentPathRight.Peek().PanelColour && hoveredPanel.Attribute != PanelAttribute.Normal)
             {
                 Debug.Log("But we're trying to enter an endpoint of the wrong colour!");
                 ClearPath();
                 return;
             }
             // why can't i use a switch statement here???
-            if(currentPath.Peek().LeftNeighbor != null && hoveredPanel.Equals(currentPath.Peek().LeftNeighbor)) //moving left
+            if(currentPathRight.Peek().LeftNeighbor != null && hoveredPanel.Equals(currentPathRight.Peek().LeftNeighbor)) //moving left
             {
                 Debug.Log("Moving left!");
-                currentPath.Peek().SetExitDirection(Direction.Left);
+                currentPathRight.Peek().SetExitDirection(Direction.Left);
                 hoveredPanel.SetEntryDirection(Direction.Right);
-                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
-                currentPath.Push(hoveredPanel);
+                hoveredPanel.PanelColour = currentPathRight.Peek().PanelColour;
+                currentPathRight.Push(hoveredPanel);
             }
-            else if(currentPath.Peek().TopNeighbor != null && hoveredPanel.Equals(currentPath.Peek().TopNeighbor)) //moving up
+            else if(currentPathRight.Peek().TopNeighbor != null && hoveredPanel.Equals(currentPathRight.Peek().TopNeighbor)) //moving up
             {
                 Debug.Log("Moving up!");
-                currentPath.Peek().SetExitDirection(Direction.Up);
+                currentPathRight.Peek().SetExitDirection(Direction.Up);
                 hoveredPanel.SetEntryDirection(Direction.Down);
-                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
-                currentPath.Push(hoveredPanel);
+                hoveredPanel.PanelColour = currentPathRight.Peek().PanelColour;
+                currentPathRight.Push(hoveredPanel);
             }
-            else if(currentPath.Peek().RightNeighbor != null && hoveredPanel.Equals(currentPath.Peek().RightNeighbor)) //moving right
+            else if(currentPathRight.Peek().RightNeighbor != null && hoveredPanel.Equals(currentPathRight.Peek().RightNeighbor)) //moving right
             {
                 Debug.Log("Moving right!");
-                currentPath.Peek().SetExitDirection(Direction.Right);
+                currentPathRight.Peek().SetExitDirection(Direction.Right);
                 hoveredPanel.SetEntryDirection(Direction.Left);
-                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
-                currentPath.Push(hoveredPanel);
+                hoveredPanel.PanelColour = currentPathRight.Peek().PanelColour;
+                currentPathRight.Push(hoveredPanel);
             }
-            else if(currentPath.Peek().DownNeighbor != null && hoveredPanel.Equals(currentPath.Peek().DownNeighbor)) //moving down
+            else if(currentPathRight.Peek().DownNeighbor != null && hoveredPanel.Equals(currentPathRight.Peek().DownNeighbor)) //moving down
             {
                 Debug.Log("Moving down!");
-                currentPath.Peek().SetExitDirection(Direction.Down);
+                currentPathRight.Peek().SetExitDirection(Direction.Down);
                 hoveredPanel.SetEntryDirection(Direction.Up);
-                hoveredPanel.PanelColour = currentPath.Peek().PanelColour;
-                currentPath.Push(hoveredPanel);
+                hoveredPanel.PanelColour = currentPathRight.Peek().PanelColour;
+                currentPathRight.Push(hoveredPanel);
             } else //the hovered Panel is not adjacent to the previous Panel in our path
             {
                 Debug.Log("But the hover changed to a non-adjacent Panel!");
@@ -161,9 +169,9 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <inheritdoc/>
     public void HandleUnhover(int x, int y)
     {
-        if(targetedPanel != null && targetedPanel.X == x && targetedPanel.Y == y)
+        if(targetedPanelRight != null && targetedPanelRight.X == x && targetedPanelRight.Y == y)
         {
-            targetedPanel = null;
+            targetedPanelRight = null;
             Debug.Log("No longer hovering!");
         }
     }
@@ -172,17 +180,17 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public void OnTriggerPress(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger pressed!");
-        if(targetedPanel == null)
+        if(targetedPanelRight == null)
         {
             Debug.Log("But I'm not aiming at a panel!");
             return;
         }
-        Panel hoveredPanel = modelInstance.GetPanel(targetedPanel.X, targetedPanel.Y);
+        Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
         if(hoveredPanel == null)
         {
-            Debug.LogError($"The panel we're trying press on ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+            Debug.LogError($"The panel we're trying press on ({targetedPanelRight.X},{targetedPanelRight.Y}) is apparently null!");
         }
-        Assert.IsNotNull(hoveredPanel, $"The panel we're trying to press on ({targetedPanel.X},{targetedPanel.Y}) is apparently null!");
+        Assert.IsNotNull(hoveredPanel, $"The panel we're trying to press on ({targetedPanelRight.X},{targetedPanelRight.Y}) is apparently null!");
         if(hoveredPanel.IsOccupied())
         {
             Debug.Log("But the panel I'm aiming at is occupied!");
@@ -191,7 +199,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         if(hoveredPanel.Attribute == PanelAttribute.Start)
         {
             Debug.Log("Starting drag!");
-            currentPath.Push(hoveredPanel);
+            currentPathRight.Push(hoveredPanel);
             isDragging = true;
         }
     }
@@ -200,11 +208,11 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public void OnTriggerRelease(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger released!");
-        if(isDragging && (targetedPanel == null || currentPath.Peek().Attribute != PanelAttribute.Exit))
+        if(isDragging && (targetedPanelRight == null || currentPathRight.Peek().Attribute != PanelAttribute.Exit))
         {
             ClearPath();
         }
-        else if(isDragging && targetedPanel != null && currentPath.Peek().Attribute == PanelAttribute.Exit && modelInstance.IsGridFilled())
+        else if(isDragging && targetedPanelRight != null && currentPathRight.Peek().Attribute == PanelAttribute.Exit && modelInstance.IsGridFilled())
         {
             //TODO: make a proper celebration
             Debug.Log("Game is complete!");
@@ -215,7 +223,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <inheritdoc/>
     public void OnResetPress(InputAction.CallbackContext context)
     {
-        if(targetedPanel == null)
+        if(targetedPanelRight == null)
         {
             return;
         }
@@ -227,11 +235,11 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public void ClearPath()
     {
         Debug.Log("Clearing path!");
-        foreach(Panel panel in currentPath)
+        foreach(Panel panel in currentPathRight)
         {
             panel.ClearPanel();
         }
-        currentPath.Clear();
+        currentPathRight.Clear();
         isDragging = false;
     }
 }
