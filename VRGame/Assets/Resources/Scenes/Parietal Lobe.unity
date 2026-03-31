@@ -5163,6 +5163,117 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!1001 &1244621575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -4.193
+      objectReference: {fileID: 0}
+    - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 2.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Positions.Array.data[0].z
+      value: 4.6400003
+      objectReference: {fileID: 0}
+    - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: -4.193
+      objectReference: {fileID: 0}
+    - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 2.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 781259359455664326, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412964280482956489, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_text
+      value: '
+
+        Myelin Sheath '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_text
+      value: '
+
+
+        A fatty insulating layer around the axon that speeds up
+        the transmission of electrical signals'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683032614973472379, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042690720493336660, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042690720493336660, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042690720493336660, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577820386585612431, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_Name
+      value: Myelin Sheath ToolTip
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124709730470611285, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 62be9223c26df45c8a97fe857adaee8f, type: 3}
 --- !u!1 &1285521917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5999186763907468791, guid: 990fb5326aff04d0aaf65cd75206b122, type: 3}
@@ -7507,3 +7618,4 @@ SceneRoots:
   - {fileID: 2103302821}
   - {fileID: 1923569153}
   - {fileID: 1905326706}
+  - {fileID: 1244621575}
