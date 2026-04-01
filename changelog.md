@@ -4,29 +4,24 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.5.4] - 2026-03-27
+## [1.5.3] - 2026-03-31
 
-### Added 
+### Added
 
-- Added a ColourButton component that changes the spawned block's colour material on every button press. Colours go in cycle.
+- SpawnButton MVC component that triggers spawning of block prefabs on button press
+- BlockSpawner MVC component that spawns block prefabs on a designated area in the Parietal Lobe scene. It cycles through a list of fours block prefabs (in sequence), destroying the previously spawned block before instantiating the next one.
 
-## [1.5.3] - 2026-03-27
+## [1.5.2] - 2026-03-31
 
-### Added 
+### Added/Restored
 
-- Added a RotateButton component that rotates the spawned block 90 degrees on the y-axis on button press
+- Restored design setup of parietal minigame view approved by stakeholders
 
-## [1.5.2] - 2026-03-27
+## [1.5.1] - 2026-03-31
 
-### Fixed
+### Fixed 
 
-- BlockSpawner and SpawnButton components refactored. SpawnButton triggers BlockSpawner to spawn block prefabs
-
-## [1.5.1] - 2026-03-27
-
-### Added 
-
-- Block Builder Game view/design on scene
+- Integrated id5 into parietal branch, keeping record of work history done
 
 
 ## [1.5.0] - 2026-03-22
