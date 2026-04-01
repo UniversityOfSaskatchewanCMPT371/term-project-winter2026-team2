@@ -6,6 +6,8 @@ do not change functionality nor do you need to when you you write tests.
 
 ## [1.5.2] - 2026-03-31
 
+### Added/Restored
+
 - Restored design setup of parietal minigame view approved by stakeholders
 
 ## [1.5.1] - 2026-03-31
