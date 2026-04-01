@@ -9,7 +9,7 @@ do not change functionality nor do you need to when you you write tests.
 
 ### Fixed 
 
-- Restored design setup of parietal minigame view approved by stakeholders
+- Integrated id5 into parietal branch, keeping record of work history done
 
 
 ## [1.5.0] - 2026-03-22
