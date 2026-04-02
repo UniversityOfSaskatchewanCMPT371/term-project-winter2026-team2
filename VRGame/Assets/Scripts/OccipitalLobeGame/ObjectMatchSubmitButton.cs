@@ -38,8 +38,6 @@ public class ObjectMatchSubmitButton : ClickableCubes
             }
         }
 
-        grabInteractable.interactionManager.SelectExit(args.interactorObject, args.interactableObject);
-
         controller.SubmitGuess();
     }
 }
