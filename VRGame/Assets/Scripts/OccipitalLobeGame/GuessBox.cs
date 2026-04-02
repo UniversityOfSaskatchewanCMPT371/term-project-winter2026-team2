@@ -93,6 +93,7 @@ public class GuessBox : MonoBehaviour
         if (other.gameObject.name == controller.GetCurrentGuessID())
         {
             controller.RemovePotentialGuess();
+            Debug.Log("Removed " + other.gameObject.name + " as the current guess because it was removed from the guess box.");
         }
         else
         {

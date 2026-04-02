@@ -12,7 +12,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     private int levelScore;
     private int failedGuesses;
     private GameState gameState;
-    private string currentGuessID;
+    private string currentGuessID = "";
     [SerializeField] internal levelData[] levels;
     
 

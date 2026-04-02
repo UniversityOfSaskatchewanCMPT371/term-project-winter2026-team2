@@ -70,6 +70,7 @@ public class GuessBoxPlayModeTests
         GameObject obj2 = new GameObject("Object2");
         obj2.AddComponent<BoxCollider>();
         obj2.AddComponent<Rigidbody>().useGravity = false;
+        obj2.transform.position = new Vector3(2000, 1000, 1000);
 
         // First Object
         _mockController.GetCurrentGuessID().Returns(""); 
