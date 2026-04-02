@@ -45,6 +45,8 @@ public class ObjectMatchGameOptionObjectPlayModeTests
         _optionObjectGo.transform.rotation = Quaternion.identity;
 
         // 5. Add components
+        Rigidbody rb = _optionObjectGo.AddComponent<Rigidbody>();
+        rb.useGravity = false;
         _grabInteractable = _optionObjectGo.AddComponent<XRGrabInteractable>();
         _optionObject = _optionObjectGo.AddComponent<ObjectMatchGameOptionObject>();
 
