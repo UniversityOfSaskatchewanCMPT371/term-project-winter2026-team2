@@ -67,6 +67,17 @@ public class GuessBox : MonoBehaviour
         controller.PotentialGuess(other.gameObject.name);
     }
 
+    /// <summary>
+    /// Notify the controller when the object is removed from the guess box.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - The controller variable is assigned to an instance of IObjectMatchGameController
+    /// - grabInteractable is assigned to an instance of XRGrabInteractable on the game object
+    ///   corresponding to the option that exited the box
+    /// Postconditions:
+    /// - If the item that exited was the current guess, tell the model to remove it. Else, do nothing
+    /// </remarks>
     private void OnTriggerExit(Collider other)
     {
         if (controller == null)
