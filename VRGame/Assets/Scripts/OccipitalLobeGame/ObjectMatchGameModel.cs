@@ -19,6 +19,8 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 
     public override void Init()
     {
+        levels = LevelData.levels;
+        
         currentLevel = -1;
         totalLevels = 5;
         gameScore = 0;
@@ -26,7 +28,6 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         failedGuesses = 0;
         gameState = GameState.readyToStart;
         currentGuessID = "";
-
     }
     // Update is called once per frame
     void Update()
