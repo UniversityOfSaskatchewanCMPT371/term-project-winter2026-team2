@@ -4,6 +4,8 @@ on:
   pull_request:
   workflow_dispatch:
 jobs:
+  static-analysis:
+   #
   test:
     runs-on: ubuntu-latest
     steps:
