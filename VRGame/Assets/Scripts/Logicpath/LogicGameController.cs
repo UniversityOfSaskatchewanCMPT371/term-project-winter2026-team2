@@ -9,9 +9,13 @@ using UnityEngine.InputSystem;
 public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGameController
 {
     /// <summary>
-    /// Are we in a valid, dragging state?
+    /// Is the left controller in a valid, dragging state?
     /// </summary>
-    private bool isDragging;
+    private bool isDraggingLeft;
+    /// <summary>
+    /// Is the right controller in a valid, dragging state?
+    /// </summary>
+    private bool isDraggingRight;
     /// <summary>
     /// What are the coordinates of the panel the left controller is aiming at, if any?
     /// </summary>
@@ -36,15 +40,18 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <inheritdoc/>
     public override void Init()
     {
-        isDragging = false;
+        isDraggingLeft = false;
+        isDraggingRight = false;
         modelInstance = gameObject.GetComponent<LogicGameModel>();
         if(modelInstance == null)
         {
             Debug.LogError("There is no LogicGameModel attached to this GameObject!");
         }
         Assert.IsNotNull(modelInstance, "There is no LogicGameModel attached to this GameObject!");
+        targetedPanelLeft = null;
         targetedPanelRight = null;
         inputActions = new XRIInputActions();
+        currentPathLeft = new Stack<Panel>();
         currentPathRight = new Stack<Panel>();
     }
 
@@ -71,8 +78,9 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         inputActions.Enable();
         //TODO: handle the left controller's actions
         inputActions.XRIRightHandInteraction.Activate.performed += OnTriggerPress;
-        inputActions.XRIRightHandInteraction.Activate.canceled += OnTriggerRelease;
+        inputActions.XRIRightHandInteraction.Activate.canceled += OnRightTriggerRelease;
         //this is not the greatest button to use for cancelling but fuck it
+        inputActions.XRILeftHandInteraction.Select.performed += OnResetPress;
         inputActions.XRIRightHandInteraction.Select.performed += OnResetPress;
     }
 
@@ -88,7 +96,8 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     private void OnDisable()
     {
         inputActions.XRIRightHandInteraction.Activate.performed -= OnTriggerPress;
-        inputActions.XRIRightHandInteraction.Activate.canceled -= OnTriggerRelease;
+        inputActions.XRIRightHandInteraction.Activate.canceled -= OnRightTriggerRelease;
+        inputActions.XRILeftHandInteraction.Select.performed -= OnResetPress;
         inputActions.XRIRightHandInteraction.Select.performed -= OnResetPress;
         inputActions.Disable();
     }
@@ -98,7 +107,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public void HandleHover(int x, int y)
     {
         targetedPanelRight = new CoordinateRef(x,y);
-        if(isDragging)
+        if(isDraggingRight)
         {
             Debug.Log("Dragging!");
             Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
@@ -116,13 +125,13 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
             {
                 Debug.Log(hoveredPanel);
                 Debug.Log("But the hovered panel is occupied!");
-                ClearPath();
+                ClearPathRight();
                 return;
             }
             if(hoveredPanel.PanelColour != currentPathRight.Peek().PanelColour && hoveredPanel.Attribute != PanelAttribute.Normal)
             {
                 Debug.Log("But we're trying to enter an endpoint of the wrong colour!");
-                ClearPath();
+                ClearPathRight();
                 return;
             }
             // why can't i use a switch statement here???
@@ -160,8 +169,8 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
             } else //the hovered Panel is not adjacent to the previous Panel in our path
             {
                 Debug.Log("But the hover changed to a non-adjacent Panel!");
-                isDragging = false;
-                ClearPath();
+                isDraggingRight = false;
+                ClearPathRight();
             }
         }
     }
@@ -200,30 +209,30 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         {
             Debug.Log("Starting drag!");
             currentPathRight.Push(hoveredPanel);
-            isDragging = true;
+            isDraggingRight = true;
         }
     }
 
     /// <inheritdoc/>
-    public void OnTriggerRelease(InputAction.CallbackContext context)
+    public void OnRightTriggerRelease(InputAction.CallbackContext context)
     {
         Debug.Log("Trigger released!");
-        if(isDragging && (targetedPanelRight == null || currentPathRight.Peek().Attribute != PanelAttribute.Exit))
+        if(isDraggingRight && (targetedPanelRight == null || currentPathRight.Peek().Attribute != PanelAttribute.Exit))
         {
-            ClearPath();
+            ClearPathRight();
         }
-        else if(isDragging && targetedPanelRight != null && currentPathRight.Peek().Attribute == PanelAttribute.Exit && modelInstance.IsGridFilled())
+        else if(isDraggingRight && targetedPanelRight != null && currentPathRight.Peek().Attribute == PanelAttribute.Exit && modelInstance.IsGridFilled() && !isDraggingLeft)
         {
             //TODO: make a proper celebration
             Debug.Log("Game is complete!");
         }
-        isDragging = false;
+        isDraggingRight = false;
     }
 
     /// <inheritdoc/>
     public void OnResetPress(InputAction.CallbackContext context)
     {
-        if(targetedPanelRight == null)
+        if(targetedPanelLeft == null && targetedPanelRight == null && !isDraggingLeft && !isDraggingRight)
         {
             return;
         }
@@ -232,14 +241,14 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     }
 
     /// <inheritdoc/>
-    public void ClearPath()
+    public void ClearPathRight()
     {
-        Debug.Log("Clearing path!");
+        Debug.Log("Clearing right's path!");
         foreach(Panel panel in currentPathRight)
         {
             panel.ClearPanel();
         }
         currentPathRight.Clear();
-        isDragging = false;
+        isDraggingRight = false;
     }
 }
