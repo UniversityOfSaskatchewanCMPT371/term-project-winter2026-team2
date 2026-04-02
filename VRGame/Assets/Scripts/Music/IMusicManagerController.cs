@@ -1,7 +1,7 @@
 /// <summary>
 /// Interface for the MusicManager component. Manages persistent music accross scenes
 /// </summary>
-public interface IMusicManagerController : IController
+public interface IMusicManagerController
 {
     /// <summary>
     /// Initializes the music manager, sets up the AudioSource
