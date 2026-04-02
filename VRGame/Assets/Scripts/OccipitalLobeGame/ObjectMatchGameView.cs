@@ -22,8 +22,14 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     // Test-accessible properties for UI elements
 internal GameObject GuessBox { get => guessBox; set => guessBox = value; }
 internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
+
+    /// <summary>
+    /// Initializes the view by deactivating all objects in the game and checking for a 
+    /// reference to the controller. Called when the object is instantiated.
+    /// </summary>
     public override void Init()
     {
+        CheckControllerRef();
         foreach (GameObject obj in allObjects)
         {
             obj.SetActive(false);
