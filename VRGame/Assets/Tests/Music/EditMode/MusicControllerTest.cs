@@ -6,17 +6,9 @@ using System;
 
 public class Music
 {
-    /// <summary>
-    /// The game object the component being test will be
-    /// attached to.
-    /// </summary>
+    
     GameObject go;
-
-    /// <summary>
-    /// The component that is being tested.
-    /// TODO : Replace the type to the class you are testing.
-    /// </summary>
-    MonoBehaviour comp;
+    MusicManagerController controller;
 
     /// <summary>
     /// Called before each tests. Handles the setup for
@@ -26,7 +18,7 @@ public class Music
     public void Setup()
     {
         go = new GameObject();
-        comp = go.AddComponent<>(); // TODO : Replace generic with component you are testing
+        controller = go.AddComponent<MusicManagerController>();
     }
 
     /// <summary>
@@ -36,12 +28,26 @@ public class Music
     [TearDown]
     public void TearDown()
     {
+        controller.ResetInstance();
         UnityEngine.Object.DestroyImmediate(go);
     }
 
     [Test]
-    public void Instantiation()
+    public void SingletonTest()
     {
-        
+        LogAssert.Expect(LogType.Error, "musicClip is not assigned");
+        try
+        {
+            controller.Init();
+        }
+        catch {}
+
+        GameObject go2 = new GameObject();
+        MusicManagerController duplicate = go2.AddComponent<MusicManagerController>();
+
+        LogAssert.Expect(LogType.Log, "MusicManagerController duplicate destroyed");
+        duplicate.Init();
+
+        UnityEngine.Object.DestroyImmediate(go2);
     }
 }

@@ -40,9 +40,11 @@ public class MusicManagerController : MonoBehaviour, IMusicManagerController
         if (instance != null && instance != this)
         {
             Debug.Log("MusicManagerController duplicate destroyed");
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
+
+        instance = this;
 
         if (musicClip == null)
         {
@@ -50,8 +52,6 @@ public class MusicManagerController : MonoBehaviour, IMusicManagerController
         }
         Assert.IsNotNull(musicClip, "musicClip must be assigned in the Inspector");
 
-        instance = this;
-        DontDestroyOnLoad(gameObject);
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = musicClip;
@@ -60,6 +60,9 @@ public class MusicManagerController : MonoBehaviour, IMusicManagerController
         audioSource.Play();
 
         Debug.Log("MusicManagerController initialized successfully");
+
+        DontDestroyOnLoad(gameObject);
+
     }
 
     /// <inheritdoc/>
