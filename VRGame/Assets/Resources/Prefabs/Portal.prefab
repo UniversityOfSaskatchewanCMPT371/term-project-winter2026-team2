@@ -69,7 +69,7 @@ MonoBehaviour:
   doorId: 0
   targetDoorId: 0
   destinationSceneId: 0
-  teleportOffset: {x: 0, y: 0, z: 0}
+  teleportOffset: {x: 0, y: 0, z: 3}
 --- !u!114 &7179370905975697689
 MonoBehaviour:
   m_ObjectHideFlags: 0
