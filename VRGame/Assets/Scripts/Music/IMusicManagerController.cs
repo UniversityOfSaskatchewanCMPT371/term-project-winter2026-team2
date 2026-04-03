@@ -14,7 +14,7 @@ public interface IMusicManagerController
     ///  - A MusicManager instance is created and initialized in the scene
     /// </post-condition>
     /// </remarks>
-    new void Init();
+    void Init();
 
     /// <summary>
     /// Called once after the scene loads
@@ -27,5 +27,18 @@ public interface IMusicManagerController
     ///  - MusicManager is set to not be destroyed on load, allowing it to persist through scenes
     /// </post-condition>
     /// </remarks>
-    new void Awake();
+    void Awake();
+
+    /// <summary>
+    /// Resets the singleton instance. Used for testing purposes
+    /// </summary>
+    /// <remarks>
+    /// <pre-condition>
+    /// - None
+    /// </pre-condition>
+    /// <post-condition>
+    /// - The singleton instance is set to null
+    /// </post-condition>
+    /// </remarks>
+    void ResetInstance();
 }

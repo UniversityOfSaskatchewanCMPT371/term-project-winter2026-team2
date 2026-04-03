@@ -28,13 +28,13 @@ public class MusicManagerController : MonoBehaviour, IMusicManagerController
     private AudioSource audioSource;
 
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public void Awake()
     {
         Init();
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public void Init()
     {
         if (instance != null && instance != this)
@@ -62,4 +62,9 @@ public class MusicManagerController : MonoBehaviour, IMusicManagerController
         Debug.Log("MusicManagerController initialized successfully");
     }
 
+    /// <inheritdoc/>
+    public void ResetInstance()
+    {
+        instance = null;
+    }
 }
