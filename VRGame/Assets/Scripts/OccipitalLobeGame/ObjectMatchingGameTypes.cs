@@ -36,6 +36,10 @@ namespace ObjectMatchGame
         /// - levelNumber is a positive integer of at least 1
         /// - CorrectObjectID is a string that exists in AllObjectIDs
         /// - AllObjectIDs is non-null and non-empty
+        /// Postconditions:
+        /// - this.levelNumber = levelNumber
+        /// - this.CorrectObjectID = CorrectObjectID;
+        /// - this.AllObjectIDs = AllObjectIDs;
         /// </remarks>
         public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs)
         {
