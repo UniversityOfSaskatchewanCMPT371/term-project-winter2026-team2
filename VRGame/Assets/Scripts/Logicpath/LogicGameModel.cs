@@ -19,11 +19,11 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     /// <summary>
     /// Every panel associated with this game
     /// </summary>
-    private Panel[,] panelGrid;
+    internal Panel[,] panelGrid;
     /// <summary>
     /// A dictionary of all the endpoints in this game
     /// </summary>
-    private Dictionary<PanelColour, (Panel start, Panel end)> endpoints;
+    internal Dictionary<PanelColour, (Panel start, Panel end)> endpoints;
 
     /// <inheritdoc/>
     public void Init()
