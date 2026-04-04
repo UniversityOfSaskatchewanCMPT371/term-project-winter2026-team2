@@ -3,6 +3,7 @@ using System.Linq;
 using ObjectMatchGame;
 using UnityEngine;
 using System;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 {
@@ -177,13 +178,28 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 
     public void CalculateScore()
     {
+        int score;
         double levelTime = stopwatch.Elapsed.TotalSeconds;
         int timeLeft = (int)Math.Ceiling((double)levels[currentLevel].maxTime - levelTime);
+        if (timeLeft <= 0)
+        {
+            score = timeLeft * pointsForTimeLeft + levels[currentLevel].winPoints -
+                failedGuesses * (levels[currentLevel].winPoints / 2);
+        }
+        else
+        {
+            score = levels[currentLevel].winPoints -
+                failedGuesses * (levels[currentLevel].winPoints / 2);
+        }
 
-        int score = timeLeft * pointsForTimeLeft + levels[currentLevel].winPoints;
-
+        if (score < 50)
+        {
+            score = 50;
+        }
         levels[currentLevel].Score = score;
         levelScore = score;
         gameScore += score;
+        UnityEngine.Debug.Log("level score: " + levelScore);
+        UnityEngine.Debug.Log("game score: " + gameScore);
     }
 }

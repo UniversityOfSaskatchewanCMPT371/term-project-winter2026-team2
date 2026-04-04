@@ -18,7 +18,7 @@ public class ObjectMatchGameModelTests
 
         for (int i = 0; i < count; i++)
         {
-            levels[i] = new levelData(i + 1, "CorrectObject", new[] { "CorrectObject", "OtherObject" });
+            levels[i] = new levelData(i + 1, "CorrectObject", new[] { "CorrectObject", "OtherObject" }, 60, 200);
         }
 
         levelsField.SetValue(model, levels);
