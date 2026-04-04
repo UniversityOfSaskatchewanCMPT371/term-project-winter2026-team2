@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ObjectMatchGame;
 using UnityEngine;
@@ -22,6 +21,8 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     private string currentGuessID = "";
     // The data for each level, which includes the IDs of all objects in the level and the ID of the correct object that the user is trying to guess
     [SerializeField] internal levelData[] levels;
+    // A stopwatch to time the level completion time
+    private Stopwatch stopwatch;
 
 
     /// <summary>
@@ -38,6 +39,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// - failedGuesses is set to 0
     /// - gameState is set to GameState.readyToStart
     /// - currentGuessID is set to an empty string
+    /// - stopwatch is a new Stopwatch object
     /// </remarks>
     public override void Init()
     {
@@ -50,11 +52,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         failedGuesses = 0;
         gameState = GameState.readyToStart;
         currentGuessID = "";
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        stopwatch = new Stopwatch();
     }
 
     /// <inheritdoc/>
@@ -90,6 +88,9 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public void CompleteLevel()
     {
+        stopwatch.Stop();
+        double levelTime = stopwatch.Elapsed.TotalSeconds;
+        UnityEngine.Debug.Log(levelTime);
         gameState = GameState.levelComplete;
         currentLevel++;
     }
@@ -99,13 +100,15 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     {
         if (currentLevel > totalLevels)
         {
-            Debug.Log("All levels completed!"); // replace with screen in game
+            UnityEngine.Debug.Log("All levels completed!"); // replace with screen in game
             return;
         }
 
         gameState = GameState.playing;
         currentGuessID = "";
         failedGuesses = 0;
+
+        stopwatch.Restart();
     }
 
     /// <inheritdoc/>
@@ -131,19 +134,19 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     {
         if (!levels[currentLevel].AllObjectIDs.Contains(Guess))
         {
-            Debug.LogWarning("Model got unexpected GameObject named: \"" + Guess + "\" in PotentialGuess");
+            UnityEngine.Debug.LogWarning("Model got unexpected GameObject named: \"" + Guess + "\" in PotentialGuess");
             return;
         }
         currentGuessID = Guess;
 
-        Debug.Log("Model received potential guess: " + Guess);
+        UnityEngine.Debug.Log("Model received potential guess: " + Guess);
     }
 
     /// <inheritdoc/>
     public void RemovePotentialGuess()
     {
         currentGuessID = "";
-        Debug.Log("Model removed potential guess, current guess is now empty string");
+        UnityEngine.Debug.Log("Model removed potential guess, current guess is now empty string");
     }
 
     /// <inheritdoc/>
@@ -151,21 +154,27 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     {
         if (currentGuessID == "")
         {
-            Debug.LogWarning("SubmitGuess called with empty current guess");
+            UnityEngine.Debug.LogWarning("SubmitGuess called with empty current guess");
             return false;
         }
 
         if (currentGuessID == levels[currentLevel].CorrectObjectID)
         {
-            Debug.Log("Correct guess!");
+            UnityEngine.Debug.Log("Correct guess!");
             CompleteLevel();
             return true;
         }
         else
         {
-            Debug.Log("Incorrect guess.");
+            UnityEngine.Debug.Log("Incorrect guess.");
             failedGuesses++;
             return false;
         }
     }
+
+    //public int CalculateScore()
+    //{
+    //    double levelTime = stopwatch.Elapsed.TotalSeconds;
+    //    double beatExpectedBy = 
+    //}
 }

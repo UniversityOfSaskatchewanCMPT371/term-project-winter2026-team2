@@ -44,7 +44,7 @@ namespace ObjectMatchGame
         /// </remarks>
         public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs)
         {
-            if (levelNumber <= 0)
+            if (levelNumber < 0)
             {
                 Debug.LogError("Attempt to create level with negative level number");
             }

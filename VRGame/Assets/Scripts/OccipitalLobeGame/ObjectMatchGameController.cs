@@ -63,7 +63,6 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
             Debug.LogError("ObjectMatchGameController was asked to submit a guess but the current guess ID is empty or null. No guess will be submitted.");
             return;
         }
-        this.modelInstance.SubmitGuess();
         bool success = this.modelInstance.SubmitGuess();
         if (success)
         {
