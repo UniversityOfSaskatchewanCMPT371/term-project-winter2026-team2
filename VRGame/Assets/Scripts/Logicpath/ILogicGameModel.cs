@@ -69,4 +69,16 @@ public interface ILogicGameModel : IModel
     ///     - The truth value of whether the current grid is filled or not is returned
     /// </remarks>
     bool IsGridFilled();
+
+    /// <summary>
+    /// Refreshes all Panels so that their *Neighbor fields are accurate
+    /// </summary>
+    /// <remarks>
+    /// This only exists because Unity is a dumb dumb stupid stupid dumb stupid dumb dumb stupid-
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - All Panels contained in panelGrid now accurately point to their neighbors
+    /// </remarks>
+    void RefreshNeighbors();
 }

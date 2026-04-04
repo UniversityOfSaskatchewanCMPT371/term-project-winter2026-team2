@@ -86,6 +86,14 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
             }
             Assert.IsNotNull(pair.end, $"Missing {colour}'s end endpoint");
         }
+        //this has to be on a timer or else somehow, the call to write the neighbors of every Panel outpaces the initialization of all Panels?
+        //idfk why Unity can't keep things straight but whatever, this is what HAS to be done ig
+        Invoke("RefreshNeighbors",0.5f);
+    }
+
+    /// <inheritdoc/>
+    public void RefreshNeighbors()
+    {
         for (int x = 0; x < panelGrid.GetLength(0); x++)
         {
             for (int y = 0; y < panelGrid.GetLength(1); y++)

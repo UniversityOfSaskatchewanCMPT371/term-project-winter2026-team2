@@ -62,7 +62,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <summary>
     /// Unity Awake() method - gets initial interaction state set up
     /// </summary>
-    public void Start()
+    public override void Start()
     {
         Init();
     }
