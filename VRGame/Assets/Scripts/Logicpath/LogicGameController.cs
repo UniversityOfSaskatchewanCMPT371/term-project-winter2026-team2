@@ -128,6 +128,8 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
                 ClearPathRight();
                 return;
             }
+            Assert.IsFalse(currentPathRight.Peek().TopNeighbor == null && currentPathRight.Peek().DownNeighbor == null && currentPathRight.Peek().LeftNeighbor == null && currentPathRight.Peek().RightNeighbor == null, "Somehow the previous panel doesn't have any neighbors. This breaks everything");
+            Assert.IsFalse(hoveredPanel.TopNeighbor == null && hoveredPanel.DownNeighbor == null && hoveredPanel.LeftNeighbor == null && hoveredPanel.RightNeighbor == null, "Somehow the currently-hovered panel doesn't have any neighbors. This breaks everything");
             if(hoveredPanel.PanelColour != currentPathRight.Peek().PanelColour && hoveredPanel.Attribute != PanelAttribute.Normal)
             {
                 Debug.Log("But we're trying to enter an endpoint of the wrong colour!");

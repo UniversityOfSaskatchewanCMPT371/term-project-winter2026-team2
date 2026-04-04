@@ -93,6 +93,7 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
                 panel.TopNeighbor = panelGrid[panel.GridX, panel.GridY+1];
                 panelGrid[panel.GridX, panel.GridY+1].DownNeighbor = panel;
             }
+
         }
         foreach((PanelColour colour, (Panel start, Panel end) pair) in endpoints)
         {
@@ -106,6 +107,18 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
                 Debug.LogError($"Missing {colour}'s end endpoint");
             }
             Assert.IsNotNull(pair.end, $"Missing {colour}'s end endpoint");
+        }
+
+        foreach(Panel panel in panelGrid)
+        {
+            if(panel == null)
+            {
+                continue;
+            }
+            if(panel.TopNeighbor == null && panel.DownNeighbor == null && panel.LeftNeighbor == null && panel.RightNeighbor == null)
+            {
+                throw new AssertionException($"Panel ({panel.GridX},{panel.GridY}) has no neighbors.", $"Panel ({panel.GridX},{panel.GridY}) has no neighbors.");
+            }
         }
     }
 
