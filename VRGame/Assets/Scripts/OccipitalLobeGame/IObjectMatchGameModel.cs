@@ -161,9 +161,10 @@ public interface IObjectMatchGameModel: IModel
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - currentGuessID is a non-empty string
+    /// - None
     /// Postconditions:
     /// - Update the model to reflect whether the current guess is correct or not
+    /// - Return true if the guess is correct, false if it is incorrect
     /// </remarks>
-    public void SubmitGuess();
+    public bool SubmitGuess();
 }

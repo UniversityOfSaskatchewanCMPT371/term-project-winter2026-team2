@@ -21,8 +21,8 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     {
         levels = LevelData.levels;
         
-        currentLevel = -1;
-        totalLevels = 5;
+        currentLevel = 1;
+        totalLevels = levels.Length - 1;
         gameScore = 0;
         levelScore = 0;
         failedGuesses = 0;
@@ -75,17 +75,15 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public void InitializeLevel()
     {
-        if (currentLevel >= totalLevels)
+        if (currentLevel > totalLevels)
         {
-            Debug.Log("All levels completed!");
+            Debug.Log("All levels completed!"); // replace with screen in game
             return;
         }
-        currentLevel++;
-        failedGuesses = 0;
-
-        levelData currentLevelData = levels[currentLevel];
 
         gameState = GameState.playing;
+        currentGuessID = "";
+        failedGuesses = 0;
     }
 
     /// <inheritdoc/>
@@ -103,6 +101,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public void InitializeTutorial()
     {
+
     }
 
     /// <inheritdoc/>
@@ -126,23 +125,25 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     }
 
     /// <inheritdoc/>
-    public void SubmitGuess()
+    public bool SubmitGuess()
     {
         if (currentGuessID == "")
         {
             Debug.LogWarning("SubmitGuess called with empty current guess");
-            return;
+            return false;
         }
 
         if (currentGuessID == levels[currentLevel].CorrectObjectID)
         {
             Debug.Log("Correct guess!");
             CompleteLevel();
+            return true;
         }
         else
         {
             Debug.Log("Incorrect guess.");
             failedGuesses++;
+            return false;
         }
     }
 }

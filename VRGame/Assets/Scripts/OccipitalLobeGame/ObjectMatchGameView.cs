@@ -15,13 +15,16 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     }
     
 
-    // Store references to the guess box and submit button so we can enable and disable them as needed
+    // Store references to the guess box, submit button, and start buttons so we can enable and disable them as needed
     [SerializeField] private GameObject guessBox;
     [SerializeField] private GameObject submitButton;
+    [SerializeField] private GameObject startLevelButton;
+
 
     // Test-accessible properties for UI elements
-internal GameObject GuessBox { get => guessBox; set => guessBox = value; }
-internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
+    internal GameObject GuessBox { get => guessBox; set => guessBox = value; }
+    internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
+    internal GameObject StartLevelButton { get => startLevelButton; set => startLevelButton = value; }
 
     /// <summary>
     /// Initializes the view by deactivating all objects in the game and checking for a 
@@ -34,30 +37,51 @@ internal GameObject SubmitButton { get => submitButton; set => submitButton = va
         {
             obj.SetActive(false);
         }
+
+        startLevelButton.SetActive(true);
     }
 
     /// </inheritdoc>
     public void ShowObjects(string[] ObjectIDs)
     {
-        foreach (GameObject obj in allObjects)
+        foreach (string id in ObjectIDs)
         {
-            if (System.Array.Exists(ObjectIDs, element => element == obj.name))
+            GameObject obj = System.Array.Find(allObjects, element => element.name == id);
+            if (obj != null)
             {
                 obj.SetActive(true);
             }
             else
             {
-                Debug.LogWarning("ObjectMatchGameView was asked to show object with ID " + obj.name + " but that ID was not found in the list of active object IDs.");
-                obj.SetActive(false);
+                Debug.LogWarning("ObjectMatchGameView was asked to show object with ID " + id + " but that ID was not found in the list of all objects.");
             }
         }
     }
 
-    public void removeGuess()
+    /// </inheritdoc>
+    public void ClearAllObjects()
     {
-        throw new System.NotImplementedException();
+    foreach (GameObject obj in allObjects)
+        {
+            obj.SetActive(false);
+        }
     }
 
+    /// </inheritdoc>
+    public void EnterLevel()
+        {
+        startLevelButton.SetActive(false);
+        guessBox.SetActive(true);
+        submitButton.SetActive(true);
+    }
+
+    /// </inheritdoc>
+    public void ExitLevel()
+    {
+        guessBox.SetActive(false);
+        submitButton.SetActive(false);
+        startLevelButton.SetActive(true);
+    }
 
     // Update is called once per frame
     void Update()

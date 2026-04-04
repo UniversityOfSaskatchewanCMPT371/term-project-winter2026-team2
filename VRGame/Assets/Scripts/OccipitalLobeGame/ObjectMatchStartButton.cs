@@ -65,6 +65,5 @@ public class ObjectMatchStartButton : MonoBehaviour
             }
         }
         controller.InitializeLevel();
-        gameObject.SetActive(false);
     }
 }

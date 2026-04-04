@@ -46,6 +46,7 @@ public class ObjectMatchGameViewTests
     GameObject dummyBtn = new GameObject("Btn");
     view.GuessBox = dummyBox;
     view.SubmitButton = dummyBtn;
+    view.StartLevelButton = dummyBtn;
 
     // 2. Setup Objects
     GameObject obj = new GameObject("TestObj");
