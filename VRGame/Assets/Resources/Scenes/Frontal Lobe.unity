@@ -1828,6 +1828,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9051862589501147850, guid: eca12a10448b10c469fd6c8ab62fe2fc, type: 3}
   m_PrefabInstance: {fileID: 1005601366}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1059565190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1059565191}
+  m_Layer: 0
+  m_Name: penis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1059565191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059565190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1750761709}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1162667944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2944,6 +2975,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7961691681593401570, guid: 75d63a48e0489654d93211e374cd976c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1746999076}
+    - targetCorrespondingSourceObject: {fileID: 7961691681593401570, guid: 75d63a48e0489654d93211e374cd976c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1059565191}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d63a48e0489654d93211e374cd976c, type: 3}
 --- !u!4 &1750761709 stripped

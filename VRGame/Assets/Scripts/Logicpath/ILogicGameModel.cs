@@ -8,7 +8,6 @@ public interface ILogicGameModel : IModel
     /// </summary>
     /// <remarks>
     /// preconditions:
-    ///     - All children beneath this GameObject have Panel scripts attached to them
     ///     - No two Panels have the same coordinates
     ///     - All Panel coordinates are non-negative and are less than MAX_GRID_SIZE
     ///     - Every start endpoint has an end endpoint, and vice versa

@@ -36,9 +36,9 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
             Panel panel = childTransform.gameObject.GetComponent<Panel>();
             if(panel == null)
             {
-                Debug.LogError("Could not find a panel script attached to one of my children!");
+                Debug.Log($"An object named \"{childTransform.name}\" is not a Panel. Skipping!");
+                continue;
             }
-            Assert.IsNotNull(panel, "Could not find a panel script attached to one of my children!");
             // the Panel initiation process guarantees the coordinates are within bounds so we won't bother checking that
             if(panelGrid[panel.GridX,panel.GridY] != null)
             {
