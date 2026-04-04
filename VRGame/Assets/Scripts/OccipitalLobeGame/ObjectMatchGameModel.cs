@@ -24,21 +24,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     [SerializeField] internal levelData[] levels;
 
 
-    /// <summary>
-    /// Initialize the game model. Sets all variables to their starting values.
-    /// </summary>
-    /// <remarks>
-    /// Preconditions:
-    /// - None
-    /// Postconditions:
-    /// - currentLevel is set to -1
-    /// - totalLevels is set to the total number of levels in the game (not counting the tutorial)
-    /// - gameScore is set to 0
-    /// - levelScore is set to 0
-    /// - failedGuesses is set to 0
-    /// - gameState is set to GameState.readyToStart
-    /// - currentGuessID is set to an empty string
-    /// </remarks>
+    /// <inheritdoc/>
     public override void Init()
     {
         currentLevel = -1;
