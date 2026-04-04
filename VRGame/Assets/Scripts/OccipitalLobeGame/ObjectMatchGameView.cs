@@ -23,10 +23,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
 internal GameObject GuessBox { get => guessBox; set => guessBox = value; }
 internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
 
-    /// <summary>
-    /// Initializes the view by deactivating all objects in the game and checking for a 
-    /// reference to the controller. Called when the object is instantiated.
-    /// </summary>
+    /// <inheritdoc/>
     public override void Init()
     {
         CheckControllerRef();
@@ -39,6 +36,11 @@ internal GameObject SubmitButton { get => submitButton; set => submitButton = va
     /// </inheritdoc>
     public void ShowObjects(string[] ObjectIDs)
     {
+        if (ObjectIDs == null)
+        {
+            Debug.LogWarning("ObjectMatchGameView was asked to show objects with an empty or null list of object IDs. No objects will be shown.");
+            return;
+        }
         foreach (GameObject obj in allObjects)
         {
             if (System.Array.Exists(ObjectIDs, element => element == obj.name))
@@ -51,17 +53,5 @@ internal GameObject SubmitButton { get => submitButton; set => submitButton = va
                 obj.SetActive(false);
             }
         }
-    }
-
-    public void removeGuess()
-    {
-        throw new System.NotImplementedException();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

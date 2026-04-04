@@ -65,6 +65,7 @@ public class ObjectMatchGameControllerTests
         IObjectMatchGameModel mockModel = Substitute.For<IObjectMatchGameModel>();
         controller.ModelMock = mockModel;
         controller.ViewMock = Substitute.For<IObjectMatchGameView>();
+        mockModel.GetCurrentGuessID().Returns("object1");
 
         // Act
         controller.SubmitGuess();

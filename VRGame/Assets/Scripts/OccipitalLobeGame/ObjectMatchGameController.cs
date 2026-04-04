@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObjectMatchGameView>, IObjectMatchGameController
 {
-/*
-    Internal references to the model and view layer. This lets us use mocks to substitute 
-    for the model and view in tests, while still allowing us to assign them in the inspector
-    for ease of use in the editor.
-    // */
-    // internal IObjectMatchGameView view;
-    // internal IObjectMatchGameModel model;
     /// </inheritdoc>
     public void PotentialGuess(string GuessItem)
     {
+        if (GuessItem == null || GuessItem.Length == 0)
+        {
+            Debug.LogError("ObjectMatchGameController was given an empty or null guess item. No potential guess will be registered.");
+            return;
+        }
         this.modelInstance.PotentialGuess(GuessItem);
     }
 
@@ -58,6 +56,11 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
     /// <inheritdoc/>
     public void SubmitGuess()
     {
+        if (this.modelInstance.GetCurrentGuessID() == null || this.modelInstance.GetCurrentGuessID().Length == 0)
+        {
+            Debug.LogError("ObjectMatchGameController was asked to submit a guess but the current guess ID is empty or null. No guess will be submitted.");
+            return;
+        }
         this.modelInstance.SubmitGuess();
     }
 }
