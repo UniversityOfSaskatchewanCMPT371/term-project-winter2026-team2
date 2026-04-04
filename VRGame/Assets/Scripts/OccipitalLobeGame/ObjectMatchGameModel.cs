@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Linq;
 using ObjectMatchGame;
 using UnityEngine;
+using System;
 
 public class ObjectMatchGameModel : Model, IObjectMatchGameModel
 {
@@ -23,6 +24,8 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     [SerializeField] internal levelData[] levels;
     // A stopwatch to time the level completion time
     private Stopwatch stopwatch;
+    // The amount of points to be added per second remaining at end of level
+    private int pointsForTimeLeft = 5; 
 
 
     /// <summary>
@@ -90,7 +93,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     {
         stopwatch.Stop();
         double levelTime = stopwatch.Elapsed.TotalSeconds;
-        UnityEngine.Debug.Log(levelTime);
+        CalculateScore();
         gameState = GameState.levelComplete;
         currentLevel++;
     }
@@ -172,9 +175,15 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         }
     }
 
-    //public int CalculateScore()
-    //{
-    //    double levelTime = stopwatch.Elapsed.TotalSeconds;
-    //    double beatExpectedBy = 
-    //}
+    public void CalculateScore()
+    {
+        double levelTime = stopwatch.Elapsed.TotalSeconds;
+        int timeLeft = (int)Math.Ceiling((double)levels[currentLevel].maxTime - levelTime);
+
+        int score = timeLeft * pointsForTimeLeft + levels[currentLevel].winPoints;
+
+        levels[currentLevel].Score = score;
+        levelScore = score;
+        gameScore += score;
+    }
 }

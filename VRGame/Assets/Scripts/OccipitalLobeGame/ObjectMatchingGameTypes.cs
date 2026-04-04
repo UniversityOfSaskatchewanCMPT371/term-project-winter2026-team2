@@ -29,6 +29,8 @@ namespace ObjectMatchGame
         public string[] AllObjectIDs;
         public int Score;
         public int failedGuesses;
+        public int maxTime;
+        public int winPoints;
         /// <summary>
         /// Creates a new instance of levelData
         /// </summary>
@@ -41,8 +43,10 @@ namespace ObjectMatchGame
         /// - this.levelNumber = levelNumber
         /// - this.CorrectObjectID = CorrectObjectID;
         /// - this.AllObjectIDs = AllObjectIDs;
+        /// - this.maxTime = maxtime
+        /// - this.winPoints = winPoints;
         /// </remarks>
-        public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs)
+        public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs, int maxTime, int winPoints)
         {
             if (levelNumber < 0)
             {
@@ -57,11 +61,17 @@ namespace ObjectMatchGame
             {
                 Debug.LogError("Attempt to create level with null or empty AllObjectIDs");
             }
+            if (maxTime <= 0)
+            {
+                Debug.LogError("Attempt to create level with 0 or negative max time");
+            }
             this.levelNumber = levelNumber;
             this.CorrectObjectID = CorrectObjectID;
             this.AllObjectIDs = AllObjectIDs;
             this.Score = 0;
             this.failedGuesses = 0;
+            this.maxTime = maxTime;
+            this.winPoints = winPoints;
         }
     }
 }
