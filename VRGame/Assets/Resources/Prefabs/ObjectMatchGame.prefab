@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8489639142398762108}
   - component: {fileID: 3381478037502531217}
   m_Layer: 0
-  m_Name: blue_cube
+  m_Name: level1object2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 1688108994614181638}
   - component: {fileID: 5273254670967619831}
   m_Layer: 0
-  m_Name: pink_cube
+  m_Name: level1object3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1372,6 +1372,8 @@ MonoBehaviour:
     - white_cube
     - blue_cube
     - pink_cube
+    Score: 0
+    failedGuesses: 0
 --- !u!114 &4685291846945321137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,6 +1393,7 @@ MonoBehaviour:
   - {fileID: 2149504325660767147}
   guessBox: {fileID: 3479493878300736810}
   submitButton: {fileID: 2917030013413819420}
+  startLevelButton: {fileID: 5456455741377981453}
 --- !u!114 &5877789084789259909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,7 +1424,7 @@ GameObject:
   - component: {fileID: 5513824991223865391}
   - component: {fileID: 4841777516531507451}
   m_Layer: 0
-  m_Name: white_cube
+  m_Name: level1object1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
