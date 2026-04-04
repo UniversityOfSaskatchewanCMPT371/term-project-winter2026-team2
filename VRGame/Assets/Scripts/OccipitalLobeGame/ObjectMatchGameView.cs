@@ -26,10 +26,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
     internal GameObject StartLevelButton { get => startLevelButton; set => startLevelButton = value; }
 
-    /// <summary>
-    /// Initializes the view by deactivating all objects in the game and checking for a 
-    /// reference to the controller. Called when the object is instantiated.
-    /// </summary>
+    /// <inheritdoc/>
     public override void Init()
     {
         CheckControllerRef();
@@ -46,6 +43,11 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     /// </inheritdoc>
     public void ShowObjects(string[] ObjectIDs)
     {
+        if (ObjectIDs == null)
+        {
+            Debug.LogWarning("ObjectMatchGameView was asked to show objects with an empty or null list of object IDs. No objects will be shown.");
+            return;
+        }
         foreach (string id in ObjectIDs)
         {
             GameObject obj = System.Array.Find(allObjects, element => element.name == id);

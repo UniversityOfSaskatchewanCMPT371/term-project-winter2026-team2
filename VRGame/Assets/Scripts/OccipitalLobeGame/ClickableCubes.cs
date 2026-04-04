@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Assertions;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -23,7 +22,20 @@ public abstract class ClickableCubes : MonoBehaviour
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - Controller component exists
+    /// - grabInteractable component exists
+    /// Postconditions:
+    /// - The controller variable is assigned to an instance of IObjectMatchGameController
+    ///   found in the parent hierarchy of this game object
+    /// </remarks>
+    /// <summary>
+    /// Store an instance of the controller so we can notify it when an option
+    /// is placed in the guess box
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - Controller component exists
+    /// - grabInteractable component exists
     /// Postconditions:
     /// - The controller variable is assigned to an instance of IObjectMatchGameController
     ///   found in the parent hierarchy of this game object
@@ -44,8 +56,11 @@ public abstract class ClickableCubes : MonoBehaviour
         {
             grabInteractable.selectEntered.AddListener(OnGrabbed);
         }
+
+        Assert.IsNotNull(controller, "Controller reference is null after initialization");
+        Assert.IsNotNull(grabInteractable, "GrabInterctable is null after initialization");
     }
 
-    
+
     abstract public void OnGrabbed(SelectEnterEventArgs args);
 }
