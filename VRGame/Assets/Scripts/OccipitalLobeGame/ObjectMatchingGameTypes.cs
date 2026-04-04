@@ -37,6 +37,10 @@ namespace ObjectMatchGame
         /// - levelNumber is a positive integer of at least 1
         /// - CorrectObjectID is a string that exists in AllObjectIDs
         /// - AllObjectIDs is non-null and non-empty
+        /// Postconditions:
+        /// - this.levelNumber = levelNumber
+        /// - this.CorrectObjectID = CorrectObjectID;
+        /// - this.AllObjectIDs = AllObjectIDs;
         /// </remarks>
         public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs)
         {
@@ -44,7 +48,7 @@ namespace ObjectMatchGame
             {
                 Debug.LogError("Attempt to create level with negative level number");
             }
-            if (CorrectObjectID == null || !AllObjectIDs.Contains("CorrectObjectID"))
+            if (CorrectObjectID == null || !AllObjectIDs.Contains(CorrectObjectID))
             {
                 Debug.LogError("Attempt to create level where the CorrectObjectID is" +
                     "not the ID of one of the Objects given");

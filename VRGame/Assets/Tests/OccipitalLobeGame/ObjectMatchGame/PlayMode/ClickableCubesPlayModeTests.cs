@@ -87,7 +87,8 @@ public class ClickableCubesPlayModeTests
         standaloneGo.AddComponent<XRGrabInteractable>();
         
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
-        
+        LogAssert.Expect(LogType.Exception, new Regex(".*Controller reference is null.*"));
+
         standaloneGo.AddComponent<TestClickableCube>();
         
         yield return null;
@@ -106,7 +107,8 @@ public class ClickableCubesPlayModeTests
         testGo.transform.SetParent(_controllerGo.transform);
         
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*XRGrabInteractable.*"));
-        
+        LogAssert.Expect(LogType.Exception, new Regex(".*GrabInteractable is null.*"));
+
         testGo.AddComponent<TestClickableCube>();
         
         yield return null;

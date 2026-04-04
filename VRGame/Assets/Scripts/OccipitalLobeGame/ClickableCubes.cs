@@ -58,7 +58,7 @@ public abstract class ClickableCubes : MonoBehaviour
         }
 
         Assert.IsNotNull(controller, "Controller reference is null after initialization");
-        Assert.IsNotNull(grabInteractable, "GrabInterctable is null after initialization");
+        Assert.IsNotNull(grabInteractable, "GrabInteractable is null after initialization");
     }
 
 
