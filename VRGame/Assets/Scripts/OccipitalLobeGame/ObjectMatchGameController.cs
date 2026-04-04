@@ -27,6 +27,7 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
     /// </inheritdoc>
     public void InitializeLevel()
     {
+        Debug.Log("Initializing level " + this.modelInstance.GetCurrentLevel());
         this.modelInstance.InitializeLevel();
         this.viewInstance.EnterLevel();
         this.viewInstance.ShowObjects(this.modelInstance.GetActiveObjectIDs());
@@ -62,8 +63,14 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
         bool success = this.modelInstance.SubmitGuess();
         if (success)
         {
-            this.viewInstance.ShowObjects(this.modelInstance.GetActiveObjectIDs());
+            ExitLevel();
         }
+    }
 
+    /// <inheritdoc/>
+    public void ExitLevel()
+    {
+        this.viewInstance.ExitLevel();
+        this.viewInstance.ClearAllObjects();
     }
 }

@@ -39,6 +39,8 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         }
 
         startLevelButton.SetActive(true);
+        guessBox.SetActive(false);
+        submitButton.SetActive(false);
     }
 
     /// </inheritdoc>
@@ -58,7 +60,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         }
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public void ClearAllObjects()
     {
     foreach (GameObject obj in allObjects)
@@ -67,7 +69,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         }
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public void EnterLevel()
         {
         startLevelButton.SetActive(false);
@@ -75,7 +77,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         submitButton.SetActive(true);
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public void ExitLevel()
     {
         guessBox.SetActive(false);

@@ -82,4 +82,16 @@ public interface IObjectMatchGameController: IController
     /// - Calls submit guess in the model
     /// </remarks>
     public void SubmitGuess();
+
+    /// <summary>
+    /// Disables the guess box and submit button, and shows the start buttons to allow
+    /// the player to move on to the next level. Clears all option objects
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The guess box, submit button, and option objects are disabled, and the start buttons are shown
+    /// </remarks>
+    public void ExitLevel();
 }

@@ -134,5 +134,6 @@ public IEnumerator Start_MissingGuessBox_LogsError()
         public string GetCurrentGuessID() => Controller?.GetCurrentGuessID() ?? "";
         public void RemovePotentialGuess() => Controller?.RemovePotentialGuess();
         public void SubmitGuess() => Controller?.SubmitGuess();
+        public void ExitLevel() => Controller?.ExitLevel();
     }
 }
