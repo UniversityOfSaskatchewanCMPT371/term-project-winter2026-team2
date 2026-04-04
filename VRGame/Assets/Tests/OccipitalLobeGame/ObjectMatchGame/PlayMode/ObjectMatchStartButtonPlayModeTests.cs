@@ -109,7 +109,7 @@ public class ObjectMatchStartButtonPlayModeTests
         standaloneGo.AddComponent<XRGrabInteractable>();
         
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
-        
+        LogAssert.Expect(LogType.Exception, new Regex(".*Controller reference is null.*"));
         var standaloneButton = standaloneGo.AddComponent<ObjectMatchStartButton>();
         
         yield return null;
@@ -176,7 +176,8 @@ public class ObjectMatchStartButtonPlayModeTests
         testGo.transform.SetParent(_controllerGo.transform);
         
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*XRGrabInteractable.*"));
-        
+        LogAssert.Expect(LogType.Exception, new Regex(".*GrabInteractable is null.*"));
+
         testGo.AddComponent<ObjectMatchStartButton>();
         
         yield return null;

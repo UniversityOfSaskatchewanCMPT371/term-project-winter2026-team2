@@ -107,9 +107,9 @@ public class ObjectMatchSubmitButtonPlayModeTests
         // Create standalone button without controller
         GameObject standaloneGo = new GameObject("StandaloneButton");
         standaloneGo.AddComponent<XRGrabInteractable>().interactionManager = _interactionManager;
-        
+
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
-        
+        LogAssert.Expect(LogType.Exception, new Regex(".*Controller reference is null.*"));
         var standaloneButton = standaloneGo.AddComponent<ObjectMatchSubmitButton>();
         
         yield return null;
@@ -123,6 +123,7 @@ public class ObjectMatchSubmitButtonPlayModeTests
 
         // Should log error and return without calling controller
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*IObjectMatchGameController.*"));
+        
         standaloneButton.OnGrabbed(args);
         
         yield return null;
@@ -166,7 +167,8 @@ public class ObjectMatchSubmitButtonPlayModeTests
         testGo.transform.SetParent(_controllerGo.transform);
         
         LogAssert.Expect(LogType.Error, new Regex(".*could not find.*XRGrabInteractable.*"));
-        
+        LogAssert.Expect(LogType.Exception, new Regex(".*GrabInteractable is null.*"));
+
         testGo.AddComponent<ObjectMatchSubmitButton>();
         
         yield return null;

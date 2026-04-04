@@ -47,7 +47,7 @@ namespace ObjectMatchGame
             {
                 Debug.LogError("Attempt to create level with negative level number");
             }
-            if (CorrectObjectID == null || !AllObjectIDs.Contains("CorrectObjectID"))
+            if (CorrectObjectID == null || !AllObjectIDs.Contains(CorrectObjectID))
             {
                 Debug.LogError("Attempt to create level where the CorrectObjectID is" +
                     "not the ID of one of the Objects given");
