@@ -50,15 +50,19 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         Assert.IsNotNull(modelInstance, "There is no LogicGameModel attached to this GameObject!");
         targetedPanelLeft = null;
         targetedPanelRight = null;
-        inputActions = new XRIInputActions();
         currentPathLeft = new Stack<Panel>();
         currentPathRight = new Stack<Panel>();
+    }
+
+    public void Awake()
+    {
+        inputActions = new XRIInputActions();
     }
 
     /// <summary>
     /// Unity Awake() method - gets initial interaction state set up
     /// </summary>
-    public void Awake()
+    public void Start()
     {
         Init();
     }

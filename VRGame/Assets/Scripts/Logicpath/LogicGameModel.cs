@@ -72,28 +72,6 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
                 Assert.IsNull(endpoints[panel.PanelColour].end, $"Duplicate end endpoint of colour {panel.PanelColour}");
                 endpoints[panel.PanelColour] = (endpoints[panel.PanelColour].start, panel);
             }
-
-            if(panel.GridX > 0 && panelGrid[panel.GridX-1, panel.GridY] != null)
-            {
-                panel.LeftNeighbor = panelGrid[panel.GridX-1, panel.GridY];
-                panelGrid[panel.GridX-1, panel.GridY].RightNeighbor = panel;
-            }
-            if(panel.GridY > 0 && panelGrid[panel.GridX, panel.GridY-1] != null)
-            {
-                panel.DownNeighbor = panelGrid[panel.GridX, panel.GridY-1];
-                panelGrid[panel.GridX, panel.GridY-1].TopNeighbor = panel;
-            }
-            if(panel.GridX < MAX_GRID_SIZE-1 && panelGrid[panel.GridX+1, panel.GridY] != null)
-            {
-                panel.RightNeighbor = panelGrid[panel.GridX+1, panel.GridY];
-                panelGrid[panel.GridX+1, panel.GridY].LeftNeighbor = panel;
-            }
-            if(panel.GridY < MAX_GRID_SIZE-1 && panelGrid[panel.GridX, panel.GridY+1] != null)
-            {
-                panel.TopNeighbor = panelGrid[panel.GridX, panel.GridY+1];
-                panelGrid[panel.GridX, panel.GridY+1].DownNeighbor = panel;
-            }
-
         }
         foreach((PanelColour colour, (Panel start, Panel end) pair) in endpoints)
         {
@@ -108,7 +86,36 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
             }
             Assert.IsNotNull(pair.end, $"Missing {colour}'s end endpoint");
         }
-
+        for (int x = 0; x < panelGrid.GetLength(0); x++)
+        {
+            for (int y = 0; y < panelGrid.GetLength(1); y++)
+            {
+                if(panelGrid[x, y] == null)
+                {
+                    continue;
+                }
+                if(panelGrid[x,y].GridX > 0 && panelGrid[panelGrid[x, y].GridX-1, panelGrid[x, y].GridY] != null)
+                {
+                    panelGrid[x, y].LeftNeighbor = panelGrid[panelGrid[x, y].GridX-1, panelGrid[x, y].GridY];
+                    panelGrid[panelGrid[x, y].GridX-1, panelGrid[x, y].GridY].RightNeighbor = panelGrid[x, y];
+                }
+                if(panelGrid[x, y].GridY > 0 && panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY-1] != null)
+                {
+                    panelGrid[x, y].DownNeighbor = panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY-1];
+                    panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY-1].TopNeighbor = panelGrid[x, y];
+                }
+                if(panelGrid[x, y].GridX < MAX_GRID_SIZE-1 && panelGrid[panelGrid[x, y].GridX+1, panelGrid[x, y].GridY] != null)
+                {
+                    panelGrid[x, y].RightNeighbor = panelGrid[panelGrid[x, y].GridX+1, panelGrid[x, y].GridY];
+                    panelGrid[panelGrid[x, y].GridX+1, panelGrid[x, y].GridY].LeftNeighbor = panelGrid[x, y];
+                }
+                if(panelGrid[x, y].GridY < MAX_GRID_SIZE-1 && panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY+1] != null)
+                {
+                    panelGrid[x, y].TopNeighbor = panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY+1];
+                    panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY+1].DownNeighbor = panelGrid[x, y];
+                }
+            }
+        }
         foreach(Panel panel in panelGrid)
         {
             if(panel == null)
