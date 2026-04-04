@@ -29,7 +29,10 @@ public class LogicGameControllerTests
         lgm = Substitute.For<ILogicGameModel>();
         lgc.ModelMock = lgm;
         lgc.Init();
+
     }
+
+    
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.

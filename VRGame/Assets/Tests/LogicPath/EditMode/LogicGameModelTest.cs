@@ -42,19 +42,12 @@ public class LogicGameModelTest
     [Test]
     public void Init_valid()
     {
-        LogAssert.Expect(LogType.Error, "Could not find a panel script attached to one of my children!");
-        // create child gameobject which does not contain a panel
-        // - this should cause init to fail
+        // add single child with panel object
         GameObject childGo = new GameObject();
-        // box collider is most basic component - doesn't contain panel
-        childGo.AddComponent<BoxCollider>();
+        childGo.AddComponent<Panel>();
         childGo.transform.SetParent(go.transform);
 
-        try {
-            lgm.Init();
-            Assert.Fail("Init with child without panel should have failed");
-        }
-        catch {}
+        lgm.Init();
     }
 
     [Test]
@@ -74,4 +67,27 @@ public class LogicGameModelTest
         }
         catch {}
     }
+    [Test]
+    public void Init_one_child_without_panel()
+    {
+        LogAssert.Expect(LogType.Error, "Could not find a panel script attached to one of my children!");
+        // create child gameobject which does not contain a panel
+        // - this should cause init to fail
+        GameObject childGo1 = new GameObject();
+        // box collider is most basic component - doesn't contain panel
+        childGo1.AddComponent<BoxCollider>();
+        childGo1.transform.SetParent(go.transform);
+
+        // second child does have panel
+        GameObject childGo2 = new GameObject();
+        childGo2.AddComponent<Panel>();
+        childGo2.transform.SetParent(go.transform);
+
+        try {
+            lgm.Init();
+            Assert.Fail("Init with child without panel should have failed");
+        }
+        catch {}
+    }
+
 }
