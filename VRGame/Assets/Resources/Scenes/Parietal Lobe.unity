@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf8ab0a969df45ac882e8d4a6f193e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inspectorWindowModel: {fileID: 4953831}
+  inspectorWindowModel: {fileID: 4953834}
   inspectorWindowView: {fileID: 4953830}
   blockSpawnerController: {fileID: 653265019}
 --- !u!114 &4953830
@@ -296,6 +296,18 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4953834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e775805f0a4ca4f6d92ad858b65255ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &54741228
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +660,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fae535713cb814e9e952635a14e333ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4953831}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fae535713cb814e9e952635a14e333ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4953834}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fae535713cb814e9e952635a14e333ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4953830}
@@ -1399,9 +1414,6 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 560ff14cd59bc4dd6ba166931824f69e, type: 3}
   - {fileID: 919132149155446097, guid: 566a5f1587a3b40da85323c137f72317, type: 3}
   - {fileID: 919132149155446097, guid: b4f2e55c98f6b47ec9eec7a8f725aebf, type: 3}
-  currentBlockIndex: 0
-  blockScale: 2
-  lastSpawnedBlock: {fileID: 0}
 --- !u!1001 &705965185
 PrefabInstance:
   m_ObjectHideFlags: 0
