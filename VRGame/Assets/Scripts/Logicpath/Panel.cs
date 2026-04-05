@@ -24,11 +24,11 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// The entry direction of this Panel, if any
     /// </summary>
-    private Direction entryDirection;
+    internal Direction entryDirection;
     /// <summary>
     /// The exit direction of this Panel, if any
     /// </summary>
-    private Direction exitDirection;
+    internal Direction exitDirection;
     /// <summary>
     /// The upper neighbor of this Panel, if there is one
     /// </summary>
@@ -55,7 +55,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// What colour this Panel has (if there is a path going through it or it is an endpoint)
     /// </summary>
     [SerializeField]
-    private PanelColour panelColour;
+    internal PanelColour panelColour;
     /// <summary>
     /// The X-coordinate of this Panel
     /// </summary>
