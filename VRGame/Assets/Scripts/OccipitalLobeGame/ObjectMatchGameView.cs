@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatchGameView
@@ -14,11 +15,16 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         set => allObjects = value;
     }
     
-
-    // Store references to the guess box, submit button, and start buttons so we can enable and disable them as needed
+    // Store references to the guess box, and various buttons so we can enable and disable them as needed
     [SerializeField] private GameObject guessBox;
     [SerializeField] private GameObject submitButton;
     [SerializeField] private GameObject startLevelButton;
+    [SerializeField] private GameObject startTutorialButton;
+    [SerializeField] private GameObject leaveTutorialButton;
+
+    // Store references to the text components so they can be updated here
+    [SerializeField] private TextMeshProUGUI inLevelDisplay;
+    [SerializeField] private TextMeshProUGUI outOfLevelDisplay;
 
 
     // Test-accessible properties for UI elements
@@ -30,6 +36,9 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     public override void Init()
     {
         CheckControllerRef();
+        // Set the camera for the canvas
+        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+
         foreach (GameObject obj in allObjects)
         {
             obj.SetActive(false);
@@ -38,6 +47,9 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         startLevelButton.SetActive(true);
         guessBox.SetActive(false);
         submitButton.SetActive(false);
+
+        inLevelDisplay.gameObject.SetActive(false);
+        outOfLevelDisplay.gameObject.SetActive(false);
     }
 
     /// </inheritdoc>
@@ -77,6 +89,9 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         startLevelButton.SetActive(false);
         guessBox.SetActive(true);
         submitButton.SetActive(true);
+
+        inLevelDisplay.gameObject.SetActive(true);
+        outOfLevelDisplay.gameObject.SetActive(false);
     }
 
     /// <inheritdoc/>
@@ -85,11 +100,43 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         guessBox.SetActive(false);
         submitButton.SetActive(false);
         startLevelButton.SetActive(true);
+        inLevelDisplay.gameObject.SetActive(false);
+        outOfLevelDisplay.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateTimer(int seconds)
     {
+        inLevelDisplay.text = "Time: " + Mathf.CeilToInt(seconds).ToString();
+    }
+
+    public void UpdateScore(int totalScore, int[] levelScores)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine("Total Score: " + totalScore);
+        for (int i = 0; i < levelScores.Length; i++)
+        sb.AppendLine("Level " + (i+1) + " Score: " + levelScores[i]);
         
+        outOfLevelDisplay.text = sb.ToString();
+    }
+
+    public void EnterTutorial()
+    {
+        startTutorialButton.SetActive(false);
+        leaveTutorialButton.SetActive(true);
+        guessBox.SetActive(true);
+        submitButton.SetActive(true);
+        inLevelDisplay.gameObject.SetActive(false);
+        outOfLevelDisplay.gameObject.SetActive(false);
+    }
+
+    public void ExitTutorial()
+    {
+        leaveTutorialButton.SetActive(false);
+        startTutorialButton.SetActive(true);
+        startLevelButton.SetActive(true);
+        guessBox.SetActive(false);
+        submitButton.SetActive(false);
+        inLevelDisplay.gameObject.SetActive(false);
+        outOfLevelDisplay.gameObject.SetActive(false);
     }
 }

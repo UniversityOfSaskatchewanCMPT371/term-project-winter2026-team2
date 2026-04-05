@@ -184,4 +184,30 @@ public interface IObjectMatchGameModel: IModel
     /// - Return true if the guess is correct, false if it is incorrect
     /// </remarks>
     public bool SubmitGuess();
+
+    /// <summary>
+    /// Get the scores of all levels
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions: 
+    /// - returns the score for all levels, where level 1 score is at index 0, level2 at 
+    /// index 1, and so on
+    /// </remarks>
+    public int[] GetLevelScores();
+
+    /// <summary>
+    /// Gets the time remaining for the current level
+    /// </summary>
+    /// <remarks>
+    /// Precondtions:
+    /// - The model's game state is playing
+    /// PostConditions:
+    /// - returns the difference between the level stopwatch and the max level time
+    /// </remarks>
+    public int GetTimeRemaining();
+
+    void LeaveTutorial();
+    string[] GetTutorialObjectIDs();
 }

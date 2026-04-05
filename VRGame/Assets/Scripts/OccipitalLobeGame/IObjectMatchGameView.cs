@@ -62,4 +62,29 @@ public interface IObjectMatchGameView: IView
     /// - The guess box and submit button are disabled and the start level and tutorial buttons are enabled
     /// </remarks>
     public void ExitLevel();
+
+    /// <summary>
+    /// Updates the timer text to reflect actual timer in the model
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The text on the canvas is updated to match the time remaining
+    /// </remarks>
+    public void UpdateTimer(int seconds);
+
+    /// <summary>
+    /// Updates the canvas to show the correct total and level scores
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - levelScores is not null
+    /// Postconditions:
+    /// - The canvas is updated to reflect the total and level scores
+    /// </remarks>
+    public void UpdateScore(int totalScore, int[] levelScores);
+
+    public void EnterTutorial();
+    public void ExitTutorial();
 }

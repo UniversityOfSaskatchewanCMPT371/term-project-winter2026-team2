@@ -130,7 +130,16 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public void InitializeTutorial()
     {
+        gameState = GameState.tutorial;
+        currentGuessID = "";
+        failedGuesses = 0;
+    }
 
+    public void LeaveTutorial()
+    {
+        gameState = GameState.readyToStart;
+        currentGuessID = "";
+        failedGuesses = 0;
     }
 
     /// <inheritdoc/>
@@ -179,9 +188,8 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     public void CalculateScore()
     {
         int score;
-        double levelTime = stopwatch.Elapsed.TotalSeconds;
-        int timeLeft = (int)Math.Ceiling((double)levels[currentLevel].maxTime - levelTime);
-        if (timeLeft <= 0)
+        int timeLeft = GetTimeRemaining();
+        if (timeLeft > 0)
         {
             score = timeLeft * pointsForTimeLeft + levels[currentLevel].winPoints -
                 failedGuesses * (levels[currentLevel].winPoints / 2);
@@ -202,4 +210,28 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         UnityEngine.Debug.Log("level score: " + levelScore);
         UnityEngine.Debug.Log("game score: " + gameScore);
     }
+
+    public int GetTimeRemaining()
+    {
+   
+
+        double levelTime = stopwatch.Elapsed.TotalSeconds;
+        int timeLeft = (int)Math.Ceiling((double)levels[currentLevel].maxTime - levelTime);
+
+        return timeLeft;
+    }
+
+    public int[] GetLevelScores()
+    {
+        int[] scores = new int[totalLevels];
+        for (int i = 0; i < totalLevels; i++)
+            scores[i] = levels[i+1].Score;
+        return scores;
+    }
+
+    public string[] GetTutorialObjectIDs()
+    {
+        return levels[0].AllObjectIDs;
+    }
 }
+

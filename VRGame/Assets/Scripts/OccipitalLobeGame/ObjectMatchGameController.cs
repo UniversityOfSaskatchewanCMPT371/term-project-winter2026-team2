@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ObjectMatchGame;
 using UnityEngine;
 
 public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObjectMatchGameView>, IObjectMatchGameController
@@ -34,7 +35,9 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
     /// </inheritdoc>
     public void InitializeTutorial()
     {
-        throw new System.NotImplementedException();
+        this.modelInstance.InitializeTutorial();
+        this.viewInstance.EnterTutorial();
+        this.viewInstance.ShowObjects(this.modelInstance.GetTutorialObjectIDs());
     }
 
     /// </inheritdoc>
@@ -73,7 +76,25 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
     /// <inheritdoc/>
     public void ExitLevel()
     {
+        this.viewInstance.UpdateScore(
+            this.modelInstance.GetGameScore(),
+            this.modelInstance.GetLevelScores()
+        );
         this.viewInstance.ExitLevel();
+        this.viewInstance.ClearAllObjects();
+    }
+
+    private void Update()
+    {
+        if (modelInstance == null) return;
+        if (modelInstance.GetGameState() != GameState.playing) return;
+        viewInstance.UpdateTimer(modelInstance.GetTimeRemaining());
+    }
+
+    public void LeaveTutorial()
+    {
+        this.modelInstance.LeaveTutorial();
+        this.viewInstance.ExitTutorial();
         this.viewInstance.ClearAllObjects();
     }
 }

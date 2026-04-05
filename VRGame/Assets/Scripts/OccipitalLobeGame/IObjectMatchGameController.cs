@@ -94,4 +94,6 @@ public interface IObjectMatchGameController: IController
     /// - The guess box, submit button, and option objects are disabled, and the start buttons are shown
     /// </remarks>
     public void ExitLevel();
+
+    void LeaveTutorial();
 }
