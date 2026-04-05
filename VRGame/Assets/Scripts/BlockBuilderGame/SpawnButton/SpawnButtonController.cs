@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 /// Controller component of SpawnButtonController.
 /// Manages the logic for triggering block spawning via button press.
 /// </summary>
-public class SpawnButtonController : Controller<ISpawnButtonModel, ISpawnButtonView>, ISpawnButtonController
+public class SpawnButtonController : Controller<IModel, ISpawnButtonView>, ISpawnButtonController
 {
     /// <summary>
     /// Reference to the BlockSpawner controller (set via inspector window)
@@ -29,7 +29,6 @@ public class SpawnButtonController : Controller<ISpawnButtonModel, ISpawnButtonV
     /// <inheritdoc/>
     public override void Init()
     {
-        this.CheckModelRef();
         this.CheckViewRef();
 
         // Implement from IBlockSpawnerController
@@ -38,7 +37,7 @@ public class SpawnButtonController : Controller<ISpawnButtonModel, ISpawnButtonV
             blockSpawner = spawner;
             Assert.IsNotNull(spawner, "spawner must not be null on Init");
         }
-        else if (blockSpawnerController != null)
+        else
         {
             Debug.LogWarning("BlockSpawner controller does not implement from IBlockSpawnerController");
         }
