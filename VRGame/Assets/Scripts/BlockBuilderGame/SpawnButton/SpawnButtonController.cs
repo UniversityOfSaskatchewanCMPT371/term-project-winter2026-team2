@@ -54,6 +54,10 @@ public class SpawnButtonController : Controller<ISpawnButtonModel, ISpawnButtonV
     /// <inheritdoc/>
     public void OnButtonPressed()
     {
+        if (blockSpawner == null)
+        {
+            Debug.LogError("blockSpawner cannot be null OnButtonPressed");
+        }
         Assert.IsNotNull(blockSpawner, "blockSpawner must not be null on ButtonPressed");
         blockSpawner.SpawnBlock();
     }
