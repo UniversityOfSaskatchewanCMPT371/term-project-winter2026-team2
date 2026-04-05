@@ -5,8 +5,8 @@
         "UnityEngine.TestRunner",
         "BlockSpawner",
         "SpawnButton",
-        "ScriptTemplates",
-        "TNRD.NSubstitute"
+        "TNRD.NSubstitute",
+        "ScriptTemplates"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
