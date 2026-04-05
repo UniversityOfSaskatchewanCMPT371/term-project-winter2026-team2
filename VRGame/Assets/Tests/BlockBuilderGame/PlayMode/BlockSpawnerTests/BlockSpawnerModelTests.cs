@@ -73,7 +73,7 @@ public class BlockSpawnerModelTests
     }
 
     [UnityTest]
-    public IEnumerator ModelData_DrivesControllerSpawn()
+    public IEnumerator ModelDataDrivesControllerSpawn()
     {
         // Expect an exception because Init() in view layer is in Awake() call
         LogAssert.Expect(LogType.Exception, new Regex(".*'viewInstance' field cannot be null.*"));

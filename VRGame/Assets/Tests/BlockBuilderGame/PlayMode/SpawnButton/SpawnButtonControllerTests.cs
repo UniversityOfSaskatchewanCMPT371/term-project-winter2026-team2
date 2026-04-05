@@ -81,7 +81,7 @@ public class SpawnButtonControllerTests
     }
 
     [UnityTest]
-    public IEnumerator OnButtonPressed_SpawnsBlockThroughBlockSpawner()
+    public IEnumerator OnButtonPressedSpawnsBlockThroughBlockSpawner()
     {
         // checks button press triggers block spawner
         blockSpawnerModel.BlockPrefabs = new[] { prefabA, prefabB };
@@ -103,7 +103,7 @@ public class SpawnButtonControllerTests
     }
 
     [UnityTest]
-    public IEnumerator OnButtonPressed_WhenSpawnerIndexInvalid_ThrowsAssertion()
+    public IEnumerator OnButtonPressedWhenSpawnerIndexInvalidThrowsAssertion()
     {
         // checks button press surfaces spawner assertion for invalid index
         yield return null;

@@ -6,15 +6,16 @@
         "BlockSpawner",
         "SpawnButton",
         "TNRD.NSubstitute",
-        "ScriptTemplates"
+        "ScriptTemplates",
+        "Unity.XR.Interaction.Toolkit.Editor",
+        "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll",
-        "NuGetForUnity.PluginAPI.dll"
+        "nunit.framework.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

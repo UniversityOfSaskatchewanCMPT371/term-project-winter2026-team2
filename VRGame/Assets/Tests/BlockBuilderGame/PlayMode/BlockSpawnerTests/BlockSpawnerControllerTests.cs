@@ -72,7 +72,7 @@ public class BlockSpawnerControllerTests
     }
 
     [UnityTest]
-    public IEnumerator SpawnBlock_UpdatesModelState()
+    public IEnumerator SpawnBlockUpdatesModelState()
     {
         // checks spawn updates block reference index and scale
         model.BlockPrefabs = new[] { prefabA, prefabB };
@@ -93,7 +93,7 @@ public class BlockSpawnerControllerTests
     }
 
     [UnityTest]
-    public IEnumerator SpawnBlock_CyclesIndexBackToZero()
+    public IEnumerator SpawnBlockCyclesIndexBackToZero()
     {
         // checks index wraps back to zero after last prefab
         model.BlockPrefabs = new[] { prefabA, prefabB };
@@ -114,7 +114,7 @@ public class BlockSpawnerControllerTests
     }
 
     [UnityTest]
-    public IEnumerator SpawnBlock_OutOfBoundsIndex_ThrowsAssertion()
+    public IEnumerator SpawnBlockOutOfBoundsIndexThrowsAssertion()
     {
         // checks out of bounds index throws assertion
         yield return null;
