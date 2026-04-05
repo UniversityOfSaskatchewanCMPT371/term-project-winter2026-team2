@@ -18,6 +18,16 @@ namespace ObjectMatchGame
     }
 
     /// <summary>
+    /// Used to determine what the start button should do when it is pressed.
+    /// </summary>
+    public enum StartButtonType
+    {
+        tutorial,
+        level,
+        leaveTutorial
+    }
+
+    /// <summary>
     /// Data for each level of the game. Serializable so the items can easily be set up
     /// in Unity Editor
     /// </summary>

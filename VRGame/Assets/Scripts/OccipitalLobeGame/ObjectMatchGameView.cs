@@ -45,6 +45,8 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         }
 
         startLevelButton.SetActive(true);
+        startTutorialButton.SetActive(true);
+        leaveTutorialButton.SetActive(false);
         guessBox.SetActive(false);
         submitButton.SetActive(false);
 
@@ -121,6 +123,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
 
     public void EnterTutorial()
     {
+        startLevelButton.SetActive(false);
         startTutorialButton.SetActive(false);
         leaveTutorialButton.SetActive(true);
         guessBox.SetActive(true);

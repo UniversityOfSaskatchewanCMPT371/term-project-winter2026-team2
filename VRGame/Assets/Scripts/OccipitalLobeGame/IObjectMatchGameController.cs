@@ -95,5 +95,5 @@ public interface IObjectMatchGameController: IController
     /// </remarks>
     public void ExitLevel();
 
-    void LeaveTutorial();
+    public void LeaveTutorial();
 }
