@@ -4,11 +4,16 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.5.2] - 2026-03-22
+## [1.5.1] - 2026-03-22
 
 ### Added
 
+- Cerebellum Prefab
+
+### Changed
+
 - Replaced PracticeRoom Scene With Cerebellum Scene
+- Corrected Names of Portals
 
 ## [1.5.0] - 2026-03-22
 
