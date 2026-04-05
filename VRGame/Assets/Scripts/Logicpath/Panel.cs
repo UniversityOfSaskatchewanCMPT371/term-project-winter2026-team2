@@ -50,7 +50,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// </summary>
 
     [SerializeField]
-    private PanelAttribute attribute;
+    internal PanelAttribute attribute;
     /// <summary>
     /// What colour this Panel has (if there is a path going through it or it is an endpoint)
     /// </summary>
