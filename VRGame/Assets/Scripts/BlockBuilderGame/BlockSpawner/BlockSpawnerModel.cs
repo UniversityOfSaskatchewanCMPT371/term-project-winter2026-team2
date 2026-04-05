@@ -96,19 +96,19 @@ public class BlockSpawnerModel : Model, IBlockSpawnerModel
 
         if (currentBlockIndex != 0)
         {
-            Debug.LogError("Failed to set currentBlockIndex to 0 on BlockSpawnerModel Init()")
+            Debug.LogError("Failed to set currentBlockIndex to 0 on BlockSpawnerModel Init()");
         }
         Assert.AreEqual(currentBlockIndex, 0, "currentBlockIndex failed to set on Init()");
 
         if (blockScale != 1.0f)
         {
-            Debug.LogError("Failed to set blockScale to 1.0f on BlockSpawnerModel Init()")
+            Debug.LogError("Failed to set blockScale to 1.0f on BlockSpawnerModel Init()");
         }
         Assert.AreEqual(blockScale, 1.0f, "blockScale failed to set on Init()");
 
         if (lastSpawnedBlock != null)
         {
-            Debug.LogError("Failed to set lastSpawnedBlock to null on BlockSpawnerModel Init()")
+            Debug.LogError("Failed to set lastSpawnedBlock to null on BlockSpawnerModel Init()");
         }
         Assert.IsNull(lastSpawnedBlock, "lastSpawnedBlock failed to set on Init()");
     }
