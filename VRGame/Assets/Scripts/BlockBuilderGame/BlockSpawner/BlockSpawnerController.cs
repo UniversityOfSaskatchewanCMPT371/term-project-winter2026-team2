@@ -36,17 +36,18 @@ public class BlockSpawnerController : Controller<IBlockSpawnerModel, IBlockSpawn
         int index = modelInstance.CurrentBlockIndex;
         Assert.IsTrue(index < prefabs.Length, "CurrentBlockIndex is out of bounds");
 
-        // If there's a previously spawned block, destroy it before spawning the next one
-        XRGrabInteractable lastGrab = null;
-        if (modelInstance.LastSpawnedBlock != null)
+        // Destroy previous block if it exists and is not being held
+        GameObject last = modelInstance.LastSpawnedBlock;
+        if (last != null)
         {
-            lastGrab = modelInstance.LastSpawnedBlock.GetComponent<XRGrabInteractable>();
-        }
-
-        // Destroy only if not held
-        if (lastGrab != null && !lastGrab.isSelected)
-        {
-            Destroy(lastGrab.gameObject);
+            // If there's a previously spawned block, destroy it before spawning the next one
+            XRGrabInteractable lastGrab = last.GetComponent<XRGrabInteractable>();
+            bool isHeld = (lastGrab != null) && (lastGrab.isSelected);
+            // Destroy only if not held
+            if (!isHeld)
+            {
+                Destroy(last);
+            }
         }
 
         // Spawn the next block
@@ -57,12 +58,6 @@ public class BlockSpawnerController : Controller<IBlockSpawnerModel, IBlockSpawn
         GameObject newBlock = Instantiate(prefab, transform.position, transform.rotation);
         newBlock.transform.localScale = Vector3.one * modelInstance.BlockScale;
 
-        // Stop tracking the last spawned block once new one is grabbed
-        XRGrabInteractable newGrab = newBlock.GetComponent<XRGrabInteractable>();
-        if (newGrab != null)
-        {
-            newGrab.selectEntered.AddListener(_ => modelInstance.LastSpawnedBlock = null);
-        }
         // Update the reference to the last spawned block in the model
         modelInstance.LastSpawnedBlock = newBlock;
     }
