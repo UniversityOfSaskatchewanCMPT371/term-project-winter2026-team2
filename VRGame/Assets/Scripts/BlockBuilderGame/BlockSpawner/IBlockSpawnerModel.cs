@@ -16,7 +16,7 @@ public interface IBlockSpawnerModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     -   requires BlockPrefabs.length > 0
+        ///     -   requires none
         /// post-condition:
         ///     -   ensures the return of the block prefabs array
         /// </remarks>
@@ -27,7 +27,7 @@ public interface IBlockSpawnerModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     -   requires BlockPrefabs.length > 0
+        ///     -   requires (value != null) && (value.Length > 0)
         /// post-condition:
         ///     -   ensures BlockPrefabs = value
         /// </remarks>
