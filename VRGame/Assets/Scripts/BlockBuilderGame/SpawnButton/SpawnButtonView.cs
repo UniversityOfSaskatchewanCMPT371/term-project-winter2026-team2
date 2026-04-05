@@ -20,12 +20,6 @@ public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
     /// <inheritdoc/>
     public void SetupXREvents()
     {
-        if (controllerInstance == null)
-        {
-            Debug.LogWarning("Controller instance cannot be null on XR events setup");
-        }
-        Assert.IsNotNull(controllerInstance, "Controller must not be null on XR events setup");
-
         var components = GetComponentsInChildren<XRBaseInteractable>();
         if (components.Length == 0)
         {
@@ -43,6 +37,7 @@ public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
         }
     }
 
+    // <inheritdoc/>
     private void OnXRClick(SelectEnterEventArgs args)
     {
         controllerInstance.OnButtonPressed();
