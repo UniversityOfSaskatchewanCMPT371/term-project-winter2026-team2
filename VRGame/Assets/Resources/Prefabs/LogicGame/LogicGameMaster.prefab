@@ -61,6 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6e147bb101c804db5cd556f0bc0612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inspectorWindowModel: {fileID: 0}
+  inspectorWindowView: {fileID: 0}
+  confetti: {fileID: 350501847410998399, guid: 5f2b837a28226ac4b9fa937ce26160bb, type: 3}
 --- !u!1001 &158306848762599913
 PrefabInstance:
   m_ObjectHideFlags: 0

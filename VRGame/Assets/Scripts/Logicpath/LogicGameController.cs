@@ -36,6 +36,10 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// The current path the right hand is taking
     /// </summary>
     private Stack<Panel> currentPathRight;
+    /// <summary>
+    /// A ParticleSystem that spawns confetti when the game is complete.
+    /// </summary>
+    private ParticleSystem confettiSpawner;
 
     /// <inheritdoc/>
     public override void Init()
@@ -52,6 +56,19 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         targetedPanelRight = null;
         currentPathLeft = new Stack<Panel>();
         currentPathRight = new Stack<Panel>();
+        foreach(Transform childTransform in transform)
+        {
+            confettiSpawner = childTransform.gameObject.GetComponent<ParticleSystem>();
+            if(confettiSpawner != null)
+            {
+                break;
+            }
+        }
+        if(confettiSpawner == null)
+        {
+            Debug.LogError("There is no ParticleSystem attached to this GameObject!");
+        }
+        Assert.IsNotNull(confettiSpawner, "There is no ParticleSystem attached to this GameObject!");
     }
 
     public void Awake()
@@ -229,8 +246,8 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         }
         else if(isDraggingRight && targetedPanelRight != null && currentPathRight.Peek().Attribute == PanelAttribute.Exit && modelInstance.IsGridFilled() && !isDraggingLeft)
         {
-            //TODO: make a proper celebration
             Debug.Log("Game is complete!");
+            confettiSpawner.Play();
         }
         isDraggingRight = false;
     }
