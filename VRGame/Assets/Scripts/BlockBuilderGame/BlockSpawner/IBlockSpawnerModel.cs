@@ -112,7 +112,7 @@ public interface IBlockSpawnerModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:
-        ///     - requires value != null
+        ///     - requires none
         /// post-condition:
         ///     - ensures lastSpawnedBlock = value
         /// </remarks>
