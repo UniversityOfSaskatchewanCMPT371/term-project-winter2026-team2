@@ -60,9 +60,6 @@ public class MusicManagerController : ControllerComponent, IMusicManagerControll
         audioSource.Play();
 
         Debug.Log("MusicManagerController initialized successfully");
-
-        DontDestroyOnLoad(gameObject);
-
     }
 
     /// <inheritdoc/>
