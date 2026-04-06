@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: teleportOffset.z
-      value: 3
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8549399872279735443, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -681,6 +681,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
+      propertyPath: teleportOffset.z
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: destinationSceneId
       value: 5
       objectReference: {fileID: 0}
@@ -766,6 +770,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
+      propertyPath: teleportOffset.z
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: destinationSceneId
       value: 6
       objectReference: {fileID: 0}
@@ -820,19 +828,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.51279235
+      value: -0.78423536
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.85851264
+      value: -0.62046355
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -840,7 +848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -118.3
+      value: -283.3
       objectReference: {fileID: 0}
     - target: {fileID: 5447637991413432508, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -853,6 +861,10 @@ PrefabInstance:
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: targetDoorId
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
+      propertyPath: teleportOffset.z
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: destinationSceneId
@@ -1010,6 +1022,10 @@ PrefabInstance:
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: targetDoorId
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
+      propertyPath: teleportOffset.z
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 6201804613942430996, guid: 86044e5b9240f4c01a978b5ba7cb22be, type: 3}
       propertyPath: destinationSceneId
