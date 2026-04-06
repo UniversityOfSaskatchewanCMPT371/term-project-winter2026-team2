@@ -34,7 +34,7 @@ public interface IMusicManagerController
     /// </summary>
     /// <remarks>
     /// <pre-condition>
-    /// - None
+    /// - musicClip is not null
     /// </pre-condition>
     /// <post-condition>
     /// - The singleton instance is set to null
