@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf8ab0a969df45ac882e8d4a6f193e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inspectorWindowModel: {fileID: 4953831}
+  inspectorWindowModel: {fileID: 0}
   inspectorWindowView: {fileID: 4953830}
   blockSpawnerController: {fileID: 653265019}
 --- !u!114 &4953830
@@ -160,18 +160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inspectorWindowController: {fileID: 4953829}
---- !u!114 &4953831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4953827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dc2e9eeb268d457883baecc5eec75e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4953832
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -712,9 +700,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fae535713cb814e9e952635a14e333ed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4953831}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fae535713cb814e9e952635a14e333ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4953830}
@@ -4472,6 +4457,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2522c5370890e4ecfbff5108da62a89e, type: 3}
+  - {fileID: 919132149155446097, guid: 9da6c0804f24e4bbc9271e2f950911f6, type: 3}
+  - {fileID: 919132149155446097, guid: 560ff14cd59bc4dd6ba166931824f69e, type: 3}
+  - {fileID: 919132149155446097, guid: 566a5f1587a3b40da85323c137f72317, type: 3}
+  - {fileID: 919132149155446097, guid: b4f2e55c98f6b47ec9eec7a8f725aebf, type: 3}
 --- !u!1001 &705965185
 PrefabInstance:
   m_ObjectHideFlags: 0

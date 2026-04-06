@@ -7,8 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
 {
-    // use 'this.controllerInstance' to access controller component
-
     /// <inheritdoc/>
     public override void Init()
     {
@@ -20,12 +18,6 @@ public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
     /// <inheritdoc/>
     public void SetupXREvents()
     {
-        if (controllerInstance == null)
-        {
-            Debug.LogWarning("Controller instance cannot be null on XR events setup");
-        }
-        Assert.IsNotNull(controllerInstance, "Controller must not be null on XR events setup");
-
         var components = GetComponentsInChildren<XRBaseInteractable>();
         if (components.Length == 0)
         {
@@ -39,10 +31,10 @@ public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
                 Debug.LogError("Null component detected");
             }
             c.selectEntered.AddListener(OnXRClick);
-            Assert.IsNotNull(c, "Failed to add XR events to a (null) component");
         }
     }
 
+    // <inheritdoc/>
     private void OnXRClick(SelectEnterEventArgs args)
     {
         controllerInstance.OnButtonPressed();

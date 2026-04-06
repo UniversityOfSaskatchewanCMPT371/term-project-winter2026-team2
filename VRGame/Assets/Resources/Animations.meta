@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:VRGame/Assets/Resources/Animations.meta
 guid: ebd9ce0a7f1994e1497a68bb0803ded7
 folderAsset: yes
 DefaultImporter:
+========
+guid: d689bfa4cae714a999453b39c174ab68
+NativeFormatImporter:
+>>>>>>>> id5:VRGame/Assets/Resources/Materials/Glass.mat.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
