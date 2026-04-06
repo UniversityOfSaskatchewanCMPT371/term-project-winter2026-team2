@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf8ab0a969df45ac882e8d4a6f193e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inspectorWindowModel: {fileID: 4953831}
+  inspectorWindowModel: {fileID: 0}
   inspectorWindowView: {fileID: 4953830}
   blockSpawnerController: {fileID: 653265019}
 --- !u!114 &4953830
