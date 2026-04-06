@@ -4,6 +4,13 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.4] - 2026-04-05
+
+### Added
+
+- ColourButton MVC component that changes the spawned block's colour/material on button press
+
+
 ## [1.5.3] - 2026-03-31
 
 ### Added
