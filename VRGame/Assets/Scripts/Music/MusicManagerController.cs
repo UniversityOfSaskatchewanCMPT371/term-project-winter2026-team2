@@ -4,7 +4,7 @@ using UnityEngine.Assertions;
 /// <summary>
 /// Controller for the MusicManager component. Manages persistent music accross scenes
 /// </summary>
-public class MusicManagerController : MonoBehaviour, IMusicManagerController
+public class MusicManagerController : ControllerComponent, IMusicManagerController
 {
 
     /// <summary>

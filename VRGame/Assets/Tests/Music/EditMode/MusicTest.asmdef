@@ -5,7 +5,9 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "TNRD.NSubstitute",
-        "Music"
+        "Music",
+        "ScriptTemplatesEditTests",
+        "ScriptTemplates"
     ],
     "includePlatforms": [
         "Editor"
