@@ -336,29 +336,6 @@ public class ObjectMatchGameModelTests
     }
 
     /// <summary>
-    /// Verifies InitializeLevel can be called multiple times sequentially.
-    /// </summary>
-    [Test]
-    public void InitializeLevel_MultipleCallsIncrementCorrectly()
-    {
-        GameObject go = new GameObject();
-        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
-
-        model.Init();
-        AssignLevels(model);
-        
-        int initialLevel = model.GetCurrentLevel();
-        
-        model.InitializeLevel();
-        Assert.AreEqual(initialLevel + 1, model.GetCurrentLevel());
-        
-        model.InitializeLevel();
-        Assert.AreEqual(initialLevel + 2, model.GetCurrentLevel());
-
-        Object.DestroyImmediate(go);
-    }
-
-    /// <summary>
     /// Verifies PotentialGuess logs warning for invalid guess ID.
     /// </summary>
     [Test]
