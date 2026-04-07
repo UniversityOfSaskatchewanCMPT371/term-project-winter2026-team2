@@ -13,15 +13,17 @@ public interface IPlayerController
     /// </remarks>
     void Awake();
 
-    /*
-    IMPORTANT NOTE: I'm not working on the player component, but the controller
-    portion of the doors interacts with it so I need an interface. This is 
-    a placeholder interface that will likely change
-    */
     /// <summary>
     /// Teleports the player to a specified destination oriented in a specified rotation.
     /// </summary>
     /// <param name="position">The position in which the player rig is teleported to.</param>
     /// <param name="rotation">The position in which the player rig is oriented to.</param>
+    /// <remarks>
+    /// Preconditions:
+    /// - model instance variable must be assigned
+    /// - params must be valid (non-NaN, non-infinite)
+    /// Postconditions:
+    /// - player rig is teleported to the specified position and oriented to the specified rotation
+    /// </remarks>
     void teleportPlayerTo(Vector3 position, Quaternion rotation);
 }
