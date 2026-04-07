@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.8] - 2026-04-07
+
+### Added
+
+- More puzzles, a quick tutorial, and proper presentation to the frontal lobe minigame
+
 ## [1.5.7] - 2026-04-06
 
 ### Added
