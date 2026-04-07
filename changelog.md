@@ -4,8 +4,7 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-<<<<<<< HEAD
-## [1.5.1] - 2026-03-22
+## [1.5.5] - 2026-04-06
 
 ### Added
 
@@ -13,9 +12,9 @@ do not change functionality nor do you need to when you you write tests.
 
 ### Changed
 
-- Replaced PracticeRoom Scene With Cerebellum Scene
+- Replaced PracticeRoom Scene with Cerebellum Scene
 - Corrected Names of Portals
-=======
+
 ## [1.5.4] - 2026-04-06
 
 ### Added
@@ -41,7 +40,6 @@ do not change functionality nor do you need to when you you write tests.
 
 - Integrated id5 into parietal branch, keeping record of work history done
 
->>>>>>> cea223d4284f90259e26358727507e0132df5a94
 
 ## [1.5.0] - 2026-03-22
 
