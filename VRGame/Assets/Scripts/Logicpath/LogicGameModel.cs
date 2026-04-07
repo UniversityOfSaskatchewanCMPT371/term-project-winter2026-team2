@@ -36,9 +36,9 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
             Panel panel = childTransform.gameObject.GetComponent<Panel>();
             if(panel == null)
             {
-                Debug.LogError("Could not find a panel script attached to one of my children!");
+                Debug.Log($"An object named \"{childTransform.name}\" is not a Panel. Skipping!");
+                continue;
             }
-            Assert.IsNotNull(panel, "Could not find a panel script attached to one of my children!");
             // the Panel initiation process guarantees the coordinates are within bounds so we won't bother checking that
             if(panelGrid[panel.GridX,panel.GridY] != null)
             {
@@ -72,27 +72,6 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
                 Assert.IsNull(endpoints[panel.PanelColour].end, $"Duplicate end endpoint of colour {panel.PanelColour}");
                 endpoints[panel.PanelColour] = (endpoints[panel.PanelColour].start, panel);
             }
-
-            if(panel.GridX > 0 && panelGrid[panel.GridX-1, panel.GridY] != null)
-            {
-                panel.LeftNeighbor = panelGrid[panel.GridX-1, panel.GridY];
-                panelGrid[panel.GridX-1, panel.GridY].RightNeighbor = panel;
-            }
-            if(panel.GridY > 0 && panelGrid[panel.GridX, panel.GridY-1] != null)
-            {
-                panel.DownNeighbor = panelGrid[panel.GridX, panel.GridY-1];
-                panelGrid[panel.GridX, panel.GridY-1].TopNeighbor = panel;
-            }
-            if(panel.GridX < MAX_GRID_SIZE-1 && panelGrid[panel.GridX+1, panel.GridY] != null)
-            {
-                panel.RightNeighbor = panelGrid[panel.GridX+1, panel.GridY];
-                panelGrid[panel.GridX+1, panel.GridY].LeftNeighbor = panel;
-            }
-            if(panel.GridY < MAX_GRID_SIZE-1 && panelGrid[panel.GridX, panel.GridY+1] != null)
-            {
-                panel.TopNeighbor = panelGrid[panel.GridX, panel.GridY+1];
-                panelGrid[panel.GridX, panel.GridY+1].DownNeighbor = panel;
-            }
         }
         foreach((PanelColour colour, (Panel start, Panel end) pair) in endpoints)
         {
@@ -106,6 +85,55 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
                 Debug.LogError($"Missing {colour}'s end endpoint");
             }
             Assert.IsNotNull(pair.end, $"Missing {colour}'s end endpoint");
+        }
+        //this has to be on a timer or else somehow, the call to write the neighbors of every Panel outpaces the initialization of all Panels?
+        //idfk why Unity can't keep things straight but whatever, this is what HAS to be done ig
+        Invoke("RefreshNeighbors",0.5f);
+    }
+
+    /// <inheritdoc/>
+    public void RefreshNeighbors()
+    {
+        for (int x = 0; x < panelGrid.GetLength(0); x++)
+        {
+            for (int y = 0; y < panelGrid.GetLength(1); y++)
+            {
+                if(panelGrid[x, y] == null)
+                {
+                    continue;
+                }
+                if(panelGrid[x,y].GridX > 0 && panelGrid[panelGrid[x, y].GridX-1, panelGrid[x, y].GridY] != null)
+                {
+                    panelGrid[x, y].LeftNeighbor = panelGrid[panelGrid[x, y].GridX-1, panelGrid[x, y].GridY];
+                    panelGrid[panelGrid[x, y].GridX-1, panelGrid[x, y].GridY].RightNeighbor = panelGrid[x, y];
+                }
+                if(panelGrid[x, y].GridY > 0 && panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY-1] != null)
+                {
+                    panelGrid[x, y].DownNeighbor = panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY-1];
+                    panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY-1].TopNeighbor = panelGrid[x, y];
+                }
+                if(panelGrid[x, y].GridX < MAX_GRID_SIZE-1 && panelGrid[panelGrid[x, y].GridX+1, panelGrid[x, y].GridY] != null)
+                {
+                    panelGrid[x, y].RightNeighbor = panelGrid[panelGrid[x, y].GridX+1, panelGrid[x, y].GridY];
+                    panelGrid[panelGrid[x, y].GridX+1, panelGrid[x, y].GridY].LeftNeighbor = panelGrid[x, y];
+                }
+                if(panelGrid[x, y].GridY < MAX_GRID_SIZE-1 && panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY+1] != null)
+                {
+                    panelGrid[x, y].TopNeighbor = panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY+1];
+                    panelGrid[panelGrid[x, y].GridX, panelGrid[x, y].GridY+1].DownNeighbor = panelGrid[x, y];
+                }
+            }
+        }
+        foreach(Panel panel in panelGrid)
+        {
+            if(panel == null)
+            {
+                continue;
+            }
+            if(panel.TopNeighbor == null && panel.DownNeighbor == null && panel.LeftNeighbor == null && panel.RightNeighbor == null)
+            {
+                throw new AssertionException($"Panel ({panel.GridX},{panel.GridY}) has no neighbors.", $"Panel ({panel.GridX},{panel.GridY}) has no neighbors.");
+            }
         }
     }
 
