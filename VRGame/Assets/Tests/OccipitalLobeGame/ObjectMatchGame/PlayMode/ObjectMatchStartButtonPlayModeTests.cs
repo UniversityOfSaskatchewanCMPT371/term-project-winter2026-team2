@@ -1,10 +1,11 @@
-using NUnit.Framework;
-using NSubstitute;
 using System.Collections;
+using System.Text.RegularExpressions;
+using NSubstitute;
+using NUnit.Framework;
+using ObjectMatchGame;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.XR.Interaction.Toolkit;
-using System.Text.RegularExpressions;
 
 /// <summary>
 /// PlayMode tests for ObjectMatchStartButton component.
@@ -36,8 +37,10 @@ public class ObjectMatchStartButtonPlayModeTests
         
         _grabInteractable = _startButtonGo.AddComponent<XRGrabInteractable>();
         _startButton = _startButtonGo.AddComponent<ObjectMatchStartButton>();
+        _startButton.buttonType = StartButtonType.level;
 
         yield return null; // Wait for Start()
+
     }
 
     /// <summary>

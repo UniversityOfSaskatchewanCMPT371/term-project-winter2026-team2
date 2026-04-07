@@ -6,7 +6,7 @@ using ObjectMatchGame;
 public class ObjectMatchStartButton : ClickableCubes
 {
 
-    [SerializeField] private StartButtonType buttonType;
+    [SerializeField] internal StartButtonType buttonType;
     /// <summary>
     /// Notifies the game controller that the start button has been grabbed so it can
     /// start the game
