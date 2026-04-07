@@ -31,11 +31,11 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <summary>
     /// The current path the left hand is taking
     /// </summary>
-    private Stack<Panel> currentPathLeft;
+    private Stack<IPanel> currentPathLeft;
     /// <summary>
     /// The current path the right hand is taking
     /// </summary>
-    private Stack<Panel> currentPathRight;
+    private Stack<IPanel> currentPathRight;
     /// <summary>
     /// A ParticleSystem that spawns confetti when the game is complete.
     /// </summary>
@@ -56,8 +56,8 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         Assert.IsNotNull(modelInstance, "There is no LogicGameModel attached to this GameObject!");
         targetedPanelLeft = null;
         targetedPanelRight = null;
-        currentPathLeft = new Stack<Panel>();
-        currentPathRight = new Stack<Panel>();
+        currentPathLeft = new Stack<IPanel>();
+        currentPathRight = new Stack<IPanel>();
         foreach(Transform childTransform in transform)
         {
             confettiSpawner = childTransform.gameObject.GetComponent<ParticleSystem>();
@@ -133,7 +133,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         if(isDraggingRight)
         {
             Debug.Log("Dragging!");
-            Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
+            IPanel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
             if(hoveredPanel == null)
             {
                 Debug.LogError("The currently-hovered panel is apparently null");
@@ -219,7 +219,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
             Debug.Log("But I'm not aiming at a panel!");
             return;
         }
-        Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
+        IPanel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
         if(hoveredPanel == null)
         {
             Debug.LogError($"The panel we're trying press on ({targetedPanelRight.X},{targetedPanelRight.Y}) is apparently null!");

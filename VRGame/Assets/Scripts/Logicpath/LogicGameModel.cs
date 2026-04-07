@@ -155,7 +155,7 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     }
 
     /// <inheritdoc/>
-    public Panel GetPanel(int x, int y)
+    public IPanel GetPanel(int x, int y)
     {
         if(x < 0)
         {
@@ -207,4 +207,5 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     {
         return GetPanel(x, y).IsOccupied();
     }
+
 }
