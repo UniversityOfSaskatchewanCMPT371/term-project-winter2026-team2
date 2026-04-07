@@ -4,11 +4,15 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.5.8] 2026-04-07
+
+- Added ColourButton component that changes the spawned block's material on (colour) button press
+
 ## [1.5.6] - 2026-04-06
 
 ### Added
 
-- Added ColourButton component that changes the spawned block's material on (colour) button press
+- Added scene descriptions for each Lobe
 
 ## [1.5.5] - 2026-04-06
 
