@@ -3,13 +3,8 @@
 API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
-## [1.5.5] - 2026-04-06
 
-### Added
-
-- Created Quiz Prefabs and added the prefabs to each lobe
-
-## [1.5.5] - 2026-04-06
+## [1.5.6] - 2026-04-06
 
 ### Added
 
@@ -19,6 +14,12 @@ do not change functionality nor do you need to when you you write tests.
 
 - Replaced PracticeRoom Scene with Cerebellum Scene
 - Corrected Names of Portals
+
+## [1.5.5] - 2026-04-06
+
+### Added
+
+- Created Quiz Prefabs and added the prefabs to each lobe
 
 ## [1.5.4] - 2026-04-06
 
