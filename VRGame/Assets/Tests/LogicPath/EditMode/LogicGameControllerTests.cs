@@ -32,15 +32,21 @@ public class LogicGameControllerTests
 
     }
 
+    [Test]
+    public void HandleHover_Valid_occupied()
+    {
+        // hovered panel mock
+        IPanel pMock = Substitute.For<IPanel>();
+        // add logicgame model mock
+        lgm = Substitute.For<ILogicGameModel>();
+
+        // logic game mock returns panel mock
+        lgm.GetPanel(0,0).Returns(pMock);
+
+        LogAssert.Expect(LogType.Log, "But the hovered panel is occupied!");
+        lgc.HandleHover(0,0);
+
+    }
     
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator LogicGameControllerWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
-    }
 }
