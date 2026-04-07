@@ -111,7 +111,10 @@ public interface IObjectMatchGameModel: IModel
     /// Preconditions:
     /// - None
     /// Postconditions:
-    /// - The model and view are updated to reflect the new level
+    /// - gameState = GameState.playing
+    /// - currentGuessID is set to an empty string
+    /// - failedGuesses is set to 0
+    /// - stopwatch is reset to zero and starts running
     /// </remarks>
     public void InitializeLevel();
 

@@ -10,7 +10,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     // Holds the level the user is currently on
     internal int currentLevel;
     // Total number of levels, not counting the tutorial
-    private int totalLevels;
+    internal int totalLevels;
     // The total score across all levels
     private int gameScore;
     // The score for the current level, which is added to the game score when the level is completed
