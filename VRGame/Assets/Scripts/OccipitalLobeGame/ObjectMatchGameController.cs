@@ -84,13 +84,15 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
         this.viewInstance.ClearAllObjects();
     }
 
-    private void Update()
+    /// <inheritdoc/>
+    public void Update()
     {
         if (modelInstance == null) return;
         if (modelInstance.GetGameState() != GameState.playing) return;
         viewInstance.UpdateTimer(modelInstance.GetTimeRemaining());
     }
 
+    /// <inheritdoc/>
     public void LeaveTutorial()
     {
         this.modelInstance.LeaveTutorial();

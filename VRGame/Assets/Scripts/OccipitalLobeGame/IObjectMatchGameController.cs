@@ -95,5 +95,26 @@ public interface IObjectMatchGameController: IController
     /// </remarks>
     public void ExitLevel();
 
+    /// <summary>
+    /// Updates the timer on every fram so the view can display it in real time.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - Calls view.UpdateTimer() with the current time remaining in the level so that the view can update the timer display
+    /// </remarks>
+    abstract void Update();
+
+    /// <summary>
+    /// Exits the tutorial and places the user back in the "menu" where they can pick to
+    /// start the tutorial or start the first level.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - See model.LeaveTutorial(), view.ExitTutorial(), and view.ClearObjects()
+    /// </remarks>
     public void LeaveTutorial();
 }

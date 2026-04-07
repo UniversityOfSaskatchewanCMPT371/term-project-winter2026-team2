@@ -208,6 +208,35 @@ public interface IObjectMatchGameModel: IModel
     /// </remarks>
     public int GetTimeRemaining();
 
-    void LeaveTutorial();
-    string[] GetTutorialObjectIDs();
+    /// <summary>
+    /// Return the game to the state it is at initialization, ready for a new game session to be started
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - gameState is set to readyToStart
+    /// - currentGuessID is set to an empty string
+    /// - failedGuesses is set to 0
+    /// </remarks>
+    public void LeaveTutorial();
+
+    /// <summary>
+    /// Retrieves the identifiers of all tutorial objects available in the current context.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions
+    /// - Returns an array of strings where each is the ID of an object used in the tutorial.
+    /// </remarks>
+    public string[] GetTutorialObjectIDs();
+
+    /// <summary>
+    /// Calculates the score of both the current level and the overall game.
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    public void CalculateScore();
 }

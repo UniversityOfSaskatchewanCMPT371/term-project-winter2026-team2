@@ -135,6 +135,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         failedGuesses = 0;
     }
 
+    /// <inheritdoc/>
     public void LeaveTutorial()
     {
         gameState = GameState.readyToStart;
@@ -185,6 +186,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         }
     }
 
+    /// <inheritdoc/>
     public void CalculateScore()
     {
         int score;
@@ -211,6 +213,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         UnityEngine.Debug.Log("game score: " + gameScore);
     }
 
+    /// <inheritdoc/>
     public int GetTimeRemaining()
     {
    
@@ -221,6 +224,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         return timeLeft;
     }
 
+    /// <inheritdoc/>
     public int[] GetLevelScores()
     {
         int[] scores = new int[totalLevels];
@@ -229,6 +233,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
         return scores;
     }
 
+    /// <inheritdoc/>
     public string[] GetTutorialObjectIDs()
     {
         return levels[0].AllObjectIDs;
