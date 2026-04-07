@@ -4,13 +4,13 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-<<<<<<< visual_match_game
+
 ## [1.6.0] - 2026-04-04
 
 ### Added
 
 - Added the MVP for the occipital lobe game
-=======
+
 ## [1.5.7] - 2026-04-06
 
 ### Added
