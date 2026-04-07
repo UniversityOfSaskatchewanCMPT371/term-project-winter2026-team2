@@ -4,9 +4,59 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.5.1] - 2026-04-04
+## [1.5.8] - 2026-04-07
 
-- Added more puzzles, a quick tutorial, and proper presentation to the frontal lobe minigame
+### Added
+
+- More puzzles, a quick tutorial, and proper presentation to the frontal lobe minigame
+
+## [1.5.7] - 2026-04-06
+
+### Added
+
+- Cerebellum Prefab
+
+### Changed
+
+- Replaced PracticeRoom Scene with Cerebellum Scene
+- Corrected Names of Portals
+
+## [1.5.6] - 2026-04-06
+
+### Added
+
+- Added scene descriptions for each Lobe
+## [1.5.5] - 2026-04-06
+
+### Added
+
+- Created Quiz Prefabs and added the prefabs to each lobe
+
+## [1.5.4] - 2026-04-06
+
+### Added
+
+- Added background music that persists throughout all scene changes
+
+## [1.5.3] - 2026-03-31
+
+### Added
+
+- SpawnButton MVC component that triggers spawning of block prefabs on button press
+- BlockSpawner MVC component that spawns block prefabs on a designated area in the Parietal Lobe scene. It cycles through a list of fours block prefabs (in sequence), destroying the previously spawned block before instantiating the next one.
+
+## [1.5.2] - 2026-03-31
+
+### Added/Restored
+
+- Restored design setup of parietal minigame view approved by stakeholders
+
+## [1.5.1] - 2026-03-31
+
+### Fixed 
+
+- Integrated id5 into parietal branch, keeping record of work history done
+
 
 ## [1.5.0] - 2026-03-22
 
