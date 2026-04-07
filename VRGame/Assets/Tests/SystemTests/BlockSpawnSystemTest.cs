@@ -4,7 +4,6 @@ using UnityEngine.TestTools;
 using System;
 using System.Collections;
 using UnityEditor;
-using System.Text.RegularExpressions;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class BlockSpawnSystemTest
