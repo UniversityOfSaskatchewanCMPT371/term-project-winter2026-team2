@@ -1,0 +1,96 @@
+fileFormatVersion: 2
+guid: 77aed1cd2c1fa44fa9b70edbdadc6a97
+labels:
+- NuGetForUnity
+- RoslynAnalyzer
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+  - first:
+      : Any
+    second:
+      enabled: 0
+      settings:
+        'Exclude ': 0
+        Exclude Android: 1
+        Exclude CloudRendering: 0
+        Exclude Editor: 1
+        Exclude EmbeddedLinux: 0
+        Exclude GameCoreScarlett: 0
+        Exclude GameCoreXboxOne: 0
+        Exclude Linux64: 1
+        Exclude OSXUniversal: 1
+        Exclude PS4: 0
+        Exclude PS5: 0
+        Exclude QNX: 0
+        Exclude Stadia: 0
+        Exclude Switch: 0
+        Exclude VisionOS: 0
+        Exclude WebGL: 0
+        Exclude Win: 1
+        Exclude Win64: 1
+        Exclude WindowsStoreApps: 0
+        Exclude XboxOne: 0
+        Exclude iOS: 0
+        Exclude tvOS: 0
+  - first:
+      Android: Android
+    second:
+      enabled: 0
+      settings:
+        AndroidSharedLibraryType: Executable
+        CPU: ARMv7
+  - first:
+      Any: 
+    second:
+      enabled: 0
+      settings: {}
+  - first:
+      Editor: Editor
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+        DefaultValueInitialized: true
+        OS: AnyOS
+  - first:
+      Standalone: Linux64
+    second:
+      enabled: 0
+      settings:
+        CPU: None
+  - first:
+      Standalone: OSXUniversal
+    second:
+      enabled: 0
+      settings:
+        CPU: None
+  - first:
+      Standalone: Win
+    second:
+      enabled: 0
+      settings:
+        CPU: None
+  - first:
+      Standalone: Win64
+    second:
+      enabled: 0
+      settings:
+        CPU: None
+  - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
