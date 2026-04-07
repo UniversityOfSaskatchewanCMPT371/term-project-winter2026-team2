@@ -42,6 +42,32 @@ public class PlayerController : MonoBehaviour, IPlayerController
     /// <inheritdoc/>
     public void teleportPlayerTo(Vector3 position, Quaternion rotation)
     {
-        // Yet to be implemented
+        // Move rig first, then align camera-facing yaw with requested orientation.
+        transform.position = position;
+
+        // First see if camera rig has a Camera component so we can align the 
+        // player's yaw to rotation
+        Camera rigCamera = GetComponentInChildren<Camera>();
+        if (rigCamera == null)
+        {
+            // No camera found, just set the rotation directly
+            transform.rotation = rotation;
+            Debug.LogWarning("No camera found in XR rig, setting rotation directly.");
+            return;
+        }
+
+        // Calculate the forward direction, ignore vertical direction
+        Vector3 desiredForward = rotation * Vector3.forward;
+        desiredForward.y = 0f;
+
+        // Calculate the current direction, ignore vertical direction
+        Vector3 currentForward = rigCamera.transform.forward;
+        currentForward.y = 0f;
+
+        // Rotate the player around the Y axis to align with the desired forward direction
+        float deltaYaw = Vector3.SignedAngle(currentForward.normalized, desiredForward.normalized, Vector3.up);
+        transform.Rotate(Vector3.up, deltaYaw, Space.World);
+
+        Debug.Log($"Player teleported to position: {position}, facing: {desiredForward.normalized}");
     }
 }

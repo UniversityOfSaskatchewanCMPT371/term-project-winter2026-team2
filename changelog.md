@@ -8,6 +8,17 @@ do not change functionality nor do you need to when you you write tests.
 ### Added
 
 - Added scene descriptions for each Lobe
+## [1.5.5] - 2026-04-06
+
+### Added
+
+- Created Quiz Prefabs and added the prefabs to each lobe
+
+## [1.5.4] - 2026-04-06
+
+### Added
+
+- Added background music that persists throughout all scene changes
 
 ## [1.5.3] - 2026-03-31
 
