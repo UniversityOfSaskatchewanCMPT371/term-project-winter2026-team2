@@ -85,6 +85,30 @@ public interface IObjectMatchGameView: IView
     /// </remarks>
     public void UpdateScore(int totalScore, int[] levelScores);
 
+    /// <summary>
+    /// Activate/deactivate the appropriate UI elements for the tutorial
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - startlevel and tutorial buttons are disabled
+    /// - guess box and submit button are enalbled
+    /// - leave tutorial button is enabled
+    /// - in level and out of level displays are disabled
+    /// </remarks>
     public void EnterTutorial();
+
+    /// <summary>
+    /// Activate/deactivate the appropriate UI elements for exiting the tutorial and returning to the main menu
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - startlevel and tutorial buttons are enabled
+    /// - leave tutorial, guess box and submit button are disabled
+    /// - in level and out of level displays are disabled
+    /// </remarks>
     public void ExitTutorial();
 }

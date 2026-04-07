@@ -385,10 +385,10 @@ public class ObjectMatchGameModelTests
         model.Init();
         
         Assert.AreEqual(GameState.readyToStart, model.GetGameState());
-        Assert.AreEqual(-1, model.GetCurrentLevel());
+        Assert.AreEqual(1, model.GetCurrentLevel());
         
         model.CompleteLevel();
-        Assert.AreEqual(0, model.GetCurrentLevel());
+        Assert.AreEqual(2, model.GetCurrentLevel());
         Assert.AreEqual(GameState.levelComplete, model.GetGameState());
 
         Object.DestroyImmediate(go);

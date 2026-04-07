@@ -31,18 +31,26 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
     internal GameObject GuessBox { get => guessBox; set => guessBox = value; }
     internal GameObject SubmitButton { get => submitButton; set => submitButton = value; }
     internal GameObject StartLevelButton { get => startLevelButton; set => startLevelButton = value; }
-
+    internal GameObject StartTutorialButton { get => startTutorialButton; set => startTutorialButton = value; }
+    internal GameObject LeaveTutorialButton { get => leaveTutorialButton; set => leaveTutorialButton = value; }
+    internal TextMeshProUGUI InLevelDisplay { get => inLevelDisplay; set => inLevelDisplay = value; }
+    internal TextMeshProUGUI OutOfLevelDisplay { get => outOfLevelDisplay; set => outOfLevelDisplay = value; }
     /// <inheritdoc/>
     public override void Init()
     {
         CheckControllerRef();
         // Set the camera for the canvas
-        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
-
+        Canvas canvas = GetComponentInChildren<Canvas>();
+        if (canvas != null)
+        {
+            canvas.worldCamera = Camera.main;
+        }
+        
         foreach (GameObject obj in allObjects)
         {
             obj.SetActive(false);
         }
+
 
         startLevelButton.SetActive(true);
         startTutorialButton.SetActive(true);
