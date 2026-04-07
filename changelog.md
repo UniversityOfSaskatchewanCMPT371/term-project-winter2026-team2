@@ -10,6 +10,11 @@ do not change functionality nor do you need to when you you write tests.
 
 - Created block prefab variances to use for block spawning (Kenny Brick Assets are not modifiable and cannot attach scripts on them)
 
+## [1.5.6] - 2026-04-06
+
+### Added
+
+- Added scene descriptions for each Lobe
 ## [1.5.5] - 2026-04-06
 
 ### Added
