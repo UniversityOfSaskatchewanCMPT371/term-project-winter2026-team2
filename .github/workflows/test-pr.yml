@@ -5,7 +5,26 @@ on:
   workflow_dispatch:
 jobs:
   static-analysis:
-   #
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Unity
+        uses: ./.github/workflows/unity-setup
+
+      # Run a compilation step so Roslyn analyzers execute
+      - name: Run static analysis (build only)
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: VRGame
+          targetPlatform: StandaloneLinux64
+          buildMethod: UnityBuilderAction.BuildScript
+        continue-on-error: true
   test:
     runs-on: ubuntu-latest
     steps:
