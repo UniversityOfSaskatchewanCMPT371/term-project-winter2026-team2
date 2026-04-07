@@ -67,9 +67,37 @@ public class LogicGameModelTest
                 p.Init();
             }
         }
-
         
         lgm.Init();
+    }
+
+    public void fill_grid()
+    {
+        lgm.panelGrid[0,0].exitDirection = Direction.Left;
+
+        lgm.panelGrid[1,0].entryDirection = Direction.Left;
+        lgm.panelGrid[1,0].exitDirection = Direction.Right;
+
+        lgm.panelGrid[2,0].entryDirection = Direction.Left;
+        lgm.panelGrid[2,0].exitDirection = Direction.Down;
+
+        lgm.panelGrid[2,1].entryDirection = Direction.Up;
+        lgm.panelGrid[2,1].exitDirection = Direction.Left;
+
+        lgm.panelGrid[1,1].entryDirection = Direction.Right;
+        lgm.panelGrid[1,1].exitDirection = Direction.Left;
+
+        lgm.panelGrid[0,1].entryDirection = Direction.Right;
+        lgm.panelGrid[0,1].exitDirection = Direction.Down;
+
+        lgm.panelGrid[0,2].entryDirection = Direction.Up;
+        lgm.panelGrid[0,2].exitDirection = Direction.Right;
+
+        lgm.panelGrid[1,2].entryDirection = Direction.Left;
+        lgm.panelGrid[1,2].exitDirection = Direction.Right;
+
+        lgm.panelGrid[2,2].entryDirection = Direction.Left;
+
     }
 
     /// <summary>
@@ -155,5 +183,45 @@ public class LogicGameModelTest
             }
         }
 
+    }
+
+    [Test]
+    public void IsGridFilled_no()
+    {
+        setup_valid_3x3();
+        Assert.IsFalse(lgm.IsGridFilled());
+
+    }
+
+    [Test]
+    public void IsGridFilled_yes()
+    {
+        setup_valid_3x3();
+        // now manually fill each panel in the grid
+        fill_grid();
+
+        Assert.IsTrue(lgm.IsGridFilled());
+
+    }
+
+    [Test]
+    public void clearGrid_PBT()
+    {
+
+        setup_valid_3x3();
+        fill_grid();
+        // clearGrid should be idempotent
+        Prop.ForAll<NonNegativeInt>(count =>
+        {
+            lgm.ClearGrid();
+            bool res = lgm.IsGridFilled();
+            bool res2 = false;
+            for (int i = 0; i < count.Get+1; i++)
+            {
+                lgm.ClearGrid();
+                res2 = lgm.IsGridFilled();
+            }
+            return res == res2;
+        }).QuickCheckThrowOnFailure();
     }
 }
