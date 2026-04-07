@@ -7,7 +7,7 @@ public interface IColourController : IController
     /// <summary>
     /// Checks references for model and view component
     /// </summary>
-    new void Awake();
+    void Awake();
 
     /// <summary>
     /// Initializes the controller and checks model, view, and block spawner references
