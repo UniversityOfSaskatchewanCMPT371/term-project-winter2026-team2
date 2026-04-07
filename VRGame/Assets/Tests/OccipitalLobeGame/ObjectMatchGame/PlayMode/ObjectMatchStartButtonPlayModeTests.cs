@@ -57,7 +57,7 @@ public class ObjectMatchStartButtonPlayModeTests
     /// Verifies OnGrabbed calls InitializeLevel on controller.
     /// </summary>
     [UnityTest]
-    public IEnumerator OnGrabbed_CallsControllerInitializeLevel()
+    public IEnumerator OnGrabbed_LevelButtonCallsController()
     {
         // Arrange
         var mockInteractor = Substitute.For<IXRSelectInteractor>();
@@ -77,10 +77,10 @@ public class ObjectMatchStartButtonPlayModeTests
     }
 
     /// <summary>
-    /// Verifies OnGrabbed deactivates the start button GameObject.
+    /// Verifies OnGrabbed for tutorial button calls InitializeTutorial on controller.
     /// </summary>
     [UnityTest]
-    public IEnumerator OnGrabbed_DeactivatesButton()
+    public IEnumerator OnGrabbed_TutorialButtonCallsController()
     {
         // Arrange
         var mockInteractor = Substitute.For<IXRSelectInteractor>();
@@ -90,6 +90,7 @@ public class ObjectMatchStartButtonPlayModeTests
             interactorObject = mockInteractor,
             interactableObject = mockInteractable
         };
+        _startButton.buttonType = StartButtonType.tutorial;
 
         Assert.IsTrue(_startButtonGo.activeSelf, "Button should be active initially");
 
@@ -98,7 +99,33 @@ public class ObjectMatchStartButtonPlayModeTests
         yield return null;
 
         // Assert
-        Assert.IsFalse(_startButtonGo.activeSelf, "Button should be deactivated after grab");
+        _mockController.Received(1).InitializeTutorial();
+    }
+
+    /// <summary>
+    /// Verifies OnGrabbed for leave tutorial button calls LeaveTutorial on controller.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator OnGrabbed_LeaveTutorialButtonCallsController()
+    {
+        // Arrange
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
+        _startButton.buttonType = StartButtonType.leaveTutorial;
+
+        Assert.IsTrue(_startButtonGo.activeSelf, "Button should be active initially");
+
+        // Act
+        _startButton.OnGrabbed(args);
+        yield return null;
+
+        // Assert
+        _mockController.Received(1).LeaveTutorial();
     }
 
     /// <summary>

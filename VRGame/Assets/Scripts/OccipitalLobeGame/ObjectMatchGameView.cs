@@ -99,6 +99,8 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         startLevelButton.SetActive(false);
         guessBox.SetActive(true);
         submitButton.SetActive(true);
+        startTutorialButton.SetActive(false);
+        leaveTutorialButton.SetActive(false);
 
         inLevelDisplay.gameObject.SetActive(true);
         outOfLevelDisplay.gameObject.SetActive(false);
@@ -110,6 +112,7 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         guessBox.SetActive(false);
         submitButton.SetActive(false);
         startLevelButton.SetActive(true);
+        startTutorialButton.SetActive(true);
         inLevelDisplay.gameObject.SetActive(false);
         outOfLevelDisplay.gameObject.SetActive(true);
     }
