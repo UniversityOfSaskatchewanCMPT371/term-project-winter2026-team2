@@ -32,6 +32,11 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
     /// </inheritdoc/>
     public void OnGrabbed(SelectEnterEventArgs args)
     {
+        if (controllerInstance == null)
+        {
+            Debug.LogError("controllerInstance is null on OnGrabbed");
+            Assert.IsNotNull(controllerInstance, "controllerInstance must not be null on OnGrabbed");
+        }
         controllerInstance.Detach();
         // Reset to upright orientation
         // AI generated ideas referenced: 
@@ -45,6 +50,11 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
     /// </inheritdoc/>
     public void OnReleased(SelectExitEventArgs args)
     {
+        if (controllerInstance == null)
+        {
+            Debug.LogError("controllerInstance is null on OnReleased");
+            Assert.IsNotNull(controllerInstance, "controllerInstance must not be null on OnReleased");
+        }
         controllerInstance.Snap();
     }
 

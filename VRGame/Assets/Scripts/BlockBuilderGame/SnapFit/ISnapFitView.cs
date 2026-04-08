@@ -22,7 +22,7 @@ public interface ISnapFitView : IView
     /// </summary> 
     /// <remarks>
     /// pre-condition:
-    ///     - requires (controllerInstance != null) && (grab != null)
+    ///     - requires (controllerInstance != null)
     /// post-condition:
     ///     - ensures (Detach() is invoked) && (block is reset to upright orientation)
     /// </remarks>
@@ -33,7 +33,7 @@ public interface ISnapFitView : IView
     /// </summary>
     /// <remarks>
     /// pre-condition:
-    ///     - requires (controllerInstance != null) && (grab != null)
+    ///     - requires (controllerInstance != null)
     /// post-condition:
     ///     - ensures Snap() is invoked (in controller component)
     /// </remarks>
