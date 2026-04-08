@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: 53cfcf3e3cfb2b7489fb969a7f199134
+<<<<<<< visual_match_game
+guid: dacfd1cefe7d1ad408c62fc385a26f5d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+=======
+guid: dc149804a482c6e428401c8cc41529ea
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
+>>>>>>> id5
   userData: 
   assetBundleName: 
   assetBundleVariant: 

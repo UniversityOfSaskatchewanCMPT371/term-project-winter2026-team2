@@ -24,14 +24,10 @@ public class SpawnButtonController : Controller<IModel, ISpawnButtonView>, ISpaw
     }
 
     /// <inheritdoc/>
-    public override void Start() {}
-
-    /// <inheritdoc/>
     public override void Init()
     {
         this.CheckViewRef();
 
-        // Implement from IBlockSpawnerController
         if (blockSpawnerController is IBlockSpawnerController spawner)
         {
             blockSpawner = spawner;

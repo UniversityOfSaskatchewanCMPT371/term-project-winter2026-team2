@@ -7,8 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
 {
-    // use 'this.controllerInstance' to access controller component
-
     /// <inheritdoc/>
     public override void Init()
     {
@@ -33,7 +31,6 @@ public class SpawnButtonView : View<ISpawnButtonController>, ISpawnButtonView
                 Debug.LogError("Null component detected");
             }
             c.selectEntered.AddListener(OnXRClick);
-            Assert.IsNotNull(c, "Failed to add XR events to a (null) component");
         }
     }
 
