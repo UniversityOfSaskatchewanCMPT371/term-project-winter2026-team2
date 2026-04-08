@@ -29,7 +29,7 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         grab.selectExited.AddListener(OnReleased);
     }
 
-    /// </inheritdoc/>
+    /// <inheritdoc/>
     public void OnGrabbed(SelectEnterEventArgs args)
     {
         if (controllerInstance == null)
@@ -48,7 +48,7 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         transform.rotation = Quaternion.Euler(0f, upright.y, 0f);
     }
 
-    /// </inheritdoc/>
+    /// <inheritdoc/>
     public void OnReleased(SelectExitEventArgs args)
     {
         if (controllerInstance == null)
@@ -60,7 +60,7 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         controllerInstance.Snap();
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc>
     public void OnDestroy()
     {
         if (grab != null)
