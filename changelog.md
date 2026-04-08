@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.7.1] - 2026-04-07
+
+### Added
+
+- SnapFit MVC component that snaps blocks together via snap points
+
 ## [1.7.0] - 2026-04-07
 
 ### Added
@@ -17,6 +23,7 @@ do not change functionality nor do you need to when you you write tests.
 ### Added
 
 - Added ColourButton component that changes the spawned block's material on (colour) button press
+
 ## [1.6.1] - 2026-04-07
 
 ### Added
