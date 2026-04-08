@@ -29,6 +29,10 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
     {
         controllerInstance.Detach();
         // Reset to upright orientation
+        // AI generated ideas referenced: 
+        //  -   Quaternioin.Euler(x, y, z) 
+        //  -   Vector3 euler = transform.eulerAngles; 
+        //  -   transform.rotation = Quaternion.Euler(0f, euler.y, 0f); 
         Vector3 upright = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0f, upright.y, 0f);
     }

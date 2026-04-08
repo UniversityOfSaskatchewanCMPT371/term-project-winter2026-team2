@@ -27,12 +27,16 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
         var points = new List<Transform>();
         foreach (Transform component in GetComponentsInChildren<Transform>())
             if (component.name.StartsWith("Top") || component.name.StartsWith("Bottom"))
+            {
                 points.Add(component);
+            }
 
         // Set snap points in model
         modelInstance.SnapPoints = points.ToArray();
         if (modelInstance.SnapPoints.Length == 0)
+        {
             Debug.LogError("No snap points found for SnapFitController");
+        }
     }
 
     /// <inheritdoc/>
@@ -83,7 +87,7 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
                 // Check all snap points of the target/other block
                 foreach (var targetSP in sf.modelInstance.SnapPoints)
                 {
-                    // Check if the snap points match
+                    // Check if the snap points match. The .StartsWith(prefix) was an AI generated idea
                     bool isMatch = (currentSP.name.StartsWith("Top") && targetSP.name.StartsWith("Bottom")) ||
                                    (currentSP.name.StartsWith("Bottom") && targetSP.name.StartsWith("Top"));
 
@@ -125,6 +129,13 @@ public class SnapFitController : Controller<ISnapFitModel, ISnapFitView>, ISnapF
 
         // Create a joint to connect this block to the target block
         var joint = gameObject.AddComponent<FixedJoint>();
+
+        // AI generated ideas here:
+        //  -   joint.connectedBody = Rigidbody
+        //  -   joint.breakForce = Math.Infinity 
+        //  -   joint.breakTorque = Math.Infinity 
+        //  -   joint.enableCollision = false 
+        //  -   joint.enablePreprocessing = false 
 
         // Connect the joint to the target block's rigidbody
         joint.connectedBody = snapFitController.GetComponent<Rigidbody>();

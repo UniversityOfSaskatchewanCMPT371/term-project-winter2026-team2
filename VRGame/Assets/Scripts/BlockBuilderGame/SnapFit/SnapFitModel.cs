@@ -63,6 +63,7 @@ public class SnapFitModel : Model, ISnapFitModel
 
     /// <summary>
     /// The joint that connects one block to another (when snapped)
+    /// FixedJoint idea came from Copilot AI suggestions
     /// </summary>
     private FixedJoint snapJoint = null;
 
