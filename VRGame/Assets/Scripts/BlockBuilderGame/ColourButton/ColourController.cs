@@ -51,21 +51,45 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
         GameObject block = blockSpawnerModel.LastSpawnedBlock;
         if (block == null)
         {
-            Debug.LogWarning("No spawned block to change colour. Please spawn a block first by pressing the 'Spawn' button.");
+            Debug.LogError("No spawned block to change colour. Please spawn a block first by pressing the 'Spawn' button.");
             return;
         }
 
         // Get colours assigned in Inspector
         Material[] colours = modelInstance.Colours;
-        Assert.IsTrue(colours.Length > 0, "Colours[] must not be empty");
-        Assert.IsNotNull(colours, "Colours[] must not be null");
+        if (colours == null)
+        {
+            Debug.LogError("Colours[] must not be null");
+            Assert.IsNotNull(colours, "Colours[] must not be null");
+            return;
+        }
+        if (colours.Length == 0)
+        {
+            Debug.LogError("Colours[] must not be empty");
+            Assert.IsTrue(colours.Length > 0, "Colours[] must not be empty");
+            return;
+        }
+        
+
 
         // Get access to the renderer component (materials live on Renderer component)
         int index = modelInstance.CurrentIndex;
-        Renderer renderer = block.GetComponentInChildren<Renderer>();
-        Assert.IsNotNull(renderer, "No Renderer found on LastSpawnedBlock");
-        Assert.IsTrue(index >= 0 && index < colours.Length, "Index out of bounds for Colours[]");
+        if (index < 0 || index >= colours.Length)
+        {
+            Debug.LogError("Index out of bounds for Colours[]");
+            Assert.IsTrue(index >= 0 && index < colours.Length, "Index out of bounds for Colours[]");
+            return;
+        }
+    
 
+        Renderer renderer = block.GetComponentInChildren<Renderer>();
+        if (renderer == null)
+        {
+            Debug.LogError("No Renderer found on LastSpawnedBlock");
+            Assert.IsNotNull(renderer, "No Renderer found on LastSpawnedBlock");
+            return;
+        }
+        
         // Set colour material based on index
         renderer.material = colours[index];
         modelInstance.CurrentIndex = (index + 1) % colours.Length;
