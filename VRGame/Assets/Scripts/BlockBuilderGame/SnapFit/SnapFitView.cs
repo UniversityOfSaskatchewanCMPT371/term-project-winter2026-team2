@@ -18,7 +18,12 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         this.CheckControllerRef();
 
         grab = GetComponent<XRGrabInteractable>();
-        Assert.IsNotNull(grab, "grab component must not be null on SnapFitView");
+        if (grab == null)
+        {
+            Debug.LogError("XR Grab interactable failed to set on Init");
+            Assert.IsNotNull(grab, "grab component must not be null on SnapFitView");
+            return;
+        }
 
         grab.selectEntered.AddListener(OnGrabbed);
         grab.selectExited.AddListener(OnReleased);
