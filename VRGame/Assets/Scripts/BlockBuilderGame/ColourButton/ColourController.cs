@@ -58,11 +58,13 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
         // Get colours assigned in Inspector
         Material[] colours = modelInstance.Colours;
         Assert.IsTrue(colours.Length > 0, "Colours[] must not be empty");
+        Assert.IsNotNull(colours, "Colours[] must not be null");
 
         // Get access to the renderer component (materials live on Renderer component)
         int index = modelInstance.CurrentIndex;
         Renderer renderer = block.GetComponentInChildren<Renderer>();
         Assert.IsNotNull(renderer, "No Renderer found on LastSpawnedBlock");
+        Assert.IsTrue(index >= 0 && index < colours.Length, "Index out of bounds for Colours[]");
 
         // Set colour material based on index
         renderer.material = colours[index];
