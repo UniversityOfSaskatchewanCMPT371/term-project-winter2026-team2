@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ObjectMatchGame;
 using UnityEngine;
 
 public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObjectMatchGameView>, IObjectMatchGameController
@@ -25,14 +26,18 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
     /// </inheritdoc>
     public void InitializeLevel()
     {
+        Debug.Log("Initializing level " + this.modelInstance.GetCurrentLevel());
         this.modelInstance.InitializeLevel();
+        this.viewInstance.EnterLevel();
         this.viewInstance.ShowObjects(this.modelInstance.GetActiveObjectIDs());
     }
 
     /// </inheritdoc>
     public void InitializeTutorial()
     {
-        throw new System.NotImplementedException();
+        this.modelInstance.InitializeTutorial();
+        this.viewInstance.EnterTutorial();
+        this.viewInstance.ShowObjects(this.modelInstance.GetTutorialObjectIDs());
     }
 
     /// </inheritdoc>
@@ -61,6 +66,37 @@ public class ObjectMatchGameController : Controller<IObjectMatchGameModel, IObje
             Debug.LogError("ObjectMatchGameController was asked to submit a guess but the current guess ID is empty or null. No guess will be submitted.");
             return;
         }
-        this.modelInstance.SubmitGuess();
+        bool success = this.modelInstance.SubmitGuess();
+        if (success)
+        {
+            ExitLevel();
+        }
+    }
+
+    /// <inheritdoc/>
+    public void ExitLevel()
+    {
+        this.viewInstance.UpdateScore(
+            this.modelInstance.GetGameScore(),
+            this.modelInstance.GetLevelScores()
+        );
+        this.viewInstance.ExitLevel();
+        this.viewInstance.ClearAllObjects();
+    }
+
+    /// <inheritdoc/>
+    public void Update()
+    {
+        if (modelInstance == null) return;
+        if (modelInstance.GetGameState() != GameState.playing) return;
+        viewInstance.UpdateTimer(modelInstance.GetTimeRemaining());
+    }
+
+    /// <inheritdoc/>
+    public void LeaveTutorial()
+    {
+        this.modelInstance.LeaveTutorial();
+        this.viewInstance.ExitTutorial();
+        this.viewInstance.ClearAllObjects();
     }
 }

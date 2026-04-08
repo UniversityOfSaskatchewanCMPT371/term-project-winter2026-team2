@@ -82,4 +82,40 @@ public interface IObjectMatchGameController: IController
     /// - Calls submit guess in the model
     /// </remarks>
     public void SubmitGuess();
+
+    /// <summary>
+    /// Disables the guess box and submit button, and shows the start buttons to allow
+    /// the player to move on to the next level. Clears all option objects
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The guess box, submit button, and option objects are disabled, and the start buttons are shown
+    /// </remarks>
+    public void ExitLevel();
+
+    /// <summary>
+    /// Updates the timer on every fram so the view can display it in real time.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - the referene to the model is not null
+    /// - the game state is set to gameState.playing
+    /// Postconditions:
+    /// - Calls view.UpdateTimer() with the current time remaining in the level so that the view can update the timer display
+    /// </remarks>
+    abstract void Update();
+
+    /// <summary>
+    /// Exits the tutorial and places the user back in the "menu" where they can pick to
+    /// start the tutorial or start the first level.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - See model.LeaveTutorial(), view.ExitTutorial(), and view.ClearObjects()
+    /// </remarks>
+    public void LeaveTutorial();
 }

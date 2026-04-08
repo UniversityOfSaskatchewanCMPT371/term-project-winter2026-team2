@@ -3,7 +3,7 @@ using ObjectMatchGame;
 /// Interface for the model of the object matching minigame for the occipital lobe
 /// The model is responsible for keeping track of the state of the game
 /// </summary>
-public interface IObjectMatchGameModel: IModel
+public interface IObjectMatchGameModel : IModel
 {
 
     /// <summary>
@@ -111,7 +111,10 @@ public interface IObjectMatchGameModel: IModel
     /// Preconditions:
     /// - None
     /// Postconditions:
-    /// - The model and view are updated to reflect the new level
+    /// - gameState = GameState.playing
+    /// - currentGuessID is set to an empty string
+    /// - failedGuesses is set to 0
+    /// - stopwatch is reset to zero and starts running
     /// </remarks>
     public void InitializeLevel();
 
@@ -122,7 +125,9 @@ public interface IObjectMatchGameModel: IModel
     /// Preconditions:
     /// - None
     /// Postconditions:
-    /// - The tutorial system is initialized and ready for user interaction
+    /// - gameState = GameState.tutorial
+    /// - currentGuessID is set to an empty string
+    /// - failedGuesses is set to 0
     /// </remarks>
     public void InitializeTutorial();
 
@@ -178,9 +183,69 @@ public interface IObjectMatchGameModel: IModel
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - currentGuessID is a non-empty string
+    /// - None
     /// Postconditions:
     /// - Update the model to reflect whether the current guess is correct or not
+    /// - Return true if the guess is correct, false if it is incorrect
     /// </remarks>
-    public void SubmitGuess();
+    public bool SubmitGuess();
+
+    /// <summary>
+    /// Get the scores of all levels
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions: 
+    /// - returns the score for all levels, where level 1 score is at index 0, level2 at 
+    /// index 1, and so on
+    /// </remarks>
+    public int[] GetLevelScores();
+
+    /// <summary>
+    /// Gets the time remaining for the current level
+    /// </summary>
+    /// <remarks>
+    /// Precondtions:
+    /// - The model's game state is playing
+    /// PostConditions:
+    /// - returns the difference between the level stopwatch and the max level time
+    /// </remarks>
+    public int GetTimeRemaining();
+
+    /// <summary>
+    /// Return the game to the state it is at initialization, ready for a new game session to be started
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - gameState is set to readyToStart
+    /// - currentGuessID is set to an empty string
+    /// - failedGuesses is set to 0
+    /// </remarks>
+    public void LeaveTutorial();
+
+    /// <summary>
+    /// Retrieves the identifiers of all tutorial objects available in the current context.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions
+    /// - Returns an array of strings where each is the ID of an object used in the tutorial.
+    /// </remarks>
+    public string[] GetTutorialObjectIDs();
+
+    /// <summary>
+    /// Calculates the score of both the current level and the overall game.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - adds the score for the last level to gameScore
+    /// - sets levels[currentLevel].score to the score for the last level
+    /// </remarks>
+    public void CalculateScore();
 }
