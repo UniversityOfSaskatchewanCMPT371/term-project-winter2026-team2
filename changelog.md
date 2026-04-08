@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.6.0] - 2026-04-07
+
+### Added
+
+- Added the MVP for the occipital lobe game
+
 ## [1.5.8] - 2026-04-07
 
 ### Added
@@ -56,7 +62,6 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed 
 
 - Integrated id5 into parietal branch, keeping record of work history done
-
 
 ## [1.5.0] - 2026-03-22
 
