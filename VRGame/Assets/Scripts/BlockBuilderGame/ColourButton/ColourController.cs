@@ -32,16 +32,22 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
     /// <inheritdoc/>
     public override void Init()
     {
-        if (BlockSpawnerModel != null)
+        if (BlockSpawnerModel == null)
         {
-            blockSpawnerModel = BlockSpawnerModel as IBlockSpawnerModel;
-            if (blockSpawnerModel == null)
-            {
-                Debug.LogWarning("'BlockSpawnerModel' does not implement IBlockSpawnerModel.");
-            }
+            Debug.LogError("'BlockSpawnerModel' inspector field must be assigned to the Block Spawner GameObject");
+            Assert.IsNotNull(blockSpawnerModel, "'BlockSpawnerModel' must not be null");
+            return;
         }
 
-        Assert.IsNotNull(blockSpawnerModel, "'BlockSpawnerModel' inspector field must be assigned to the Block Spawner GameObject.");
+        blockSpawnerModel = BlockSpawnerModel as IBlockSpawnerModel;
+
+        // Check again since we assigned in previous line
+        if (blockSpawnerModel == null)
+        {
+            Debug.LogError("'BlockSpawnerModel' must implement IBlockSpawnerModel");
+            Assert.IsNotNull(blockSpawnerModel, "'BlockSpawnerModel' must implement IBlockSpawnerModel");
+            return;
+        }
     }
 
     /// <inheritdoc/>
@@ -69,8 +75,6 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
             Assert.IsTrue(colours.Length > 0, "Colours[] must not be empty");
             return;
         }
-        
-
 
         // Get access to the renderer component (materials live on Renderer component)
         int index = modelInstance.CurrentIndex;
