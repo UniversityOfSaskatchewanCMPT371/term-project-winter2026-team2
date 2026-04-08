@@ -15,6 +15,26 @@ public class PanelTextureManager : MonoBehaviour
     /// </summary>
     private Panel panel;
 
+
+    /// <summary>
+    /// Unity's Awake() method for the texture manager, saves the Panel this manager is associated with
+    /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - There is a Panel attached to the same GameObject
+    /// postconditions:
+    ///     - The manager has its associated Panel saved
+    /// </remarks>
+    public void Init()
+    {
+        panel = gameObject.GetComponent<Panel>();
+        if(panel == null)
+        {
+            Debug.LogError("There is no panel attached to this GameObject!");
+        }
+        Assert.IsNotNull(panel, "There is no panel attached to this GameObject!");
+    }
+
     /// <summary>
     /// Unity's Awake() method for the texture manager, saves the Panel this manager is associated with
     /// </summary>
@@ -26,12 +46,7 @@ public class PanelTextureManager : MonoBehaviour
     /// </remarks>
     public void Awake()
     {
-        panel = gameObject.GetComponent<Panel>();
-        if(panel == null)
-        {
-            Debug.LogError("There is no panel attached to this GameObject!");
-        }
-        Assert.IsNotNull(panel, "There is no panel attached to this GameObject!");
+        Init();
     }
     
     /// <summary>
