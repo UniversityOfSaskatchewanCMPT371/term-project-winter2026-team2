@@ -36,6 +36,7 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         {
             Debug.LogError("controllerInstance is null on OnGrabbed");
             Assert.IsNotNull(controllerInstance, "controllerInstance must not be null on OnGrabbed");
+            return;
         }
         controllerInstance.Detach();
         // Reset to upright orientation
@@ -54,6 +55,7 @@ public class SnapFitView : View<ISnapFitController>, ISnapFitView
         {
             Debug.LogError("controllerInstance is null on OnReleased");
             Assert.IsNotNull(controllerInstance, "controllerInstance must not be null on OnReleased");
+            return;
         }
         controllerInstance.Snap();
     }
