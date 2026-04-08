@@ -7,8 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class ColourView : View<IColourController>, IColourView
 {
-    // use 'this.controllerInstance' to access controller component
-
     /// <inheritdoc/>
     public override void Init()
     {
@@ -43,6 +41,7 @@ public class ColourView : View<IColourController>, IColourView
         }
     }
 
+    /// <inheritdoc/>
     private void OnXRClick(SelectEnterEventArgs args)
     {
         controllerInstance.OnButtonPressed();
