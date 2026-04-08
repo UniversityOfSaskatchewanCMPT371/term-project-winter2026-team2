@@ -1,0 +1,19 @@
+{
+    "name": "LogicPath",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fe685ec1767f73d42b749ea8045bfe43",
+        "GUID:4e035efe9a13e18448974cf8d38d4bab",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:6d5d9ac2bffae9a4fb431670cd518c92"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

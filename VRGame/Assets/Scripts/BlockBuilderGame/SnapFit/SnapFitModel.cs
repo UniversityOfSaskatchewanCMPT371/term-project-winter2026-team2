@@ -1,0 +1,141 @@
+using UnityEngine;
+using UnityEngine.Assertions;
+
+/// <summary>
+/// Model component of SnapFitModel.
+/// </summary>
+public class SnapFitModel : Model, ISnapFitModel
+{
+    /// <summary>
+    /// The snap points where blocks snap together
+    /// </summary>
+    private Transform[] snapPoints = new Transform[0];
+
+    /// <inheritdoc/>
+    public Transform[] SnapPoints
+    {
+        get
+        {
+            return snapPoints;
+        }
+        set
+        {
+            if (value == null)
+            {
+                Debug.LogError("SnapPoint value to set must not be null");
+                Assert.IsNotNull(value, "SnapPoint value must not be null");
+                return;
+            }
+            if (value.Length <= 0)
+            {
+                Debug.LogError("SnapPoints must have at least 1 element");
+                Assert.IsTrue(value.Length > 0, "SnapPoints must have at least 1 element");
+                return;
+            }
+            snapPoints = value;
+        }
+    }
+
+    /// <summary>
+     /// The radius in which the snap points will trigger snap
+     /// </summary>
+    private float snapRadius = 0.5f;
+
+    /// <inheritdoc/>
+    public float SnapRadius
+    {
+        get
+        {
+            return snapRadius;
+        }
+        set
+        {
+            if (value <= 0)
+            {
+                Debug.LogError("SnapRadius value to set must be greater than 0");
+                Assert.IsTrue(value > 0, "SnapRadius value must be greater than 0");
+                return;
+            }
+            snapRadius = value;
+        }
+    }
+    
+    /// <summary>
+    /// The state of whether this block is currently snapped to another block
+    /// </summary>
+    private bool isSnapped = false;
+
+    /// <inheritdoc/>
+    public bool IsSnapped
+    {
+        get
+        {
+            return isSnapped;
+        }
+        set
+        {
+            isSnapped = value;
+        }
+    }
+
+    /// <summary>
+    /// The joint that connects one block to another (when snapped)
+    /// FixedJoint idea came from Copilot AI suggestions
+    /// </summary>
+    private FixedJoint snapJoint = null;
+
+    /// <inheritdoc/>
+    public FixedJoint SnapJoint
+    {
+        get
+        {
+            return snapJoint;
+        }
+        set
+        {
+            snapJoint = value;
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Init()
+    {  
+        isSnapped = false;
+        snapPoints = new Transform[0];
+        snapJoint = null;
+        if (snapRadius <= 0)
+        {
+            snapRadius = 0.5f;
+        }
+
+        if (isSnapped)
+        {
+            Debug.LogError("isSnapped failed to set false on Init");
+            Assert.IsFalse(isSnapped, "isSnapped must be false on Init");
+            return;
+        }
+
+        if (snapPoints == null)
+        {
+            Debug.LogError("SnapPoints failed to set on Init");
+            Assert.IsNotNull(snapPoints, "SnapPoints must not be null on Init");
+            // Recover if it fails rather than terminate
+            snapRadius = 0.5f;
+        }
+
+        if (snapJoint != null)
+        {
+            Debug.LogError("snapJoint failed to set on Init");
+            Assert.IsNull(snapJoint, "snapJoint must be null on Init");
+            return;
+        }
+        
+        if (snapRadius <= 0)
+        {
+            Debug.LogError("snapRadius must greater than 0 on Init");
+            Assert.IsTrue(snapRadius > 0, "snapRadius must be greater than 0 on Init");
+            return;
+        }
+        
+    }
+}

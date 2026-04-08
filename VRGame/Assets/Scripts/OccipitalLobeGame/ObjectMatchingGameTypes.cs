@@ -1,0 +1,87 @@
+using System.Linq;
+using UnityEngine;
+
+namespace ObjectMatchGame
+{
+    /// <summary>
+    /// Used to determine the current state of the game. Will determine which actions
+    /// are valid to do based on which of these states the model is in
+    /// </summary>
+    public enum GameState
+    {
+        playing,
+        levelComplete,
+        levelFailed,
+        readyToStart,
+        tutorial,
+        complete
+    }
+
+    /// <summary>
+    /// Used to determine what the start button should do when it is pressed.
+    /// </summary>
+    public enum StartButtonType
+    {
+        tutorial,
+        level,
+        leaveTutorial
+    }
+
+    /// <summary>
+    /// Data for each level of the game. Serializable so the items can easily be set up
+    /// in Unity Editor
+    /// </summary>
+    [System.Serializable]
+    internal struct levelData
+    {
+        public int levelNumber;
+        public string CorrectObjectID;
+        public string[] AllObjectIDs;
+        public int Score;
+        public int failedGuesses;
+        public int maxTime;
+        public int winPoints;
+        /// <summary>
+        /// Creates a new instance of levelData
+        /// </summary>
+        /// <remarks>
+        /// Precondtitions:
+        /// - levelNumber is a positive integer of at least 1
+        /// - CorrectObjectID is a string that exists in AllObjectIDs
+        /// - AllObjectIDs is non-null and non-empty
+        /// Postconditions:
+        /// - this.levelNumber = levelNumber
+        /// - this.CorrectObjectID = CorrectObjectID;
+        /// - this.AllObjectIDs = AllObjectIDs;
+        /// - this.maxTime = maxtime
+        /// - this.winPoints = winPoints;
+        /// </remarks>
+        public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs, int maxTime, int winPoints)
+        {
+            if (levelNumber < 0)
+            {
+                Debug.LogError("Attempt to create level with negative level number");
+            }
+            if (CorrectObjectID == null || !AllObjectIDs.Contains(CorrectObjectID))
+            {
+                Debug.LogError("Attempt to create level where the CorrectObjectID is" +
+                    "not the ID of one of the Objects given");
+            }
+            if (AllObjectIDs == null || AllObjectIDs.Length == 0)
+            {
+                Debug.LogError("Attempt to create level with null or empty AllObjectIDs");
+            }
+            if (maxTime <= 0)
+            {
+                Debug.LogError("Attempt to create level with 0 or negative max time");
+            }
+            this.levelNumber = levelNumber;
+            this.CorrectObjectID = CorrectObjectID;
+            this.AllObjectIDs = AllObjectIDs;
+            this.Score = 0;
+            this.failedGuesses = 0;
+            this.maxTime = maxTime;
+            this.winPoints = winPoints;
+        }
+    }
+}
