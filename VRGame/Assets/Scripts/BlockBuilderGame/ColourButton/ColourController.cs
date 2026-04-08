@@ -58,6 +58,7 @@ public class ColourController : Controller<IColourModel, IColourView>, IColourCo
         if (block == null)
         {
             Debug.LogError("No spawned block to change colour. Please spawn a block first by pressing the 'Spawn' button.");
+            Assert.IsNotNull(block, "LastSpawnedBlock must not be null");
             return;
         }
 

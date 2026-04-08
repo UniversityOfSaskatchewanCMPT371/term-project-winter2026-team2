@@ -26,7 +26,8 @@ public interface IColourController : IController
     /// </summary>
     /// <remarks>
     /// pre-conditions:
-    ///     - requires (modelInstance.Colours.Length > 0)
+    ///     - requires (modelInstance.Colours != null) && (modelInstance.Colours.Length > 0) 
+    ///         && (CurrentIndex >= 0 && CurrentIndex < modelInstance.Colours.Length)
     /// post-conditions:
     ///     - ensures colour material is set on the spawned block prefab based on index if LastSpawnedBlock != null.
     ///         Otherwise, logs a warning and returns early
