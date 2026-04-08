@@ -8,6 +8,7 @@ public class SnapFitModel : Model, ISnapFitModel
 {
     /// <summary>
     /// The snap points where blocks snap together
+    /// </summary>
     private Transform[] snapPoints = new Transform[0];
 
     /// <inheritdoc/>
@@ -23,7 +24,7 @@ public class SnapFitModel : Model, ISnapFitModel
             {
                 Debug.LogError("SnapPoint value to set must not be null");
                 Assert.IsNotNull(value, "SnapPoint value must not be null");
-                return
+                return;
             }
             snapPoints = value;
         }
@@ -100,9 +101,34 @@ public class SnapFitModel : Model, ISnapFitModel
         {
             snapRadius = 0.5f;
         }
-        Assert.IsFalse(isSnapped, "isSnapped must be false on Init");
-        Assert.IsNotNull(snapPoints, "SnapPoints must not be null on Init");
-        Assert.IsNull(snapJoint, "snapJoint must be null on Init");
-        Assert.IsTrue(snapRadius > 0, "snapRadius must be > 0 on Init");
+
+        if (isSnapped)
+        {
+            Debug.LogError("isSnapped failed to set false on Init");
+            Assert.IsFalse(isSnapped, "isSnapped must be false on Init");
+            return;
+        }
+
+        if (snapPoints == null)
+        {
+            Debug.LogError("SnapPoints failed to set on Init");
+            Assert.IsNotNull(snapPoints, "SnapPoints must not be null on Init");
+            return;
+        }
+
+        if (snapJoint != null)
+        {
+            Debug.LogError("snapJoint failed to set on Init");
+            Assert.IsNull(snapJoint, "snapJoint must be null on Init");
+            return;
+        }
+        
+        if (snapRadius <= 0)
+        {
+            Debug.LogError("snapRadius must greater than 0 on Init");
+            Assert.IsTrue(snapRadius > 0, "snapRadius must be greater than 0 on Init");
+            return;
+        }
+        
     }
 }
