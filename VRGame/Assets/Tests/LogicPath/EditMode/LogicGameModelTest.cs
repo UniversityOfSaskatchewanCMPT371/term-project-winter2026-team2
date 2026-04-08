@@ -124,7 +124,7 @@ public class LogicGameModelTest
     [Test]
     public void Init_no_panels_in_children()
     {
-        LogAssert.Expect(LogType.Error, "Could not find a panel script attached to one of my children!");
+        LogAssert.Expect(LogType.Log, "An object named \"New Game Object\" is not a Panel. Skipping!");
         // create child gameobject which does not contain a panel
         // - this should cause init to fail
         GameObject childGo = new GameObject();
@@ -141,7 +141,7 @@ public class LogicGameModelTest
     [Test]
     public void Init_one_child_without_panel()
     {
-        LogAssert.Expect(LogType.Error, "Could not find a panel script attached to one of my children!");
+        LogAssert.Expect(LogType.Log, "An object named \"New Game Object\" is not a Panel. Skipping!");
         // create child gameobject which does not contain a panel
         // - this should cause init to fail
         GameObject childGo1 = new GameObject();
