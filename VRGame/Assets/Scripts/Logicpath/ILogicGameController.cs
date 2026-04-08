@@ -71,7 +71,7 @@ public interface ILogicGameController
     ///     - If our drag ends on an endpoint, complete the drag movement
     ///     - If our drag doesn't end on an endpoint (or any Panel), cancel the drag movement and clear the path
     /// </remarks>
-    void OnTriggerRelease(InputAction.CallbackContext context);
+    void OnRightTriggerRelease(InputAction.CallbackContext context);
 
     /// <summary>
     /// Handles pressing the designated reset button
@@ -94,5 +94,5 @@ public interface ILogicGameController
     /// postconditions:
     ///     - The current path being drawn is cleared by resetting the panels in the path and the path stack
     /// </remarks>
-    void ClearPath();
+    void ClearPathRight();
 }
