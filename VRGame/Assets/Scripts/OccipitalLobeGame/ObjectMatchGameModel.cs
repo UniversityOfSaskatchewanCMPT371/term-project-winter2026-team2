@@ -16,7 +16,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     // The score for the current level, which is added to the game score when the level is completed
     private int levelScore;
     // The number of failed guesses for the current level, which is used to calculate the level score when the level is completed
-    private int failedGuesses;
+    internal int failedGuesses;
     // The current state of the game, which is used to control the flow of the game and determine what actions are allowed at any given time
     private GameState gameState;
     // The ID of the current guess, which is set when the user makes a potential guess and cleared when the user removes their potential guess
@@ -118,6 +118,11 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public string[] GetActiveObjectIDs()
     {
+        if (currentLevel < 1 || currentLevel > totalLevels)
+        {
+            UnityEngine.Debug.LogWarning("GetActiveObjectIDs called with invalid current level: " + currentLevel);
+            return null;
+        }
         return levels[currentLevel].AllObjectIDs;
     }
 

@@ -18,7 +18,7 @@ public class ObjectMatchGameModelTests
 
         for (int i = 0; i < count; i++)
         {
-            levels[i] = new levelData(i + 1, "CorrectObject", new[] { "CorrectObject", "OtherObject" }, 60, 200);
+            levels[i] = new levelData(i + 1, ("CorrectObject" + i), new[] { ("CorrectObject" + i), "OtherObject" }, 60, 200);
         }
 
         levelsField.SetValue(model, levels);
@@ -78,7 +78,7 @@ public class ObjectMatchGameModelTests
     }
 
     /// <summary>
-    /// Verifies GetCurrentLevel returns -1 before the game starts.
+    /// Verifies GetCurrentLevel returns 1 before the game starts.
     /// </summary>
     [Test]
     public void GetCurrentLevel()
@@ -197,18 +197,42 @@ public class ObjectMatchGameModelTests
     }
 
     /// <summary>
-    /// Verifies InitializeTutorial executes without errors (currently empty implementation).
+    /// Verifies InitializeTutorial correctly sets relevant fields
     /// </summary>
     [Test]
-    public void InitializeTutorial()
+    public void InitializeTutorialSetsProperties()
     {
         GameObject go = new GameObject();
         ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
 
         model.Init();
 
-        // InitializeTutorial is currently empty but should not throw
         model.InitializeTutorial();
+
+        Assert.AreEqual(GameState.tutorial, model.GetGameState());
+        Assert.AreEqual(0, model.failedGuesses);
+        Assert.AreEqual("", model.GetCurrentGuessID());
+
+        Object.DestroyImmediate(go);
+    }
+
+    /// <summary>
+    /// Verifies LeaveTutorial correctly sets relevant fields
+    /// </summary>
+    [Test]
+    public void LeaveTutorialSetsProperties()
+    {
+        GameObject go = new GameObject();
+        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
+
+        model.Init();
+        model.InitializeTutorial();
+
+        model.LeaveTutorial();
+
+        Assert.AreEqual(GameState.readyToStart, model.GetGameState());
+        Assert.AreEqual(0, model.failedGuesses);
+        Assert.AreEqual("", model.GetCurrentGuessID());
 
         Object.DestroyImmediate(go);
     }
@@ -373,6 +397,25 @@ public class ObjectMatchGameModelTests
         Object.DestroyImmediate(go);
     }
 
+    [Test]
+    public void SubmitGuess_WrongID_ReturnsFalse()
+    {
+        GameObject go = new GameObject();
+        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
+        model.Init();
+        AssignLevels(model);
+        model.InitializeLevel();
+        
+        model.PotentialGuess("OtherObject");
+
+        int failures = model.failedGuesses; 
+        bool result = model.SubmitGuess();
+        
+        Assert.IsFalse(result);
+        Assert.AreEqual(failures + 1, model.failedGuesses);
+        Object.DestroyImmediate(go);
+    }
+
     /// <summary>
     /// Verifies model maintains consistent state across method calls.
     /// </summary>
@@ -453,6 +496,40 @@ public class ObjectMatchGameModelTests
         LogAssert.Expect(LogType.Log, "All levels completed!");
         model.InitializeLevel();
 
+        Object.DestroyImmediate(go);
+    }
+
+    [Test]
+    public void GetActiveObjectIDs_GetsList()
+    {
+        GameObject go = new GameObject();
+        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
+        model.Init();
+        AssignLevels(model);
+        model.InitializeLevel();
+        string[] activeIDs = model.GetActiveObjectIDs();
+        
+        Assert.IsNotNull(activeIDs);
+        Assert.AreEqual(2, activeIDs.Length);
+        Assert.Contains("CorrectObject1", activeIDs);
+        Assert.Contains("OtherObject", activeIDs);
+        Object.DestroyImmediate(go);
+    }
+
+
+    [Test]
+    public void GetActiveObjectIDs_InvalidLevel ()
+    {
+        GameObject go = new GameObject();
+        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
+        model.Init();
+        AssignLevels(model);
+        model.InitializeLevel();
+        model.currentLevel = 10; // Set to invalid level
+
+        LogAssert.Expect(LogType.Warning, new System.Text.RegularExpressions.Regex(".*GetActiveObjectIDs called with invalid current level.*"));
+        string[] activeIDs = model.GetActiveObjectIDs();
+        
         Object.DestroyImmediate(go);
     }
 

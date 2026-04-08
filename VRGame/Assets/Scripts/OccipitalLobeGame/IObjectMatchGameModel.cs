@@ -125,7 +125,9 @@ public interface IObjectMatchGameModel: IModel
     /// Preconditions:
     /// - None
     /// Postconditions:
-    /// - The tutorial system is initialized and ready for user interaction
+    /// - gameState = GameState.tutorial
+    /// - currentGuessID is set to an empty string
+    /// - failedGuesses is set to 0
     /// </remarks>
     public void InitializeTutorial();
 
