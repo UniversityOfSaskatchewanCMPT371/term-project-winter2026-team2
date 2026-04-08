@@ -38,4 +38,86 @@ public interface IPanel
     /// </summary>
     /// <param name="args">Arguments for this event</param>
     void OnHoverExited(HoverExitEventArgs args);
+    
+    /// <summary>
+    /// Accessor for top neighbour Panel
+    /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the top neighbor of this Panel is returned if it exists, null otherwise
+    ///     - If setting, the top neighbor of this Panel is written
+    /// </remarks>
+    public IPanel TopNeighbor {get; set;}
+
+    /// <summary>
+    /// Accessor for right neighbour panel
+    /// </summary>
+    public IPanel RightNeighbor {get; set;}
+
+    /// <summary>
+    /// Accessor for down neighbour panel
+    /// </summary>
+    public IPanel DownNeighbor {get; set;}
+
+    /// <summary>
+    /// Accessor for left neighbour panel
+    /// </summary>
+    public IPanel LeftNeighbor {get; set;}
+    
+    /// <summary>
+    /// Accessor for panel colour
+    /// </summary>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - If getting, the colour of this Panel is returned
+    ///     - If setting, the colour of this Panel is overwritten, and the texture is refreshed to reflect the state
+    /// </remarks>
+    public PanelColour PanelColour {get; set;}
+    
+    /// <summary>
+    /// Accessor for this Panel's X-coordinate
+    /// </summary>
+    public int GridX {get; set;}
+    
+    /// <summary>
+    /// Accessor for grid Y coordinate
+    /// </summary>
+    public int GridY {get; set;}
+    
+    /// <summary>
+    /// Setter for entry direction
+    /// </summary>
+    /// <param name="entryDirection">The new entry direction</param>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - This panel's entryDirection is changed
+    ///     - This panel's texture updates to match the new direction
+    /// </remarks>
+    public void SetEntryDirection(Direction entryDirection);
+    
+    /// <summary>
+    /// Setter for exit direction
+    /// </summary>
+    /// <param name="exitDirection">The new exit direction</param>
+    /// <remarks>
+    /// preconditions:
+    ///     - None
+    /// postconditions:
+    ///     - This panel's exitDirection is changed
+    ///     - This panel's texture updates to match the new direction
+    /// </remarks>
+
+    public void SetExitDirection(Direction exitDirection);
+    
+    /// <summary>
+    /// Accessor for Panel attribute (normal, start, exit, block)
+    /// </summary>
+    /// </remarks>
+    public PanelAttribute Attribute {get; set;}
 }

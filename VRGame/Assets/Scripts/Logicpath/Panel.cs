@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -24,38 +26,38 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// The entry direction of this Panel, if any
     /// </summary>
-    private Direction entryDirection;
+    internal Direction entryDirection;
     /// <summary>
     /// The exit direction of this Panel, if any
     /// </summary>
-    private Direction exitDirection;
+    internal Direction exitDirection;
     /// <summary>
     /// The upper neighbor of this Panel, if there is one
     /// </summary>
-    private Panel topNeighbor;
+    private IPanel topNeighbor;
     /// <summary>
     /// The right neighbor of this Panel, if there is one
     /// </summary>
-    private Panel rightNeighbor;
+    private IPanel rightNeighbor;
     /// <summary>
     /// The lower neighbor of this Panel, if there is one
     /// </summary>
-    private Panel downNeighbor;
+    private IPanel downNeighbor;
     /// <summary>
     /// The left neighbor of this Panel, if there is one
     /// </summary>
-    private Panel leftNeighbor;
+    private IPanel leftNeighbor;
     /// <summary>
     /// Marks whether this Panel is a Block, start endpoint, end endpoint, or a regular Panel
     /// </summary>
 
     [SerializeField]
-    private PanelAttribute attribute;
+    internal PanelAttribute attribute;
     /// <summary>
     /// What colour this Panel has (if there is a path going through it or it is an endpoint)
     /// </summary>
     [SerializeField]
-    private PanelColour panelColour;
+    internal PanelColour panelColour;
     /// <summary>
     /// The X-coordinate of this Panel
     /// </summary>
@@ -152,7 +154,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     ///     - If getting, the top neighbor of this Panel is returned if it exists, null otherwise
     ///     - If setting, the top neighbor of this Panel is written
     /// </remarks>
-    public Panel TopNeighbor
+    public IPanel TopNeighbor
     {
         /// <summary>
         /// Getter for the top neighbor Panel
@@ -187,7 +189,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
-    public Panel RightNeighbor
+    public IPanel RightNeighbor
     {
         /// <summary>
         /// Getter for the right neighbor Panel
@@ -222,7 +224,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// Accessor for down neighbour panel
     /// </summary>
-    public Panel DownNeighbor
+    public IPanel DownNeighbor
     {
         /// <summary>
         /// Getter for the down neighbor Panel
@@ -257,7 +259,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// Accessor for left neighbour panel
     /// </summary>
-    public Panel LeftNeighbor
+    public IPanel LeftNeighbor
     {
         /// <summary>
         /// Getter for the left neighbor Panel
@@ -526,7 +528,6 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
             Debug.LogError("Could not find texture manager!");
         }
         Assert.IsNotNull(panelTextureManager, "Could not find texture manager!");
-        panelTextureManager.RefreshTexture();
 
         xRSimpleInteractable = GetComponent<XRSimpleInteractable>();
         if(xRSimpleInteractable == null)
@@ -548,6 +549,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
             Debug.LogError("Could not find the parent's LogicGameController!");
         }
         Assert.IsNotNull(controllerInstance, "Could not find the parent's LogicGameController!");
+        panelTextureManager.Invoke("RefreshTexture", 0.25f); //TODO: find a better way to wait
     }
 
     /// <summary>
@@ -576,13 +578,52 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <inheritdoc/>
     public void OnHoverEntered(HoverEnterEventArgs args)
     {
-        controllerInstance.HandleHover(gridX, gridY);
+        try
+        {
+            XRRayInteractor rayInteractor = (XRRayInteractor) args.interactorObject;
+            //ok so unity doesn't implement a "handedness" check for a controller/interactor until version 3.x of the xr interaction toolkit.
+            //therefore in order to check what hand we're hovering with in this toolkit version, we have to check the GameObject name of the parent of the rayinteractor.
+            //yes, this fails if somehow the object doesn't communicate that it's "right" from its name alone.
+            //no, there is no other indicator for this within the rayinteractor's children.
+            //yes, google's ai summary lied to me on multiple occasions and hallucinated the solution to this.
+            //yes, this is a coding horror.
+            //yes, i am absolutely furious that is the approach i am left with.
+            string controllerName = rayInteractor.transform.parent.name;
+            if(Regex.IsMatch(controllerName.ToLower(), ".*right.*"))
+            {
+                controllerInstance.HandleHover(gridX, gridY);
+            }
+            else if(!Regex.IsMatch(controllerName.ToLower(), ".*left.*"))
+            {
+                Debug.LogError($"Somehow the object that's hovering on this Panel @({gridX},{gridY}) is neither left nor right-handed. It says instead that it is a \"{controllerName}\". Things have gone very badly and it's all Unity's fault");
+            }
+        } catch(InvalidCastException)
+        {
+            Debug.LogError($"Somehow the object that's hovering on this Panel @({gridX},{gridY}) is not an XRRayInteractor");
+        }
+        
     }
 
     /// <inheritdoc/>
     public void OnHoverExited(HoverExitEventArgs args)
     {
-        controllerInstance.HandleUnhover(gridX, gridY);
+        try
+        {
+            XRRayInteractor rayInteractor = (XRRayInteractor) args.interactorObject;
+            //please see OnHoverEntered() for why this abomination has to exist
+            string controllerName = rayInteractor.transform.parent.name;
+            if(Regex.IsMatch(controllerName.ToLower(), ".*right.*"))
+            {
+                controllerInstance.HandleUnhover(gridX, gridY);
+            }
+            else if(!Regex.IsMatch(controllerName.ToLower(), ".*left.*"))
+            {
+                Debug.LogError($"Somehow the object that's unhovering on this Panel @({gridX},{gridY}) is neither left nor right-handed. It says instead that it is a \"{controllerName}\". Things have gone very badly and it's all Unity's fault");
+            }
+        } catch(InvalidCastException)
+        {
+            Debug.LogError($"Somehow the object that's unhovering on this Panel @({gridX},{gridY}) is not an XRRayInteractor");
+        }
     }
 
     /// <summary>
