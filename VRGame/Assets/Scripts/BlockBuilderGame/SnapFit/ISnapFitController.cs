@@ -52,13 +52,4 @@ public interface ISnapFitController : IController
     /// </remarks>
     bool IsMatch(string name1, string name2);
 
-    /// <summary>
-    /// Breaks the snap joint and updates the model state when the block is grabbed
-    /// </summary>
-    /// <remarks>
-    /// pre-condition:
-    ///     - requires modelInstance != null
-    /// post-condition:
-    ///     - ensures (modelInstance.SnapJoint == null) && (modelInstance.IsSnapped == false)
-    /// </remarks>
 }
