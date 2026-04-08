@@ -16,20 +16,35 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     // The score for the current level, which is added to the game score when the level is completed
     private int levelScore;
     // The number of failed guesses for the current level, which is used to calculate the level score when the level is completed
-    private int failedGuesses;
+    internal int failedGuesses;
     // The current state of the game, which is used to control the flow of the game and determine what actions are allowed at any given time
     private GameState gameState;
     // The ID of the current guess, which is set when the user makes a potential guess and cleared when the user removes their potential guess
     private string currentGuessID = "";
     // The data for each level, which includes the IDs of all objects in the level and the ID of the correct object that the user is trying to guess
-    [SerializeField] internal levelData[] levels;
+    internal levelData[] levels;
     // A stopwatch to time the level completion time
     private Stopwatch stopwatch;
     // The amount of points to be added per second remaining at end of level
     private int pointsForTimeLeft = 5; 
 
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Initialize the game model. Sets all variables to their starting values.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - currentLevel is set to 1
+    /// - totalLevels is set to the total number of levels in the game (not counting the tutorial)
+    /// - gameScore is set to 0
+    /// - levelScore is set to 0
+    /// - failedGuesses is set to 0
+    /// - gameState is set to GameState.readyToStart
+    /// - currentGuessID is set to an empty string
+    /// - stopwatch is a new Stopwatch object
+    /// </remarks>
     public override void Init()
     {
         levels = LevelData.levels;
@@ -103,6 +118,11 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public string[] GetActiveObjectIDs()
     {
+        if (currentLevel < 1 || currentLevel > totalLevels)
+        {
+            UnityEngine.Debug.LogWarning("GetActiveObjectIDs called with invalid current level: " + currentLevel);
+            return null;
+        }
         return levels[currentLevel].AllObjectIDs;
     }
 
@@ -201,8 +221,6 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public int GetTimeRemaining()
     {
-   
-
         double levelTime = stopwatch.Elapsed.TotalSeconds;
         int timeLeft = (int)Math.Ceiling((double)levels[currentLevel].maxTime - levelTime);
 

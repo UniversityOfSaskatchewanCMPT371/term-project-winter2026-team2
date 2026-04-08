@@ -100,7 +100,8 @@ public interface IObjectMatchGameController: IController
     /// </summary>
     /// <remarks>
     /// Preconditions:
-    /// - None
+    /// - the referene to the model is not null
+    /// - the game state is set to gameState.playing
     /// Postconditions:
     /// - Calls view.UpdateTimer() with the current time remaining in the level so that the view can update the timer display
     /// </remarks>
