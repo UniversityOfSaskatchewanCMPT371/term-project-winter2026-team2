@@ -51,7 +51,7 @@ public class ColourModel : Model, IColourModel
         {
             if (value < 0)
             {
-                Debug.LogError("currentIndex value to set must be greater than or equal to 0")
+                Debug.LogError("currentIndex value to set must be greater than or equal to 0");
             }
             Assert.IsTrue(value >= 0, "currentIndex for colours cannot be negative");
             currentIndex = value;
