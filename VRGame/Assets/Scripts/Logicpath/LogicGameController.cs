@@ -15,7 +15,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <summary>
     /// Is the right controller in a valid, dragging state?
     /// </summary>
-    private bool isDraggingRight;
+    internal bool isDraggingRight;
     /// <summary>
     /// What are the coordinates of the panel the left controller is aiming at, if any?
     /// </summary>
@@ -31,11 +31,11 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <summary>
     /// The current path the left hand is taking
     /// </summary>
-    private Stack<IPanel> currentPathLeft;
+    internal Stack<IPanel> currentPathLeft;
     /// <summary>
     /// The current path the right hand is taking
     /// </summary>
-    private Stack<IPanel> currentPathRight;
+    internal Stack<IPanel> currentPathRight;
     /// <summary>
     /// A ParticleSystem that spawns confetti when the game is complete.
     /// </summary>
@@ -269,7 +269,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public void ClearPathRight()
     {
         Debug.Log("Clearing right's path!");
-        foreach(Panel panel in currentPathRight)
+        foreach(IPanel panel in currentPathRight)
         {
             panel.ClearPanel();
         }

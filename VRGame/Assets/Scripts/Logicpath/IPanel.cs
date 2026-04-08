@@ -49,22 +49,22 @@ public interface IPanel
     ///     - If getting, the top neighbor of this Panel is returned if it exists, null otherwise
     ///     - If setting, the top neighbor of this Panel is written
     /// </remarks>
-    public Panel TopNeighbor {get; set;}
+    public IPanel TopNeighbor {get; set;}
 
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
-    public Panel RightNeighbor {get; set;}
+    public IPanel RightNeighbor {get; set;}
 
     /// <summary>
     /// Accessor for down neighbour panel
     /// </summary>
-    public Panel DownNeighbor {get; set;}
+    public IPanel DownNeighbor {get; set;}
 
     /// <summary>
     /// Accessor for left neighbour panel
     /// </summary>
-    public Panel LeftNeighbor {get; set;}
+    public IPanel LeftNeighbor {get; set;}
     
     /// <summary>
     /// Accessor for panel colour
