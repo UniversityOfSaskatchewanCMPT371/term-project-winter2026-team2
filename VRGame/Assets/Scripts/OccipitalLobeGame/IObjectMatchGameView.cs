@@ -27,4 +27,88 @@ public interface IObjectMatchGameView: IView
     /// - The objects corresponding to the IDs in ObjectIDs are displayed in the scene
     /// </remarks>
     public void ShowObjects(string[] ObjectIDs);
+
+    /// <summary>
+    /// Clears all objects from the scene, making them invisible and non-interactable.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - All objects in the scene are invisible and non-interactable
+    /// </remarks>
+    public void ClearAllObjects();
+
+    /// <summary>
+    /// Prepares the game for displaying a level by enabling the guess box and submit button and
+    /// disabling the start level and tutorial buttons.
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The guess box and submit button are enabled and the start level and tutorial buttons are disabled
+    /// </remarks>
+    public void EnterLevel();
+
+    /// <summary>
+    /// Prepares the game for exiting a level by disabling the guess box and submit button and enabling
+    /// the start level and tutorial buttons
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The guess box and submit button are disabled and the start level and tutorial buttons are enabled
+    /// </remarks>
+    public void ExitLevel();
+
+    /// <summary>
+    /// Updates the timer text to reflect actual timer in the model
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - The text on the canvas is updated to match the time remaining
+    /// </remarks>
+    public void UpdateTimer(int seconds);
+
+    /// <summary>
+    /// Updates the canvas to show the correct total and level scores
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - levelScores is not null
+    /// Postconditions:
+    /// - The canvas is updated to reflect the total and level scores
+    /// </remarks>
+    public void UpdateScore(int totalScore, int[] levelScores);
+
+    /// <summary>
+    /// Activate/deactivate the appropriate UI elements for the tutorial
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - startlevel and tutorial buttons are disabled
+    /// - guess box and submit button are enalbled
+    /// - leave tutorial button is enabled
+    /// - in level and out of level displays are disabled
+    /// </remarks>
+    public void EnterTutorial();
+
+    /// <summary>
+    /// Activate/deactivate the appropriate UI elements for exiting the tutorial and returning to the main menu
+    /// </summary>
+    /// <remarks>
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - startlevel and tutorial buttons are enabled
+    /// - leave tutorial, guess box and submit button are disabled
+    /// - in level and out of level displays are disabled
+    /// </remarks>
+    public void ExitTutorial();
 }

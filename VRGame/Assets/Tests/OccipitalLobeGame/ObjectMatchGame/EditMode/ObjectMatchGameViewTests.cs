@@ -4,6 +4,7 @@ using UnityEngine;
 using NSubstitute;
 using UnityEngine.TestTools;
 using System.Text.RegularExpressions;
+using TMPro;
 
 /// <summary>
 /// Unit tests for ObjectMatchGameView class following the isolated Arrange-Act-Assert style.
@@ -46,9 +47,14 @@ public class ObjectMatchGameViewTests
     GameObject dummyBtn = new GameObject("Btn");
     view.GuessBox = dummyBox;
     view.SubmitButton = dummyBtn;
+    view.StartLevelButton = dummyBtn;
+    view.StartTutorialButton = dummyBtn;
+    view.LeaveTutorialButton = dummyBtn;
+    view.InLevelDisplay = dummyBtn.AddComponent<TextMeshProUGUI>();
+    view.OutOfLevelDisplay = dummyBtn.GetComponent<TextMeshProUGUI>();
 
-    // 2. Setup Objects
-    GameObject obj = new GameObject("TestObj");
+        // 2. Setup Objects
+        GameObject obj = new GameObject("TestObj");
     obj.SetActive(true);
     view.AllObjects = new GameObject[] { obj };
 
@@ -148,7 +154,7 @@ public class ObjectMatchGameViewTests
     /// Test ShowObjects when an empty ID list is provided.
     /// </summary>
    [Test]
-    public void ShowObjects_EmptyArray_DeactivatesAll()
+    public void ShowObjects_EmptyArray_LeavesAsIs()
 {
     // Arrange
     GameObject go = new GameObject();
@@ -169,7 +175,7 @@ public class ObjectMatchGameViewTests
     view.ShowObjects(new string[] { });
 
     // Assert
-    Assert.IsFalse(obj1.activeSelf, "Object should be deactivated when not in the ID list.");
+    Assert.IsTrue(obj1.activeSelf, "Object should be deactivated when not in the ID list.");
     Assert.IsTrue(dummyGuessBox.activeSelf, "Guess box should be enabled even if list is empty.");
 
     // Cleanup

@@ -1,10 +1,11 @@
-using NUnit.Framework;
-using NSubstitute;
 using System.Collections;
+using System.Text.RegularExpressions;
+using NSubstitute;
+using NUnit.Framework;
+using ObjectMatchGame;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.XR.Interaction.Toolkit;
-using System.Text.RegularExpressions;
 
 /// <summary>
 /// PlayMode tests for ObjectMatchStartButton component.
@@ -36,8 +37,10 @@ public class ObjectMatchStartButtonPlayModeTests
         
         _grabInteractable = _startButtonGo.AddComponent<XRGrabInteractable>();
         _startButton = _startButtonGo.AddComponent<ObjectMatchStartButton>();
+        _startButton.buttonType = StartButtonType.level;
 
         yield return null; // Wait for Start()
+
     }
 
     /// <summary>
@@ -54,7 +57,7 @@ public class ObjectMatchStartButtonPlayModeTests
     /// Verifies OnGrabbed calls InitializeLevel on controller.
     /// </summary>
     [UnityTest]
-    public IEnumerator OnGrabbed_CallsControllerInitializeLevel()
+    public IEnumerator OnGrabbed_LevelButtonCallsController()
     {
         // Arrange
         var mockInteractor = Substitute.For<IXRSelectInteractor>();
@@ -74,10 +77,10 @@ public class ObjectMatchStartButtonPlayModeTests
     }
 
     /// <summary>
-    /// Verifies OnGrabbed deactivates the start button GameObject.
+    /// Verifies OnGrabbed for tutorial button calls InitializeTutorial on controller.
     /// </summary>
     [UnityTest]
-    public IEnumerator OnGrabbed_DeactivatesButton()
+    public IEnumerator OnGrabbed_TutorialButtonCallsController()
     {
         // Arrange
         var mockInteractor = Substitute.For<IXRSelectInteractor>();
@@ -87,6 +90,7 @@ public class ObjectMatchStartButtonPlayModeTests
             interactorObject = mockInteractor,
             interactableObject = mockInteractable
         };
+        _startButton.buttonType = StartButtonType.tutorial;
 
         Assert.IsTrue(_startButtonGo.activeSelf, "Button should be active initially");
 
@@ -95,7 +99,33 @@ public class ObjectMatchStartButtonPlayModeTests
         yield return null;
 
         // Assert
-        Assert.IsFalse(_startButtonGo.activeSelf, "Button should be deactivated after grab");
+        _mockController.Received(1).InitializeTutorial();
+    }
+
+    /// <summary>
+    /// Verifies OnGrabbed for leave tutorial button calls LeaveTutorial on controller.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator OnGrabbed_LeaveTutorialButtonCallsController()
+    {
+        // Arrange
+        var mockInteractor = Substitute.For<IXRSelectInteractor>();
+        var mockInteractable = Substitute.For<IXRSelectInteractable>();
+        var args = new SelectEnterEventArgs
+        {
+            interactorObject = mockInteractor,
+            interactableObject = mockInteractable
+        };
+        _startButton.buttonType = StartButtonType.leaveTutorial;
+
+        Assert.IsTrue(_startButtonGo.activeSelf, "Button should be active initially");
+
+        // Act
+        _startButton.OnGrabbed(args);
+        yield return null;
+
+        // Assert
+        _mockController.Received(1).LeaveTutorial();
     }
 
     /// <summary>
@@ -231,5 +261,8 @@ public class ObjectMatchStartButtonPlayModeTests
         public string GetCurrentGuessID() => Controller?.GetCurrentGuessID() ?? "";
         public void RemovePotentialGuess() => Controller?.RemovePotentialGuess();
         public void SubmitGuess() => Controller?.SubmitGuess();
+        public void ExitLevel() => Controller?.ExitLevel();
+        public void LeaveTutorial() => Controller?.LeaveTutorial();
+        public void Update() => Controller?.Update();
     }
 }

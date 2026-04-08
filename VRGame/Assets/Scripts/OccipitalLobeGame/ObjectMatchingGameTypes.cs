@@ -18,6 +18,16 @@ namespace ObjectMatchGame
     }
 
     /// <summary>
+    /// Used to determine what the start button should do when it is pressed.
+    /// </summary>
+    public enum StartButtonType
+    {
+        tutorial,
+        level,
+        leaveTutorial
+    }
+
+    /// <summary>
     /// Data for each level of the game. Serializable so the items can easily be set up
     /// in Unity Editor
     /// </summary>
@@ -27,7 +37,10 @@ namespace ObjectMatchGame
         public int levelNumber;
         public string CorrectObjectID;
         public string[] AllObjectIDs;
-
+        public int Score;
+        public int failedGuesses;
+        public int maxTime;
+        public int winPoints;
         /// <summary>
         /// Creates a new instance of levelData
         /// </summary>
@@ -40,10 +53,12 @@ namespace ObjectMatchGame
         /// - this.levelNumber = levelNumber
         /// - this.CorrectObjectID = CorrectObjectID;
         /// - this.AllObjectIDs = AllObjectIDs;
+        /// - this.maxTime = maxtime
+        /// - this.winPoints = winPoints;
         /// </remarks>
-        public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs)
+        public levelData(int levelNumber, string CorrectObjectID, string[] AllObjectIDs, int maxTime, int winPoints)
         {
-            if (levelNumber <= 0)
+            if (levelNumber < 0)
             {
                 Debug.LogError("Attempt to create level with negative level number");
             }
@@ -56,9 +71,17 @@ namespace ObjectMatchGame
             {
                 Debug.LogError("Attempt to create level with null or empty AllObjectIDs");
             }
+            if (maxTime <= 0)
+            {
+                Debug.LogError("Attempt to create level with 0 or negative max time");
+            }
             this.levelNumber = levelNumber;
             this.CorrectObjectID = CorrectObjectID;
             this.AllObjectIDs = AllObjectIDs;
+            this.Score = 0;
+            this.failedGuesses = 0;
+            this.maxTime = maxTime;
+            this.winPoints = winPoints;
         }
     }
 }

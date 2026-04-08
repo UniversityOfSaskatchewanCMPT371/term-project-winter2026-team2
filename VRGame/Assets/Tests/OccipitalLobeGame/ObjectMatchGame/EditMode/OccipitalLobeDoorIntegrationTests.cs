@@ -183,10 +183,10 @@ public class OccipitalLobeDoorIntegrationTests
         int levelAfterThird = _gameModel.GetCurrentLevel();
 
         // Assert - Level progression enables different door states
-        Assert.AreEqual(-1, initialLevel);
-        Assert.AreEqual(0, levelAfterFirst);
-        Assert.AreEqual(1, levelAfterSecond);
-        Assert.AreEqual(2, levelAfterThird);
+        Assert.AreEqual(1, initialLevel);
+        Assert.AreEqual(2, levelAfterFirst);
+        Assert.AreEqual(3, levelAfterSecond);
+        Assert.AreEqual(4, levelAfterThird);
         
         // Different doors could be unlocked at different levels
         Assert.Pass("Multi-level door progression logic verified");
@@ -198,7 +198,7 @@ public class OccipitalLobeDoorIntegrationTests
     [Test]public void GameController_DoorController_MVCIntegration()
 {
     // 1. Arrange
-    _gameModel.Init(); // Sets currentLevel to -1
+    _gameModel.Init(); // Sets currentLevel to 1
 
     // Setup dummy data
     _gameModel.levels = new levelData[] 
@@ -206,19 +206,25 @@ public class OccipitalLobeDoorIntegrationTests
         new levelData { 
             AllObjectIDs = new string[] { "Obj1", "Obj2" },
             CorrectObjectID = "Obj1"
-        } 
+        },
+        new levelData {
+            AllObjectIDs = new string[] { "Obj1", "Obj2" },
+            CorrectObjectID = "Obj1"
+        }
     };
-
+    _gameModel.totalLevels = 1;
     _gameController.ModelMock = _gameModel;
     _gameController.ViewMock = _mockGameView;
     _gameController.Init();
 
     // 2. Act & Assert
-    // This calls _gameModel.InitializeLevel(), which increments -1 to 0
     Assert.DoesNotThrow(() => _gameController.InitializeLevel());
-    
-    Assert.AreEqual(0, _gameModel.GetCurrentLevel());
     Assert.AreEqual(GameState.playing, _gameModel.GetGameState());
+    Assert.DoesNotThrow(() => _gameController.PotentialGuess("Obj1"));
+    Assert.DoesNotThrow(() => _gameController.SubmitGuess());
+    Assert.AreEqual(GameState.levelComplete, _gameModel.GetGameState());
+    Assert.AreEqual(2, _gameModel.GetCurrentLevel());
+    
 }
    
     /// <summary>
@@ -364,8 +370,8 @@ public class OccipitalLobeDoorIntegrationTests
         int currentLevel = _gameModel.GetCurrentLevel();
 
         // Assert - Can use this data for door logic
-        Assert.AreEqual(5, totalLevels);
-        Assert.AreEqual(-1, currentLevel);
+        Assert.AreEqual(3, totalLevels);
+        Assert.AreEqual(1, currentLevel);
         
         // Calculate doors available based on progression
         float progressPercentage = (currentLevel + 1) / (float)totalLevels;
