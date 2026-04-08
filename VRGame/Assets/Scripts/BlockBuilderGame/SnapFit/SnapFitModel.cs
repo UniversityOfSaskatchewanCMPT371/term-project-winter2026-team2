@@ -19,7 +19,12 @@ public class SnapFitModel : Model, ISnapFitModel
         }
         set
         {
-            Assert.IsNotNull(value, "SnapPoint value must not be null");
+            if (value == null)
+            {
+                Debug.LogError("SnapPoint value to set must not be null");
+                Assert.IsNotNull(value, "SnapPoint value must not be null");
+                return
+            }
             snapPoints = value;
         }
     }
@@ -38,7 +43,12 @@ public class SnapFitModel : Model, ISnapFitModel
         }
         set
         {
-            Assert.IsTrue(value > 0, "SnapRadius value must be greater than 0");
+            if (value <= 0)
+            {
+                Debug.LogError("SnapRadius value to set must be greater than 0");
+                Assert.IsTrue(value > 0, "SnapRadius value must be greater than 0");
+                return;
+            }
             snapRadius = value;
         }
     }
