@@ -42,7 +42,7 @@ public interface IColourModel : IModel
 
         /// <remarks>
         /// pre-condition:
-        ///     - requires value >= 0
+        ///     - requires (value >= 0) && (value <= colours.Length)
         /// post-condition:
         ///     - ensures currentMaterialIndex = value
         /// </remarks>

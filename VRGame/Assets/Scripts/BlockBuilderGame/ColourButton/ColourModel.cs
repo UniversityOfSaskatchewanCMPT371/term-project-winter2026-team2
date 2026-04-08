@@ -22,15 +22,18 @@ public class ColourModel : Model, IColourModel
         {
             if (value == null)
             {
-                Debug.LogError("Colours[] to set must to set must not be null");
+                Debug.LogError("Colours[] to set must not be null");
+                Assert.IsNotNull(value, "value to set for colours must not be null");
+                return;
             }
-            Assert.IsNotNull(value, "value to set for colours must not be null");
+            
 
             if (value.Length <= 0)
             {
                 Debug.LogError("Colours[] to set must have at least 1 element");
+                Assert.IsTrue(value.Length > 0, "colours array must have at least 1 element");
+                return;
             }
-            Assert.IsTrue(value.Length > 0, "colours array must have at least 1 element");
             colours = value;
         }
     }
@@ -52,8 +55,15 @@ public class ColourModel : Model, IColourModel
             if (value < 0)
             {
                 Debug.LogError("currentIndex value to set must be greater than or equal to 0");
+                Assert.IsTrue(value >= 0, "currentIndex for colours cannot be negative");
+                return;
             }
-            Assert.IsTrue(value >= 0, "currentIndex for colours cannot be negative");
+            if (value >= colours.Length)
+            {
+                Debug.LogError("currentIndex is out of bounds for Colours[]");
+                Assert.IsTrue(value < colours.Length, "currentIndex out of bounds");
+                return;
+            }
             currentIndex = value;
         }
     }
