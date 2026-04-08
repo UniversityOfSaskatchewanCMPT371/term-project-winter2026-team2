@@ -18,10 +18,11 @@ public class ObjectMatchGameModelTests
 
         for (int i = 0; i < count; i++)
         {
-            levels[i] = new levelData(i + 1, "CorrectObject", new[] { "CorrectObject", "OtherObject" });
+            levels[i] = new levelData(i + 1, "CorrectObject", new[] { "CorrectObject", "OtherObject" }, 60, 200);
         }
 
         levelsField.SetValue(model, levels);
+        model.totalLevels = count - 1;
     }
 
     /// <summary>
@@ -51,8 +52,8 @@ public class ObjectMatchGameModelTests
         model.Init();
         /// Initial values check 
         Assert.AreEqual(GameState.readyToStart, model.GetGameState());
-        Assert.AreEqual(-1, model.GetCurrentLevel());
-        Assert.AreEqual(5, model.GetTotalLevels());
+        Assert.AreEqual(1, model.GetCurrentLevel());
+        Assert.AreEqual(3, model.GetTotalLevels());
         Assert.AreEqual(0, model.GetGameScore());
         Assert.AreEqual(0, model.GetLevelScore());
         Assert.AreEqual("", model.GetCurrentGuessID());
@@ -87,7 +88,7 @@ public class ObjectMatchGameModelTests
 
         model.Init();
 
-        Assert.AreEqual(-1, model.GetCurrentLevel());
+        Assert.AreEqual(1, model.GetCurrentLevel());
 
         Object.DestroyImmediate(go);
     }
@@ -103,7 +104,7 @@ public class ObjectMatchGameModelTests
 
         model.Init();
 
-        Assert.AreEqual(5, model.GetTotalLevels());
+        Assert.AreEqual(3, model.GetTotalLevels());
 
         Object.DestroyImmediate(go);
     }
@@ -228,7 +229,7 @@ public class ObjectMatchGameModelTests
         int totalLevels2 = model.GetTotalLevels();
         
         Assert.AreEqual(totalLevels1, totalLevels2);
-        Assert.AreEqual(5, totalLevels1);
+        Assert.AreEqual(3, totalLevels1);
 
         Object.DestroyImmediate(go);
     }
@@ -318,7 +319,7 @@ public class ObjectMatchGameModelTests
     /// Verifies InitializeLevel increments currentLevel and sets state to playing.
     /// </summary>
     [Test]
-    public void InitializeLevel_IncrementsLevelAndSetsPlaying()
+    public void InitializeLevel_SetsPlaying()
     {
         GameObject go = new GameObject();
         ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
@@ -329,31 +330,7 @@ public class ObjectMatchGameModelTests
         int initialLevel = model.GetCurrentLevel();
         model.InitializeLevel();
 
-        Assert.AreEqual(initialLevel + 1, model.GetCurrentLevel());
         Assert.AreEqual(GameState.playing, model.GetGameState());
-
-        Object.DestroyImmediate(go);
-    }
-
-    /// <summary>
-    /// Verifies InitializeLevel can be called multiple times sequentially.
-    /// </summary>
-    [Test]
-    public void InitializeLevel_MultipleCallsIncrementCorrectly()
-    {
-        GameObject go = new GameObject();
-        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
-
-        model.Init();
-        AssignLevels(model);
-        
-        int initialLevel = model.GetCurrentLevel();
-        
-        model.InitializeLevel();
-        Assert.AreEqual(initialLevel + 1, model.GetCurrentLevel());
-        
-        model.InitializeLevel();
-        Assert.AreEqual(initialLevel + 2, model.GetCurrentLevel());
 
         Object.DestroyImmediate(go);
     }
@@ -408,10 +385,10 @@ public class ObjectMatchGameModelTests
         model.Init();
         
         Assert.AreEqual(GameState.readyToStart, model.GetGameState());
-        Assert.AreEqual(-1, model.GetCurrentLevel());
+        Assert.AreEqual(1, model.GetCurrentLevel());
         
         model.CompleteLevel();
-        Assert.AreEqual(0, model.GetCurrentLevel());
+        Assert.AreEqual(2, model.GetCurrentLevel());
         Assert.AreEqual(GameState.levelComplete, model.GetGameState());
 
         Object.DestroyImmediate(go);
@@ -467,9 +444,10 @@ public class ObjectMatchGameModelTests
         model.Init();
         AssignLevels(model);
         
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             model.InitializeLevel();
+            model.CompleteLevel();
         }
         
         LogAssert.Expect(LogType.Log, "All levels completed!");

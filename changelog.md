@@ -4,6 +4,14 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.7.0] - 2026-04-07
+
+### Added
+
+- Multiple levels for occipital lobe game
+- Scoring system for occipital lobe game
+- Tutorial mode for occipital lobe game 
+ 
 ## [1.6.2] - 2026-04-07
 
 ### Added

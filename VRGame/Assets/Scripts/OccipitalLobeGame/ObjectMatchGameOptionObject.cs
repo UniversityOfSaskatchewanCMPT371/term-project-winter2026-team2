@@ -20,6 +20,9 @@ public class ObjectMatchGameOptionObject : MonoBehaviour
     // grabbed and released
     private XRGrabInteractable grabInteractable;
 
+    // Store an instance of the rigidbody component so we can disable physics when the object is grabbed
+    private Rigidbody rigidBody;
+
     /// <summary>
     /// Store an instance of the controller so we can get information about the
     /// current option object
@@ -47,7 +50,14 @@ public class ObjectMatchGameOptionObject : MonoBehaviour
         }
         else
         {
+            grabInteractable.selectEntered.AddListener(OnGrabbed);
             grabInteractable.selectExited.AddListener(OnReleased);
+        }
+
+        rigidBody = GetComponent<Rigidbody>();
+        if (rigidBody != null)
+        {
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         initialPosition = transform.position;
@@ -56,6 +66,15 @@ public class ObjectMatchGameOptionObject : MonoBehaviour
         guessBoxPosition = transform.parent.parent.Find("GuessBox").position;
         guessBoxRotation = transform.parent.parent.Find("GuessBox").rotation;
 
+    }
+
+
+    private void OnGrabbed(SelectEnterEventArgs args)
+    {
+        if (rigidBody != null)
+        {
+            rigidBody.constraints = RigidbodyConstraints.None;
+        }
     }
 
     private void OnReleased(SelectExitEventArgs args)
@@ -83,5 +102,9 @@ public class ObjectMatchGameOptionObject : MonoBehaviour
             transform.rotation = guessBoxRotation;
         }
 
+        if (rigidBody != null)
+        {
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 }

@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.XR.Interaction.Toolkit; 
+using UnityEngine.XR.Interaction.Toolkit;
+using ObjectMatchGame;
 
 public class ObjectMatchStartButton : ClickableCubes
 {
+
+    [SerializeField] internal StartButtonType buttonType;
     /// <summary>
     /// Notifies the game controller that the start button has been grabbed so it can
     /// start the game
@@ -26,7 +29,18 @@ public class ObjectMatchStartButton : ClickableCubes
                 return;
             }
         }
-        controller.InitializeLevel();
-        gameObject.SetActive(false);
+
+        if (buttonType == StartButtonType.level)
+        {
+            controller.InitializeLevel();
+        }
+        else if (buttonType == StartButtonType.tutorial)
+        {
+            controller.InitializeTutorial();
+        }
+        else if (buttonType == StartButtonType.leaveTutorial)
+        {
+            controller.LeaveTutorial();
+        }
     }
 }

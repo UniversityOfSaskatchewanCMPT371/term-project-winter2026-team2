@@ -256,5 +256,8 @@ public class ClickableCubesPlayModeTests
         public string GetCurrentGuessID() => Controller?.GetCurrentGuessID() ?? "";
         public void RemovePotentialGuess() => Controller?.RemovePotentialGuess();
         public void SubmitGuess() => Controller?.SubmitGuess();
+        public void ExitLevel() => Controller?.ExitLevel();
+        public void LeaveTutorial() => Controller?.LeaveTutorial();
+        public void Update() => Controller?.Update();
     }
 }
