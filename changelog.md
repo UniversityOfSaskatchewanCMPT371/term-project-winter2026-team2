@@ -4,6 +4,12 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
+## [1.6.1] - 2026-04-07
+
+### Added
+
+- Created block prefab variances to use for block spawning (Kenny Brick Assets are not modifiable and cannot attach scripts on them)
+
 ## [1.6.0] - 2026-04-07
 
 ### Added
