@@ -26,7 +26,7 @@ public interface ISnapFitModel : IModel
         /// </summary>
         /// <remarks>
         /// pre-condition:  
-        ///     - requires value != null
+        ///     - requires (value != null) && (value.Length > 0)
         /// post-condition: 
         ///     - ensures SnapPoints == value
         /// </remarks>

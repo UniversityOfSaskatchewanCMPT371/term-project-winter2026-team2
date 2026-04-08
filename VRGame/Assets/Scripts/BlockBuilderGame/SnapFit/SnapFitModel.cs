@@ -26,6 +26,12 @@ public class SnapFitModel : Model, ISnapFitModel
                 Assert.IsNotNull(value, "SnapPoint value must not be null");
                 return;
             }
+            if (value.Length <= 0)
+            {
+                Debug.LogError("SnapPoints must have at least 1 element");
+                Assert.IsTrue(value.Length > 0, "SnapPoints must have at least 1 element");
+                return;
+            }
             snapPoints = value;
         }
     }
@@ -113,7 +119,8 @@ public class SnapFitModel : Model, ISnapFitModel
         {
             Debug.LogError("SnapPoints failed to set on Init");
             Assert.IsNotNull(snapPoints, "SnapPoints must not be null on Init");
-            return;
+            // Recover if it fails rather than terminate
+            snapRadius = 0.5f;
         }
 
         if (snapJoint != null)
