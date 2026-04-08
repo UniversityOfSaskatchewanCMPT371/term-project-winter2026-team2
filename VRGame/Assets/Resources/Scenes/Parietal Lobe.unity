@@ -1524,10 +1524,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockPrefabs:
-  - {fileID: 919132149155446097, guid: 9da6c0804f24e4bbc9271e2f950911f6, type: 3}
-  - {fileID: 919132149155446097, guid: 560ff14cd59bc4dd6ba166931824f69e, type: 3}
-  - {fileID: 919132149155446097, guid: 566a5f1587a3b40da85323c137f72317, type: 3}
-  - {fileID: 919132149155446097, guid: b4f2e55c98f6b47ec9eec7a8f725aebf, type: 3}
+  - {fileID: 4733160034843613268, guid: 3e6b4b4088bb74085a7985aee7b58bcb, type: 3}
+  - {fileID: 6038730470302423416, guid: 814c4fdd0cbef48a3be4698418963957, type: 3}
+  - {fileID: 7479342717237480398, guid: e498574ba012d4576ae5b6a6f5d99ff4, type: 3}
+  - {fileID: 4221919066604440266, guid: ec4dfee65ff94430f841d7dc71fa18d3, type: 3}
 --- !u!1 &664335550
 GameObject:
   m_ObjectHideFlags: 0
