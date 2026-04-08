@@ -15,7 +15,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <summary>
     /// Is the right controller in a valid, dragging state?
     /// </summary>
-    private bool isDraggingRight;
+    internal bool isDraggingRight;
     /// <summary>
     /// What are the coordinates of the panel the left controller is aiming at, if any?
     /// </summary>
@@ -31,11 +31,11 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     /// <summary>
     /// The current path the left hand is taking
     /// </summary>
-    private Stack<Panel> currentPathLeft;
+    internal Stack<IPanel> currentPathLeft;
     /// <summary>
     /// The current path the right hand is taking
     /// </summary>
-    private Stack<Panel> currentPathRight;
+    internal Stack<IPanel> currentPathRight;
     /// <summary>
     /// A ParticleSystem that spawns confetti when the game is complete.
     /// </summary>
@@ -46,16 +46,18 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     {
         isDraggingLeft = false;
         isDraggingRight = false;
-        modelInstance = gameObject.GetComponent<LogicGameModel>();
         if(modelInstance == null)
         {
-            Debug.LogError("There is no LogicGameModel attached to this GameObject!");
+            modelInstance = gameObject.GetComponent<LogicGameModel>();
+            if (modelInstance == null) {
+                Debug.LogError("There is no LogicGameModel attached to this GameObject!");
+            }
         }
         Assert.IsNotNull(modelInstance, "There is no LogicGameModel attached to this GameObject!");
         targetedPanelLeft = null;
         targetedPanelRight = null;
-        currentPathLeft = new Stack<Panel>();
-        currentPathRight = new Stack<Panel>();
+        currentPathLeft = new Stack<IPanel>();
+        currentPathRight = new Stack<IPanel>();
         foreach(Transform childTransform in transform)
         {
             confettiSpawner = childTransform.gameObject.GetComponent<ParticleSystem>();
@@ -131,7 +133,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
         if(isDraggingRight)
         {
             Debug.Log("Dragging!");
-            Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
+            IPanel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
             if(hoveredPanel == null)
             {
                 Debug.LogError("The currently-hovered panel is apparently null");
@@ -217,7 +219,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
             Debug.Log("But I'm not aiming at a panel!");
             return;
         }
-        Panel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
+        IPanel hoveredPanel = modelInstance.GetPanel(targetedPanelRight.X, targetedPanelRight.Y);
         if(hoveredPanel == null)
         {
             Debug.LogError($"The panel we're trying press on ({targetedPanelRight.X},{targetedPanelRight.Y}) is apparently null!");
@@ -267,7 +269,7 @@ public class LogicGameController : Controller<ILogicGameModel, Panel>, ILogicGam
     public void ClearPathRight()
     {
         Debug.Log("Clearing right's path!");
-        foreach(Panel panel in currentPathRight)
+        foreach(IPanel panel in currentPathRight)
         {
             panel.ClearPanel();
         }

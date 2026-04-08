@@ -9,6 +9,11 @@ do not change functionality nor do you need to when you you write tests.
 ### Added
 
 - Added ColourButton component that changes the spawned block's material on (colour) button press
+## [1.6.1] - 2026-04-07
+
+### Added
+
+- Created block prefab variances to use for block spawning (Kenny Brick Assets are not modifiable and cannot attach scripts on them)
 
 ## [1.6.0] - 2026-04-07
 
