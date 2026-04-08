@@ -221,8 +221,6 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     /// <inheritdoc/>
     public int GetTimeRemaining()
     {
-   
-
         double levelTime = stopwatch.Elapsed.TotalSeconds;
         int timeLeft = (int)Math.Ceiling((double)levels[currentLevel].maxTime - levelTime);
 

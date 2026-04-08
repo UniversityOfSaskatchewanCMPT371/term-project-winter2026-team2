@@ -499,6 +499,9 @@ public class ObjectMatchGameModelTests
         Object.DestroyImmediate(go);
     }
 
+    /// <summary>
+    /// Verifies GetActiveObjectIDs returns correct IDs for current level.
+    /// </summary>
     [Test]
     public void GetActiveObjectIDs_GetsList()
     {
@@ -516,7 +519,9 @@ public class ObjectMatchGameModelTests
         Object.DestroyImmediate(go);
     }
 
-
+    /// <summary>
+    /// Checks that GetActiveObjectIDs logs a warning if currentLevel is out of bounds.
+    /// </summary>
     [Test]
     public void GetActiveObjectIDs_InvalidLevel ()
     {
@@ -530,6 +535,47 @@ public class ObjectMatchGameModelTests
         LogAssert.Expect(LogType.Warning, new System.Text.RegularExpressions.Regex(".*GetActiveObjectIDs called with invalid current level.*"));
         string[] activeIDs = model.GetActiveObjectIDs();
         
+        Object.DestroyImmediate(go);
+    }
+
+    /// <summary>
+    /// Verifies that CalculateScore correctly calculates score based on time left
+    /// </summary>
+    [UnityTest]
+    public IEnumerator CalculateScore_TimeLeft()
+    {
+        GameObject go = new GameObject();
+        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
+        model.Init();
+        AssignLevels(model);
+        int levelIndex = model.GetCurrentLevel();
+        model.InitializeLevel();
+        yield return null; // Simulate time passing
+        model.CalculateScore();
+        model.GetTimeRemaining(); // Update time remaining
+        
+        Assert.AreEqual(450, model.levels[levelIndex].Score);
+        Object.DestroyImmediate(go);
+    }
+
+    /// <summary>
+    /// Tests that CalculateScore reduces score based on failed guesses
+    /// </summary>
+    [UnityTest]
+    public IEnumerator CalculateScore_WrongGuess()
+    {
+        GameObject go = new GameObject();
+        ObjectMatchGameModel model = go.AddComponent<ObjectMatchGameModel>();
+        model.Init();
+        AssignLevels(model);
+        int levelIndex = model.GetCurrentLevel();
+        model.InitializeLevel();
+        yield return null; // Simulate time passing
+        model.failedGuesses = 2; // Simulate wrong guesses
+        model.CalculateScore();
+        model.GetTimeRemaining(); // Update time remaining
+
+        Assert.AreEqual(300, model.levels[levelIndex].Score);
         Object.DestroyImmediate(go);
     }
 
