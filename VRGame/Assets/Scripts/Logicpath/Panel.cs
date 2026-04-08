@@ -26,38 +26,38 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// The entry direction of this Panel, if any
     /// </summary>
-    private Direction entryDirection;
+    internal Direction entryDirection;
     /// <summary>
     /// The exit direction of this Panel, if any
     /// </summary>
-    private Direction exitDirection;
+    internal Direction exitDirection;
     /// <summary>
     /// The upper neighbor of this Panel, if there is one
     /// </summary>
-    private Panel topNeighbor;
+    private IPanel topNeighbor;
     /// <summary>
     /// The right neighbor of this Panel, if there is one
     /// </summary>
-    private Panel rightNeighbor;
+    private IPanel rightNeighbor;
     /// <summary>
     /// The lower neighbor of this Panel, if there is one
     /// </summary>
-    private Panel downNeighbor;
+    private IPanel downNeighbor;
     /// <summary>
     /// The left neighbor of this Panel, if there is one
     /// </summary>
-    private Panel leftNeighbor;
+    private IPanel leftNeighbor;
     /// <summary>
     /// Marks whether this Panel is a Block, start endpoint, end endpoint, or a regular Panel
     /// </summary>
 
     [SerializeField]
-    private PanelAttribute attribute;
+    internal PanelAttribute attribute;
     /// <summary>
     /// What colour this Panel has (if there is a path going through it or it is an endpoint)
     /// </summary>
     [SerializeField]
-    private PanelColour panelColour;
+    internal PanelColour panelColour;
     /// <summary>
     /// The X-coordinate of this Panel
     /// </summary>
@@ -154,7 +154,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     ///     - If getting, the top neighbor of this Panel is returned if it exists, null otherwise
     ///     - If setting, the top neighbor of this Panel is written
     /// </remarks>
-    public Panel TopNeighbor
+    public IPanel TopNeighbor
     {
         /// <summary>
         /// Getter for the top neighbor Panel
@@ -189,7 +189,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// Accessor for right neighbour panel
     /// </summary>
-    public Panel RightNeighbor
+    public IPanel RightNeighbor
     {
         /// <summary>
         /// Getter for the right neighbor Panel
@@ -224,7 +224,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// Accessor for down neighbour panel
     /// </summary>
-    public Panel DownNeighbor
+    public IPanel DownNeighbor
     {
         /// <summary>
         /// Getter for the down neighbor Panel
@@ -259,7 +259,7 @@ public class Panel : View<LogicGameController>, IEquatable<Panel>, IPanel
     /// <summary>
     /// Accessor for left neighbour panel
     /// </summary>
-    public Panel LeftNeighbor
+    public IPanel LeftNeighbor
     {
         /// <summary>
         /// Getter for the left neighbor Panel

@@ -8,5 +8,6 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("ServicePlayMode")]
 [assembly: InternalsVisibleTo("PlayerServicePlayMode")]
 [assembly: InternalsVisibleTo("PlayerServiceEditMode")]
+[assembly: InternalsVisibleTo("LogicPathTest")]
 [assembly: InternalsVisibleTo("ScriptTemplatesEditTests")]
 [assembly:InternalsVisibleTo("ObjectMatchGameEditModeTest")]
