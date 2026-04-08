@@ -4,11 +4,34 @@ API changes / Backward compatible features / Backward compatible bug fixes.
 You do not need to update the version for refactors or code improvements that
 do not change functionality nor do you need to when you you write tests.
 
-## [1.5.7] - 2026-04-06
+## [1.6.1] - 2026-04-07
 
 ### Added
 
 - Created block prefab variances to use for block spawning (Kenny Brick Assets are not modifiable and cannot attach scripts on them)
+
+## [1.6.0] - 2026-04-07
+
+### Added
+
+- Added the MVP for the occipital lobe game
+
+## [1.5.8] - 2026-04-07
+
+### Added
+
+- More puzzles, a quick tutorial, and proper presentation to the frontal lobe minigame
+
+## [1.5.7] - 2026-04-06
+
+### Added
+
+- Cerebellum Prefab
+
+### Changed
+
+- Replaced PracticeRoom Scene with Cerebellum Scene
+- Corrected Names of Portals
 
 ## [1.5.6] - 2026-04-06
 
@@ -45,7 +68,6 @@ do not change functionality nor do you need to when you you write tests.
 ### Fixed 
 
 - Integrated id5 into parietal branch, keeping record of work history done
-
 
 ## [1.5.0] - 2026-03-22
 
