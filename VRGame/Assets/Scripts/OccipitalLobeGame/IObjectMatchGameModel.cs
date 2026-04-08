@@ -3,7 +3,7 @@ using ObjectMatchGame;
 /// Interface for the model of the object matching minigame for the occipital lobe
 /// The model is responsible for keeping track of the state of the game
 /// </summary>
-public interface IObjectMatchGameModel: IModel
+public interface IObjectMatchGameModel : IModel
 {
 
     /// <summary>
@@ -241,7 +241,11 @@ public interface IObjectMatchGameModel: IModel
     /// Calculates the score of both the current level and the overall game.
     /// </summary>
     /// <remarks>
-    /// 
+    /// Preconditions:
+    /// - None
+    /// Postconditions:
+    /// - adds the score for the last level to gameScore
+    /// - sets levels[currentLevel].score to the score for the last level
     /// </remarks>
     public void CalculateScore();
 }

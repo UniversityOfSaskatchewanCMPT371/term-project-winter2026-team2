@@ -30,7 +30,7 @@ public interface ILogicGameModel : IModel
     /// postconditions:
     ///     - None
     /// </remarks>
-    Panel GetPanel(int x, int y);
+    IPanel GetPanel(int x, int y);
 
     /// <summary>
     /// Checks if a Panel is occupied

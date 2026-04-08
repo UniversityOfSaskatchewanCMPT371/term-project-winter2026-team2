@@ -19,11 +19,11 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     /// <summary>
     /// Every panel associated with this game
     /// </summary>
-    private Panel[,] panelGrid;
+    internal Panel[,] panelGrid;
     /// <summary>
     /// A dictionary of all the endpoints in this game
     /// </summary>
-    private Dictionary<PanelColour, (Panel start, Panel end)> endpoints;
+    internal Dictionary<PanelColour, (Panel start, Panel end)> endpoints;
 
     /// <inheritdoc/>
     public void Init()
@@ -155,7 +155,7 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     }
 
     /// <inheritdoc/>
-    public Panel GetPanel(int x, int y)
+    public IPanel GetPanel(int x, int y)
     {
         if(x < 0)
         {
@@ -207,4 +207,5 @@ public class LogicGameModel : MonoBehaviour, ILogicGameModel
     {
         return GetPanel(x, y).IsOccupied();
     }
+
 }

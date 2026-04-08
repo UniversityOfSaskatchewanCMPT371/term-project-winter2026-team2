@@ -22,7 +22,7 @@ public class ObjectMatchGameModel : Model, IObjectMatchGameModel
     // The ID of the current guess, which is set when the user makes a potential guess and cleared when the user removes their potential guess
     private string currentGuessID = "";
     // The data for each level, which includes the IDs of all objects in the level and the ID of the correct object that the user is trying to guess
-    [SerializeField] internal levelData[] levels;
+    internal levelData[] levels;
     // A stopwatch to time the level completion time
     private Stopwatch stopwatch;
     // The amount of points to be added per second remaining at end of level

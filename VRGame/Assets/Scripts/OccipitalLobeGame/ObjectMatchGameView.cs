@@ -117,11 +117,13 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         outOfLevelDisplay.gameObject.SetActive(true);
     }
 
+    /// <inheritdoc/>
     public void UpdateTimer(int seconds)
     {
         inLevelDisplay.text = "Time: " + Mathf.CeilToInt(seconds).ToString();
     }
 
+    /// <inheritdoc/>
     public void UpdateScore(int totalScore, int[] levelScores)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -131,7 +133,8 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         
         outOfLevelDisplay.text = sb.ToString();
     }
-
+    
+    /// <inheritdoc/>
     public void EnterTutorial()
     {
         startLevelButton.SetActive(false);
@@ -142,7 +145,8 @@ public class ObjectMatchGameView : View<IObjectMatchGameController>, IObjectMatc
         inLevelDisplay.gameObject.SetActive(false);
         outOfLevelDisplay.gameObject.SetActive(false);
     }
-
+    
+    /// <inheritdoc/>
     public void ExitTutorial()
     {
         leaveTutorialButton.SetActive(false);
