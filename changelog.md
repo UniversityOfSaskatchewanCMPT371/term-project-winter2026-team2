@@ -12,6 +12,17 @@ do not change functionality nor do you need to when you you write tests.
 - Scoring system for occipital lobe game
 - Tutorial mode for occipital lobe game 
  
+## [1.6.2] - 2026-04-07
+
+### Added
+
+- Added ColourButton component that changes the spawned block's material on (colour) button press
+## [1.6.1] - 2026-04-07
+
+### Added
+
+- Created block prefab variances to use for block spawning (Kenny Brick Assets are not modifiable and cannot attach scripts on them)
+
 ## [1.6.0] - 2026-04-07
 
 ### Added
@@ -26,20 +37,14 @@ do not change functionality nor do you need to when you you write tests.
 
 ## [1.5.7] - 2026-04-06
 
-### Added
-
-- Cerebellum Prefab
-
-### Changed
-
-- Replaced PracticeRoom Scene with Cerebellum Scene
-- Corrected Names of Portals
+- Added ColourButton component that changes the spawned block's material on (colour) button press
 
 ## [1.5.6] - 2026-04-06
 
 ### Added
 
 - Added scene descriptions for each Lobe
+
 ## [1.5.5] - 2026-04-06
 
 ### Added

@@ -1,25 +1,21 @@
 {
-    "name": "LogicPathTest",
+    "name": "BlockBuilderGamePlayMode",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
+        "BlockSpawner",
+        "SpawnButton",
         "TNRD.NSubstitute",
         "ScriptTemplates",
-        "LogicPath",
-        "Unity.XR.Interaction.Toolkit",
-        ""
+        "Unity.XR.Interaction.Toolkit.Editor",
+        "Unity.XR.Interaction.Toolkit"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll",
-        "FsCheck.dll",
-        "FSharp.Core.dll"
+        "nunit.framework.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
